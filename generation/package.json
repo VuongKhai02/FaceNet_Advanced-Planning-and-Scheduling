@@ -1,0 +1,6 @@
+{
+  "name": "planningService-generation",
+  "devDependencies": {
+    "@haulmont/jmix-front-generator": "^1.0.0-next.0"
+  }
+}

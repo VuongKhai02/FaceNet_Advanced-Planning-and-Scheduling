@@ -1,0 +1,287 @@
+
+.main-layout {
+  height: 100%;
+}
+
+.layout-container.ant-layout {
+  min-height: initial;
+}
+
+.layout-sider {
+  background: #ffffff;
+  
+}
+
+.layout-content {
+  padding: 0px 24px 24px;
+}
+
+.narrow-layout {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.narrow-layout.ant-card {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+  padding: 14px;
+}
+
+.showtime-preview>div:first-child {
+  font-size: 12px;
+  white-space: normal;
+}
+
+.showtime-preview>div:not(:first-child) {
+  font-size: 11px;
+  white-space: normal;
+}
+
+.movie-tooltip .movie-info {
+  /*display: inline-block;*/
+  margin-left: 20px;
+  vertical-align: top;
+  text-align: left;
+}
+
+/*.movie-tooltip img {*/
+/*  height: 80px;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+.movie-tooltip .movie-title {
+  font-size: 1.5em;
+  line-height: 40px;
+}
+
+.long-title h3 {
+  font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+  font-weight: 200;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dx-progressbar-status {
+  font-size: 14px !important;
+}
+
+.fileuploader-container {
+  border: 1px solid #d3d3d3;
+  margin: 20px 20px 0 20px;
+}
+
+.button-upload {
+  margin-top: 50px;
+  margin-right: 20px;
+  float: right;
+}
+
+.note {
+  font-size: 10pt;
+  color: #484848;
+  margin-left: 9px;
+}
+
+.note>span {
+  font-weight: 700
+}
+
+h3 {
+  margin-left: 20px;
+  font-weight: normal;
+  font-size: 22px;
+}
+
+.master-detail-caption {
+  padding: 0 0 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/*can chinh dong trong grid data*/
+.dx-datagrid-content .dx-datagrid-table .dx-row>td,
+.dx-datagrid-content .dx-datagrid-table .dx-row>tr>td {
+  vertical-align: inherit !important;
+}
+
+.ant-layout-sider-light .ant-layout-sider-trigger,
+.ant-layout-sider-light .ant-layout-sider-zero-width-trigger {
+  background: rgba(52, 53, 71, 0.46) !important;
+}
+
+.ant-layout-header {
+  background: #343547 !important;
+  height: 60px !important;
+  line-height: 0px !important;
+  transition: 0.6s;
+}
+
+.menu-parent-text {
+  color: #f05b41;
+  font-weight: bold;
+}
+
+.ant-layout-footer {
+  padding: 0px 50px !important
+}
+
+.ant-layout-header-sticky {
+  background: #ecf0f1 !important;
+  height: 50px !important;
+}
+
+
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>tr>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover>tr>td {
+  background-color: #da5859 !important;
+  color: #fff !important;
+}
+
+.dx-popup-title {
+  color: #da5859 !important;
+  font-size: 24px !important;
+  font-weight: 500;
+}
+
+
+.dx-button[aria-label='Lưu lại'] {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Lưu lại']:hover {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Đồng ý'] {
+  background-color: #1F6EE5;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Đồng ý']:hover {
+  background-color: #1F6EE5;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Từ chối'] {
+  background-color: #E51C0F;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Từ chối']:hover {
+  background-color: #E51C0F;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+.dx-button[aria-label='Xóa'] {
+  background-color: #E51C0F;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Xóa']:hover {
+  background-color: #E51C0F;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+.dx-button[aria-label='Phê duyệt'] {
+  background-color: #1F6EE5;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Phê duyệt']:hover {
+  background-color: #1F6EE5;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+.dx-button[aria-label='Gửi'] {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Gửi']:hover {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+.dx-button[aria-label='Gửi đi'] {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Gửi đi']:hover {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Hôm nay' ] {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-button[aria-label='Hôm nay']:hover {
+  background-color: #06BE18;
+  border-color: transparent;
+  color: #FFFFFF;
+}
+
+.dx-box-item-content {
+  font-weight: 500;
+}
+
+
+.dx-icon-history {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMi4xIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNNzUgNzVMNDEgNDFDMjUuOSAyNS45IDAgMzYuNiAwIDU3LjlWMTY4YzAgMTMuMyAxMC43IDI0IDI0IDI0SDEzNC4xYzIxLjQgMCAzMi4xLTI1LjkgMTctNDFsLTMwLjgtMzAuOEMxNTUgODUuNSAyMDMgNjQgMjU2IDY0YzEwNiAwIDE5MiA4NiAxOTIgMTkycy04NiAxOTItMTkyIDE5MmMtNDAuOCAwLTc4LjYtMTIuNy0xMDkuNy0zNC40Yy0xNC41LTEwLjEtMzQuNC02LjYtNDQuNiA3LjlzLTYuNiAzNC40IDcuOSA0NC42QzE1MS4yIDQ5NSAyMDEuNyA1MTIgMjU2IDUxMmMxNDEuNCAwIDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDBDMTg1LjMgMCAxMjEuMyAyOC43IDc1IDc1em0xODEgNTNjLTEzLjMgMC0yNCAxMC43LTI0IDI0VjI1NmMwIDYuNCAyLjUgMTIuNSA3IDE3bDcyIDcyYzkuNCA5LjQgMjQuNiA5LjQgMzMuOSAwczkuNC0yNC42IDAtMzMuOWwtNjUtNjVWMTUyYzAtMTMuMy0xMC43LTI0LTI0LTI0eiIvPjwvc3ZnPg==');
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+.dx-icon-csvfile {
+  background-image: url("https://img.icons8.com/material/512/csv.png");
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+.dx-icon-jsonfile {
+  background-image: url("https://icon-library.com/images/json-icon-png/json-icon-png-5.jpg");
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+}
+.dx-toolbar-label .dx-toolbar-item-content > div {
+  overflow: inherit;
+
+}
+.dx-toolbar-label > div {
+  overflow: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 -5px;
+  padding: 0 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .dx-popup-bottom.dx-toolbar {
+    padding: 0 !important;
+  }
+  .dx-popup-content {
+    padding: 0 !important;
+  }
+  .dx-popup-title.dx-toolbar {
+    padding: 0 20px !important;
+  }
+}
