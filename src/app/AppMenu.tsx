@@ -50,12 +50,6 @@ export const AppMenu = (props: AppMenuProps) => {
           key={"Content 2.2"}
         />
       </SubMenuItem>
-      {/*<MenuItem*/}
-      {/*  screenId="Template"*/}
-      {/*  icon={<HomeFilled/>}*/}
-      {/*  caption={"Template"}*/}
-      {/*  key={"Template"}*/}
-      {/*/>*/}
 
     </VerticalMenu>);
 };

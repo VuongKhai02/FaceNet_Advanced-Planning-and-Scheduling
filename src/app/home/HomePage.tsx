@@ -1,11 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import Doughnut from "../chart/Doughnut";
-import BarChart from "../chart/BarChart";
-import {ChartExample} from "../chart/ChartExample";
-import {Dashboard} from "../dashboard/Dashboard";
-import SSOMenu from "../dashboard/SSOMenu";
 
 const ROUTING_PATH = "/";
 

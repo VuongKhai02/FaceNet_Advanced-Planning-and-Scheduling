@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Layout, Space } from "antd";
 import { observer } from "mobx-react";
-import Login from "./login/Login";
-import Centered from "./common/Centered";
 import AppHeader from "./header/AppHeader";
 import { ContentArea } from "@haulmont/jmix-react-ui";
 import { useMainStore, Router } from "@haulmont/jmix-react-core";
@@ -11,10 +9,6 @@ import { AppMenu } from "./AppMenu";
 import "../routing";
 import "./App.css";
 import 'devextreme/dist/css/dx.light.css';
-import SSOMenu from "./dashboard/SSOMenu";
-import { LanguageSwitcher } from "../i18n/LanguageSwitcher";
-import { LogoutOutlined } from "@ant-design/icons";
-import UserService from "../Keycloak";
 
 const routes = {
   "/": <ContentArea />, "/:entityName/:entityId?": <ContentArea />

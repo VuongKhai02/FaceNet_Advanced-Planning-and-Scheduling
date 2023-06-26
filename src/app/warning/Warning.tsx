@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 
+// @ts-ignore
 import {Button, DataGrid, Popup} from "devextreme-react";
 import {
   Column,
@@ -12,19 +13,18 @@ import {
   Toolbar,
 
 } from "devextreme-react/data-grid";
+import axios from "axios";
 import {useMainStore} from "@haulmont/jmix-react-core";
 import {registerScreen} from "@haulmont/jmix-react-ui";
-import WarningDetail from "./WarningDetail";
-import {print, str} from "../../utils/utils";
 import {IWarning} from "../shared/model/Warning.model";
+import {PLANNING_API_URL} from "../../config";
 
 const ROUTING_PATH = "/warnings";
 
 export const Warning = () => {
 
-  // const loading = useAppSelector(selectLoading);
   const [warnings, setWarnings] = useState<[]>();
-  const [token, setToken] = useState<string>("");
+  const [content, setContent] = useState<string>();
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
   const [currentWarning, setCurrentWarning] = useState<IWarning>()
 
@@ -205,17 +205,19 @@ export const Warning = () => {
   };
 
   const loadWarnings = () => {
-    // const headers = {
-    //   'Authorization': 'Bearer ' + mainStore.authToken,
-    //   'content-type': 'application/json'
-    // };
-    // axios.get(PLANNING_API_URL + '/api/warnings/all', {headers})
-    //   .then(response => {
-    //       if (response.status === 200) {
-    //         setWarnings(response.data.data)
-    //       }
-    //     }
-    //   );
+    const headers = {
+      'Authorization': 'Bearer ' + mainStore.authToken,
+      'content-type': 'application/json'
+    };
+    axios.get(PLANNING_API_URL + '/api/hello', {headers})
+      .then(response => {
+        console.log(response)
+          if (response.status === 200) {
+            console.log(response.data)
+            setContent(response.data)
+          }
+        }
+      );
   }
 
   const onSelectedRowKeysChange = (e) => {
@@ -232,18 +234,15 @@ export const Warning = () => {
     refresh();
   }
 
-  // useEffect(() => {
-  //   loadWarnings()
-  // }, [])
+  useEffect(() => {
+    loadWarnings()
+  }, [])
 
   const contenRender = (data) => {
-    print("------------------------------------")
-    return <WarningDetail warningDetail={currentWarning} />
+    // return <WarningDetail warningDetail={currentWarning} />
   }
 
   return <div>
-    {/*<input type="text" value={token} onChange={(e) => setToken(e.target.value)}/>*/}
-    {/*<button onClick={() => dispatch(getWarnings(token))}>Get Warnings</button>*/}
     <div className="table-responsive">
       <div className="informer" style={{
         background: "#fff",
@@ -253,7 +252,7 @@ export const Warning = () => {
         <h5 className="name" style={{
           fontSize: 18,
           marginBottom: 0
-        }}>TABLE CONTENT</h5>
+        }}>Table of content</h5>
       </div>
       <div className="informer" style={{
         backgroundColor: "#ffffff",
@@ -271,10 +270,9 @@ export const Warning = () => {
       <Popup visible={popupIsOpen}
              onHiding={setPopUpClose}
              title={currentWarning?.topicDescription}
-        // titleComponent={() => { return <div>Thêm mới đề nghị lĩnh nguyên vật liệu Panacim</div> }}
              showTitle={true}
              fullScreen={false}
-             contentRender={contenRender}
+             // contentRender={contenRender}
              dragEnabled={false}
              closeOnOutsideClick={true}
 
@@ -338,7 +336,7 @@ export const Warning = () => {
 
 registerScreen({
   component: Warning,
-  caption: "Warnings",
+  caption: "Content 1",
   screenId: "Warnings",
   menuOptions: {
     pathPattern: ROUTING_PATH,
