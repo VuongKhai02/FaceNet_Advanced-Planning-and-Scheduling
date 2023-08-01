@@ -74,7 +74,7 @@ pipeline {
     stages{
         stage ('main') {
             steps {
-                git branch: 'test', credentialsId: 'github', url: 'https://github.com/nguyenquanghieu2000d/planning-frontend.git'
+                git branch: 'test', credentialsId: 'github', url: 'https://github.com/nguyenquanghieu2000d/mk-aps-frontend.git'
             }
         }
         // stage('SonarQube Analysis') {
