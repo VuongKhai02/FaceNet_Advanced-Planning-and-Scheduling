@@ -85,7 +85,7 @@
   "jmix": {
     "generator": "react-typescript"
   },
-  "proxy": "http://localhost:6886/",
+  "proxy": "http://222.252.25.37:3185",
   "browserslist": [
     ">0.2%",
     "not dead",
