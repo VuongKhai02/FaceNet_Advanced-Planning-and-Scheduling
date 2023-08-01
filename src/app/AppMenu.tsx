@@ -29,18 +29,18 @@ export const AppMenu = (props: AppMenuProps) => {
         caption={"screen.home"}
         key={"home"}
       />
-      <MenuItem
-        screenId="Warnings"
-        icon={<HomeFilled/>}
-        caption={"Content 1"}
-        key={"Content 1"}
-      />
-      <SubMenuItem caption={"Content 2"} icon={<ShoppingFilled />}>
+      {/*<MenuItem*/}
+      {/*  screenId="Warnings"*/}
+      {/*  icon={<HomeFilled/>}*/}
+      {/*  caption={"Content 1"}*/}
+      {/*  key={"Content 1"}*/}
+      {/*/>*/}
+      <SubMenuItem caption={"Quản lý thông tin"} icon={<ShoppingFilled />}>
         <MenuItem
-          screenId="Template"
+          screenId="MrpSaleOrders"
           icon={<HomeFilled/>}
-          caption={"Content 2.1"}
-          key={"Content 2.1"}
+          caption={"Quản lý đơn hàng"}
+          key={"mrporders"}
         />
 
         <MenuItem
