@@ -5,4 +5,4 @@ services:
     build:
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "6080:6080"
