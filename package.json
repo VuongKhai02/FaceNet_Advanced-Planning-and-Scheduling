@@ -86,10 +86,6 @@
   "jmix": {
     "generator": "react-typescript"
   },
-<<<<<<< HEAD
-=======
-  "proxy": "http://222.252.25.37:3185",
->>>>>>> e4361c2d579a3c8b61acbd9930f2b61a782b3b63
   "browserslist": [
     ">0.2%",
     "not dead",
