@@ -1,41 +1,40 @@
 import React, {useEffect, useState} from "react";
-import "./MrpSaleOrder.css"
 
 // @ts-ignore
 import {Button, DataGrid, Popup} from "devextreme-react";
 import {
-  Column,
-  FilterRow,
-  HeaderFilter,
-  Item as ToolbarItem,
+  Column, ColumnChooser, Editing,
+  FilterRow, Form, Format, FormItem, Grouping,
+  HeaderFilter, Item as TItem,
+  Item as ToolbarItem, Lookup, MasterDetail, OperationDescriptions,
   Pager,
   Paging,
-  SearchPanel,
+  SearchPanel, Selection,
   Toolbar,
-  MasterDetail, Editing, Form
+
 } from "devextreme-react/data-grid";
 import axios from "axios";
 import {useMainStore} from "@haulmont/jmix-react-core";
 import {registerScreen} from "@haulmont/jmix-react-ui";
 import {IWarning} from "../shared/model/Warning.model";
 import {PLANNING_API_URL} from "../../config";
-import {ImportOrder} from "../import/ImportOrder";
-import {customizeColor, getColor} from "../../utils/utils";
-import OrderItemTemplate from "./OrderItemTemplate";
-import {Tooltip} from "devextreme-react/tooltip";
-import {Tag} from "antd";
+import {LoadingPanel} from "../../utils/LoadingPanel";
+import SelectBox from "devextreme-react/select-box";
+import {stateCellRender} from "../utils";
 import {Item} from "devextreme-react/form";
+import CheckBox from "devextreme-react/check-box";
+import {ImportTechForm} from "../import/ImportTechForm";
+import OrderItemTemplate from "../mrporder/OrderItemTemplate";
 import notify from "devextreme/ui/notify";
+import {customizeColor, getColor} from "../../utils/utils";
+import {Tag} from "antd";
 
+const ROUTING_PATH = "/techFormManager";
 
-const ROUTING_PATH = "/mrporders";
+export const TechFormManager = () => {
 
-export const MrpSaleOrders = () => {
-
-  const [warnings, setWarnings] = useState<[]>();
   const [content, setContent] = useState<string>();
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
-  const [currentWarning, setCurrentWarning] = useState<IWarning>()
   const [popupVisible, setPopupVisible] = useState(false);
 
   const mainStore = useMainStore();
@@ -97,14 +96,14 @@ export const MrpSaleOrders = () => {
         <Button
           icon="redundaunt"
           stylingMode={"text"}
-          />
+        />
 
       </div>
       <div id={"approveRedundantmaterial" + data.data.id} style={{ float: "left" }}>
         <Button
           icon="approveredundaunt"
           stylingMode={"text"}
-          />
+        />
       </div>
 
     </div>
@@ -148,7 +147,7 @@ export const MrpSaleOrders = () => {
   const renderPopupImport = () => {
     // console.log("WorkOrderLogPopup render popup")
     // console.log(props.businessLogObject)
-    return <ImportOrder/>
+    return <ImportTechForm/>
   }
 
   const getProductOrderItemTemplate = row => {
@@ -163,7 +162,7 @@ export const MrpSaleOrders = () => {
 
   const onSelectedRowKeysChange = (e) => {
     if (e.data) {
-      setCurrentWarning(e.data)
+      // setCurrentWarning(e.data)
     }
   }
   const setPopUpOpen = () => {
@@ -205,32 +204,6 @@ export const MrpSaleOrders = () => {
           } else {
             notify({
               message: 'Cập nhật thất bại!',
-              width: 450
-            }, 'error', 3000);
-          }
-        }
-      );
-  }
-  const removeOrder = (e) => {
-    // return <WarningDetail warningDetail={currentWarning} />
-    const headers = {
-      'Authorization': 'Bearer ' + mainStore.authToken,
-      'content-type': 'application/json'
-    };
-    console.log(e)
-    let data = JSON.stringify(e.newData);
-    axios.delete(PLANNING_API_URL + '/api/orders/' + e.data.saleOrderId, {headers}, )
-      .then(response => {
-          if (response.status === 200) {
-            // console.log(response.data)
-            // setContent(response.data.data)
-            notify({
-              message: 'Xóa thành công đơn hàng!',
-              width: 450
-            }, 'SUCCESS', 3000);
-          } else {
-            notify({
-              message: 'Xóa thất bại!',
               width: 450
             }, 'error', 3000);
           }
@@ -389,13 +362,13 @@ export const MrpSaleOrders = () => {
         closeOnOutsideClick={true}
         showCloseButton={true}
         showTitle={true}
-        title="Import đơn hàng"
+        title="Import phiếu công nghệ"
         // container=".dx-viewport"
         width={"80%"}
-        height={"auto"}
+        height={"60%"}
         // contentRender={renderPopupImport}
       >
-        <ImportOrder/>
+        <ImportTechForm/>
       </Popup>
 
 
@@ -412,7 +385,6 @@ export const MrpSaleOrders = () => {
         onSelectionChanged={onSelectedRowKeysChange}
         onRowClick={onSelectedRowKeysChange}
         onRowUpdating={updateOrder}
-        onRowRemoving={removeOrder}
       >
         <Toolbar>
           <ToolbarItem location="after">
@@ -448,7 +420,7 @@ export const MrpSaleOrders = () => {
           allowedPageSizes={[5, 10]}
           infoText="Trang số {0} trên {1} ({2} bản ghi)"
         />
-        <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="center" width={100}/>
+        <Column caption={"Mã PCN"} dataField={"saleOrderId"} alignment="center" width={100}/>
         <Column caption={"Mã sản xuất"} dataField={"productionCode"}/>
         <Column caption={"Tên khách hàng"} dataField={"customer"} />
         <Column caption={"Tên thẻ"} dataField={"cardName"}/>
@@ -481,7 +453,7 @@ export const MrpSaleOrders = () => {
             width={"80%"}
             height={"auto"}
           />
-          <Form labelLocation="top" onEditorEnterKey={saveOrder} >
+          <Form labelLocation="top" >
             <Item
               itemType="group"
               colCount={2}
@@ -502,24 +474,20 @@ export const MrpSaleOrders = () => {
           </Form>
         </Editing>
 
-        <MasterDetail
-          enabled={true}
-          component={getProductOrderItemTemplate}
-          // autoExpandAll={true}
-        />
       </DataGrid>
     </div>
   </div>
 }
 
+
 registerScreen({
-  component: MrpSaleOrders,
-  caption: "Quản lý đơn hàng",
-  screenId: "MrpSaleOrders",
+  caption: "Quản lý phiếu công nghệ",
+  component: TechFormManager,
   menuOptions: {
     pathPattern: ROUTING_PATH,
     menuLink: ROUTING_PATH
-  }
+  },
+  screenId: "techFormManager"
 });
 
-export default MrpSaleOrders;
+export default TechFormManager;

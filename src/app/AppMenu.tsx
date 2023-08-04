@@ -46,8 +46,83 @@ export const AppMenu = (props: AppMenuProps) => {
         <MenuItem
           screenId="Template"
           icon={<ShoppingOutlined />}
-          caption={"Content 2.2"}
+          caption={"Quản lý mã QR lô sản phẩm"}
           key={"Content 2.2"}
+        />
+      </SubMenuItem>
+      <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<ShoppingFilled />}>
+        <MenuItem
+          screenId="techFormManager"
+          icon={<HomeFilled/>}
+          caption={"Danh sách phiếu công nghệ"}
+          key={"techFormManager"}
+        />
+
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Phê duyệt phiếu công nghệ"}
+          key={"b"}
+        />
+      </SubMenuItem>
+      <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<ShoppingFilled />}>
+        <MenuItem
+          screenId=""
+          icon={<HomeFilled/>}
+          caption={"Danh sách kế hoạch sản xuất"}
+          key={"c"}
+        />
+
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Danh sách đề nghị lĩnh NVL"}
+          key={"d"}
+        />
+      </SubMenuItem>
+      <SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled />}>
+        <MenuItem
+          screenId=""
+          icon={<HomeFilled/>}
+          caption={"Danh sách phiếu công nghệ"}
+          key={"e"}
+        />
+
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Phê duyệt phiếu công nghệ"}
+          key={"f"}
+        />
+      </SubMenuItem>
+      <SubMenuItem caption={"Cảnh báo"} icon={<ShoppingFilled />}>
+        <MenuItem
+          screenId=""
+          icon={<HomeFilled/>}
+          caption={"Danh sách phiếu công nghệ"}
+          key={"g"}
+        />
+
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Phê duyệt phiếu công nghệ"}
+          key={"h"}
+        />
+      </SubMenuItem>
+      <SubMenuItem caption={"Báo cáo, thống kê"} icon={<ShoppingFilled />}>
+        <MenuItem
+          screenId=""
+          icon={<HomeFilled/>}
+          caption={"Danh sách phiếu công nghệ"}
+          key={"i"}
+        />
+
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Phê duyệt phiếu công nghệ"}
+          key={"k"}
         />
       </SubMenuItem>
 
