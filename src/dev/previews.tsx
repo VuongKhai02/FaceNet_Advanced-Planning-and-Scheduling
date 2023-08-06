@@ -1,17 +1,14 @@
-import React from "react";
-// import { TestDevExpress } from "../app/test/TestDevExpress";
-
-import {ComponentPreview, Previews} from "@haulmont/react-ide-toolbox";
-import {MrpSaleOrders} from "../app/mrporder/MrpSaleOrders"
-import TechFormManager from "../app/work-order/TechFormManager";
+import { ComponentPreview, Previews } from "@haulmont/react-ide-toolbox";
+import { MrpSaleOrders } from "../app/mrporder/MrpSaleOrders"
+import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
 export const ComponentPreviews = () => {
   return (
     <Previews>
       <ComponentPreview path="/mrpsaleorders">
-        <MrpSaleOrders/>
+        <MrpSaleOrders />
       </ComponentPreview>
-      <ComponentPreview path="/techFormManager">
-        <TechFormManager/>
+      <ComponentPreview path="/techFormList">
+        <TechFormList />
       </ComponentPreview>
     </Previews>
   );

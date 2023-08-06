@@ -69,29 +69,28 @@ const App = observer(() => {
     </Layout.Header>
     <Layout className="layout-container" style={{ marginTop: 60 }}>
       <Layout.Sider
-        width={283}
+        width={280}
         breakpoint="sm"
         collapsedWidth={'50'}
         className="layout-sider"
         collapsible={true}
-        // style={{backgroundColor: "#BEBEBE"}}
-        // theme={"dark"}
+      // style={{backgroundColor: "#BEBEBE"}}
+      // theme={"dark"}
       >
         <AppMenu inlineCollapsed={true} mode={"inline"}
-                 // style={{ height: "100%" }}
-                 // theme={"dark"}
-                 style={{backgroundColor: "#BEBEBE", fontSize: "16px"}}
+          // style={{ height: "100%" }}
+          // theme={"dark"}
+          style={{ backgroundColor: "#BEBEBE", fontSize: "16px" }}
         />
       </Layout.Sider>
 
       <Layout className="layout-content">
         <Layout.Content>
           <Router global routes={routes} />
-
         </Layout.Content>
       </Layout>
     </Layout>
-    <Footer style={{ textAlign: 'center' }}>
+    <Footer style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="container">
         <div className="copyright">
           © Copyright <strong>Facenet</strong>. All Rights Reserved

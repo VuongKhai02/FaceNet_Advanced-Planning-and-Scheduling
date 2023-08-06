@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./MrpSaleOrder.css"
-
-// @ts-ignore
 import { Button, DataGrid, Popup } from "devextreme-react";
 import {
   Column,
@@ -17,27 +14,29 @@ import {
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../config";
-import { ImportOrder } from "../import/ImportOrder";
-import { customizeColor, getColor } from "../../utils/utils";
-import OrderItemTemplate from "./OrderItemTemplate";
+import { IWarning } from "../../shared/model/Warning.model";
+import { PLANNING_API_URL } from "../../../config";
+import { ImportOrder } from "../../import/ImportOrder";
+import { customizeColor, getColor } from "../../../utils/utils";
+import TechFormListDetail from "./TechFormListDetail";
 import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
+import TechProcedure from "./TechFormNewAdd/TechProcedure/TechProcedure";
+import { ImportTechForm } from "../../import/ImportTechForm";
 
 
-const ROUTING_PATH = "/mrporders";
+const ROUTING_PATH = "/techFormList";
 
-export const MrpSaleOrders = () => {
+export const TechFormList = () => {
 
   const [warnings, setWarnings] = useState<[]>();
   const [content, setContent] = useState<string>();
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
   const [currentWarning, setCurrentWarning] = useState<IWarning>()
   const [popupVisible, setPopupVisible] = useState(false);
-
+  const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
   const mainStore = useMainStore();
 
   const onStatusRender = (data) => {
@@ -153,7 +152,7 @@ export const MrpSaleOrders = () => {
 
   const getProductOrderItemTemplate = row => {
     return (
-      <OrderItemTemplate
+      <TechFormListDetail
         data={row.data}
       // productsFullArrays={this.state.productsFullArrays}
       // reasons={this.state.reasonList}
@@ -183,6 +182,10 @@ export const MrpSaleOrders = () => {
     // return <WarningDetail warningDetail={currentWarning} />
     console.log(data);
     console.log("click submit")
+  }
+
+  const handleAddFormTech = () => {
+    setIsAddNewTechForm(true);
   }
 
   const updateOrder = (e) => {
@@ -347,179 +350,184 @@ export const MrpSaleOrders = () => {
   }
 
 
-  return <div>
-    <div className="table-responsive">
-      <div className="informer" style={{
-        background: "#fff",
-        textAlign: "center",
-        paddingTop: 12
-      }}>
-        <h5 className="name" style={{
-          fontSize: 18,
-          marginBottom: 0
-        }}>Danh sách đơn hàng</h5>
-      </div>
-      <div className="informer" style={{
-        backgroundColor: "#ffffff",
-        paddingLeft: 13
-      }}>
-        <h5 className="name" style={{
-          color: "rgba(0, 0, 0, 0.7)",
-          marginBottom: 0,
-          fontSize: 15,
-          boxSizing: "border-box",
-          fontWeight: 550
-        }}>Tìm kiếm chung</h5>
-      </div>
+  return (
+    <>
+      {
+        isAddNewTechForm ?
+          <TechProcedure
+            isOpen={isAddNewTechForm}
+            setClose={() => setIsAddNewTechForm(false)} /> :
+          <div>
+            <div className="table-responsive">
+              <div className="informer" style={{
+                background: "#fff",
+                textAlign: "center",
+                paddingTop: 12
+              }}>
+                <h5 className="name" style={{
+                  fontSize: 18,
+                  marginBottom: 0
+                }}>Danh sách phiếu công nghệ</h5>
+              </div>
+              <div className="informer" style={{
+                backgroundColor: "#ffffff",
+                paddingLeft: 13
+              }}>
+                <h5 className="name" style={{
+                  color: "rgba(0, 0, 0, 0.7)",
+                  marginBottom: 0,
+                  fontSize: 15,
+                  boxSizing: "border-box",
+                  fontWeight: 550
+                }}>Tìm kiếm chung</h5>
+              </div>
 
-      {/*<Popup visible={popupIsOpen}*/}
-      {/*       onHiding={setPopUpClose}*/}
-      {/*       title={currentWarning?.topicDescription}*/}
-      {/*       showTitle={true}*/}
-      {/*       fullScreen={false}*/}
-      {/*       // contentRender={contenRender}*/}
-      {/*       dragEnabled={false}*/}
-      {/*       closeOnOutsideClick={true}*/}
-      {/*>*/}
-      {/*</Popup>*/}
-      <Popup
-        visible={popupVisible}
-        onHiding={hideInfo}
-        dragEnabled={false}
-        closeOnOutsideClick={true}
-        showCloseButton={true}
-        showTitle={true}
-        title="Import đơn hàng"
-        // container=".dx-viewport"
-        width={"80%"}
-        height={"auto"}
-      // contentRender={renderPopupImport}
-      >
-        <ImportOrder />
-      </Popup>
+              {/*<Popup visible={popupIsOpen}*/}
+              {/*       onHiding={setPopUpClose}*/}
+              {/*       title={currentWarning?.topicDescription}*/}
+              {/*       showTitle={true}*/}
+              {/*       fullScreen={false}*/}
+              {/*       // contentRender={contenRender}*/}
+              {/*       dragEnabled={false}*/}
+              {/*       closeOnOutsideClick={true}*/}
+              {/*>*/}
+              {/*</Popup>*/}
+              <Popup
+                visible={popupVisible}
+                onHiding={hideInfo}
+                dragEnabled={false}
+                closeOnOutsideClick={true}
+                showCloseButton={true}
+                showTitle={true}
+                title="Import phiếu công nghệ"
+                // container=".dx-viewport"
+                width={"80%"}
+                height={"auto"}
+              // contentRender={renderPopupImport}
+              >
+                <ImportTechForm />
+              </Popup>
 
 
-      <DataGrid
-        keyExpr={"saleOrderId"}
-        dataSource={content}
-        showBorders={true}
-        columnAutoWidth={true}
-        showRowLines={true}
-        rowAlternationEnabled={true}
-        allowColumnResizing={true}
-        allowColumnReordering={true}
-        focusedRowEnabled={true}
-        onSelectionChanged={onSelectedRowKeysChange}
-        onRowClick={onSelectedRowKeysChange}
-        onRowUpdating={updateOrder}
-        onRowRemoving={removeOrder}
-      >
-        <Toolbar>
-          <ToolbarItem location="after">
-            <Button hint="Thêm mới" icon="add" />
-          </ToolbarItem>
-          <ToolbarItem location="after">
-            <Button hint="Upload file" icon="upload" onClick={showInfo} />
-          </ToolbarItem>
-          <ToolbarItem location="after">
-            <Button hint="Refresh" icon="refresh" />
-          </ToolbarItem>
-          {/*<ToolbarItem name="addRowButton"/>*/}
-          {/*<ToolbarItem name="revertButton"/>*/}
-          {/*<ToolbarItem name="saveButton"/>*/}
-          <ToolbarItem name="searchPanel" location="before" />
-          {/*<ToolbarItem name="columnChooserButton"></ToolbarItem>*/}
+              <DataGrid
+                keyExpr={"saleOrderId"}
+                dataSource={content}
+                showBorders={true}
+                columnAutoWidth={true}
+                showRowLines={true}
+                rowAlternationEnabled={true}
+                allowColumnResizing={true}
+                allowColumnReordering={true}
+                focusedRowEnabled={true}
+                onSelectionChanged={onSelectedRowKeysChange}
+                onRowClick={onSelectedRowKeysChange}
+                onRowUpdating={updateOrder}
+                onRowRemoving={removeOrder}
+              >
+                <Toolbar>
+                  <ToolbarItem location="after">
+                    <Button hint="Thêm mới" icon="add" onClick={handleAddFormTech} />
+                  </ToolbarItem>
+                  <ToolbarItem location="after">
+                    <Button hint="Upload file" icon="upload" onClick={showInfo} />
+                  </ToolbarItem>
+                  <ToolbarItem location="after">
+                    <Button hint="Refresh" icon="refresh" />
+                  </ToolbarItem>
+                  {/*<ToolbarItem name="addRowButton"/>*/}
+                  {/*<ToolbarItem name="revertButton"/>*/}
+                  {/*<ToolbarItem name="saveButton"/>*/}
+                  <ToolbarItem name="searchPanel" location="before" />
+                  {/*<ToolbarItem name="columnChooserButton"></ToolbarItem>*/}
 
-        </Toolbar>
-        <HeaderFilter visible={true} texts={{
-          cancel: "Hủy bỏ",
-          ok: "Đồng ý",
-          emptyValue: "Rỗng"
+                </Toolbar>
+                <HeaderFilter visible={true} texts={{
+                  cancel: "Hủy bỏ",
+                  ok: "Đồng ý",
+                  emptyValue: "Rỗng"
 
-        }} />
-        <FilterRow visible={true} />
-        <SearchPanel visible={true} placeholder={"VD: PO"} />
-        <Paging defaultPageSize={10} />
-        <Pager
-          visible={true}
-          displayMode={"full"}
-          showInfo={true}
-          showNavigationButtons={true}
-          allowedPageSizes={[5, 10]}
-          infoText="Trang số {0} trên {1} ({2} bản ghi)"
-        />
-        <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="center" width={100} />
-        <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
-        <Column caption={"Tên khách hàng"} dataField={"customer"} />
-        <Column caption={"Tên thẻ"} dataField={"cardName"} />
-        <Column caption={"Số lượng"} dataField={"quantity"} />
-        <Column caption={"Số lượng đã tính bù hao"} dataField={"totalQuantity"} />
-        <Column caption={"Số HD/PO"} dataField={"contractNumber"} width={200} />
-        <Column caption={"Ngày bắt đầu"} dataType="datetime" dataField={"startTime"}
-          format="dd/MM/yyyy hh:mm:ss" />
-        <Column caption={"Ngày kết thúc"} dataType="datetime" dataField={"finishTime"}
-          format="dd/MM/yyyy hh:mm:ss" />
-        <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
-          format="dd/MM/yyyy hh:mm:ss" />
-        <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
-        <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-        <Column type={"buttons"} caption={"Thao tác"} alignment="left" />
-        <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-          texts={{
-            cancelRowChanges: "Hủy bỏ",
-            saveRowChanges: "Lưu lại",
-            confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-            confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-            deleteRow: "Xóa",
-            editRow: "Sửa",
-            addRow: "Thêm"
-          }}
-        >
-          <Popup
-            title="Thông tin chi tiết đơn hàng"
-            showTitle={true}
-            width={"80%"}
-            height={"auto"}
-          />
-          <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-            <Item
-              itemType="group"
-              colCount={2}
-              colSpan={2}
-              caption="Thông tin chi tiết đơn hàng"
-            >
-              <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-              <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-              <Item dataField="customer" caption="Tên khách hàng" />
-              <Item dataField="cardName" caption="Tên thẻ" />
-              <Item dataField="quantity" caption="Số lượng" />
-              <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-              <Item dataField="contractNumber" caption="Số HD/PO" />
-              <Item dataField="startTime" caption="Ngày bắt đầu" />
-              <Item dataField="finishTime" caption="Ngày kết thúc" />
-              <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-            </Item>
-          </Form>
-        </Editing>
+                }} />
+                <FilterRow visible={true} />
+                <SearchPanel visible={true} placeholder={"VD: PO"} />
+                <Paging defaultPageSize={10} />
+                <Pager
+                  visible={true}
+                  displayMode={"full"}
+                  showInfo={true}
+                  showNavigationButtons={true}
+                  allowedPageSizes={[5, 10]}
+                  infoText="Trang số {0} trên {1} ({2} bản ghi)"
+                />
+                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="center" width={100} />
+                <Column caption={"Mã khách hàng"} dataField={"productionCode"} />
+                <Column caption={"Tên khách hàng"} dataField={"customer"} />
+                <Column caption={"Ngày đặt hàng"} dataType="datetime" dataField={"startTime"}
+                  format="dd/MM/yyyy hh:mm:ss" />
+                <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
+                  format="dd/MM/yyyy hh:mm:ss" />
+                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                <Column type={"buttons"} caption={"Thao tác"} alignment="left" />
+                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
+                  texts={{
+                    cancelRowChanges: "Hủy bỏ",
+                    saveRowChanges: "Lưu lại",
+                    confirmDeleteTitle: 'Xác nhận xóa bản ghi',
+                    confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
+                    deleteRow: "Xóa",
+                    editRow: "Sửa",
+                    addRow: "Thêm"
+                  }}
+                >
+                  <Popup
+                    title="Thông tin chi tiết đơn hàng"
+                    showTitle={true}
+                    width={"80%"}
+                    height={"auto"}
+                  />
+                  <Form labelLocation="top" onEditorEnterKey={saveOrder} >
+                    <Item
+                      itemType="group"
+                      colCount={2}
+                      colSpan={2}
+                      caption="Thông tin chi tiết đơn hàng"
+                    >
+                      <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
+                      <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
+                      <Item dataField="customer" caption="Tên khách hàng" />
+                      <Item dataField="cardName" caption="Tên thẻ" />
+                      <Item dataField="quantity" caption="Số lượng" />
+                      <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
+                      <Item dataField="contractNumber" caption="Số HD/PO" />
+                      <Item dataField="startTime" caption="Ngày bắt đầu" />
+                      <Item dataField="finishTime" caption="Ngày kết thúc" />
+                      <Item dataField="deliveryDate" caption="Ngày giao hàng" />
+                    </Item>
+                  </Form>
+                </Editing>
 
-        <MasterDetail
-          enabled={true}
-          component={getProductOrderItemTemplate}
-        // autoExpandAll={true}
-        />
-      </DataGrid>
-    </div>
-  </div>
+                <MasterDetail
+                  enabled={true}
+                  component={getProductOrderItemTemplate}
+                // autoExpandAll={true}
+                />
+              </DataGrid>
+            </div>
+          </div>
+      }
+    </>
+  )
+
 }
 
+
 registerScreen({
-  component: MrpSaleOrders,
-  caption: "Quản lý đơn hàng",
-  screenId: "MrpSaleOrders",
+  caption: "Danh sách phiếu công nghệ",
+  component: TechFormList,
   menuOptions: {
     pathPattern: ROUTING_PATH,
     menuLink: ROUTING_PATH
-  }
+  },
+  screenId: "techFormList"
 });
 
-export default MrpSaleOrders;
+export default TechFormList;
