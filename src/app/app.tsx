@@ -8,6 +8,8 @@ import CenteredLoader from "./CenteredLoader";
 import { AppMenu } from "./AppMenu";
 import "../routing";
 import "./App.css";
+// import "./theme.less"
+import "./custom-theme.css"
 import 'devextreme/dist/css/dx.light.css';
 
 const routes = {
@@ -72,11 +74,14 @@ const App = observer(() => {
         collapsedWidth={'50'}
         className="layout-sider"
         collapsible={true}
-        theme={"dark"}
+        // style={{backgroundColor: "#BEBEBE"}}
+        // theme={"dark"}
       >
         <AppMenu inlineCollapsed={true} mode={"inline"}
                  // style={{ height: "100%" }}
-                 theme={"dark"} />
+                 // theme={"dark"}
+                 style={{backgroundColor: "#BEBEBE", fontSize: "16px"}}
+        />
       </Layout.Sider>
 
       <Layout className="layout-content">
