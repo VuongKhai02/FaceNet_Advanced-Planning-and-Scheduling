@@ -1,17 +1,19 @@
-import {MenuProps} from "antd";
+import { MenuProps } from "antd";
 import React from "react";
-import {MenuItem, SubMenuItem, VerticalMenu} from "@haulmont/jmix-react-ui";
+import { MenuItem, SubMenuItem, VerticalMenu } from "@haulmont/jmix-react-ui";
 import {
   ApartmentOutlined,
   BarsOutlined,
   CalendarFilled,
   CalendarOutlined,
   FileExcelOutlined,
+  FormOutlined,
   HomeFilled,
   ShoppingFilled,
   ShoppingOutlined,
   SignalFilled,
-  UploadOutlined
+  UploadOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import UserService from "../Keycloak";
 
@@ -25,7 +27,7 @@ export const AppMenu = (props: AppMenuProps) => {
     <VerticalMenu {...props}>
       <MenuItem
         screenId="HomePage"
-        icon={<HomeFilled/>}
+        icon={<HomeFilled />}
         caption={"screen.home"}
         key={"home"}
       />
@@ -38,7 +40,7 @@ export const AppMenu = (props: AppMenuProps) => {
       <SubMenuItem caption={"Quản lý thông tin"} icon={<ShoppingFilled />}>
         <MenuItem
           screenId="MrpSaleOrders"
-          icon={<HomeFilled/>}
+          icon={<HomeFilled />}
           caption={"Quản lý đơn hàng"}
           key={"mrporders"}
         />
@@ -52,23 +54,23 @@ export const AppMenu = (props: AppMenuProps) => {
       </SubMenuItem>
       <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<ShoppingFilled />}>
         <MenuItem
-          screenId="techFormManager"
-          icon={<HomeFilled/>}
+          screenId="techFormList"
+          icon={<HomeFilled />}
           caption={"Danh sách phiếu công nghệ"}
-          key={"techFormManager"}
+          key={"techFormList"}
         />
 
         <MenuItem
-          screenId=""
+          screenId="techFormApprove"
           icon={<ShoppingOutlined />}
           caption={"Phê duyệt phiếu công nghệ"}
-          key={"b"}
+          key={"techFormApprove"}
         />
       </SubMenuItem>
       <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<ShoppingFilled />}>
         <MenuItem
           screenId=""
-          icon={<HomeFilled/>}
+          icon={<HomeFilled />}
           caption={"Danh sách kế hoạch sản xuất"}
           key={"c"}
         />
@@ -83,22 +85,38 @@ export const AppMenu = (props: AppMenuProps) => {
       <SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled />}>
         <MenuItem
           screenId=""
-          icon={<HomeFilled/>}
-          caption={"Danh sách phiếu công nghệ"}
+          icon={<HomeFilled />}
+          caption={"Giám sát tiến độ sản xuất"}
           key={"e"}
         />
 
         <MenuItem
           screenId=""
           icon={<ShoppingOutlined />}
-          caption={"Phê duyệt phiếu công nghệ"}
+          caption={"Giám sát tiến độ đơn hàng"}
           key={"f"}
         />
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Giám sát máy"}
+          key={"gsm"}
+        />
+        <MenuItem
+          screenId=""
+          icon={<ShoppingOutlined />}
+          caption={"Hàng chờ công đoạn"}
+          key={"hc"}
+        />
+      </SubMenuItem>
+      {/* user */}
+      <SubMenuItem caption="Quản lý tài khoản" icon={<UserOutlined />}>
+
       </SubMenuItem>
       <SubMenuItem caption={"Cảnh báo"} icon={<ShoppingFilled />}>
         <MenuItem
           screenId=""
-          icon={<HomeFilled/>}
+          icon={<HomeFilled />}
           caption={"Danh sách phiếu công nghệ"}
           key={"g"}
         />
@@ -110,10 +128,10 @@ export const AppMenu = (props: AppMenuProps) => {
           key={"h"}
         />
       </SubMenuItem>
-      <SubMenuItem caption={"Báo cáo, thống kê"} icon={<ShoppingFilled />}>
+      <SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined />}>
         <MenuItem
           screenId=""
-          icon={<HomeFilled/>}
+          icon={<HomeFilled />}
           caption={"Danh sách phiếu công nghệ"}
           key={"i"}
         />

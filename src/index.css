@@ -27,3 +27,7 @@ body {
 .ant-menu-item-selected a, .ant-menu-item-selected a:hover{
   color: white;
 }
+
+.ant-layout-sider{
+  background-color: #BEBEBE;
+}
