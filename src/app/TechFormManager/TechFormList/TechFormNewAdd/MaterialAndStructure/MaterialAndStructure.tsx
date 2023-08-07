@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DropDownBox, Popup } from "devextreme-react";
+import { Button, DataGrid, DropDownBox, Popup, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./MaterialAndStructure.css";
 import {
@@ -50,22 +50,6 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
     const handleToDateTimeChange = (e) => {
         setToDateTime(e.value);
     };
-
-
-    const handleCongDoanChange = (e, rowKey) => {
-        const newData = rowData.map((row) =>
-            row.No === rowKey ? { ...row, CongDoan: e.value } : row
-        );
-        setRowData(newData);
-    };
-
-    const handleMaJobChange = (e, rowKey) => {
-        const newData = rowData.map((row) =>
-            row.No === rowKey ? { ...row, MaJob: e.value } : row
-        );
-        setRowData(newData);
-    };
-
 
 
     const handleAddFormTechProcedure = () => {
@@ -125,7 +109,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 <Column dataField="quantity" caption="Số lượng" />
                                 <Column dataField="note" caption="Ghi chú/Remarks"
                                     cellRender={() => (
-                                        <input
+                                        <TextBox
                                             className="inputRow"
                                             placeholder="--Nhập--"
                                         />
@@ -145,7 +129,12 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 </div>
                                 <div className="input">
                                     <label htmlFor="tongSoBan" style={{ fontWeight: 500, marginLeft: 50 }}>Tổng số bản:</label>
-                                    <input placeholder="--Nhập--" id="tongSoBan" style={{ width: 200, height: 33, marginLeft: 10, borderColor: "aliceblue" }} />
+                                    <TextBox
+                                        className="inputRow"
+                                        placeholder="--Nhập--"
+                                        id="id"
+                                        style={{ width: 200, height: 33, marginLeft: 10 }}
+                                    />
                                 </div>
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -159,15 +148,15 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     <Column alignment="center" caption="Mặt trước/Front" fixed >
                                         <Column dataField="MatTruocNoiDung" caption="Nội dung/Item"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />
                                             )}
                                         />
-                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty"
+                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty" alignment="left"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />
@@ -175,7 +164,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                         <Column dataField="MatTruocKichThuocBan"
                                             caption="Kích thước bản/Plate size"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />
@@ -185,15 +174,15 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     <Column alignment="center" caption="Mặt sau/Back" fixed>
                                         <Column dataField="MatTruocNoiDung" caption="Nội dung/Item"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />
                                             )}
                                         />
-                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty"
+                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty" alignment="left"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />
@@ -201,7 +190,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                         />
                                         <Column dataField="MatTruocKichThuocBan" caption="Kích thước bản/Plate size"
                                             cellRender={() => (
-                                                <input
+                                                <TextBox
                                                     className="inputRow"
                                                     placeholder="--Nhập--"
                                                 />

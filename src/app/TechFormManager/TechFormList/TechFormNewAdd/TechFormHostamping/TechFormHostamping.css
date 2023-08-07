@@ -1,0 +1,40 @@
+.buttons{
+    background-color: #FF7A00;
+    color: #fff ;
+    width: 100px; 
+    margin-right: 8px;
+    
+}
+.note{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row !important;
+}
+.rectangle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #d5cfcf;
+  margin-top: 30px;
+}
+
+.text-section {
+  text-align: center;
+  flex: 1;
+  padding: 10px;
+}
+
+.text {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.date {
+  margin-top: 70px;
+  font-size: 14px;
+  color: rgb(57, 56, 56);
+  font-style: italic;
+}
