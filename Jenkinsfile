@@ -72,9 +72,11 @@
 pipeline {
     agent {label "APS_MK"}
     stages{
-        stage ('main') {
+        stage ('setup env') {
             steps {
-                git branch: 'test', credentialsId: 'github', url: 'https://github.com/nguyenquanghieu2000d/mk-aps-frontend.git'
+                sh 'echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p'
+                sh 'cat /proc/sys/fs/inotify/max_user_watches'
+                sh 'fs.inotify.max_user_watches=524288'
             }
         }
         // stage('SonarQube Analysis') {
