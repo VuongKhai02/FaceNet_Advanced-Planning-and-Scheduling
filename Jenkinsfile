@@ -72,7 +72,7 @@
 pipeline {
     agent {label "APS_MK"}
     stages{
-        stage ('test') {
+        stage ('Clone') {
             steps {
                 git branch: 'test', credentialsId: 'github', url: 'https://github.com/nguyenquanghieu2000d/mk-aps-frontend.git'
             }
