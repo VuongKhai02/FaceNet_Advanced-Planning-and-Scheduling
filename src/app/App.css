@@ -113,6 +113,27 @@ h3 {
   background: rgba(52, 53, 71, 0.46) !important;
 }
 
+
+.dx-datagrid .dx-row:nth-child(odd) {
+  background-color: #FFF3E8;
+}
+
+.dx-datagrid .dx-row:nth-child(even) {
+  background-color: #FFFFFF;
+}
+
+.dx-datagrid .dx-header-row {
+  font-weight: 500;
+  color: black;
+  background-color: #FFE0C2;
+}
+
+.dx-datagrid .dx-header-filter {
+  font-weight: bold !important;
+  color: rgb(35, 34, 34) !important;
+  font-size: 10px !important;
+}
+
 .ant-layout-header {
   background: #343547 !important;
   height: 60px !important;
