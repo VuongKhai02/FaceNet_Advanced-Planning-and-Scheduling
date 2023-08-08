@@ -4,6 +4,10 @@ services:
     container_name: mk-aps-frontend
     build:
       dockerfile: Dockerfile
+    ulimits:
+      nofile:
+        soft: 524288
+        hard: 524288
     restart: always
     ports:
       - "6080:6080"
