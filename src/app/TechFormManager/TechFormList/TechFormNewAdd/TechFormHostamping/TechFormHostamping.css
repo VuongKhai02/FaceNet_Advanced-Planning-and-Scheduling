@@ -1,6 +1,6 @@
 .buttons{
-    background-color: #FF7A00;
-    color: #fff ;
+    background-color: #FF7A00 !important;
+    color: #fff !important ;
     width: 100px; 
     margin-right: 8px;
     
@@ -38,3 +38,5 @@
   color: rgb(57, 56, 56);
   font-style: italic;
 }
+
+

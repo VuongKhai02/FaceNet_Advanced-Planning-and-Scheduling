@@ -46,8 +46,6 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({
         setRowData(newData);
     };
 
-
-
     const handleAddFormTechMaterialAndStructure = () => {
         setIsAddNewTechForm(true);
     }

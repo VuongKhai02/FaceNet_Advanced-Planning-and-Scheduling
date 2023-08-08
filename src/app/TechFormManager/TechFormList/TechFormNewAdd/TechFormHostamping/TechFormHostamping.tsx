@@ -15,12 +15,36 @@ const data = [
     { id: 2, name: 'Item 2', isChecked: true },
 ];
 
+const data1 = [
+    { TrinhTu: 1, ChungLoai: 'A', SoLuong: 10, MaChip: 'ABC123', OS: 'Windows', Other: 'Lorem ipsum' },
+    { TrinhTu: 2, ChungLoai: 'B', SoLuong: 5, MaChip: 'DEF456', OS: 'Linux', Other: 'Dolor sit amet' },
+    // Thêm dữ liệu cho các bước khác nếu cần
+];
+
+const titles = [
+    { title: 'Chủng loại', key: 'ChungLoai' },
+    { title: 'Số lượng', key: 'SoLuong' },
+    { title: 'Mã chip', key: 'MaChip' },
+    { title: 'OS', key: 'OS' },
+    { title: 'Other', key: 'Other' },
+];
+
+const subtitles = [
+    { subtitle: 'Step 1', key: 'Step1' },
+    { subtitle: 'Step 2', key: 'Step2' },
+    { subtitle: 'Step 3', key: 'Step3' },
+    { subtitle: 'Step 4', key: 'Step4' },
+    // Thêm các bước khác nếu cần
+];
+
+
 export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
     isOpen = false, setClose }) => {
 
     const [rowData, setRowData] = useState(data);
     const [fromDateTime, setFromDateTime] = useState('');
     const [toDateTime, setToDateTime] = useState('');
+    const [currentTitle, setCurrentTitle] = useState('TrinhTu');
 
     const handleFromDateTimeChange = (e) => {
         setFromDateTime(e.value);
@@ -197,6 +221,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         )} />
                         <Editing allowDeleting={true} useIcons={true} />
                     </DataGrid>
+
                 </div>
                 <div style={{ marginTop: 30 }}>
                     <div className="subtile" style={{ marginBottom: 15 }}>

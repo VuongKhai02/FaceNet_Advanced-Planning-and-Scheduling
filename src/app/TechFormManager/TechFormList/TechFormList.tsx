@@ -16,15 +16,13 @@ import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import { IWarning } from "../../shared/model/Warning.model";
 import { PLANNING_API_URL } from "../../../config";
-import { ImportOrder } from "../../import/ImportOrder";
 import { customizeColor, getColor } from "../../../utils/utils";
 import TechFormListDetail from "./TechFormListDetail";
-import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
-import TechProcedure from "./TechFormNewAdd/TechProcedure/TechProcedure";
 import { ImportTechForm } from "../../import/ImportTechForm";
+import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 
 
 const ROUTING_PATH = "/techFormList";
@@ -117,14 +115,6 @@ export const TechFormList = () => {
     setPopupVisible(true)
   }
 
-
-  function renderWaringDetail(data: any) {
-    return <div>
-      {/*data.data.id*/}
-      <Button icon="search" onClick={setPopUpOpen} />
-    </div>
-  }
-
   const refresh = async () => {
     // await loadPartNumber();
   };
@@ -142,12 +132,6 @@ export const TechFormList = () => {
         }
       }
       );
-  }
-
-  const renderPopupImport = () => {
-    // console.log("WorkOrderLogPopup render popup")
-    // console.log(props.businessLogObject)
-    return <ImportOrder />
   }
 
   const getProductOrderItemTemplate = row => {
@@ -349,12 +333,11 @@ export const TechFormList = () => {
     }}>{status}</Tag>
   }
 
-
   return (
     <>
       {
         isAddNewTechForm ?
-          <TechProcedure
+          <TechFormBodyCard
             isOpen={isAddNewTechForm}
             setClose={() => setIsAddNewTechForm(false)} /> :
           <div>
@@ -381,17 +364,6 @@ export const TechFormList = () => {
                   fontWeight: 550
                 }}>Tìm kiếm chung</h5>
               </div>
-
-              {/*<Popup visible={popupIsOpen}*/}
-              {/*       onHiding={setPopUpClose}*/}
-              {/*       title={currentWarning?.topicDescription}*/}
-              {/*       showTitle={true}*/}
-              {/*       fullScreen={false}*/}
-              {/*       // contentRender={contenRender}*/}
-              {/*       dragEnabled={false}*/}
-              {/*       closeOnOutsideClick={true}*/}
-              {/*>*/}
-              {/*</Popup>*/}
               <Popup
                 visible={popupVisible}
                 onHiding={hideInfo}
@@ -407,7 +379,6 @@ export const TechFormList = () => {
               >
                 <ImportTechForm />
               </Popup>
-
 
               <DataGrid
                 keyExpr={"saleOrderId"}
@@ -434,12 +405,7 @@ export const TechFormList = () => {
                   <ToolbarItem location="after">
                     <Button hint="Refresh" icon="refresh" />
                   </ToolbarItem>
-                  {/*<ToolbarItem name="addRowButton"/>*/}
-                  {/*<ToolbarItem name="revertButton"/>*/}
-                  {/*<ToolbarItem name="saveButton"/>*/}
                   <ToolbarItem name="searchPanel" location="before" />
-                  {/*<ToolbarItem name="columnChooserButton"></ToolbarItem>*/}
-
                 </Toolbar>
                 <HeaderFilter visible={true} texts={{
                   cancel: "Hủy bỏ",

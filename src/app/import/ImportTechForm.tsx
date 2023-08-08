@@ -48,8 +48,8 @@ export const ImportTechForm = (props) => {
           notify('Import thất bại!', 'error', 3000);
         }
       }).catch(err => {
-      notify(err.response.data.message, 'error', 3000);
-    });
+        notify(err.response.data.message, 'error', 3000);
+      });
   }
   const onload = (file, callback) => {
     setFile(file);
@@ -57,20 +57,18 @@ export const ImportTechForm = (props) => {
 
 
   return <div>
-    <h3>Import phiếu công nghệ</h3>
+    {/* <h3>Import phiếu công nghệ</h3> */}
     <div className="widget-container">
       <div className="fileuploader-container">
         <FileUploader uploadFile={onload} ref={(ref) => fileUpload = ref}
-                      allowedFileExtensions={fileExtensions} />
-        <span className="note">{'Allowed file extensions: '}
-          <span>.xls, .xlsx</span>
-            </span>
-        <a href='/List_PartNumber.csv' className="note">Tải xuống file mẫu</a>
-        <Button1 className="button-upload" icon="exportxlsx" text="Import" type="default"
-                 onClick={onClick} />
+          allowedFileExtensions={fileExtensions} />
+        <span className="note">{'Chỉ cho phép file dạng và dung lượng không quá 1Mb:'}
+          <span> .xls, .xlsx</span>
+          <Button1 className="button-upload" icon="exportxlsx" text="Import" type="default"
+            onClick={onClick} style={{ marginLeft: 900, marginBottom: 20 }} />
+        </span>
+        {/* <a href='/List_PartNumber.csv' className="note">Tải xuống file mẫu</a> */}
       </div>
     </div>
-
-    {/*  gird data list of product order*/}
   </div>
 }
