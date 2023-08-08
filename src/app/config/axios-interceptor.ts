@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const TIMEOUT = 1 * 60 * 1000;
 axios.defaults.timeout = TIMEOUT;
-axios.defaults.baseURL = "http://localhost:6886/api";
+axios.defaults.baseURL = process.env.REACT_APP_API_URL + "/api";
 
 const setupAxiosInterceptors = onUnauthenticated => {
   const onRequestSuccess = config => {
