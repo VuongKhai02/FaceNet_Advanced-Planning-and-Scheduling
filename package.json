@@ -48,7 +48,7 @@
     "react-error-overlay": "6.0.9"
   },
   "scripts": {
-    "start": "set PORT=6080 HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
+    "start": "set HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
     "start-3001": "set PORT=9081 HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
     "start:test": "env-cmd -f .env.test react-scripts start",
     "build": "react-scripts build",
