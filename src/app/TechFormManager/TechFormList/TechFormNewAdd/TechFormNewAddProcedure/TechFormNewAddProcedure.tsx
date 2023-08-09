@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, DataGrid, DropDownBox, Popup, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./TechFormNewAddProcedure.css";
-import CustomGrid from './CustomGrid';
-import { Column, Editing } from "devextreme-react/data-grid";
+import { Column, Editing, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormHostamping from "../TechFormHostamping/TechFormHostamping";
 
@@ -163,7 +162,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                             />
                                         </Column>
                                     </Column>
-                                    <Editing allowDeleting={true} useIcons={true} />
+                                    <Column type={'buttons'} caption={""} alignment="center" >
+                                        <ButtonIcon icon='add' />
+                                    </Column>
                                 </DataGrid>
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -230,7 +231,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Editing allowDeleting={true} useIcons={true} />
+                                        <Column type={'buttons'} caption={""} alignment="center" >
+                                            <ButtonIcon icon='add' />
+                                        </Column>
                                     </DataGrid>
 
                                 </div>
@@ -302,7 +305,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Editing allowDeleting={true} useIcons={true} />
+                                        <Column type={'buttons'} caption={""} alignment="center" >
+                                            <ButtonIcon icon='add' />
+                                        </Column>
                                     </DataGrid>
 
                                 </div>
@@ -348,7 +353,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Editing allowDeleting={true} useIcons={true} />
+                                        <Column type={'buttons'} caption={""} alignment="center" >
+                                            <ButtonIcon icon='add' />
+                                        </Column>
                                     </DataGrid>
 
                                 </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, Popup } from "devextreme-react";
+import { Button, DataGrid, Popup, TextArea } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -20,9 +20,10 @@ import { customizeColor, getColor } from "../../../utils/utils";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
-import TechProcedure from "../TechFormList/TechFormNewAdd/TechProcedure/TechProcedure";
 import { OrderItem } from "../../../fake_data/OrderItem";
 import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
+import { Popup as PopupCofirm } from 'devextreme-react/popup';
+import "./TechFormApprove.css";
 
 
 const ROUTING_PATH = "/TechFormApprove";
@@ -32,8 +33,21 @@ export const TechFormApprove = () => {
     const [, setContent] = useState<string>();
     const [, setCurrentWarning] = useState<IWarning>()
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
+
+    const [showPopup, setShowPopup] = useState(false);
+    const [rejectReason, setRejectReason] = useState('');
+
     const mainStore = useMainStore();
     const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+
+
+    const onConfirmClick = () => {
+        setShowPopup(false);
+    };
+
+    const onCancelClick = () => {
+        setShowPopup(false);
+    };
 
     const loadOrders = () => {
         const headers = {
@@ -292,7 +306,7 @@ export const TechFormApprove = () => {
                                 <Column dataField="quantity"
                                     minWidth={140}
                                     caption="Số lượng"
-                                    alignment="right"
+                                    alignment="left"
                                 >
                                 </Column>
 
@@ -300,7 +314,7 @@ export const TechFormApprove = () => {
                                     caption="Ngày bắt đầu"
                                     format={"dd/MM/yyyy"}
                                     dataType="datetime"
-                                    alignment={"center"}
+                                    alignment={"left"}
                                     minWidth={140}
                                     hidingPriority={0}
                                 >
@@ -310,7 +324,7 @@ export const TechFormApprove = () => {
                                     caption="Ngày kết thúc"
                                     dataType="datetime"
                                     format={"dd/MM/yyyy"}
-                                    alignment={"center"}
+                                    alignment={"left"}
                                     minWidth={140}
                                     hidingPriority={1}
                                 >
@@ -384,6 +398,7 @@ export const TechFormApprove = () => {
                                 }}
                             >
                                 <Button
+                                    onClick={() => setShowPopup(true)}
                                     text="Từ chối"
                                     style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
@@ -392,6 +407,32 @@ export const TechFormApprove = () => {
                                     style={{ backgroundColor: "#FF7A00", color: "#fff" }}
                                 />
                             </div>
+                            <PopupCofirm
+                                title="Xác nhận từ chối"
+                                visible={showPopup}
+                                onHiding={() => setShowPopup(false)}
+                                showCloseButton={false}
+                                width={400}
+                                height={330}
+                            >
+                                <div>
+                                    <p>Bạn có chắc chắn muốn từ chối phiếu công nghệ này không?</p>
+                                    <div className="reject-reason-container">
+                                        <label >Lý do từ chối <span className="required">*</span></label>
+                                        <TextArea
+                                            value={rejectReason}
+                                            onValueChanged={(e) => setRejectReason(e.value)}
+                                            placeholder="Nhập lý do từ chối..."
+                                            height={100}
+                                            style={{ marginTop: 10 }}
+                                        />
+                                    </div>
+                                    <div className="button-container">
+                                        <Button text="Hủy bỏ" onClick={onCancelClick} style={{ backgroundColor: '#E5E5E5' }} />
+                                        <Button text="Xác nhận" onClick={onConfirmClick} style={{ backgroundColor: '#FF7A00', color: '#FFF' }} />
+                                    </div>
+                                </div>
+                            </PopupCofirm>
                         </div>
                     </div>
             }

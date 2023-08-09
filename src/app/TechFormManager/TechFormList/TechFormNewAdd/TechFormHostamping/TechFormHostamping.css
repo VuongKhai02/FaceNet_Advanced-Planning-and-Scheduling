@@ -38,5 +38,22 @@
   color: rgb(57, 56, 56);
   font-style: italic;
 }
+.alternate-row-colors thead tr:nth-child(odd) th {
+    background-color: #fff2e6 !important;
+}
+
+.alternate-row-colors thead tr:nth-child(even) th {
+    background-color: white !important; 
+}
 
 
+.ant-table-tbody .ant-table-row:nth-child(even) {
+    background-color: #fff2e6; 
+}
+
+.ant-table-tbody .ant-table-row:nth-child(odd) {
+    background-color: #ffff;
+}
+.ant-table-thead .ant-table-cell {
+    background-color: #fff2e6;
+}

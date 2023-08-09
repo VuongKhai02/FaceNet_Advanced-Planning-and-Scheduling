@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DropDownBox, Popup, TextBox } from "devextreme-react";
+import React, { useState } from "react";
+import { Button, DataGrid, DropDownBox, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./TechFormHostamping.css";
-import { Column, Editing } from "devextreme-react/data-grid";
+import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
+import { Input, Table, Button as ButtonAnt } from "antd";
+import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 type TechFormHostampingProps = {
     isOpen: boolean,
@@ -11,40 +13,22 @@ type TechFormHostampingProps = {
 
 };
 const data = [
-    { id: 1, name: 'Item 1', isChecked: false },
-    { id: 2, name: 'Item 2', isChecked: true },
+    { id: 1, process: 'Công đoạn/Process', isChecked: false },
 ];
 
 const data1 = [
-    { TrinhTu: 1, ChungLoai: 'A', SoLuong: 10, MaChip: 'ABC123', OS: 'Windows', Other: 'Lorem ipsum' },
-    { TrinhTu: 2, ChungLoai: 'B', SoLuong: 5, MaChip: 'DEF456', OS: 'Linux', Other: 'Dolor sit amet' },
-    // Thêm dữ liệu cho các bước khác nếu cần
-];
-
-const titles = [
-    { title: 'Chủng loại', key: 'ChungLoai' },
-    { title: 'Số lượng', key: 'SoLuong' },
-    { title: 'Mã chip', key: 'MaChip' },
-    { title: 'OS', key: 'OS' },
-    { title: 'Other', key: 'Other' },
-];
-
-const subtitles = [
-    { subtitle: 'Step 1', key: 'Step1' },
-    { subtitle: 'Step 2', key: 'Step2' },
-    { subtitle: 'Step 3', key: 'Step3' },
-    { subtitle: 'Step 4', key: 'Step4' },
-    // Thêm các bước khác nếu cần
+    { position: 'Kích thước/Size', type: 'Item 1', machine: false, temp: '' },
+    { position: 'Loại/Type', type: 'Item 1', machine: false, temp: '' },
+    { position: 'Máy/Machine', type: 'Item 1', machine: false, temp: '' },
+    { position: 'Nhiệt độ/Temp', type: 'Item 1', machine: false, temp: '' }
 ];
 
 
 export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [rowData, setRowData] = useState(data);
     const [fromDateTime, setFromDateTime] = useState('');
     const [toDateTime, setToDateTime] = useState('');
-    const [currentTitle, setCurrentTitle] = useState('TrinhTu');
 
     const handleFromDateTimeChange = (e) => {
         setFromDateTime(e.value);
@@ -100,7 +84,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         showRowLines={true}
                         showColumnLines={true}
                     >
-                        <Column dataField="id" caption="Bước" alignment="center" width={100} />
+                        <Column dataField="" caption="Bước/Step" alignment="center" width={100} />
                         <Column dataField="process" caption="Công đoạn/Process" cellRender={({ data, key }) => (
                             <DropDownBox
                                 placeholder="--Chọn--"
@@ -153,7 +137,9 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 placeholder="--Nhập--"
                             />
                         )} />
-                        <Editing allowDeleting={true} useIcons={true} />
+                        <Column type={'buttons'} caption={""} alignment="center" >
+                            <ButtonIcon icon='add' />
+                        </Column>
                     </DataGrid>
 
                 </div>
@@ -167,7 +153,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                             value={fromDateTime}
                             onValueChanged={handleFromDateTimeChange}
                             type="datetime"
-                        // displayFormat="shortdatetime"
                         />
                         <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                         <DateBox
@@ -176,51 +161,138 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                             value={toDateTime}
                             onValueChanged={handleToDateTimeChange}
                             type="datetime"
-                        // displayFormat="shortdatetime"
                         />
                     </div>
-                    <DataGrid
-                        dataSource={rowData}
-                        keyExpr="id"
-                        showBorders={true}
-                        showRowLines={true}
-                        showColumnLines={true}
-                    >
-                        <Column dataField="id" caption="Trình tự/Step" alignment="left" width={100} />
-                        <Column dataField="icType" caption="Chủng loại/IC Type" cellRender={() => (
-                            <TextBox
-                                className="inputRow"
-                                placeholder="--Nhập--"
+                    <div>
+                        <Table
+                            dataSource={data}
+                            rowKey="id"
+                            bordered
+                            pagination={false}
+                        >
+                            <Table.Column title="Trình tự/Step" dataIndex="" key="id" align="left" width={130} />
+                            <Table.Column
+                                title="Chủng loại/IC Type"
+                                dataIndex="icType"
+                                key="icType"
+                                align="center"
+
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
                             />
-                        )} />
-                        <Column dataField="quantity" caption="Số lượng/Quantity" cellRender={() => (
-                            <TextBox
-                                className="inputRow"
-                                placeholder="--Nhập--"
+                            <Table.Column
+                                title="Số lượng/Quantity"
+                                dataIndex="quantity"
+                                key="quantity"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
                             />
-                        )} />
-                        <Column dataField="icCode" caption="Mã chip/IC Code" cellRender={() => (
-                            <TextBox
-                                className="inputRow"
-                                placeholder="--Nhập--"
+                            <Table.Column
+                                title="Mã chip/IC Code"
+                                dataIndex="icCode"
+                                key="icCode"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
                             />
-                        )} />
-                        <Column dataField="os" caption="OS/Version"
-                            cellRender={() => (
-                                <TextBox
-                                    className="inputRow"
-                                    placeholder="--Nhập--"
-                                />
-                            )}>
-                        </Column>
-                        <Column dataField="other" caption="Other/Khác" cellRender={() => (
-                            <TextBox
-                                className="inputRow"
-                                placeholder="--Nhập--"
+                            <Table.Column
+                                title="OS/Version"
+                                dataIndex="version"
+                                key="version"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
                             />
-                        )} />
-                        <Editing allowDeleting={true} useIcons={true} />
-                    </DataGrid>
+                            <Table.Column
+                                title="Other/Khác"
+                                dataIndex="other"
+                                key="other"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
+                            />
+                            <Table.Column
+                                title=""
+                                key="actions"
+                                align="center"
+                                render={() => (
+                                    <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
+                                )}
+                            />
+                        </Table>
+
+                        <Table
+                            dataSource={data}
+                            rowKey="id"
+                            bordered
+                            pagination={false}
+                        >
+                            <Table.Column title="Trình tự/Step" dataIndex="process" key="id" align="left" width={130} />
+                            <Table.Column
+                                title="Step 1"
+                                dataIndex="icType"
+                                key="step1"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
+                            />
+                            <Table.Column
+                                title="Step 2"
+                                dataIndex="icType"
+                                key="step2"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
+                            />
+                            <Table.Column
+                                title="Step 3"
+                                dataIndex="icType"
+                                key="step3"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
+                            />
+                            <Table.Column
+                                title="Step 4"
+                                dataIndex="icType"
+                                key="step4"
+                                align="center"
+                                render={() => (
+                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                )}
+                            />
+                        </Table>
+
+                        <Table
+                            dataSource={data1}
+                            rowKey="position"
+                            bordered
+                            pagination={false}
+                        >
+                            <Table.Column title="Vị trí/Position" dataIndex="position" key="position" width={130} />
+                            <Table.ColumnGroup title="Lỗ ngoài/Outside Hole">
+                                <Table.Column title="Dài/Length" dataIndex="length" key="length" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="Rộng/Width" dataIndex="width" key="width" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                            </Table.ColumnGroup>
+                            <Table.ColumnGroup title="Lỗ trong/Inside Hole">
+                                <Table.Column title="Dài/Length" dataIndex="length" key="length" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="Rộng/Width" dataIndex="width" key="width" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                            </Table.ColumnGroup>
+                        </Table>
+                    </div>
 
                 </div>
                 <div style={{ marginTop: 30 }}>
@@ -246,7 +318,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         />
                     </div>
                     <DataGrid
-                        dataSource={rowData}
+                        dataSource={data}
                         keyExpr="id"
                         showBorders={true}
                         showRowLines={true}
@@ -284,7 +356,9 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 />
                             )} />
                         </Column>
-                        <Editing allowDeleting={true} useIcons={true} />
+                        <Column type={'buttons'} caption={""} alignment="center" >
+                            <ButtonIcon icon='add' />
+                        </Column>
                     </DataGrid>
                 </div>
                 <div className="noteRemark">

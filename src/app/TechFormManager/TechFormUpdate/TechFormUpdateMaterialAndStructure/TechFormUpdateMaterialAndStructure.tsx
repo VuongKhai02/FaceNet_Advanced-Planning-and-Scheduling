@@ -6,6 +6,7 @@ import {
     Column, Editing
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
+import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
 
 type TechFormUpdateMaterialAndStructureProps = {
     isOpen: boolean,
@@ -39,26 +40,20 @@ const data1 = [
 export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterialAndStructureProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [fromDateTime, setFromDateTime] = useState('');
-    const [toDateTime, setToDateTime] = useState('');
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
 
-    const handleFromDateTimeChange = (e) => {
-        setFromDateTime(e.value);
-    };
 
-    const handleToDateTimeChange = (e) => {
-        setToDateTime(e.value);
-    };
-
-
-    const handleAddFormTechProcedure = () => {
+    const handleTechFormUpdateProcedure = () => {
         setIsAddNewTechForm(true);
     }
 
     return (
         <>
-            {
+            {isAddNewTechForm ?
+                <TechFormUpdateProcedure
+                    isOpen={isAddNewTechForm}
+                    setClose={() => setIsAddNewTechForm(false)}
+                /> :
                 <div>
                     <div className="table-responsive">
                         <div className="informer" style={{
@@ -71,7 +66,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             }}>Thêm mới phiếu công nghệ</h5>
                         </div>
                         <div className="subtile">
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu và cấu trúc/ Material and Structure : Thời gian từ /from 09/08/2022 đến/to 19/08/2022  </h6>
+                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022  </h6>
                         </div>
                         <div style={{ marginTop: 30 }}>
                             <DataGrid
@@ -91,11 +86,11 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             <div className="container">
                                 <div className="checkbox">
                                     <label htmlFor="raPhim" style={{ fontWeight: 500 }}>Ra phim/Pre-press</label>
-                                    <input type="checkbox" id="raPhim" />
+                                    <input type="checkbox" id="raPhim" checked={true} />
                                 </div>
                                 <div className="checkbox">
                                     <label htmlFor="raBan" style={{ fontWeight: 500, marginLeft: 50 }}>Ra bản/PC to plate</label>
-                                    <input type="checkbox" id="raBan" />
+                                    <input type="checkbox" id="raBan" checked={true} />
                                 </div>
                                 <div className="input">
                                     <label htmlFor="tongSoBan" style={{ fontWeight: 500, marginLeft: 50 }}>Tổng số bản: {'6'}</label>
@@ -140,7 +135,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                 <Button
                                     className="border-none"
                                     icon="chevronright"
-                                    onClick={() => console.log('ok')}
+                                    onClick={handleTechFormUpdateProcedure}
                                     style={{ color: "#fff" }}
                                 />
                             </div>

@@ -1,10 +1,9 @@
 import React from "react";
-import { Button, DataGrid, Template, TextBox } from "devextreme-react";
+import { Button, DataGrid, Template } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import { ImportTechForm } from "../../import/ImportTechForm";
 import TechnologyPocudure from "./TechnologyProcedure/TechnologyProcedure";
-
+import "./TechFormUpdate.css";
 type TechFormUpdateProps = {
     isOpen: boolean,
     setClose?: () => void;
@@ -63,6 +62,16 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     marginBottom: 0,
                                     textAlign: "center"
                                 }}>(Phôi thẻ - Body card)</h5>
+                                <h6 style={{
+                                    fontSize: 15,
+                                    textAlign: "right",
+                                    fontWeight: "normal"
+                                }}>Tổng số lô: {'1'}</h6>
+                                <h6 style={{
+                                    fontSize: 15,
+                                    textAlign: "right",
+                                    fontWeight: "normal"
+                                }}>Số lô: {'1'}</h6>
                             </div>
 
 
@@ -98,10 +107,11 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     paddingBottom: 10,
                                     // marginTop: 20
                                 }}>
+                                    <h5 style={{ marginTop: 30 }}>Mức độ ưu tiên: {'1'}</h5>
                                     <h5 className="name" style={{
                                         fontSize: 18,
-                                        marginBottom: 0
-                                    }}>Quy cách sản phẩm/Product Spec</h5>
+                                        marginTop: 30
+                                    }}>Quy cách sản phẩm/Product Spee</h5>
 
                                 </div>
                                 <DataGrid
@@ -110,40 +120,18 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     showRowLines={true}
                                     showColumnLines={true}
                                 >
-                                    <Column dataField="MatTruocNoiDung" caption="Khổ thẻ/Size"
-                                        cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )}
-                                    />
+                                    <Column dataField="MatTruocNoiDung" caption="Khổ thẻ/Size" />
                                     <Column alignment="left"
                                         dataField="MatTruocSoLuong"
                                         caption="Kích thước/Size, Dài/Length * Rộng/Width(mm)"
-                                        cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
+                                    />
                                     <Column dataField="MatTruocKichThuocBan"
                                         caption="Kích thước/size"
-                                        cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )}
+
                                     />
                                     <Column dataField="MatTruocKichThuocBan"
                                         caption="Khác/other"
-                                        cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )}
+
                                     />
                                 </DataGrid>
                                 <div className="informer" style={{
@@ -154,10 +142,23 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     // marginTop: 15
                                 }}>
                                     <h5 className="name" style={{
-                                        fontSize: 18,
-                                        marginLeft: 20
+                                        fontSize: 18
                                     }}>Thiết kế - Card design</h5>
-                                    <ImportTechForm />
+                                </div>
+                                <div className="outer-rectangle">
+                                    <div className="inner-rectangle">
+                                        <div className="text">
+                                            Chú ý: -Màu theo tờ mẫu đã làm T05/2020
+                                            Khách hàng khó tính, các công đoạn làm chuẩn theo mẫu
+                                            -CTH in Barcode MS thẻ từ VCCP227002
+                                            Dán lable LP2
+                                            Xuất tồn kho 900 thẻ
+                                        </div>
+                                    </div>
+
+                                    <div className="image-container">
+                                        <img src="https://www.visa.com.vn/dam/VCOM/regional/ap/vietnam/global-elements/images/vn-visa-classic-card-498x280.png" alt="Credit Card" className="credit-card-image" />
+                                    </div>
                                 </div>
                                 <div
                                     className="toolbar"
@@ -170,14 +171,12 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     }}
                                 >
                                     <Button
-                                        // text="Trở lại"
                                         className="border-none"
                                         icon="back"
                                         onClick={setClose}
                                         style={{ marginRight: "20px", color: "#333" }}
                                     />
                                     <Button
-                                        // text="Tiếp theo"
                                         className="border-none"
                                         icon="chevronright"
                                         onClick={handleTechnologyPocudure}
