@@ -1,6 +1,5 @@
 import { locale, loadMessages } from "devextreme/localization";
-import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OrderItem } from "../../../fake_data/OrderItem";
 import DataGrid, {
     Column, FilterRow, HeaderFilter, SearchPanel,
@@ -10,18 +9,12 @@ import DataGrid, {
     Lookup,
     Form,
     Toolbar,
-    Item as TItem, FormItem, Scrolling, Paging, Pager, Format, OperationDescriptions
+    Item as TItem, Paging, Pager, OperationDescriptions, Button
 } from 'devextreme-react/data-grid';
 
-import Popup2 from 'devextreme-react/popup';
 import { Item } from 'devextreme-react/form';
-import { collection, instance } from "@haulmont/jmix-react-core";
 import { Tooltip } from 'devextreme-react/tooltip';
-import notify from "devextreme/ui/notify";
-import { Observer } from "@apollo/client";
 import { Tag } from "antd";
-import { registerScreen } from "@haulmont/jmix-react-ui";
-
 
 const getProductName = (rowData) => {
     if (rowData.data.status && rowData.data.status === 'created_wo') {
@@ -428,7 +421,14 @@ export const TechFormListDetail = React.memo((props: any) => {
                 </Column>
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
 
-                <Column type={'buttons'} caption={"Thao tác"} alignment="left" />
+                <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
+                    <Button icon="edit" />
+                    <Button icon="airplane" />
+                    <Button icon="globe" />
+                    <Button icon="print" />
+                    <Button icon="chevronnext" />
+                    <Button icon="trash" />
+                </Column>
                 <Editing
                     mode="popup"
                     allowUpdating={true}
