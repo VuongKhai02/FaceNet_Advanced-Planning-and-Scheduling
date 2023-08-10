@@ -23,6 +23,7 @@ import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
 import { ImportTechForm } from "../../import/ImportTechForm";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
+import PopupImportFile from "../../shared/components/PopupImportFile/PopupImportFile";
 
 
 const ROUTING_PATH = "/techFormList";
@@ -37,87 +38,13 @@ export const TechFormList = () => {
   const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
   const mainStore = useMainStore();
 
-  const onStatusRender = (data) => {
-    console.log(data.data)
-    // console.log("Data color,", data?.value)
-    let status = "";
-    let backgroundColor = "";
-    let padding = "";
-    let borderRadius = "";
-    let width = "";
-    let border = "";
-    const getColor = (value) => {
-      let color = ""
-      switch (value) {
-        case "Cảnh báo":
-          status = "Cảnh báo"
-          color = "rgba(228, 184, 25, 1)"
-          backgroundColor = "rgba(228, 184, 25, 0.1)"
-          padding = "3px 15px"
-          borderRadius = "4px"
-          width = "125px"
-          border = "1px solid rgba(228, 184, 25, 0.5)"
-          break;
-        case "Nghiêm trọng":
-          status = "Nghiêm trọng"
-          color = "rgba(229, 28, 15, 1)"
-          backgroundColor = "rgba(229, 28, 15, 0.1)"
-          padding = "3px 15px"
-          borderRadius = "4px"
-          // width = "90px"
-          border = "1px solid rgba(229, 28, 15, 0.5)"
-          break;
-      }
-      return color
-    }
-
-    const color = getColor(data?.value)
-    return <div style={{
-      "width": "100%",
-      "textAlign": "center",
-      "color": color,
-      "backgroundColor": backgroundColor,
-      "padding": padding,
-      "borderRadius": borderRadius,
-      // "width": width,
-      "border": border
-    }}>{status}</div>
-  }
-
-  const buttonCellRender = (data) => {
-
-    return <div>
-      <div id={"r2Tool" + data.data.id} style={{ float: "left" }}>
-        <Button icon="customicon" stylingMode={"text"} />
-      </div>
-      <div id={"redundantMaterial" + data.data.id} style={{ float: "left" }}>
-        <Button
-          icon="redundaunt"
-          stylingMode={"text"}
-        />
-
-      </div>
-      <div id={"approveRedundantmaterial" + data.data.id} style={{ float: "left" }}>
-        <Button
-          icon="approveredundaunt"
-          stylingMode={"text"}
-        />
-      </div>
-
-    </div>
-  }
-
-  const hideInfo = () => {
+  const handleHideUploadImport = () => {
     setPopupVisible(false)
   }
 
-  const showInfo = () => {
+  const handleShowUploadImport = () => {
     setPopupVisible(true)
   }
-
-  const refresh = async () => {
-    // await loadPartNumber();
-  };
 
   const loadOrders = () => {
     const headers = {
@@ -151,11 +78,9 @@ export const TechFormList = () => {
   }
   const setPopUpOpen = () => {
     setPopupIsOpen(true);
-    refresh();
   }
   const setPopUpClose = () => {
     setPopupIsOpen(false);
-    refresh();
   }
 
   useEffect(() => {
@@ -163,7 +88,6 @@ export const TechFormList = () => {
   }, [])
 
   const saveOrder = (data) => {
-    // return <WarningDetail warningDetail={currentWarning} />
     console.log(data);
     console.log("click submit")
   }
@@ -183,8 +107,6 @@ export const TechFormList = () => {
     axios.put(PLANNING_API_URL + '/api/orders/' + e.oldData.saleOrderId, data, { headers },)
       .then(response => {
         if (response.status === 200) {
-          // console.log(response.data)
-          // setContent(response.data.data)
           notify({
             message: 'Cập nhật thành công!',
             width: 450
@@ -209,8 +131,6 @@ export const TechFormList = () => {
     axios.delete(PLANNING_API_URL + '/api/orders/' + e.data.saleOrderId, { headers },)
       .then(response => {
         if (response.status === 200) {
-          // console.log(response.data)
-          // setContent(response.data.data)
           notify({
             message: 'Xóa thành công đơn hàng!',
             width: 450
@@ -226,7 +146,6 @@ export const TechFormList = () => {
   }
 
   const onStatusPoRender = (rowInfo) => {
-    // console.log("Data color,", data?.value)
     let customColor: {
       color: string,
       backgroundColor: string
@@ -364,21 +283,7 @@ export const TechFormList = () => {
                   fontWeight: 550
                 }}>Tìm kiếm chung</h5>
               </div>
-              <Popup
-                visible={popupVisible}
-                onHiding={hideInfo}
-                dragEnabled={false}
-                closeOnOutsideClick={true}
-                showCloseButton={true}
-                showTitle={true}
-                title="Import phiếu công nghệ"
-                // container=".dx-viewport"
-                width={"80%"}
-                height={"auto"}
-              // contentRender={renderPopupImport}
-              >
-                <ImportTechForm />
-              </Popup>
+              <PopupImportFile visible={popupVisible} onClose={() => setPopupVisible(false)} />
 
               <DataGrid
                 keyExpr={"saleOrderId"}
@@ -400,7 +305,7 @@ export const TechFormList = () => {
                     <Button hint="Thêm mới" icon="add" onClick={handleAddFormTech} />
                   </ToolbarItem>
                   <ToolbarItem location="after">
-                    <Button hint="Upload file" icon="upload" onClick={showInfo} />
+                    <Button hint="Upload file" icon="upload" onClick={handleShowUploadImport} />
                   </ToolbarItem>
                   <ToolbarItem location="after">
                     <Button hint="Refresh" icon="refresh" />
