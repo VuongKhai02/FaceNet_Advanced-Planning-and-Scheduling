@@ -84,6 +84,12 @@ pipeline {
         //         }
         //     }
         // }
+        stage("Check old image") {
+            steps {
+                sh 'docker rm -f mk-aps-frontend || echo "this container does not exist" '
+                sh 'docker image rm -f aps_mkfrontend-frontend || echo "this image dose not exist" '
+            }
+        }
         stage('Build and Run') {
             steps {
                 sh 'docker compose up -d --build'
