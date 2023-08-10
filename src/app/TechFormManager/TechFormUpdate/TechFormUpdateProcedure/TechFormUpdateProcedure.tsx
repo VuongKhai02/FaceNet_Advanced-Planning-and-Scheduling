@@ -27,7 +27,6 @@ const data2 = [
 
 
 
-
 export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = observer(({
     isOpen = false, setClose }) => {
 

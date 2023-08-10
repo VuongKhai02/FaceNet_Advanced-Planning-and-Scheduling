@@ -24,6 +24,8 @@ import { OrderItem } from "../../../fake_data/OrderItem";
 import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
 import { Popup as PopupCofirm } from 'devextreme-react/popup';
 import "./TechFormApprove.css";
+import PopupConfirmDelete from "../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import { InfoCircleOutlined, InfoOutlined, WarningOutlined } from "@ant-design/icons";
 
 
 const ROUTING_PATH = "/TechFormApprove";
@@ -33,7 +35,7 @@ export const TechFormApprove = () => {
     const [, setContent] = useState<string>();
     const [, setCurrentWarning] = useState<IWarning>()
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
+    const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [showPopup, setShowPopup] = useState(false);
     const [rejectReason, setRejectReason] = useState('');
 
@@ -48,6 +50,14 @@ export const TechFormApprove = () => {
     const onCancelClick = () => {
         setShowPopup(false);
     };
+
+    const handleShowModalDel = () => {
+        setIsConfirmDelete(true);
+    }
+    const handleHideModalDel = () => {
+        setIsConfirmDelete(false);
+    }
+
 
     const loadOrders = () => {
         const headers = {
@@ -261,6 +271,22 @@ export const TechFormApprove = () => {
                                 onRowUpdating={updateOrder}
                                 onRowRemoving={removeOrder}
                             >
+                                <PopupConfirmDelete
+                                    isVisible={isConfirmDelete}
+                                    onCancel={handleHideModalDel}
+                                    onSubmit={() => console.log('ok')
+                                    }
+                                    modalTitle={
+                                        <div>
+                                            <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 50 }} />
+                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 30 }}>
+                                                Xác nhận xóa?
+                                            </h3>
+                                            <h5 style={{ fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5>
+                                        </div>
+                                    }
+                                    modalContent={''}
+                                    width={600} />
                                 <Toolbar>
                                     <ToolbarItem >
                                         <Button
@@ -345,7 +371,7 @@ export const TechFormApprove = () => {
                                     <ButtonB icon='check' />
                                     <ButtonB icon='clear' />
                                     <ButtonB icon='add' />
-                                    <ButtonB icon='trash' />
+                                    <ButtonB icon='trash' onClick={handleShowModalDel} />
                                 </Column>
                                 <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
                                     texts={{

@@ -13,8 +13,9 @@ import DataGrid, {
 } from 'devextreme-react/data-grid';
 
 import { Item } from 'devextreme-react/form';
-import { Tooltip } from 'devextreme-react/tooltip';
 import { Tag } from "antd";
+import PopupSendSAP from "../../shared/components/PopupSendSAP/PopupSendSAP";
+import { WarningOutlined } from "@ant-design/icons";
 
 const getProductName = (rowData) => {
     if (rowData.data.status && rowData.data.status === 'created_wo') {
@@ -38,26 +39,6 @@ const setProductSelectionValue = (rowData, value) => {
     rowData.sapUrl2 = value.uDocurl2
 }
 
-const quantityOutCellRender = (row) => {
-    return row.value ? row.value.toLocaleString('en-US', { maximumFractionDigits: 2 }) : "0";
-}
-
-const rowIndexRender = (row) => {
-    return <div>{row.data.itemIndex == 0 ? (row.rowIndex + 1) : row.data.itemIndex}</div>
-}
-
-
-const completePercent = (row) => {
-    let outQuantity = row.data.quantityOut;
-    let quantity = row.data.quantity;
-    let displayQuantity = outQuantity * 100 / quantity;
-    if (outQuantity && quantity) {
-
-        return <div>{displayQuantity.toFixed(2)}%</div>
-    }
-    return <div>---</div>
-}
-
 const onCellPrepared = (e) => {
     if (e.rowType == "data" && e.column.dataField == "completePercent") {
         if (e.data.completePercent > 5)
@@ -66,40 +47,12 @@ const onCellPrepared = (e) => {
 }
 
 
-const quantityOut = (row) => {
-    let outQuantity = row.data.scadaQuantityOut;
-    if (outQuantity) return <div className={"highlightColumnQuantity"}>{outQuantity}</div>
-    return <div>0.00</div>
-}
-
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
-
-
 export const TechFormListDetail = React.memo((props: any) => {
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [popupVisible2, setPopupVisible2] = useState(false);
-    const [currentRow, setCurrentRow] = useState(null);
-    const [productsFullArrays, setProductsFullArrays] = useState<any[]>([]);
-    const [bomVersion, setBomVersion] = useState<any>(null);
-    const [branchGroupArray, setBranchGroupArray] = useState<any[]>([]);
-    const [groupArray, setGroupArray] = useState<any[]>([]);
+    const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
 
-    const productOrderId: string = props.data.data.productOrderId;
-
-    const [bomVersionProps, setBomversionProps] = useState<{ popupVisible: boolean, currentRow: any, bomVersion: any }>
-        ({
-            popupVisible: false,
-            currentRow: null,
-            bomVersion: null
-        });
-
-
-    const loadProductOrderItem = () => {
-
-    }
-    const loadProduct = () => {
-
-    }
+    const loadProductOrderItem = () => { }
+    const loadProduct = () => { }
 
     useEffect(() => {
         loadProduct();
@@ -107,89 +60,12 @@ export const TechFormListDetail = React.memo((props: any) => {
         loadBranchGroup();
     }, [])
 
-
-    const buttonCreateWOByProduct = (row) => {
-        return <>
-            <div id={"buttonCreateWOByProduct" + row.data.id}>
-                <Tooltip
-                    target={"#buttonCreateWOByProduct" + row.data.id}
-                    showEvent="dxhoverstart"
-                    hideEvent="dxhoverend"
-                    contentRender={() => {
-                        return (
-                            <p>Thêm KBSX-WO cho Sản phẩm</p>
-                        )
-                    }
-                    }
-                    hideOnOutsideClick={false}
-                />
-            </div>
-
-        </>;
-    }
-    const buttonViewBom = (row) => {
-        return <div id={"buttonViewBom" + row.data.id}>
-        </div>
-    }
-    const renderPopup = () => {
-
-    };
-
-    const renderPopupCreateWO = () => {
-
-    }
-
-    const closePopup = () => {
-        // setPopupVisible(false);
-        setPopupVisible2(false);
-    }
-
-
-    const handlePopupHidden = () => {
-        bomVersionProps.popupVisible = false;
-        setPopupVisible2(false);
-    }
-
-    const docUrlRender = (row) => {
-
-    }
-
-    const showBomversionView = async (row) => {
-
-    }
-
-    //tao wo từ product
-    const showCreateWOByProductPopup = (row) => {
-        // setPopupVisible2(true);
-        // setCurrentRow(row);
-        // createWOByProdObj.setData(true, row.data, null, props.data.data)
-    }
-
-    const onEdit = async (data) => {
-    }
-
-    const onDelete = (data) => {
-    }
-
-    const onInsert = async (data) => {
-    }
-
-    const getIndexForNewRow = () => {
-        let lastIndex = 0;
-        // data.map(item => {
-        //   if (item.itemIndex && item.itemIndex > lastIndex) {
-        //     lastIndex = item.itemIndex
-        //   }
-        // });
-        return lastIndex + 1;
-    }
-
-
-    const loadBranchGroup = () => {
-    }
+    const onEdit = async (data) => { }
+    const onDelete = (data) => { }
+    const onInsert = async (data) => { }
+    const loadBranchGroup = () => { }
 
     function onStatusPoRender(rowInfo) {
-        // console.log("Data color,", data?.value)
         let customColor: {
             color: string,
             backgroundColor: string
@@ -255,37 +131,6 @@ export const TechFormListDetail = React.memo((props: any) => {
         }}>{status}</Tag>
     }
 
-
-    function renderProcessStatus(rowInfo) {
-        let cl = "processing";
-        let str = "Chưa xác định";
-        console.log(" status in master detail", rowInfo.data.data.processStatus, rowInfo);
-        if (!rowInfo.data.data.processStatus || rowInfo.data.data.processStatus === "new") {
-            cl = "processing";
-            str = "Chờ sản xuất";
-        } else if (rowInfo.data.data.processStatus === "complete") {
-            cl = "success";
-            str = "Hoàn thành";
-        } else if (rowInfo.data.data.processStatus === "not_complete") {
-            cl = "error";
-            str = "Chưa hoàn thành";
-        } else if (rowInfo.data.data.processStatus === "early_complete") {
-            cl = "success";
-            str = "Hoàn thành sớm";
-        } else if (rowInfo.data.data.processStatus === "delay") {
-            cl = "warning";
-            str = "Chậm tiến độ";
-        } else if (rowInfo.data.data.processStatus === "in_production") {
-            cl = "processing";
-            str = "Đang sản xuất";
-        }
-        else if (rowInfo.data.data.processStatus === "unknown" || rowInfo.data.data.processStatus === null) {
-            cl = "processing";
-            str = "Chưa xác định";
-        }
-        return <Tag color={cl}>{str}</Tag>
-    }
-
     locale("en");
     loadMessages(
         {
@@ -296,6 +141,18 @@ export const TechFormListDetail = React.memo((props: any) => {
             }
         }
     );
+
+    const handleShowModalSendSAP = () => {
+        setIsModalVisibleSendSAP(true);
+    };
+
+    const handleHideModalSendSAP = () => {
+        setIsModalVisibleSendSAP(false);
+    };
+
+    const handleConfirmSendSAP = () => {
+        setIsModalVisibleSendSAP(false);
+    };
 
     return (
         <div>
@@ -361,8 +218,6 @@ export const TechFormListDetail = React.memo((props: any) => {
                     placeholder="Tìm kiếm..."
                 />
                 <Selection mode="single" />
-
-                {/*<Column cellRender={rowIndexRender} width={50} caption={"STT"} alignment={"left"} />*/}
                 <Column
                     width={140}
                     caption="Tìm kiếm sản phẩm"
@@ -420,13 +275,34 @@ export const TechFormListDetail = React.memo((props: any) => {
                 >
                 </Column>
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-
+                <PopupSendSAP
+                    isVisible={isModalVisibleSendSAP}
+                    onCancel={handleHideModalSendSAP}
+                    onSubmit={handleConfirmSendSAP}
+                    modalTitle={
+                        <div>
+                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                                Xác nhận gửi SAP
+                            </h3>
+                            <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
+                        </div>
+                    }
+                    modalContent={
+                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                            <h3 style={{ color: '#ff794e' }}>
+                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                Lưu ý:
+                            </h3>
+                            <p style={{ marginLeft: 20, fontSize: 15 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
+                        </div>
+                    }
+                    width={600} />
                 <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
                     <Button icon="edit" />
                     <Button icon="airplane" />
                     <Button icon="globe" />
                     <Button icon="print" />
-                    <Button icon="chevronnext" />
+                    <Button icon="chevronnext" onClick={handleShowModalSendSAP} />
                     <Button icon="trash" />
                 </Column>
                 <Editing

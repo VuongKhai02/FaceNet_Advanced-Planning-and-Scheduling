@@ -43,10 +43,11 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                     />
                     :
                     <div>
-                        <div className="table-responsive">
+                        <div className="table-responsive" >
                             <div className="informer" style={{
                                 textAlign: "left",
-                                paddingTop: 12
+                                paddingTop: 12,
+                                backgroundColor: '#ffffff'
                             }}>
                                 <h5 className="name" style={{
                                     fontSize: 18,
