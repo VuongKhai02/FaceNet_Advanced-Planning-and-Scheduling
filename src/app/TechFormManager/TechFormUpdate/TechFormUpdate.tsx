@@ -46,13 +46,12 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                         <div className="table-responsive" >
                             <div className="informer" style={{
                                 textAlign: "left",
-                                paddingTop: 12,
-                                backgroundColor: '#ffffff'
+                                paddingTop: 12
                             }}>
                                 <h5 className="name" style={{
                                     fontSize: 18,
                                     marginBottom: 0
-                                }}>Thêm mới phiếu công nghệ</h5>
+                                }}>Cập nhật phiếu công nghệ</h5>
                                 <h5 className="name" style={{
                                     fontSize: 18,
                                     marginBottom: 0,
@@ -166,7 +165,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({
                                     style={{
                                         marginTop: 10,
                                         float: "right",
-                                        background: "#f2f2f2",
+                                        background: "#ffffff",
                                         padding: "8px",
                                         borderRadius: "4px",
                                     }}

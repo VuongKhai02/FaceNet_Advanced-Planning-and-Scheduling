@@ -302,15 +302,15 @@ export const TechFormApprove = () => {
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} />
+                                }} allowSearch={true} />
                                 <FilterRow visible={true} />
                                 <SearchPanel visible={true} placeholder={"VD: PO"} />
                                 <Paging defaultPageSize={10} />
-                                <ColumnChooser enabled={true} />
+                                <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                                 <Pager
                                     visible={true}
                                     allowedPageSizes={allowedPageSizes}
-                                    displayMode={"full"}
+                                    displayMode={"compact"}
                                     showPageSizeSelector={true}
                                     showInfo={true}
                                     showNavigationButtons={true}
@@ -416,9 +416,9 @@ export const TechFormApprove = () => {
                                 style={{
                                     marginTop: 15,
                                     display: "flex",
-                                    justifyContent: "center",
+                                    justifyContent: "right",
                                     alignItems: "center",
-                                    background: "#f2f2f2",
+                                    background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
                                 }}

@@ -391,7 +391,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                     style={{
                         marginTop: 10,
                         float: "right",
-                        background: "#f2f2f2",
+                        background: "#ffffff",
                         padding: "8px",
                         borderRadius: "4px",
                     }}

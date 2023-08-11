@@ -2,6 +2,7 @@ import { ComponentPreview, Previews } from "@haulmont/react-ide-toolbox";
 import { MrpSaleOrders } from "../app/mrporder/MrpSaleOrders"
 import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
 import TechFormApprove from "../app/TechFormManager/TechFormApprove/TechFormApprove";
+import ProductionPlanList from "../app/ProductionPlanManagement/ProductionPlanList/ProductionPlanList";
 export const ComponentPreviews = () => {
   return (
     <Previews>
@@ -13,6 +14,9 @@ export const ComponentPreviews = () => {
       </ComponentPreview>
       <ComponentPreview path="/techFormApprove">
         <TechFormApprove />
+      </ComponentPreview>
+      <ComponentPreview path="/productionPlanList">
+        <ProductionPlanList />
       </ComponentPreview>
     </Previews>
   );

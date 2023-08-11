@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DropDownBox, Popup, TextBox } from "devextreme-react";
+import React, { useState } from "react";
+import { Button, DataGrid, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./MaterialAndStructure.css";
 import {
-    Column, Editing, GroupItem
+    Column, Button as ButtonIcon
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
@@ -116,7 +116,6 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     )}>
                                 </Column>
                                 <Column dataField="structure" caption="Cấu trúc/Structure" />
-                                <Editing allowDeleting={true} useIcons={true} />
                             </DataGrid>
                             <div className="container">
                                 <div className="checkbox">
@@ -197,7 +196,9 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                             )}
                                         />
                                     </Column>
-                                    <Editing allowDeleting={true} useIcons={true} />
+                                    <Column caption="" type={'buttons'} alignment="center">
+                                        <ButtonIcon icon="add" />
+                                    </Column>
                                 </DataGrid>
                             </div>
                             <div
@@ -205,7 +206,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 style={{
                                     marginTop: 10,
                                     float: "right",
-                                    background: "#f2f2f2",
+                                    background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
                                 }}

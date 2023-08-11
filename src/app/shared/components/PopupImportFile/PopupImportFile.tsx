@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Upload, Button } from 'antd';
 import { DownloadOutlined, ExclamationCircleOutlined, UploadOutlined } from '@ant-design/icons';
-
+import "./PopupImportFile.css"
 const PopupImportFile = ({ visible, onClose }) => {
     const [isvisible, setIsVisible] = useState(false);
 
@@ -27,17 +27,17 @@ const PopupImportFile = ({ visible, onClose }) => {
             <Modal
                 visible={visible}
                 title={
-                    <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#FFE0C2', width: 854, height: 50 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#FFE0C2', height: 50 }}>
                         {/* <ExclamationCircleOutlined /> */}
                         <p style={{ lineHeight: '38px', padding: 0, margin: 0 }}>Import phiếu công nghệ</p>
                     </div>
                 }
 
                 footer={[
-                    <Button key="cancel" onClick={handleCancel} style={{ marginRight: '30px', backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
+                    <Button key="cancel" onClick={handleCancel} style={{ width: 100, height: 40, marginRight: '20px', backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
                         Hủy bỏ
                     </Button>,
-                    <Button key="confirm" onClick={submit} style={{ backgroundColor: '#FF7A00', color: "#fff", borderRadius: 5 }}>
+                    <Button key="confirm" onClick={submit} style={{ width: 100, height: 40, backgroundColor: '#FF7A00', color: "#fff", borderRadius: 5 }}>
                         Tải lên
                     </Button>,
                 ]}

@@ -27,7 +27,7 @@ import PopupImportFile from "../../shared/components/PopupImportFile/PopupImport
 
 
 const ROUTING_PATH = "/techFormList";
-
+const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const TechFormList = () => {
 
   const [warnings, setWarnings] = useState<[]>();
@@ -317,19 +317,19 @@ export const TechFormList = () => {
                   ok: "Đồng ý",
                   emptyValue: "Rỗng"
 
-                }} />
+                }} allowSearch={true} />
                 <FilterRow visible={true} />
                 <SearchPanel visible={true} placeholder={"VD: PO"} />
-                <Paging defaultPageSize={10} />
+                <Paging defaultPageSize={5} />
                 <Pager
                   visible={true}
-                  displayMode={"full"}
+                  allowedPageSizes={allowedPageSizes}
+                  displayMode={"compact"}
+                  showPageSizeSelector={true}
                   showInfo={true}
                   showNavigationButtons={true}
-                  allowedPageSizes={[5, 10]}
-                  infoText="Trang số {0} trên {1} ({2} bản ghi)"
-                />
-                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="center" width={100} />
+                  infoText="Trang số {0} trên {1} ({2} bản ghi)" />
+                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="left" width={100} />
                 <Column caption={"Mã khách hàng"} dataField={"productionCode"} />
                 <Column caption={"Tên khách hàng"} dataField={"customer"} />
                 <Column caption={"Ngày đặt hàng"} dataType="datetime" dataField={"startTime"}

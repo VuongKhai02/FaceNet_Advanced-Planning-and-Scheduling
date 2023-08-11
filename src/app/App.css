@@ -295,6 +295,13 @@ h3 {
   padding: 0 5px;
 }
 
+.ant-tabs-tabpane {
+    flex: none;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+}
+
 @media screen and (max-width: 600px) {
   .dx-popup-bottom.dx-toolbar {
     padding: 0 !important;

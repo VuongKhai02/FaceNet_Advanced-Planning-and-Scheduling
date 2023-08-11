@@ -63,22 +63,19 @@ export const AppMenu = (props: AppMenuProps) => {
 
         <MenuItem
           screenId="techFormApprove"
-          // icon={<ShoppingOutlined />}
           caption={"Phê duyệt phiếu công nghệ"}
           key={"techFormApprove"}
         />
       </SubMenuItem>
       <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
         <MenuItem
-          screenId=""
-          // icon={<HomeFilled />}
+          screenId="productionPlanList"
           caption={"Danh sách kế hoạch sản xuất"}
-          key={"c"}
+          key={"productionPlanList"}
         />
 
         <MenuItem
           screenId=""
-          // icon={<ShoppingOutlined />}
           caption={"Danh sách đề nghị lĩnh NVL"}
           key={"d"}
         />
