@@ -7,6 +7,7 @@ import {
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
+import { Table } from "antd";
 
 
 type MaterialAndStructureProps = {
@@ -16,9 +17,9 @@ type MaterialAndStructureProps = {
 };
 
 const data = [
-    { No: 1, CongDoan: '', MaJob: '', TenJob: '' },
-    { No: 2, CongDoan: '', MaJob: '', TenJob: '' },
-    { No: 3, CongDoan: '', MaJob: '', TenJob: '' },
+    { No: 1, CongDoan: '', MaJob: '', TenJob: '', structure: 'a' },
+    { No: 2, CongDoan: '', MaJob: '', TenJob: '', structure: 'b' },
+    { No: 3, CongDoan: '', MaJob: '', TenJob: '', structure: 'c' },
 ];
 
 const data1 = [
@@ -96,7 +97,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             />
                         </div>
                         <div style={{ marginTop: 30 }}>
-                            <DataGrid
+                            {/* <DataGrid
                                 dataSource={rowData}
                                 keyExpr="No"
                                 showBorders={true}
@@ -116,7 +117,24 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     )}>
                                 </Column>
                                 <Column dataField="structure" caption="Cấu trúc/Structure" />
-                            </DataGrid>
+                            </DataGrid> */}
+                            <Table
+                                dataSource={data}
+                                rowKey="No"
+                                bordered
+                                pagination={false}
+                            >
+                                <Table.Column dataIndex="No" title="No." align="left" />
+                                <Table.Column dataIndex="CongDoan" title="Công đoạn" />
+                                <Table.Column dataIndex="MaterialCode" title="Mã vật tư" />
+                                <Table.Column dataIndex="quantity" title="Số lượng" />
+                                <Table.Column dataIndex="note" title="Ghi chú/Remarks" />
+                                <Table.Column
+                                    onCell={(item: any, index) => {
+                                        return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                    }}
+                                    dataIndex="structure" title="Cấu trúc/Structure" render={() => <div><img src="https://img3.thuthuatphanmem.vn/uploads/2019/07/05/anh-chan-dung-con-gai-toc-ngan_082837328.jpg" width={150} height={220}></img></div>} />
+                            </Table>
                             <div className="container">
                                 <div className="checkbox">
                                     <label htmlFor="raPhim" style={{ fontWeight: 500 }}>Ra phim/Pre-press</label>

@@ -100,17 +100,28 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                     pagination={false}
                                 >
                                     <Table.Column title="No." dataIndex="no" key="no" align="left" width={130} />
-                                    <Table.Column title="Tên vật liệu/Materials Name" dataIndex="materialName" key="materialName" align="center" />
+                                    <Table.Column onCell={(item, index) => {
+                                        return index === 2 ? { rowSpan: 2 } : index === 3 ? { rowSpan: 0 } : { rowSpan: 1 }
+                                    }} title="Tên vật liệu/Materials Name" dataIndex="materialName" key="materialName" align="center" />
                                     <Table.Column title="Xuất xứ/Supplier" dataIndex="supplier" key="supplier" align="center" />
-                                    <Table.Column title="Độ dày/Thickness(mm)" dataIndex="thickNess" key="thickNess" align="center" />
-                                    <Table.Column title="Số lượng/Q'ty(tấm)" dataIndex="quantity" key="quantity" align="center" />
+                                    <Table.Column onCell={(item, index: any) => {
+                                        return index === 2 ? { rowSpan: 3 } : [3, 4].includes(index) ? { rowSpan: 0 } : { rowSpan: 1 }
+                                    }} title="Độ dày/Thickness(mm)" dataIndex="thickNess" key="thickNess" align="center" />
+                                    <Table.Column onCell={(item, index: any) => {
+                                        return index === 2 ? { rowSpan: 3 } : [3, 4].includes(index) ? { rowSpan: 0 } : { rowSpan: 1 }
+                                    }} title="Số lượng/Q'ty(tấm)" dataIndex="quantity" key="quantity" align="center" />
                                     <Table.Column title="Ghi chú/Remark" dataIndex="remark" key="remark" align="center" />
                                     <Table.Column
+                                        onCell={(item, index: any) => {
+                                            return index === 0 ? { rowSpan: 9 } : { rowSpan: 0 }
+                                        }}
                                         title="Cấu trúc/Structure"
                                         dataIndex='structure'
                                         key="structure"
                                         align="center"
                                         className="no-border-column"
+
+                                        render={() => <div><img src="https://img3.thuthuatphanmem.vn/uploads/2019/07/05/anh-chan-dung-con-gai-toc-ngan_082837328.jpg" width={150} height={220}></img></div>}
                                     />
                                 </Table>
 

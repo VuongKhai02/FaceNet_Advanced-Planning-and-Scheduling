@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, DataGrid, DropDownBox, TextBox } from "devextreme-react";
+import { Button, DataGrid, DropDownBox, SelectBox, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./TechFormHostamping.css";
 import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import { Input, Table, Button as ButtonAnt } from "antd";
+import { Input, Table, Button as ButtonAnt, Select } from "antd";
 import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 type TechFormHostampingProps = {
@@ -176,7 +176,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 dataIndex="icType"
                                 key="icType"
                                 align="center"
-
                                 render={() => (
                                     <Input className="inputRow" placeholder="--Nhập--" />
                                 )}
@@ -280,16 +279,52 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         >
                             <Table.Column title="Vị trí/Position" dataIndex="position" key="position" width={130} />
                             <Table.ColumnGroup title="Lỗ ngoài/Outside Hole">
-                                <Table.Column title="Dài/Length" dataIndex="length" key="length" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="Rộng/Width" dataIndex="width" key="width" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 8 } : { colSpan: 1 }
+                                }} title="Dài/Length" dataIndex="length" key="length" align="center" render={(value, record: any, index) => {
+                                    return index !== 2 ?
+                                        [1, 3].includes(index) ? <Input style={{ width: 250, float: 'left' }} className="inputRow" placeholder="--Nhập--" /> : <Input className="inputRow" placeholder="--Nhập--" />
+                                        :
+                                        <SelectBox style={{ width: 250, float: 'left' }} placeholder="--Lựa chọn--" />
+
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="Rộng/Width" dataIndex="width" key="width" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
                             </Table.ColumnGroup>
                             <Table.ColumnGroup title="Lỗ trong/Inside Hole">
-                                <Table.Column title="Dài/Length" dataIndex="length" key="length" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="Rộng/Width" dataIndex="width" key="width" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
-                                <Table.Column title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={() => <Input className="inputRow" placeholder="--Nhập--" />} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="Dài/Length" dataIndex="length" key="length" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="Rộng/Width" dataIndex="width" key="width" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
+                                <Table.Column onCell={(item: any) => {
+                                    return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
+                                }} title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={(value, record: any, index) => {
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                }} />
                             </Table.ColumnGroup>
                         </Table>
                     </div>
