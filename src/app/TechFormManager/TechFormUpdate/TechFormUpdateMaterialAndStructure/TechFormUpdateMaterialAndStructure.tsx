@@ -70,6 +70,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                         </div>
                         <div style={{ marginTop: 30 }}>
                             <DataGrid
+                                key={'No'}
                                 dataSource={data}
                                 keyExpr="No"
                                 showBorders={true}
@@ -98,6 +99,8 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <DataGrid
+                                    key={'Id'}
+                                    keyExpr={'Id'}
                                     dataSource={data1}
                                     showBorders={true}
                                     showRowLines={true}

@@ -137,6 +137,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                     }}>Trình tự công nghệ/Technology procedure</h5>
                                 </div>
                                 <DataGrid
+                                    key={'No'}
                                     dataSource={data}
                                     keyExpr="No"
                                     showBorders={true}

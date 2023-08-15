@@ -286,6 +286,7 @@ export const TechFormList = () => {
               <PopupImportFile visible={popupVisible} onClose={() => setPopupVisible(false)} />
 
               <DataGrid
+                key={'saleOrderId'}
                 keyExpr={"saleOrderId"}
                 dataSource={content}
                 showBorders={true}

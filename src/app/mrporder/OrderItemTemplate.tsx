@@ -2,7 +2,7 @@ import { locale, loadMessages } from "devextreme/localization";
 import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
 import "./MrpSaleOrder.css"
-import {OrderItem} from "../../fake_data/OrderItem";
+import { OrderItem } from "../../fake_data/OrderItem";
 import DataGrid, {
   Column, FilterRow, HeaderFilter, SearchPanel,
   Editing,
@@ -96,11 +96,11 @@ export const OrderItemTemplate = React.memo((props: any) => {
   const productOrderId: string = props.data.data.productOrderId;
 
   const [bomVersionProps, setBomversionProps] = useState<{ popupVisible: boolean, currentRow: any, bomVersion: any }>
-  ({
-    popupVisible: false,
-    currentRow: null,
-    bomVersion: null
-  });
+    ({
+      popupVisible: false,
+      currentRow: null,
+      bomVersion: null
+    });
 
 
   const loadProductOrderItem = () => {
@@ -308,21 +308,23 @@ export const OrderItemTemplate = React.memo((props: any) => {
 
   return (
     <div>
-      <DataGrid id="gridContainer"
-                dataSource={OrderItem}
-                keyExpr="id"
-                height={"auto"}
-                onRowUpdating={onEdit}
-                onRowInserting={onInsert}
-                onRowRemoving={onDelete}
-                showBorders={true}
-                showColumnLines={false}
-                showRowLines={false}
-                rowAlternationEnabled={true}
-                onCellPrepared={onCellPrepared}
-                wordWrapEnabled={true}
-                columnAutoWidth={true}
-                noDataText="Không có dữ liệu để hiển thị"
+      <DataGrid
+        id="gridContainer"
+        dataSource={OrderItem}
+        key={'id'}
+        keyExpr="id"
+        height={"auto"}
+        onRowUpdating={onEdit}
+        onRowInserting={onInsert}
+        onRowRemoving={onDelete}
+        showBorders={true}
+        showColumnLines={false}
+        showRowLines={false}
+        rowAlternationEnabled={true}
+        onCellPrepared={onCellPrepared}
+        wordWrapEnabled={true}
+        columnAutoWidth={true}
+        noDataText="Không có dữ liệu để hiển thị"
       >
         <Toolbar>
           <TItem location={"before"}
@@ -366,8 +368,8 @@ export const OrderItemTemplate = React.memo((props: any) => {
 
         }} />
         <SearchPanel visible={true}
-                     width={240}
-                     placeholder="Tìm kiếm..."
+          width={240}
+          placeholder="Tìm kiếm..."
         />
         <Selection mode="single" />
         <Column type={'buttons'} caption={"Tùy chọn"} alignment="left" />
@@ -380,35 +382,35 @@ export const OrderItemTemplate = React.memo((props: any) => {
           setCellValue={setProductSelectionValue}
         >
           <Lookup dataSource={props.productsFullArrays} displayExpr={"productName"}
-                  valueExpr={"coittId"} />
+            valueExpr={"coittId"} />
         </Column>
         <Column dataField="productCode"
-                minWidth={140}
-                caption="Mã sản phẩm"
-                cellRender={getProductCode}
+          minWidth={140}
+          caption="Mã sản phẩm"
+          cellRender={getProductCode}
         >
         </Column>
         <Column dataField="productName"
-                caption="Tên Sản phẩm"
-                cellRender={getProductName}
-                hidingPriority={4}
-                minWidth={200}
+          caption="Tên Sản phẩm"
+          cellRender={getProductName}
+          hidingPriority={4}
+          minWidth={200}
         >
 
         </Column>
         <Column dataField="bomVersion"
-                width={140}
-                caption="Version BOM"
-                alignment={"center"}
-          // setCellValue={this.setBomversionCellValue}
+          width={140}
+          caption="Version BOM"
+          alignment={"center"}
+        // setCellValue={this.setBomversionCellValue}
         >
           {/*<Lookup dataSource={bomversionList} displayExpr="Name" valueExpr="ID"/>*/}
         </Column>
         <Column dataField="quantity"
-                minWidth={140}
-                caption="Số lượng đặt hàng"
-                hidingPriority={2}
-                alignment="right"
+          minWidth={140}
+          caption="Số lượng đặt hàng"
+          hidingPriority={2}
+          alignment="right"
         >
           <Format
             type="fixedPoint"
@@ -416,11 +418,11 @@ export const OrderItemTemplate = React.memo((props: any) => {
           />
         </Column>
         <Column dataField="quantityOut"
-                width={140}
-                caption="SL hoàn thành"
-                alignment="right"
-                cellRender={quantityOutCellRender}
-                hidingPriority={3}
+          width={140}
+          caption="SL hoàn thành"
+          alignment="right"
+          cellRender={quantityOutCellRender}
+          hidingPriority={3}
         >
         </Column>
         <Column
@@ -431,10 +433,10 @@ export const OrderItemTemplate = React.memo((props: any) => {
           cellRender={completePercent}
         />
         <Column dataField="scadaQuantityOut"
-                width={120}
-                alignment="right"
-                caption="Sản lượng Scada"
-                cellRender={quantityOut}
+          width={120}
+          alignment="right"
+          caption="Sản lượng Scada"
+          cellRender={quantityOut}
         />
         <Column
           dataField={"scadaQuantityOut1"}
@@ -443,32 +445,32 @@ export const OrderItemTemplate = React.memo((props: any) => {
           width={160}
         />
         <Column dataField="branchCode"
-                caption="Ngành"
-                width={300}
-                hidingPriority={2}
-                renderAsync={true}
+          caption="Ngành"
+          width={300}
+          hidingPriority={2}
+          renderAsync={true}
         >
           <Lookup dataSource={branchGroupArray} displayExpr="text" valueExpr="id" />
         </Column>
         <Column dataField="groupCode"
-                width={100}
-                caption="Tổ"
-                hidingPriority={3}
-                renderAsync={true}
+          width={100}
+          caption="Tổ"
+          hidingPriority={3}
+          renderAsync={true}
         >
           <Lookup dataSource={groupArray} displayExpr="text" valueExpr="id" />
         </Column>
         <Column dataField="createdAt"
-                caption="Thời gian tạo"
-                format={"dd/MM/yyyy HH:mm:ss"}
-                dataType="datetime"
-                alignment={"center"}
-                minWidth={140}
+          caption="Thời gian tạo"
+          format={"dd/MM/yyyy HH:mm:ss"}
+          dataType="datetime"
+          alignment={"center"}
+          minWidth={140}
         />
         <Column dataField="createdBy"
-                width={100}
-                alignment="right"
-                caption="Tạo bởi"
+          width={100}
+          alignment="right"
+          caption="Tạo bởi"
         />
         <Column
           alignment="center"
@@ -479,22 +481,22 @@ export const OrderItemTemplate = React.memo((props: any) => {
         >
         </Column>
         <Column dataField="startDate"
-                caption="Ngày bắt đầu"
-                format={"dd/MM/yyyy"}
-                dataType="datetime"
-                alignment={"center"}
-                minWidth={140}
-                hidingPriority={0}
+          caption="Ngày bắt đầu"
+          format={"dd/MM/yyyy"}
+          dataType="datetime"
+          alignment={"center"}
+          minWidth={140}
+          hidingPriority={0}
         >
 
         </Column>
         <Column dataField="endDate"
-                caption="Ngày kết thúc"
-                dataType="datetime"
-                format={"dd/MM/yyyy"}
-                alignment={"center"}
-                minWidth={140}
-                hidingPriority={1}
+          caption="Ngày kết thúc"
+          dataType="datetime"
+          format={"dd/MM/yyyy"}
+          alignment={"center"}
+          minWidth={140}
+          hidingPriority={1}
         >
         </Column>
         <Column

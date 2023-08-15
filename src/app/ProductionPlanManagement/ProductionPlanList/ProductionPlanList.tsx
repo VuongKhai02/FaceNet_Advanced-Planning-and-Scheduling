@@ -26,9 +26,9 @@ const ROUTING_PATH = "/ProductionPlanList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 
 const data = [
-    { no: '1', codeMaterial: 'Mã vật tư', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
-    { no: '2', codeMaterial: 'Mã vật tư', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
-    { no: '2', codeMaterial: 'Mã vật tư', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' }
+    { no: '1', codeMaterial: 'Mã vật tư 1', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 2', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 3', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' }
 
 
 ]
@@ -291,6 +291,7 @@ export const ProductionPlanList = () => {
                             </Modal>
 
                             <DataGrid
+                                key={'saleOrderId'}
                                 keyExpr={"saleOrderId"}
                                 dataSource={content}
                                 showBorders={true}
@@ -431,6 +432,8 @@ export const ProductionPlanList = () => {
                                     height={600}
                                 >
                                     <DataGrid
+                                        key={'no'}
+                                        keyExpr={'no'}
                                         dataSource={data}
                                         showBorders={true}
                                         columnAutoWidth={true}
@@ -452,16 +455,26 @@ export const ProductionPlanList = () => {
                                 height={800}
                             >
                                 <DataGrid
+                                    key={'no'}
+                                    keyExpr={'no'}
                                     dataSource={data}
                                     showBorders={true}
                                     columnAutoWidth={true}
                                     showRowLines={true}>
+                                    <HeaderFilter visible={true} allowSearch={true} />
                                     <Column caption="Mã công đoạn" dataField="codeStage" />
                                     <Column caption="Tên công đoạn" dataField="nameStage" />
                                     <Column caption="Mã Job" dataField="codeJob" />
                                     <Column caption="Tên Job" dataField="nameJob" />
                                     <Column caption="Người phụ trách" dataField="responsiblePerson" />
                                 </DataGrid>
+                                <div style={{ marginTop: 30, float: "right" }}>
+                                    <Button icon="" text="Hủy bỏ" style={{
+                                        marginRight: 30, fontSize: 15, width: 100, height: 40, backgroundColor: '#E5E5E5', borderRadius: 5
+                                    }} />
+                                    <Button icon="" text="Gửi QMS" style={{ fontSize: 15, width: 100, height: 40, backgroundColor: '#FF7A00', color: "#fff", borderRadius: 5 }} />
+                                </div>
+
                             </Popup>
                         </div>
                     </div>

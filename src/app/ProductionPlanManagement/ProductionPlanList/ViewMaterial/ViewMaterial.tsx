@@ -28,6 +28,7 @@ export const ViewMaterial = () => {
                             height={600}
                         >
                             <DataGrid
+                                key={'saleOrderId'}
                                 keyExpr={"saleOrderId"}
                                 dataSource={data}
                                 showBorders={true}

@@ -48,7 +48,7 @@ const onCellPrepared = (e) => {
 
 
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
-export const TechFormListDetail = React.memo((props: any) => {
+export const BOMPersonalizedDetail = React.memo((props: any) => {
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
 
     const loadProductOrderItem = () => { }
@@ -156,11 +156,9 @@ export const TechFormListDetail = React.memo((props: any) => {
 
     return (
         <div>
-            <DataGrid
-                id="gridContainer"
-                key={'id'}
-                keyExpr="id"
+            <DataGrid id="gridContainer"
                 dataSource={OrderItem}
+                keyExpr="id"
                 height={"auto"}
                 onRowUpdating={onEdit}
                 onRowInserting={onInsert}
@@ -178,7 +176,7 @@ export const TechFormListDetail = React.memo((props: any) => {
                     <TItem location={"before"}
                     >
                         <div className={"master-detail-title"}>
-                            Danh sách phiếu công nghệ
+                            Danh sách BOM cụ thể
                         </div>
                     </TItem>
                     <TItem name="addRowButton" />
@@ -348,4 +346,4 @@ export const TechFormListDetail = React.memo((props: any) => {
         </div>
     );
 });
-export default TechFormListDetail;
+export default BOMPersonalizedDetail;

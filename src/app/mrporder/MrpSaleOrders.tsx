@@ -400,6 +400,7 @@ export const MrpSaleOrders = () => {
 
 
       <DataGrid
+        key={"saleOrderId"}
         keyExpr={"saleOrderId"}
         dataSource={content}
         showBorders={true}

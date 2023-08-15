@@ -62,6 +62,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <DataGrid
+                                    key={'id'}
+                                    keyExpr={'id'}
                                     dataSource={data}
                                     showBorders={true}
                                     showRowLines={true}
@@ -115,6 +117,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                     </div>
 
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={data1}
                                         keyExpr="id"
                                         showBorders={true}
@@ -139,6 +142,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                         <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ 09/08/2022 đến 19/08/2022</h6>
                                     </div>
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={data1}
                                         keyExpr="id"
                                         showBorders={true}
@@ -164,6 +168,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                         <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ 09/08/2022 đến 19/08/2022</h6>
                                     </div>
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={data1}
                                         keyExpr="id"
                                         showBorders={true}
@@ -182,6 +187,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                         <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ 09/08/2022 đến 19/08/2022</h6>
                                     </div>
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={data2}
                                         keyExpr="id"
                                         showBorders={true}

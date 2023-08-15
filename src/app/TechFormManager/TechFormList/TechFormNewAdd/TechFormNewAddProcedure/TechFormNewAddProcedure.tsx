@@ -86,6 +86,8 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <DataGrid
+                                    key={'id'}
+                                    keyExpr={'id'}
                                     dataSource={data}
                                     showBorders={true}
                                     showRowLines={true}
@@ -192,6 +194,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     </div>
 
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={data}
                                         keyExpr="id"
                                         showBorders={true}
@@ -260,6 +263,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         />
                                     </div>
                                     <DataGrid
+                                        key={'id'}
                                         dataSource={rowData}
                                         keyExpr="id"
                                         showBorders={true}

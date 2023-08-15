@@ -66,8 +66,15 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
 
 
                         <div style={{ marginTop: 10 }}>
-                            <DataGrid dataSource={data1} showBorders={true} columnAutoWidth={true} showColumnHeaders={false}
-                                showRowLines={true} showColumnLines={true}
+                            <DataGrid
+                                key={'title1'}
+                                keyExpr={'title1'}
+                                dataSource={data1}
+                                showBorders={true}
+                                columnAutoWidth={true}
+                                showColumnHeaders={false}
+                                showRowLines={true}
+                                showColumnLines={true}
                             >
                                 <Column dataField="title1" alignment={"left"} cssClass={"highlightColumn"}>
                                     <Template name="title1">
@@ -104,6 +111,8 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
 
                             </div>
                             <DataGrid
+                                key={"Id"}
+                                keyExpr={'Id'}
                                 dataSource={data2}
                                 showBorders={true}
                                 showRowLines={true}

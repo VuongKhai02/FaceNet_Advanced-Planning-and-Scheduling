@@ -53,6 +53,19 @@ export const AppMenu = (props: AppMenuProps) => {
           key={"Content 2.2"}
         />
       </SubMenuItem>
+      <SubMenuItem caption={"Quản lý BOM"} icon={<AppstoreOutlined />}>
+        <MenuItem
+          screenId="bomBodyCard"
+          caption={"Quản lý BOM body card"}
+          key={"bomBodyCard"}
+        />
+
+        <MenuItem
+          screenId="bomPersonalized"
+          caption={"Quản lý BOM cá thể hóa"}
+          key={"bomPersonalized"}
+        />
+      </SubMenuItem>
       <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
         <MenuItem
           screenId="techFormList"
@@ -75,9 +88,9 @@ export const AppMenu = (props: AppMenuProps) => {
         />
 
         <MenuItem
-          screenId=""
+          screenId="dnlNvlList"
           caption={"Danh sách đề nghị lĩnh NVL"}
-          key={"d"}
+          key={"dnlNvlList"}
         />
       </SubMenuItem>
 

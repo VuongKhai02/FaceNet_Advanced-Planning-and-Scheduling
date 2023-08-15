@@ -156,6 +156,8 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <DataGrid
+                                    key={'Id'}
+                                    keyExpr={'Id'}
                                     dataSource={data1}
                                     showBorders={true}
                                     showRowLines={true}

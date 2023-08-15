@@ -18,9 +18,9 @@ const data = [
 
 const data1 = [
     { position: 'Kích thước/Size', type: 'Item 1', machine: false, temp: '' },
-    { position: 'Loại/Type', type: 'Item 1', machine: false, temp: '' },
-    { position: 'Máy/Machine', type: 'Item 1', machine: false, temp: '' },
-    { position: 'Nhiệt độ/Temp', type: 'Item 1', machine: false, temp: '' }
+    { position: 'Loại/Type', type: 'Item 2', machine: false, temp: '' },
+    { position: 'Máy/Machine', type: 'Item 3', machine: false, temp: '' },
+    { position: 'Nhiệt độ/Temp', type: 'Item 4', machine: false, temp: '' }
 ];
 
 
@@ -78,6 +78,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                     </div>
 
                     <DataGrid
+                        key={'id'}
                         dataSource={data}
                         keyExpr="id"
                         showBorders={true}
@@ -272,6 +273,8 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         </Table>
 
                         <Table
+                            key={'type'}
+                            id="type"
                             dataSource={data1}
                             rowKey="position"
                             bordered
@@ -353,6 +356,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         />
                     </div>
                     <DataGrid
+                        key={'id'}
                         dataSource={data}
                         keyExpr="id"
                         showBorders={true}

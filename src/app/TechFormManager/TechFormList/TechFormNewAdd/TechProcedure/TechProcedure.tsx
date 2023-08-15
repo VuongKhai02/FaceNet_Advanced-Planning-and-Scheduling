@@ -89,6 +89,7 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({
 
                         <div style={{ marginTop: 100 }}>
                             <DataGrid
+                                key={'No'}
                                 dataSource={rowData}
                                 keyExpr="No"
                                 showBorders={true}
