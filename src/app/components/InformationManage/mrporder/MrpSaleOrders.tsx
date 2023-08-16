@@ -17,10 +17,10 @@ import {
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../config";
-import { ImportOrder } from "../import/ImportOrder";
-import { customizeColor, getColor } from "../../utils/utils";
+import { IWarning } from "../../../shared/model/Warning.model";
+import { PLANNING_API_URL } from "../../../../config";
+import { ImportOrder } from "../../../import/ImportOrder";
+import { customizeColor, getColor } from "../../../../utils/utils";
 import OrderItemTemplate from "./OrderItemTemplate";
 import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";

@@ -11,9 +11,10 @@ import "./App.css";
 // import "./theme.less"
 import "./custom-theme.css"
 import 'devextreme/dist/css/dx.light.css';
+import HomePage from "./home/HomePage";
 
 const routes = {
-  "/": <ContentArea />, "/:entityName/:entityId?": <ContentArea />
+  "/": <HomePage />, "/:entityName/:entityId?": <ContentArea />
 };
 
 const App = observer(() => {

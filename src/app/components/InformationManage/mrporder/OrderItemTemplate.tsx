@@ -2,7 +2,7 @@ import { locale, loadMessages } from "devextreme/localization";
 import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
 import "./MrpSaleOrder.css"
-import { OrderItem } from "../../fake_data/OrderItem";
+import { OrderItem } from "../../../../fake_data/OrderItem";
 import DataGrid, {
   Column, FilterRow, HeaderFilter, SearchPanel,
   Editing,

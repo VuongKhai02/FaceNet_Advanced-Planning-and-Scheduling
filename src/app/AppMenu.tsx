@@ -41,16 +41,24 @@ export const AppMenu = (props: AppMenuProps) => {
       <SubMenuItem caption={"Quản lý thông tin"} icon={<AppstoreOutlined />}>
         <MenuItem
           screenId="MrpSaleOrders"
-          // icon={<HomeFilled />}
           caption={"Quản lý đơn hàng"}
           key={"mrporders"}
         />
 
         <MenuItem
-          screenId="Template"
-          // icon={<ShoppingOutlined />}
-          caption={"Quản lý mã QR lô sản phẩm"}
-          key={"Content 2.2"}
+          screenId="manageProductionRequirements"
+          caption={"Quản lý yêu cầu sản xuất"}
+          key={"manageProductionRequirements"}
+        />
+        <MenuItem
+          screenId="cardManagement"
+          caption={"Quản lý hộp chứa thẻ"}
+          key={"cardManagement"}
+        />
+        <MenuItem
+          screenId="manageJobOutput"
+          caption={"Quản lý Job output"}
+          key={"manageJobOutput"}
         />
       </SubMenuItem>
       <SubMenuItem caption={"Quản lý BOM"} icon={<AppstoreOutlined />}>
