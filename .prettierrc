@@ -1,0 +1,13 @@
+# Prettier configuration
+
+printWidth: 140
+singleQuote: false
+tabWidth: 4
+useTabs: false
+bracketSpacing: true
+bracketSameLine: true
+
+# js and ts rules:
+
+# jsx and tsx rules:
+jsxSingleQuote: true
