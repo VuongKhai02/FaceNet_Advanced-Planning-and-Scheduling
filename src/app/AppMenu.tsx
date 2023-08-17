@@ -104,17 +104,20 @@ export const AppMenu = (props: AppMenuProps) => {
 
       <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>
         <MenuItem
-          screenId=""
-          // icon={<HomeFilled />}
+          screenId="progressMonitoringWO"
+          caption={"Giám sát tiến độ WO"}
+          key={"progressMonitoringWO"}
+        />
+        <MenuItem
+          screenId="progressMonitoringManufacture"
           caption={"Giám sát tiến độ sản xuất"}
-          key={"e"}
+          key={"progressMonitoringManufacture"}
         />
 
         <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
+          screenId="progressMonitoringOrder"
           caption={"Giám sát tiến độ đơn hàng"}
-          key={"f"}
+          key={"progressMonitoringOrder"}
         />
         <MenuItem
           screenId=""

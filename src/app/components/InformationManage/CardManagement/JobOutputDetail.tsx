@@ -1,134 +1,20 @@
 import { locale, loadMessages } from "devextreme/localization";
-import React, { useEffect, useState } from "react";
-import { OrderItem } from "../../../../fake_data/OrderItem";
+import React, { } from "react";
 import DataGrid, {
     Column, FilterRow, HeaderFilter, SearchPanel,
-    Editing,
-    Popup,
-    Selection,
-    Lookup,
-    Form,
     Toolbar,
-    Item as TItem, Paging, Pager, OperationDescriptions, Button
+    Item as TItem, Paging, Pager, OperationDescriptions, ColumnChooser,
 } from 'devextreme-react/data-grid';
+import PopupScanBarCode from "../../../shared/components/PopupScanBarCode/PopupScanBarCode";
 
-import { Item } from 'devextreme-react/form';
-import { Tag } from "antd";
-import { WarningOutlined } from "@ant-design/icons";
-
-const getProductName = (rowData) => {
-    if (rowData.data.status && rowData.data.status === 'created_wo') {
-        return <div className="product_name_created_wo">{rowData.data.productName}</div>
-    }
-    return <div>{rowData.data.productName}</div>
-}
-
-const getProductCode = (rowData) => {
-    if (rowData.data.status && rowData.data.status === 'created_wo') {
-        return <div className="product_name_created_wo">{rowData.data.productCode}</div>
-    }
-    return <div>{rowData.data.productCode}</div>
-}
-
-const setProductSelectionValue = (rowData, value) => {
-    rowData.productCode = value.productCode
-    rowData.productName = value.productName
-    rowData.bomVersion = value.bomVersion
-    rowData.sapUrl = value.uDocurl
-    rowData.sapUrl2 = value.uDocurl2
-}
-
-const onCellPrepared = (e) => {
-    if (e.rowType == "data" && e.column.dataField == "completePercent") {
-        if (e.data.completePercent > 5)
-            e.cellElement.className += " cls";
-    }
-}
-
+const data = [
+    { jobOutputCode: 'J01', jobOutputName: 'WO-123-CĐ01-01', cardBoxQuantity: '01', startDate: '15/08/2023', endDate: '16/08/2023' },
+    { jobOutputCode: 'J02', jobOutputName: 'WO-123-CĐ01-01', cardBoxQuantity: '01', startDate: '15/08/2023', endDate: '16/08/2023' },
+    { jobOutputCode: 'J03', jobOutputName: 'WO-123-CĐ01-01', cardBoxQuantity: '01', startDate: '15/08/2023', endDate: '16/08/2023' }
+];
 
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const JobOutPutDetail = React.memo((props: any) => {
-    const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
-
-    const loadProductOrderItem = () => { }
-    const loadProduct = () => { }
-
-    useEffect(() => {
-        loadProduct();
-        loadProductOrderItem();
-        loadBranchGroup();
-    }, [])
-
-    const onEdit = async (data) => { }
-    const onDelete = (data) => { }
-    const onInsert = async (data) => { }
-    const loadBranchGroup = () => { }
-
-    function onStatusPoRender(rowInfo) {
-        let customColor: {
-            color: string,
-            backgroundColor: string
-        } = {
-            color: "",
-            backgroundColor: ""
-        }
-        let status = "";
-        // let backgroundColor = "";
-        let padding = "";
-        let borderRadius = "";
-        let width = "";
-        let border = "";
-
-        // let value = rowInfo.data.data.processStatus;
-        const getColor = (value) => {
-            // let color = ""
-            switch (value) {
-                case "new":
-                    status = "Chờ sản xuất"
-                    break;
-                case "complete":
-                    status = "Hoàn thành"
-                    break;
-                case "not_complete":
-                    status = "Chưa hoàn thành"
-                    break
-                case "in_production":
-                    status = "Đang sản xuất"
-                    break;
-                case "early_complete":
-                    status = "Hoàn thành sớm"
-                    break;
-                case "delay":
-                    status = "Chậm tiến độ"
-                    break;
-                case "wait_production":
-                    status = "Chờ sản xuất"
-                    break;
-                case "unknown":
-                    status = "Chưa xác định"
-                    break;
-                default:
-                    status = "Chưa xác định"
-                    break;
-            }
-        }
-
-        getColor(rowInfo.data.data.processStatus);
-        border = "1px solid " + customColor.color;
-        // const color = getColor(rowInfo.data.data.processStatus)
-        // return <Tag color={color}>{status}</Tag>
-        return <Tag style={{
-            "fontWeight": "bold",
-            "width": "100%",
-            "textAlign": "center",
-            "color": customColor.color,
-            "backgroundColor": customColor.backgroundColor,
-            // "padding": padding,
-            "borderRadius": "4px",
-            // "width": width,
-            "border": border
-        }}>{status}</Tag>
-    }
 
     locale("en");
     loadMessages(
@@ -141,34 +27,18 @@ export const JobOutPutDetail = React.memo((props: any) => {
         }
     );
 
-    const handleShowModalSendSAP = () => {
-        setIsModalVisibleSendSAP(true);
-    };
-
-    const handleHideModalSendSAP = () => {
-        setIsModalVisibleSendSAP(false);
-    };
-
-    const handleConfirmSendSAP = () => {
-        setIsModalVisibleSendSAP(false);
-    };
-
     return (
         <div>
             <DataGrid
                 id="gridContainer"
-                key={'id'}
-                keyExpr="id"
-                dataSource={OrderItem}
+                key={'jobOutputCode'}
+                keyExpr="jobOutputCode"
+                dataSource={data}
                 height={"auto"}
-                onRowUpdating={onEdit}
-                onRowInserting={onInsert}
-                onRowRemoving={onDelete}
                 showBorders={true}
                 showColumnLines={true}
                 showRowLines={true}
                 rowAlternationEnabled={true}
-                onCellPrepared={onCellPrepared}
                 wordWrapEnabled={true}
                 columnAutoWidth={true}
                 noDataText="Không có dữ liệu để hiển thị"
@@ -177,17 +47,18 @@ export const JobOutPutDetail = React.memo((props: any) => {
                     <TItem location={"before"}
                     >
                         <div className={"master-detail-title"}>
-                            Danh sách phiếu công nghệ
+                            Danh sách Job output
                         </div>
                     </TItem>
                     <TItem name="addRowButton" />
+                    <TItem name="columnChooserButton" />
                 </Toolbar>
-                {/*<Scrolling mode="virtual"/>*/}
+                <ColumnChooser enabled={true} allowSearch={true} />
                 <Paging defaultPageSize={5} />
                 <Pager
                     visible={true}
                     allowedPageSizes={allowedPageSizes}
-                    displayMode={"full"}
+                    displayMode={"compact"}
                     showPageSizeSelector={true}
                     showInfo={true}
                     showNavigationButtons={true}
@@ -218,110 +89,32 @@ export const JobOutPutDetail = React.memo((props: any) => {
                     width={240}
                     placeholder="Tìm kiếm..."
                 />
-                <Selection mode="single" />
                 <Column
-                    width={140}
-                    caption="Tìm kiếm sản phẩm"
-                    dataField={"coittId"}
-                    visible={false}
-                    setCellValue={setProductSelectionValue}
-                >
-                    <Lookup dataSource={props.productsFullArrays} displayExpr={"productName"}
-                        valueExpr={"coittId"} />
-                </Column>
-                <Column dataField="productCode"
-                    minWidth={140}
-                    caption="Mã phiếu công nghệ"
-                    cellRender={getProductCode}
-                >
-                </Column>
-                <Column dataField="productName"
-                    caption="Tên thẻ"
-                    cellRender={getProductName}
-                    minWidth={200}
-                >
-                </Column>
-
-                <Column dataField="quantity"
-                    minWidth={140}
-                    caption="Số lượng"
-                    alignment="right"
-                >
-                </Column>
-
-                <Column dataField="startDate"
-                    caption="Ngày bắt đầu"
+                    caption="Mã Job output"
+                    dataField={"jobOutputCode"}
+                />
+                <Column
+                    dataField="jobOutputName"
+                    caption="Tên Job output"
+                />
+                <Column
+                    dataField="cardBoxQuantity"
+                    caption="Số lượng thẻ trong hộp"
+                />
+                <Column
+                    dataField="startDate"
+                    caption="Ngày tiếp nhận"
                     format={"dd/MM/yyyy"}
                     dataType="datetime"
-                    alignment={"center"}
-                    minWidth={140}
-                    hidingPriority={0}
-                >
-
-                </Column>
-                <Column dataField="endDate"
+                />
+                <Column
+                    dataField="endDate"
                     caption="Ngày kết thúc"
                     dataType="datetime"
                     format={"dd/MM/yyyy"}
                     alignment={"center"}
-                    minWidth={140}
-                    hidingPriority={1}
-                >
-                </Column>
-                <Column
-                    alignment={"center"}
-                    caption={"Mức độ ưu tiên"}
-                    width={140}
-                    renderAsync={true}
-                >
-                </Column>
-                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                    <Button icon="edit" />
-                    <Button icon="airplane" />
-                    <Button icon="globe" />
-                    <Button icon="print" />
-                    <Button icon="chevronnext" onClick={handleShowModalSendSAP} />
-                    <Button icon="trash" />
-                </Column>
-                <Editing
-                    mode="popup"
-                    allowUpdating={true}
-                    allowDeleting={true}
-                    allowAdding={true}
-                    useIcons={true}
-                    texts={{
-                        cancelRowChanges: "Hủy bỏ",
-                        saveRowChanges: "Lưu lại",
-                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                        deleteRow: "Xóa",
-                        editRow: "Sửa",
-                        addRow: "Thêm hàng"
-                    }}
-                >
-                    <Popup title="Cập nhật thông tin sản phẩm" showTitle={true} width={900} height={550} />
-                    <Form>
-                        <Item itemType="group" colCount={2} colSpan={2}>
-                            <Item dataField="coittId" />
-                            <Item dataField="coittId" visible={false} />
-                            <Item dataField="productCode" />
-                            <Item dataField="productName" />
-                            <Item dataField="bomVersion" />
-                            <Item dataField="startDate" />
-                            <Item dataField="endDate" />
-                            <Item dataField="quantity" isRequired={true} />
-                            <Item dataField="note" colSpan={2} />
-                            <Item dataField="branchCode" />
-                            <Item dataField="groupCode" />
-                            <Item dataField="reasonId" />
-                        </Item>
-                    </Form>
-                </Editing>
+                />
             </DataGrid>
-
-
-            {/*</Popup2>*/}
         </div>
     );
 });

@@ -280,7 +280,7 @@ export const DnlNvlList = () => {
                             visible={isViewMaterial}
                             title="Xem danh sách nguyên vật liệu cần lĩnh"
                             onHiding={() => { setIsViewMaterial(false) }}
-                            width={1500}
+                            width={1000}
                             height={800}
                         >
                             <div>

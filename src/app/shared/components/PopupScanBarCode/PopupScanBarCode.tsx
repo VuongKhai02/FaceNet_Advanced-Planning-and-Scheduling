@@ -8,26 +8,23 @@ interface PopupConfirmDeleteProps {
     modalTitle: React.ReactNode;
     modalContent: React.ReactNode;
     width: number;
-    customFooter?: React.ReactNode[] | null;
 }
 
-const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
+const PopupScanBarCode: React.FC<PopupConfirmDeleteProps> = ({
     isVisible,
     onCancel,
     onSubmit,
     modalTitle,
     modalContent,
     width,
-    customFooter
 }) => {
     return (
         <Modal
             bodyStyle={{ padding: 0 }}
-            closeIcon={true}
             visible={isVisible}
             title={modalTitle}
-            footer={customFooter !== undefined ? customFooter : [
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20 }}>
+            footer={[
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
                     <Button
                         key="cancel"
                         style={{
@@ -41,7 +38,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                         }}
                         onClick={onCancel}
                     >
-                        Hủy
+                        Hủy bỏ
                     </Button>,
                     <Button
                         style={{
@@ -56,7 +53,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                         onClick={onSubmit}
                         className="btn btn-save"
                     >
-                        Xóa
+                        In mã
                     </Button>
                 </div>
             ]}
@@ -68,4 +65,4 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
     );
 };
 
-export default PopupConfirmDelete;
+export default PopupScanBarCode;
