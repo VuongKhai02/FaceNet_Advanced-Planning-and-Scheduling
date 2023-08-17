@@ -81,10 +81,17 @@ export const AppMenu = (props: AppMenuProps) => {
           caption={"Danh sách đề nghị lĩnh NVL"}
           key={"d"}
         />
+
+        <MenuItem
+          screenId="declareProductionObject"
+          icon={<HomeFilled />}
+          caption={"Khai báo người/máy/lô sản xuất"}
+          key={"dd"}
+        />
       </SubMenuItem>
       <SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled />}>
         <MenuItem
-          screenId=""
+          screenId="productionProgressList"
           icon={<HomeFilled />}
           caption={"Giám sát tiến độ sản xuất"}
           key={"e"}
