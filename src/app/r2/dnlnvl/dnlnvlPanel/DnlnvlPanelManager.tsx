@@ -1361,7 +1361,7 @@ const DnlnvlPanelManager = ({ planningWorkOrder, popupIsOpen, setPopUpIsOpen }) 
     const onInsertDnlnvlSap = async () => {
         // @ts-ignore
         await axios
-            .put(PLANNING_API_URL + "/services/api/dnlnvl/sendsap/" + currentDnlnvl.id, {
+            .put(PLANNING_API_URL + "/services/api/dnlnvl/sendsap/" + currentDnlnvl?.id, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("_jmixRestAccessToken"),
                 },
