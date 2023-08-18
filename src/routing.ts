@@ -4,4 +4,5 @@ import "./app/TechFormManager/TechFormList/TechFormList";
 import "./app/home/HomePage";
 import "./app/progressMonitor/productionProgress/ProductionProgressList";
 import "./app/productionPlanManager/declareObject/DeclareProductionObject";
+import "./app/productionPlanManager/declareProductionInfor/DeclareProductionInfor";
 

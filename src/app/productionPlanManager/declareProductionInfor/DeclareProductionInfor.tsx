@@ -13,8 +13,8 @@ import {
     MasterDetail, Editing, Form
 } from "devextreme-react/data-grid";
 import axios from "axios";
-import { Link, useMainStore } from "@haulmont/jmix-react-core";
-import { MenuItem, registerScreen } from "@haulmont/jmix-react-ui";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import { registerScreen } from "@haulmont/jmix-react-ui";
 import { IWarning } from "../../shared/model/Warning.model";
 import { PLANNING_API_URL } from "../../../config";
 import { ImportOrder } from "../../import/ImportOrder";
@@ -28,9 +28,9 @@ import notify from "devextreme/ui/notify";
 import { ImportTechForm } from "../../import/ImportTechForm";
 
 
-const ROUTING_PATH = "/declareProductionObject";
+const ROUTING_PATH = "/declareProductionInfor";
 
-export const DeclareProductionObject = () => {
+export const DeclareProductionInfor = () => {
     const mainStore = useMainStore();
     const [content, setContent] = useState<string>();
 
@@ -356,7 +356,6 @@ export const DeclareProductionObject = () => {
                                     }
                                 />
 
-
                             </div>
 
 
@@ -381,12 +380,12 @@ export const DeclareProductionObject = () => {
 
 registerScreen({
     caption: "Khai báo người/máy/lô sản xuất",
-    component: DeclareProductionObject,
+    component: DeclareProductionInfor,
     menuOptions: {
         pathPattern: ROUTING_PATH,
         menuLink: ROUTING_PATH
     },
-    screenId: "declareProductionObject"
+    screenId: "/declareProductionObject"
 });
 
-export default DeclareProductionObject;
+export default DeclareProductionInfor;

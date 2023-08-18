@@ -3,6 +3,8 @@ import { MrpSaleOrders } from "../app/mrporder/MrpSaleOrders"
 import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
 import ProductionProgressList from "../app/progressMonitor/productionProgress/ProductionProgressList";
 import DeclareProductionObject from "../app/productionPlanManager/declareObject/DeclareProductionObject";
+import DeclareProductionInfor from "../app/productionPlanManager/declareProductionInfor/DeclareProductionInfor";
+
 
 
 export const ComponentPreviews = () => {
@@ -20,6 +22,10 @@ export const ComponentPreviews = () => {
       <ComponentPreview path="/declareProductionObject">
         <DeclareProductionObject />
       </ComponentPreview>
+      <ComponentPreview path="/declareProductionInfor">
+        <DeclareProductionInfor />
+      </ComponentPreview>
+
     </Previews>
   );
 };
