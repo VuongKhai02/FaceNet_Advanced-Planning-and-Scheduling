@@ -16,6 +16,7 @@ import { Item } from 'devextreme-react/form';
 import { Tag } from "antd";
 import PopupSendSAP from "../../shared/components/PopupSendSAP/PopupSendSAP";
 import { WarningOutlined } from "@ant-design/icons";
+import TechFormDetail from "../TechFormDetail/TechFormDetail";
 
 const getProductName = (rowData) => {
     if (rowData.data.status && rowData.data.status === 'created_wo') {
@@ -50,6 +51,7 @@ const onCellPrepared = (e) => {
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const TechFormListDetail = React.memo((props: any) => {
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
+    const [isVisibleTechFormDetail, setIsVisibleTechFormDetail] = React.useState<boolean>(false);
 
     const loadProductOrderItem = () => { }
     const loadProduct = () => { }
@@ -155,197 +157,204 @@ export const TechFormListDetail = React.memo((props: any) => {
     };
 
     return (
-        <div>
-            <DataGrid
-                id="gridContainer"
-                key={'id'}
-                keyExpr="id"
-                dataSource={OrderItem}
-                height={"auto"}
-                onRowUpdating={onEdit}
-                onRowInserting={onInsert}
-                onRowRemoving={onDelete}
-                showBorders={true}
-                showColumnLines={true}
-                showRowLines={true}
-                rowAlternationEnabled={true}
-                onCellPrepared={onCellPrepared}
-                wordWrapEnabled={true}
-                columnAutoWidth={true}
-                noDataText="Không có dữ liệu để hiển thị"
-            >
-                <Toolbar>
-                    <TItem location={"before"}
-                    >
-                        <div className={"master-detail-title"}>
-                            Danh sách phiếu công nghệ
-                        </div>
-                    </TItem>
-                    <TItem name="addRowButton" />
-                </Toolbar>
-                {/*<Scrolling mode="virtual"/>*/}
-                <Paging defaultPageSize={5} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"full"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                <FilterRow visible={false} applyFilter={"auto"} showAllText='Tất cả' resetOperationText="Đặt lại">
-                    <OperationDescriptions
-                        startsWith="Bắt đầu với"
-                        equal="Bằng"
-                        endsWith="Kết thúc với"
-                        contains="Chứa"
-                        notContains="Không chứa"
-                        notEqual="Không bằng"
-                        lessThan="Nhỏ hơn"
-                        lessThanOrEqual="Nhỏ hơn hoặc bằng"
-                        greaterThan="Lớn hơn"
-                        greaterThanOrEqual="Lớn hơn hoặc bằng"
-                        between="Nằm giữa"
-
-                    />
-                </FilterRow>
-                <HeaderFilter visible={true} texts={{
-                    cancel: "Hủy bỏ",
-                    ok: "Đồng ý",
-                    emptyValue: "Rỗng"
-
-                }} />
-                <SearchPanel visible={true}
-                    width={240}
-                    placeholder="Tìm kiếm..."
+        <>
+            {isVisibleTechFormDetail
+                ?
+                <TechFormDetail
+                    isOpen={isVisibleTechFormDetail}
+                    setClose={() => setIsVisibleTechFormDetail(false)}
                 />
-                <Selection mode="single" />
-                <Column
-                    width={140}
-                    caption="Tìm kiếm sản phẩm"
-                    dataField={"coittId"}
-                    visible={false}
-                    setCellValue={setProductSelectionValue}
-                >
-                    <Lookup dataSource={props.productsFullArrays} displayExpr={"productName"}
-                        valueExpr={"coittId"} />
-                </Column>
-                <Column dataField="productCode"
-                    minWidth={140}
-                    caption="Mã phiếu công nghệ"
-                    cellRender={getProductCode}
-                >
-                </Column>
-                <Column dataField="productName"
-                    caption="Tên thẻ"
-                    cellRender={getProductName}
-                    minWidth={200}
-                >
-                </Column>
+                :
+                <div>
+                    <DataGrid
+                        id="gridContainer"
+                        key={'id'}
+                        keyExpr="id"
+                        dataSource={OrderItem}
+                        height={"auto"}
+                        onRowUpdating={onEdit}
+                        onRowInserting={onInsert}
+                        onRowRemoving={onDelete}
+                        showBorders={true}
+                        showColumnLines={true}
+                        showRowLines={true}
+                        rowAlternationEnabled={true}
+                        onCellPrepared={onCellPrepared}
+                        wordWrapEnabled={true}
+                        columnAutoWidth={true}
+                        noDataText="Không có dữ liệu để hiển thị"
+                    >
+                        <Toolbar>
+                            <TItem location={"before"}
+                            >
+                                <div className={"master-detail-title"}>
+                                    Danh sách phiếu công nghệ
+                                </div>
+                            </TItem>
+                            <TItem name="addRowButton" />
+                        </Toolbar>
+                        {/*<Scrolling mode="virtual"/>*/}
+                        <Paging defaultPageSize={5} />
+                        <Pager
+                            visible={true}
+                            allowedPageSizes={allowedPageSizes}
+                            displayMode={"full"}
+                            showPageSizeSelector={true}
+                            showInfo={true}
+                            showNavigationButtons={true}
+                            infoText="Trang số {0} trên {1} ({2} bản ghi)" />
+                        <FilterRow visible={false} applyFilter={"auto"} showAllText='Tất cả' resetOperationText="Đặt lại">
+                            <OperationDescriptions
+                                startsWith="Bắt đầu với"
+                                equal="Bằng"
+                                endsWith="Kết thúc với"
+                                contains="Chứa"
+                                notContains="Không chứa"
+                                notEqual="Không bằng"
+                                lessThan="Nhỏ hơn"
+                                lessThanOrEqual="Nhỏ hơn hoặc bằng"
+                                greaterThan="Lớn hơn"
+                                greaterThanOrEqual="Lớn hơn hoặc bằng"
+                                between="Nằm giữa"
 
-                <Column dataField="quantity"
-                    minWidth={140}
-                    caption="Số lượng"
-                    alignment="right"
-                >
-                </Column>
+                            />
+                        </FilterRow>
+                        <HeaderFilter visible={true} texts={{
+                            cancel: "Hủy bỏ",
+                            ok: "Đồng ý",
+                            emptyValue: "Rỗng"
 
-                <Column dataField="startDate"
-                    caption="Ngày bắt đầu"
-                    format={"dd/MM/yyyy"}
-                    dataType="datetime"
-                    alignment={"center"}
-                    minWidth={140}
-                    hidingPriority={0}
-                >
+                        }} />
+                        <SearchPanel visible={true}
+                            width={240}
+                            placeholder="Tìm kiếm..."
+                        />
+                        <Selection mode="single" />
+                        <Column
+                            width={140}
+                            caption="Tìm kiếm sản phẩm"
+                            dataField={"coittId"}
+                            visible={false}
+                            setCellValue={setProductSelectionValue}
+                        >
+                            <Lookup dataSource={props.productsFullArrays} displayExpr={"productName"}
+                                valueExpr={"coittId"} />
+                        </Column>
+                        <Column dataField="productCode"
+                            minWidth={140}
+                            caption="Mã phiếu công nghệ"
+                            cellRender={getProductCode}
+                        >
+                        </Column>
+                        <Column dataField="productName"
+                            caption="Tên thẻ"
+                            cellRender={getProductName}
+                            minWidth={200}
+                        >
+                        </Column>
 
-                </Column>
-                <Column dataField="endDate"
-                    caption="Ngày kết thúc"
-                    dataType="datetime"
-                    format={"dd/MM/yyyy"}
-                    alignment={"center"}
-                    minWidth={140}
-                    hidingPriority={1}
-                >
-                </Column>
-                <Column
-                    alignment={"center"}
-                    caption={"Mức độ ưu tiên"}
-                    width={140}
-                    renderAsync={true}
-                >
-                </Column>
-                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <PopupSendSAP
-                    isVisible={isModalVisibleSendSAP}
-                    onCancel={handleHideModalSendSAP}
-                    onSubmit={handleConfirmSendSAP}
-                    modalTitle={
-                        <div>
-                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
-                                Xác nhận gửi SAP
-                            </h3>
-                            <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
-                        </div>
-                    }
-                    modalContent={
-                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
-                            <h3 style={{ color: '#ff794e' }}>
-                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
-                                Lưu ý:
-                            </h3>
-                            <p style={{ marginLeft: 20, fontSize: 15 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
-                        </div>
-                    }
-                    width={600} />
-                <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                    <Button icon="edit" />
-                    <Button icon="airplane" />
-                    <Button icon="globe" />
-                    <Button icon="print" />
-                    <Button icon="chevronnext" onClick={handleShowModalSendSAP} />
-                    <Button icon="trash" />
-                </Column>
-                <Editing
-                    mode="popup"
-                    allowUpdating={true}
-                    allowDeleting={true}
-                    allowAdding={true}
-                    useIcons={true}
-                    texts={{
-                        cancelRowChanges: "Hủy bỏ",
-                        saveRowChanges: "Lưu lại",
-                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                        deleteRow: "Xóa",
-                        editRow: "Sửa",
-                        addRow: "Thêm hàng"
-                    }}
-                >
-                    <Popup title="Cập nhật thông tin sản phẩm" showTitle={true} width={900} height={550} />
-                    <Form>
-                        <Item itemType="group" colCount={2} colSpan={2}>
-                            <Item dataField="coittId" />
-                            <Item dataField="coittId" visible={false} />
-                            <Item dataField="productCode" />
-                            <Item dataField="productName" />
-                            <Item dataField="bomVersion" />
-                            <Item dataField="startDate" />
-                            <Item dataField="endDate" />
-                            <Item dataField="quantity" isRequired={true} />
-                            <Item dataField="note" colSpan={2} />
-                            <Item dataField="branchCode" />
-                            <Item dataField="groupCode" />
-                            <Item dataField="reasonId" />
-                        </Item>
-                    </Form>
-                </Editing>
-            </DataGrid>
+                        <Column dataField="quantity"
+                            minWidth={140}
+                            caption="Số lượng"
+                            alignment="right"
+                        >
+                        </Column>
 
+                        <Column dataField="startDate"
+                            caption="Ngày bắt đầu"
+                            format={"dd/MM/yyyy"}
+                            dataType="datetime"
+                            alignment={"center"}
+                            minWidth={140}
+                            hidingPriority={0}
+                        >
 
-            {/*</Popup2>*/}
-        </div>
+                        </Column>
+                        <Column dataField="endDate"
+                            caption="Ngày kết thúc"
+                            dataType="datetime"
+                            format={"dd/MM/yyyy"}
+                            alignment={"center"}
+                            minWidth={140}
+                            hidingPriority={1}
+                        >
+                        </Column>
+                        <Column
+                            alignment={"center"}
+                            caption={"Mức độ ưu tiên"}
+                            width={140}
+                            renderAsync={true}
+                        >
+                        </Column>
+                        <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                        <PopupSendSAP
+                            isVisible={isModalVisibleSendSAP}
+                            onCancel={handleHideModalSendSAP}
+                            onSubmit={handleConfirmSendSAP}
+                            modalTitle={
+                                <div>
+                                    <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                                        Xác nhận gửi SAP
+                                    </h3>
+                                    <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
+                                </div>
+                            }
+                            modalContent={
+                                <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                                    <h3 style={{ color: '#ff794e' }}>
+                                        <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                        Lưu ý:
+                                    </h3>
+                                    <p style={{ marginLeft: 20, fontSize: 15 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
+                                </div>
+                            }
+                            width={600} />
+                        <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
+                            <Button icon="edit" onClick={() => setIsVisibleTechFormDetail(true)} />
+                            <Button icon="airplane" />
+                            <Button icon="globe" />
+                            <Button icon="print" />
+                            <Button icon="chevronnext" onClick={handleShowModalSendSAP} />
+                            <Button icon="trash" />
+                        </Column>
+                        <Editing
+                            mode="popup"
+                            allowUpdating={true}
+                            allowDeleting={true}
+                            allowAdding={true}
+                            useIcons={true}
+                            texts={{
+                                cancelRowChanges: "Hủy bỏ",
+                                saveRowChanges: "Lưu lại",
+                                confirmDeleteTitle: 'Xác nhận xóa bản ghi',
+                                confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
+                                deleteRow: "Xóa",
+                                editRow: "Sửa",
+                                addRow: "Thêm hàng"
+                            }}
+                        >
+                            <Popup title="Cập nhật thông tin sản phẩm" showTitle={true} width={900} height={550} />
+                            <Form>
+                                <Item itemType="group" colCount={2} colSpan={2}>
+                                    <Item dataField="coittId" />
+                                    <Item dataField="coittId" visible={false} />
+                                    <Item dataField="productCode" />
+                                    <Item dataField="productName" />
+                                    <Item dataField="bomVersion" />
+                                    <Item dataField="startDate" />
+                                    <Item dataField="endDate" />
+                                    <Item dataField="quantity" isRequired={true} />
+                                    <Item dataField="note" colSpan={2} />
+                                    <Item dataField="branchCode" />
+                                    <Item dataField="groupCode" />
+                                    <Item dataField="reasonId" />
+                                </Item>
+                            </Form>
+                        </Editing>
+                    </DataGrid>
+                </div>
+            }
+        </>
     );
 });
 export default TechFormListDetail;

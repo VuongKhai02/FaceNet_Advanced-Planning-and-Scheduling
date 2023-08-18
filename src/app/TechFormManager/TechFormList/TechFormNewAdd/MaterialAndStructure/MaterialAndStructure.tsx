@@ -121,6 +121,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             <Table
                                 dataSource={data}
                                 rowKey="No"
+                                key='No'
                                 bordered
                                 pagination={false}
                             >
@@ -128,7 +129,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 <Table.Column dataIndex="CongDoan" title="Công đoạn" />
                                 <Table.Column dataIndex="MaterialCode" title="Mã vật tư" />
                                 <Table.Column dataIndex="quantity" title="Số lượng" />
-                                <Table.Column dataIndex="note" title="Ghi chú/Remarks" />
+                                <Table.Column dataIndex="note" title="Ghi chú/Remarks" render={() => <TextBox placeholder="Nhập" key={'No'} />} />
                                 <Table.Column
                                     onCell={(item: any, index) => {
                                         return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
@@ -234,9 +235,10 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
                                 />
-                                <Button text="Tiếp theo" onClick={handleAddFormTechProcedure} style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                                <Button text="Tiếp theo" onClick={handleAddFormTechProcedure} style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }} />
+                                <Button text="Thêm mới" style={{ backgroundColor: "gray", color: "#fff" }} />
                             </div>
                         </div>
                     </div>

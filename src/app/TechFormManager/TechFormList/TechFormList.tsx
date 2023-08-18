@@ -338,8 +338,8 @@ export const TechFormList = () => {
                 <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
                   format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type={"buttons"} caption={"Thao tác"} alignment="left" />
-                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
+                <Column type={"buttons"} caption={"Thao tác"} alignment="center" />
+                <Editing mode="popup" useIcons={true} allowDeleting={true}
                   texts={{
                     cancelRowChanges: "Hủy bỏ",
                     saveRowChanges: "Lưu lại",

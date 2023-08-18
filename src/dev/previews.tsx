@@ -35,6 +35,8 @@ export const ComponentPreviews = () => {
       <ComponentPreview path="/techFormApprove">
         <TechFormApprove />
       </ComponentPreview>
+
+      {/* QLKHSX */}
       <ComponentPreview path="/productionPlanList">
         <ProductionPlanList />
       </ComponentPreview>

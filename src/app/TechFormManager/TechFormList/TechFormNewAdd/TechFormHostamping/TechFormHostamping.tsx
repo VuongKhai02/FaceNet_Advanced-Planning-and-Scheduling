@@ -5,7 +5,7 @@ import "./TechFormHostamping.css";
 import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Input, Table, Button as ButtonAnt, Select } from "antd";
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 type TechFormHostampingProps = {
     isOpen: boolean,
@@ -140,6 +140,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         )} />
                         <Column type={'buttons'} caption={""} alignment="center" >
                             <ButtonIcon icon='add' />
+                            <ButtonIcon icon='trash' />
                         </Column>
                     </DataGrid>
 
@@ -222,7 +223,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="actions"
                                 align="center"
                                 render={() => (
-                                    <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
+                                    <div>
+                                        <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
+                                        <ButtonAnt icon={<DeleteOutlined />} style={{ border: 'none' }} />
+                                    </div>
                                 )}
                             />
                         </Table>
@@ -270,6 +274,12 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     <Input className="inputRow" placeholder="--Nhập--" />
                                 )}
                             />
+                            <Table.Column title='' width={105} render={() => (
+                                <div>
+                                    <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
+                                    <ButtonAnt icon={<DeleteOutlined />} style={{ border: 'none' }} />
+                                </div>
+                            )} />
                         </Table>
 
                         <Table
@@ -397,6 +407,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         </Column>
                         <Column type={'buttons'} caption={""} alignment="center" >
                             <ButtonIcon icon='add' />
+                            <ButtonIcon icon='trash' />
                         </Column>
                     </DataGrid>
                 </div>
@@ -438,12 +449,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                     <Button
                         text="Trở lại"
                         onClick={setClose}
-                        style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
+                        style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 110 }}
                     />
-                    <Button text="Tiếp theo" onClick={handleNextClick} style={{ backgroundColor: "#737070", color: "#fff", width: 100, marginRight: "8px" }} />
-                    <Button text="Ký lập" onClick={handleNextClick} className="buttons" />
-                    <Button text="Gửi duyệt" onClick={handleNextClick} className="buttons" />
-                    <Button text="In" onClick={handleNextClick} className="buttons" />
+                    <Button text="Tiếp theo" onClick={handleNextClick} style={{ backgroundColor: "gray", color: "#fff", width: 110, marginRight: "18px" }} />
+                    <Button text="Thêm mới" onClick={handleNextClick} style={{ backgroundColor: "#FF7A00", color: "#fff", width: 110 }} />
                 </div>
             </div>
         </div>

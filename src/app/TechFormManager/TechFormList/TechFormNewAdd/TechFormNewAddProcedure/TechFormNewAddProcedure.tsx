@@ -132,7 +132,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                             return (
                                                 <div className="checkbox">
                                                     <div>
-                                                        <input type="checkbox" id="In" />
+                                                        <input type="checkbox" id="In" checked={true} />
                                                         <label htmlFor="In" className="checkBoxStyle">In trở Nó</label>
                                                     </div>
                                                     <div style={{ marginLeft: 120 }}>
@@ -166,6 +166,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     </Column>
                                     <Column type={'buttons'} caption={""} alignment="center" >
                                         <ButtonIcon icon='add' />
+                                        <ButtonIcon icon='trash' />
                                     </Column>
                                 </DataGrid>
                             </div>
@@ -236,6 +237,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         )} />
                                         <Column type={'buttons'} caption={""} alignment="center" >
                                             <ButtonIcon icon='add' />
+                                            <ButtonIcon icon='trash' />
                                         </Column>
                                     </DataGrid>
 
@@ -311,6 +313,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         )} />
                                         <Column type={'buttons'} caption={""} alignment="center" >
                                             <ButtonIcon icon='add' />
+                                            <ButtonIcon icon='trash' />
                                         </Column>
                                     </DataGrid>
 
@@ -359,6 +362,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         )} />
                                         <Column type={'buttons'} caption={""} alignment="center" >
                                             <ButtonIcon icon='add' />
+                                            <ButtonIcon icon='trash' />
                                         </Column>
                                     </DataGrid>
 
@@ -376,9 +380,10 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Button
                                         text="Trở lại"
                                         onClick={setClose}
-                                        style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                        style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
                                     />
-                                    <Button text="Tiếp theo" onClick={handleAddFormTechHostamping} style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                                    <Button text="Tiếp theo" onClick={handleAddFormTechHostamping} style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }} />
+                                    <Button text="Thêm mới" style={{ backgroundColor: "gray", color: "#fff" }} />
                                 </div>
                             </div>
                         </div>

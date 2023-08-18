@@ -99,35 +99,11 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({
                                 <Column dataField="No" caption="No." allowEditing={false} alignment="left" />
                                 <Column
                                     dataField="CongDoan"
-                                    caption="Công đoạn" cellRender={({ data, key }) => (
-                                        <DropDownBox
-                                            placeholder="--Chọn--"
-                                            dataSource={selectBoxOptions}
-                                            valueExpr="value"
-                                            displayExpr="label"
-                                            value={data[key]?.CongDoan || '--Chọn--'}
-                                            onValueChanged={(e) => handleCongDoanChange(e, key)}
-                                            showClearButton={true}
-                                        />
-                                    )}>
-                                    <Editing allowUpdating={true} />
-
+                                    caption="Công đoạn" >
                                 </Column>
-                                <Column dataField="MaJob" caption="Mã Job" cellRender={({ data, key }) => (
-                                    <DropDownBox
-                                        placeholder="--Chọn--"
-                                        dataSource={selectBoxOptions}
-                                        valueExpr="value"
-                                        displayExpr="label"
-                                        value={data[key]?.MaJob || '--Chọn--'}
-                                        onValueChanged={(e) => handleMaJobChange(e, key)}
-                                        showClearButton={true}
-                                    />
-                                )}>
-                                    <Editing allowUpdating={true} />
+                                <Column dataField="MaJob" caption="Mã Job">
                                 </Column>
                                 <Column dataField="TenJob" caption="Tên Job" />
-
                             </DataGrid>
                             <div
                                 className="toolbar"
@@ -142,12 +118,17 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
                                 />
                                 <Button
                                     text="Tiếp theo"
                                     onClick={handleAddFormTechMaterialAndStructure}
-                                    style={{ backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                />
+                                <Button
+                                    text="Thêm mới"
+                                    onClick={handleAddFormTechMaterialAndStructure}
+                                    style={{ backgroundColor: "gray", color: "#fff" }}
                                 />
                             </div>
                         </div>
