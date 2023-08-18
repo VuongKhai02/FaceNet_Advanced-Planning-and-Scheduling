@@ -16,7 +16,7 @@ import { Item } from 'devextreme-react/form';
 import { Tag } from "antd";
 import PopupSendSAP from "../../shared/components/PopupSendSAP/PopupSendSAP";
 import { WarningOutlined } from "@ant-design/icons";
-import TechFormDetail from "../TechFormDetail/TechFormDetail";
+import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
 
 const getProductName = (rowData) => {
     if (rowData.data.status && rowData.data.status === 'created_wo') {
@@ -51,7 +51,7 @@ const onCellPrepared = (e) => {
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const TechFormListDetail = React.memo((props: any) => {
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
-    const [isVisibleTechFormDetail, setIsVisibleTechFormDetail] = React.useState<boolean>(false);
+    const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
 
     const loadProductOrderItem = () => { }
     const loadProduct = () => { }
@@ -158,11 +158,11 @@ export const TechFormListDetail = React.memo((props: any) => {
 
     return (
         <>
-            {isVisibleTechFormDetail
+            {isVisibleTechFormUpdate
                 ?
-                <TechFormDetail
-                    isOpen={isVisibleTechFormDetail}
-                    setClose={() => setIsVisibleTechFormDetail(false)}
+                <TechFormUpdate
+                    isOpen={isVisibleTechFormUpdate}
+                    setClose={() => setIsVisibleTechFormUpdate(false)}
                 />
                 :
                 <div>
@@ -310,7 +310,7 @@ export const TechFormListDetail = React.memo((props: any) => {
                             }
                             width={600} />
                         <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                            <Button icon="edit" onClick={() => setIsVisibleTechFormDetail(true)} />
+                            <Button icon="edit" onClick={() => setIsVisibleTechFormUpdate(true)} />
                             <Button icon="airplane" />
                             <Button icon="globe" />
                             <Button icon="print" />

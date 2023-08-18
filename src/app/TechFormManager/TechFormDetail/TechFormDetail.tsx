@@ -2,9 +2,8 @@ import React from "react";
 import { Button, DataGrid, Template } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
+import TechnologyPocudure from "./TechnologyProcedure/TechnologyProcedure";
 import "./TechFormDetail.css";
-import TechnologyPocudureDetail from "./TechnologyProcedureDetail/TechnologyProcedureDetail";
-
 type TechFormDetailProps = {
     isOpen: boolean,
     setClose?: () => void;
@@ -14,7 +13,7 @@ type TechFormDetailProps = {
 export const TechFormDetail: React.FC<TechFormDetailProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [isVisibleTechProcedureDetail, setIsVisibleTechProcedureDetail] = React.useState<boolean>(false);
+    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
     const data1 = [
         { title1: 'Mã sx/Production', data1: '1500928', title2: 'Người gửi/Sender', data2: 'Nguyễn Thị A' },
         { title1: 'Tên khách hàng/Customer', data1: 'Ngân hang A', title2: 'Số lượng thẻ/Quantity', data2: '15000' },
@@ -28,14 +27,19 @@ export const TechFormDetail: React.FC<TechFormDetailProps> = observer(({
             Id: 1, MatTruocNoiDung: 'Nội dung Mặt trước 1', MatTruocSoLuong: 10, MatTruocKichThuocBan: 'A4', MatSauNoiDung: 'Nội dung Mặt sau 1', MatSauSoLuong: 5, MatSauKichThuocBan: 'A4'
         }
     ];
+
+    const handleTechnologyPocudure = () => {
+        setIsAddNewTechForm(true);
+    }
+
     return (
         <>
             {
-                isVisibleTechProcedureDetail
+                isAddNewTechForm
                     ?
-                    <TechnologyPocudureDetail
-                        isOpen={isVisibleTechProcedureDetail}
-                        setClose={() => setIsVisibleTechProcedureDetail(false)}
+                    <TechnologyPocudure
+                        isOpen={isAddNewTechForm}
+                        setClose={() => setIsAddNewTechForm(false)}
                     />
                     :
                     <div>
@@ -47,7 +51,7 @@ export const TechFormDetail: React.FC<TechFormDetailProps> = observer(({
                                 <h5 className="name" style={{
                                     fontSize: 18,
                                     marginBottom: 0
-                                }}>Cập nhật phiếu công nghệ</h5>
+                                }}>Xem chi tiết phiếu công nghệ</h5>
                                 <h5 className="name" style={{
                                     fontSize: 18,
                                     marginBottom: 0,
@@ -145,6 +149,10 @@ export const TechFormDetail: React.FC<TechFormDetailProps> = observer(({
                                     <div className="inner-rectangle">
                                         <div className="text">
                                             Chú ý: -Màu theo tờ mẫu đã làm T05/2020
+                                            Khách hàng khó tính, các công đoạn làm chuẩn theo mẫu
+                                            -CTH in Barcode MS thẻ từ VCCP227002
+                                            Dán lable LP2
+                                            Xuất tồn kho 900 thẻ
                                         </div>
                                     </div>
 
@@ -163,24 +171,16 @@ export const TechFormDetail: React.FC<TechFormDetailProps> = observer(({
                                     }}
                                 >
                                     <Button
-                                        text="Trở lại"
+                                        className="border-none"
+                                        icon="back"
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: '#E5E5E5', width: 100 }}
+                                        style={{ marginRight: "20px", color: "#333" }}
                                     />
                                     <Button
-                                        text="Tiếp theo"
-                                        onClick={() => { setIsVisibleTechProcedureDetail(true) }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: '#FF7A00' }}
-                                    />
-                                    <Button
-                                        text="Ký lập"
-                                        onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray', width: 100 }}
-                                    />
-                                    <Button
-                                        text="Gửi duyệt"
-                                        onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray' }}
+                                        className="border-none"
+                                        icon="chevronright"
+                                        onClick={handleTechnologyPocudure}
+                                        style={{ color: "#fff" }}
                                     />
                                 </div>
                             </div>

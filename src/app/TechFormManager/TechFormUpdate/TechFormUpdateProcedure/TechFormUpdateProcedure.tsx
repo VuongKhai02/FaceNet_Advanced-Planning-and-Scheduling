@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Button, DataGrid } from "devextreme-react";
-import "./TechFormUpdateProcedure.css";
-import { Column } from "devextreme-react/data-grid";
+import { Button, DataGrid, TextBox } from "devextreme-react";
+import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateHostamping from "../TechFormUpdateHostamping/TechFormUpdateHostamping";
 
-type TechFormUpdateProcedureProps = {
+type TechFormDetailProcedureProps = {
     isOpen: boolean,
     setClose?: () => void;
 
@@ -27,23 +26,20 @@ const data2 = [
 
 
 
-export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = observer(({
+export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
+    const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
 
-    const handleTechFormUpdateHostamping = () => {
-        setIsAddNewTechForm(true);
-    }
 
     return (
         <>
             {
-                isAddNewTechForm
+                isVisibleTechFormUpdateHostamping
                     ?
                     <TechFormUpdateHostamping
-                        isOpen={isAddNewTechForm}
-                        setClose={() => setIsAddNewTechForm(false)} />
+                        isOpen={isVisibleTechFormUpdateHostamping}
+                        setClose={() => setIsVisibleTechFormUpdateHostamping(false)} />
                     :
                     <div>
                         <div className="table-responsive">
@@ -150,15 +146,21 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                         showColumnLines={true}
                                     >
                                         <Column dataField="id" caption="No." alignment="left" width={100} />
-                                        <Column dataField="lnk" caption="Mực/Lnk" />
-                                        <Column dataField="nilon" caption="Nilon" />
-                                        <Column dataField="cut" caption="Cắt" />
-                                        <Column dataField="be" caption="Bế"
-                                        >
+                                        <Column dataField="lnk" caption="Mực/Lnk" cellRender={() => <TextBox placeholder="Nhập" key={'lnk'} />}>
                                         </Column>
-                                        <Column dataField="dun" caption="Đùn" />
-                                        <Column dataField="other" caption="Khác/Other" />
-
+                                        <Column dataField="nilon" caption="Nilon" cellRender={() => <TextBox placeholder="Nhập" key={'nilon'} />} />
+                                        <Column dataField="cut" caption="Cắt" cellRender={() => <TextBox placeholder="Nhập" key={'cut'} />} />
+                                        <Column dataField="be" caption="Bế"
+                                            cellRender={() => <TextBox placeholder="Nhập" key={'be'} />} >
+                                        </Column>
+                                        <Column dataField="dun" caption="Đùn" cellRender={() => <TextBox placeholder="Nhập" key={'dun'} />} />
+                                        <Column dataField="other" caption="Khác/Other" cellRender={() => <TextBox placeholder="Nhập" key={'other'} />} />
+                                        <Column caption="" dataField="" alignment="center" cellRender={() =>
+                                            <div>
+                                                <Button icon="add" style={{ marginRight: 10, border: 'none' }} />
+                                                <Button icon="trash" style={{ border: 'none' }} />
+                                            </div>
+                                        } />
                                     </DataGrid>
 
                                 </div>
@@ -176,8 +178,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                         showColumnLines={true}
                                     >
                                         <Column dataField="id" caption="No." alignment="left" width={100} />
-                                        <Column dataField="content" caption="Nội dung/Content" />
-                                        <Column dataField="machine" caption="Máy/Machine" />
+                                        <Column dataField="content" caption="Nội dung/Content" cellRender={() => <TextBox placeholder="Nhập" key={'content'} />} />
+                                        <Column dataField="machine" caption="Máy/Machine" cellRender={() => <TextBox placeholder="Nhập" key={'machine'} />} />
                                     </DataGrid>
 
                                 </div>
@@ -218,16 +220,24 @@ export const TechFormUpdateProcedure: React.FC<TechFormUpdateProcedureProps> = o
                                     }}
                                 >
                                     <Button
-                                        className="border-none"
-                                        icon="back"
+                                        text="Trở lại"
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#333" }}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: '#E5E5E5', width: 100 }}
                                     />
                                     <Button
-                                        className="border-none"
-                                        icon="chevronright"
-                                        onClick={handleTechFormUpdateHostamping}
-                                        style={{ color: "#fff" }}
+                                        text="Tiếp theo"
+                                        onClick={() => { setIsVisibleTechFormUpdateHostamping(true) }}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: '#FF7A00' }}
+                                    />
+                                    <Button
+                                        text="Ký lập"
+                                        onClick={() => { }}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray', width: 100 }}
+                                    />
+                                    <Button
+                                        text="Gửi duyệt"
+                                        onClick={() => { }}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray' }}
                                     />
                                 </div>
                             </div>

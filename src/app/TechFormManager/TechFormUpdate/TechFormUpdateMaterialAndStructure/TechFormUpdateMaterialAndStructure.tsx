@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Button, DataGrid, TextBox } from "devextreme-react";
-import DateBox from 'devextreme-react/date-box';
-import "./TechFormUpdateMaterialAndStructure.css";
+import React, { } from "react";
+import { Button, DataGrid } from "devextreme-react";
 import {
-    Column, Editing
+    Column
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
@@ -40,20 +38,17 @@ const data1 = [
 export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterialAndStructureProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
-
-    const handleTechFormUpdateProcedure = () => {
-        setIsAddNewTechForm(true);
-    }
+    const [isVisibleTechFormUpdateProcedure, setIsVisibleTechFormUpdateProcedure] = React.useState<boolean>(false);
 
     return (
         <>
-            {isAddNewTechForm ?
+            {isVisibleTechFormUpdateProcedure
+                ?
                 <TechFormUpdateProcedure
-                    isOpen={isAddNewTechForm}
-                    setClose={() => setIsAddNewTechForm(false)}
-                /> :
+                    isOpen={isVisibleTechFormUpdateProcedure}
+                    setClose={() => setIsVisibleTechFormUpdateProcedure(false)}
+                />
+                :
                 <div>
                     <div className="table-responsive">
                         <div className="informer" style={{
@@ -63,7 +58,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             <h5 className="name" style={{
                                 fontSize: 18,
                                 marginBottom: 0
-                            }}>Thêm mới phiếu công nghệ</h5>
+                            }}>Cập nhật phiếu công nghệ</h5>
                         </div>
                         <div className="subtile">
                             <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022  </h6>
@@ -130,16 +125,24 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                 }}
                             >
                                 <Button
-                                    className="border-none"
-                                    icon="back"
+                                    text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#333" }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: '#E5E5E5', width: 100 }}
                                 />
                                 <Button
-                                    className="border-none"
-                                    icon="chevronright"
-                                    onClick={handleTechFormUpdateProcedure}
-                                    style={{ color: "#fff" }}
+                                    text="Tiếp theo"
+                                    onClick={() => { setIsVisibleTechFormUpdateProcedure(true) }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: '#FF7A00' }}
+                                />
+                                <Button
+                                    text="Ký lập"
+                                    onClick={() => { }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray', width: 100 }}
+                                />
+                                <Button
+                                    text="Gửi duyệt"
+                                    onClick={() => { }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray' }}
                                 />
                             </div>
                         </div>

@@ -13,7 +13,7 @@
 
 .app-header__content {
   margin-left: 12px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   overflow: hidden;
 }
 

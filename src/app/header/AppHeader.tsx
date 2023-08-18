@@ -27,8 +27,8 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
   return (
     <div className="app-header">
       <RdIcon ></RdIcon>
-      <div className="app-header__user-panel__logout-btn" style={{ paddingLeft: "10px", fontSize: "20px", flexGrow: 1, paddingBottom: "-10px" }}>Advanced Planning and Scheduling</div>
       <div className="app-header__content">{children}</div>
+      <div className="app-header__user-panel__logout-btn" style={{ fontSize: "20px", flexGrow: 1, paddingBottom: "-10px", textAlign: 'left' }}>Advanced Planning and Scheduling</div>
 
       <Space className="app-header__user-panel">
         <LanguageSwitcher className="language-switcher -header" />

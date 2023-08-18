@@ -1,7 +1,9 @@
-import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import React, { useState } from "react";
+import { Button, DataGrid, TextBox } from "devextreme-react";
+import DateBox from 'devextreme-react/date-box';
+import "./TechFormDetailMaterialAndStructure.css";
 import {
-    Column
+    Column, Editing
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormDetailProcedure from "../TechFormDetailProcedure/TechFormDetailProcedure";
@@ -38,17 +40,20 @@ const data1 = [
 export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterialAndStructureProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [isVisibleTechFormDetailProcedure, setIsVisibleTechFormDetailProcedure] = React.useState<boolean>(false);
+    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
+
+
+    const handleTechFormDetailProcedure = () => {
+        setIsAddNewTechForm(true);
+    }
 
     return (
         <>
-            {isVisibleTechFormDetailProcedure
-                ?
+            {isAddNewTechForm ?
                 <TechFormDetailProcedure
-                    isOpen={isVisibleTechFormDetailProcedure}
-                    setClose={() => setIsVisibleTechFormDetailProcedure(false)}
-                />
-                :
+                    isOpen={isAddNewTechForm}
+                    setClose={() => setIsAddNewTechForm(false)}
+                /> :
                 <div>
                     <div className="table-responsive">
                         <div className="informer" style={{
@@ -58,7 +63,7 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                             <h5 className="name" style={{
                                 fontSize: 18,
                                 marginBottom: 0
-                            }}>Cập nhật phiếu công nghệ</h5>
+                            }}>Thêm mới phiếu công nghệ</h5>
                         </div>
                         <div className="subtile">
                             <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022  </h6>
@@ -125,24 +130,16 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                 }}
                             >
                                 <Button
-                                    text="Trở lại"
+                                    className="border-none"
+                                    icon="back"
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: '#E5E5E5', width: 100 }}
+                                    style={{ marginRight: "20px", color: "#333" }}
                                 />
                                 <Button
-                                    text="Tiếp theo"
-                                    onClick={() => { setIsVisibleTechFormDetailProcedure(true) }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: '#FF7A00' }}
-                                />
-                                <Button
-                                    text="Ký lập"
-                                    onClick={() => { }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray', width: 100 }}
-                                />
-                                <Button
-                                    text="Gửi duyệt"
-                                    onClick={() => { }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: 'gray' }}
+                                    className="border-none"
+                                    icon="chevronright"
+                                    onClick={handleTechFormDetailProcedure}
+                                    style={{ color: "#fff" }}
                                 />
                             </div>
                         </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, DataGrid } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
+import TechFormDetailMaterialAndStructure from "../TechFormDetailMaterialAndStructure/TechFormDetailMaterialAndStructure";
 import { Input, Table } from "antd";
 import "./TechnologyProcedure.css";
 
@@ -49,14 +49,14 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
 
 
-    const HandleTechFormUpdateMaterialAndStructure = () => {
+    const HandleTechFormDetailMaterialAndStructure = () => {
         setIsAddNewTechForm(true);
     }
 
     return (
         <>
             {isAddNewTechForm ?
-                <TechFormUpdateMaterialAndStructure
+                <TechFormDetailMaterialAndStructure
                     isOpen={isAddNewTechForm}
                     setClose={() => setIsAddNewTechForm(false)}
                 /> :
@@ -177,7 +177,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                 <Button
                                     className="border-none"
                                     icon="chevronright"
-                                    onClick={HandleTechFormUpdateMaterialAndStructure}
+                                    onClick={HandleTechFormDetailMaterialAndStructure}
                                     style={{ color: "#fff" }}
                                 />
                             </div>

@@ -59,7 +59,7 @@ export const CardManagement = () => {
                     onClick={() => setIsVisibleAddBoxCard(false)}
                 >
                     Hủy bỏ
-                </Button>,
+                </Button>
                 <Button
                     style={{
                         borderRadius: '4px',
@@ -75,7 +75,7 @@ export const CardManagement = () => {
                     className="btn btn-save"
                 >
                     Thêm mới
-                </Button>,
+                </Button>
                 <Button
                     style={{
                         borderRadius: '4px',
@@ -307,7 +307,7 @@ export const CardManagement = () => {
 
 
 registerScreen({
-    caption: "Danh sách phiếu công nghệ",
+    caption: "Quản lý hộp chứa thẻ",
     component: CardManagement,
     menuOptions: {
         pathPattern: ROUTING_PATH,

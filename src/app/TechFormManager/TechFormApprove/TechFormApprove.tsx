@@ -21,7 +21,7 @@ import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
 import { OrderItem } from "../../../fake_data/OrderItem";
-import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
+import TechFormDetail from "../TechFormDetail/TechFormDetail";
 import { Popup as PopupCofirm } from 'devextreme-react/popup';
 import "./TechFormApprove.css";
 import PopupConfirmDelete from "../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
@@ -219,7 +219,7 @@ export const TechFormApprove = () => {
     }
 
 
-    const handleTechFormUpdate = () => {
+    const handleTechFormDetail = () => {
         setIsAddNewTechForm(true);
     }
 
@@ -227,7 +227,7 @@ export const TechFormApprove = () => {
         <>
             {
                 isAddNewTechForm ?
-                    <TechFormUpdate
+                    <TechFormDetail
                         isOpen={isAddNewTechForm}
                         setClose={() => setIsAddNewTechForm(false)} /> :
                     <div>
@@ -367,7 +367,7 @@ export const TechFormApprove = () => {
                                 </Column>
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                                 <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                                    <ButtonB icon="eyeopen" onClick={handleTechFormUpdate} />
+                                    <ButtonB icon="eyeopen" onClick={handleTechFormDetail} />
                                     <ButtonB icon='check' />
                                     <ButtonB icon='clear' />
                                     <ButtonB icon='add' />

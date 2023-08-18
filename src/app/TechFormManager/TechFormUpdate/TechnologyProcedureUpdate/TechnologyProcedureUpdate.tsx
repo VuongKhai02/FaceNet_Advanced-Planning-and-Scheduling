@@ -3,12 +3,11 @@ import { Button, DataGrid } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Table, Upload } from "antd";
-import TechFormDetailMaterialAndStructure from "../TechFormDetailMaterialAndStructure/TechFormDetailMaterialAndStructure";
+import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
 
-type TechnologyPocudureDetailProps = {
+type TechnologyProcedureUpdateProps = {
     isOpen: boolean,
     setClose?: () => void;
-
 };
 
 const data = [
@@ -37,18 +36,18 @@ const data2 = [
     { no: '6', materialName: 'Dải từ', supplier: '', thickNess: '', quantity: 'HI-co đen 12.7', note: '', structure: '' }
 ]
 
-export const TechnologyPocudureDetail: React.FC<TechnologyPocudureDetailProps> = observer(({
+export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps> = observer(({
     isOpen = false, setClose }) => {
 
-    const [isVisibleTechFormDetailMaterialAndStructure, setIsVisibleTechFormDetailMaterialAndStructure] = React.useState<boolean>(false);
+    const [isVisibleTechFormUpdateMaterialAndStructure, setIsVisibleTechFormUpdateMaterialAndStructure] = React.useState<boolean>(false);
 
 
     return (
         <>
-            {isVisibleTechFormDetailMaterialAndStructure ?
-                <TechFormDetailMaterialAndStructure
-                    isOpen={isVisibleTechFormDetailMaterialAndStructure}
-                    setClose={() => setIsVisibleTechFormDetailMaterialAndStructure(false)}
+            {isVisibleTechFormUpdateMaterialAndStructure ?
+                <TechFormUpdateMaterialAndStructure
+                    isOpen={isVisibleTechFormUpdateMaterialAndStructure}
+                    setClose={() => setIsVisibleTechFormUpdateMaterialAndStructure(false)}
                 /> :
                 <div>
                     <div className="table-responsive">
@@ -178,7 +177,7 @@ export const TechnologyPocudureDetail: React.FC<TechnologyPocudureDetailProps> =
                                 />
                                 <Button
                                     text="Tiếp theo"
-                                    onClick={() => { setIsVisibleTechFormDetailMaterialAndStructure(true) }}
+                                    onClick={() => { setIsVisibleTechFormUpdateMaterialAndStructure(true) }}
                                     style={{ marginRight: "20px", color: "#fff", backgroundColor: '#FF7A00' }}
                                 />
                                 <Button
@@ -202,4 +201,4 @@ export const TechnologyPocudureDetail: React.FC<TechnologyPocudureDetailProps> =
 
 })
 
-export default TechnologyPocudureDetail;
+export default TechnologyProcedureUpdate;
