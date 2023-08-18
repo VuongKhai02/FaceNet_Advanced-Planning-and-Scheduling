@@ -54,9 +54,8 @@ const App = observer(() => {
           onClick={() => setCollapsed(!collapsed)}
           style={{
             fontSize: '16px',
-            width: 64,
-            height: 64,
             color: '#fff',
+            marginLeft: 40
           }}
         />
       </AppHeader>

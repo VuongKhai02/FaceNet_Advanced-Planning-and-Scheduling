@@ -149,7 +149,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                         title="Số lượng"
                                         dataIndex="quantity"
                                         key="quantity"
-                                        onCell={(item: any, index) => {
+                                        onCell={(item: any, index: number) => {
                                             return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
                                         }}
                                         render={() =>

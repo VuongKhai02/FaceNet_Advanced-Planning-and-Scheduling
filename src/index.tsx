@@ -1,21 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app/app";
-import {ComponentPreviews} from "./dev/previews";
-import {useDevLogin} from "./dev/hooks";
-import {DevSupport} from "@haulmont/react-ide-toolbox";
+import { ComponentPreviews } from "./dev/previews";
+import { useDevLogin } from "./dev/hooks";
+import { DevSupport } from "@haulmont/react-ide-toolbox";
 
-import {initializeApolloClient, JmixAppProvider, Screens, ScreensContext} from "@haulmont/jmix-react-core";
-import {I18nProvider, Modals} from "@haulmont/jmix-react-ui";
-import {initializeApp} from "@haulmont/jmix-rest";
-import {GRAPHQL_URI, JMIX_REST_URL, REST_CLIENT_ID, REST_CLIENT_SECRET} from "./config";
+import { initializeApolloClient, JmixAppProvider, Screens, ScreensContext } from "@haulmont/jmix-react-core";
+import { I18nProvider, Modals } from "@haulmont/jmix-react-ui";
+import { initializeApp } from "@haulmont/jmix-rest";
+import { GRAPHQL_URI, JMIX_REST_URL, REST_CLIENT_ID, REST_CLIENT_SECRET } from "./config";
 import "mobx-react-lite/batchingForReactDom";
 import metadata from "./jmix/metadata.json";
 import "antd/dist/antd.min.css";
 import "@haulmont/jmix-react-ui/dist/index.min.css";
 import "./index.css";
-import {antdLocaleMapping, messagesMapping} from "./i18n/i18nMappings";
-import {ApolloProvider} from "@apollo/client";
+import { antdLocaleMapping, messagesMapping } from "./i18n/i18nMappings";
+import { ApolloProvider } from "@apollo/client";
 
 // Define types of plugins used by dayjs
 import "dayjs/plugin/customParseFormat";
@@ -24,7 +24,7 @@ import "dayjs/plugin/weekday";
 import "dayjs/plugin/localeData";
 import "dayjs/plugin/weekOfYear";
 import "dayjs/plugin/weekYear";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import UserService from "./Keycloak"
@@ -68,14 +68,14 @@ const reactRenderApp = () => ReactDOM.render(
         <DevSupport
           ComponentPreviews={
             <ScreensContext.Provider value={devScreens}>
-              <ComponentPreviews/>
+              <ComponentPreviews />
             </ScreensContext.Provider>
           }
           useInitialHook={useDevLogin}
         >
-          <App/>
+          <App />
         </DevSupport>
-        <ToastContainer/>
+        <ToastContainer />
       </I18nProvider>
     </ApolloProvider>
   </JmixAppProvider>,
