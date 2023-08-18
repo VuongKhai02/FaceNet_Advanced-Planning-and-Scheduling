@@ -294,9 +294,8 @@ export const DeclareProductionObject = () => {
                                 <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
                                     <p>Mã sản xuất</p>
 
-                                    <SelectBox placeholder="-- Chọn mã sản xuất --">
-                                        items={selectionModes}
-                                    </SelectBox>
+                                    <TextBox />
+
                                 </div>
 
                                 <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
@@ -323,7 +322,7 @@ export const DeclareProductionObject = () => {
 
                                     <p>Mã WO</p>
                                     {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
+                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
 
                                     <p>Mã máy</p>
                                     {/* <img src={myImg} alt="" /> */}
@@ -333,7 +332,7 @@ export const DeclareProductionObject = () => {
                                 <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
 
                                     <p>Mã công nhân</p>
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
+                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
 
                                     {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
                                     <p>Mã lô NVL/BTP</p>

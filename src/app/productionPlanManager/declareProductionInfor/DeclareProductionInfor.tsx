@@ -31,243 +31,8 @@ import { ImportTechForm } from "../../import/ImportTechForm";
 const ROUTING_PATH = "/declareProductionInfor";
 
 export const DeclareProductionInfor = () => {
-    const mainStore = useMainStore();
-    const [content, setContent] = useState<string>();
-
-
-    const loadOrders = () => {
-        const headers = {
-            'Authorization': 'Bearer ' + mainStore.authToken,
-            'content-type': 'application/json'
-        };
-        axios.get(PLANNING_API_URL + '/api/orders', { headers })
-            .then(response => {
-                if (response.status === 200) {
-                    // console.log(response.data)
-                    setContent(response.data.data)
-                }
-            }
-            );
-    }
-
-    useEffect(() => {
-        loadOrders()
-    }, [])
-
-    const handleAddFormTech = () => {
-    }
-
-
-    const showInfo = () => {
-    }
-
-
-    const onStatusPoRender = (rowInfo) => {
-        // console.log("Data color,", data?.value)
-        let customColor: {
-            color: string,
-            backgroundColor: string
-        } = {
-            color: "",
-            backgroundColor: ""
-        }
-        let status = "";
-        // let backgroundColor = "";
-        let padding = "";
-        let borderRadius = "";
-        let width = "";
-        let border = "";
-
-        // let value = rowInfo.data.data.processStatus;
-        const getColor = (value) => {
-            // let color = ""
-            switch (value) {
-                case "new":
-                    status = "Chờ sản xuất"
-                    break;
-                case "complete":
-                    status = "Hoàn thành"
-                    break;
-                case "not_complete":
-                    status = "Chưa hoàn thành"
-                    break
-                case "in_production":
-                    status = "Đang sản xuất"
-                    break;
-                case "early_complete":
-                    status = "Hoàn thành sớm"
-                    break;
-                case "delay":
-                    status = "Chậm tiến độ"
-                    break;
-                case "unknown":
-                    status = "Chưa xác định"
-                    break;
-                case "wait_production":
-                    status = "Chờ sản xuất"
-                    break;
-                case "stop":
-                    status = "Ngưng sản xuất"
-                    break;
-                default:
-                    status = "Chưa xác định"
-                    break;
-            }
-        }
-
-        getColor(rowInfo.data.data.processStatus);
-        customColor = customizeColor(status)
-        border = "1px solid " + customColor.color;
-        // const color = getColor(rowInfo.data.data.processStatus)
-        // return <Tag color={color}>{status}</Tag>
-        return <Tag style={{
-            "fontWeight": "bold",
-            "width": "100%",
-            "textAlign": "center",
-            "color": customColor.color,
-            "backgroundColor": customColor.backgroundColor,
-            // "padding": padding,
-            "borderRadius": "4px",
-            // "width": width,
-            "border": border
-        }}>{status}</Tag>
-    }
-
-
-    const saveOrder = (data) => {
-    }
-
-
-    const getProductOrderItemTemplate = row => {
-    };
-
-
-    const selectionModes = ['none', 'single', 'multiple', 'all'];
     return (
         <>
-            {/* <div>
-                <div className="table-responsive">
-                    <div className="informer" style={{
-                        background: "#fff",
-                        textAlign: "center",
-                        paddingTop: 12
-                    }}>
-                        <h5 className="name" style={{
-                            fontSize: 18,
-                            marginBottom: 0
-                        }}>Khai báo thông tin</h5>
-                    </div>
-                    <div className="informer" style={{
-                        backgroundColor: "#ffffff",
-                        paddingLeft: 13
-                    }}>
-                        <h5 className="name" style={{
-                            color: "rgba(0, 0, 0, 0.7)",
-                            marginBottom: 0,
-                            fontSize: 15,
-                            boxSizing: "border-box",
-                            fontWeight: 550
-                        }}>Tìm kiếm chung</h5>
-                    </div>
-                </div>
-            </div> */}
-
-
-            {/* <DataGrid
-                keyExpr={"saleOrderId"}
-                dataSource={content}
-                showBorders={true}
-                columnAutoWidth={true}
-                showRowLines={true}
-                rowAlternationEnabled={true}
-                allowColumnResizing={true}
-                allowColumnReordering={true}
-                focusedRowEnabled={true}
-            // onSelectionChanged={onSelectedRowKeysChange}
-            // onRowClick={onSelectedRowKeysChange}
-            // onRowUpdating={updateOrder}
-            // onRowRemoving={removeOrder}
-            >
-                <Toolbar>
-                    <ToolbarItem location="after">
-                        <Button text="Xuất Excel" hint="Xuất Excel" icon="download" />
-                    </ToolbarItem>
-                    <ToolbarItem location="after">
-                        <Button hint="Column to display" icon="columnchooser" />
-                    </ToolbarItem>
-                    
-                    <ToolbarItem name="searchPanel" location="before" />
-
-                </Toolbar>
-                <HeaderFilter visible={true} texts={{
-                    cancel: "Hủy bỏ",
-                    ok: "Đồng ý",
-                    emptyValue: "Rỗng"
-
-                }} />
-                <FilterRow visible={true} />
-                <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    displayMode={"full"}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    allowedPageSizes={[5, 10]}
-                    infoText="Trang số {0} trên {1} ({2} bản ghi)"
-                />
-                <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
-                <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
-                <Column caption={"Mã công nhân"} dataField={"customer"} />
-                <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
-                <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
-                <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type="buttons" width={110}>
-                    <Button hint="Clone" icon="copy" />
-                </Column>
-                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-                    texts={{
-                        cancelRowChanges: "Hủy bỏ",
-                        saveRowChanges: "Lưu lại",
-                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                        deleteRow: "Xóa",
-                        editRow: "Sửa",
-                        addRow: "Thêm"
-                    }}
-                >
-                    <Popup
-                        title="Thông tin chi tiết đơn hàng"
-                        showTitle={true}
-                        width={"80%"}
-                        height={"auto"}
-                    />
-                    <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-                        <Item
-                            itemType="group"
-                            colCount={2}
-                            colSpan={2}
-                            caption="Thông tin chi tiết đơn hàng"
-                        >
-                            <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-                            <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-                            <Item dataField="customer" caption="Tên khách hàng" />
-                            <Item dataField="cardName" caption="Tên thẻ" />
-                            <Item dataField="quantity" caption="Số lượng" />
-                            <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-                            <Item dataField="contractNumber" caption="Số HD/PO" />
-                            <Item dataField="startTime" caption="Ngày bắt đầu" />
-                            <Item dataField="finishTime" caption="Ngày kết thúc" />
-                            <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-                        </Item>
-                    </Form>
-                </Editing>
-
-
-            </DataGrid> */}
-
             <div>
                 <div className="table-responsive">
                     <div className="informer" style={{
@@ -279,85 +44,75 @@ export const DeclareProductionInfor = () => {
                             marginBottom: 0,
                             fontWeight: 700,
                             margin: "0 0 .6rem .5rem"
-                        }}>Khai báo thông tin</h2>
-                        <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem' }}>
-                            <div className="content" style={{ display: "flex", height: "250px", width: "100%", justifyContent: "space-between", margin: ".5rem" }}>
+                        }}>Khai báo WO</h2>
 
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Mã WO</p>
+                        <div style={{ width: "40%", margin: "auto" }}>
 
-                                    <SelectBox placeholder="-- Chọn WO --" >
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Mã sản xuất</p>
-
-                                    <SelectBox placeholder="-- Chọn mã sản xuất --">
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Tên công đoạn</p>
-
-                                    <SelectBox placeholder="-- Chọn công đoạn --">
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Tên Job</p>
-
-                                    <SelectBox placeholder="-- Chọn Job --">
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
+                            <div style={{ textAlign: "center", margin: "2rem" }}>
+                                <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
+                                <img src={myImg} width={100} height={100} alt="" />
 
                             </div>
 
-                            <div className="content" style={{ display: "flex", backgroundColor: "rgba(0, 0, 0, 0.1)", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
 
-                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
+                            <div className="dx-fieldset">
+                                <h4 style={{ margin: "1rem 0" }}>Thông tin WO</h4>
 
-                                    <p>Mã WO</p>
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-
-                                    <p>Mã máy</p>
-                                    {/* <img src={myImg} alt="" /> */}
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Mã WO</div>
+                                    <div className="dx-field-value">
+                                        <TextBox defaultValue="John Smith" />
+                                    </div>
                                 </div>
-                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-
-                                    <p>Mã công nhân</p>
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                    <p>Mã lô NVL/BTP</p>
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-
-
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Mã sản xuất</div>
+                                    <div className="dx-field-value">
+                                        <TextBox />
+                                    </div>
+                                </div>
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Tên thẻ</div>
+                                    <div className="dx-field-value">
+                                        <TextBox />
+                                    </div>
+                                </div>
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Trạng thái</div>
+                                    <div className="dx-field-value">
+                                        <TextBox />
+                                    </div>
+                                </div>
+                                <div className="dx-field">
+                                    <div className="dx-field-label">Số lượng</div>
+                                    <div className="dx-field-value">
+                                        <TextBox />
+                                    </div>
                                 </div>
 
+                                <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem" }}>
+
+
+                                    <Button
+                                        text="Tiếp theo"
+                                        width={80}
+                                        height={30}
+
+                                        render={(buttonData) =>
+                                            <i style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+
+                                        }
+                                    />
+                                    <Button
+                                        text="Quét lại"
+                                        height={30}
+                                        width={80}
+                                        render={(buttonData) =>
+                                            <i style={{ color: '#fff', background: '#ccc', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+
+                                        }
+                                    />
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
-                                <Button
-                                    text="Khai báo thông tin sản xuất"
-                                    height={35}
-                                    width={190}
-                                    render={(buttonData) =>
-                                        <i style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', padding: '.5rem 1rem' }}>{buttonData.text}</i>
-
-                                    }
-                                />
-
-                            </div>
-
 
 
                         </div>
@@ -370,22 +125,19 @@ export const DeclareProductionInfor = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </>
     )
 }
 
 
 registerScreen({
-    caption: "Khai báo người/máy/lô sản xuất",
+    caption: "Khai báo ",
     component: DeclareProductionInfor,
     menuOptions: {
         pathPattern: ROUTING_PATH,
         menuLink: ROUTING_PATH
     },
-    screenId: "/declareProductionObject"
+    screenId: "declareProductionInfor"
 });
 
 export default DeclareProductionInfor;
