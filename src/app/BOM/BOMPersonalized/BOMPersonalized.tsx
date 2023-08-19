@@ -73,8 +73,7 @@ export const BOMPersonalized = () => {
                                 fontWeight: 550
                             }}>Tìm kiếm chung</h5>
                         </div>
-                        <PopupImportFile visible={popupVisible} onClose={() => setPopupVisible(false)} />
-
+                        <PopupImportFile visible={popupVisible} onCancel={() => setPopupVisible(false)} title={'Import file'} onSubmit={() => { }} width={900} />
                         <DataGrid
                             key={'cardTypeCode'}
                             keyExpr={"cardTypeCode"}

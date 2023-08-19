@@ -26,17 +26,18 @@ import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
+import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 
 
 const ROUTING_PATH = "/mrporders";
 
 export const MrpSaleOrders = () => {
 
-  const [warnings, setWarnings] = useState<[]>();
-  const [content, setContent] = useState<string>();
-  const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
-  const [currentWarning, setCurrentWarning] = useState<IWarning>()
-  const [popupVisible, setPopupVisible] = useState(false);
+  const [content, setContent] = React.useState<string>();
+  const [popupIsOpen, setPopupIsOpen] = React.useState<boolean>(false)
+  const [currentWarning, setCurrentWarning] = React.useState<IWarning>()
+  const [popupVisible, setPopupVisible] = React.useState<boolean>(false);
+  const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
 
   const mainStore = useMainStore();
 
@@ -110,18 +111,8 @@ export const MrpSaleOrders = () => {
     </div>
   }
 
-  const hideInfo = () => {
-    setPopupVisible(false)
-  }
-
-  const showInfo = () => {
-    setPopupVisible(true)
-  }
-
-
   function renderWaringDetail(data: any) {
     return <div>
-      {/*data.data.id*/}
       <Button icon="search" onClick={setPopUpOpen} />
     </div>
   }
@@ -138,25 +129,17 @@ export const MrpSaleOrders = () => {
     axios.get(PLANNING_API_URL + '/api/orders', { headers })
       .then(response => {
         if (response.status === 200) {
-          // console.log(response.data)
           setContent(response.data.data)
         }
       }
       );
   }
 
-  const renderPopupImport = () => {
-    // console.log("WorkOrderLogPopup render popup")
-    // console.log(props.businessLogObject)
-    return <ImportOrder />
-  }
 
   const getProductOrderItemTemplate = row => {
     return (
       <OrderItemTemplate
         data={row.data}
-      // productsFullArrays={this.state.productsFullArrays}
-      // reasons={this.state.reasonList}
       />
     );
   };
@@ -180,13 +163,11 @@ export const MrpSaleOrders = () => {
   }, [])
 
   const saveOrder = (data) => {
-    // return <WarningDetail warningDetail={currentWarning} />
     console.log(data);
     console.log("click submit")
   }
 
   const updateOrder = (e) => {
-    // return <WarningDetail warningDetail={currentWarning} />
     const headers = {
       'Authorization': 'Bearer ' + mainStore.authToken,
       'content-type': 'application/json'
@@ -196,8 +177,6 @@ export const MrpSaleOrders = () => {
     axios.put(PLANNING_API_URL + '/api/orders/' + e.oldData.saleOrderId, data, { headers },)
       .then(response => {
         if (response.status === 200) {
-          // console.log(response.data)
-          // setContent(response.data.data)
           notify({
             message: 'Cập nhật thành công!',
             width: 450
@@ -212,7 +191,6 @@ export const MrpSaleOrders = () => {
       );
   }
   const removeOrder = (e) => {
-    // return <WarningDetail warningDetail={currentWarning} />
     const headers = {
       'Authorization': 'Bearer ' + mainStore.authToken,
       'content-type': 'application/json'
@@ -222,8 +200,6 @@ export const MrpSaleOrders = () => {
     axios.delete(PLANNING_API_URL + '/api/orders/' + e.data.saleOrderId, { headers },)
       .then(response => {
         if (response.status === 200) {
-          // console.log(response.data)
-          // setContent(response.data.data)
           notify({
             message: 'Xóa thành công đơn hàng!',
             width: 450
@@ -254,7 +230,6 @@ export const MrpSaleOrders = () => {
     let width = "";
     let border = "";
 
-    // let value = rowInfo.data.data.processStatus;
     const getColor = (value) => {
       // let color = ""
       switch (value) {
@@ -294,23 +269,18 @@ export const MrpSaleOrders = () => {
     getColor(rowInfo.data.data.processStatus);
     customColor = customizeColor(status)
     border = "1px solid " + customColor.color;
-    // const color = getColor(rowInfo.data.data.processStatus)
-    // return <Tag color={color}>{status}</Tag>
     return <Tag style={{
       "fontWeight": "bold",
       "width": "100%",
       "textAlign": "center",
       "color": customColor.color,
       "backgroundColor": customColor.backgroundColor,
-      // "padding": padding,
       "borderRadius": "4px",
-      // "width": width,
       "border": border
     }}>{status}</Tag>
   }
 
   const onPriorityRender = (rowInfo) => {
-    // console.log("Data color,", data?.value)
     let customColor: {
       color: string,
       backgroundColor: string
@@ -319,29 +289,22 @@ export const MrpSaleOrders = () => {
       backgroundColor: ""
     }
     let status = "";
-    // let backgroundColor = "";
     let padding = "";
     let borderRadius = "";
     let width = "";
     let border = "";
-
-    // let value = rowInfo.data.data.processStatus;
     status = "1"
 
     getColor(status);
     customColor = customizeColor(status)
     border = "1px solid " + customColor.color;
-    // const color = getColor(rowInfo.data.data.processStatus)
-    // return <Tag color={color}>{status}</Tag>
     return <Tag style={{
       "fontWeight": "bold",
       "width": "50%",
       "textAlign": "center",
       "color": customColor.color,
       "backgroundColor": customColor.backgroundColor,
-      // "padding": padding,
       "borderRadius": "4px",
-      // "width": width,
       "border": border
     }}>{status}</Tag>
   }
@@ -372,33 +335,6 @@ export const MrpSaleOrders = () => {
         }}>Tìm kiếm chung</h5>
       </div>
 
-      {/*<Popup visible={popupIsOpen}*/}
-      {/*       onHiding={setPopUpClose}*/}
-      {/*       title={currentWarning?.topicDescription}*/}
-      {/*       showTitle={true}*/}
-      {/*       fullScreen={false}*/}
-      {/*       // contentRender={contenRender}*/}
-      {/*       dragEnabled={false}*/}
-      {/*       closeOnOutsideClick={true}*/}
-      {/*>*/}
-      {/*</Popup>*/}
-      <Popup
-        visible={popupVisible}
-        onHiding={hideInfo}
-        dragEnabled={false}
-        closeOnOutsideClick={true}
-        showCloseButton={true}
-        showTitle={true}
-        title="Import đơn hàng"
-        // container=".dx-viewport"
-        width={"80%"}
-        height={"auto"}
-      // contentRender={renderPopupImport}
-      >
-        <ImportOrder />
-      </Popup>
-
-
       <DataGrid
         key={"saleOrderId"}
         keyExpr={"saleOrderId"}
@@ -415,21 +351,18 @@ export const MrpSaleOrders = () => {
         onRowUpdating={updateOrder}
         onRowRemoving={removeOrder}
       >
+        <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
         <Toolbar>
           <ToolbarItem location="after">
             <Button hint="Thêm mới" icon="add" />
           </ToolbarItem>
           <ToolbarItem location="after">
-            <Button hint="Upload file" icon="upload" onClick={showInfo} />
+            <Button hint="Upload file" icon="upload" onClick={() => setIsVisibleImportFile(true)} />
           </ToolbarItem>
           <ToolbarItem location="after">
             <Button hint="Refresh" icon="refresh" />
           </ToolbarItem>
-          {/*<ToolbarItem name="addRowButton"/>*/}
-          {/*<ToolbarItem name="revertButton"/>*/}
-          {/*<ToolbarItem name="saveButton"/>*/}
           <ToolbarItem name="searchPanel" location="before" />
-          {/*<ToolbarItem name="columnChooserButton"></ToolbarItem>*/}
 
         </Toolbar>
         <HeaderFilter visible={true} texts={{

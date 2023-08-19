@@ -212,7 +212,7 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     style={{
                                         marginTop: 10,
                                         float: "right",
-                                        background: "#ffffff",
+                                        // background: "#ffffff",
                                         padding: "8px",
                                         borderRadius: "4px",
                                     }}

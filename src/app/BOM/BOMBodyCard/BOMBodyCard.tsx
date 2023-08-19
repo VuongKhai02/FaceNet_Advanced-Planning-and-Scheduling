@@ -16,6 +16,7 @@ import "./BOMBodyCard.css";
 import PopupConfirmDelete from "../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
+import PopupImportFile from "../../shared/components/PopupImportFile/PopupImportFile";
 
 
 const data = [
@@ -35,6 +36,7 @@ export const BOMBodyCard = () => {
     const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
+    const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
 
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
@@ -94,6 +96,7 @@ export const BOMBodyCard = () => {
                                     focusedRowEnabled={true}
 
                                 >
+                                    <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
                                     <PopupConfirmDelete
                                         isVisible={isConfirmDelete}
                                         onCancel={handleHideModalDel}
@@ -113,13 +116,12 @@ export const BOMBodyCard = () => {
                                     <Toolbar>
                                         <ToolbarItem >
                                             <Button
-                                                // style={{ border: 'none' }}
+                                                onClick={() => setIsVisibleImportFile(true)}
                                                 icon="upload"
                                                 text="Import file" />
                                         </ToolbarItem>
                                         <ToolbarItem >
                                             <Button
-                                                // style={{ border: 'none' }}
                                                 icon="download"
                                                 text="Xuất Excel" />
                                         </ToolbarItem>

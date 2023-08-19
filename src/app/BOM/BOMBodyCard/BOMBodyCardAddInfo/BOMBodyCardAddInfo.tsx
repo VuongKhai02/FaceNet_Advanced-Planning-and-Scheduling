@@ -238,7 +238,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 display: "flex",
                                 justifyContent: "right",
                                 alignItems: "center",
-                                background: "#ffffff",
+                                // background: "#ffffff",
                                 padding: "8px",
                                 borderRadius: "4px",
                             }}

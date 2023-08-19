@@ -253,7 +253,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                         style={{
                             marginTop: 10,
                             float: "right",
-                            background: "#ffffff",
+                            // background: "#ffffff",
                             padding: "8px",
                             borderRadius: "4px",
                         }}

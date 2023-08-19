@@ -59,7 +59,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                             display: "flex",
                             justifyContent: "right",
                             alignItems: "center",
-                            background: "#ffffff",
+                            // background: "#ffffff",
                             padding: "8px",
                             borderRadius: "4px",
                         }}
