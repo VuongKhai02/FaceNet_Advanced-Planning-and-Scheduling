@@ -1,9 +1,7 @@
 import { ComponentPreview, Previews } from "@haulmont/react-ide-toolbox";
-import { MrpSaleOrders } from "../app/mrporder/MrpSaleOrders";
-import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
 
 //import planning\
-import { MrpSaleOrders } from "../app/components/InformationManage/mrporder/MrpSaleOrders"
+import { MrpSaleOrders } from "../app/components/InformationManage/mrporder/MrpSaleOrders";
 import TechFormList from "../app/components/TechFormManager/TechFormList/TechFormList";
 import TechFormApprove from "../app/components/TechFormManager/TechFormApprove/TechFormApprove";
 import ProductionPlanList from "../app/components/ProductionPlanManagement/ProductionPlanList/ProductionPlanList";

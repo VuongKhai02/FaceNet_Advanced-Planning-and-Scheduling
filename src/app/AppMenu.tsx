@@ -9,7 +9,7 @@ import {
   SignalFilled,
   UploadOutlined,
   UserOutlined,
-  WarningOutlined
+  WarningOutlined,
     ApartmentOutlined,
     BarsOutlined,
     CalendarFilled,

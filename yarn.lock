@@ -3047,9 +3047,9 @@
   "version" "6.2.1"
 
 "antd@^4.13.0":
-  "integrity" "sha512-bPy/MSLzJGcHQH549B3WpTRitt1O3b35cD6UhAR+4AhKZjFmOqNc+gSUY5j+IsaKfdv+FeOGmUOqAr2jrc3Oyg=="
-  "resolved" "https://registry.npmjs.org/antd/-/antd-4.19.1.tgz"
-  "version" "4.19.1"
+  "integrity" "sha512-N2odRsbomseCE3U845Whf+RdgmQbiWbKvWS6ggH/xHjXojHx951rmZXW4nMqAeSoUp66sQOASGtrP/SUsdA2oQ=="
+  "resolved" "https://registry.npmjs.org/antd/-/antd-4.24.13.tgz"
+  "version" "4.24.13"
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"
