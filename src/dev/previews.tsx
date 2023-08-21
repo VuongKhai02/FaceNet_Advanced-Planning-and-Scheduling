@@ -11,9 +11,7 @@ import CardManagement from "../app/components/InformationManage/CardManagement/C
 import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput/ManageJobOutput";
 import ProgressMonitoringWO from "../app/components/ProgressMonitoring/ProgressMonitoringWO/ProgressMonitoringWO";
 import ProgressMonitoringManufacture from "../app/components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture";
-import { MrpSaleOrders } from "../app/mrporder/MrpSaleOrders"
-import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
-import DeclareProductionObject from "../app/productionPlanManager/declareObject/DeclareProductionObject";
+import DeclareProductionObject from "../app/components/ProductionPlanManagement/declareObject/DeclareProductionObject";
 import DeclareProductionInfor from "../app/productionPlanManager/declareProductionInfor/DeclareProductionInfor";
 
 
@@ -50,6 +48,12 @@ export const ComponentPreviews = () => {
       <ComponentPreview path="/dnlNvlList">
         <DnlNvlList />
       </ComponentPreview>
+      <ComponentPreview path="/declareProductionObject">
+        <DeclareProductionObject />
+      </ComponentPreview>
+      <ComponentPreview path="/declareProductionInfor">
+        <DeclareProductionInfor />
+      </ComponentPreview>
 
       {/* BOM */}
       <ComponentPreview path="/bomBodyCard">
@@ -65,12 +69,6 @@ export const ComponentPreviews = () => {
       </ComponentPreview>
       <ComponentPreview path="/progressMonitoringManufacture">
         <ProgressMonitoringManufacture />
-      </ComponentPreview>
-      <ComponentPreview path="/declareProductionObject">
-        <DeclareProductionObject />
-      </ComponentPreview>
-      <ComponentPreview path="/declareProductionInfor">
-        <DeclareProductionInfor />
       </ComponentPreview>
 
     </Previews>

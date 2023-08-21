@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import myImg from "../images/qrCode.jpg";
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import {
     Column,
@@ -9,23 +8,20 @@ import {
     Pager,
     Paging,
     SearchPanel,
-    Toolbar,
-    MasterDetail, Editing, Form
+    Toolbar, ColumnChooser, Button as ButtonIcon
 } from "devextreme-react/data-grid";
 import axios from "axios";
-import { Link, useMainStore } from "@haulmont/jmix-react-core";
-import { MenuItem, registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../../config";
-import { ImportOrder } from "../../import/ImportOrder";
-import { customizeColor, getColor } from "../../../utils/utils";
-// import TechFormListDetail from "./TechFormListDetail";
-import { Tooltip } from "devextreme-react/tooltip";
-import { Tag } from "antd";
-import { Item } from "devextreme-react/form";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import { registerScreen } from "@haulmont/jmix-react-ui";
+import { IWarning } from "../../../shared/model/Warning.model";
+import { PLANNING_API_URL } from "../../../../config";
+import { customizeColor } from "../../../../utils/utils";
+import { Modal, Tag } from "antd";
 import notify from "devextreme/ui/notify";
-// import TechProcedure from "./TechFormNewAdd/TechProcedure/TechProcedure";
-import { ImportTechForm } from "../../import/ImportTechForm";
+import InfoRow from "../../../shared/components/InfoRow/InfoRow";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import myImg from "../declareObject/images/qrCode.jpg"
+
 
 
 const ROUTING_PATH = "/declareProductionObject";
@@ -36,6 +32,8 @@ export const DeclareProductionObject = () => {
     const mainStore = useMainStore();
     const [content, setContent] = useState<string>();
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+    const [isVisibleAdd, setIsVisibleAdd] = React.useState<boolean>(false);
+
 
 
 
@@ -198,13 +196,11 @@ export const DeclareProductionObject = () => {
             >
                 <Toolbar>
                     <ToolbarItem location="after">
-                        <Button style={{ color: "rgba(255, 122, 0, 1)" }} text="Xuất Excel" hint="Xuất Excel" icon="download" />
+                        <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     </ToolbarItem>
-                    <ToolbarItem location="after">
-                        <Button hint="Column to display" icon="columnchooser" />
-                    </ToolbarItem>
-
+                    <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                     <ToolbarItem name="searchPanel" location="before" />
+
 
                 </Toolbar>
                 <HeaderFilter visible={true} texts={{
@@ -214,7 +210,8 @@ export const DeclareProductionObject = () => {
 
                 }} />
                 <FilterRow visible={true} />
-                <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
+                <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
+                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
                 <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
@@ -233,10 +230,15 @@ export const DeclareProductionObject = () => {
                 <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type="buttons" width={110} caption="Thao tác">
-                    <Button hint="Clone" icon="copy" />
+                <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
+                    <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                        <SvgIcon tooltipTitle="Xem chi tiết" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                        <SvgIcon tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+
+                    </div>
+                }>
                 </Column>
-                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
+                {/* <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
                     texts={{
                         cancelRowChanges: "Hủy bỏ",
                         saveRowChanges: "Lưu lại",
@@ -253,26 +255,8 @@ export const DeclareProductionObject = () => {
                         width={"80%"}
                         height={"auto"}
                     />
-                    <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-                        <Item
-                            itemType="group"
-                            colCount={2}
-                            colSpan={2}
-                            caption="Thông tin chi tiết đơn hàng"
-                        >
-                            <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-                            <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-                            <Item dataField="customer" caption="Tên khách hàng" />
-                            <Item dataField="cardName" caption="Tên thẻ" />
-                            <Item dataField="quantity" caption="Số lượng" />
-                            <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-                            <Item dataField="contractNumber" caption="Số HD/PO" />
-                            <Item dataField="startTime" caption="Ngày bắt đầu" />
-                            <Item dataField="finishTime" caption="Ngày kết thúc" />
-                            <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-                        </Item>
-                    </Form>
-                </Editing>
+                  
+                </Editing> */}
 
 
             </DataGrid>

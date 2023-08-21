@@ -103,13 +103,11 @@ export const AppMenu = (props: AppMenuProps) => {
 
         <MenuItem
           screenId="declareProductionObject"
-          icon={<HomeFilled />}
           caption={"Khai báo người/máy/lô sản xuất"}
           key={"dd"}
         />
         <MenuItem
           screenId="declareProductionInfor"
-          icon={<HomeFilled />}
           caption={"Khai báo "}
           key={"declareProductionInfor"}
         />

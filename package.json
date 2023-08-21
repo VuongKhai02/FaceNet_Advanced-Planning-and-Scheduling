@@ -22,7 +22,6 @@
     "file-saver": "^2.0.5",
     "file-saver-es": "^2.0.5",
     "graphql": "^15.4.0",
-    "http-proxy-middleware": "^2.0.6",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "jwt-decode": "^3.1.2",
@@ -71,6 +70,7 @@
     "@types/react-router-dom": "^5.1.5",
     "devextreme-aspnet-data-nojquery": "^2.8.6",
     "env-cmd": "^10.1.0",
+    "http-proxy-middleware": "^2.0.6",
     "react-error-overlay": "^6.0.9",
     "typescript": "^4.3.3"
   },
@@ -88,6 +88,7 @@
   "jmix": {
     "generator": "react-typescript"
   },
+  "proxy": "http://localhost:6886/",
   "browserslist": [
     ">0.2%",
     "not dead",
