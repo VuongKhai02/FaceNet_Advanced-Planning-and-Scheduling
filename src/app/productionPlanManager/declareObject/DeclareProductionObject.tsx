@@ -33,6 +33,8 @@ const ROUTING_PATH = "/declareProductionObject";
 export const DeclareProductionObject = () => {
     const mainStore = useMainStore();
     const [content, setContent] = useState<string>();
+    const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+
 
 
     const loadOrders = () => {
@@ -51,7 +53,11 @@ export const DeclareProductionObject = () => {
     }
 
     useEffect(() => {
-        loadOrders()
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        loadOrders();
+        window.addEventListener('resize', updateDimension);
     }, [])
 
     const handleAddFormTech = () => {
@@ -145,7 +151,7 @@ export const DeclareProductionObject = () => {
     const selectionModes = ['none', 'single', 'multiple', 'all'];
     return (
         <>
-            {/* <div>
+            <div>
                 <div className="table-responsive">
                     <div className="informer" style={{
                         background: "#fff",
@@ -170,10 +176,10 @@ export const DeclareProductionObject = () => {
                         }}>Tìm kiếm chung</h5>
                     </div>
                 </div>
-            </div> */}
+            </div>
 
 
-            {/* <DataGrid
+            <DataGrid
                 keyExpr={"saleOrderId"}
                 dataSource={content}
                 showBorders={true}
@@ -190,12 +196,12 @@ export const DeclareProductionObject = () => {
             >
                 <Toolbar>
                     <ToolbarItem location="after">
-                        <Button text="Xuất Excel" hint="Xuất Excel" icon="download" />
+                        <Button style={{ color: "rgba(255, 122, 0, 1)" }} text="Xuất Excel" hint="Xuất Excel" icon="download" />
                     </ToolbarItem>
                     <ToolbarItem location="after">
                         <Button hint="Column to display" icon="columnchooser" />
                     </ToolbarItem>
-                    
+
                     <ToolbarItem name="searchPanel" location="before" />
 
                 </Toolbar>
@@ -266,7 +272,7 @@ export const DeclareProductionObject = () => {
                 </Editing>
 
 
-            </DataGrid> */}
+            </DataGrid>
 
             <div>
                 <div className="table-responsive">
@@ -281,34 +287,25 @@ export const DeclareProductionObject = () => {
                             margin: "0 0 .6rem .5rem"
                         }}>Khai báo thông tin</h2>
                         <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem' }}>
-                            <div className="content" style={{ display: "flex", height: "250px", width: "100%", justifyContent: "space-between", margin: ".5rem" }}>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Mã WO</p>
-
+                            <div className="content" style={{ display: "flex", height: "45vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
+                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
+                                    <p>Mã sản xuất</p>
                                     <SelectBox placeholder="-- Chọn WO --" >
                                         items={selectionModes}
                                     </SelectBox>
                                 </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
-                                    <p>Mã sản xuất</p>
-
-                                    <TextBox />
-
+                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                    <p>Mã SO</p>
+                                    <TextBox style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
                                 </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
+                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
                                     <p>Tên công đoạn</p>
-
                                     <SelectBox placeholder="-- Chọn công đoạn --">
                                         items={selectionModes}
                                     </SelectBox>
                                 </div>
-
-                                <div className="col-4" style={{ width: "24%", marginRight: "3rem" }}>
+                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
                                     <p>Tên Job</p>
-
                                     <SelectBox placeholder="-- Chọn Job --">
                                         items={selectionModes}
                                     </SelectBox>
@@ -316,43 +313,37 @@ export const DeclareProductionObject = () => {
 
                             </div>
 
-                            <div className="content" style={{ display: "flex", backgroundColor: "rgba(0, 0, 0, 0.1)", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
-
+                            <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", backgroundColor: "rgba(0, 0, 0, 0.1)", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
                                 <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-
-                                    <p>Mã WO</p>
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
+                                    <p>Mã sản xuất</p>
+                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
 
                                     <p>Mã máy</p>
-                                    {/* <img src={myImg} alt="" /> */}
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
+                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
                                 </div>
                                 <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-
                                     <p>Mã công nhân</p>
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
+                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
 
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
                                     <p>Mã lô NVL/BTP</p>
-                                    <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " />
-
-                                    {/* <TextBox placeholder="Quét mã trên ứng dụng mobile  " /> */}
-
-
+                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
                                 </div>
 
                             </div>
                             <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
                                 <Button
-                                    text="Khai báo thông tin sản xuất"
+                                    style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
+                                    text={windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}
                                     height={35}
-                                    width={190}
-                                    render={(buttonData) =>
-                                        <i style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', padding: '.5rem 1rem' }}>{buttonData.text}</i>
+                                    width={250}
 
-                                    }
+                                // render={(buttonData) =>
+                                //     <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}</p>
+                                // }
                                 />
 
 

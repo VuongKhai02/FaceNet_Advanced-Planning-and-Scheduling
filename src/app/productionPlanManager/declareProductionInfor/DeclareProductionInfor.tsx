@@ -32,33 +32,25 @@ import { useRef } from 'react';
 
 const ROUTING_PATH = "/declareProductionInfor";
 
-
 export const DeclareProductionInfor = () => {
-
-
     const [popupVisible, setPopupVisible] = useState(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
-    // const windowWidth2 = useRef(window.innerWidth);
+
     const togglePopup = () => {
         setPopupVisible(!popupVisible)
     }
+
     const isAccpetPopup = () => {
         alert("Xác nhận");
-        console.log("with", windowWidth);
-        if (windowWidth < 890) {
-            console.log("with nhỏ hơn ")
-        }
     }
 
     console.log("with", windowWidth);
-
 
     useEffect(() => {
         const updateDimension = () => {
             setwindowWidth(window.innerWidth)
         }
         window.addEventListener('resize', updateDimension);
-
     }, [])
 
     const renderContent = () => {
@@ -79,7 +71,7 @@ export const DeclareProductionInfor = () => {
                             width={80}
                             height={30}
                             render={(buttonData) =>
-                                <i style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                             }
                         />
                         <Button
@@ -88,7 +80,7 @@ export const DeclareProductionInfor = () => {
                             height={30}
                             width={80}
                             render={(buttonData) =>
-                                <i style={{ color: '#fff', background: '#ccc', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+                                <p style={{ color: '#fff', background: '#ccc', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                             }
                         />
                     </div>
@@ -122,7 +114,6 @@ export const DeclareProductionInfor = () => {
                             width={windowWidth < 600 ? '80vw' : '28vw'}
                         />
                         <div style={{ width: windowWidth < 600 ? '100%' : '40%', margin: "auto" }}>
-
                             <div style={{ textAlign: "center", margin: "2rem" }}>
                                 <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
                                 <img src={myImg} width={100} height={100} alt="" />
@@ -132,7 +123,7 @@ export const DeclareProductionInfor = () => {
                                 <div className="dx-field">
                                     <div className="dx-field-label">Mã WO</div>
                                     <div className="dx-field-value">
-                                        <TextBox />
+                                        <TextBox  > </TextBox>
                                     </div>
                                 </div>
                                 <div className="dx-field">
@@ -166,7 +157,7 @@ export const DeclareProductionInfor = () => {
                                         height={30}
                                         onClick={togglePopup}
                                         render={(buttonData) =>
-                                            <i style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+                                            <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                         }
                                     />
                                     <Button
@@ -174,7 +165,7 @@ export const DeclareProductionInfor = () => {
                                         height={30}
                                         width={80}
                                         render={(buttonData) =>
-                                            <i style={{ color: '#fff', background: '#ccc', padding: '.5rem 2rem' }}>{buttonData.text}</i>
+                                            <p style={{ color: '#fff', background: '#ccc', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                         }
                                     />
                                 </div>
