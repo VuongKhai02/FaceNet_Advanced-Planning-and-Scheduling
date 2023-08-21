@@ -8,6 +8,7 @@ interface PopupConfirmDeleteProps {
     modalTitle: React.ReactNode;
     modalContent: React.ReactNode;
     width: number;
+    customFooter?: React.ReactNode[] | null;
 }
 
 const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
@@ -17,6 +18,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
     modalTitle,
     modalContent,
     width,
+    customFooter
 }) => {
     return (
         <Modal
@@ -24,7 +26,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
             closeIcon={true}
             visible={isVisible}
             title={modalTitle}
-            footer={[
+            footer={customFooter !== undefined ? customFooter : [
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20 }}>
                     <Button
                         key="cancel"
@@ -39,7 +41,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                         }}
                         onClick={onCancel}
                     >
-                        Hủy bỏ
+                        Hủy
                     </Button>,
                     <Button
                         style={{
