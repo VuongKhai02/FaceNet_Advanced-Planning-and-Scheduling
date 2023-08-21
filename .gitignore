@@ -24,7 +24,6 @@ yarn-error.log*
 .idea
 .vscode
 .gradle
-.husky
 .jmix
 
 ### IntelliJ IDEA ###
