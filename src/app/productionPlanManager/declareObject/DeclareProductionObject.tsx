@@ -222,15 +222,16 @@ export const DeclareProductionObject = () => {
                     allowedPageSizes={[5, 10]}
                     infoText="Trang số {0} trên {1} ({2} bản ghi)"
                 />
+
                 <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
                 <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
-                <Column caption={"Mã công nhân"} dataField={"customer"} />
-                <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
-                <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
-                <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
+                <Column caption={"Mã công nhân"} />
+                <Column caption={"Số lô NVL/BTP đầu vào"} alignment="left" />
+                <Column caption={"Số lô NVL/BTP đầu ra"} alignment="left" />
+                <Column caption={"Thời gian bắt đầu"} dataType="datetime" format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type="buttons" width={110}>
+                <Column type="buttons" width={110} caption="Thao tác">
                     <Button hint="Clone" icon="copy" />
                 </Column>
                 <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
