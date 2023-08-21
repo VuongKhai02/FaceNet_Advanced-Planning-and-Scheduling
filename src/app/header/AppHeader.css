@@ -1,45 +1,64 @@
 .app-header {
-  display: flex;
-  align-items: center;
-  color: #CCCCCC;
-  padding-top: 8px;
+    display: flex;
+    align-items: center;
+    color: #cccccc;
+    padding-top: 8px;
 }
 
 .app-header__icon {
-  width: 64px;
-  height: 64px;
-  line-height: 0px;
+    width: 64px;
+    height: 64px;
+    line-height: 0px;
 }
 
 .app-header__content {
-  margin-left: 12px;
-  flex-grow: 1;
-  overflow: hidden;
+    margin-left: 12px;
+    /* flex-grow: 1; */
+    overflow: hidden;
 }
 
 .app-header__user-panel {
-  margin-left: 12px;
+    margin-left: 12px;
 }
 
 .app-header__user-panel__logout-btn {
-  color: #CCCCCC !important;
+    color: #cccccc !important;
 }
 
 .app-header__user-panel__logout-btn:hover {
-  color: #FFF !important;
+    color: #fff !important;
 }
 
-.ant-layout-header-sticky .app-header__user-panel__logout-btn{
-  color: #f05b41 !important;
-  font-weight:"bold"
-
+.ant-layout-header-sticky .app-header__user-panel__logout-btn {
+    color: #f05b41 !important;
+    font-weight: "bold";
 }
 
 .ant-layout-header-sticky .app-header__user-panel__logout-btn:hover {
-  color: #f04147 !important;
-
+    color: #f04147 !important;
 }
 
 .ant-layout-header-sticky .app-header {
-  padding-top: 5px;
+    padding-top: 5px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    position: relative;
+    color: #cccccc !important;
+    /* background-color: #343547 !important; */
+    border: none !important;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.ant-select-arrow {
+    color: #fff !important;
+}
+.fullscreen-container {
+    height: 100vh;
+    width: 100%;
+}
+.fullscreen-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #cccccc;
 }

@@ -1,0 +1,122 @@
+.dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+    padding: 14px;
+}
+
+.showtime-preview > div:first-child {
+    font-size: 12px;
+    white-space: normal;
+    margin-bottom: 10px;
+}
+
+.showtime-preview > div:not(:first-child) {
+    font-size: 12px;
+    white-space: normal;
+}
+
+.movie-tooltip .movie-info {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+    text-align: left;
+    word-wrap: break-word;
+    width: 100%;
+    display: flex;
+}
+
+.movie-tooltip img {
+    height: 80px;
+    margin-bottom: 5px;
+}
+
+.movie-tooltip .movie-title {
+    font-size: 1.3em;
+    line-height: 40px;
+    font-weight: bold;
+
+    width: 100%;
+}
+
+.long-title h3 {
+    font-family: "Segoe UI Light", "Helvetica Neue Light", "Segoe UI", "Helvetica Neue", "Trebuchet MS", Verdana;
+    font-weight: 200;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wo-template-content {
+    color: #dfe6e9;
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.fill-window {
+    height: 100vh;
+    min-height: 100vh;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.dx-scheduler-group-flex-container .dx-scheduler-group-row .dx-scheduler-group-header {
+    width: 200px !important;
+    height: 100px !important;
+    min-height: 100px !important;
+}
+
+.dx-scheduler-timeline .dx-scheduler-date-table .dx-scheduler-date-table-cell {
+    min-height: 120px !important;
+}
+
+/*.dx-scheduler-timeline .dx-scheduler-group-header{*/
+/*  min-height: 100px!important;*/
+/*}*/
+
+.dx-popup-wrapper.dx-scheduler-appointment-tooltip-wrapper .dx-popup-content .dx-list-item,
+.dx-scheduler-overlay-panel .dx-popup-content .dx-list-item {
+    width: 400px !important;
+    max-width: 800px !important;
+    height: fit-content !important;
+}
+
+.dot {
+    margin-top: 10px;
+    /*margin-left: 5px;*/
+    margin-right: 7px;
+    background: #337ab7;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    max-width: 20px;
+}
+
+.collap_button {
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+    margin-bottom: 10px;
+    color: #8bc34a;
+}
+
+.collap_button_active {
+    transform: rotate(90deg);
+}
+
+.collapsible {
+    transition: 0.6s !important;
+}
+
+.hidden {
+    height: 40px;
+}
+
+.options {
+    padding: 10px;
+    background-color: #ffffff;
+    transition: height 0.6s;
+}
+.dx-scheduler-header {
+    height: 56px;
+    background-color: #ffffff;
+}

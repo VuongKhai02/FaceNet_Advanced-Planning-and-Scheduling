@@ -9,6 +9,13 @@
 .layout-sider {
     background: #ffffff;
 }
+.ant-modal-header {
+    padding: 16px 24px !important;
+    color: rgba(0, 0, 0, 0.85) !important;
+    background: #fff3e8 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    border-radius: 2px 2px 0 0 !important;
+}
 
 .layout-content {
     padding: 0px 24px 24px;
@@ -132,7 +139,7 @@ h3 {
 }
 
 .ant-layout-header {
-    background: #343547 !important;
+    background: #2a3884 !important;
     height: 60px !important;
     line-height: 0px !important;
     transition: 0.6s;
@@ -144,7 +151,7 @@ h3 {
 }
 
 .ant-layout-footer {
-    padding: 0px 50px !important;
+    padding: 0px 280px !important;
 }
 
 .ant-layout-header-sticky {
@@ -297,6 +304,13 @@ h3 {
     white-space: nowrap;
     margin: 0 -5px;
     padding: 0 5px;
+}
+
+.ant-tabs-tabpane {
+    flex: none;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
 }
 
 @media screen and (max-width: 600px) {

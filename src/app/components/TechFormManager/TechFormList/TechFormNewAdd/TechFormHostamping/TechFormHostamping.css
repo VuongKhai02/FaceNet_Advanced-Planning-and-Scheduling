@@ -1,0 +1,57 @@
+.buttons {
+    background-color: #ff7a00 !important;
+    color: #fff !important ;
+    width: 100px;
+    margin-right: 8px;
+}
+.note {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row !important;
+}
+.rectangle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #d5cfcf;
+    margin-top: 30px;
+}
+
+.text-section {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+}
+
+.text {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.date {
+    margin-top: 70px;
+    font-size: 14px;
+    color: rgb(57, 56, 56);
+    font-style: italic;
+}
+.alternate-row-colors thead tr:nth-child(odd) th {
+    background-color: #fff2e6 !important;
+}
+
+.alternate-row-colors thead tr:nth-child(even) th {
+    background-color: white !important;
+}
+
+.ant-table-tbody .ant-table-row:nth-child(even) {
+    background-color: #fff2e6;
+}
+
+.ant-table-tbody .ant-table-row:nth-child(odd) {
+    background-color: #ffff;
+}
+.ant-table-thead .ant-table-cell {
+    background-color: #fff2e6;
+}

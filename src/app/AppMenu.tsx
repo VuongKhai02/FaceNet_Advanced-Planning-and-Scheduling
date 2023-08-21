@@ -3,9 +3,11 @@ import React from "react";
 import { MenuItem, SubMenuItem, VerticalMenu } from "@haulmont/jmix-react-ui";
 import {
     ApartmentOutlined,
+    AppstoreOutlined,
     BarsOutlined,
     CalendarFilled,
     CalendarOutlined,
+    DashboardOutlined,
     FileExcelOutlined,
     FormOutlined,
     HomeFilled,
@@ -15,6 +17,7 @@ import {
     SignalFilled,
     UploadOutlined,
     UserOutlined,
+    WarningOutlined,
 } from "@ant-design/icons";
 import UserService from "../Keycloak";
 
@@ -119,7 +122,31 @@ export const AppMenu = (props: AppMenuProps) => {
             </SubMenuItem>
             <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<ShoppingFilled />}>
                 <MenuItem screenId='techFormList' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"techFormList"} />
+                <MenuItem
+                    screenId='manageProductionRequirements'
+                    caption={"Quản lý yêu cầu sản xuất"}
+                    key={"manageProductionRequirements"}
+                />
+                <MenuItem screenId='cardManagement' caption={"Quản lý hộp chứa thẻ"} key={"cardManagement"} />
+                <MenuItem screenId='manageJobOutput' caption={"Quản lý Job output"} key={"manageJobOutput"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý BOM"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='bomBodyCard' caption={"Quản lý BOM body card"} key={"bomBodyCard"} />
 
+                <MenuItem screenId='bomPersonalized' caption={"Quản lý BOM cá thể hóa"} key={"bomPersonalized"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
+                <MenuItem
+                    screenId='techFormList'
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"techFormList"}
+                />
+
+                <MenuItem screenId='techFormApprove' caption={"Phê duyệt phiếu công nghệ"} key={"techFormApprove"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='productionPlanList' caption={"Danh sách kế hoạch sản xuất"} key={"productionPlanList"} />
                 <MenuItem
                     screenId='techFormApprove'
                     icon={<ShoppingOutlined />}
@@ -130,32 +157,70 @@ export const AppMenu = (props: AppMenuProps) => {
             <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<ShoppingFilled />}>
                 <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách kế hoạch sản xuất"} key={"c"} />
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Danh sách đề nghị lĩnh NVL"} key={"d"} />
+                <MenuItem screenId='dnlNvlList' caption={"Danh sách đề nghị lĩnh NVL"} key={"dnlNvlList"} />
             </SubMenuItem>
-            <SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Giám sát tiến độ sản xuất"} key={"e"} />
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Giám sát tiến độ đơn hàng"} key={"f"} />
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Giám sát máy"} key={"gsm"} />
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Hàng chờ công đoạn"} key={"hc"} />
+            <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='progressMonitoringWO' caption={"Giám sát tiến độ WO"} key={"progressMonitoringWO"} />
+                <MenuItem
+                    screenId='progressMonitoringManufacture'
+                    caption={"Giám sát tiến độ sản xuất"}
+                    key={"progressMonitoringManufacture"}
+                />
+
+                <MenuItem screenId='progressMonitoringOrder' caption={"Giám sát tiến độ đơn hàng"} key={"progressMonitoringOrder"} />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Giám sát máy"}
+                    key={"gsm"}
+                />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Hàng chờ công đoạn"}
+                    key={"hc"}
+                />
             </SubMenuItem>
             {/* user */}
             <SubMenuItem caption='Quản lý tài khoản' icon={<UserOutlined />}></SubMenuItem>
-            <SubMenuItem caption={"Cảnh báo"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"g"} />
+            <SubMenuItem caption={"Cảnh báo"} icon={<WarningOutlined />}>
+                <MenuItem
+                    screenId=''
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"g"}
+                />
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Phê duyệt phiếu công nghệ"} key={"h"} />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Phê duyệt phiếu công nghệ"}
+                    key={"h"}
+                />
             </SubMenuItem>
             <SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"i"} />
+                <MenuItem
+                    screenId=''
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"i"}
+                />
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Phê duyệt phiếu công nghệ"} key={"k"} />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Phê duyệt phiếu công nghệ"}
+                    key={"k"}
+                />
             </SubMenuItem>
+
             {orderMenu}
             {workOrderManagerMenu}
             {importManager}
             {employeeMenu}
             {monitorMenu}
+
             <SubMenuItem caption={"BÁO CÁO"} icon={<FormOutlined />}>
                 <MenuItem
                     screenId={"screen.ProductOrderDetailReport"}
