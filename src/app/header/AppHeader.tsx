@@ -66,7 +66,7 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
       <Space align="center">
         <Avatar size={30} icon={<img src={avatarImage} alt="Avatar" />} />
         <Select bordered={false} style={{ width: 120, marginRight: 20 }} value={selectedLanguage} onChange={handleLanguageChange}>
-          <option value="en">Tiếng Anh</option>
+          <option value="en">English</option>
           <option value="vi">Tiếng Việt</option>
         </Select>
       </Space>

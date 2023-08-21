@@ -23,6 +23,7 @@ import InfoRow from "../../../shared/components/InfoRow/InfoRow";
 import CreateProductionPlan from "./CreateProductionPlan/CreateProductionPlan";
 import PopupWO from "../../../shared/components/PopupWO/PopupWO";
 import QRCode from "react-qr-code";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 const ROUTING_PATH = "/ProductionPlanList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
@@ -66,24 +67,22 @@ export const ProductionPlanList = () => {
 
     const popupContentIcon = (
         <div onClick={() => { hidePopupIcon() }}>
-            <div>
-                <Button icon="aligncenter" text="Xem nguyên vật liệu" onClick={() => setIsViewMaterial(true)} width={300} />
+            <div style={{ border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={() => setIsViewMaterial(true)} text="Xem nguyên vật liệu" tooltipTitle="Xem nguyên vật liệu" sizeIcon={17} textSize={17} icon="assets/icons/ViewMaterial.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="rename" text="Khai báo công đoạn QMS" onClick={() => setIsVisibleQMSProcessResponsiblePerson(true)} width={300} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon text="Gửi WO sang QMS" tooltipTitle="Gửi WO sang QMS" sizeIcon={17} textSize={17} icon="assets/icons/DoubleRightChervon.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="plus" text="Thêm đề nghị lĩnh nguyên vật liệu" onClick={hidePopupIcon} width={300} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={() => setIsVisibleAddQRCodeWO(true)} text="Thêm mới mã QR cho WO" tooltipTitle="Thêm mới mã QR cho WO" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="folder" text="Thêm mới mã QR cho WO" onClick={() => setIsVisibleAddQRCodeWO(true)} width={300} />
-            </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="add" text="Thêm mới" onClick={handleAddNewButton} width={300} style={{ color: 'orange' }} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={handleAddNewButton} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
+
             </div>
             {newButtons.map((button, index) => (
-                <div key={index} style={{ marginTop: 20 }}>
-                    <Button icon="plus" text={button.text} width={button.width} />
+                <div key={index} style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                    <SvgIcon text="Thêm mới button icon" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
                 </div>
             ))}
         </div>
@@ -562,13 +561,10 @@ export const ProductionPlanList = () => {
                             >
                                 <Toolbar>
                                     <ToolbarItem location="after">
-                                        <Button hint="Thêm mới" icon="add" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} />
+                                        <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem location="after">
-                                        <Button
-                                            hint="Xuất Excel"
-                                            icon="download"
-                                            text="Xuất Excel" />
+                                        <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
@@ -601,11 +597,15 @@ export const ProductionPlanList = () => {
                                 <Column caption={"Mã QR"} dataField={"customer"} />
                                 <Column caption={"Mức độ ưu tiên"} dataField={"customer"} />
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={"buttons"} caption={"Thao tác"} alignment="left" >
-                                    <ButtonIcon icon="info" onClick={() => setIsVisibleUpdateInfoWO(true)} />
-                                    <ButtonIcon icon="smalliconslayout" onClick={() => setIsVisibleDetailQRCodeWO(true)} />
-                                    <ButtonIcon icon="chevronright" />
-                                    <ButtonIcon icon="more" onClick={showPopupIcon} />
+                                <Column type={"buttons"} caption={"Thao tác"} alignment="left"
+                                    cellRender={() =>
+                                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                                            <SvgIcon onClick={() => setIsVisibleUpdateInfoWO(true)} tooltipTitle="Cập nhật thông tin WO" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={() => setIsVisibleDetailQRCodeWO(true)} tooltipTitle="Xem chi tiết mã QR" sizeIcon={17} textSize={17} icon="assets/icons/QrCode.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Bắt đầu sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={showPopupIcon} tooltipTitle="Khác" sizeIcon={17} textSize={17} icon="assets/icons/More.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>
+                                    }>
                                 </Column>
                             </DataGrid>
                             <Popup

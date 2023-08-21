@@ -290,7 +290,7 @@ export const TechFormApprove = () => {
                                     width={600} />
                                 <Toolbar>
                                     <ToolbarItem >
-                                        <SvgIcon sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" text="Xuất Excel" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" text="Xuất Excel" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
@@ -364,50 +364,15 @@ export const TechFormApprove = () => {
                                 >
                                 </Column>
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                                    <ButtonB icon="eyeopen" onClick={handleTechFormDetail} />
-                                    <ButtonB icon='check' />
-                                    <ButtonB icon='clear' />
-                                    <ButtonB icon='add' />
-                                    <ButtonB icon='trash' onClick={handleShowModalDel} />
+                                <Column type={'buttons'} caption={"Thao tác"} alignment="left" cellRender={() =>
+                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon tooltipTitle="Xem Phiếu công nghệ" onClick={handleTechFormDetail} sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Phê duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Check.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Từ chối" sizeIcon={17} textSize={17} icon="assets/icons/Close.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xóa" onClick={handleShowModalDel} sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    </div>
+                                }>
                                 </Column>
-                                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-                                    texts={{
-                                        cancelRowChanges: "Hủy bỏ",
-                                        saveRowChanges: "Lưu lại",
-                                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                                        deleteRow: "Xóa",
-                                        editRow: "Sửa",
-                                        addRow: "Thêm"
-                                    }}
-                                >
-                                    <Popup
-                                        title="Thông tin chi tiết đơn hàng"
-                                        showTitle={true}
-                                        width={"80%"}
-                                        height={"auto"}
-                                    />
-                                    <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-                                        <Item
-                                            itemType="group"
-                                            colCount={2}
-                                            colSpan={2}
-                                            caption="Thông tin chi tiết đơn hàng"
-                                        >
-                                            <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-                                            <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-                                            <Item dataField="customer" caption="Tên khách hàng" />
-                                            <Item dataField="cardName" caption="Tên thẻ" />
-                                            <Item dataField="quantity" caption="Số lượng" />
-                                            <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-                                            <Item dataField="contractNumber" caption="Số HD/PO" />
-                                            <Item dataField="startTime" caption="Ngày bắt đầu" />
-                                            <Item dataField="finishTime" caption="Ngày kết thúc" />
-                                            <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-                                        </Item>
-                                    </Form>
-                                </Editing>
                             </DataGrid>
                             <div
                                 className="toolbar"

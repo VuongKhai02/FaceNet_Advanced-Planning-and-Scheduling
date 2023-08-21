@@ -6,6 +6,7 @@ import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Input, Table, Button as ButtonAnt, Select } from "antd";
 import { DeleteOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormHostampingProps = {
     isOpen: boolean,
@@ -138,10 +139,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 placeholder="--Nhập--"
                             />
                         )} />
-                        <Column type={'buttons'} caption={""} alignment="center" >
-                            <ButtonIcon icon='add' />
-                            <ButtonIcon icon='trash' />
-                        </Column>
+                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                        </div>} />
                     </DataGrid>
 
                 </div>
@@ -218,17 +219,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     <Input className="inputRow" placeholder="--Nhập--" />
                                 )}
                             />
-                            <Table.Column
-                                title=""
-                                key="actions"
-                                align="center"
-                                render={() => (
-                                    <div>
-                                        <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
-                                        <ButtonAnt icon={<DeleteOutlined />} style={{ border: 'none' }} />
-                                    </div>
-                                )}
-                            />
+                            <Table.Column title='' align="center" width={80} render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                            </div>} />
                         </Table>
 
                         <Table
@@ -274,12 +268,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     <Input className="inputRow" placeholder="--Nhập--" />
                                 )}
                             />
-                            <Table.Column title='' width={105} render={() => (
-                                <div>
-                                    <ButtonAnt icon={<PlusOutlined />} style={{ border: 'none' }} />
-                                    <ButtonAnt icon={<DeleteOutlined />} style={{ border: 'none' }} />
-                                </div>
-                            )} />
+                            <Table.Column title='' align="center" width={80} render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                            </div>} />
                         </Table>
 
                         <Table
@@ -405,10 +397,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 />
                             )} />
                         </Column>
-                        <Column type={'buttons'} caption={""} alignment="center" >
-                            <ButtonIcon icon='add' />
-                            <ButtonIcon icon='trash' />
-                        </Column>
+                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                        </div>} />
                     </DataGrid>
                 </div>
                 <div className="noteRemark">

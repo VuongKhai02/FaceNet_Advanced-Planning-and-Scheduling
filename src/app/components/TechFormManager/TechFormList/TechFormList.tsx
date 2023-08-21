@@ -9,7 +9,7 @@ import {
   Paging,
   SearchPanel,
   Toolbar,
-  MasterDetail, Editing, Form
+  MasterDetail, Editing, Form, ColumnChooser
 } from "devextreme-react/data-grid";
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
@@ -23,6 +23,7 @@ import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/techFormList";
@@ -301,15 +302,16 @@ export const TechFormList = () => {
               >
                 <Toolbar>
                   <ToolbarItem location="after">
-                    <Button hint="Thêm mới" icon="add" onClick={handleAddFormTech} />
+                    <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={handleAddFormTech} sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                   </ToolbarItem>
                   <ToolbarItem location="after">
-                    <Button hint="Upload file" icon="upload" onClick={handleShowUploadImport} />
+                    <SvgIcon tooltipTitle="Import File" text="Import File" onClick={handleShowUploadImport} sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                   </ToolbarItem>
                   <ToolbarItem location="after">
-                    <Button hint="Refresh" icon="refresh" />
+                    <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                   </ToolbarItem>
                   <ToolbarItem name="searchPanel" location="before" />
+                  <ToolbarItem name="columnChooserButton" />
                 </Toolbar>
                 <HeaderFilter visible={true} texts={{
                   cancel: "Hủy bỏ",
@@ -318,6 +320,7 @@ export const TechFormList = () => {
 
                 }} allowSearch={true} />
                 <FilterRow visible={true} />
+                <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                 <SearchPanel visible={true} placeholder={"VD: PO"} />
                 <Paging defaultPageSize={5} />
                 <Pager
@@ -336,8 +339,11 @@ export const TechFormList = () => {
                 <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
                   format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type={"buttons"} caption={"Thao tác"} alignment="center" />
-                <Editing mode="popup" useIcons={true} allowDeleting={true}
+                <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <SvgIcon tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                  </div>} />
+                {/* <Editing mode="popup" useIcons={true} allowDeleting={true}
                   texts={{
                     cancelRowChanges: "Hủy bỏ",
                     saveRowChanges: "Lưu lại",
@@ -373,7 +379,7 @@ export const TechFormList = () => {
                       <Item dataField="deliveryDate" caption="Ngày giao hàng" />
                     </Item>
                   </Form>
-                </Editing>
+                </Editing> */}
 
                 <MasterDetail
                   enabled={true}

@@ -19,6 +19,7 @@ import { customizeColor } from "../../../../utils/utils";
 import { Modal, Tag } from "antd";
 import notify from "devextreme/ui/notify";
 import InfoRow from "../../../shared/components/InfoRow/InfoRow";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/DnlNvlList";
@@ -232,10 +233,7 @@ export const DnlNvlList = () => {
                             >
                                 <Toolbar>
                                     <ToolbarItem location="after">
-                                        <Button
-                                            hint="Xuất Excel"
-                                            icon="download"
-                                            text="Xuất Excel" />
+                                        <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
@@ -267,10 +265,14 @@ export const DnlNvlList = () => {
                                 <Column caption={"Bom version"} dataField={"customer"} />
                                 <Column caption={"Mức độ ưu tiên"} dataField={"customer"} />
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={"buttons"} caption={"Thao tác"} alignment="center" >
-                                    <ButtonIcon icon="eyeopen" onClick={() => { setIsViewMaterial(true) }} />
-                                    <ButtonIcon icon="trash" />
-                                </Column>
+                                <Column type={"buttons"} caption={"Thao tác"} alignment="center"
+                                    cellRender={() =>
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                            <SvgIcon tooltipTitle="Xem danh sách NVL" onClick={() => { setIsViewMaterial(true) }} sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>}
+                                />
+
                             </DataGrid>
                         </div>
 

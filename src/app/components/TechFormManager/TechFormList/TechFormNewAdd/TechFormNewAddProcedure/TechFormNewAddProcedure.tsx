@@ -5,6 +5,7 @@ import "./TechFormNewAddProcedure.css";
 import { Column, Editing, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormHostamping from "../TechFormHostamping/TechFormHostamping";
+import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormNewAddProcedureProps = {
     isOpen: boolean,
@@ -164,10 +165,10 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                             />
                                         </Column>
                                     </Column>
-                                    <Column type={'buttons'} caption={""} alignment="center" >
-                                        <ButtonIcon icon='add' />
-                                        <ButtonIcon icon='trash' />
-                                    </Column>
+                                    <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    </div>} />
                                 </DataGrid>
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -235,10 +236,10 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Column type={'buttons'} caption={""} alignment="center" >
-                                            <ButtonIcon icon='add' />
-                                            <ButtonIcon icon='trash' />
-                                        </Column>
+                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>} />
                                     </DataGrid>
 
                                 </div>
@@ -311,10 +312,10 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Column type={'buttons'} caption={""} alignment="center" >
-                                            <ButtonIcon icon='add' />
-                                            <ButtonIcon icon='trash' />
-                                        </Column>
+                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>} />
                                     </DataGrid>
 
                                 </div>
@@ -360,10 +361,10 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 placeholder="--Nhập--"
                                             />
                                         )} />
-                                        <Column type={'buttons'} caption={""} alignment="center" >
-                                            <ButtonIcon icon='add' />
-                                            <ButtonIcon icon='trash' />
-                                        </Column>
+                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>} />
                                     </DataGrid>
 
                                 </div>

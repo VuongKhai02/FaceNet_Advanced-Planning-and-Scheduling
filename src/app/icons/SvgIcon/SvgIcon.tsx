@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Tooltip } from 'antd';
 
 interface SvgIconProps {
     icon: string;
@@ -11,6 +12,7 @@ interface SvgIconProps {
     sizeIcon?: number;
     style?: React.CSSProperties;
     textSize?: number;
+    tooltipTitle?: string;
 }
 
 const SvgIcon: FC<SvgIconProps> = ({
@@ -24,17 +26,26 @@ const SvgIcon: FC<SvgIconProps> = ({
     sizeIcon = 24,
     style = {},
     textSize = 14,
+    tooltipTitle = '',
 }) => {
+    const iconElement = (
+        <img src={icon} alt="SVG Icon" style={{ fill, stroke, width: sizeIcon, height: sizeIcon }} />
+    );
+
     return (
-        <div
-            onClick={onClick}
-            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', ...style }}
-        >
-            <img src={icon} alt="SVG Icon" style={{ fill, stroke, width: sizeIcon, height: sizeIcon }} />
-            {text && (
-                <span style={{ marginLeft: '8px', color: textColor, fontSize: textSize }}>{text}</span>
-            )}
-        </div>
+        <Tooltip title={tooltipTitle} placement="top" overlayClassName='custom-tooltip' color='#FF7A00' overlayStyle={{ color: 'blue' }}>
+            <div
+                onClick={onClick}
+                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', ...style }}
+            >
+                {iconElement}
+                {text && (
+                    <span style={{ marginLeft: '8px', color: textColor, fontSize: textSize }}>
+                        {text}
+                    </span>
+                )}
+            </div>
+        </Tooltip>
     );
 };
 
