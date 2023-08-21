@@ -13,7 +13,7 @@
 
 .app-header__content {
   margin-left: 12px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   overflow: hidden;
 }
 
@@ -42,4 +42,25 @@
 
 .ant-layout-header-sticky .app-header {
   padding-top: 5px;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    position: relative;
+    color: #CCCCCC !important;
+    /* background-color: #343547 !important; */
+    border: none !important;
+    border-radius: 2px;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+}
+.ant-select-arrow {
+  color: #FFF !important;
+}
+.fullscreen-container {
+  height: 100vh;
+  width: 100%;  
+}
+.fullscreen-icon {
+  cursor: pointer; 
+  font-size: 20px;
+  color: #CCCCCC;
 }

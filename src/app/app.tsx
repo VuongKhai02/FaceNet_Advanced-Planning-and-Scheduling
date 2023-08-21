@@ -11,14 +11,18 @@ import "./App.css";
 // import "./theme.less"
 import "./custom-theme.css"
 import 'devextreme/dist/css/dx.light.css';
+import HomePage from "./home/HomePage";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
 const routes = {
-  "/": <ContentArea />, "/:entityName/:entityId?": <ContentArea />
+  "/": <HomePage />, "/:entityName/:entityId?": <ContentArea />
 };
 
 const App = observer(() => {
   const mainStore = useMainStore();
   const { initialized, locale, loginRequired } = mainStore;
+  const [collapsed, setCollapsed] = React.useState<boolean>(false);
+
   const { Footer } = Layout;
   if (!initialized || !locale) {
     return <CenteredLoader />;
@@ -40,44 +44,37 @@ const App = observer(() => {
     if (header) header.classList.toggle("ant-layout-header-sticky", window.scrollY > 0)
   })
 
-  // {
-  //   const scrollTop = () =>
-  //     window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  //   const header = document.querySelector("header");
-  //   if (header && window.innerWidth > 768) {
-  //     document.addEventListener("scroll", function () {
-  //       if (scrollTop() > header.offset().top - 70) header.style.position = "sticky";
-  //       else header.style.position = "";
-  //     });
-  //   }
-  // }
-
-  // const offsetElement = document.querySelector("header");
-  // if (window.innerWidth > 768 && offsetElement) {
-  //   const offsetTop = offsetElement.offsetTop;
-  //   document.addEventListener("scroll", function () {
-  //     const scrollTop = window.pageYOffset || this.documentElement.scrollTop || this.body.scrollTop || 0;
-  //     const menu = document.querySelector("header");
-  //     if (scrollTop > offsetTop - 70) menu.classList.add("sticky");
-  //     else menu.classList.remove("sticky");
-  //   });
-  // }
 
   return (<Layout className="main-layout">
     <Layout.Header style={{ position: 'fixed', zIndex: 1000, width: '100%' }}>
-      <AppHeader />
+      <AppHeader >
+        <Button
+          type="text"
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => setCollapsed(!collapsed)}
+          style={{
+            fontSize: '16px',
+            color: '#fff',
+            marginLeft: 40
+          }}
+        />
+      </AppHeader>
     </Layout.Header>
+
     <Layout className="layout-container" style={{ marginTop: 60 }}>
       <Layout.Sider
         width={280}
         breakpoint="sm"
         collapsedWidth={'50'}
         className="layout-sider"
-        collapsible={true}
-      // style={{backgroundColor: "#BEBEBE"}}
-      // theme={"dark"}
+        // collapsible={true}
+        collapsed={collapsed}
+        // style={{backgroundColor: "#BEBEBE"}}
+        theme={"dark"}
       >
-        <AppMenu inlineCollapsed={true} mode={"inline"}
+
+        <AppMenu mode={"inline"}
+          inlineCollapsed={true}
           // style={{ height: "100%" }}
           // theme={"dark"}
           style={{ backgroundColor: "#BEBEBE", fontSize: "16px" }}
@@ -93,10 +90,9 @@ const App = observer(() => {
     <Footer style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="container">
         <div className="copyright">
-          © Copyright <strong>Facenet</strong>. All Rights Reserved
+          © Copyright <strong>Facenet</strong>. All Rights Reserved &nbsp;
         </div>
         <div className="credits">
-
           Designed by <a href="https://facenet.vn/">Facenet</a>
         </div>
       </div>

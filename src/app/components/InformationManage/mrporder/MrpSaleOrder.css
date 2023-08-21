@@ -1,0 +1,81 @@
+#gridContainer {
+  height: 640px;
+}
+
+.options {
+  padding: 10px;
+  margin-top: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+  transition: height 0.6s;
+}
+
+.caption {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.option {
+  margin-top: 10px;
+}
+
+.option > span {
+  margin-right: 10px;
+}
+
+.option > .dx-selectbox {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.button {
+  margin-top: 40px;
+  margin-right: 20px;
+  float: right;
+}
+
+.dx-datagrid-header-panel {
+  padding-top: 10px;
+  /*background-color: rgba(85, 149, 222, 0.6);*/
+}
+
+.dx-datagrid-header-panel .dx-toolbar {
+  margin: 0;
+  padding-right: 20px;
+  background-color: transparent;
+}
+
+.dx-datagrid-header-panel .dx-toolbar-items-container {
+  height: 70px;
+}
+
+.master-detail-title {
+  padding: 0 0 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.product_name_created_wo{
+  color: #027fb8;
+  font-weight: 500;
+}
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td .product_name_created_wo{
+  color: #fff;
+  font-weight: 500;
+}
+
+.highlightColumn{
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.d{
+  background-color: #dbdedf;
+}
+
+ .cls {
+  background-color: #44ff00;
+}
+.highlightColumnQuantity{
+  font-size: 14px;
+  font-weight: 500;
+  color: #027fb8;
+}
