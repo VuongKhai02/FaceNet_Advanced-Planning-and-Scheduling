@@ -55,6 +55,7 @@
         "start-3001": "set PORT=9081 HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
         "start:test": "env-cmd -f .env.test react-scripts start",
         "build": "react-scripts build",
+        "build:test": "env-cmd -f ./.env.test npm run-script build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "update-model": "gen-jmix-front sdk:all --dest src/jmix",
