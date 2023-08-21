@@ -1,0 +1,34 @@
+.border-none{
+    border: none !important;
+}
+.outer-rectangle {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border: 1px solid #bbb6b6;
+    padding: 10px;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.inner-rectangle {
+    border: 1px solid #bbb6b6;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+.image-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.credit-card-image {
+    max-width: 100%;
+    height: auto;
+}
+
