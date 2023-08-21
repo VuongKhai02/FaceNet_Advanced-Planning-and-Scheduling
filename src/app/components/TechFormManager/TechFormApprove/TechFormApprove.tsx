@@ -26,6 +26,7 @@ import { Popup as PopupCofirm } from 'devextreme-react/popup';
 import "./TechFormApprove.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { InfoCircleOutlined, InfoOutlined, WarningOutlined } from "@ant-design/icons";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/TechFormApprove";
@@ -289,10 +290,7 @@ export const TechFormApprove = () => {
                                     width={600} />
                                 <Toolbar>
                                     <ToolbarItem >
-                                        <Button
-                                            // style={{ border: 'none' }}
-                                            icon="download"
-                                            text="Xuất Excel" />
+                                        <SvgIcon sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" text="Xuất Excel" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
