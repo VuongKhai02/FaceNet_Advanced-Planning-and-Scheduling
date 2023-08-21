@@ -90,10 +90,9 @@ const App = observer(() => {
     <Footer style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="container">
         <div className="copyright">
-          © Copyright <strong>Facenet</strong>. All Rights Reserved
+          © Copyright <strong>Facenet</strong>. All Rights Reserved &nbsp;
         </div>
         <div className="credits">
-
           Designed by <a href="https://facenet.vn/">Facenet</a>
         </div>
       </div>

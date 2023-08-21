@@ -8,7 +8,7 @@ import {
     MasterDetail,
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import InfoRow from "../../../shared/components/InfoRow/InfoRow";
+import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
 type CreateProductionPlanProps = {
     isOpen: boolean,

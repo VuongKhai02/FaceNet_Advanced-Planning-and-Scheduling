@@ -1,11 +1,11 @@
 import { ComponentPreview, Previews } from "@haulmont/react-ide-toolbox";
 import { MrpSaleOrders } from "../app/components/InformationManage/mrporder/MrpSaleOrders"
-import TechFormList from "../app/TechFormManager/TechFormList/TechFormList";
-import TechFormApprove from "../app/TechFormManager/TechFormApprove/TechFormApprove";
-import ProductionPlanList from "../app/ProductionPlanManagement/ProductionPlanList/ProductionPlanList";
-import BOMBodyCard from "../app/BOM/BOMBodyCard/BOMBodyCard";
-import BOMPersonalized from "../app/BOM/BOMPersonalized/BOMPersonalized";
-import DnlNvlList from "../app/ProductionPlanManagement/DnlNvlList/DnlNvlList";
+import TechFormList from "../app/components/TechFormManager/TechFormList/TechFormList";
+import TechFormApprove from "../app/components/TechFormManager/TechFormApprove/TechFormApprove";
+import ProductionPlanList from "../app/components/ProductionPlanManagement/ProductionPlanList/ProductionPlanList";
+import BOMBodyCard from "../app/components/BOM/BOMBodyCard/BOMBodyCard";
+import BOMPersonalized from "../app/components/BOM/BOMPersonalized/BOMPersonalized";
+import DnlNvlList from "../app/components/ProductionPlanManagement/DnlNvlList/DnlNvlList";
 import ManageProductionRequirements from "../app/components/InformationManage/ManageProductionRequirements/ManageProductionRequirements";
 import CardManagement from "../app/components/InformationManage/CardManagement/CardManagement";
 import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput/ManageJobOutput";

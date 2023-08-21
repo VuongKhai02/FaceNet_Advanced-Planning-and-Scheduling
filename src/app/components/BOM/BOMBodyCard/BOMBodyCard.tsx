@@ -13,10 +13,10 @@ import {
 } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import "./BOMBodyCard.css";
-import PopupConfirmDelete from "../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
-import PopupImportFile from "../../shared/components/PopupImportFile/PopupImportFile";
+import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 
 
 const data = [

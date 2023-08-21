@@ -14,16 +14,15 @@ import {
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../../config";
-import { customizeColor, getColor } from "../../../utils/utils";
+import { IWarning } from "../../../shared/model/Warning.model";
+import { PLANNING_API_URL } from "../../../../config";
+import { customizeColor, getColor } from "../../../../utils/utils";
 import TechFormListDetail from "./TechFormListDetail";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
-import { ImportTechForm } from "../../import/ImportTechForm";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
-import PopupImportFile from "../../shared/components/PopupImportFile/PopupImportFile";
+import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 
 
 const ROUTING_PATH = "/techFormList";

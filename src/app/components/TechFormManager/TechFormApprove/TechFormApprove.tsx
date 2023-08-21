@@ -14,17 +14,17 @@ import {
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../../config";
-import { customizeColor, getColor } from "../../../utils/utils";
+import { IWarning } from "../../../shared/model/Warning.model";
+import { PLANNING_API_URL } from "../../../../config";
+import { customizeColor, getColor } from "../../../../utils/utils";
 import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
-import { OrderItem } from "../../../fake_data/OrderItem";
+import { OrderItem } from "../../../../fake_data/OrderItem";
 import TechFormDetail from "../TechFormDetail/TechFormDetail";
 import { Popup as PopupCofirm } from 'devextreme-react/popup';
 import "./TechFormApprove.css";
-import PopupConfirmDelete from "../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { InfoCircleOutlined, InfoOutlined, WarningOutlined } from "@ant-design/icons";
 
 

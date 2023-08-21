@@ -3,7 +3,6 @@ import { Button, DataGrid, Template, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/TechProcedure";
 import { observer } from "mobx-react";
-import { ImportTechForm } from "../../../../import/ImportTechForm";
 import { Table, Upload } from "antd";
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 

@@ -1,6 +1,6 @@
 import { locale, loadMessages } from "devextreme/localization";
 import React, { useEffect, useState } from "react";
-import { OrderItem } from "../../../fake_data/OrderItem";
+import { OrderItem } from "../../../../fake_data/OrderItem";
 import DataGrid, {
     Column, FilterRow, HeaderFilter, SearchPanel,
     Editing,
@@ -14,7 +14,7 @@ import DataGrid, {
 
 import { Item } from 'devextreme-react/form';
 import { Tag } from "antd";
-import PopupSendSAP from "../../shared/components/PopupSendSAP/PopupSendSAP";
+import PopupSendSAP from "../../../shared/components/PopupSendSAP/PopupSendSAP";
 import { WarningOutlined } from "@ant-design/icons";
 
 const getProductName = (rowData) => {

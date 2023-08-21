@@ -4,10 +4,8 @@ import {
     Column, Editing
 } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { ImportOrder } from "../../../../import/ImportOrder";
 import { observer } from "mobx-react";
 import MaterialAndStructure from "../MaterialAndStructure/MaterialAndStructure";
-import { ImportTechForm } from "../../../../import/ImportTechForm";
 import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 

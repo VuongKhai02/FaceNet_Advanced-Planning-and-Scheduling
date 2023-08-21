@@ -28,17 +28,19 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
   const enterFullScreen = () => {
     setIsFullScreen(true);
     document.documentElement.requestFullscreen();
-    document.body.style.backgroundColor = '#000';
   };
   const exitFullScreen = () => {
     setIsFullScreen(false);
     document.exitFullscreen();
-    document.body.style.backgroundColor = '';
   };
 
-  const handleLanguageChange = value => {
-    setSelectedLanguage(value);
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event);
   };
+  const avatarImage = selectedLanguage === 'en'
+    ? 'assets/images/GreatBritainFlag.png'
+    : 'assets/images/VietNamFlag.png';
+
   const showLogoutConfirm = useCallback(() => {
     modals.open({
       content: intl.formatMessage({ id: "header.logout.areYouSure" }),
@@ -48,21 +50,22 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
     });
   }, [mainStore, intl]);
 
+
   return (
     <div className="app-header">
       <RdIcon ></RdIcon>
       <div className="app-header__content">{children}</div>
       <div className="app-header__user-panel__logout-btn" style={{ fontSize: "20px", flexGrow: 1 }}>Advanced Planning and Scheduling</div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginRight: 50 }}>
-        <Avatar size={30} icon={<img src="https://img3.thuthuatphanmem.vn/uploads/2019/07/05/anh-chan-dung-con-gai-toc-ngan_082837328.jpg" alt="Avatar" />} />
+        <Avatar size={30} icon={<img src="assets/images/GirlImage.jpg" alt="Avatar" />} />
         <div style={{ flexDirection: "column", marginLeft: 10 }}>
           <div style={{ fontSize: 14 }}>Xin chào</div>
           <div style={{ marginTop: 14, fontSize: 16 }}>{'Nguyễn Minh Sơn'}</div>
         </div>
       </div>
       <Space align="center">
-        <Avatar size={30} icon={<img src="https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://mayfair.wmctower.com/wp-content/uploads/flags/vn.png" alt="Avatar" />} />
-        <Select style={{ width: 120, marginRight: 20 }} value={selectedLanguage} onChange={handleLanguageChange}>
+        <Avatar size={30} icon={<img src={avatarImage} alt="Avatar" />} />
+        <Select bordered={false} style={{ width: 120, marginRight: 20 }} value={selectedLanguage} onChange={handleLanguageChange}>
           <option value="en">Tiếng Anh</option>
           <option value="vi">Tiếng Việt</option>
         </Select>
@@ -88,6 +91,7 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
       <Space className="app-header__user-panel">
         <LanguageSwitcher className="language-switcher -header" />
         <span className={"app-header__user-panel__logout-btn"}>{mainStore.userName}</span>
+
 
         <Button
           id="button_logout"

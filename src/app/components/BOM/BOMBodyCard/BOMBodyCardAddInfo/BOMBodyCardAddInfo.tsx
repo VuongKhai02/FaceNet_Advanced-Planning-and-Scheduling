@@ -10,9 +10,10 @@ import {
 } from "devextreme-react/data-grid";
 import "./BOMBodyCardAddInfo.css";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
-import PopupBOMAddNewInfoMaterial from "../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
+import PopupBOMAddNewInfoMaterial from "../../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
+import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 
 type BOMBodyCardAddInfoProps = {
     isOpen: boolean,
@@ -27,7 +28,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     isOpen = false, setClose }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
-
+    const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     }
@@ -152,6 +153,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
                         >
+                            <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
                             <PopupConfirmDelete
                                 isVisible={isConfirmDelete}
                                 onCancel={handleHideModalDel}
@@ -177,6 +179,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 </ToolbarItem>
                                 <ToolbarItem >
                                     <Button
+                                        onClick={() => setIsVisibleImportFile(true)}
                                         icon="upload"
                                         text="Import file" />
                                 </ToolbarItem>

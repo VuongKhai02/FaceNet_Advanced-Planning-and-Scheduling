@@ -13,7 +13,7 @@ import {
     Button as ButtonIcon
 } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import PopupImportFile from "../../shared/components/PopupImportFile/PopupImportFile";
+import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import BOMPersonalizedDetail from "./BOMPersonalizedDetail";
 
 
