@@ -279,14 +279,13 @@ export const TechFormApprove = () => {
                                     }
                                     modalTitle={
                                         <div>
-                                            <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 50 }} />
-                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 30 }}>
+                                            <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
+                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 25 }}>
                                                 Xác nhận xóa?
                                             </h3>
-                                            <h5 style={{ fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5>
                                         </div>
                                     }
-                                    modalContent={''}
+                                    modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
                                     width={600} />
                                 <Toolbar>
                                     <ToolbarItem >
@@ -397,7 +396,11 @@ export const TechFormApprove = () => {
                                 />
                             </div>
                             <PopupCofirm
-                                title="Xác nhận từ chối"
+                                titleRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Xác nhận từ chối
+                                </div>}
+                                // title="Xác nhận từ chối"
                                 visible={showPopup}
                                 onHiding={() => setShowPopup(false)}
                                 showCloseButton={false}

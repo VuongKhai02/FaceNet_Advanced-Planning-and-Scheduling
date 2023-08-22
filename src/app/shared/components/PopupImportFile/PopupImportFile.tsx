@@ -1,15 +1,16 @@
 import React from 'react';
 import { Modal, Upload, Button } from 'antd';
 import "./PopupImportFile.css";
+import SvgIcon from '../../../icons/SvgIcon/SvgIcon';
 
 const PopupImportFile = ({ title, visible, onSubmit, onCancel, width }) => {
     return (
         <Modal
             visible={visible}
             title={
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    {/* <ExclamationCircleOutlined /> */}
-                    <p style={{ lineHeight: '38px', padding: 0, margin: 0 }}>{title}</p>
+                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <p style={{ lineHeight: '38px', padding: 0, margin: 0, fontSize: 20 }}>{title}</p>
                 </div>
             }
             footer={[

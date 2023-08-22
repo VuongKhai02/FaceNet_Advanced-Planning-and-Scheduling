@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 
-interface PopupConfirmDeleteProps {
+interface PopupScanBarCodeProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -10,7 +10,7 @@ interface PopupConfirmDeleteProps {
     width: number;
 }
 
-const PopupScanBarCode: React.FC<PopupConfirmDeleteProps> = ({
+const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({
     isVisible,
     onCancel,
     onSubmit,

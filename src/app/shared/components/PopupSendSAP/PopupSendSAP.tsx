@@ -20,7 +20,7 @@ const PopupSendSAP: React.FC<PopupSendSAPProps> = ({
 }) => {
     return (
         <Modal
-            closeIcon={true}
+            // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
             footer={[

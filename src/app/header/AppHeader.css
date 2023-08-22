@@ -1,7 +1,7 @@
 .app-header {
   display: flex;
   align-items: center;
-  color: #CCCCCC;
+  color: #FFFFFF;
   padding-top: 8px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .app-header__user-panel__logout-btn {
-  color: #CCCCCC !important;
+  color: #FFFFFF !important;
 }
 
 .app-header__user-panel__logout-btn:hover {
@@ -42,19 +42,56 @@
 
 .ant-layout-header-sticky .app-header {
   padding-top: 5px;
+  color: #333 !important;
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
     position: relative;
-    color: #CCCCCC !important;
-    /* background-color: #343547 !important; */
+    color: #FFFFFF !important;
     border: none !important;
     border-radius: 2px;
     transition: all .3s cubic-bezier(.645,.045,.355,1);
 }
+.ant-layout-header-sticky .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  color: #333 !important;
+}
 .ant-select-arrow {
   color: #FFF !important;
 }
+.ant-layout-header-sticky .ant-select-arrow {
+  color: #333 !important;
+}
+
+.app-header_bell {
+  font-size: 21px;
+  color: #FFFFFF !important;
+}
+.ant-layout-header-sticky .app-header_bell {
+  color: #333 !important;
+}
+.app-header_logo {
+  color: #FFFFFF !important;
+}
+
+.ant-layout-header-sticky .app-header_logo {
+  color: #333 !important;
+}
+
+.app-header_title_logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin-left: 10px 
+}
+
+.ant-layout-header-sticky .app-header_title_logo {
+   color: #2A3884 !important;
+  font-weight: bold;
+}
+
 .fullscreen-container {
   height: 100vh;
   width: 100%;  
@@ -62,5 +99,5 @@
 .fullscreen-icon {
   cursor: pointer; 
   font-size: 20px;
-  color: #CCCCCC;
+  color: #FFFFFF;
 }

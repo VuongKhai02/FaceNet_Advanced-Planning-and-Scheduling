@@ -1,0 +1,9 @@
+
+.icon-more {
+margin-top: 20px;
+border: 1px solid #dbdedf;
+height: 40px;
+display:flex; 
+align-items: center;
+border-radius: 5px ;
+}

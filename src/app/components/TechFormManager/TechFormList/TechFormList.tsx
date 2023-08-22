@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, DataGrid, Popup } from "devextreme-react";
 import {
   Column,
@@ -9,248 +9,75 @@ import {
   Paging,
   SearchPanel,
   Toolbar,
-  MasterDetail, Editing, Form, ColumnChooser
+  ColumnChooser
 } from "devextreme-react/data-grid";
-import axios from "axios";
+import "./TechFormList.css";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../../../config";
-import { customizeColor, getColor } from "../../../../utils/utils";
-import TechFormListDetail from "./TechFormListDetail";
-import { Tag } from "antd";
-import { Item } from "devextreme-react/form";
-import notify from "devextreme/ui/notify";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import { WarningOutlined } from "@ant-design/icons";
+import PopupSendSAP from "../../../shared/components/PopupSendSAP/PopupSendSAP";
+import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
+import BOMBodyCardAddInfo from "../../BOM/BOMBodyCard/BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 
 
+const data = [
+  { soCode: '1237891', manufactureCode: '123567', customerName: 'BIDV', cardName: 'Visa BIDV', quantity: '1000', startDate: '09/08/2023', endDate: '10/08/2023', priority: '2', status: 'Đã tạo KHSX' },
+  { soCode: '1237892', manufactureCode: '123567', customerName: 'BIDV', cardName: 'Visa BIDV', quantity: '1000', startDate: '09/08/2023', endDate: '10/08/2023', priority: '2', status: 'Đã tạo KHSX' },
+  { soCode: '1237893', manufactureCode: '123567', customerName: 'BIDV', cardName: 'Visa BIDV', quantity: '1000', startDate: '09/08/2023', endDate: '10/08/2023', priority: '2', status: 'Đã tạo KHSX' }
+];
 const ROUTING_PATH = "/techFormList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const TechFormList = () => {
-
-  const [warnings, setWarnings] = useState<[]>();
-  const [content, setContent] = useState<string>();
-  const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false)
-  const [currentWarning, setCurrentWarning] = useState<IWarning>()
   const [popupVisible, setPopupVisible] = useState(false);
   const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-  const mainStore = useMainStore();
+  const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
 
-  const handleHideUploadImport = () => {
-    setPopupVisible(false)
-  }
+  const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
+  const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
+  const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
+  const [newButtons, setNewButtons] = React.useState<any>([]);
+  const mainStore = useMainStore();
 
   const handleShowUploadImport = () => {
     setPopupVisible(true)
-  }
-
-  const loadOrders = () => {
-    const headers = {
-      'Authorization': 'Bearer ' + mainStore.authToken,
-      'content-type': 'application/json'
-    };
-    axios.get(PLANNING_API_URL + '/api/orders', { headers })
-      .then(response => {
-        if (response.status === 200) {
-          // console.log(response.data)
-          setContent(response.data.data)
-        }
-      }
-      );
-  }
-
-  const getProductOrderItemTemplate = row => {
-    return (
-      <TechFormListDetail
-        data={row.data}
-      // productsFullArrays={this.state.productsFullArrays}
-      // reasons={this.state.reasonList}
-      />
-    );
-  };
-
-  const onSelectedRowKeysChange = (e) => {
-    if (e.data) {
-      setCurrentWarning(e.data)
-    }
-  }
-  const setPopUpOpen = () => {
-    setPopupIsOpen(true);
-  }
-  const setPopUpClose = () => {
-    setPopupIsOpen(false);
-  }
-
-  useEffect(() => {
-    loadOrders()
-  }, [])
-
-  const saveOrder = (data) => {
-    console.log(data);
-    console.log("click submit")
   }
 
   const handleAddFormTech = () => {
     setIsAddNewTechForm(true);
   }
 
-  const updateOrder = (e) => {
-    // return <WarningDetail warningDetail={currentWarning} />
-    const headers = {
-      'Authorization': 'Bearer ' + mainStore.authToken,
-      'content-type': 'application/json'
-    };
-    console.log(e)
-    let data = JSON.stringify(e.newData);
-    axios.put(PLANNING_API_URL + '/api/orders/' + e.oldData.saleOrderId, data, { headers },)
-      .then(response => {
-        if (response.status === 200) {
-          notify({
-            message: 'Cập nhật thành công!',
-            width: 450
-          }, 'SUCCESS', 3000);
-        } else {
-          notify({
-            message: 'Cập nhật thất bại!',
-            width: 450
-          }, 'error', 3000);
-        }
-      }
-      );
-  }
-  const removeOrder = (e) => {
-    // return <WarningDetail warningDetail={currentWarning} />
-    const headers = {
-      'Authorization': 'Bearer ' + mainStore.authToken,
-      'content-type': 'application/json'
-    };
-    console.log(e)
-    let data = JSON.stringify(e.newData);
-    axios.delete(PLANNING_API_URL + '/api/orders/' + e.data.saleOrderId, { headers },)
-      .then(response => {
-        if (response.status === 200) {
-          notify({
-            message: 'Xóa thành công đơn hàng!',
-            width: 450
-          }, 'SUCCESS', 3000);
-        } else {
-          notify({
-            message: 'Xóa thất bại!',
-            width: 450
-          }, 'error', 3000);
-        }
-      }
-      );
-  }
+  const hidePopupIcon = () => {
+    setPopupVisibleIcon(false);
+  };
 
-  const onStatusPoRender = (rowInfo) => {
-    let customColor: {
-      color: string,
-      backgroundColor: string
-    } = {
-      color: "",
-      backgroundColor: ""
-    }
-    let status = "";
-    // let backgroundColor = "";
-    let padding = "";
-    let borderRadius = "";
-    let width = "";
-    let border = "";
+  const handleAddNewButton = () => {
+    setNewButtons([...newButtons, { text: 'Thêm mới button', width: 300 }]);
+  };
 
-    // let value = rowInfo.data.data.processStatus;
-    const getColor = (value) => {
-      // let color = ""
-      switch (value) {
-        case "new":
-          status = "Chờ sản xuất"
-          break;
-        case "complete":
-          status = "Hoàn thành"
-          break;
-        case "not_complete":
-          status = "Chưa hoàn thành"
-          break
-        case "in_production":
-          status = "Đang sản xuất"
-          break;
-        case "early_complete":
-          status = "Hoàn thành sớm"
-          break;
-        case "delay":
-          status = "Chậm tiến độ"
-          break;
-        case "unknown":
-          status = "Chưa xác định"
-          break;
-        case "wait_production":
-          status = "Chờ sản xuất"
-          break;
-        case "stop":
-          status = "Ngưng sản xuất"
-          break;
-        default:
-          status = "Chưa xác định"
-          break;
-      }
-    }
-
-    getColor(rowInfo.data.data.processStatus);
-    customColor = customizeColor(status)
-    border = "1px solid " + customColor.color;
-    // const color = getColor(rowInfo.data.data.processStatus)
-    // return <Tag color={color}>{status}</Tag>
-    return <Tag style={{
-      "fontWeight": "bold",
-      "width": "100%",
-      "textAlign": "center",
-      "color": customColor.color,
-      "backgroundColor": customColor.backgroundColor,
-      // "padding": padding,
-      "borderRadius": "4px",
-      // "width": width,
-      "border": border
-    }}>{status}</Tag>
-  }
-
-  const onPriorityRender = (rowInfo) => {
-    // console.log("Data color,", data?.value)
-    let customColor: {
-      color: string,
-      backgroundColor: string
-    } = {
-      color: "",
-      backgroundColor: ""
-    }
-    let status = "";
-    // let backgroundColor = "";
-    let padding = "";
-    let borderRadius = "";
-    let width = "";
-    let border = "";
-
-    // let value = rowInfo.data.data.processStatus;
-    status = "1"
-
-    getColor(status);
-    customColor = customizeColor(status)
-    border = "1px solid " + customColor.color;
-    // const color = getColor(rowInfo.data.data.processStatus)
-    // return <Tag color={color}>{status}</Tag>
-    return <Tag style={{
-      "fontWeight": "bold",
-      "width": "50%",
-      "textAlign": "center",
-      "color": customColor.color,
-      "backgroundColor": customColor.backgroundColor,
-      // "padding": padding,
-      "borderRadius": "4px",
-      // "width": width,
-      "border": border
-    }}>{status}</Tag>
-  }
+  const popupContentIcon = (
+    <div onClick={() => { hidePopupIcon() }}>
+      <div className="icon-more">
+        <SvgIcon onClick={() => { }} text="Thay đổi mức độ ưu tiên" tooltipTitle="Thay đổi mức độ ưu tiên" sizeIcon={17} textSize={17} icon="assets/icons/Compass.svg" textColor="#000" style={{ marginLeft: 17 }} />
+      </div>
+      <div className="icon-more">
+        <SvgIcon text="In" tooltipTitle="In" sizeIcon={17} textSize={17} icon="assets/icons/Print.svg" textColor="#000" style={{ marginLeft: 17 }} />
+      </div>
+      <div className="icon-more">
+        <SvgIcon onClick={() => { }} text="Gửi SAP" tooltipTitle="Gửi SAP" sizeIcon={17} textSize={17} icon="assets/icons/CircleRight.svg" textColor="#000" style={{ marginLeft: 17 }} />
+      </div>
+      <div className="icon-more">
+        <SvgIcon onClick={handleAddNewButton} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
+      </div>
+      {newButtons.map((button, index) => (
+        <div key={index} className="icon-more">
+          <SvgIcon text="Thêm mới button icon" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <>
@@ -284,10 +111,43 @@ export const TechFormList = () => {
                 }}>Tìm kiếm chung</h5>
               </div>
               <PopupImportFile visible={popupVisible} onCancel={() => setPopupVisible(false)} title={'Import file'} onSubmit={() => { }} width={900} />
+              <PopupSendSAP
+                isVisible={isModalVisibleSendSAP}
+                onCancel={() => { setIsModalVisibleSendSAP(false) }}
+                onSubmit={() => { }}
+                modalTitle={
+                  <div>
+                    <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                      Xác nhận gửi SAP
+                    </h3>
+                    <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
+                  </div>
+                }
+                modalContent={
+                  <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                    <h3 style={{ color: '#ff794e' }}>
+                      <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                      Lưu ý:
+                    </h3>
+                    <p style={{ marginLeft: 20, fontSize: 15 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
+                  </div>
+                }
+                width={600} />
+              <Popup
+                title="Các Icon thao tác"
+                visible={popupVisibleIcon}
+                onHiding={hidePopupIcon}
+                contentRender={() => popupContentIcon}
+                width={320}
+                height={350}
+                showCloseButton={false}
+                hideOnOutsideClick={true}
+
+              />
               <DataGrid
-                key={'saleOrderId'}
-                keyExpr={"saleOrderId"}
-                dataSource={content}
+                key={'soCode'}
+                keyExpr={"soCode"}
+                dataSource={data}
                 showBorders={true}
                 columnAutoWidth={true}
                 showRowLines={true}
@@ -295,10 +155,7 @@ export const TechFormList = () => {
                 allowColumnResizing={true}
                 allowColumnReordering={true}
                 focusedRowEnabled={true}
-                onSelectionChanged={onSelectedRowKeysChange}
-                onRowClick={onSelectedRowKeysChange}
-                onRowUpdating={updateOrder}
-                onRowRemoving={removeOrder}
+
               >
                 <Toolbar>
                   <ToolbarItem location="after">
@@ -331,68 +188,43 @@ export const TechFormList = () => {
                   showInfo={true}
                   showNavigationButtons={true}
                   infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="left" width={100} />
-                <Column caption={"Mã khách hàng"} dataField={"productionCode"} />
-                <Column caption={"Tên khách hàng"} dataField={"customer"} />
-                <Column caption={"Ngày đặt hàng"} dataType="datetime" dataField={"startTime"}
-                  format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
-                  format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <SvgIcon tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                  </div>} />
-                {/* <Editing mode="popup" useIcons={true} allowDeleting={true}
-                  texts={{
-                    cancelRowChanges: "Hủy bỏ",
-                    saveRowChanges: "Lưu lại",
-                    confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                    confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                    deleteRow: "Xóa",
-                    editRow: "Sửa",
-                    addRow: "Thêm"
-                  }}
-                >
-                  <Popup
-                    title="Thông tin chi tiết đơn hàng"
-                    showTitle={true}
-                    width={"80%"}
-                    height={"auto"}
-                  />
-                  <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-                    <Item
-                      itemType="group"
-                      colCount={2}
-                      colSpan={2}
-                      caption="Thông tin chi tiết đơn hàng"
-                    >
-                      <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-                      <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-                      <Item dataField="customer" caption="Tên khách hàng" />
-                      <Item dataField="cardName" caption="Tên thẻ" />
-                      <Item dataField="quantity" caption="Số lượng" />
-                      <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-                      <Item dataField="contractNumber" caption="Số HD/PO" />
-                      <Item dataField="startTime" caption="Ngày bắt đầu" />
-                      <Item dataField="finishTime" caption="Ngày kết thúc" />
-                      <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-                    </Item>
-                  </Form>
-                </Editing> */}
 
-                <MasterDetail
-                  enabled={true}
-                  component={getProductOrderItemTemplate}
-                // autoExpandAll={true}
-                />
+                <Column caption={"Mã SO"} dataField={"soCode"} alignment="left" width={100} />
+                <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
+                <Column caption={"Tên khách hàng"} dataField={"customerName"} />
+                <Column caption={"Tên thẻ"} dataField={"cardName"} />
+                <Column caption={"Số lượng"} dataField={"quantity"} />
+                <Column caption={"Ngày bắt đầu"} dataType="datetime" dataField={"startDate"}
+                  format="dd/MM/yyyy hh:mm:ss" />
+                <Column caption={"Ngày kết thúc"} dataType="datetime" dataField={"endDate"}
+                  format="dd/MM/yyyy hh:mm:ss" />
+                <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
+                <Column caption={"Trạng thái"} dataField="status" />
+                <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
+                  <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                    <SvgIcon onClick={() => setIsVisibleTechFormUpdate(true)} tooltipTitle="Cập nhật PCN" sizeIcon={17} textSize={17} icon="assets/icons/Edit.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => setIsVisibleBOMBodyCardAddInfo(true)} tooltipTitle="Tạo BOM" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => setIsModalVisibleSendSAP(true)} tooltipTitle="Gửi duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => { }} tooltipTitle="Tạo KHSX" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => setPopupVisibleIcon(true)} tooltipTitle="Khác" sizeIcon={17} textSize={17} icon="assets/icons/More.svg" textColor="#FF7A00" />
+                  </div>} />
+                {
+                  isVisibleTechFormUpdate && (
+                    <TechFormUpdate isOpen={isVisibleTechFormUpdate} setClose={() => setIsVisibleTechFormUpdate(false)} />
+                  )
+                }
+                {
+                  isVisibleBOMBodyCardAddInfo && (
+                    <BOMBodyCardAddInfo isOpen={isVisibleBOMBodyCardAddInfo} setClose={() => setIsVisibleBOMBodyCardAddInfo(false)} />
+                  )
+                }
               </DataGrid>
             </div>
           </div>
       }
     </>
   )
-
 }
 
 

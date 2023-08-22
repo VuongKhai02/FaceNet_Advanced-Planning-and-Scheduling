@@ -53,7 +53,8 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
 
   return (
     <div className="app-header">
-      <RdIcon ></RdIcon>
+      <RdIcon></RdIcon>
+      <h3 className="app-header_title_logo">FaceNet</h3>
       <div className="app-header__content">{children}</div>
       <div className="app-header__user-panel__logout-btn" style={{ fontSize: "20px", flexGrow: 1 }}>Advanced Planning and Scheduling</div>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginRight: 50 }}>
@@ -86,7 +87,7 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
       </Space>
       {/* <BellFilled style={{ fontSize: 20, cursor: 'pointer' }} /> */}
       <Badge count={9} overflowCount={99} offset={[5, -10]}>
-        <BellFilled style={{ fontSize: '21px', color: '#CCCCCC' }} />
+        <BellFilled className="app-header_bell" />
       </Badge>
       <Space className="app-header__user-panel">
         <LanguageSwitcher className="language-switcher -header" />

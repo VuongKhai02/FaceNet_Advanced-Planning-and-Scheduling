@@ -17,6 +17,7 @@ import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/Po
 import { InfoCircleOutlined } from "@ant-design/icons";
 import PopupDetailProductionRequire from "../../../shared/components/PopupDetailProductionRequire/PopupDetailProductionRequire";
 import ViewDetailProductRequires from "./ViewDetailProductRequires/ViewDetailProductRequires";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const data = [
@@ -127,7 +128,10 @@ export const ManageProductionRequirements = () => {
                                                 </table>
                                             </div>
                                         }
-                                        modalTitle={<div><h3>Thông tin chi tiết yêu cầu sản xuất</h3></div>}
+                                        modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            Thông tin chi tiết yêu cầu sản xuất
+                                        </div>}
                                         width={800}
                                         onCancel={() => setIsVisibleDetailProductionRequire(false)}
                                         onSubmit={() => { }}
@@ -139,14 +143,13 @@ export const ManageProductionRequirements = () => {
                                         }
                                         modalTitle={
                                             <div>
-                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 50 }} />
-                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 30 }}>
+                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
+                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 25 }}>
                                                     Xác nhận xóa?
                                                 </h3>
-                                                <h5 style={{ fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5>
                                             </div>
                                         }
-                                        modalContent={''}
+                                        modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
                                         width={600} />
                                     <Toolbar>
                                         <ToolbarItem name="searchPanel" location="before" />
@@ -201,10 +204,15 @@ export const ManageProductionRequirements = () => {
                                         caption={"Ngày kết thúc"}
                                     />
                                     <Column caption={"Trạng thái"} dataField="status" />
-                                    <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                                        <ButtonB icon="info" onClick={() => { setIsViewDetailProductRequire(true) }} />
-                                        <ButtonB icon='add' onClick={() => { setIsVisibleDetailProductionRequire(true) }} />
-                                        <ButtonB icon='trash' onClick={handleShowModalDel} />
+                                    <Column type={'buttons'} caption={"Thao tác"} alignment="left"
+                                        cellRender={() =>
+                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                                <SvgIcon onClick={() => { setIsViewDetailProductRequire(true) }} tooltipTitle="Xem chi tiết yêu cầu sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={() => { setIsVisibleDetailProductionRequire(true) }} tooltipTitle="Thêm phiếu công nghệ" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                            </div>
+                                        }
+                                    >
                                     </Column>
                                 </DataGrid>
                             </div>

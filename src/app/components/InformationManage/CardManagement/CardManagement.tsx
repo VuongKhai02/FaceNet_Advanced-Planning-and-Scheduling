@@ -19,6 +19,7 @@ import PopupDetailBoxCard from "../../../shared/components/PopupDetailBoxCard/Po
 import PopupAddBoxCard from "../../../shared/components/PopupAddBoxCard/PopupAddBoxCard";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const data = [
@@ -138,7 +139,10 @@ export const CardManagement = () => {
                             <PopupScanBarCode
                                 isVisible={isVisibleScanBarCode}
                                 modalContent={<div><Barcode value="Nguyen Minh Son" textAlign="center" font="monospace" /></div>}
-                                modalTitle='Quét mã Bar code'
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Quét mã Bar code
+                                </div>}
                                 width={800}
                                 onCancel={() => setIsVisibleScanBarCode(false)}
                                 onSubmit={() => { }}
@@ -181,14 +185,20 @@ export const CardManagement = () => {
                                         </div>
                                     </div>
                                 }
-                                modalTitle='Quét mã Bar code'
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Quét mã Bar code
+                                </div>}
                                 width={1000}
                                 onCancel={() => setIsVisibleDetailBoxCard(false)}
                                 onSubmit={() => { }}
                             />
                             <PopupAddBoxCard
                                 isVisible={isVisibleAddBoxCard}
-                                modalTitle='Thêm mới hộp chứa thẻ'
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Thêm mới hộp chứa thẻ
+                                </div>}
                                 modalContent={
                                     <div>
                                         <h3><p>Thêm mới hộp chứa thẻ</p></h3>
@@ -254,10 +264,10 @@ export const CardManagement = () => {
                             />
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <Button hint="Thêm mới" icon="add" text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} />
+                                    <SvgIcon text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem >
-                                    <Button icon='print' text="In mã" onClick={() => setIsVisibleScanBarCode(true)} />
+                                    <SvgIcon text="In mã" onClick={() => setIsVisibleScanBarCode(true)} tooltipTitle="In mã" sizeIcon={17} textSize={17} icon="assets/icons/Print.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem name="columnChooserButton" />
                                 <ToolbarItem name="searchPanel" location="before" />
@@ -269,7 +279,7 @@ export const CardManagement = () => {
 
                             }} allowSearch={true} />
                             <FilterRow visible={true} />
-                            <ColumnChooser enabled={true} allowSearch={true} />
+                            <ColumnChooser enabled={true} allowSearch={true} title="Chọn cột" />
                             <SearchPanel visible={true} placeholder={"VD: PO"} />
                             <Paging defaultPageSize={5} />
                             <Pager
@@ -287,10 +297,17 @@ export const CardManagement = () => {
                             <Column caption={"Tên Job"} dataField={"jobName"} />
                             <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
                             <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
-                            <Column type={"buttons"} caption={"Thao tác"} alignment="center" >
-                                <ButtonIcon icon="info" onClick={() => setIsVisibleDetailBoxCard(true)} />
+                            <Column type={"buttons"} caption={"Thao tác"} alignment="center"
+                                cellRender={() =>
+                                    <div style={{ display: 'flex', flexDirection: "row" }}>
+                                        <SvgIcon onClick={() => setIsVisibleDetailBoxCard(true)} tooltipTitle="Xem chi tiết hộp chứa thẻ" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon onClick={() => { }} tooltipTitle="Bar Code" sizeIcon={17} textSize={17} icon="assets/icons/BarCode.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon onClick={() => setIsVisibleDelJobOutput(true)} tooltipTitle="Xóa Job output" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+
+                                    </div>}>
+                                <ButtonIcon icon="info" />
                                 <ButtonIcon icon="smalliconslayout" />
-                                <ButtonIcon icon="trash" onClick={() => setIsVisibleDelJobOutput(true)} />
+                                <ButtonIcon icon="trash" />
                             </Column>
                             <MasterDetail
                                 enabled={true}

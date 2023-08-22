@@ -15,6 +15,7 @@ import { registerScreen } from "@haulmont/jmix-react-ui";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
 import InfoJobOutputDetail from "./InfoJobOutputDetail/InfoJobOutputDetail";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const data = [
@@ -130,7 +131,13 @@ export const ManageJobOutput = () => {
                                 <Column caption={"Tên Job"} dataField={"jobName"} />
                                 <Column caption={"Số lượng thẻ"} dataField={"quantity"} />
                                 <Column caption={"Trạng thái"} dataField={"status"} />
-                                <Column type={"buttons"} caption={"Thao tác"} alignment="center" >
+                                <Column type={"buttons"} caption={"Thao tác"} alignment="center"
+                                    cellRender={() =>
+                                        <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon onClick={() => setIsVisibleJobOutputDetail(true)} tooltipTitle="Thông tin chi tiết Job output" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={() => setIsVisibleDelJobOutput(true)} tooltipTitle="Xóa Job output" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                        </div>
+                                    }>
                                     <ButtonIcon icon="info" onClick={() => setIsVisibleJobOutputDetail(true)} />
                                     <ButtonIcon icon="trash" onClick={() => setIsVisibleDelJobOutput(true)} />
                                 </Column>

@@ -13,6 +13,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import { Tooltip } from 'antd';
 import ProgressMonitoringWODetail from "./ProgressMonitoringWODetail/ProgressMonitoringWODetail";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/progressMonitoringManufacture";
@@ -73,10 +74,7 @@ export const ProgressMonitoringManufacture = () => {
                         >
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <Button
-                                        hint="Xuất Excel"
-                                        icon="download"
-                                        text="Xuất Excel" />
+                                    <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                 <ToolbarItem name="searchPanel" location="before" />
@@ -110,9 +108,12 @@ export const ProgressMonitoringManufacture = () => {
                             <Column caption={"Tỉ lệ hoàn thành"} dataField={"finishRatio"} />
                             <Column caption={"Tỉ lệ lỗi"} dataField={"errorRatio"} />
                             <Column caption={"Trạng thái"} dataField="status" />
-                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" >
-                                <ButtonIcon icon="eyeopen" onClick={() => setIsVisibleWODetail(true)} />
-                                <ButtonIcon icon="trash" />
+                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" cellRender={() =>
+                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                    <SvgIcon onClick={() => setIsVisibleWODetail(true)} tooltipTitle="Thông tin chi tiết - WO" sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                </div>
+                            }>
                             </Column>
                         </DataGrid>
                     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, Radio } from 'antd';
 import { QrcodeOutlined } from '@ant-design/icons';
 
-interface PopupConfirmDeleteProps {
+interface PopupDetailBoxCardProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -12,7 +12,7 @@ interface PopupConfirmDeleteProps {
     className?: string;
 }
 
-const PopupDetailBoxCard: React.FC<PopupConfirmDeleteProps> = ({
+const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
     isVisible,
     onCancel,
     onSubmit,
