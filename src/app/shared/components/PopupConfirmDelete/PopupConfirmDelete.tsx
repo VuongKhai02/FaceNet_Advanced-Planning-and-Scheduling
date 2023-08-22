@@ -23,11 +23,11 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
     return (
         <Modal
             bodyStyle={{ padding: 0 }}
-            closeIcon={true}
+            // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
             footer={customFooter !== undefined ? customFooter : [
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20 }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
                     <Button
                         key="cancel"
                         style={{

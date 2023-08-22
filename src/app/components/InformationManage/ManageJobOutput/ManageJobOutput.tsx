@@ -53,7 +53,6 @@ export const ManageJobOutput = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -87,11 +86,12 @@ export const ManageJobOutput = () => {
                                             <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
                                                 Xóa Job output
                                             </h3>
-                                            <h5 style={{ fontWeight: 400, marginTop: 30 }}>{'Bạn có chắc chắn muốn xóa Job out này không?'}</h5>
+
                                         </div>
                                     }
                                     modalContent={
-                                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', marginLeft: 20, marginRight: 20 }}>
+                                            <h5 style={{ fontWeight: 500, marginTop: 20, marginLeft: 20, fontSize: 20 }}>{'Bạn có chắc chắn muốn xóa Job out này không?'}</h5>
                                             <h3 style={{ color: '#ff794e' }}>
                                                 <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
                                                 Lưu ý:
@@ -142,8 +142,8 @@ export const ManageJobOutput = () => {
                                     <ButtonIcon icon="trash" onClick={() => setIsVisibleDelJobOutput(true)} />
                                 </Column>
                             </DataGrid>
-                        </div>
-                    </div>
+                        </div >
+                    </div >
             }
         </>
     )

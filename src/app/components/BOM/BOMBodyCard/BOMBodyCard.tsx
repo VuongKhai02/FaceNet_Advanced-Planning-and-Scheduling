@@ -73,7 +73,6 @@ export const BOMBodyCard = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -105,8 +104,8 @@ export const BOMBodyCard = () => {
                                         }
                                         modalTitle={
                                             <div>
-                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
-                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 25 }}>
+                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
+                                                    <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
                                                     Xác nhận xóa?
                                                 </h3>
                                             </div>

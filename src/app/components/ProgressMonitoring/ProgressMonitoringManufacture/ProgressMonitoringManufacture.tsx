@@ -49,7 +49,6 @@ export const ProgressMonitoringManufacture = () => {
                         </div>
                         <div className="informer" style={{
                             backgroundColor: "#ffffff",
-                            paddingLeft: 13
                         }}>
                             <h5 className="name" style={{
                                 color: "rgba(0, 0, 0, 0.7)",

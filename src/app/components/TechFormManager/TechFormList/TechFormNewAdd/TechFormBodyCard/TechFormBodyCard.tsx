@@ -63,11 +63,12 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                     <div className="table-responsive">
                         <div className="informer" style={{
                             textAlign: "left",
-                            paddingTop: 12
+                            paddingTop: 12,
+
                         }}>
                             <h5 className="name" style={{
                                 fontSize: 18,
-                                marginBottom: 0
+                                marginBottom: 0,
                             }}>Thêm mới phiếu công nghệ</h5>
                             <h5 className="name" style={{
                                 fontSize: 18,
@@ -123,7 +124,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                             }}>
                                 <h5 className="name" style={{
                                     fontSize: 18,
-                                    marginBottom: 0
+                                    marginBottom: 0,
                                 }}>Quy cách sản phẩm/Product Spec</h5>
 
                             </div>
@@ -182,7 +183,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                     fontSize: 18,
                                 }}>Thiết kế/Card design</h5>
                                 {/* <ImportTechForm /> */}
-                                <div className="mt-24">
+                                <div className="mt-24" >
                                     <Upload.Dragger
                                         multiple={false}
                                         accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -204,7 +205,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 }}>
                                     <h5 className="name" style={{
                                         fontSize: 18,
-                                        marginBottom: 0
+                                        marginBottom: 0,
                                     }}>1. Trình tự công nghệ/Technology procedure</h5>
                                 </div>
                                 <div>
@@ -291,7 +292,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
                                 <Button
                                     text="Tiếp theo"

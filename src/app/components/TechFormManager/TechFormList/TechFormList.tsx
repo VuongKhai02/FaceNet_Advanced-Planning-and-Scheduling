@@ -100,7 +100,6 @@ export const TechFormList = () => {
               </div>
               <div className="informer" style={{
                 backgroundColor: "#ffffff",
-                paddingLeft: 13
               }}>
                 <h5 className="name" style={{
                   color: "rgba(0, 0, 0, 0.7)",
@@ -120,11 +119,11 @@ export const TechFormList = () => {
                     <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
                       Xác nhận gửi SAP
                     </h3>
-                    <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
                   </div>
                 }
                 modalContent={
                   <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                    <h4 style={{ fontWeight: 600, marginTop: 20, marginLeft: 20 }}>Bạn chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h4>
                     <h3 style={{ color: '#ff794e' }}>
                       <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
                       Lưu ý:
@@ -178,7 +177,7 @@ export const TechFormList = () => {
                 }} allowSearch={true} />
                 <FilterRow visible={true} />
                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                <SearchPanel visible={true} placeholder={"VD: PO"} />
+                <SearchPanel visible={true} placeholder={"VD: PO"} width={300} />
                 <Paging defaultPageSize={5} />
                 <Pager
                   visible={true}

@@ -296,11 +296,11 @@ export const TechFormListDetail = React.memo((props: any) => {
                                     <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
                                         Xác nhận gửi SAP
                                     </h3>
-                                    <h5 style={{ fontWeight: 400, marginTop: 30 }}>Bạn có chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h5>
                                 </div>
                             }
                             modalContent={
                                 <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
+                                    <h4 style={{ fontWeight: 600, marginTop: 20, marginLeft: 20 }}>Bạn chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h4>
                                     <h3 style={{ color: '#ff794e' }}>
                                         <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
                                         Lưu ý:

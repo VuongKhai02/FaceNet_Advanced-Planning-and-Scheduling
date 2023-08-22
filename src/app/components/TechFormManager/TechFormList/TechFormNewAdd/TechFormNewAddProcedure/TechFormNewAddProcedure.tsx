@@ -381,7 +381,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Button
                                         text="Trở lại"
                                         onClick={setClose}
-                                        style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                        style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                     />
                                     <Button text="Tiếp theo" onClick={handleAddFormTechHostamping} style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }} />
                                     <Button text="Thêm mới" style={{ backgroundColor: "gray", color: "#fff" }} />

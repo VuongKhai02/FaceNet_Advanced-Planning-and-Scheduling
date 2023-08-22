@@ -34,7 +34,7 @@ const PopupDetailProductionRequire: React.FC<PopupDetailProductionRequireProps> 
                         <Button
                             key="cancel"
                             style={{
-                                marginRight: '30px',
+                                marginRight: '15px',
                                 backgroundColor: '#E5E5E5',
                                 display: 'inline-block',
                                 borderRadius: '4px',
