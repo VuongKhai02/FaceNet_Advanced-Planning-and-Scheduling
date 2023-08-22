@@ -1,0 +1,253 @@
+// import React, {useState} from "react";
+// // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// import 'devextreme-react/text-area';
+// import {toastError} from "../../../../utils/ToastifyManager";
+// import {DnlnvlDetailDetail} from "../../../../jmix/entities/DnlnvlDetailDetail";
+// import InfoRow from "../../../../utils/InfoRow";
+// import {
+//   Column,
+//   ColumnChooser,
+//   DataGrid,
+//   Editing,
+//   FilterRow,
+//   HeaderFilter,
+//   Item as DataGripToolbarItem,
+//   LoadPanel,
+//   Pager,
+//   Paging,
+//   Scrolling,
+//   Selection,
+//   Toolbar
+// } from "devextreme-react/data-grid";
+// import {DropDownBox} from "devextreme-react";
+// import {Button} from "devextreme-react/button";
+// import {Location} from "../../../../jmix/entities/Location";
+// import ScrollView from "devextreme-react/scroll-view";
+//
+//
+// const ROUTING_PATH = "/dnlnvlManager";
+//
+// const PopupEditMaterial = (props) => {
+//
+//   const [listLocation, setListLocation] = useState<Location[] | undefined>(undefined);
+//   const [listChooseMaterial, setListChooseMaterial] = useState<DnlnvlDetailDetail[] | undefined>();
+//   const [listChooseMaterialKeys, setListChooseMaterialKeys] = useState<number[] | undefined>();
+//   const [stillNeed, setStillNeed] = useState<number | undefined>(dnlnvlDetail.stillNeed);
+//   const [estTotalQty, setEstTotalQty] = useState<number | undefined>(dnlnvlDetail.estTotalQty);
+//   const [dnlnvlLoad, setDnlnvlLoad] = useState<boolean>(false);
+//   const [listMaterialAvailable, setListMaterialAvailable] = useState<DnlnvlDetailDetail[] | undefined>(undefined);
+//
+//
+//   // @ts-ignore
+//   // const dnlnvlDetail = dnlnvl_?.dnlnvlDetails ? copy(dnlnvl_?.dnlnvlDetails) : null
+//
+//   const dataGridRender = () => {
+//     return (<ScrollView>
+//       <DataGrid
+//         key='location'
+//         id={"location"}
+//         keyExpr={"locationName"}
+//         dataSource={listLocation}
+//         columns={gridColumns}
+//         hoverStateEnabled={true}
+//         // selectedRowKeys={gridBoxValue}
+//         // onSelectionChanged={dataGridOnSelectionChanged}
+//       >
+//         <Column width={200} allowEditing={false} dataField={'location'}/>
+//         <Selection mode="multiple"/>
+//         {/*<Scrolling mode="virtual"/>*/}
+//         <Paging enabled={true} pageSize={10}/>
+//         <FilterRow visible={true}/>
+//       </DataGrid>
+//     </ScrollView>);
+//   }
+//
+//   const onSelectionChangedContentModifyDnlnvl = (e) => {
+//
+//     let selectedRowsData = e.selectedRowsData;
+//
+//     if (stillNeed == undefined) {
+//       toastError("Có lỗi xảy ra");
+//       return
+//     }
+//
+//     if (stillNeed && stillNeed < 0 && listChooseMaterial && selectedRowsData.length > listChooseMaterial?.length) {
+//       toastError("Bạn đang reserved quá số lượng cần thiết");
+//       return
+//     }
+//
+//     let tempListChooseMaterial: DnlnvlDetailDetail[] | undefined = listMaterialAvailable;
+//
+//     // print(selectedRowsData);
+//     e.currentDeselectedRowKeys = e.currentDeselectedRowKeys.map((dnlnvlDetailDetailDeselected, index) => {
+//       tempListChooseMaterial = tempListChooseMaterial?.map((dnlnvlDetailDetailAvailable, index1) => {
+//         if (dnlnvlDetailDetailAvailable.id == dnlnvlDetailDetailDeselected) {
+//           dnlnvlDetailDetailAvailable.stillNeed = null;
+//         }
+//         return dnlnvlDetailDetailAvailable;
+//       })
+//       return dnlnvlDetailDetailDeselected;
+//     })
+//
+//     e.selectedRowKeys = e.selectedRowKeys.map((dnlnvlDetailDetailSelected: DnlnvlDetailDetail, index) => {
+//       tempListChooseMaterial = tempListChooseMaterial?.map((dnlnvlDetailDetailAvailable: DnlnvlDetailDetail, index1) => {
+//         if (dnlnvlDetailDetailAvailable.id == dnlnvlDetailDetailSelected.id) {
+//           dnlnvlDetailDetailAvailable.stillNeed = dnlnvlDetailDetailSelected.stillNeed;
+//         }
+//         return dnlnvlDetailDetailAvailable;
+//       })
+//       return dnlnvlDetailDetailSelected;
+//     })
+//
+//     selectedRowsData = selectedRowsData.map((value, index) => {
+//       if (value.stillNeed == null) {
+//         value.stillNeed = stillNeed - value.reserveQty;
+//         // value.stillNeed = 32987474
+//       }
+//       return value;
+//     })
+//
+//     const goo = _.sumBy(selectedRowsData, function (data) {
+//       return data.reserveQty
+//     })
+//
+//     setEstTotalQty(goo);
+//     setStillNeed(dnlnvlDetail.estTotalQty - goo);
+//     setListChooseMaterial(selectedRowsData);
+//     setListChooseMaterialKeys(e.selectedRowKeys);
+//     setListMaterialAvailable(tempListChooseMaterial);
+//   }
+//
+//   return <div id={"dnhjbdf"} style={{height: "100%"}}>
+//     <div style={{background: 'lightgray', padding: '10px', height: "20%"}}>
+//       <h2>
+//         KHUYẾN NGHỊ
+//       </h2>
+//
+//       <div>
+//         {/*{*/}
+//         {/*  listChooseMaterial ? str(listChooseMaterial) : ""*/}
+//         {/*}*/}
+//         {/*{*/}
+//         {/*  listChooseMaterialKeys ? str(listChooseMaterialKeys) : ""*/}
+//         {/*}*/}
+//         {/*<div>*/}
+//         {/*  {*/}
+//         {/*    str(listChooseMaterial)*/}
+//         {/*  }*/}
+//         {/*</div>*/}
+//         <div style={{"display": "flex", "flexDirection": "row"}}>
+//           <InfoRow label={"id"} data={dnlnvlDetail.id}/>
+//           <InfoRow label={"Part Number Code"} data={dnlnvlDetail.partNumber.partNumberCode}/>
+//           <InfoRow label={"Name"} data={dnlnvlDetail.partNumber.name}/>
+//           <InfoRow label={"Est Reqd Qty"} data={dnlnvlDetail.estReqdQty}/>
+//           <InfoRow label={"Buffer Qty"} data={dnlnvlDetail.bufferQty}/>
+//           <InfoRow label={"Reserve Qty "} data={dnlnvlDetail.estTotalQty}/>
+//           <InfoRow label={"Current Reserve Qty "} data={estTotalQty}/>
+//           <div style={{"background": stillNeed && stillNeed < 0 ? "green" : "red", color: 'white'}}>
+//
+//             <InfoRow label={"Still Need"} data={stillNeed}/>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//     <div style={{overflow: "hidden", height: "80%"}}>
+//       <DataGrid
+//         showColumnLines={true}
+//         showRowLines={true}
+//         rowAlternationEnabled={true}
+//         columnAutoWidth={true}
+//         repaintChangesOnly={true}
+//         showBorders={true}
+//         allowColumnResizing={true}
+//         allowColumnReordering={true}
+//         focusedRowEnabled={true}
+//         onSelectionChanged={onSelectionChangedContentModifyDnlnvl}
+//         // defaultSelectionFilter={selectionFilter}
+//         height={"100%"}
+//         dataSource={listMaterialAvailable}
+//         keyExpr="id"
+//         selectedRowKeys={listChooseMaterialKeys}
+//       >
+//         <Toolbar>
+//           <DataGripToolbarItem>
+//             <DropDownBox
+//               width={300} // TODO fix cứng width
+//               // value={gridBoxValue}
+//               valueExpr="locationName"
+//               deferRendering={false}
+//               displayExpr="locationName"
+//               placeholder="Select a value..."
+//               showClearButton={true}
+//               dataSource={listLocation}
+//               // onValueChanged={syncDataGridSelection}
+//               contentRender={dataGridRender}
+//             />
+//           </DataGripToolbarItem>
+//           {/*<DataGripToolbarItem>*/}
+//           {/*  <TextBox placeholder="Rank áp"/>*/}
+//           {/*</DataGripToolbarItem>*/}
+//           {/*<DataGripToolbarItem>*/}
+//           {/*  <TextBox placeholder="Rank quang"/>*/}
+//           {/*</DataGripToolbarItem>*/}
+//           {/*<DataGripToolbarItem>*/}
+//           {/*  <TextBox placeholder="Rank màu"/>*/}
+//           {/*</DataGripToolbarItem>*/}
+//           {/*<DataGripToolbarItem>*/}
+//           {/*  <TextBox placeholder="User data 4"/>*/}
+//           {/*</DataGripToolbarItem>*/}
+//           {/*<DataGripToolbarItem>*/}
+//           {/*  <TextBox placeholder="User data 5"/>*/}
+//           {/*</DataGripToolbarItem>*/}
+//           <DataGripToolbarItem
+//             name="columnChooserButton">
+//           </DataGripToolbarItem>
+//           <DataGripToolbarItem>
+//             <Button
+//               onClick={refresh2}
+//               icon='refresh'
+//             />
+//           </DataGripToolbarItem>
+//         </Toolbar>
+//         <ColumnChooser enabled={true}/>
+//         <FilterRow visible={true}
+//                    applyFilter={'auto'}/>
+//         <HeaderFilter visible={true}/>
+//         <Paging enabled={true} defaultPageSize={30}/>
+//         <Pager
+//           visible={true}
+//           displayMode={"full"}
+//           showInfo={true}
+//           showNavigationButtons={true}
+//           allowedPageSizes={[5, 30]}/>
+//         <Selection
+//           mode="multiple"
+//           allowSelectAll={false}
+//           // deferred={true}
+//           showCheckBoxesMode={"onClick"}
+//         />
+//         <Scrolling mode={"virtual"} columnRenderingMode="virtual"/>
+//         <Editing/>
+//         <Column dataField="id" caption={"Id"}/>
+//         <Column dataField="material" caption="Material Id"/>
+//         <Column dataField="materialName" caption="Material Name"/>
+//         <Column dataField="reserveQty" caption="Reserve Qty"/>
+//         <Column dataField="stillNeed" caption="Still Need"/>
+//         <Column dataField="partNumber" caption="Part Code" cellRender={renderPartNumberCell}/>
+//         <Column dataField="partNumber" caption="Part Name" cellRender={renderPartNumberNameCell}/>
+//         <Column dataField="rankAp" caption="rankAp"/>
+//         <Column dataField="rankMau" caption="rankMau"/>
+//         <Column dataField="rankQuang" caption="rankQuang" dataType="text"/>
+//         <Column dataField="userData4" caption="userData4" dataType="text"/>
+//         <Column dataField="userData5" caption="userData5"/>
+//         <Column dataField="materialState" caption="Material State"/>
+//         <Column dataField="locationType" caption="Location (Type)"/>
+//         <Column dataField="status" caption="Status"/>
+//         <LoadPanel enabled={dnlnvlLoad}/>
+//       </DataGrid>
+//     </div>
+//   </div>
+// }
+//
+// export default PopupEditMaterial;
+//

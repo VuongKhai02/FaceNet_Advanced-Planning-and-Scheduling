@@ -6,7 +6,7 @@ export const GRAPHQL_URI = process.env.REACT_APP_GRAPHQL_URI ?? "/graphql";
 
 export const DEFAULT_COUNT = 10; // Typical amount of entities to be loaded on browse screens
 
-export const PLANNING_API_URL = "http://localhost:6886"
+export const PLANNING_API_URL = process.env.REACT_APP_API_URL
 
 //Scada config
 export const SCADA_URL = process.env.REACT_APP_SCADA_API_URL ?? "http://192.168.68.95:4200"

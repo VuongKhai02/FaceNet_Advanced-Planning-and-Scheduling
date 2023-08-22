@@ -15,8 +15,12 @@ import { observer } from "mobx-react";
 import PopupBOMAddNewInfoMaterial from "../../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
+import axios from "axios";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import { PLANNING_API_URL } from "../../../../../config";
 
 type BOMBodyCardAddInfoProps = {
+    id: Number | null,
     isOpen: boolean,
     setClose?: () => void;
 
@@ -26,10 +30,11 @@ const data = [
     { materialCode: 'HH01', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
 ];
 export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
-    isOpen = false, setClose }) => {
+    isOpen = false, setClose, id }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
+    const [bomData, setBomData] = React.useState<any>({})
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     }
@@ -41,6 +46,23 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
         setIsVisiblePopupAddInfoMaterial(true);
     }
 
+    const mainStore = useMainStore();
+
+    React.useEffect(() => {
+        const headers = {
+            'Authorization': 'Bearer ' + mainStore.authToken,
+            'content-type': 'application/json'
+          };
+          axios.get(PLANNING_API_URL + '/api/boms/' + id, { headers })
+            .then(response => {
+              if (response.status === 200) {
+                console.log(response.data.data)
+                setBomData(response.data.data)
+              }
+            }
+            );
+    }, [id])
+
     return (
         <>
             {isVisiblePopupAddInfoMaterial ?
@@ -51,7 +73,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Mã vật tư</p>
-                                    <TextBox id="codeMaterial" key={'codeMaterial'} placeholder="Nhập mã vật tư" width={300}></TextBox>
+                                    <TextBox value="" id="codeMaterial" key={'codeMaterial'} placeholder="Nhập mã vật tư" width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Tên kỹ thuật</p>
                                     <TextBox id="technicalName" key={'technicalName'} placeholder="Nhập tên kỹ thuật"></TextBox>
                                     <p style={{ marginTop: 30 }}>Phân loại</p>
@@ -106,7 +128,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Mã sản phẩm</p>
-                                    <TextBox placeholder="SP001" width={350}></TextBox>
+                                    <TextBox value={bomData.productCode} placeholder="SP001" width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Số lượng</p>
                                     <TextBox placeholder="15000"></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
@@ -114,17 +136,17 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 </td>
                                 <td>
                                     <p>Mô tả sản phẩm</p>
-                                    <TextBox placeholder="Phôi thẻ MC " width={350}></TextBox>
+                                    <TextBox value={bomData.productName} placeholder="Phôi thẻ MC " width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Lưu ý</p>
-                                    <TextBox placeholder=""></TextBox>
+                                    <TextBox value={bomData.notice} placeholder=""></TextBox>
                                     <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
                                     <TextBox placeholder=""></TextBox>
                                 </td>
                                 <td style={{ marginRight: 30 }}>
                                     <p>Version</p>
-                                    <TextBox placeholder="1.1" width={350}></TextBox>
+                                    <TextBox value={bomData.version} placeholder="1.1" width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Ghi chú</p>
-                                    <TextBox placeholder=""></TextBox>
+                                    <TextBox value={bomData.note} placeholder=""></TextBox>
                                 </td>
                             </table>
                         </div>
@@ -144,7 +166,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                         <DataGrid
                             key="materialCode"
                             keyExpr={"materialCode"}
-                            dataSource={data}
+                            dataSource={bomData.bomBodyCardMaterials}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
@@ -220,7 +242,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             >
                             </Column>
                             <Column caption={"Kho hàng"} dataField="warehouse" />
-                            <Column caption={"Mã vật tư thay thế"} dataField="materialCodeChange" />
+                            <Column caption={"Mã vật tư thay thế"} dataField="replaceMaterialCode" />
                             <Column caption={"Mô tả vật tư thay thế"} dataField="materialDescriptChange" />
                             <Column caption={"Số lượng tồn kho"} dataField="inventoryQuantity" />
                             <Column type={'buttons'} caption={"Thao tác"} alignment="center"

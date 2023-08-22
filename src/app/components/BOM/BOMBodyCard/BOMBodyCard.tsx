@@ -18,6 +18,9 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../config";
 
 
 const data = [
@@ -39,6 +42,12 @@ export const BOMBodyCard = () => {
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
 
+    const [bom, setBom] = React.useState<any>({})
+
+    const [bomIdChoosed, setBomIdChoosed] = React.useState<Number | null>(null);
+
+    const mainStore = useMainStore();
+
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     }
@@ -46,17 +55,36 @@ export const BOMBodyCard = () => {
         setIsConfirmDelete(false);
     }
 
-    const handleBOMBodyCardAddInfo = () => {
+    const handleBOMBodyCardAddInfo = (e) => {
+        setBomIdChoosed(e.row.data.id)
         setIsBOMCardAddInfo(true);
     }
+
+    React.useEffect(() => {
+        const headers = {
+            'Authorization': 'Bearer ' + mainStore.authToken,
+            'content-type': 'application/json'
+          };
+          axios.get(PLANNING_API_URL + '/api/boms', { headers })
+            .then(response => {
+              if (response.status === 200) {
+                setBom(response.data.data)
+              }
+            }
+            );
+    }, [])
 
     return (
         <>
             {
                 isBOMCardAddInfo ?
                     <BOMBodyCardAddInfo
+                        id = {bomIdChoosed}
                         isOpen={isBOMCardAddInfo}
-                        setClose={() => { setIsBOMCardAddInfo(false) }}
+                        setClose={() => { 
+                            setIsBOMCardAddInfo(false); 
+                            setBomIdChoosed(null);
+                        }}
                     />
                     :
                     <div>
@@ -87,7 +115,7 @@ export const BOMBodyCard = () => {
                                 <DataGrid
                                     key="productCode"
                                     keyExpr={"productCode"}
-                                    dataSource={data}
+                                    dataSource={bom.data}
                                     showBorders={true}
                                     columnAutoWidth={true}
                                     showRowLines={true}
@@ -159,14 +187,14 @@ export const BOMBodyCard = () => {
                                     >
                                     </Column>
 
-                                    <Column dataField="productType"
+                                    <Column dataField="productClassify"
                                         caption="Phân loại sản phẩm"
                                         alignment={"left"}
                                         minWidth={140}
                                     >
                                     </Column>
                                     <Column dataField="describe" caption="Mô tả " />
-                                    <Column dataField="note" caption="Lưu ý" />
+                                    <Column dataField="notice" caption="Lưu ý" />
                                     <Column
                                         dataField="note"
                                         alignment={"left"}
