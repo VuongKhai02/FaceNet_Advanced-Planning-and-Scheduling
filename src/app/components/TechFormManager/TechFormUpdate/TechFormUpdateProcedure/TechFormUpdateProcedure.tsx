@@ -3,6 +3,7 @@ import { Button, DataGrid, TextBox } from "devextreme-react";
 import { Column, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateHostamping from "../TechFormUpdateHostamping/TechFormUpdateHostamping";
+import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormDetailProcedureProps = {
     isOpen: boolean,
@@ -156,9 +157,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                         <Column dataField="dun" caption="Đùn" cellRender={() => <TextBox placeholder="Nhập" key={'dun'} />} />
                                         <Column dataField="other" caption="Khác/Other" cellRender={() => <TextBox placeholder="Nhập" key={'other'} />} />
                                         <Column caption="" dataField="" alignment="center" cellRender={() =>
-                                            <div>
-                                                <Button icon="add" style={{ marginRight: 10, border: 'none' }} />
-                                                <Button icon="trash" style={{ border: 'none' }} />
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                                <SvgIcon onClick={() => { }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={() => { }} tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                             </div>
                                         } />
                                     </DataGrid>

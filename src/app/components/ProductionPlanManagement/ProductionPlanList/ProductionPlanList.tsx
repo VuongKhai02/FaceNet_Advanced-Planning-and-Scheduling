@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DateBox as DateSelect, Popup, SelectBox, TextBox } from "devextreme-react";
+import { Button, DataGrid, DateBox as DateSelect, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -23,6 +23,9 @@ import InfoRow from "../../../shared/components/InfoRow/InfoRow";
 import CreateProductionPlan from "./CreateProductionPlan/CreateProductionPlan";
 import PopupWO from "../../../shared/components/PopupWO/PopupWO";
 import QRCode from "react-qr-code";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import PopupConfirmGeneral from "../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const ROUTING_PATH = "/ProductionPlanList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
@@ -32,6 +35,17 @@ const data = [
     { no: '2', codeMaterial: 'Mã vật tư 2', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
     { no: '2', codeMaterial: 'Mã vật tư 3', nameMaterial: 'Tên vật tư', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' }
 ]
+const data1 = [
+    {
+        soCode: '312324', manufactureCode: 'MSX-123', customerName: 'TP Bank', cardName: 'Visa TPBank', quantity: '15000', quantityLoss: '18000', qrCode: '', priority: '1', reasonClose: 'Khách hàng thay đổi yêu cầu'
+    },
+    {
+        soCode: '312325', manufactureCode: 'MSX-123', customerName: 'TP Bank', cardName: 'Visa TPBank', quantity: '15000', quantityLoss: '18000', qrCode: '', priority: '1', reasonClose: 'Khách hàng thay đổi yêu cầu'
+    },
+    {
+        soCode: '312326', manufactureCode: 'MSX-123', customerName: 'TP Bank', cardName: 'Visa TPBank', quantity: '15000', quantityLoss: '18000', qrCode: '', priority: '1', reasonClose: 'Khách hàng thay đổi yêu cầu'
+    }
+];
 export const ProductionPlanList = () => {
 
     const [content, setContent] = useState<string>();
@@ -47,6 +61,7 @@ export const ProductionPlanList = () => {
     const [isVisibleUpdateInfoWO, setIsVisibleUpdateInfoWO] = React.useState<boolean>(false);
     const [isVisibleDetailQRCodeWO, setIsVisibleDetailQRCodeWO] = React.useState<boolean>(false);
     const [isVisibleAddQRCodeWO, setIsVisibleAddQRCodeWO] = React.useState<boolean>(false);
+    const [isCloseWorkOrder, setIsCloseWorkOrder] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
 
     const showPopupIcon = () => {
@@ -66,24 +81,22 @@ export const ProductionPlanList = () => {
 
     const popupContentIcon = (
         <div onClick={() => { hidePopupIcon() }}>
-            <div>
-                <Button icon="aligncenter" text="Xem nguyên vật liệu" onClick={() => setIsViewMaterial(true)} width={300} />
+            <div style={{ border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={() => setIsViewMaterial(true)} text="Xem nguyên vật liệu" tooltipTitle="Xem nguyên vật liệu" sizeIcon={17} textSize={17} icon="assets/icons/ViewMaterial.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="rename" text="Khai báo công đoạn QMS" onClick={() => setIsVisibleQMSProcessResponsiblePerson(true)} width={300} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon text="Gửi lệnh sản xuất sang QMS" tooltipTitle="Gửi lệnh sản xuất sang QMS" sizeIcon={17} textSize={17} icon="assets/icons/DoubleRightChervon.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="plus" text="Thêm đề nghị lĩnh nguyên vật liệu" onClick={hidePopupIcon} width={300} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={() => setIsVisibleAddQRCodeWO(true)} text="Thêm mới mã QR cho lệnh sản xuất" tooltipTitle="Thêm mới mã QR cho lệnh sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="folder" text="Thêm mới mã QR cho WO" onClick={() => setIsVisibleAddQRCodeWO(true)} width={300} />
-            </div>
-            <div style={{ marginTop: 20 }}>
-                <Button icon="add" text="Thêm mới" onClick={handleAddNewButton} width={300} style={{ color: 'orange' }} />
+            <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                <SvgIcon onClick={handleAddNewButton} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
+
             </div>
             {newButtons.map((button, index) => (
-                <div key={index} style={{ marginTop: 20 }}>
-                    <Button icon="plus" text={button.text} width={button.width} />
+                <div key={index} style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
+                    <SvgIcon text="Thêm mới button icon" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
                 </div>
             ))}
         </div>
@@ -332,7 +345,6 @@ export const ProductionPlanList = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -346,7 +358,7 @@ export const ProductionPlanList = () => {
                                 isVisible={isVisibleUpdateInfoWO}
                                 modalContent={
                                     <div>
-                                        <div style={{ marginLeft: 20, marginRight: 20 }}>
+                                        <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
                                             <p style={{ marginBottom: 5, color: '#333', fontSize: 20 }}>Thông tin chung</p>
                                             <div>
                                                 <table style={{ display: "flex", justifyContent: "space-around" }}>
@@ -410,7 +422,10 @@ export const ProductionPlanList = () => {
                                         </div>
                                     </div>
                                 }
-                                modalTitle='Cập nhật thông tin WO'
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Cập nhật thông tin WO
+                                </div>}
                                 width={900}
                                 onCancel={() => setIsVisibleUpdateInfoWO(false)}
                                 onSubmit={() => { }}
@@ -420,7 +435,7 @@ export const ProductionPlanList = () => {
                                 customFooter={handleCustomFooterDetailQRCodeWO}
                                 modalContent={
                                     <div>
-                                        <h3><p>Xem chi tiết QR code WO</p></h3>
+                                        <h3><p style={{ marginTop: 20 }}>Xem chi tiết QR code WO</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
 
@@ -459,7 +474,8 @@ export const ProductionPlanList = () => {
                                     </div>
                                 }
                                 modalTitle={
-                                    <div>
+                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         Xem chi tiết QR code WO
                                     </div>}
                                 width={1000}
@@ -471,7 +487,7 @@ export const ProductionPlanList = () => {
                                 customFooter={handleCustomFooterAddQRCodeWO}
                                 modalContent={
                                     <div>
-                                        <h3><p>Thêm mới QR code cho WO</p></h3>
+                                        <h3><p style={{ marginTop: 20 }}>Thêm mới QR code cho WO</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
 
@@ -508,7 +524,10 @@ export const ProductionPlanList = () => {
                                         </div>
                                     </div>
                                 }
-                                modalTitle='Thêm mới QR code cho WO '
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Thêm mới QR code cho WO
+                                </div>}
                                 width={1000}
                                 onCancel={() => setIsVisibleAddQRCodeWO(false)}
                                 onSubmit={() => { }}
@@ -516,8 +535,9 @@ export const ProductionPlanList = () => {
                             <Modal
                                 visible={isVisibleAdd}
                                 title={
-                                    <div style={{ display: 'flex', alignItems: 'center', height: 50 }}>
-                                        <p style={{ lineHeight: '38px', padding: 0, margin: 0 }}>Import phiếu công nghệ</p>
+                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        Import phiếu công nghệ
                                     </div>
                                 }
                                 footer={[
@@ -543,11 +563,38 @@ export const ProductionPlanList = () => {
                                     </div>
                                 </div>
                             </Modal>
+                            <PopupConfirmGeneral
+                                isVisible={isCloseWorkOrder}
+                                modalContent={
+                                    <div>
+                                        <div style={{ marginLeft: 20, marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: '500' }}>
+                                            Lệnh sản xuất hiện tại đang ở trạng thái .... Nếu bạn đóng lệnh sản xuất, tất cả thông tin của lệnh sản xuất này sẽ bị hủy và cảnh báo về việc đóng sẽ được gửi đến các bộ phận liên quan. Bạn có chắc chắn muốn đóng lệnh sản xuất 13342?
+                                        </div>
+                                        <div className="reject-reason-container">
+                                            <label style={{ marginLeft: 20, fontSize: 18 }}>Lý do đóng lệnh sản xuất<span className="required">*</span></label>
+                                            <TextArea
+                                                value={''}
+                                                onValueChanged={() => { }}
+                                                placeholder="Nhập lý do từ chối..."
+                                                height={100}
+                                                style={{ marginTop: 10, marginLeft: 20, marginRight: 20 }}
+                                            />
+                                        </div>
+                                    </div>
+                                }
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Info.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <span style={{ color: '#FF7A00', fontSize: 20 }}>Xác nhận đóng lệnh sản xuất?</span>
+                                </div>}
+                                width={600}
+                                onCancel={() => setIsCloseWorkOrder(false)}
+                                onSubmit={() => { }}
+                            />
 
                             <DataGrid
-                                key={'saleOrderId'}
-                                keyExpr={"saleOrderId"}
-                                dataSource={content}
+                                key={'soCode'}
+                                keyExpr={"soCode"}
+                                dataSource={data1}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
@@ -562,13 +609,10 @@ export const ProductionPlanList = () => {
                             >
                                 <Toolbar>
                                     <ToolbarItem location="after">
-                                        <Button hint="Thêm mới" icon="add" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} />
+                                        <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem location="after">
-                                        <Button
-                                            hint="Xuất Excel"
-                                            icon="download"
-                                            text="Xuất Excel" />
+                                        <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
@@ -591,33 +635,39 @@ export const ProductionPlanList = () => {
                                     showInfo={true}
                                     showNavigationButtons={true}
                                     infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                                <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" width={100} />
-                                <Column caption={"Mã SO"} dataField={"productionCode"} />
-                                <Column caption={"Mã PCN"} dataField={"productionCode"} />
-                                <Column caption={"Tên khách hàng"} dataField={"customer"} />
-                                <Column caption={"Tên thẻ "} dataType="datetime" dataField={"startTime"} />
-                                <Column caption={"Số lượng"} dataType="datetime" dataField={"deliveryDate"} />
-                                <Column caption={"Số lượng bù hao"} dataField={"customer"} />
-                                <Column caption={"Mã QR"} dataField={"customer"} />
-                                <Column caption={"Mức độ ưu tiên"} dataField={"customer"} />
+
+                                <Column caption={"Mã SO"} dataField={"soCode"} alignment="left" width={100} />
+                                <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
+                                <Column caption={"Tên khách hàng"} dataField={"customerName"} />
+                                <Column caption={"Tên thẻ "} dataField={"cardName"} />
+                                <Column caption={"Số lượng"} dataField={"quantity"} />
+                                <Column caption={"Số lượng bù hao"} dataField={"quantityLoss"} />
+                                <Column caption={"Mã QR"} dataField={"qrCode"} />
+                                <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
+                                <Column caption="Lý do đóng lệnh sản xuất" dataField="reasonClose" />
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={"buttons"} caption={"Thao tác"} alignment="left" >
-                                    <ButtonIcon icon="info" onClick={() => setIsVisibleUpdateInfoWO(true)} />
-                                    <ButtonIcon icon="smalliconslayout" onClick={() => setIsVisibleDetailQRCodeWO(true)} />
-                                    <ButtonIcon icon="chevronright" />
-                                    <ButtonIcon icon="more" onClick={showPopupIcon} />
+                                <Column type={"buttons"} caption={"Thao tác"} alignment="left"
+                                    cellRender={() =>
+                                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                                            <SvgIcon onClick={() => setIsVisibleUpdateInfoWO(true)} tooltipTitle="Cập nhật thông tin WO" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={() => setIsVisibleDetailQRCodeWO(true)} tooltipTitle="Xem chi tiết mã QR" sizeIcon={17} textSize={17} icon="assets/icons/QrCode.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Bắt đầu sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={() => setIsCloseWorkOrder(true)} tooltipTitle="Đóng lệnh sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Stop.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={showPopupIcon} tooltipTitle="Khác" sizeIcon={17} textSize={17} icon="assets/icons/More.svg" textColor="#FF7A00" />
+                                        </div>
+                                    }>
                                 </Column>
                             </DataGrid>
                             <Popup
-                                title="Icon"
+                                title="Các Icon thao tác"
                                 visible={popupVisibleIcon}
                                 onHiding={hidePopupIcon}
                                 contentRender={() => popupContentIcon}
-                                width={320}
+                                width={370}
                                 height={350}
                                 showCloseButton={false}
                                 hideOnOutsideClick={true}
-                            // position={{ my: 'left top', at: 'left bottom', of: '.dx-datagrid-table' }}
+
                             />
                             {/* Xem nguyên vật liệu */}
 

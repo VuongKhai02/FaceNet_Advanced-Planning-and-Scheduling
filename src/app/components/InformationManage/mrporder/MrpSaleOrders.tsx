@@ -12,7 +12,7 @@ import {
   Paging,
   SearchPanel,
   Toolbar,
-  MasterDetail, Editing, Form
+  MasterDetail, Editing, Form, ColumnChooser
 } from "devextreme-react/data-grid";
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
@@ -27,6 +27,7 @@ import { Tag } from "antd";
 import { Item } from "devextreme-react/form";
 import notify from "devextreme/ui/notify";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/mrporders";
@@ -324,7 +325,6 @@ export const MrpSaleOrders = () => {
       </div>
       <div className="informer" style={{
         backgroundColor: "#ffffff",
-        paddingLeft: 13
       }}>
         <h5 className="name" style={{
           color: "rgba(0, 0, 0, 0.7)",
@@ -354,15 +354,13 @@ export const MrpSaleOrders = () => {
         <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
         <Toolbar>
           <ToolbarItem location="after">
-            <Button hint="Thêm mới" icon="add" />
+            <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
           </ToolbarItem>
           <ToolbarItem location="after">
-            <Button hint="Upload file" icon="upload" onClick={() => setIsVisibleImportFile(true)} />
-          </ToolbarItem>
-          <ToolbarItem location="after">
-            <Button hint="Refresh" icon="refresh" />
+            <SvgIcon text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
           </ToolbarItem>
           <ToolbarItem name="searchPanel" location="before" />
+          <ToolbarItem name="columnChooserButton" />
 
         </Toolbar>
         <HeaderFilter visible={true} texts={{
@@ -372,7 +370,8 @@ export const MrpSaleOrders = () => {
 
         }} />
         <FilterRow visible={true} />
-        <SearchPanel visible={true} placeholder={"VD: PO"} />
+        <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
+        <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
         <Paging defaultPageSize={10} />
         <Pager
           visible={true}
@@ -397,45 +396,14 @@ export const MrpSaleOrders = () => {
           format="dd/MM/yyyy hh:mm:ss" />
         <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
         <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-        <Column type={"buttons"} caption={"Thao tác"} alignment="left" />
-        <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-          texts={{
-            cancelRowChanges: "Hủy bỏ",
-            saveRowChanges: "Lưu lại",
-            confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-            confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-            deleteRow: "Xóa",
-            editRow: "Sửa",
-            addRow: "Thêm"
-          }}
-        >
-          <Popup
-            title="Thông tin chi tiết đơn hàng"
-            showTitle={true}
-            width={"80%"}
-            height={"auto"}
-          />
-          <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-            <Item
-              itemType="group"
-              colCount={2}
-              colSpan={2}
-              caption="Thông tin chi tiết đơn hàng"
-            >
-              <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-              <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-              <Item dataField="customer" caption="Tên khách hàng" />
-              <Item dataField="cardName" caption="Tên thẻ" />
-              <Item dataField="quantity" caption="Số lượng" />
-              <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-              <Item dataField="contractNumber" caption="Số HD/PO" />
-              <Item dataField="startTime" caption="Ngày bắt đầu" />
-              <Item dataField="finishTime" caption="Ngày kết thúc" />
-              <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-            </Item>
-          </Form>
-        </Editing>
+        <Column type={"buttons"} caption={"Thao tác"} alignment="left"
+          cellRender={() =>
+            <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+              <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
 
+            </div>
+          }>
+        </Column>
         <MasterDetail
           enabled={true}
           component={getProductOrderItemTemplate}

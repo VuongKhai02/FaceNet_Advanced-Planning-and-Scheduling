@@ -8,6 +8,7 @@ import {
 import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
 import { Table } from "antd";
+import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 
 type MaterialAndStructureProps = {
@@ -217,9 +218,10 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                             )}
                                         />
                                     </Column>
-                                    <Column caption="" type={'buttons'} alignment="center">
-                                        <ButtonIcon icon="add" />
-                                    </Column>
+                                    <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    </div>} />
                                 </DataGrid>
                             </div>
                             <div
@@ -235,7 +237,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
                                 <Button text="Tiếp theo" onClick={handleAddFormTechProcedure} style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }} />
                                 <Button text="Thêm mới" style={{ backgroundColor: "gray", color: "#fff" }} />

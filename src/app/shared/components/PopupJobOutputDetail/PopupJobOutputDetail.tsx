@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, Radio } from 'antd';
 import { QrcodeOutlined } from '@ant-design/icons';
 
-interface PopupConfirmDeleteProps {
+interface PopupJobOutputDetailProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -13,7 +13,7 @@ interface PopupConfirmDeleteProps {
     customFooter?: React.ReactNode[] | null;
 }
 
-const PopupJobOutputDetail: React.FC<PopupConfirmDeleteProps> = ({
+const PopupJobOutputDetail: React.FC<PopupJobOutputDetailProps> = ({
     isVisible,
     onCancel,
     onSubmit,

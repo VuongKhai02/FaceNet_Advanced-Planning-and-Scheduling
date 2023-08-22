@@ -57,6 +57,16 @@
 /*  margin-bottom: 10px;*/
 /*}*/
 
+.dx-datagrid-search-panel{
+  margin: 0 !important;
+}
+.table-responsive{
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+}
+.ant-tabs-content-holder {
+  background: #ffffff !important;
+}
 .movie-tooltip .movie-title {
     font-size: 1.5em;
     line-height: 40px;
@@ -132,6 +142,10 @@ h3 {
     background-color: #ffe0c2;
 }
 
+.dx-datagrid .dx-row-alt > td {
+  background-color: #FFFFFF !important;
+}
+
 .dx-datagrid .dx-header-filter {
     font-weight: bold !important;
     color: rgb(35, 34, 34) !important;
@@ -159,12 +173,16 @@ h3 {
     height: 50px !important;
 }
 
-.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
-.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > tr > td,
-.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td,
-.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > tr > td {
-    background-color: #da5859 !important;
-    color: #fff !important;
+.dx-icon-column-chooser{
+  color: #FF7A00 !important;
+}
+
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>tr>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover>tr>td {
+  background-color: #da5859 !important;
+  color: #fff !important;
 }
 
 .dx-popup-title {

@@ -116,7 +116,7 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
                                 <Button
                                     text="Tiếp theo"

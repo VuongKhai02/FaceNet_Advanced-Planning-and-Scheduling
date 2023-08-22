@@ -17,6 +17,7 @@ import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/Po
 import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const data = [
@@ -72,7 +73,6 @@ export const BOMBodyCard = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -104,26 +104,20 @@ export const BOMBodyCard = () => {
                                         }
                                         modalTitle={
                                             <div>
-                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 50 }} />
-                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 30 }}>
+                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
+                                                    <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
                                                     Xác nhận xóa?
                                                 </h3>
-                                                <h5 style={{ fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5>
                                             </div>
                                         }
-                                        modalContent={''}
+                                        modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
                                         width={600} />
                                     <Toolbar>
                                         <ToolbarItem >
-                                            <Button
-                                                onClick={() => setIsVisibleImportFile(true)}
-                                                icon="upload"
-                                                text="Import file" />
+                                            <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         </ToolbarItem>
                                         <ToolbarItem >
-                                            <Button
-                                                icon="download"
-                                                text="Xuất Excel" />
+                                            <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         </ToolbarItem>
                                         <ToolbarItem name="searchPanel" location="before" />
                                         <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
@@ -180,10 +174,14 @@ export const BOMBodyCard = () => {
                                     >
                                     </Column>
                                     <Column caption={"Trạng thái"} dataField="status" />
-                                    <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                                        <ButtonB icon="info" />
-                                        <ButtonB icon='add' onClick={handleBOMBodyCardAddInfo} />
-                                        <ButtonB icon='trash' onClick={handleShowModalDel} />
+                                    <Column type={'buttons'} caption={"Thao tác"} alignment="left"
+                                        cellRender={() =>
+                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                                <SvgIcon onClick={() => { }} tooltipTitle="Thông tin" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={handleBOMBodyCardAddInfo} tooltipTitle="Thêm mới thông tin BOM body card" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                            </div>
+                                        }>
                                     </Column>
                                 </DataGrid>
                             </div>

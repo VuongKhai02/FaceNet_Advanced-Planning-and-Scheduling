@@ -57,11 +57,12 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                         style={{
                             marginTop: 15,
                             display: "flex",
-                            justifyContent: "right",
+                            justifyContent: "flex-end",
                             alignItems: "center",
                             // background: "#ffffff",
                             padding: "8px",
                             borderRadius: "4px",
+                            marginRight: '23px'
                         }}
                     >
                         <Button

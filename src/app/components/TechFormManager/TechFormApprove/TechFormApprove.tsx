@@ -26,6 +26,7 @@ import { Popup as PopupCofirm } from 'devextreme-react/popup';
 import "./TechFormApprove.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { InfoCircleOutlined, InfoOutlined, WarningOutlined } from "@ant-design/icons";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const ROUTING_PATH = "/TechFormApprove";
@@ -244,7 +245,6 @@ export const TechFormApprove = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -278,21 +278,17 @@ export const TechFormApprove = () => {
                                     }
                                     modalTitle={
                                         <div>
-                                            <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 50 }} />
-                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, marginTop: 20, fontSize: 30 }}>
+                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
+                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
                                                 Xác nhận xóa?
                                             </h3>
-                                            <h5 style={{ fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5>
                                         </div>
                                     }
-                                    modalContent={''}
+                                    modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
                                     width={600} />
                                 <Toolbar>
                                     <ToolbarItem >
-                                        <Button
-                                            // style={{ border: 'none' }}
-                                            icon="download"
-                                            text="Xuất Excel" />
+                                        <SvgIcon tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" text="Xuất Excel" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
@@ -366,50 +362,15 @@ export const TechFormApprove = () => {
                                 >
                                 </Column>
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={'buttons'} caption={"Thao tác"} alignment="left" >
-                                    <ButtonB icon="eyeopen" onClick={handleTechFormDetail} />
-                                    <ButtonB icon='check' />
-                                    <ButtonB icon='clear' />
-                                    <ButtonB icon='add' />
-                                    <ButtonB icon='trash' onClick={handleShowModalDel} />
+                                <Column type={'buttons'} caption={"Thao tác"} alignment="left" cellRender={() =>
+                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                        <SvgIcon tooltipTitle="Xem Phiếu công nghệ" onClick={handleTechFormDetail} sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Phê duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Check.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Từ chối" sizeIcon={17} textSize={17} icon="assets/icons/Close.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xóa" onClick={handleShowModalDel} sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    </div>
+                                }>
                                 </Column>
-                                <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-                                    texts={{
-                                        cancelRowChanges: "Hủy bỏ",
-                                        saveRowChanges: "Lưu lại",
-                                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                                        deleteRow: "Xóa",
-                                        editRow: "Sửa",
-                                        addRow: "Thêm"
-                                    }}
-                                >
-                                    <Popup
-                                        title="Thông tin chi tiết đơn hàng"
-                                        showTitle={true}
-                                        width={"80%"}
-                                        height={"auto"}
-                                    />
-                                    <Form labelLocation="top" onEditorEnterKey={saveOrder} >
-                                        <Item
-                                            itemType="group"
-                                            colCount={2}
-                                            colSpan={2}
-                                            caption="Thông tin chi tiết đơn hàng"
-                                        >
-                                            <Item dataField="saleOrderId" disabled={true} caption="Mã sx/Production Code" />
-                                            <Item dataField="productionCode" disabled={true} caption="Mã sx/Production Code" />
-                                            <Item dataField="customer" caption="Tên khách hàng" />
-                                            <Item dataField="cardName" caption="Tên thẻ" />
-                                            <Item dataField="quantity" caption="Số lượng" />
-                                            <Item dataField="totalQuantity" caption="SL thẻ đã tính bù hao" />
-                                            <Item dataField="contractNumber" caption="Số HD/PO" />
-                                            <Item dataField="startTime" caption="Ngày bắt đầu" />
-                                            <Item dataField="finishTime" caption="Ngày kết thúc" />
-                                            <Item dataField="deliveryDate" caption="Ngày giao hàng" />
-                                        </Item>
-                                    </Form>
-                                </Editing>
                             </DataGrid>
                             <div
                                 className="toolbar"
@@ -434,7 +395,11 @@ export const TechFormApprove = () => {
                                 />
                             </div>
                             <PopupCofirm
-                                title="Xác nhận từ chối"
+                                titleRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    Xác nhận từ chối
+                                </div>}
+                                // title="Xác nhận từ chối"
                                 visible={showPopup}
                                 onHiding={() => setShowPopup(false)}
                                 showCloseButton={false}

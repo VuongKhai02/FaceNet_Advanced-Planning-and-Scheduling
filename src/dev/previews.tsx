@@ -76,6 +76,7 @@ import DnlnvlHistoryCompareMaterial from "../app/r2/dnlnvl/dnlnvlWarehouse/Dnlnv
 import CITT1Import from "../app/profile/CITT1Import";
 import COITTImport from "../app/profile/COITTImport";
 import OITMImport from "../app/profile/OITMImport";
+import ProgressMonitoringOrder from "../app/components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder";
 
 export const ComponentPreviews = () => {
     return (
@@ -313,6 +314,10 @@ export const ComponentPreviews = () => {
             <ComponentPreview path='/QmsStageGroupMappingManager'>
                 <QmsStageGroupManagerScreen />
             </ComponentPreview>
+            <ComponentPreview path="/progressMonitoringOrder">
+        <ProgressMonitoringOrder />
+      </ComponentPreview>
         </Previews>
-    );
+
+  );
 };

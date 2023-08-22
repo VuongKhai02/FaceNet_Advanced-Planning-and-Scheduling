@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 
-interface PopupConfirmDeleteProps {
+interface PopupWOProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -11,7 +11,7 @@ interface PopupConfirmDeleteProps {
     customFooter?: React.ReactNode[] | null;
 }
 
-const PopupWO: React.FC<PopupConfirmDeleteProps> = ({
+const PopupWO: React.FC<PopupWOProps> = ({
     isVisible,
     onCancel,
     onSubmit,

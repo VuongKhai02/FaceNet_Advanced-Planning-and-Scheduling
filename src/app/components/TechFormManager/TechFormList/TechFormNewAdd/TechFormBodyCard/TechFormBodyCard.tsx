@@ -5,6 +5,7 @@ import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/Te
 import { observer } from "mobx-react";
 import { Table, Upload } from "antd";
 import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormBodyCardProps = {
     isOpen: boolean,
@@ -62,11 +63,12 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                     <div className="table-responsive">
                         <div className="informer" style={{
                             textAlign: "left",
-                            paddingTop: 12
+                            paddingTop: 12,
+
                         }}>
                             <h5 className="name" style={{
                                 fontSize: 18,
-                                marginBottom: 0
+                                marginBottom: 0,
                             }}>Thêm mới phiếu công nghệ</h5>
                             <h5 className="name" style={{
                                 fontSize: 18,
@@ -122,7 +124,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                             }}>
                                 <h5 className="name" style={{
                                     fontSize: 18,
-                                    marginBottom: 0
+                                    marginBottom: 0,
                                 }}>Quy cách sản phẩm/Product Spec</h5>
 
                             </div>
@@ -181,7 +183,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                     fontSize: 18,
                                 }}>Thiết kế/Card design</h5>
                                 {/* <ImportTechForm /> */}
-                                <div className="mt-24">
+                                <div className="mt-24" >
                                     <Upload.Dragger
                                         multiple={false}
                                         accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -203,7 +205,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 }}>
                                     <h5 className="name" style={{
                                         fontSize: 18,
-                                        marginBottom: 0
+                                        marginBottom: 0,
                                     }}>1. Trình tự công nghệ/Technology procedure</h5>
                                 </div>
                                 <div>
@@ -226,9 +228,9 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                         <Table.Column title="Step10" dataIndex='step10' key="step10" align="center" render={() => <TextBox placeholder="Nhập" key="step10" />} />
                                         <Table.Column title="Step11" dataIndex='step11' key="step11" align="center" render={() => <TextBox placeholder="Nhập" key="step11" />} />
                                         <Table.Column title="Step12" dataIndex='step12' key="step12" align="center" render={() => <TextBox placeholder="Nhập" key="step12" />} />
-                                        <Table.Column title='' align="center" width={100} render={() => <div style={{ fontSize: 20 }}>
-                                            <PlusOutlined style={{ marginRight: 12 }} />
-                                            <DeleteOutlined />
+                                        <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         </div>} />
                                     </Table>
                                     <Table
@@ -268,9 +270,9 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                                 <p className="ant-upload-hint">Chỉ cho phép file dạng .xls, .xlsx và dung lượng không quá 1MB</p>
                                             </Upload.Dragger></div>}
                                         />
-                                        <Table.Column title='' align="center" width={150} render={() => <div style={{ fontSize: 20 }}>
-                                            <PlusOutlined style={{ marginRight: 12 }} />
-                                            <DeleteOutlined />
+                                        <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         </div>} />
                                     </Table>
 
@@ -290,7 +292,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 <Button
                                     text="Trở lại"
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
                                 <Button
                                     text="Tiếp theo"

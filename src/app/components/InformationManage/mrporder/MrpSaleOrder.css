@@ -67,7 +67,7 @@
   font-weight: 500;
 }
 
-/deep/ .cls {
+ .cls {
   background-color: #44ff00;
 }
 .highlightColumnQuantity{

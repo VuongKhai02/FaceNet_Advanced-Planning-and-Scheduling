@@ -15,6 +15,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import BOMPersonalizedDetail from "./BOMPersonalizedDetail";
+import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
 
 const data = [
@@ -63,7 +64,6 @@ export const BOMPersonalized = () => {
                         </div>
                         <div className="informer" style={{
                             backgroundColor: "#ffffff",
-                            paddingLeft: 13
                         }}>
                             <h5 className="name" style={{
                                 color: "rgba(0, 0, 0, 0.7)",
@@ -85,17 +85,16 @@ export const BOMPersonalized = () => {
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
-
                         >
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <Button text="Thêm mới" icon="add" onClick={handleAddFormTech} />
+                                    <SvgIcon onClick={handleAddFormTech} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
-                                <ToolbarItem location="after">
-                                    <Button text="Import file" icon="upload" onClick={handleShowUploadImport} />
+                                <ToolbarItem >
+                                    <SvgIcon onClick={() => setPopupVisible(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
-                                <ToolbarItem location="after">
-                                    <Button text="Xuất Excel" icon="download" />
+                                <ToolbarItem >
+                                    <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem name="searchPanel" location="before" />
                                 <ToolbarItem name="columnChooserButton" />
@@ -130,10 +129,14 @@ export const BOMPersonalized = () => {
                             <Column caption={"Ghi chú"} dataField={"noted"}
                             />
                             <Column caption={"Trạng thái"} dataField="status" />
-                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" >
-                                <ButtonIcon icon="info" />
-                                <ButtonIcon icon='add' />
-                                <ButtonIcon icon="trash" />
+                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" cellRender={() =>
+                                <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon onClick={() => { }} tooltipTitle="Thông tin" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => { }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                </div>
+                            } >
+
                             </Column>
 
                             <MasterDetail
