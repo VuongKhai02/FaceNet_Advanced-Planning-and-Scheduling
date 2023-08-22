@@ -151,7 +151,7 @@ export const CardManagement = () => {
                                 isVisible={isVisibleDetailBoxCard}
                                 modalContent={
                                     <div>
-                                        <h3><p>Xem chi tiết hộp chứa thẻ</p></h3>
+                                        <h3><p style={{ marginTop: 20 }}>Xem chi tiết hộp chứa thẻ</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <td>
@@ -201,7 +201,7 @@ export const CardManagement = () => {
                                 </div>}
                                 modalContent={
                                     <div>
-                                        <h3><p>Thêm mới hộp chứa thẻ</p></h3>
+                                        <h3><p style={{ marginTop: 20 }}>Thêm mới hộp chứa thẻ</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <td>
@@ -305,9 +305,6 @@ export const CardManagement = () => {
                                         <SvgIcon onClick={() => setIsVisibleDelJobOutput(true)} tooltipTitle="Xóa Job output" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
 
                                     </div>}>
-                                <ButtonIcon icon="info" />
-                                <ButtonIcon icon="smalliconslayout" />
-                                <ButtonIcon icon="trash" />
                             </Column>
                             <MasterDetail
                                 enabled={true}

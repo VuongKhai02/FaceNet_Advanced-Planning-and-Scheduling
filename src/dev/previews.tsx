@@ -11,6 +11,8 @@ import CardManagement from "../app/components/InformationManage/CardManagement/C
 import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput/ManageJobOutput";
 import ProgressMonitoringWO from "../app/components/ProgressMonitoring/ProgressMonitoringWO/ProgressMonitoringWO";
 import ProgressMonitoringManufacture from "../app/components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture";
+import ProgressMonitoringOrder from "../app/components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder";
+
 export const ComponentPreviews = () => {
   return (
     <Previews>
@@ -58,6 +60,9 @@ export const ComponentPreviews = () => {
       </ComponentPreview>
       <ComponentPreview path="/progressMonitoringManufacture">
         <ProgressMonitoringManufacture />
+      </ComponentPreview>
+      <ComponentPreview path="/progressMonitoringOrder">
+        <ProgressMonitoringOrder />
       </ComponentPreview>
     </Previews>
   );

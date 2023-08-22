@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DateBox as DateSelect, Popup, SelectBox, TextBox } from "devextreme-react";
+import { Button, DataGrid, DateBox as DateSelect, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -24,6 +24,8 @@ import CreateProductionPlan from "./CreateProductionPlan/CreateProductionPlan";
 import PopupWO from "../../../shared/components/PopupWO/PopupWO";
 import QRCode from "react-qr-code";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import PopupConfirmGeneral from "../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const ROUTING_PATH = "/ProductionPlanList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
@@ -59,6 +61,7 @@ export const ProductionPlanList = () => {
     const [isVisibleUpdateInfoWO, setIsVisibleUpdateInfoWO] = React.useState<boolean>(false);
     const [isVisibleDetailQRCodeWO, setIsVisibleDetailQRCodeWO] = React.useState<boolean>(false);
     const [isVisibleAddQRCodeWO, setIsVisibleAddQRCodeWO] = React.useState<boolean>(false);
+    const [isCloseWorkOrder, setIsCloseWorkOrder] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
 
     const showPopupIcon = () => {
@@ -82,10 +85,10 @@ export const ProductionPlanList = () => {
                 <SvgIcon onClick={() => setIsViewMaterial(true)} text="Xem nguyên vật liệu" tooltipTitle="Xem nguyên vật liệu" sizeIcon={17} textSize={17} icon="assets/icons/ViewMaterial.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
             <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
-                <SvgIcon text="Gửi WO sang QMS" tooltipTitle="Gửi lệnh sản xuất sang QMS" sizeIcon={17} textSize={17} icon="assets/icons/DoubleRightChervon.svg" textColor="#000" style={{ marginLeft: 17 }} />
+                <SvgIcon text="Gửi lệnh sản xuất sang QMS" tooltipTitle="Gửi lệnh sản xuất sang QMS" sizeIcon={17} textSize={17} icon="assets/icons/DoubleRightChervon.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
             <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
-                <SvgIcon onClick={() => setIsVisibleAddQRCodeWO(true)} text="Thêm mới mã QR cho WO" tooltipTitle="Thêm mới mã QR cho WO" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#000" style={{ marginLeft: 17 }} />
+                <SvgIcon onClick={() => setIsVisibleAddQRCodeWO(true)} text="Thêm mới mã QR cho lệnh sản xuất" tooltipTitle="Thêm mới mã QR cho lệnh sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#000" style={{ marginLeft: 17 }} />
             </div>
             <div style={{ marginTop: 20, border: '1px solid #dbdedf', height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
                 <SvgIcon onClick={handleAddNewButton} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginLeft: 17 }} />
@@ -561,6 +564,33 @@ export const ProductionPlanList = () => {
                                     </div>
                                 </div>
                             </Modal>
+                            <PopupConfirmGeneral
+                                isVisible={isCloseWorkOrder}
+                                modalContent={
+                                    <div>
+                                        <div style={{ marginLeft: 20, marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: '500' }}>
+                                            Lệnh sản xuất hiện tại đang ở trạng thái .... Nếu bạn đóng lệnh sản xuất, tất cả thông tin của lệnh sản xuất này sẽ bị hủy và cảnh báo về việc đóng sẽ được gửi đến các bộ phận liên quan. Bạn có chắc chắn muốn đóng lệnh sản xuất 13342?
+                                        </div>
+                                        <div className="reject-reason-container">
+                                            <label style={{ marginLeft: 20, fontSize: 18 }}>Lý do đóng lệnh sản xuất<span className="required">*</span></label>
+                                            <TextArea
+                                                value={''}
+                                                onValueChanged={() => { }}
+                                                placeholder="Nhập lý do từ chối..."
+                                                height={100}
+                                                style={{ marginTop: 10, marginLeft: 20, marginRight: 20 }}
+                                            />
+                                        </div>
+                                    </div>
+                                }
+                                modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon sizeIcon={25} icon="assets/icons/Info.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <span style={{ color: '#FF7A00', fontSize: 20 }}>Xác nhận đóng lệnh sản xuất?</span>
+                                </div>}
+                                width={600}
+                                onCancel={() => setIsCloseWorkOrder(false)}
+                                onSubmit={() => { }}
+                            />
 
                             <DataGrid
                                 key={'soCode'}
@@ -623,7 +653,7 @@ export const ProductionPlanList = () => {
                                             <SvgIcon onClick={() => setIsVisibleUpdateInfoWO(true)} tooltipTitle="Cập nhật thông tin WO" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                             <SvgIcon onClick={() => setIsVisibleDetailQRCodeWO(true)} tooltipTitle="Xem chi tiết mã QR" sizeIcon={17} textSize={17} icon="assets/icons/QrCode.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                             <SvgIcon tooltipTitle="Bắt đầu sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                            <SvgIcon tooltipTitle="Đóng lệnh sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Stop.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon onClick={() => setIsCloseWorkOrder(true)} tooltipTitle="Đóng lệnh sản xuất" sizeIcon={17} textSize={17} icon="assets/icons/Stop.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                             <SvgIcon onClick={showPopupIcon} tooltipTitle="Khác" sizeIcon={17} textSize={17} icon="assets/icons/More.svg" textColor="#FF7A00" />
                                         </div>
                                     }>
@@ -634,11 +664,11 @@ export const ProductionPlanList = () => {
                                 visible={popupVisibleIcon}
                                 onHiding={hidePopupIcon}
                                 contentRender={() => popupContentIcon}
-                                width={320}
+                                width={370}
                                 height={350}
                                 showCloseButton={false}
                                 hideOnOutsideClick={true}
-                            // position={{ my: 'left top', at: 'left bottom', of: '.dx-datagrid-table' }}
+
                             />
                             {/* Xem nguyên vật liệu */}
 
