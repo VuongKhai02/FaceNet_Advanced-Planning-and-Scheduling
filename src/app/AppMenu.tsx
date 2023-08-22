@@ -106,11 +106,6 @@ export const AppMenu = (props: AppMenuProps) => {
           caption={"Khai báo người/máy/lô sản xuất"}
           key={"dd"}
         />
-        <MenuItem
-          screenId="declareProductionInfor"
-          caption={"Khai báo "}
-          key={"declareProductionInfor"}
-        />
       </SubMenuItem>
 
       <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>

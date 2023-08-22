@@ -12,7 +12,6 @@ import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput
 import ProgressMonitoringWO from "../app/components/ProgressMonitoring/ProgressMonitoringWO/ProgressMonitoringWO";
 import ProgressMonitoringManufacture from "../app/components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture";
 import DeclareProductionObject from "../app/components/ProductionPlanManagement/declareObject/DeclareProductionObject";
-import DeclareProductionInfor from "../app/productionPlanManager/declareProductionInfor/DeclareProductionInfor";
 
 
 
@@ -51,9 +50,9 @@ export const ComponentPreviews = () => {
       <ComponentPreview path="/declareProductionObject">
         <DeclareProductionObject />
       </ComponentPreview>
-      <ComponentPreview path="/declareProductionInfor">
+      {/* <ComponentPreview path="/declareProductionInfor">
         <DeclareProductionInfor />
-      </ComponentPreview>
+      </ComponentPreview> */}
 
       {/* BOM */}
       <ComponentPreview path="/bomBodyCard">

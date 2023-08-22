@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import "./DeclareProductionObject.css"
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import {
+    Export,
     Column,
     FilterRow,
     HeaderFilter,
@@ -17,26 +19,70 @@ import { IWarning } from "../../../shared/model/Warning.model";
 import { PLANNING_API_URL } from "../../../../config";
 import { customizeColor } from "../../../../utils/utils";
 import { Modal, Tag } from "antd";
-import notify from "devextreme/ui/notify";
-import InfoRow from "../../../shared/components/InfoRow/InfoRow";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
-import myImg from "../declareObject/images/qrCode.jpg"
-
+import qrTextbox from "./images/qrTextBox.jpg"
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+import { exportDataGrid } from 'devextreme/excel_exporter';
+import DeclareProductionInfor from "./declareProductionInfor/ProductionOder/DeclareProductionInfor";
 
 
 const ROUTING_PATH = "/declareProductionObject";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const production_id = [
+    '45312313',
+    '46666663',
+    '41111113',
+    '45312313',
+];
+
+const stage_name = [
+    'In offset',
+    'In lưới',
+    'Ép',
+    'Cắt',
+];
+
+const job_name = [
+    'Ra film',
+    'Ra film + Chụp bản',
+    'In màu',
+    'In trắng',
+];
 
 
 export const DeclareProductionObject = () => {
     const mainStore = useMainStore();
     const [content, setContent] = useState<string>();
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
-    const [isVisibleAdd, setIsVisibleAdd] = React.useState<boolean>(false);
+    const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [dataSelected, setDataSelected] = useState([{
+        id: '0',
+        production_id: '0',
+        so_id: "0"
+    }]);
 
+    const fakeDtselect = [
+        {
+            id: '1',
+            production_id: '123',
+            so_id: "321"
+        },
+        {
+            id: '2',
+            production_id: '567',
+            so_id: "765"
+        },
+        {
+            id: '3',
+            production_id: '456',
+            so_id: "654"
+        }
+    ]
 
-
-
+    const handleChangeScreen = () => {
+        setisDeclareInfo(true);
+    }
     const loadOrders = () => {
         const headers = {
             'Authorization': 'Bearer ' + mainStore.authToken,
@@ -45,7 +91,6 @@ export const DeclareProductionObject = () => {
         axios.get(PLANNING_API_URL + '/api/orders', { headers })
             .then(response => {
                 if (response.status === 200) {
-                    // console.log(response.data)
                     setContent(response.data.data)
                 }
             }
@@ -59,14 +104,6 @@ export const DeclareProductionObject = () => {
         loadOrders();
         window.addEventListener('resize', updateDimension);
     }, [])
-
-    const handleAddFormTech = () => {
-    }
-
-
-    const showInfo = () => {
-    }
-
 
     const onStatusPoRender = (rowInfo) => {
         // console.log("Data color,", data?.value)
@@ -139,218 +176,192 @@ export const DeclareProductionObject = () => {
         }}>{status}</Tag>
     }
 
-
-    const saveOrder = (data) => {
+    const onValueChanged = (e) => {
+        setDataSelected(fakeDtselect.filter(data => data.id == e.value));
     }
 
+    const onExporting = (e) => {
+        const workbook = new Workbook();
+        const worksheet = workbook.addWorksheet('Main sheet');
 
-    const getProductOrderItemTemplate = row => {
-    };
-
-
-    const selectionModes = ['none', 'single', 'multiple', 'all'];
+        exportDataGrid({
+            component: e.component,
+            worksheet,
+            autoFilterEnabled: true,
+        }).then(() => {
+            workbook.xlsx.writeBuffer().then((buffer) => {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
     return (
         <>
-            <div>
-                <div className="table-responsive">
-                    <div className="informer" style={{
-                        background: "#fff",
-                        textAlign: "center",
-                        paddingTop: 12
-                    }}>
-                        <h5 className="name" style={{
-                            fontSize: 18,
-                            marginBottom: 0
-                        }}>Khai báo thông tin</h5>
-                    </div>
-                    <div className="informer" style={{
-                        backgroundColor: "#ffffff",
-                        paddingLeft: 13
-                    }}>
-                        <h5 className="name" style={{
-                            color: "rgba(0, 0, 0, 0.7)",
-                            marginBottom: 0,
-                            fontSize: 15,
-                            boxSizing: "border-box",
-                            fontWeight: 550
-                        }}>Tìm kiếm chung</h5>
-                    </div>
-                </div>
-            </div>
-
-
-            <DataGrid
-                keyExpr={"saleOrderId"}
-                dataSource={content}
-                showBorders={true}
-                columnAutoWidth={true}
-                showRowLines={true}
-                rowAlternationEnabled={true}
-                allowColumnResizing={true}
-                allowColumnReordering={true}
-                focusedRowEnabled={true}
-            // onSelectionChanged={onSelectedRowKeysChange}
-            // onRowClick={onSelectedRowKeysChange}
-            // onRowUpdating={updateOrder}
-            // onRowRemoving={removeOrder}
-            >
-                <Toolbar>
-                    <ToolbarItem location="after">
-                        <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                    </ToolbarItem>
-                    <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
-                    <ToolbarItem name="searchPanel" location="before" />
-
-
-                </Toolbar>
-                <HeaderFilter visible={true} texts={{
-                    cancel: "Hủy bỏ",
-                    ok: "Đồng ý",
-                    emptyValue: "Rỗng"
-
-                }} />
-                <FilterRow visible={true} />
-                <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-
-                <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
-                <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
-                <Column caption={"Mã công nhân"} dataField={"customer"} />
-                <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
-                <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
-                <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
-                    <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
-                        <SvgIcon tooltipTitle="Xem chi tiết" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                        <SvgIcon tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-
-                    </div>
-                }>
-                </Column>
-                {/* <Editing mode="popup" useIcons={true} allowUpdating={true} allowDeleting={true}
-                    texts={{
-                        cancelRowChanges: "Hủy bỏ",
-                        saveRowChanges: "Lưu lại",
-                        confirmDeleteTitle: 'Xác nhận xóa bản ghi',
-                        confirmDeleteMessage: 'Bạn chắc chắn muốn xóa bản ghi này?',
-                        deleteRow: "Xóa",
-                        editRow: "Sửa",
-                        addRow: "Thêm"
-                    }}
-                >
-                    <Popup
-                        title="Thông tin chi tiết đơn hàng"
-                        showTitle={true}
-                        width={"80%"}
-                        height={"auto"}
-                    />
-                  
-                </Editing> */}
-
-
-            </DataGrid>
-
-            <div>
-                <div className="table-responsive">
-                    <div className="informer" style={{
-                        background: "#fff",
-                        textAlign: "left",
-                        paddingTop: 12
-                    }}>
-                        <h2 className="name" style={{
-                            marginBottom: 0,
-                            fontWeight: 700,
-                            margin: "0 0 .6rem .5rem"
-                        }}>Khai báo thông tin</h2>
-                        <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem' }}>
-                            <div className="content" style={{ display: "flex", height: "45vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
-                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
-                                    <p>Mã sản xuất</p>
-                                    <SelectBox placeholder="-- Chọn WO --" >
-                                        items={selectionModes}
-                                    </SelectBox>
+            {
+                isDeclareInfo ? <DeclareProductionInfor
+                    isOpen={isDeclareInfo}
+                    setClose={() => setisDeclareInfo(false)} /> :
+                    <div>
+                        <div>
+                            <div className="table-responsive">
+                                <div className="informer" style={{
+                                    background: "#fff",
+                                    textAlign: "center",
+                                    paddingTop: 12
+                                }}>
+                                    <h5 className="name" style={{
+                                        fontSize: 18,
+                                        marginBottom: 0
+                                    }}>Danh sách khai báo người/máy/lô sản xuất</h5>
                                 </div>
-                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
-                                    <p>Mã SO</p>
-                                    <TextBox style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
+                                <div className="informer" style={{
+                                    backgroundColor: "#ffffff",
+                                    paddingLeft: 13
+                                }}>
+                                    <h5 className="name" style={{
+                                        color: "rgba(0, 0, 0, 0.7)",
+                                        marginBottom: 0,
+                                        fontSize: 15,
+                                        boxSizing: "border-box",
+                                        fontWeight: 550
+                                    }}>Tìm kiếm chung</h5>
                                 </div>
-                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
-                                    <p>Tên công đoạn</p>
-                                    <SelectBox placeholder="-- Chọn công đoạn --">
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
-                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
-                                    <p>Tên Job</p>
-                                    <SelectBox placeholder="-- Chọn Job --">
-                                        items={selectionModes}
-                                    </SelectBox>
-                                </div>
-
                             </div>
-
-                            <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", backgroundColor: "rgba(0, 0, 0, 0.1)", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
-                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                    <p>Mã sản xuất</p>
-                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
-                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
-
-                                    <p>Mã máy</p>
-                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
-                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                </div>
-                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                    <p>Mã công nhân</p>
-                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
-                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
-
-                                    <p>Mã lô NVL/BTP</p>
-                                    <TextBox style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
-                                    {/* <input style={{ background: `url(${myImg}) no-repeat scroll 5px 4px`, width: "70%", padding: "0.5rem 0.5rem 0.5rem 3rem", borderRadius: "4px", border: "1px solid #ccc" }} type="text" name="" id="" placeholder="Quét mã trên ứng dụng mobile  " /> */}
-                                </div>
-
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
-                                <Button
-                                    style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
-                                    text={windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}
-                                    height={35}
-                                    width={250}
-
-                                // render={(buttonData) =>
-                                //     <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}</p>
-                                // }
-                                />
-
-
-                            </div>
-
-
-
                         </div>
+                        <DataGrid
+                            keyExpr={"saleOrderId"}
+                            dataSource={content}
+                            showBorders={true}
+                            columnAutoWidth={true}
+                            showRowLines={true}
+                            rowAlternationEnabled={true}
+                            allowColumnResizing={true}
+                            allowColumnReordering={true}
+                            focusedRowEnabled={true}
+                            onExporting={onExporting}
+                        // onSelectionChanged={onSelectedRowKeysChange}
+                        // onRowClick={onSelectedRowKeysChange}
+                        // onRowUpdating={updateOrder}
+                        // onRowRemoving={removeOrder}
+                        >
+                            <Toolbar>
+                                {/* <ToolbarItem location="after">
+                            <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                        </ToolbarItem> */}
+                                <ToolbarItem name="exportButton" html="Xuất excel" location="after"></ToolbarItem>
+                                <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
+                                <ToolbarItem name="searchPanel" location="before" />
+                            </Toolbar>
+                            <HeaderFilter visible={true} texts={{
+                                cancel: "Hủy bỏ",
+                                ok: "Đồng ý",
+                                emptyValue: "Rỗng"
+                            }} />
+                            <FilterRow visible={true} />
+                            <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
+                            <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
+                            <Paging defaultPageSize={10} />
+                            <Pager
+                                visible={true}
+                                allowedPageSizes={allowedPageSizes}
+                                displayMode={"compact"}
+                                showPageSizeSelector={true}
+                                showInfo={true}
+                                showNavigationButtons={true}
+                                infoText="Trang số {0} trên {1} ({2} bản ghi)" />
+                            <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
+                            <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
+                            <Column caption={"Mã công nhân"} dataField={"customer"} />
+                            <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
+                            <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
+                            <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
+                            <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
+                            <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                            <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
+                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                                    <SvgIcon tooltipTitle="Xem chi tiết" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon tooltipTitle="Thời gian" sizeIcon={17} textSize={17} icon="assets/icons/Time.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                </div>
+                            }>
+                            </Column>
+                            <Export enabled={true} allowExportSelectedData={true} />
+                        </DataGrid>
+                        <div>
+                            <div className="table-responsive">
+                                <div className="informer" style={{
+                                    background: "#fff",
+                                    textAlign: "left",
+                                    paddingTop: 12
+                                }}>
+                                    <h2 className="name" style={{
+                                        marginBottom: 0,
+                                        fontWeight: 700,
+                                        margin: "0 0 .6rem .5rem"
+                                    }}>Khai báo thông tin</h2>
+                                    <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem' }}>
+                                        <div className="content" style={{ display: "flex", height: "45vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Mã sản xuất</p>
+                                                {/* <SelectBox placeholder="-- Chọn mã sản xuất --" items={fakeDtselect} /> */}
+                                                <SelectBox placeholder="-- Chọn mã sản xuất --"
+                                                    dataSource={fakeDtselect}
+                                                    displayExpr="production_id"
+                                                    valueExpr="id"
+                                                    onValueChanged={onValueChanged}
+                                                />
+                                            </div>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Mã SO</p>
+                                                <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
+                                            </div>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Tên công đoạn</p>
+                                                <SelectBox placeholder="-- Chọn tên công đoạn --" items={stage_name} />
 
+                                            </div>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Tên Job</p>
+                                                <SelectBox placeholder="-- Chọn job --" items={job_name} />
+                                            </div>
+                                        </div>
+
+                                        <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", backgroundColor: "rgba(0, 0, 0, 0.1)", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
+                                            <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
+                                                <p>Mã sản xuất</p>
+                                                <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+
+                                                <p>Mã máy</p>
+                                                <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                            </div>
+                                            <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
+                                                <p>Mã công nhân</p>
+                                                <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+
+                                                <p>Mã lô NVL/BTP</p>
+                                                <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "70%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên ứng dụng mobile  " > </TextBox>
+                                            </div>
+
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
+                                            <Button
+                                                style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
+                                                text={windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}
+                                                height={35}
+                                                width={250}
+                                                onClick={handleChangeScreen}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="informer" style={{
+                                    backgroundColor: "#ffffff",
+                                    paddingLeft: 13
+                                }}>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="informer" style={{
-                        backgroundColor: "#ffffff",
-                        paddingLeft: 13
-                    }}>
-                    </div>
-                </div>
-            </div>
-
-
-
+            }
         </>
     )
 }
