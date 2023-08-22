@@ -59,6 +59,16 @@
 /*  margin-bottom: 10px;*/
 /*}*/
 
+.collapsed-icons {
+    font-size: 16px;
+    color: #fff !important;
+    margin-left: 40px;
+}
+
+.ant-layout-header-sticky .collapsed-icons {
+  color: #333 !important;
+}
+
 .dx-datagrid-search-panel{
   margin: 0 !important;
 }
@@ -178,6 +188,9 @@ h3 {
 
 .dx-icon-column-chooser{
   color: #FF7A00 !important;
+}
+.dx-datagrid-column-chooser-button{
+  border-color:#FF7A00 !important; ;
 }
 
 .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>td,

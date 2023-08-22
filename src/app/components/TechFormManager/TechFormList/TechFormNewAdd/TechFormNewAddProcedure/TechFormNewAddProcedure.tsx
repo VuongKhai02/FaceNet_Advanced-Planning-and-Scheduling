@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DropDownBox, Popup, TextBox } from "devextreme-react";
+import { Button, DataGrid, DropDownBox, SelectBox, TextBox } from "devextreme-react";
 import DateBox from 'devextreme-react/date-box';
 import "./TechFormNewAddProcedure.css";
-import { Column, Editing, Button as ButtonIcon } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormHostamping from "../TechFormHostamping/TechFormHostamping";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
+import { Input, Select, Table } from "antd";
+import { Column } from "devextreme-react/data-grid";
 
 type TechFormNewAddProcedureProps = {
     isOpen: boolean,
@@ -18,17 +19,14 @@ const data = [
     { id: 2, name: 'Item 2', isChecked: true },
 ];
 
-
+const { Option } = Select;
 
 export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = observer(({
     isOpen = false, setClose }) => {
 
     const [rowData, setRowData] = useState(data);
-
     const [fromDateTime, setFromDateTime] = useState('');
-
     const [toDateTime, setToDateTime] = useState('');
-
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
 
 
@@ -73,7 +71,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     value={fromDateTime}
                                     onValueChanged={handleFromDateTimeChange}
                                     type="datetime"
-                                // displayFormat="shortdatetime"
+
                                 />
                                 <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                                 <DateBox
@@ -82,7 +80,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     value={toDateTime}
                                     onValueChanged={handleToDateTimeChange}
                                     type="datetime"
-                                // displayFormat="shortdatetime"
                                 />
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -97,28 +94,24 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Column alignment="left" caption="Công nghệ In/Printing Technology" fixed>
                                         <Column alignment="left" caption="Nội dung In/Printing Contents" fixed >
                                             <Column dataField="id" alignment="center" caption="Bước/Step" width={100} >
-                                                {/* <Column>
-                                    <Column dataField="" caption="Front" width={50} />
-                                    <Column dataField="" caption="Back" width={50} />
-                                </Column> */}
-                                                {/* <Column dataField="id" width={50} alignment="left" caption="" /> */}
+
                                             </Column>
                                             <Column dataField="Item" caption="Nội dung/Item"
                                                 cellRender={() => (
-                                                    <TextBox
+                                                    <Input
                                                         className="inputRow"
-                                                        placeholder="--Nhập--"
+                                                        placeholder="Nhập"
                                                     />
                                                 )}
                                             />
                                             <Column dataField="method" caption="Phương pháp/Method"
                                                 cellRender={({ data, key }) => (
                                                     <DropDownBox
-                                                        placeholder="--Chọn--"
+                                                        placeholder="Chọn"
                                                         dataSource={data}
                                                         valueExpr="value"
                                                         displayExpr="label"
-                                                        value={data[key]?.CongDoan || '--Chọn--'}
+                                                        value={'Chọn'}
                                                         showClearButton={true}
                                                     />
                                                 )} />
@@ -128,7 +121,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Column
                                         // caption="Chọn"
                                         alignment="left"
-                                        // cellTemplate={checkboxTemplate}
                                         headerCellRender={() => {
                                             return (
                                                 <div className="checkbox">
@@ -148,18 +140,18 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                             <Column dataField="colour"
                                                 caption="Màu/Colour"
                                                 cellRender={() => (
-                                                    <TextBox
+                                                    <Input
                                                         className="inputRow"
-                                                        placeholder="--Nhập--"
+                                                        placeholder="Nhập"
                                                     />
                                                 )}
                                             />
 
                                             <Column dataField="note" caption="Ghi chú/Note"
                                                 cellRender={() => (
-                                                    <TextBox
+                                                    <Input
                                                         className="inputRow"
-                                                        placeholder="--Nhập--"
+                                                        placeholder="Nhập"
                                                     />
                                                 )}
                                             />
@@ -195,52 +187,55 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         />
                                     </div>
 
-                                    <DataGrid
-                                        key={'id'}
+                                    <Table
                                         dataSource={data}
-                                        keyExpr="id"
-                                        showBorders={true}
-                                        showRowLines={true}
-                                        showColumnLines={true}
+                                        bordered
+                                        rowKey="id"
+                                        pagination={false}
                                     >
-                                        <Column dataField="id" caption="Bước" alignment="left" width={100} />
-                                        <Column dataField="contens" caption="Nội dung ép/Contens" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="classify" caption="Phân loại/Classify" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="lamination" caption="Thông số máy/Lamination Parameter" width={270} cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="other" caption="Khác/Other"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}>
-                                        </Column>
-                                        <Column dataField="structure" caption="Cấu trúc/Structure" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        </div>} />
-                                    </DataGrid>
+                                        <Table.Column
+                                            title="Bước"
+                                            dataIndex="id"
+                                            align="left"
+                                            width={100}
+                                        />
+                                        <Table.Column
+                                            title="Nội dung ép/Contens"
+                                            dataIndex="contens"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Phân loại/Classify"
+                                            dataIndex="classify"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Thông số máy/Lamination Parameter"
+                                            dataIndex="lamination"
+                                            width={270}
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Khác/Other"
+                                            dataIndex="other"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Cấu trúc/Structure"
+                                            dataIndex="structure"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title=""
+                                            dataIndex="operation"
+                                            align="center"
+                                            width={80}
+                                            render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            </div>}
+                                        />
+                                    </Table>
 
                                 </div>
                                 <div style={{ marginTop: 30 }}>
@@ -265,58 +260,59 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         // displayFormat="shortdatetime"
                                         />
                                     </div>
-                                    <DataGrid
-                                        key={'id'}
+                                    <Table
                                         dataSource={rowData}
-                                        keyExpr="id"
-                                        showBorders={true}
-                                        showRowLines={true}
-                                        showColumnLines={true}
+                                        bordered
+                                        rowKey="id"
+                                        pagination={false}
                                     >
-                                        <Column dataField="id" caption="No." alignment="left" width={100} />
-                                        <Column dataField="lnk" caption="Mực/Lnk" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="nilon" caption="Nilon" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="cut" caption="Cắt" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="be" caption="Bế"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}>
-                                        </Column>
-                                        <Column dataField="dun" caption="Đùn" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="other" caption="Khác/Other" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        </div>} />
-                                    </DataGrid>
+                                        <Table.Column
+                                            title="No."
+                                            dataIndex="id"
+                                            align="left"
+                                            width={100}
+                                        />
+                                        <Table.Column
+                                            title="Mực/Lnk"
+                                            dataIndex="lnk"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Nilon"
+                                            dataIndex="nilon"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Cắt"
+                                            dataIndex="cut"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Bế"
+                                            dataIndex="be"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Đùn"
+                                            dataIndex="dun"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Khác/Other"
+                                            dataIndex="other"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title=""
+                                            dataIndex="operation"
+                                            align="center"
+                                            width={80}
+                                            render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            </div>}
+                                        />
+                                    </Table>
 
                                 </div>
                                 <div style={{ marginTop: 30 }}>
@@ -341,31 +337,39 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         // displayFormat="shortdatetime"
                                         />
                                     </div>
-                                    <DataGrid
+                                    <Table
                                         dataSource={rowData}
-                                        keyExpr="id"
-                                        showBorders={true}
-                                        showRowLines={true}
-                                        showColumnLines={true}
+                                        bordered
+                                        rowKey="id"
+                                        pagination={false}
                                     >
-                                        <Column dataField="id" caption="No." alignment="left" width={100} />
-                                        <Column dataField="content" caption="Nội dung/Content" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column dataField="machine" caption="Máy/Machine" cellRender={() => (
-                                            <TextBox
-                                                className="inputRow"
-                                                placeholder="--Nhập--"
-                                            />
-                                        )} />
-                                        <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        </div>} />
-                                    </DataGrid>
+                                        <Table.Column
+                                            title="No."
+                                            dataIndex="id"
+                                            align="left"
+                                            width={100}
+                                        />
+                                        <Table.Column
+                                            title="Nội dung/Content"
+                                            dataIndex="content"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title="Máy/Machine"
+                                            dataIndex="machine"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                        <Table.Column
+                                            title=""
+                                            dataIndex="operation"
+                                            align="center"
+                                            width={80}
+                                            render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            </div>}
+                                        />
+                                    </Table>
 
                                 </div>
                                 <div

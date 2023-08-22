@@ -555,7 +555,7 @@ export const ProductionPlanList = () => {
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: '20px' }}>
                                     <div style={{ marginBottom: 20 }}>
                                         <label htmlFor="techFormCode" style={{ display: 'block', marginBottom: 5 }}>Mã phiếu công nghệ</label>
-                                        <SelectBox id="techFormCode" placeholder="--Chọn--" />
+                                        <SelectBox id="techFormCode" placeholder="Chọn" />
                                     </div>
                                     <div style={{ marginBottom: 20 }}>
                                         <label htmlFor="nameCard" style={{ display: 'block', marginBottom: 5 }}>Tên thẻ</label>

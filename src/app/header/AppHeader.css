@@ -65,6 +65,7 @@
 .app-header_bell {
   font-size: 21px;
   color: #FFFFFF !important;
+  cursor: pointer;
 }
 .ant-layout-header-sticky .app-header_bell {
   color: #333 !important;
