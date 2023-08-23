@@ -15,7 +15,7 @@ export const ProgressWODetailJob: React.FC<ProgressWODetailProps> = observer(({
     return (
         <>
             {
-                <div>
+                <div className="box__shadow-table-responsive">
                     <div className="table-responsive">
                         <div>
                             <table >

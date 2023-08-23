@@ -90,7 +90,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                     width={800}
                 />
                 :
-                <div>
+                <div className="box__shadow-table-responsive">
                     <div className="table-responsive">
                         <div className="informer" style={{
                             background: "#fff",

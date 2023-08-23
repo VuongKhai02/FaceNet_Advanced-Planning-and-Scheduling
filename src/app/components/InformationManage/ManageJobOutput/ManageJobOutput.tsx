@@ -39,7 +39,7 @@ export const ManageJobOutput = () => {
                         setClose={() => { setIsVisibleJobOutputDetail(false) }}
                     />
                     :
-                    <div>
+                    <div className="box__shadow-table-responsive">
                         <div className="table-responsive">
                             <div className="informer" style={{
                                 background: "#fff",

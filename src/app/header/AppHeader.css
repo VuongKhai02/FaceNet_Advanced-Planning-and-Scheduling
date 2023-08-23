@@ -30,7 +30,7 @@
 }
 
 .ant-layout-header-sticky .app-header__user-panel__logout-btn{
-  color: #f05b41 !important;
+  /* color: #f05b41 !important; */
   font-weight:"bold"
 
 }
@@ -41,8 +41,8 @@
 }
 
 .ant-layout-header-sticky .app-header {
-  padding-top: 5px;
-  color: #333 !important;
+  /* padding-top: 5px; */
+  /* color: #333 !important; */
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -53,13 +53,13 @@
     transition: all .3s cubic-bezier(.645,.045,.355,1);
 }
 .ant-layout-header-sticky .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  color: #333 !important;
+  /* color: #333 !important; */
 }
 .ant-select-arrow {
   color: #FFF !important;
 }
 .ant-layout-header-sticky .ant-select-arrow {
-  color: #333 !important;
+  /* color: #333 !important; */
 }
 
 .app-header_bell {
@@ -68,14 +68,14 @@
   cursor: pointer;
 }
 .ant-layout-header-sticky .app-header_bell {
-  color: #333 !important;
+  /* color: #333 !important; */
 }
 .app-header_logo {
   color: #FFFFFF !important;
 }
 
 .ant-layout-header-sticky .app-header_logo {
-  color: #333 !important;
+  /* color: #333 !important; */
 }
 
 .app-header_title_logo{
@@ -85,11 +85,12 @@
   margin-top: 10px;
   font-weight: bold !important;
   color: #FFFFFF;
-  margin-left: 10px 
+  margin-left: 10px;
+  font-weight: bold;
 }
 
 .ant-layout-header-sticky .app-header_title_logo {
-   color: #2A3884 !important;
+  /* color: #2A3884 !important; */
   font-weight: bold;
 }
 

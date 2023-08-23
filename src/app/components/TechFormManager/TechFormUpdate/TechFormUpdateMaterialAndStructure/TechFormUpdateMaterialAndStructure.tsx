@@ -49,7 +49,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                     setClose={() => setIsVisibleTechFormUpdateProcedure(false)}
                 />
                 :
-                <div>
+                <div className="box__shadow-table-responsive">
                     <div className="table-responsive">
                         <div className="informer" style={{
                             textAlign: "left",

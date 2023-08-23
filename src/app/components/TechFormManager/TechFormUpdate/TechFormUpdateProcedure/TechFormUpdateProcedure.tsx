@@ -42,7 +42,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                         isOpen={isVisibleTechFormUpdateHostamping}
                         setClose={() => setIsVisibleTechFormUpdateHostamping(false)} />
                     :
-                    <div>
+                    <div className="box__shadow-table-responsive">
                         <div className="table-responsive">
                             <div className="informer" style={{
                                 textAlign: "left",

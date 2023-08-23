@@ -18,7 +18,7 @@ export const ViewMaterial = () => {
     return (
         <>
             {
-                <div>
+                <div className="box__shadow-table-responsive">
                     <div className="table-responsive">
                         <Popup
                             // visible={popupVisible}

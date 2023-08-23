@@ -66,7 +66,7 @@
 }
 
 .ant-layout-header-sticky .collapsed-icons {
-  color: #333 !important;
+  /* color: #333 !important; */
 }
 
 .dx-datagrid-search-panel{
@@ -75,6 +75,11 @@
 .table-responsive{
   margin-left: 20px !important;
   margin-right: 20px !important;
+}
+
+.box__shadow-table-responsive {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
+  border-radius: 3px !important;
 }
 .ant-tabs-content-holder {
   background: #ffffff !important;
@@ -167,9 +172,9 @@ h3 {
 
 .ant-layout-header {
   background: #2A3884 !important;
-  height: 60px !important;
+  /* height: 60px !important; */
   line-height: 0px !important;
-  transition: 0.6s;
+  /* transition: 0.6s; */
 }
 
 .menu-parent-text {
@@ -182,8 +187,10 @@ h3 {
 }
 
 .ant-layout-header-sticky {
-  background: #ecf0f1 !important;
-  height: 50px !important;
+  background: #2A3884 !important;
+  /* height: 60px !important; */
+  line-height: 0px !important;
+  /* transition: 0.6s;  */
 }
 
 .dx-icon-column-chooser{

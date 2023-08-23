@@ -51,7 +51,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                         isOpen={isAddNewTechForm}
                         setClose={() => setIsAddNewTechForm(false)} />
                     :
-                    <div>
+                    <div className="box__shadow-table-responsive">
                         <div className="table-responsive">
                             <div className="informer" style={{
                                 textAlign: "left",

@@ -12,7 +12,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
 
     return (
         <>
-            <div>
+            <div className="box__shadow-table-responsive">
                 <div className="table-responsive">
                     <div className="informer" style={{
                         background: "#fff",

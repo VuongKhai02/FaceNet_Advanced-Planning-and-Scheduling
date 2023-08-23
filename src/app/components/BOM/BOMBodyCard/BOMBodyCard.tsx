@@ -18,6 +18,7 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import { Table } from "antd";
 
 
 const data = [
@@ -59,7 +60,7 @@ export const BOMBodyCard = () => {
                         setClose={() => { setIsBOMCardAddInfo(false) }}
                     />
                     :
-                    <div>
+                    <div className="box__shadow-table-responsive">
                         <div className="table-responsive">
                             <div className="informer" style={{
                                 background: "#fff",
@@ -73,6 +74,8 @@ export const BOMBodyCard = () => {
                             </div>
                             <div className="informer" style={{
                                 backgroundColor: "#ffffff",
+                                display: "flex",
+                                justifyContent: "space-between"
                             }}>
                                 <h5 className="name" style={{
                                     color: "rgba(0, 0, 0, 0.7)",
@@ -81,109 +84,58 @@ export const BOMBodyCard = () => {
                                     boxSizing: "border-box",
                                     fontWeight: 550
                                 }}>Tìm kiếm chung</h5>
+                                <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <SvgIcon onClick={() => { }} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={() => { }} tooltipTitle="Chọn cột" sizeIcon={18} textSize={17} icon="assets/icons/ColumnChooser.svg" textColor="#FF7A00" style={{ marginRight: 17, borderRadius: '4px', border: '1px solid rgba(255, 122, 0, 0.60) ', padding: '6px' }} />
+                                </div>
                             </div>
                             <div>
-                                <DataGrid
-                                    key="productCode"
-                                    keyExpr={"productCode"}
+                                <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
+                                <PopupConfirmDelete
+                                    isVisible={isConfirmDelete}
+                                    onCancel={handleHideModalDel}
+                                    onSubmit={() => console.log('ok')}
+                                    modalTitle={
+                                        <div>
+                                            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
+                                                <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
+                                                Xác nhận xóa?
+                                            </h3>
+                                        </div>
+                                    }
+                                    modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
+                                    width={600} />
+                                <Table
                                     dataSource={data}
-                                    showBorders={true}
-                                    columnAutoWidth={true}
-                                    showRowLines={true}
-                                    rowAlternationEnabled={true}
-                                    allowColumnResizing={true}
-                                    allowColumnReordering={true}
-                                    focusedRowEnabled={true}
+                                    rowKey="productCode"
+                                    size="small"
+                                    pagination={{ defaultPageSize: 10 }}
+                                    bordered
+                                    style={{ marginTop: 30 }}
 
                                 >
-                                    <PopupImportFile visible={isVisibleImportFile} onCancel={() => setIsVisibleImportFile(false)} title={'Import file'} onSubmit={() => { }} width={900} />
-                                    <PopupConfirmDelete
-                                        isVisible={isConfirmDelete}
-                                        onCancel={handleHideModalDel}
-                                        onSubmit={() => console.log('ok')
-                                        }
-                                        modalTitle={
-                                            <div>
-                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
-                                                    <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
-                                                    Xác nhận xóa?
-                                                </h3>
-                                            </div>
-                                        }
-                                        modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
-                                        width={600} />
-                                    <Toolbar>
-                                        <ToolbarItem >
-                                            <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        </ToolbarItem>
-                                        <ToolbarItem >
-                                            <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        </ToolbarItem>
-                                        <ToolbarItem name="searchPanel" location="before" />
-                                        <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
-                                    </Toolbar>
-                                    <HeaderFilter visible={true} texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng"
-
-                                    }} allowSearch={true} />
-                                    <FilterRow visible={true} />
-                                    <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                                    <Paging defaultPageSize={10} />
-                                    <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                                    <Pager
-                                        visible={true}
-                                        allowedPageSizes={allowedPageSizes}
-                                        displayMode={"compact"}
-                                        showPageSizeSelector={true}
-                                        showInfo={true}
-                                        showNavigationButtons={true}
-                                        infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                                    <Column dataField="productCode"
-                                        minWidth={140}
-                                        caption="Mã sản phẩm"
-                                    >
-                                    </Column>
-                                    <Column dataField="productName"
-                                        caption="Tên sản phẩm"
-                                        minWidth={200}
-                                    >
-                                    </Column>
-
-                                    <Column dataField="version"
-                                        minWidth={140}
-                                        caption="Version"
-                                        alignment="left"
-                                    >
-                                    </Column>
-
-                                    <Column dataField="productType"
-                                        caption="Phân loại sản phẩm"
-                                        alignment={"left"}
-                                        minWidth={140}
-                                    >
-                                    </Column>
-                                    <Column dataField="describe" caption="Mô tả " />
-                                    <Column dataField="note" caption="Lưu ý" />
-                                    <Column
-                                        dataField="note"
-                                        alignment={"left"}
-                                        caption={"Ghi chú"}
-                                        width={140}
-                                    >
-                                    </Column>
-                                    <Column caption={"Trạng thái"} dataField="status" />
-                                    <Column type={'buttons'} caption={"Thao tác"} alignment="left"
-                                        cellRender={() =>
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <Table.Column title="Mã sản phẩm" dataIndex="productCode" filterSearch={true} />
+                                    <Table.Column title="Tên sản phẩm" dataIndex="productName" filterSearch={true} />
+                                    <Table.Column title="Version" dataIndex="version" filterSearch={true} />
+                                    <Table.Column title="Phân loại sản phẩm" dataIndex="productType" />
+                                    <Table.Column title="Mô tả" dataIndex="describe" />
+                                    <Table.Column title="Lưu ý" dataIndex="note" />
+                                    <Table.Column title="Ghi chú" dataIndex="note" />
+                                    <Table.Column title="Trạng thái" dataIndex="status" />
+                                    <Table.Column
+                                        title="Thao tác"
+                                        align="center"
+                                        render={() =>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon onClick={() => { }} tooltipTitle="Thông tin" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                                 <SvgIcon onClick={handleBOMBodyCardAddInfo} tooltipTitle="Thêm mới thông tin BOM body card" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                                 <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                             </div>
-                                        }>
-                                    </Column>
-                                </DataGrid>
+                                        }
+                                    />
+                                </Table>
                             </div>
                         </div>
                     </div>

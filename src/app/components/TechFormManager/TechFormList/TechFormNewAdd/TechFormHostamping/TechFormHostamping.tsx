@@ -43,7 +43,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
         console.log("Tiếp theo");
     };
 
-    return <div>
+    return <div className="box__shadow-table-responsive">
         <div className="table-responsive">
             <div className="informer" style={{
                 textAlign: "left",

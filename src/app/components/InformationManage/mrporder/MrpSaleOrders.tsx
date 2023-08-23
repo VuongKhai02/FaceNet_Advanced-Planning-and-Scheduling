@@ -311,7 +311,7 @@ export const MrpSaleOrders = () => {
   }
 
 
-  return <div>
+  return <div className="box__shadow-table-responsive">
     <div className="table-responsive">
       <div className="informer" style={{
         background: "#fff",
