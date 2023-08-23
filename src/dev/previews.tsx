@@ -77,6 +77,7 @@ import CITT1Import from "../app/profile/CITT1Import";
 import COITTImport from "../app/profile/COITTImport";
 import OITMImport from "../app/profile/OITMImport";
 import ProgressMonitoringOrder from "../app/components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder";
+import DeclareProductionObject from "../app/components/ProductionPlanManagement/declareObject/DeclareProductionObject";
 
 export const ComponentPreviews = () => {
     return (
@@ -107,51 +108,57 @@ export const ComponentPreviews = () => {
             <ComponentPreview path='/workOrderTooltip'>
                 <WorkOrderTooltip />
             </ComponentPreview>
- {/* Quản lý thông tin */}
- <ComponentPreview path="/mrpsaleorders">
-        <MrpSaleOrders />
-      </ComponentPreview>
-      <ComponentPreview path="/manageProductionRequirements">
-        <ManageProductionRequirements />
-      </ComponentPreview>
-      <ComponentPreview path="/cardManagement">
-        <CardManagement />
-      </ComponentPreview>
-      <ComponentPreview path="/manageJobOutput">
-        <ManageJobOutput />
-      </ComponentPreview>
+            {/* Quản lý thông tin */}
+            <ComponentPreview path='/mrpsaleorders'>
+                <MrpSaleOrders />
+            </ComponentPreview>
+            <ComponentPreview path='/manageProductionRequirements'>
+                <ManageProductionRequirements />
+            </ComponentPreview>
+            <ComponentPreview path='/cardManagement'>
+                <CardManagement />
+            </ComponentPreview>
+            <ComponentPreview path='/manageJobOutput'>
+                <ManageJobOutput />
+            </ComponentPreview>
 
-      {/* Phiếu công nghệ */}
-      <ComponentPreview path="/techFormList">
-        <TechFormList />
-      </ComponentPreview>
-      <ComponentPreview path="/techFormApprove">
-        <TechFormApprove />
-      </ComponentPreview>
+            {/* Phiếu công nghệ */}
+            <ComponentPreview path='/techFormList'>
+                <TechFormList />
+            </ComponentPreview>
+            <ComponentPreview path='/techFormApprove'>
+                <TechFormApprove />
+            </ComponentPreview>
 
-      {/* QLKHSX */}
-      <ComponentPreview path="/productionPlanList">
-        <ProductionPlanList />
-      </ComponentPreview>
-      <ComponentPreview path="/dnlNvlList">
-        <DnlNvlList />
-      </ComponentPreview>
+            {/* QLKHSX */}
+            <ComponentPreview path='/productionPlanList'>
+                <ProductionPlanList />
+            </ComponentPreview>
+            <ComponentPreview path='/dnlNvlList'>
+                <DnlNvlList />
+            </ComponentPreview>
+            <ComponentPreview path='/declareProductionObject'>
+                <DeclareProductionObject />
+            </ComponentPreview>
+            {/* <ComponentPreview path="/declareProductionInfor">
+        <DeclareProductionInfor />
+      </ComponentPreview> */}
 
-      {/* BOM */}
-      <ComponentPreview path="/bomBodyCard">
-        <BOMBodyCard />
-      </ComponentPreview>
-      <ComponentPreview path="/bomPersonalized">
-        <BOMPersonalized />
-      </ComponentPreview>
+            {/* BOM */}
+            <ComponentPreview path='/bomBodyCard'>
+                <BOMBodyCard />
+            </ComponentPreview>
+            <ComponentPreview path='/bomPersonalized'>
+                <BOMPersonalized />
+            </ComponentPreview>
 
-      {/* Giám sát tiến độ */}
-      <ComponentPreview path="/progressMonitoringWO">
-        <ProgressMonitoringWO />
-      </ComponentPreview>
-      <ComponentPreview path="/progressMonitoringManufacture">
-        <ProgressMonitoringManufacture />
-      </ComponentPreview>
+            {/* Giám sát tiến độ */}
+            <ComponentPreview path='/progressMonitoringWO'>
+                <ProgressMonitoringWO />
+            </ComponentPreview>
+            <ComponentPreview path='/progressMonitoringManufacture'>
+                <ProgressMonitoringManufacture />
+            </ComponentPreview>
             <ComponentPreview path='/PlanningWorkOrderAssignmentList'>
                 <PlanningWorkOrderAssignmentList />
             </ComponentPreview>
@@ -314,10 +321,9 @@ export const ComponentPreviews = () => {
             <ComponentPreview path='/QmsStageGroupMappingManager'>
                 <QmsStageGroupManagerScreen />
             </ComponentPreview>
-            <ComponentPreview path="/progressMonitoringOrder">
-        <ProgressMonitoringOrder />
-      </ComponentPreview>
+            <ComponentPreview path='/progressMonitoringOrder'>
+                <ProgressMonitoringOrder />
+            </ComponentPreview>
         </Previews>
-
-  );
+    );
 };
