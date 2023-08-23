@@ -24,6 +24,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
     const [popupVisible, setPopupVisible] = useState(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [productionId, setproductionId] = useState(fakeProductionID);
 
     const togglePopup = () => {
         setPopupVisible(!popupVisible)
@@ -62,7 +63,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                             }
                         />
                         <Button
-                            onClick={togglePopup}
+                            onClick={setClose}
                             text="Hủy bỏ"
                             height={30}
                             width={80}
@@ -74,6 +75,16 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                 </div>
             </>
         )
+    }
+
+    const refresh = () => {
+        productionId[0].id = "";
+        productionId[0].cardName = "";
+        productionId[0].status = "";
+        productionId[0].quantity = "";
+        let newObj = JSON.parse(JSON.stringify(productionId))
+        setproductionId(newObj);
+        console.log(newObj)
     }
     return (
         <>
@@ -110,28 +121,28 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                     <div className="dx-field">
                                         <div className="dx-field-label">Mã sản xuất</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeProductionID[0].id} > </TextBox>
+                                            <TextBox value={fakeProductionID[0].id} > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Tên thẻ</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeProductionID[0].cardName} />
+                                            <TextBox value={fakeProductionID[0].cardName} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Trạng thái</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeProductionID[0].status} />
+                                            <TextBox value={fakeProductionID[0].status} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Số lượng</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeProductionID[0].quantity} />
+                                            <TextBox value={fakeProductionID[0].quantity} />
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem" }}>
+                                    <div style={{ display: "flex", flexDirection: "row-reverse", gap: "10px", padding: "2rem 0" }}>
                                         <Button
                                             text="Tiếp theo"
                                             width={80}
@@ -142,8 +153,8 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                             }
                                         />
                                         <Button
-                                            text="Hủy bỏ"
-                                            onClick={setClose}
+                                            text="Quét lại"
+                                            onClick={refresh}
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>

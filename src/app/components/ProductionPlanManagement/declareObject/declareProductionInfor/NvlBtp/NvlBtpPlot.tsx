@@ -9,15 +9,18 @@ type NvlBtpPlot = {
     setClose?: () => void;
 };
 
+
+const fakeNvlBtpPlot = [{
+    plotNumber: "WO_123",
+    quantity: "10,000"
+}]
+
 export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
     isOpen = false, setClose }) => {
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [nvlBtpPlot, setnvlBtpPlot] = useState(fakeNvlBtpPlot);
 
-    const fakeNvlBtpPlot = [{
-        plotNumber: "WO_123",
-        quantity: "10,000"
-    }]
 
     useEffect(() => {
         const updateDimension = () => {
@@ -30,6 +33,13 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
         alert("Bắt đầu");
     }
 
+    const refresh = () => {
+        nvlBtpPlot[0].plotNumber = "";
+        nvlBtpPlot[0].quantity = "";
+        let newObj = JSON.parse(JSON.stringify(nvlBtpPlot))
+        setnvlBtpPlot(newObj);
+        console.log(newObj)
+    }
     return (
         <>
             {isDeclareInfo ? <NvlBtpPlot isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)} /> :
@@ -55,16 +65,16 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                     <div className="dx-field">
                                         <div className="dx-field-label">Số lô</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeNvlBtpPlot[0].plotNumber} > </TextBox>
+                                            <TextBox value={fakeNvlBtpPlot[0].plotNumber} > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Số lượng</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeNvlBtpPlot[0].quantity} />
+                                            <TextBox value={fakeNvlBtpPlot[0].quantity} />
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem" }}>
+                                    <div style={{ display: "flex", gap: "10px", flexDirection: "row-reverse", padding: "2rem 0" }}>
                                         <Button
                                             text="Bắt đầu"
                                             width={80}
@@ -76,7 +86,7 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                         />
                                         <Button
                                             text="Quét lại"
-                                            onClick={setClose}
+                                            onClick={refresh}
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>

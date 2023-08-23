@@ -10,17 +10,20 @@ type MachineID = {
     setClose?: () => void;
 };
 
+
+const fakeMachineID = [{
+    id: "M001",
+    machineName: "Máy 01",
+    machineType: "Máy đồn dập",
+}]
+
 export const MachineID: React.FC<MachineID> = observer(({
     isOpen = false, setClose }) => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [machineID, setmachineID] = useState(fakeMachineID);
 
-    const fakeMachineID = [{
-        id: "M001",
-        machineName: "Máy 01",
-        machineType: "Máy đồn dập",
-    }]
 
     useEffect(() => {
         const updateDimension = () => {
@@ -31,6 +34,15 @@ export const MachineID: React.FC<MachineID> = observer(({
 
     const handleChangeScreen = () => {
         setisDeclareInfo(true);
+    }
+
+    const refresh = () => {
+        machineID[0].id = "";
+        machineID[0].machineName = "";
+        machineID[0].machineType = "";
+        let newObj = JSON.parse(JSON.stringify(machineID))
+        setmachineID(newObj);
+        console.log(newObj)
     }
 
     return (
@@ -59,22 +71,22 @@ export const MachineID: React.FC<MachineID> = observer(({
                                     <div className="dx-field">
                                         <div className="dx-field-label">Mã máy</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeMachineID[0].id}  > </TextBox>
+                                            <TextBox value={fakeMachineID[0].id}  > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Tên máy</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeMachineID[0].machineName} />
+                                            <TextBox value={fakeMachineID[0].machineName} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Loại máy</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeMachineID[0].machineType} />
+                                            <TextBox value={fakeMachineID[0].machineType} />
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem" }}>
+                                    <div style={{ display: "flex", gap: "10px", flexDirection: "row-reverse", padding: "2rem 0" }}>
                                         <Button
                                             text="Tiếp theo"
                                             width={80}
@@ -86,7 +98,7 @@ export const MachineID: React.FC<MachineID> = observer(({
                                         />
                                         <Button
                                             text="Quét lại"
-                                            onClick={setClose}
+                                            onClick={refresh}
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>

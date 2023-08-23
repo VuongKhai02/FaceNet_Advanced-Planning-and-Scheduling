@@ -22,6 +22,8 @@ export const WorkerID: React.FC<WorkerID> = observer(({
     const [popupVisible, setPopupVisible] = useState(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [workerID, setworkerID] = useState(fakeWorkerID)
+
 
     useEffect(() => {
         const updateDimension = () => {
@@ -32,6 +34,15 @@ export const WorkerID: React.FC<WorkerID> = observer(({
 
     const handleChangeScreen = () => {
         setisDeclareInfo(true);
+    }
+
+    const refresh = () => {
+        workerID[0].id = "";
+        workerID[0].workerName = "";
+        workerID[0].group = "";
+        let newObj = JSON.parse(JSON.stringify(workerID))
+        setworkerID(newObj);
+        console.log(newObj)
     }
 
     return (
@@ -56,26 +67,26 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                                     <img src={qr_img} width={200} height={200} alt="" />
                                 </div>
                                 <div className="dx-fieldset">
-                                    <h4 style={{ margin: "1rem 0" }}>Thông tin lệnh công nhân</h4>
+                                    <h4 style={{ margin: "1rem 0" }}>Thông tin công nhân</h4>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Mã công nhân</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeWorkerID[0].id} > </TextBox>
+                                            <TextBox value={fakeWorkerID[0].id} > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Tên công nhân</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeWorkerID[0].workerName} />
+                                            <TextBox value={fakeWorkerID[0].workerName} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Nhóm/tổ</div>
                                         <div className="dx-field-value">
-                                            <TextBox defaultValue={fakeWorkerID[0].group} />
+                                            <TextBox value={fakeWorkerID[0].group} />
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem" }}>
+                                    <div style={{ display: "flex", gap: "10px", flexDirection: "row-reverse", padding: "2rem 0" }}>
                                         <Button
                                             text="Tiếp theo"
                                             width={80}
@@ -87,7 +98,7 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                                         />
                                         <Button
                                             text="Quét lại"
-                                            onClick={setClose}
+                                            onClick={refresh}
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>

@@ -38,6 +38,17 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         console.log(newObj)
     }
 
+    // Function for update after qr again
+    const updateDt = () => {
+        productionInfo[0].id = "1";
+        productionInfo[0].cardName = "a";
+        productionInfo[0].status = "b";
+        productionInfo[0].quantity = "2";
+        let newObj = JSON.parse(JSON.stringify(productionInfo))
+        setProductionInfo(newObj);
+        console.log(newObj)
+    }
+
     useEffect(() => {
         const updateDimension = () => {
             setwindowWidth(window.innerWidth)
@@ -46,9 +57,9 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         window.addEventListener('resize', updateDimension);
     }, [])
 
+
     return (
         <>
-            <h2>{productionInfo[0].id}</h2>
             {isDeclareInfo ? <ProductionID isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)} status={fakeProductionInfo[0].status} /> :
                 <div>
                     <div className="table-responsive">
@@ -93,7 +104,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             <TextBox value={productionInfo[0].quantity} />
                                         </div>
                                     </div>
-                                    <div style={{ display: "flex", flexDirection: "row-reverse", padding: "2rem 0" }}>
+                                    <div style={{ gap: "10px", display: "flex", flexDirection: "row-reverse", padding: "2rem 0" }}>
                                         <Button
                                             text="Tiếp theo"
                                             onClick={handleChangeScreen}
@@ -110,6 +121,15 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             width={80}
                                             render={(buttonData) =>
                                                 <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                            }
+                                        />
+                                        <Button
+                                            text="Trở lại  "
+                                            onClick={setClose}
+                                            height={30}
+                                            width={80}
+                                            render={(buttonData) =>
+                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                             }
                                         />
                                     </div>

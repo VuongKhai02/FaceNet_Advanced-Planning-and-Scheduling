@@ -223,12 +223,14 @@ export const DeclareProductionObject = () => {
                                         marginBottom: 0,
                                         fontSize: 15,
                                         boxSizing: "border-box",
-                                        fontWeight: 550
+                                        fontWeight: 550,
+                                        marginLeft: ".5rem"
                                     }}>Tìm kiếm chung</h5>
                                 </div>
                             </div>
                         </div>
                         <DataGrid
+                            style={{ marginLeft: "0 .5rem" }}
                             keyExpr={"saleOrderId"}
                             dataSource={content}
                             showBorders={true}
@@ -264,7 +266,7 @@ export const DeclareProductionObject = () => {
                             <Pager
                                 visible={true}
                                 allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
+                                displayMode={"full"}
                                 showPageSizeSelector={true}
                                 showInfo={true}
                                 showNavigationButtons={true}
@@ -310,16 +312,16 @@ export const DeclareProductionObject = () => {
                                                     onValueChanged={onValueChanged}
                                                 />
                                             </div>
-                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
                                                 <p>Mã SO</p>
                                                 <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
                                             </div>
-                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
                                                 <p>Tên công đoạn</p>
                                                 <SelectBox placeholder="-- Chọn tên công đoạn --" items={stage_name} />
 
                                             </div>
-                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "24%", margin: "0 1rem 1rem 0" }}>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
                                                 <p>Tên Job</p>
                                                 <SelectBox placeholder="-- Chọn job --" items={job_name} />
                                             </div>
