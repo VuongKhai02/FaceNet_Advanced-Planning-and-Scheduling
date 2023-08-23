@@ -1,46 +1,42 @@
-import React, { } from "react";
+import React from "react";
 import { Button, DataGrid } from "devextreme-react";
 
-import {
-    Column,
-    FilterRow,
-    HeaderFilter,
-    MasterDetail,
-} from "devextreme-react/data-grid";
+import { Column, FilterRow, HeaderFilter, MasterDetail } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
 type CreateProductionPlanProps = {
-    isOpen: boolean,
+    isOpen: boolean;
     setClose?: () => void;
-
 };
 
 const data = [
-    { codeJob: 'In lưới', nameJob: '', startTime: '', endTime: '' },
-    { codeJob: 'In offset', nameJob: '', startTime: '', endTime: '' },
-    { codeJob: 'Ép', nameJob: '', startTime: '', endTime: '' }
+    { codeJob: "In lưới", nameJob: "", startTime: "", endTime: "" },
+    { codeJob: "In offset", nameJob: "", startTime: "", endTime: "" },
+    { codeJob: "Ép", nameJob: "", startTime: "", endTime: "" },
+];
 
-]
-
-export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observer(({
-    isOpen = false, setClose }) => {
-
-
+export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observer(({ isOpen = false, setClose }) => {
     return (
         <>
             {
-                <div>
-                    <div className="table-responsive">
-                        <div className="informer" style={{
-                            background: "#fff",
-                            textAlign: "center",
-                            paddingTop: 12
-                        }}>
-                            <h5 className="name" style={{
-                                fontSize: 18,
-                                marginBottom: 30
-                            }}>Tạo kế hoạch sản xuất</h5>
+                <div className='box__shadow-table-responsive'>
+                    <div className='table-responsive'>
+                        <div
+                            className='informer'
+                            style={{
+                                background: "#fff",
+                                textAlign: "center",
+                                paddingTop: 12,
+                            }}>
+                            <h5
+                                className='name'
+                                style={{
+                                    fontSize: 18,
+                                    marginBottom: 30,
+                                }}>
+                                Tạo kế hoạch sản xuất
+                            </h5>
                         </div>
 
                         <div style={{ marginBottom: 50 }}>
@@ -60,7 +56,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             </table>
                         </div>
                         <DataGrid
-                            key={'codeJob'}
+                            key={"codeJob"}
                             keyExpr={"codeJob"}
                             dataSource={data}
                             showBorders={true}
@@ -69,54 +65,49 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            focusedRowEnabled={true}
-
-                        >
-
-                            <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} />
+                            focusedRowEnabled={true}>
+                            <HeaderFilter
+                                visible={true}
+                                texts={{
+                                    cancel: "Hủy bỏ",
+                                    ok: "Đồng ý",
+                                    emptyValue: "Rỗng",
+                                }}
+                                allowSearch={true}
+                            />
                             <FilterRow visible={true} />
 
-                            <Column caption={"Mã Job"} dataField={"codeJob"} alignment="left" width={100} />
+                            <Column caption={"Mã Job"} dataField={"codeJob"} alignment='left' width={100} />
                             <Column caption={"Tên Job"} dataField={"nameJob"} />
-                            <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={""}
-                                format="dd/MM/yyyy hh:mm:ss">
-                            </Column>
-                            <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"endTime"}
-                                format="dd/MM/yyyy hh:mm:ss" />
+                            <Column caption={"Thời gian bắt đầu"} dataType='datetime' dataField={""} format='dd/MM/yyyy hh:mm:ss'></Column>
+                            <Column caption={"Thời gian kết thúc"} dataType='datetime' dataField={"endTime"} format='dd/MM/yyyy hh:mm:ss' />
                             <MasterDetail
                                 enabled={true}
-                            // component={getProductOrderItemTemplate}
+                                // component={getProductOrderItemTemplate}
                             />
                         </DataGrid>
                         <div
-                            className="toolbar"
+                            className='toolbar'
                             style={{
                                 marginTop: 10,
                                 float: "right",
                                 // background: "#ffffff",
                                 padding: "8px",
                                 borderRadius: "4px",
-                            }}
-                        >
+                            }}>
                             <Button
-                                text="Hủy bỏ"
+                                text='Hủy bỏ'
                                 onClick={setClose}
                                 style={{ marginRight: "20px", backgroundColor: "#E5E5E5", color: "#333" }}
                             />
-                            <Button text="Lưu lại" style={{ marginRight: '20px', backgroundColor: "#FF7A00", color: "#fff" }} />
-                            <Button text="Phát lệnh sản xuất" style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                            <Button text='Lưu lại' style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff" }} />
+                            <Button text='Phát lệnh sản xuất' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
                         </div>
                     </div>
                 </div>
             }
         </>
-    )
-})
-
+    );
+});
 
 export default CreateProductionPlan;
