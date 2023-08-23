@@ -1,17 +1,22 @@
-import React from "react";
-import { Button, DataGrid, Template } from "devextreme-react";
+import React, { useEffect } from "react";
+import { Button, DataGrid, Template, TextArea, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import "./TechFormUpdate.css";
 import TechnologyProcedureUpdate from "./TechnologyProcedureUpdate/TechnologyProcedureUpdate";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../config";
 
 type TechFormUpdateProps = {
+    id: any;
     isOpen: boolean;
     setClose?: () => void;
 };
 
-export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen = false, setClose }) => {
+export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen = false, setClose, id }) => {
     const [isVisibleTechProcedureUpdate, setIsVisibleTechProcedureUpdate] = React.useState<boolean>(false);
+    const mainStore = useMainStore();
     const data1 = [
         { title1: "Mã sx/Production", data1: "1500928", title2: "Người gửi/Sender", data2: "Nguyễn Thị A" },
         { title1: "Tên khách hàng/Customer", data1: "Ngân hang A", title2: "Số lượng thẻ/Quantity", data2: "15000" },
@@ -31,12 +36,49 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             MatSauKichThuocBan: "A4",
         },
     ];
+
+    const [techFormData, setTechFormData] = React.useState<any>({});
+    const loadTechFormData = (id) => {
+        if (id > 0) {
+            const headers = {
+                Authorization: "Bearer " + mainStore.authToken,
+                "content-type": "application/json",
+            };
+            axios.get(PLANNING_API_URL + "/api/techforms/" + id, { headers }).then((response) => {
+                if (response.status === 200) {
+                    setTechFormData(response.data.data);
+                }
+            });
+        }
+    };
+
+    const customRenderSize = (cellInfo) => {
+        const texts = cellInfo.value.split(";");
+        return (
+            <p>
+                {texts[0]}
+                <br></br>
+                {texts[1]}
+            </p>
+        );
+    };
+
+    useEffect(() => {
+        loadTechFormData(id);
+    }, [id]);
+
+    console.log(techFormData);
     return (
         <>
             {isVisibleTechProcedureUpdate ? (
-                <TechnologyProcedureUpdate isOpen={isVisibleTechProcedureUpdate} setClose={() => setIsVisibleTechProcedureUpdate(false)} />
+                <TechnologyProcedureUpdate
+                    techFormData={techFormData}
+                    setTechFormData={setTechFormData}
+                    isOpen={isVisibleTechProcedureUpdate}
+                    setClose={() => setIsVisibleTechProcedureUpdate(false)}
+                />
             ) : (
-                <div className='box__shadow-table-responsive'>
+                <div>
                     <div className='table-responsive'>
                         <div
                             className='informer'
@@ -126,7 +168,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     paddingBottom: 10,
                                     // marginTop: 20
                                 }}>
-                                <h5 style={{ marginTop: 30 }}>Mức độ ưu tiên: {"1"}</h5>
+                                <h5 style={{ marginTop: 30 }}>Mức độ ưu tiên: {techFormData.priority}</h5>
                                 <h5
                                     className='name'
                                     style={{
@@ -136,15 +178,51 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     Quy cách sản phẩm/Product Spee
                                 </h5>
                             </div>
-                            <DataGrid dataSource={data2} showBorders={true} showRowLines={true} showColumnLines={true}>
-                                <Column dataField='MatTruocNoiDung' caption='Khổ thẻ/Size' />
+                            <DataGrid dataSource={[techFormData.productSpec]} showBorders={true} showRowLines={true} showColumnLines={true}>
+                                <Column
+                                    dataField='sizeType'
+                                    caption='Khổ thẻ/Size'
+                                    cellRender={(cellIfo) => <TextBox placeholder='Nhập' value={cellIfo.value} key={"sizeType"} />}
+                                />
                                 <Column
                                     alignment='left'
-                                    dataField='MatTruocSoLuong'
-                                    caption='Kích thước/Size, Dài/Length * Rộng/Width(mm)'
+                                    dataField='thickness'
+                                    caption='Độ dày/Thickness(mm)'
+                                    cellRender={(cellIfo) => <TextBox placeholder='Nhập' value={cellIfo.value} key={"thickness"} />}
                                 />
-                                <Column dataField='MatTruocKichThuocBan' caption='Kích thước/size' />
-                                <Column dataField='MatTruocKichThuocBan' caption='Khác/other' />
+                                <Column
+                                    dataField='size'
+                                    caption='Kích thước/Size, Dài/Length * Rộng/Width(mm)'
+                                    cellRender={(cellIfo) => (
+                                        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                                            {" "}
+                                            <div className='textbox-row'>
+                                                <label>Width(W)</label>
+                                                <TextBox
+                                                    style={{ width: "100%" }}
+                                                    placeholder='Nhập'
+                                                    value={cellIfo.value.split(";")[0].replace("Width(W):", "").trim()}
+                                                    key={"size"}
+                                                />
+                                            </div>{" "}
+                                            <div className='textbox-row'>
+                                                {" "}
+                                                <label>Height(H)</label>
+                                                <TextBox
+                                                    style={{ width: "100%" }}
+                                                    placeholder='Nhập'
+                                                    value={cellIfo.value.split(";")[1].replace("Height(H):", "").trim()}
+                                                    key={"size"}
+                                                />
+                                            </div>{" "}
+                                        </div>
+                                    )}
+                                />
+                                <Column
+                                    dataField='other'
+                                    caption='Khác/other'
+                                    cellRender={(cellIfo) => <TextArea placeholder='Nhập' value={cellIfo.value} key={"other"} />}
+                                />
                             </DataGrid>
                             <div
                                 className='informer'

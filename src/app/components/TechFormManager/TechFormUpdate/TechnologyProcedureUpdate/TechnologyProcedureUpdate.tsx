@@ -6,6 +6,8 @@ import { Table, Upload } from "antd";
 import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
 
 type TechnologyProcedureUpdateProps = {
+    techFormData: any;
+    setTechFormData: any;
     isOpen: boolean;
     setClose?: () => void;
 };
@@ -44,6 +46,9 @@ const data2 = [
     { no: "6", materialName: "Dải từ", supplier: "", thickNess: "", quantity: "HI-co đen 12.7", note: "", structure: "" },
 ];
 
+// export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps> = observer(({
+//     isOpen = false, setClose, techFormData, setTechFormData }) => {
+
 export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps> = observer(({ isOpen = false, setClose }) => {
     const [isVisibleTechFormUpdateMaterialAndStructure, setIsVisibleTechFormUpdateMaterialAndStructure] = React.useState<boolean>(false);
 
@@ -51,6 +56,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
         <>
             {isVisibleTechFormUpdateMaterialAndStructure ? (
                 <TechFormUpdateMaterialAndStructure
+                    techFormData={techFormData}
+                    setTechFormData={setTechFormData}
                     isOpen={isVisibleTechFormUpdateMaterialAndStructure}
                     setClose={() => setIsVisibleTechFormUpdateMaterialAndStructure(false)}
                 />

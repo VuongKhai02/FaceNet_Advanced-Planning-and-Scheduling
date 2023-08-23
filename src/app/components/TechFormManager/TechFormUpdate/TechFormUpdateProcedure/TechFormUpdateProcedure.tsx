@@ -6,6 +6,8 @@ import TechFormUpdateHostamping from "../TechFormUpdateHostamping/TechFormUpdate
 import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormDetailProcedureProps = {
+    techFormData: any;
+    setTechFormData: any;
     isOpen: boolean;
     setClose?: () => void;
 };
@@ -31,264 +33,560 @@ const data2 = [
     },
 ];
 
-export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = observer(({ isOpen = false, setClose }) => {
-    const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
+export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = observer(
+    ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
+        const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
 
-    return (
-        <>
-            {isVisibleTechFormUpdateHostamping ? (
-                <TechFormUpdateHostamping
-                    isOpen={isVisibleTechFormUpdateHostamping}
-                    setClose={() => setIsVisibleTechFormUpdateHostamping(false)}
-                />
-            ) : (
-                <div className='box__shadow-table-responsive'>
-                    <div className='table-responsive'>
-                        <div
-                            className='informer'
-                            style={{
-                                textAlign: "left",
-                                paddingTop: 12,
-                            }}>
-                            <h5
-                                className='name'
+        const onChoosePrintingTechnology = (option) => {
+            setTechFormData({
+                ...techFormData,
+                printingTech: {
+                    ...techFormData.printingTech,
+                    printingTechnology: option,
+                },
+            });
+        };
+
+        const onAddRowProcessing = (no) => {
+            console.log(no);
+            const newProcessingInfo = [
+                ...techFormData.processing.processingInfos.slice(0, no),
+                { no: no + 1 },
+                ...techFormData.processing.processingInfos.slice(no).map((element, index) => {
+                    return {
+                        ...element,
+                        no: element.no + 1,
+                    };
+                }),
+            ];
+
+            setTechFormData({
+                ...techFormData,
+                processing: {
+                    ...techFormData.processing,
+                    processingInfos: newProcessingInfo,
+                },
+            });
+        };
+
+        const onRemoveRowProcessing = (no) => {
+            console.log(no);
+            const newProcessingInfo = techFormData.processing.processingInfos
+                .filter((process) => process.no !== no)
+                .map((process, index) => {
+                    return {
+                        ...process,
+                        no: index + 1,
+                    };
+                });
+
+            if (newProcessingInfo.length === 0) {
+                newProcessingInfo.push({ no: 1 });
+            }
+
+            setTechFormData({
+                ...techFormData,
+                processing: {
+                    ...techFormData.processing,
+                    processingInfos: newProcessingInfo,
+                },
+            });
+        };
+
+        const onAddNewRowLamination = (index) => {
+            console.log(index);
+            const newLaminationSteps = [
+                ...techFormData.lamination.steps.slice(0, index + 1),
+                { step: index + 2 },
+                ...techFormData.lamination.steps.slice(index + 1),
+            ].map((step, index) => {
+                return {
+                    ...step,
+                    step: index + 1,
+                };
+            });
+            setTechFormData({
+                ...techFormData,
+                lamination: {
+                    ...techFormData.lamination,
+                    steps: newLaminationSteps,
+                },
+            });
+        };
+
+        const onRemoveRowLamination = (rowIndex) => {
+            const newLaminationSteps = techFormData.lamination.steps
+                .filter((step, index) => index !== rowIndex)
+                .map((step, index) => {
+                    return {
+                        ...step,
+                        step: index + 1,
+                    };
+                });
+
+            if (newLaminationSteps.length === 0) {
+                newLaminationSteps.push({ step: 1 });
+            }
+
+            setTechFormData({
+                ...techFormData,
+                lamination: {
+                    ...techFormData.lamination,
+                    steps: newLaminationSteps,
+                },
+            });
+        };
+
+        return (
+            <>
+                {isVisibleTechFormUpdateHostamping ? (
+                    <TechFormUpdateHostamping
+                        techFormData={techFormData}
+                        setTechFormData={setTechFormData}
+                        isOpen={isVisibleTechFormUpdateHostamping}
+                        setClose={() => setIsVisibleTechFormUpdateHostamping(false)}
+                    />
+                ) : (
+                    <div>
+                        <div className='table-responsive'>
+                            <div
+                                className='informer'
                                 style={{
-                                    fontSize: 18,
-                                    marginBottom: 0,
+                                    textAlign: "left",
+                                    paddingTop: 12,
                                 }}>
-                                Cập nhật phiếu công nghệ
-                            </h5>
-                        </div>
-                        <div className='subtile'>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                Thời gian từ 09/08/2022 đến 19/08/2022
-                            </h6>
-                        </div>
-                        <div style={{ marginTop: 30 }}>
-                            <DataGrid
-                                key={"id"}
-                                keyExpr={"id"}
-                                dataSource={data}
-                                showBorders={true}
-                                showRowLines={true}
-                                showColumnLines={true}>
-                                <Column alignment='left' caption='Công nghệ In/Printing Technology' fixed>
-                                    <Column alignment='left' caption='Nội dung In/Printing Contents' fixed>
-                                        <Column dataField='id' alignment='center' caption='Bước/Step' width={100}>
-                                            {/* <Column>
+                                <h5
+                                    className='name'
+                                    style={{
+                                        fontSize: 18,
+                                        marginBottom: 0,
+                                    }}>
+                                    Cập nhật phiếu công nghệ
+                                </h5>
+                            </div>
+                            <div className='subtile'>
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
+                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                    Thời gian từ 09/08/2022 đến 19/08/2022
+                                </h6>
+                            </div>
+                            <div style={{ marginTop: 30 }}>
+                                <DataGrid
+                                    key={"step"}
+                                    keyExpr={"step"}
+                                    dataSource={[...techFormData.printingTech.front, ...techFormData.printingTech.back]}
+                                    showBorders={true}
+                                    showRowLines={true}
+                                    showColumnLines={true}>
+                                    <Column alignment='left' caption='Công nghệ In/Printing Technology' fixed>
+                                        <Column alignment='left' caption='Nội dung In/Printing Contents' fixed>
+                                            <Column
+                                                dataField='step'
+                                                alignment='center'
+                                                caption='Bước/Step'
+                                                width={100}
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"step"} />
+                                                )}>
+                                                {/* <Column>
                                     <Column dataField="" caption="Front" width={50} />
                                     <Column dataField="" caption="Back" width={50} />
                                 </Column> */}
-                                            {/* <Column dataField="id" width={50} alignment="left" caption="" /> */}
+                                                {/* <Column dataField="id" width={50} alignment="left" caption="" /> */}
+                                            </Column>
+                                            <Column
+                                                dataField='item'
+                                                caption='Nội dung/Item'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"item"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='method'
+                                                caption='Phương pháp/Method'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"method"} />
+                                                )}
+                                            />
                                         </Column>
                                         <Column dataField='item' caption='Nội dung/Item' />
                                         <Column dataField='method' caption='Phương pháp/Method' />
                                     </Column>
-                                </Column>
-                                <Column
-                                    alignment='left'
-                                    headerCellRender={() => {
-                                        return (
-                                            <div className='checkbox'>
-                                                <div>
-                                                    <input type='checkbox' id='In' checked={true} />
-                                                    <label htmlFor='In' className='checkBoxStyle'>
-                                                        In trở Nó
-                                                    </label>
+                                    <Column
+                                        alignment='left'
+                                        headerCellRender={() => {
+                                            return (
+                                                <div className='checkbox'>
+                                                    <div>
+                                                        <input
+                                                            onChange={() => onChoosePrintingTechnology(0)}
+                                                            type='checkbox'
+                                                            id='In'
+                                                            checked={techFormData.printingTech.printingTechnology === 0}
+                                                        />
+                                                        <label htmlFor='In' className='checkBoxStyle'>
+                                                            In trở Nó
+                                                        </label>
+                                                    </div>
+                                                    <div style={{ marginLeft: 120 }}>
+                                                        <input
+                                                            onChange={() => onChoosePrintingTechnology(1)}
+                                                            type='checkbox'
+                                                            id='In'
+                                                            checked={techFormData.printingTech.printingTechnology === 1}
+                                                        />
+                                                        <label htmlFor='In' className='checkBoxStyle'>
+                                                            In trở Khác
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div style={{ marginLeft: 120 }}>
-                                                    <input type='checkbox' id='In' />
-                                                    <label htmlFor='In' className='checkBoxStyle'>
-                                                        In trở Khác
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        );
-                                    }}>
-                                    <Column alignment='center' caption='File' fixed>
-                                        <Column dataField='colour' caption='Màu/Colour' />
-                                        <Column dataField='note' caption='Ghi chú/Note' />
+                                            );
+                                        }}>
+                                        <Column alignment='center' caption='File' fixed>
+                                            <Column
+                                                dataField='colour'
+                                                caption='Màu/Colour'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"colour"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='note'
+                                                caption='Ghi chú/Note'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"note"} />
+                                                )}
+                                            />
+                                        </Column>
                                     </Column>
-                                </Column>
-                            </DataGrid>
-                        </div>
-                        <div style={{ marginTop: 30 }}>
-                            <div>
-                                <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                        Thời gian từ 09/08/2022 đến 19/08/2022
-                                    </h6>
-                                </div>
+                                </DataGrid>
+                            </div>
+                            <div style={{ marginTop: 30 }}>
+                                <div>
+                                    <div className='subtile' style={{ marginBottom: 15 }}>
+                                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
+                                        <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                            Thời gian từ 09/08/2022 đến 19/08/2022
+                                        </h6>
+                                    </div>
 
-                                <DataGrid
-                                    key={"id"}
-                                    dataSource={data1}
-                                    keyExpr='id'
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}>
-                                    <Column dataField='id' caption='Bước' alignment='left' width={100} />
-                                    <Column dataField='contens' caption='Nội dung ép/Contens' />
-                                    <Column dataField='classify' caption='Phân loại/Classify' />
-                                    <Column dataField='lamination' caption='Thông số máy/Lamination Parameter' width={270} />
-                                    <Column dataField='other' caption='Khác/Other'></Column>
-                                    <Column dataField='structure' caption='Cấu trúc/Structure' />
-                                </DataGrid>
-                            </div>
-                            <div style={{ marginTop: 30 }}>
-                                <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                        Thời gian từ 09/08/2022 đến 19/08/2022
-                                    </h6>
+                                    <DataGrid
+                                        key={"id"}
+                                        dataSource={data1}
+                                        keyExpr='id'
+                                        showBorders={true}
+                                        showRowLines={true}
+                                        showColumnLines={true}>
+                                        <Column dataField='id' caption='Bước' alignment='left' width={100} />
+                                        <Column dataField='contens' caption='Nội dung ép/Contens' />
+                                        <Column dataField='classify' caption='Phân loại/Classify' />
+                                        <Column dataField='lamination' caption='Thông số máy/Lamination Parameter' width={270} />
+                                        <Column dataField='other' caption='Khác/Other'></Column>
+                                        <Column dataField='structure' caption='Cấu trúc/Structure' />
+                                    </DataGrid>
                                 </div>
-                                <DataGrid
-                                    key={"id"}
-                                    dataSource={data1}
-                                    keyExpr='id'
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}>
-                                    <Column dataField='id' caption='No.' alignment='left' width={100} />
-                                    <Column
-                                        dataField='lnk'
-                                        caption='Mực/Lnk'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"lnk"} />}></Column>
-                                    <Column
-                                        dataField='nilon'
-                                        caption='Nilon'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"nilon"} />}
-                                    />
-                                    <Column dataField='cut' caption='Cắt' cellRender={() => <TextBox placeholder='Nhập' key={"cut"} />} />
-                                    <Column
-                                        dataField='be'
-                                        caption='Bế'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"be"} />}></Column>
-                                    <Column dataField='dun' caption='Đùn' cellRender={() => <TextBox placeholder='Nhập' key={"dun"} />} />
-                                    <Column
-                                        dataField='other'
-                                        caption='Khác/Other'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"other"} />}
-                                    />
-                                    <Column
-                                        caption=''
-                                        dataField=''
-                                        alignment='center'
-                                        cellRender={() => (
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                                <SvgIcon
-                                                    onClick={() => {}}
-                                                    tooltipTitle='Thêm mới'
-                                                    sizeIcon={17}
-                                                    textSize={17}
-                                                    icon='assets/icons/Add.svg'
-                                                    textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
-                                                />
-                                                <SvgIcon
-                                                    onClick={() => {}}
-                                                    tooltipTitle='Xóa hàng'
-                                                    sizeIcon={17}
-                                                    textSize={17}
-                                                    icon='assets/icons/Trash.svg'
-                                                    textColor='#FF7A00'
-                                                />
+                                <div style={{ marginTop: 30 }}>
+                                    <div>
+                                        <div className='subtile' style={{ marginBottom: 15 }}>
+                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
+                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                Thời gian từ 09/08/2022 đến 19/08/2022
+                                            </h6>
+                                        </div>
+
+                                        <DataGrid
+                                            key={"step"}
+                                            dataSource={techFormData.lamination.steps}
+                                            keyExpr='step'
+                                            showBorders={true}
+                                            showRowLines={true}
+                                            showColumnLines={true}>
+                                            <Column dataField='step' caption='Bước' alignment='left' width={100} />
+                                            <Column
+                                                dataField='contents'
+                                                caption='Nội dung ép/Contens'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"contents"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='classify'
+                                                caption='Phân loại/Classify'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"classify"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='parameter'
+                                                caption='Thông số máy/Lamination Parameter'
+                                                width={270}
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"parameter"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='other'
+                                                caption='Khác/Other'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                )}></Column>
+                                            <Column dataField='structure' caption='Cấu trúc/Structure' />
+                                            <Column
+                                                caption=''
+                                                dataField=''
+                                                alignment='center'
+                                                cellRender={(cellInfo) => (
+                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                                        <SvgIcon
+                                                            onClick={() => {
+                                                                onAddNewRowLamination(cellInfo.rowIndex);
+                                                            }}
+                                                            tooltipTitle='Thêm mới'
+                                                            sizeIcon={17}
+                                                            textSize={17}
+                                                            icon='assets/icons/Add.svg'
+                                                            textColor='#FF7A00'
+                                                            style={{ marginRight: 17 }}
+                                                        />
+                                                        <SvgIcon
+                                                            onClick={() => {
+                                                                onRemoveRowLamination(cellInfo.rowIndex);
+                                                            }}
+                                                            tooltipTitle='Xóa hàng'
+                                                            sizeIcon={17}
+                                                            textSize={17}
+                                                            icon='assets/icons/Trash.svg'
+                                                            textColor='#FF7A00'
+                                                        />
+                                                    </div>
+                                                )}
+                                            />
+                                        </DataGrid>
+                                    </div>
+                                    <div style={{ marginTop: 30 }}>
+                                        <div className='subtile' style={{ marginBottom: 15 }}>
+                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
+                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                Thời gian từ 09/08/2022 đến 19/08/2022
+                                            </h6>
+                                        </div>
+                                        <DataGrid
+                                            key={"no"}
+                                            dataSource={techFormData.processing.processingInfos}
+                                            keyExpr='no'
+                                            showBorders={true}
+                                            showRowLines={true}
+                                            showColumnLines={true}>
+                                            <Column dataField='no' caption='No.' alignment='left' width={100} />
+                                            <Column
+                                                dataField='ink'
+                                                caption='Mực/Lnk'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"lnk"} />
+                                                )}></Column>
+                                            <Column
+                                                dataField='nilon'
+                                                caption='Nilon'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"nilon"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='cut'
+                                                caption='Cắt'
+                                                cellRender={(cellInfo) => <TextBox placeholder='Nhập' value={cellInfo.value} key={"cut"} />}
+                                            />
+                                            <Column
+                                                dataField='hold'
+                                                caption='Bế'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox value={cellInfo.value} placeholder='Nhập' key={"hold"} />
+                                                )}></Column>
+                                            <Column
+                                                dataField='pull'
+                                                caption='Đùn'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"pull"} />
+                                                )}
+                                            />
+                                            <Column
+                                                dataField='other'
+                                                caption='Khác/Other'
+                                                cellRender={(cellInfo) => (
+                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                )}
+                                            />
+                                            <Column
+                                                caption=''
+                                                dataField=''
+                                                alignment='center'
+                                                cellRender={(cellInfo) => (
+                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                                        <SvgIcon
+                                                            onClick={() => {
+                                                                onAddRowProcessing(cellInfo.data.no);
+                                                            }}
+                                                            tooltipTitle='Thêm mới'
+                                                            sizeIcon={17}
+                                                            textSize={17}
+                                                            icon='assets/icons/Add.svg'
+                                                            textColor='#FF7A00'
+                                                            style={{ marginRight: 17 }}
+                                                        />
+                                                        <SvgIcon
+                                                            onClick={() => {
+                                                                onRemoveRowProcessing(cellInfo.data.no);
+                                                            }}
+                                                            tooltipTitle='Xóa hàng'
+                                                            sizeIcon={17}
+                                                            textSize={17}
+                                                            icon='assets/icons/Trash.svg'
+                                                            textColor='#FF7A00'
+                                                        />
+                                                    </div>
+                                                )}
+                                            />
+                                        </DataGrid>
+                                    </div>
+                                    <div style={{ marginTop: 30 }}>
+                                        <div className='subtile' style={{ marginBottom: 15 }}>
+                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
+                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                Thời gian từ 09/08/2022 đến 19/08/2022
+                                            </h6>
+                                        </div>
+                                        <div style={{ marginTop: 30 }}>
+                                            <div className='subtile' style={{ marginBottom: 15 }}>
+                                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
+                                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                    Thời gian từ 09/08/2022 đến 19/08/2022
+                                                </h6>
                                             </div>
-                                        )}
-                                    />
-                                </DataGrid>
-                            </div>
-                            <div style={{ marginTop: 30 }}>
-                                <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                        Thời gian từ 09/08/2022 đến 19/08/2022
-                                    </h6>
+                                            <DataGrid
+                                                key={"no"}
+                                                dataSource={techFormData.cutting.cuttingInfos}
+                                                keyExpr='no'
+                                                showBorders={true}
+                                                showRowLines={true}
+                                                showColumnLines={true}>
+                                                <Column dataField='no' caption='No.' alignment='left' width={100} />
+                                                <Column
+                                                    dataField='content'
+                                                    caption='Nội dung/Content'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"content"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='machine'
+                                                    caption='Máy/Machine'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"machine"} />
+                                                    )}
+                                                />
+                                            </DataGrid>
+                                        </div>
+                                        <div>
+                                            <div className='subtile' style={{ marginBottom: 15 }}>
+                                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
+                                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                    Thời gian từ 09/08/2022 đến 19/08/2022
+                                                </h6>
+                                            </div>
+                                            <DataGrid
+                                                key={"step"}
+                                                dataSource={techFormData.hostamping.hostampingInfos}
+                                                keyExpr='step'
+                                                showBorders={true}
+                                                showRowLines={true}
+                                                showColumnLines={true}>
+                                                <Column dataField='step' caption='Bước' alignment='center' width={100} />
+                                                <Column
+                                                    dataField='process'
+                                                    caption='Công đoạn/Process'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"process"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='content'
+                                                    alignment='center'
+                                                    caption='Nội dung hots/Content'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"content"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='rmCode'
+                                                    alignment='center'
+                                                    caption='Mã vật liệu/RMcode'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"rmCode"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='type'
+                                                    alignment='center'
+                                                    caption='Loại phôi hots/Type'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"type"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='position'
+                                                    alignment='center'
+                                                    caption='Vị trí'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"position"} />
+                                                    )}></Column>
+                                                <Column
+                                                    dataField='machine'
+                                                    alignment='center'
+                                                    caption='Máy/Machine'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"machine"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    dataField='other'
+                                                    alignment='center'
+                                                    caption='Khác/Other'
+                                                    cellRender={(cellInfo) => (
+                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                    )}
+                                                />
+                                            </DataGrid>
+                                        </div>
+                                        <div
+                                            className='toolbar'
+                                            style={{
+                                                marginTop: 10,
+                                                float: "right",
+                                                // background: "#ffffff",
+                                                padding: "8px",
+                                                borderRadius: "4px",
+                                            }}
+                                            // style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                        />
+                                        <Button
+                                            text='Ký lập'
+                                            onClick={() => {}}
+                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                        />
+                                        <Button
+                                            text='Gửi duyệt'
+                                            onClick={() => {}}
+                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                        />
+                                    </div>
                                 </div>
-                                <DataGrid
-                                    key={"id"}
-                                    dataSource={data1}
-                                    keyExpr='id'
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}>
-                                    <Column dataField='id' caption='No.' alignment='left' width={100} />
-                                    <Column
-                                        dataField='content'
-                                        caption='Nội dung/Content'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"content"} />}
-                                    />
-                                    <Column
-                                        dataField='machine'
-                                        caption='Máy/Machine'
-                                        cellRender={() => <TextBox placeholder='Nhập' key={"machine"} />}
-                                    />
-                                </DataGrid>
-                            </div>
-                            <div>
-                                <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                        Thời gian từ 09/08/2022 đến 19/08/2022
-                                    </h6>
-                                </div>
-                                <DataGrid
-                                    key={"id"}
-                                    dataSource={data2}
-                                    keyExpr='id'
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}>
-                                    <Column dataField='id' caption='Bước' alignment='center' width={100} />
-                                    <Column dataField='process' caption='Công đoạn/Process' />
-                                    <Column dataField='content' alignment='center' caption='Nội dung hots/Content' />
-                                    <Column dataField='rmcode' alignment='center' caption='Mã vật liệu/RMcode' />
-                                    <Column dataField='typehots' alignment='center' caption='Loại phôi hots/Type' />
-                                    <Column dataField='position' alignment='center' caption='Vị trí'></Column>
-                                    <Column dataField='machine' alignment='center' caption='Máy/Machine' />
-                                    <Column dataField='other' alignment='center' caption='Khác/Other' />
-                                </DataGrid>
-                            </div>
-                            <div
-                                className='toolbar'
-                                style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
-                                    borderRadius: "4px",
-                                }}>
-                                <Button
-                                    text='Trở lại'
-                                    onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                />
-                                <Button
-                                    text='Tiếp theo'
-                                    onClick={() => {
-                                        setIsVisibleTechFormUpdateHostamping(true);
-                                    }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                />
-                                <Button
-                                    text='Ký lập'
-                                    onClick={() => {}}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
-                                />
-                                <Button
-                                    text='Gửi duyệt'
-                                    onClick={() => {}}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                />
                             </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </>
-    );
-});
+                )}
+            </>
+        );
+    },
+);
 
 export default TechFormUpdateProcedure;

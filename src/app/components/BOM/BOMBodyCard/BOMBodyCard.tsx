@@ -20,7 +20,10 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
-import { Table } from "antd";
+// import { Table } from "antd";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../config";
 
 const data = [
     {
@@ -74,6 +77,12 @@ export const BOMBodyCard = () => {
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
 
+    const [bom, setBom] = React.useState<any>({});
+
+    const [bomIdChoosed, setBomIdChoosed] = React.useState<Number | null>(null);
+
+    const mainStore = useMainStore();
+
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     };
@@ -81,21 +90,37 @@ export const BOMBodyCard = () => {
         setIsConfirmDelete(false);
     };
 
-    const handleBOMBodyCardAddInfo = () => {
+    const handleBOMBodyCardAddInfo = (cellInfo) => {
+        console.log(cellInfo);
+        setBomIdChoosed(cellInfo.data.id);
         setIsBOMCardAddInfo(true);
     };
+
+    React.useEffect(() => {
+        const headers = {
+            Authorization: "Bearer " + mainStore.authToken,
+            "content-type": "application/json",
+        };
+        axios.get(PLANNING_API_URL + "/api/boms", { headers }).then((response) => {
+            if (response.status === 200) {
+                setBom(response.data.data);
+            }
+        });
+    }, []);
 
     return (
         <>
             {isBOMCardAddInfo ? (
                 <BOMBodyCardAddInfo
+                    id={bomIdChoosed}
                     isOpen={isBOMCardAddInfo}
                     setClose={() => {
                         setIsBOMCardAddInfo(false);
+                        setBomIdChoosed(null);
                     }}
                 />
             ) : (
-                <div className='box__shadow-table-responsive'>
+                <div>
                     <div className='table-responsive'>
                         <div
                             className='informer'
@@ -131,76 +156,32 @@ export const BOMBodyCard = () => {
                                 }}>
                                 Tìm kiếm chung
                             </h5>
-                            <div style={{ display: "flex", flexDirection: "row" }}>
-                                <SvgIcon
-                                    onClick={() => {}}
-                                    text='Thêm mới'
-                                    tooltipTitle='Thêm mới'
-                                    sizeIcon={17}
-                                    textSize={17}
-                                    icon='assets/icons/Add.svg'
-                                    textColor='#FF7A00'
-                                    style={{ marginRight: 17 }}
-                                />
-                                <SvgIcon
-                                    onClick={() => setIsVisibleImportFile(true)}
-                                    text='Import file'
-                                    tooltipTitle='Import file'
-                                    sizeIcon={17}
-                                    textSize={17}
-                                    icon='assets/icons/ImportFile.svg'
-                                    textColor='#FF7A00'
-                                    style={{ marginRight: 17 }}
-                                />
-                                <SvgIcon
-                                    onClick={() => {}}
-                                    text='Xuất Excel'
-                                    tooltipTitle='Xuất Excel'
-                                    sizeIcon={17}
-                                    textSize={17}
-                                    icon='assets/icons/ExportFile.svg'
-                                    textColor='#FF7A00'
-                                    style={{ marginRight: 17 }}
-                                />
-                                <SvgIcon
-                                    onClick={() => {}}
-                                    tooltipTitle='Chọn cột'
-                                    sizeIcon={18}
-                                    textSize={17}
-                                    icon='assets/icons/ColumnChooser.svg'
-                                    textColor='#FF7A00'
-                                    style={{
-                                        marginRight: 17,
-                                        borderRadius: "4px",
-                                        border: "1px solid rgba(255, 122, 0, 0.60) ",
-                                        padding: "6px",
-                                    }}
-                                />
-                            </div>
                         </div>
                         <div>
-                            <PopupImportFile
-                                visible={isVisibleImportFile}
-                                onCancel={() => setIsVisibleImportFile(false)}
-                                title={"Import file"}
-                                onSubmit={() => {}}
-                                width={900}
-                            />
-                            <PopupConfirmDelete
-                                isVisible={isConfirmDelete}
-                                onCancel={handleHideModalDel}
-                                onSubmit={() => console.log("ok")}
-                                modalTitle={
-                                    <div>
-                                        <h3
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                color: "#ff794e",
-                                                fontWeight: 500,
-                                                fontSize: 25,
-                                            }}>
+                            <DataGrid
+                                key='productCode'
+                                keyExpr={"productCode"}
+                                dataSource={bom.data}
+                                showBorders={true}
+                                columnAutoWidth={true}
+                                showRowLines={true}
+                                rowAlternationEnabled={true}
+                                allowColumnResizing={true}
+                                allowColumnReordering={true}
+                                focusedRowEnabled={true}>
+                                <PopupImportFile
+                                    visible={isVisibleImportFile}
+                                    onCancel={() => setIsVisibleImportFile(false)}
+                                    title={"Import file"}
+                                    onSubmit={() => {}}
+                                    width={900}
+                                />
+                                <PopupConfirmDelete
+                                    isVisible={isConfirmDelete}
+                                    onCancel={handleHideModalDel}
+                                    onSubmit={() => console.log("ok")}
+                                    modalTitle={
+                                        <div>
                                             <InfoCircleOutlined
                                                 style={{
                                                     color: "#ff794e",
@@ -211,29 +192,193 @@ export const BOMBodyCard = () => {
                                                     fontSize: 30,
                                                 }}
                                             />
-                                            Xác nhận xóa?
-                                        </h3>
-                                    </div>
-                                }
-                                modalContent={
-                                    <div>
-                                        <h5
+                                            <h3
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    color: "#ff794e",
+                                                    fontWeight: 500,
+                                                    marginTop: 20,
+                                                    fontSize: 25,
+                                                }}>
+                                                Xác nhận xóa?
+                                            </h3>
+                                        </div>
+                                    }
+                                    modalContent={
+                                        <div>
+                                            <h5
+                                                style={{
+                                                    height: 80,
+                                                    fontWeight: 400,
+                                                    marginTop: 30,
+                                                    fontSize: 20,
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                }}>
+                                                Bạn có chắc chắn muốn thực hiện thao tác xóa không?
+                                            </h5>
+                                        </div>
+                                    }
+                                    width={600}
+                                />
+                                <Toolbar>
+                                    <ToolbarItem>
+                                        <SvgIcon
+                                            onClick={() => setIsVisibleImportFile(true)}
+                                            text='Import file'
+                                            tooltipTitle='Import file'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/ImportFile.svg'
+                                            textColor='#FF7A00'
+                                            style={{ marginRight: 17 }}
+                                        />
+                                    </ToolbarItem>
+                                    <ToolbarItem>
+                                        <SvgIcon
+                                            onClick={() => {}}
+                                            text='Xuất Excel'
+                                            tooltipTitle='Xuất Excel'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/ExportFile.svg'
+                                            textColor='#FF7A00'
+                                            style={{ marginRight: 17 }}
+                                        />
+                                    </ToolbarItem>
+                                    <ToolbarItem name='searchPanel' location='before' />
+                                    <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
+                                </Toolbar>
+                                <HeaderFilter
+                                    visible={true}
+                                    texts={{
+                                        cancel: "Hủy bỏ",
+                                        ok: "Đồng ý",
+                                        emptyValue: "Rỗng",
+                                    }}
+                                    allowSearch={true}
+                                />
+                                <FilterRow visible={true} />
+                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <Paging defaultPageSize={10} />
+                                <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
+                                <Pager
+                                    visible={true}
+                                    allowedPageSizes={allowedPageSizes}
+                                    displayMode={"compact"}
+                                    showPageSizeSelector={true}
+                                    showInfo={true}
+                                    showNavigationButtons={true}
+                                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
+                                />
+                                <Column dataField='productCode' minWidth={140} caption='Mã sản phẩm'></Column>
+                                <Column dataField='productName' caption='Tên sản phẩm' minWidth={200}></Column>
+
+                                <Column dataField='version' minWidth={140} caption='Version' alignment='left'></Column>
+
+                                <Column dataField='productClassify' caption='Phân loại sản phẩm' alignment={"left"} minWidth={140}></Column>
+                                <Column dataField='describe' caption='Mô tả ' />
+                                <Column dataField='notice' caption='Lưu ý' />
+                                <Column dataField='note' alignment={"left"} caption={"Ghi chú"} width={140}></Column>
+                                <Column caption={"Trạng thái"} dataField='status' />
+                                <Column
+                                    type={"buttons"}
+                                    caption={"Thao tác"}
+                                    alignment='left'
+                                    cellRender={(cellInfo) => (
+                                        <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon
+                                                onClick={() => {}}
+                                                tooltipTitle='Thông tin'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/InfoCircle.svg'
+                                                textColor='#FF7A00'
+                                                style={{ marginRight: 17 }}
+                                            />
+                                            <SvgIcon
+                                                onClick={() => {
+                                                    handleBOMBodyCardAddInfo(cellInfo);
+                                                }}
+                                                tooltipTitle='Thêm mới thông tin BOM body card'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/Add.svg'
+                                                textColor='#FF7A00'
+                                                style={{ marginRight: 17 }}
+                                            />
+                                            <SvgIcon
+                                                onClick={handleShowModalDel}
+                                                tooltipTitle='Xóa'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/Trash.svg'
+                                                textColor='#FF7A00'
+                                            />
+                                        </div>
+                                    )}></Column>
+                            </DataGrid>
+                        </div>
+                    </div>
+                    <div>
+                        <PopupImportFile
+                            visible={isVisibleImportFile}
+                            onCancel={() => setIsVisibleImportFile(false)}
+                            title={"Import file"}
+                            onSubmit={() => {}}
+                            width={900}
+                        />
+                        <PopupConfirmDelete
+                            isVisible={isConfirmDelete}
+                            onCancel={handleHideModalDel}
+                            onSubmit={() => console.log("ok")}
+                            modalTitle={
+                                <div>
+                                    <h3
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            color: "#ff794e",
+                                            fontWeight: 500,
+                                            fontSize: 25,
+                                        }}>
+                                        <InfoCircleOutlined
                                             style={{
-                                                height: 80,
-                                                fontWeight: 400,
-                                                marginTop: 30,
-                                                fontSize: 20,
+                                                color: "#ff794e",
+                                                marginRight: "8px",
                                                 display: "flex",
                                                 justifyContent: "center",
                                                 alignItems: "center",
-                                            }}>
-                                            Bạn có chắc chắn muốn thực hiện thao tác xóa không?
-                                        </h5>
-                                    </div>
-                                }
-                                width={600}
-                            />
-                            <Table
+                                                fontSize: 30,
+                                            }}
+                                        />
+                                        Xác nhận xóa?
+                                    </h3>
+                                </div>
+                            }
+                            modalContent={
+                                <div>
+                                    <h5
+                                        style={{
+                                            height: 80,
+                                            fontWeight: 400,
+                                            marginTop: 30,
+                                            fontSize: 20,
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                        }}>
+                                        Bạn có chắc chắn muốn thực hiện thao tác xóa không?
+                                    </h5>
+                                </div>
+                            }
+                            width={600}
+                        />
+                        {/* <Table
                                 dataSource={data}
                                 rowKey='productCode'
                                 size='small'
@@ -282,8 +427,7 @@ export const BOMBodyCard = () => {
                                         </div>
                                     )}
                                 />
-                            </Table>
-                        </div>
+                            </Table> */}
                     </div>
                 </div>
             )}
