@@ -300,7 +300,7 @@ export const TechFormApprove = () => {
 
                                 }} allowSearch={true} />
                                 <FilterRow visible={true} />
-                                <SearchPanel visible={true} placeholder={"VD: PO"} />
+                                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
                                 <Paging defaultPageSize={10} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                                 <Pager
@@ -362,12 +362,12 @@ export const TechFormApprove = () => {
                                 >
                                 </Column>
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type={'buttons'} caption={"Thao tác"} alignment="left" cellRender={() =>
+                                <Column type={'buttons'} caption={"Thao tác"} alignment="center" cellRender={() =>
                                     <div style={{ display: "flex", flexDirection: "row" }}>
                                         <SvgIcon tooltipTitle="Xem Phiếu công nghệ" onClick={handleTechFormDetail} sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         <SvgIcon tooltipTitle="Phê duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Check.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                         <SvgIcon tooltipTitle="Từ chối" sizeIcon={17} textSize={17} icon="assets/icons/Close.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        <SvgIcon tooltipTitle="Xóa" onClick={handleShowModalDel} sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Xóa" onClick={handleShowModalDel} sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                     </div>
                                 }>
                                 </Column>
@@ -419,7 +419,7 @@ export const TechFormApprove = () => {
                                         />
                                     </div>
                                     <div className="button-container">
-                                        <Button text="Hủy bỏ" onClick={onCancelClick} style={{ backgroundColor: '#E5E5E5' }} />
+                                        <Button text="Hủy bỏ" onClick={onCancelClick} style={{ backgroundColor: '#E5E5E5', marginRight: 20, width: 100 }} />
                                         <Button text="Xác nhận" onClick={onConfirmClick} style={{ backgroundColor: '#FF7A00', color: '#FFF' }} />
                                     </div>
                                 </div>

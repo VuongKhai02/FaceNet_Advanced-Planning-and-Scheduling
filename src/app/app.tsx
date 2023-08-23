@@ -52,11 +52,7 @@ const App = observer(() => {
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
-          style={{
-            fontSize: '16px',
-            color: '#fff',
-            marginLeft: 40
-          }}
+          className="collapsed-icons"
         />
       </AppHeader>
     </Layout.Header>

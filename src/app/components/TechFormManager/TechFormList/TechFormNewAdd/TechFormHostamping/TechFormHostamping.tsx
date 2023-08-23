@@ -65,7 +65,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                             value={fromDateTime}
                             onValueChanged={handleFromDateTimeChange}
                             type="datetime"
-                        // displayFormat="shortdatetime"
                         />
                         <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                         <DateBox
@@ -74,7 +73,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                             value={toDateTime}
                             onValueChanged={handleToDateTimeChange}
                             type="datetime"
-                        // displayFormat="shortdatetime"
                         />
                     </div>
 
@@ -89,54 +87,54 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         <Column dataField="" caption="Bước/Step" alignment="center" width={100} />
                         <Column dataField="process" caption="Công đoạn/Process" cellRender={({ data, key }) => (
                             <DropDownBox
-                                placeholder="--Chọn--"
+                                placeholder="Chọn"
                                 dataSource={data}
                                 valueExpr="value"
                                 displayExpr="label"
-                                value={'--Chọn--'}
+                                value={'Chọn'}
                                 showClearButton={true}
                             />
                         )} />
                         <Column dataField="content" alignment="center" caption="Nội dung hots/Content" cellRender={() => (
-                            <TextBox
+                            <Input
                                 className="inputRow"
-                                placeholder="--Nhập--"
+                                placeholder="Nhập"
                             />
                         )} />
                         <Column dataField="rmcode" alignment="center" caption="Mã vật liệu/RMcode" cellRender={() => (
-                            <TextBox
+                            <Input
                                 className="inputRow"
-                                placeholder="--Nhập--"
+                                placeholder="Nhập"
                             />
                         )} />
                         <Column dataField="typehots" alignment="center" caption="Loại phôi hots/Type" cellRender={() => (
-                            <TextBox
+                            <Input
                                 className="inputRow"
-                                placeholder="--Nhập--"
+                                placeholder="Nhập"
                             />
                         )} />
                         <Column dataField="position" alignment="center" caption="Vị trí"
                             cellRender={() => (
-                                <TextBox
+                                <Input
                                     className="inputRow"
-                                    placeholder="--Nhập--"
+                                    placeholder="Nhập"
                                 />
                             )}>
                         </Column>
                         <Column dataField="machine" alignment="center" caption="Máy/Machine" cellRender={({ data, key }) => (
                             <DropDownBox
-                                placeholder="--Chọn--"
+                                placeholder="Chọn"
                                 dataSource={data}
                                 valueExpr="value"
                                 displayExpr="label"
-                                value={'--Chọn--'}
+                                value={'Chọn'}
                                 showClearButton={true}
                             />
                         )} />
                         <Column dataField="other" alignment="center" caption="Khác/Other" cellRender={() => (
-                            <TextBox
+                            <Input
                                 className="inputRow"
-                                placeholder="--Nhập--"
+                                placeholder="Nhập"
                             />
                         )} />
                         <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
@@ -180,7 +178,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="icType"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -189,7 +187,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="quantity"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -198,7 +196,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="icCode"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -207,7 +205,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="version"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -216,7 +214,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="other"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column title='' align="center" width={80} render={() => <div style={{ display: "flex", flexDirection: "row" }}>
@@ -238,7 +236,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="step1"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -247,7 +245,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="step2"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -256,7 +254,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="step3"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column
@@ -265,7 +263,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 key="step4"
                                 align="center"
                                 render={() => (
-                                    <Input className="inputRow" placeholder="--Nhập--" />
+                                    <Input className="inputRow" placeholder="Nhập" />
                                 )}
                             />
                             <Table.Column title='' align="center" width={80} render={() => <div style={{ display: "flex", flexDirection: "row" }}>
@@ -288,47 +286,47 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 8 } : { colSpan: 1 }
                                 }} title="Dài/Length" dataIndex="length" key="length" align="center" render={(value, record: any, index) => {
                                     return index !== 2 ?
-                                        [1, 3].includes(index) ? <Input style={{ width: 250, float: 'left' }} className="inputRow" placeholder="--Nhập--" /> : <Input className="inputRow" placeholder="--Nhập--" />
+                                        [1, 3].includes(index) ? <Input style={{ width: 250, float: 'left' }} className="inputRow" placeholder="Nhập" /> : <Input className="inputRow" placeholder="Nhập" />
                                         :
-                                        <SelectBox style={{ width: 250, float: 'left' }} placeholder="--Lựa chọn--" />
+                                        <SelectBox style={{ width: 250, float: 'left' }} placeholder="Lựa chọn" />
 
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="Rộng/Width" dataIndex="width" key="width" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                             </Table.ColumnGroup>
                             <Table.ColumnGroup title="Lỗ trong/Inside Hole">
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="Dài/Length" dataIndex="length" key="length" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="Rộng/Width" dataIndex="width" key="width" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="Sâu/Depth" dataIndex="depth" key="depth" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                                 <Table.Column onCell={(item: any) => {
                                     return item.position !== 'Kích thước/Size' ? { colSpan: 0 } : { colSpan: 1 }
                                 }} title="DK/Diameter" dataIndex="diameter" key="diameter" align="center" render={(value, record: any, index) => {
-                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="--Nhập--" /> : null
+                                    return record.position === 'Kích thước/Size' ? <Input className="inputRow" placeholder="Nhập" /> : null
                                 }} />
                             </Table.ColumnGroup>
                         </Table>
@@ -367,9 +365,9 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                     >
                         <Column dataField="id" caption="No." alignment="center" width={100} />
                         <Column dataField="boxtype" alignment="center" caption="Loại hộp/Box Type" cellRender={() => (
-                            <TextBox
+                            <Input
                                 className="inputRow"
-                                placeholder="--Nhập--"
+                                placeholder="Nhập"
                             />
                         )} width={300} />
                         <Column dataField="productLabel" alignment="center" caption="Temp sản phẩm/Product Label" >
@@ -378,22 +376,22 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 alignment="center"
                                 caption="Số lượng/Q'ty"
                                 cellRender={() => (
-                                    <TextBox
+                                    <Input
                                         className="inputRow"
-                                        placeholder="--Nhập--"
+                                        placeholder="Nhập"
                                     />
                                 )}
                             />
                             <Column dataField="from" alignment="center" caption="Từ/From" cellRender={() => (
-                                <TextBox
+                                <Input
                                     className="inputRow"
-                                    placeholder="--Nhập--"
+                                    placeholder="Nhập"
                                 />
                             )} />
                             <Column dataField="to" alignment="center" caption="Đến/To" cellRender={() => (
-                                <TextBox
+                                <Input
                                     className="inputRow"
-                                    placeholder="--Nhập--"
+                                    placeholder="Nhập"
                                 />
                             )} />
                         </Column>
@@ -405,10 +403,10 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                 </div>
                 <div className="noteRemark">
                     <div className="note">
-                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ghi chú/Remark: </h6>
-                        <TextBox
+                        <h6 style={{ fontSize: 15, fontWeight: 500, marginTop: 5 }}>Ghi chú/Remark: </h6>
+                        <Input
                             className="inputRow"
-                            placeholder="--Nhập--"
+                            placeholder="Nhập"
                             id="id"
                             style={{ width: 200, height: 33, marginLeft: 10 }}
                         />

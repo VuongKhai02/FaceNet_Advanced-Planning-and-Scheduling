@@ -57,9 +57,9 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     <p style={{ marginTop: 30 }}>Phân loại</p>
                                     <TextBox id="classify" key={'classify'} placeholder="Nhập tên khác"></TextBox>
                                     <p style={{ marginTop: 30 }}>Đơn vị tính</p>
-                                    <SelectBox id="unit" key={'unit'} placeholder="--Chọn--"></SelectBox>
+                                    <SelectBox id="unit" key={'unit'} placeholder="Chọn"></SelectBox>
                                     <p style={{ marginTop: 30 }}>Kho hàng</p>
-                                    <SelectBox id="warehouse" key={'warehouse'} placeholder="--Chọn--"></SelectBox>
+                                    <SelectBox id="warehouse" key={'warehouse'} placeholder="Chọn"></SelectBox>
                                     <p style={{ marginTop: 30 }}>Mã vật tư thay thế</p>
                                     <TextBox id="materialCodeChange" key={'materialCodeChange'} placeholder="Nhập mã vật tư thay thế"></TextBox>
                                 </td>
@@ -69,7 +69,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     <p style={{ marginTop: 30 }}>Verion</p>
                                     <TextBox id="version" key={'version'} placeholder="Nhập"></TextBox>
                                     <p style={{ marginTop: 30 }}>Định mức</p>
-                                    <SelectBox id="norm" key={'norm'} placeholder="--Chọn--"></SelectBox>
+                                    <SelectBox id="norm" key={'norm'} placeholder="Chọn"></SelectBox>
                                     <p style={{ marginTop: 30 }}>Nhà cung cấp</p>
                                     <TextBox id="supplier" key={'supplier'} placeholder="Nhập mã nhà cung cấp"></TextBox>
                                     <p style={{ marginTop: 30 }}>Số lượng tồn kho</p>
@@ -110,7 +110,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     <p style={{ marginTop: 30 }}>Số lượng</p>
                                     <TextBox placeholder="15000"></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
-                                    <SelectBox placeholder="--Chọn--"></SelectBox>
+                                    <SelectBox placeholder="Chọn"></SelectBox>
                                 </td>
                                 <td>
                                     <p>Mô tả sản phẩm</p>

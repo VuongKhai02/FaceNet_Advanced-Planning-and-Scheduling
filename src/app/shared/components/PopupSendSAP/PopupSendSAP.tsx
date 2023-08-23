@@ -24,7 +24,7 @@ const PopupSendSAP: React.FC<PopupSendSAPProps> = ({
             visible={isVisible}
             title={modalTitle}
             footer={[
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
                     <Button
                         key="cancel"
                         style={{

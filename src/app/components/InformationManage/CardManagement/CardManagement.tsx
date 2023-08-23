@@ -223,7 +223,7 @@ export const CardManagement = () => {
                                                     <p>Tên hộp</p>
                                                     <TextBox id="boxName" key={'boxName'} placeholder="Nhập tên hộp" width={300} ></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên công đoạn</p>
-                                                    <SelectBox id="stageName" key={'stageName'} placeholder="--Chọn--" ></SelectBox>
+                                                    <SelectBox id="stageName" key={'stageName'} placeholder="Chọn" ></SelectBox>
                                                     <p style={{ marginTop: 30 }}>Tên Job</p>
                                                     <TextBox id="jobName" key={'jobName'} placeholder="Nhập tên Job"></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên Job output</p>
@@ -264,7 +264,10 @@ export const CardManagement = () => {
                             />
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <SvgIcon text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon text="Thêm mới mã thẻ" onClick={() => { }} tooltipTitle="Thêm mới mã thẻ" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                </ToolbarItem>
+                                <ToolbarItem location="after">
+                                    <SvgIcon text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem >
                                     <SvgIcon text="In mã" onClick={() => setIsVisibleScanBarCode(true)} tooltipTitle="In mã" sizeIcon={17} textSize={17} icon="assets/icons/Print.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />

@@ -32,7 +32,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                                 <p style={{ marginTop: 30 }}>Mã Job</p>
                                 <TextBox value="J01-001" key={'jobCode'} id="jobCode"></TextBox>
                                 <p style={{ marginTop: 30 }}>Trạng thái</p>
-                                <SelectBox value={'Chuyển công đoạn'} key={'forwardStage'} id="forwardStage"></SelectBox>
+                                <SelectBox placeholder="Chọn" value={'Chuyển công đoạn'} key={'forwardStage'} id="forwardStage"></SelectBox>
                             </td>
                             <td>
                                 <p>Tên Job output</p>
@@ -46,7 +46,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                                 <p>Số lượng thẻ</p>
                                 <TextBox value="100" width={350} key={'cardQuantity'} id="cardQuantity"></TextBox>
                                 <p style={{ marginTop: 30 }}>Mã hộp</p>
-                                <SelectBox value={'H02'} id="boxCode" key={'boxCode'}></SelectBox>
+                                <SelectBox value={'H02'} id="boxCode" key={'boxCode'} placeholder="Chọn"></SelectBox>
                                 <p style={{ marginTop: 30 }}>In lưới</p>
                                 <TextBox value={'In lưới'}></TextBox>
                             </td>

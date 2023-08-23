@@ -3,8 +3,7 @@ import { Button, DataGrid, Template, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/TechProcedure";
 import { observer } from "mobx-react";
-import { Table, Upload } from "antd";
-import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormBodyCardProps = {
@@ -128,50 +127,37 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 }}>Quy cách sản phẩm/Product Spec</h5>
 
                             </div>
-                            <DataGrid
-                                key={"Id"}
-                                keyExpr={'Id'}
+                            <Table
                                 dataSource={data3}
-                                showBorders={true}
-                                showRowLines={true}
-                                showColumnLines={true}
+                                bordered
+                                rowKey="Id"
+                                pagination={false}
                             >
-                                <Column dataField="MatTruocNoiDung" caption="Khổ thẻ/Size"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="--Nhập--"
-                                        />
-                                    )}
+                                <Table.Column
+                                    title="Khổ thẻ/Size"
+                                    dataIndex="size"
+                                    key="size"
+                                    render={() => <Input className="inputRow" placeholder="Nhập" />}
                                 />
-                                <Column alignment="left"
-                                    dataField="MatTruocSoLuong"
-                                    caption="Kích thước/Size, Dài/Length * Rộng/Width(mm)"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="--Nhập--"
-                                        />
-                                    )} />
-                                <Column dataField="MatTruocKichThuocBan"
-                                    caption="Kích thước/size"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="--Nhập--"
-                                        />
-                                    )}
+                                <Table.Column
+                                    title="Kích thước/Size, Dài/Length * Rộng/Width(mm)"
+                                    dataIndex="sizes"
+                                    key="sizes"
+                                    render={() => <Input className="inputRow" placeholder="Nhập" />}
                                 />
-                                <Column dataField="MatTruocKichThuocBan"
-                                    caption="Khác/other"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="--Nhập--"
-                                        />
-                                    )}
+                                <Table.Column
+                                    title="Kích thước/size"
+                                    dataIndex="size"
+                                    key="size"
+                                    render={() => <Input className="inputRow" placeholder="Nhập" />}
                                 />
-                            </DataGrid>
+                                <Table.Column
+                                    title="Khác/other"
+                                    dataIndex="other"
+                                    key="other"
+                                    render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                />
+                            </Table>
                             <div className="informer" style={{
                                 background: "#fff",
                                 textAlign: "left",

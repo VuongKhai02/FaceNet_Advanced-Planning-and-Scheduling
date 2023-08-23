@@ -177,7 +177,7 @@ export const TechFormList = () => {
                 }} allowSearch={true} />
                 <FilterRow visible={true} />
                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                <SearchPanel visible={true} placeholder={"VD: PO"} width={300} />
+                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
                 <Paging defaultPageSize={5} />
                 <Pager
                   visible={true}

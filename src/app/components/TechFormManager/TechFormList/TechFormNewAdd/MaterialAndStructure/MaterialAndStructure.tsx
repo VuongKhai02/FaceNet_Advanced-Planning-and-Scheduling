@@ -7,7 +7,7 @@ import {
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
-import { Table } from "antd";
+import { Input, Table } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 
 
@@ -113,7 +113,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     cellRender={() => (
                                         <TextBox
                                             className="inputRow"
-                                            placeholder="--Nhập--"
+                                            placeholder="Nhập"
                                         />
                                     )}>
                                 </Column>
@@ -150,79 +150,66 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     <label htmlFor="tongSoBan" style={{ fontWeight: 500, marginLeft: 50 }}>Tổng số bản:</label>
                                     <TextBox
                                         className="inputRow"
-                                        placeholder="--Nhập--"
+                                        placeholder="Nhập"
                                         id="id"
                                         style={{ width: 200, height: 33, marginLeft: 10 }}
                                     />
                                 </div>
                             </div>
                             <div style={{ marginTop: 30 }}>
-                                <DataGrid
-                                    key={'Id'}
-                                    keyExpr={'Id'}
+                                <Table
                                     dataSource={data1}
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}
+                                    bordered
+                                    rowKey="Id"
+                                    pagination={false}
                                 >
-                                    <Column dataField="Id" caption="Id" visible={false} />
-                                    <Column alignment="center" caption="Mặt trước/Front" fixed >
-                                        <Column dataField="MatTruocNoiDung" caption="Nội dung/Item"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}
+                                    <Table.ColumnGroup title="Mặt trước/Front" fixed="left">
+                                        <Table.Column
+                                            dataIndex="MatTruocNoiDung"
+                                            title="Nội dung/Item"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
                                         />
-                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty" alignment="left"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )} />
-                                        <Column dataField="MatTruocKichThuocBan"
-                                            caption="Kích thước bản/Plate size"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}
+                                        <Table.Column
+                                            dataIndex="MatTruocSoLuong"
+                                            title="Số lượng/Q'ty"
+                                            align="left"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
                                         />
-                                    </Column>
-                                    <Column alignment="center" caption="Mặt sau/Back" fixed>
-                                        <Column dataField="MatTruocNoiDung" caption="Nội dung/Item"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}
+                                        <Table.Column
+                                            dataIndex="MatTruocKichThuocBan"
+                                            title="Kích thước bản/Plate size"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
                                         />
-                                        <Column dataField="MatTruocSoLuong" caption="Số lượng/Q'ty" alignment="left"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}
+                                    </Table.ColumnGroup>
+                                    <Table.ColumnGroup title="Mặt sau/Back" fixed="left">
+                                        <Table.Column
+                                            dataIndex="MatTruocNoiDung"
+                                            title="Nội dung/Item"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
                                         />
-                                        <Column dataField="MatTruocKichThuocBan" caption="Kích thước bản/Plate size"
-                                            cellRender={() => (
-                                                <TextBox
-                                                    className="inputRow"
-                                                    placeholder="--Nhập--"
-                                                />
-                                            )}
+                                        <Table.Column
+                                            dataIndex="MatTruocSoLuong"
+                                            title="Số lượng/Q'ty"
+                                            align="left"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
                                         />
-                                    </Column>
-                                    <Column caption='' alignment="center" width={80} cellRender={() => <div style={{ display: "flex", flexDirection: "row" }}>
-                                        <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                        <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                    </div>} />
-                                </DataGrid>
+                                        <Table.Column
+                                            dataIndex="MatTruocKichThuocBan"
+                                            title="Kích thước bản/Plate size"
+                                            render={() => <Input className="inputRow" placeholder="Nhập" />}
+                                        />
+                                    </Table.ColumnGroup>
+                                    <Table.Column
+                                        title=""
+                                        dataIndex="operation"
+                                        align="center"
+                                        width={80}
+                                        render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                            <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>}
+                                    />
+                                </Table>
                             </div>
                             <div
                                 className="toolbar"
