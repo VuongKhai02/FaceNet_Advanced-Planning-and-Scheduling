@@ -8,6 +8,8 @@ export const DEFAULT_COUNT = 10; // Typical amount of entities to be loaded on b
 
 export const PLANNING_API_URL = process.env.REACT_APP_API_URL
 
+export const MDM_API_URL = process.env.REACT_APP_MDM_API
+
 //Scada config
 export const SCADA_URL = process.env.REACT_APP_SCADA_API_URL ?? "http://192.168.68.95:4200"
 export const SCADA_USER = "ecyberlinh@gmail.com"

@@ -5,6 +5,8 @@ import { observer } from "mobx-react";
 import { Input, Table } from "antd";
 
 type TechFormDetailHostampingProps = {
+    techFormData: any,
+    setTechFormData: any,
     isOpen: boolean,
     setClose?: () => void;
 
@@ -25,7 +27,7 @@ const data2 = [
 
 
 export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> = observer(({
-    isOpen = false, setClose }) => {
+    isOpen = false, setClose, techFormData, setTechFormData }) => {
 
     const handleNextClick = () => {
         console.log("Tiếp theo");
@@ -207,7 +209,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                         </div>
                         <DataGrid
                             key={'id'}
-                            dataSource={data}
+                            dataSource={[{...techFormData.packing, id: 1}]}
                             keyExpr="id"
                             showBorders={true}
                             showRowLines={true}
@@ -217,13 +219,13 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                             <Column dataField="boxType" alignment="center" caption="Loại hộp/Box Type" width={300} />
                             <Column dataField="productLabel" alignment="center" caption="Temp sản phẩm/Product Label" >
                                 <Column
-                                    dataField="quantity"
+                                    dataField="packingLabelQuantity"
                                     alignment="center"
                                     caption="Số lượng/Q'ty"
 
                                 />
-                                <Column dataField="from" alignment="center" caption="Từ/From" />
-                                <Column dataField="to" alignment="center" caption="Đến/To" />
+                                <Column dataField="packingLabelFrom" alignment="center" caption="Từ/From" />
+                                <Column dataField="packingLabelToó" alignment="center" caption="Đến/To" />
                             </Column>
                         </DataGrid>
                     </div>

@@ -161,6 +161,7 @@ export const TechFormListDetail = React.memo((props: any) => {
             {isVisibleTechFormUpdate
                 ?
                 <TechFormUpdate
+                    id={2}
                     isOpen={isVisibleTechFormUpdate}
                     setClose={() => setIsVisibleTechFormUpdate(false)}
                 />

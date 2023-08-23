@@ -1,5 +1,5 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { Button, DataGrid, TextBox } from "devextreme-react";
 import {
     Column
 } from "devextreme-react/data-grid";
@@ -7,6 +7,8 @@ import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
 
 type TechFormUpdateMaterialAndStructureProps = {
+    techFormData: any,
+    setTechFormData: any,
     isOpen: boolean,
     setClose?: () => void;
 
@@ -35,16 +37,63 @@ const data1 = [
 ];
 
 
+
 export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterialAndStructureProps> = observer(({
-    isOpen = false, setClose }) => {
+    isOpen = false, setClose, techFormData, setTechFormData }) => {
 
     const [isVisibleTechFormUpdateProcedure, setIsVisibleTechFormUpdateProcedure] = React.useState<boolean>(false);
+
+    const getMaterialFormTechForm = () => {
+        const data:any[] = [];
+        techFormData?.bomBodyCard?.bomBodyCardMaterials.forEach(((material, index) => {
+            data.push({
+                ...material,
+                no: index + 1,
+            })
+        }))
+        return data;
+
+    }
+
+    const getInfoPlate = () => {
+        const data:any[] = [];
+        const maxLength = Math.max(techFormData.prePressPcToPlate.front.length, techFormData.prePressPcToPlate.back.length)
+
+        let front;
+        let back
+
+        for (let i = 0; i< maxLength; ++i) {
+            if (techFormData.prePressPcToPlate.front.length > i) {
+                front = techFormData.prePressPcToPlate.front[i]
+            } else {
+                front = {}
+            }
+
+            if (techFormData.prePressPcToPlate.back.length > i) {
+                back = techFormData.prePressPcToPlate.back[i]
+            } else {
+                back = {}
+            }
+            data.push({
+                no: i,
+                front: front,
+                back: back
+            })
+        }
+
+        return data;
+
+    }
+
+    console.log(getMaterialFormTechForm());
 
     return (
         <>
             {isVisibleTechFormUpdateProcedure
                 ?
                 <TechFormUpdateProcedure
+                    techFormData={techFormData}
+                    setTechFormData={setTechFormData}
                     isOpen={isVisibleTechFormUpdateProcedure}
                     setClose={() => setIsVisibleTechFormUpdateProcedure(false)}
                 />
@@ -65,14 +114,14 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                         </div>
                         <div style={{ marginTop: 30 }}>
                             <DataGrid
-                                key={'No'}
-                                dataSource={data}
-                                keyExpr="No"
+                                key={'no'}
+                                dataSource={getMaterialFormTechForm()}
+                                keyExpr="no"
                                 showBorders={true}
                                 showRowLines={true}
                                 showColumnLines={true}
                             >
-                                <Column dataField="No" caption="No." allowEditing={false} alignment="left" />
+                                <Column dataField="no" caption="No." allowEditing={false} alignment="left" />
                                 <Column dataField="materialCode" caption="Mã vật tư/Material Code" />
                                 <Column dataField="materialName" caption="Tên vật tư/Material Name" width={500} />
                                 <Column dataField="quantity" caption="Số lượng/Q'ty" />
@@ -82,35 +131,53 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             <div className="container">
                                 <div className="checkbox">
                                     <label htmlFor="raPhim" style={{ fontWeight: 500 }}>Ra phim/Pre-press</label>
-                                    <input type="checkbox" id="raPhim" checked={true} />
+                                    <input onChange={(e) => {
+                                        setTechFormData({
+                                            ...techFormData,
+                                            prePressPcToPlate: {
+                                                ...techFormData.prePressPcToPlate,
+                                                isPrePress: !techFormData.prePressPcToPlate.isPrePress
+                                            }
+                                        })
+                                    }} type="checkbox" id="raPhim" checked={techFormData.prePressPcToPlate.isPrePress} />
                                 </div>
                                 <div className="checkbox">
                                     <label htmlFor="raBan" style={{ fontWeight: 500, marginLeft: 50 }}>Ra bản/PC to plate</label>
-                                    <input type="checkbox" id="raBan" checked={true} />
+                                    <input onChange={(e) => {
+                                        setTechFormData({
+                                            ...techFormData,
+                                            prePressPcToPlate: {
+                                                ...techFormData.prePressPcToPlate,
+                                                isPcToPlate: !techFormData.prePressPcToPlate.isPcToPlate
+                                            }
+                                        })
+                                    }} type="checkbox" id="raBan" checked={techFormData.prePressPcToPlate.isPcToPlate} />
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="tongSoBan" style={{ fontWeight: 500, marginLeft: 50 }}>Tổng số bản: {'6'}</label>
+                                    <label htmlFor="tongSoBan" style={{ fontWeight: 500, marginLeft: 50 }}>Tổng số bản: {techFormData.prePressPcToPlate.totalPlate}</label>
                                 </div>
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <DataGrid
-                                    key={'Id'}
-                                    keyExpr={'Id'}
-                                    dataSource={data1}
+                                    key={'no'}
+                                    keyExpr={'no'}
+                                    dataSource={getInfoPlate()}
                                     showBorders={true}
                                     showRowLines={true}
                                     showColumnLines={true}
                                 >
                                     <Column dataField="Id" caption="Id" visible={false} />
                                     <Column alignment="center" caption="Mặt trước/Front" fixed >
-                                        <Column dataField="contentFront" caption="Nội dung/Item" />
-                                        <Column dataField="quantityFront" caption="Số lượng/Q'ty" alignment="left" />
-                                        <Column dataField="sizeFront" caption="Kích thước bản/Plate size" />
+                                        <Column dataField="front.item" caption="Nội dung/Item" cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'front.item'} />} />
+                                        <Column dataField="front.quantity" caption="Số lượng/Q'ty" alignment="left" cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'front.quantity'} />} />
+                                        <Column dataField="front.plateSize" caption="Kích thước bản/Plate size" cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'front.plateSize'} />} />
                                     </Column>
                                     <Column alignment="center" caption="Mặt sau/Back" fixed>
-                                        <Column dataField="contentFront" caption="Nội dung/Item" />
-                                        <Column dataField="quantityFront" caption="Số lượng/Q'ty" alignment="left" />
-                                        <Column dataField="sizeFront" caption="Kích thước bản/Plate size" />
+                                        <Column dataField="back.item" caption="Nội dung/Item" cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'back.item'} />} />
+                                        <Column dataField="back.quantity" caption="Số lượng/Q'ty" alignment="left" 
+                                        cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'back.quantity'} />}/>
+                                        <Column dataField="back.plateSize" caption="Kích thước bản/Plate size"
+                                        cellRender={(cellIfo) => <TextBox placeholder="Nhập" value={cellIfo.value} key={'back.plateSiz'} />} />
                                     </Column>
                                 </DataGrid>
                             </div>

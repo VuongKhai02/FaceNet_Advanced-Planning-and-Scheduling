@@ -55,8 +55,9 @@ export const BOMBodyCard = () => {
         setIsConfirmDelete(false);
     }
 
-    const handleBOMBodyCardAddInfo = (e) => {
-        setBomIdChoosed(e.row.data.id)
+    const handleBOMBodyCardAddInfo = (cellInfo) => {
+        console.log(cellInfo);
+        setBomIdChoosed(cellInfo.data.id)
         setIsBOMCardAddInfo(true);
     }
 
@@ -204,10 +205,10 @@ export const BOMBodyCard = () => {
                                     </Column>
                                     <Column caption={"Trạng thái"} dataField="status" />
                                     <Column type={'buttons'} caption={"Thao tác"} alignment="left"
-                                        cellRender={() =>
+                                        cellRender={(cellInfo) =>
                                             <div style={{ display: "flex", flexDirection: "row" }}>
                                                 <SvgIcon onClick={() => { }} tooltipTitle="Thông tin" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                                <SvgIcon onClick={handleBOMBodyCardAddInfo} tooltipTitle="Thêm mới thông tin BOM body card" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon onClick={() => {handleBOMBodyCardAddInfo(cellInfo)}} tooltipTitle="Thêm mới thông tin BOM body card" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                                 <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                             </div>
                                         }>

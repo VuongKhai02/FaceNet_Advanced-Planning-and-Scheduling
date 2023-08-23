@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, DataGrid, Popup } from "devextreme-react";
 import {
   Column,
@@ -21,6 +21,8 @@ import { WarningOutlined } from "@ant-design/icons";
 import PopupSendSAP from "../../../shared/components/PopupSendSAP/PopupSendSAP";
 import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
 import BOMBodyCardAddInfo from "../../BOM/BOMBodyCard/BOMBodyCardAddInfo/BOMBodyCardAddInfo";
+import { PLANNING_API_URL } from "../../../../config";
+import axios from "axios";
 
 
 const data = [
@@ -39,7 +41,10 @@ export const TechFormList = () => {
   const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
   const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
   const [newButtons, setNewButtons] = React.useState<any>([]);
+  const [techFormIdChoosed, setTechFormIdChoosed] = React.useState(null);
   const mainStore = useMainStore();
+
+  const [techForms, setTechForms] = React.useState([]);
 
   const handleShowUploadImport = () => {
     setPopupVisible(true)
@@ -56,6 +61,25 @@ export const TechFormList = () => {
   const handleAddNewButton = () => {
     setNewButtons([...newButtons, { text: 'Thêm mới button', width: 300 }]);
   };
+
+  const loadTechForms = () => {
+    const headers = {
+      'Authorization': 'Bearer ' + mainStore.authToken,
+      'content-type': 'application/json'
+    };
+    axios.get(PLANNING_API_URL + '/api/techforms', { headers })
+      .then(response => {
+        if (response.status === 200) {
+          setTechForms(response.data.data.data)
+        }
+      }
+      );
+  }
+  console.log(techForms)
+
+  useEffect(() => {
+    loadTechForms();
+  }, [])
 
   const popupContentIcon = (
     <div onClick={() => { hidePopupIcon() }}>
@@ -145,9 +169,9 @@ export const TechFormList = () => {
 
               />
               <DataGrid
-                key={'soCode'}
-                keyExpr={"soCode"}
-                dataSource={data}
+                key={'id'}
+                keyExpr={"id"}
+                dataSource={techForms}
                 showBorders={true}
                 columnAutoWidth={true}
                 showRowLines={true}
@@ -200,9 +224,12 @@ export const TechFormList = () => {
                   format="dd/MM/yyyy hh:mm:ss" />
                 <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
                 <Column caption={"Trạng thái"} dataField="status" />
-                <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
+                <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={(cellInfo) =>
                   <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
-                    <SvgIcon onClick={() => setIsVisibleTechFormUpdate(true)} tooltipTitle="Cập nhật PCN" sizeIcon={17} textSize={17} icon="assets/icons/Edit.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => {
+                      setIsVisibleTechFormUpdate(true);
+                      setTechFormIdChoosed(cellInfo.data.id)
+                      }} tooltipTitle="Cập nhật PCN" sizeIcon={17} textSize={17} icon="assets/icons/Edit.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => setIsVisibleBOMBodyCardAddInfo(true)} tooltipTitle="Tạo BOM" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => setIsModalVisibleSendSAP(true)} tooltipTitle="Gửi duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => { }} tooltipTitle="Tạo KHSX" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -211,12 +238,12 @@ export const TechFormList = () => {
                   </div>} />
                 {
                   isVisibleTechFormUpdate && (
-                    <TechFormUpdate isOpen={isVisibleTechFormUpdate} setClose={() => setIsVisibleTechFormUpdate(false)} />
+                    <TechFormUpdate id={techFormIdChoosed} isOpen={isVisibleTechFormUpdate} setClose={() => setIsVisibleTechFormUpdate(false)} />
                   )
                 }
                 {
                   isVisibleBOMBodyCardAddInfo && (
-                    <BOMBodyCardAddInfo isOpen={isVisibleBOMBodyCardAddInfo} setClose={() => setIsVisibleBOMBodyCardAddInfo(false)} />
+                    <BOMBodyCardAddInfo id= {null} isOpen={isVisibleBOMBodyCardAddInfo} setClose={() => setIsVisibleBOMBodyCardAddInfo(false)} />
                   )
                 }
               </DataGrid>
