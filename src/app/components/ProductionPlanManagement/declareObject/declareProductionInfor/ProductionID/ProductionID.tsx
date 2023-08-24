@@ -65,6 +65,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({ isOpen = false, 
                                     {buttonData.text}
                                 </p>
                             )}
+                            hint='Khai báo công nhân'
                         />
                         <Button
                             onClick={setClose}
@@ -74,6 +75,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({ isOpen = false, 
                             render={(buttonData) => (
                                 <p style={{ color: "#fff", background: "#ccc", margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                             )}
+                            hint='Khai báo lệnh sản xuất'
                         />
                     </div>
                 </div>

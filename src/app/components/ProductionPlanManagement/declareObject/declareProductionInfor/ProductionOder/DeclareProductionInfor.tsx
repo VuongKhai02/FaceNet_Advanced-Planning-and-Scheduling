@@ -128,6 +128,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({ isO
                                                     {buttonData.text}
                                                 </p>
                                             )}
+                                            hint='Khai báo mã sản xuất'
                                         />
                                         <Button
                                             text='Quét lại'
@@ -162,6 +163,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({ isO
                                                     {buttonData.text}
                                                 </p>
                                             )}
+                                            hint='Khai báo thông tin'
                                         />
                                     </div>
                                 </div>

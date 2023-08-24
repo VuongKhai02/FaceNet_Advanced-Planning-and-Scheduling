@@ -27,6 +27,7 @@ import { Workbook } from "exceljs";
 import { saveAs } from "file-saver-es";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import DeclareProductionInfor from "./declareProductionInfor/ProductionOder/DeclareProductionInfor";
+import ProgressMonitoringWODetail from "../../ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringWODetail/ProgressMonitoringWODetail";
 
 const ROUTING_PATH = "/declareProductionObject";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
@@ -41,6 +42,7 @@ export const DeclareProductionObject = () => {
     const [content, setContent] = useState<string>();
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [isVisibleProgressWODetailJob, setisVisibleProgressWODetailJob] = React.useState<boolean>(false);
     const [dataSelected, setDataSelected] = useState([
         {
             id: "0",
@@ -166,6 +168,7 @@ export const DeclareProductionObject = () => {
         );
     };
 
+    // getItemSelected
     const onValueChanged = (e) => {
         setDataSelected(fakeDtselect.filter((data) => data.id == e.value));
     };
@@ -187,7 +190,9 @@ export const DeclareProductionObject = () => {
     };
     return (
         <>
-            {isDeclareInfo ? (
+            {isVisibleProgressWODetailJob == true ? (
+                <ProgressMonitoringWODetail isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)} />
+            ) : isDeclareInfo ? (
                 <DeclareProductionInfor isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)} />
             ) : (
                 <div>
@@ -289,20 +294,15 @@ export const DeclareProductionObject = () => {
                             width={110}
                             caption='Thao tác'
                             cellRender={() => (
-                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                     <SvgIcon
-                                        tooltipTitle='Xem chi tiết'
+                                        tooltipTitle='Giám sát tiến độ theo công đoạn'
+                                        onClick={() => {
+                                            setisVisibleProgressWODetailJob(true);
+                                        }}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/InfoCircle.svg'
-                                        textColor='#FF7A00'
-                                        style={{ marginRight: 17 }}
-                                    />
-                                    <SvgIcon
-                                        tooltipTitle='Thời gian'
-                                        sizeIcon={17}
-                                        textSize={17}
-                                        icon='assets/icons/Time.svg'
                                         textColor='#FF7A00'
                                         style={{ marginRight: 17 }}
                                     />
@@ -328,7 +328,13 @@ export const DeclareProductionObject = () => {
                                     }}>
                                     Khai báo thông tin
                                 </h2>
-                                <div style={{ border: "1px solid #ccc", borderRadius: "6px", margin: "0.5rem" }}>
+                                <div
+                                    style={{
+                                        border: "1px solid #ccc",
+                                        borderRadius: "6px",
+                                        margin: "0.5rem",
+                                        padding: windowWidth < 600 ? "0" : "0 3rem",
+                                    }}>
                                     <div
                                         className='content'
                                         style={{
@@ -339,36 +345,38 @@ export const DeclareProductionObject = () => {
                                             margin: ".5rem",
                                             flexWrap: "wrap",
                                         }}>
+                                        {/* <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Mã sản xuất</p>
+                                                <SelectBox placeholder="-- Chọn mã sản xuất --"
+                                                    dataSource={fakeDtselect}
+                                                    displayExpr="production_id"
+                                                    valueExpr="id"
+                                                    onValueChanged={onValueChanged}
+                                                />
+                                            </div>
+                                            <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
+                                                <p>Mã SO</p>
+                                                <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
+                                            </div> */}
                                         <div
                                             className='col-4'
-                                            style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
-                                            <p>Mã sản xuất</p>
-                                            {/* <SelectBox placeholder="-- Chọn mã sản xuất --" items={fakeDtselect} /> */}
+                                            style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
+                                            <p>Tên công đoạn</p>
                                             <SelectBox
-                                                placeholder='-- Chọn mã sản xuất --'
-                                                dataSource={fakeDtselect}
-                                                displayExpr='production_id'
-                                                valueExpr='id'
-                                                onValueChanged={onValueChanged}
+                                                style={{ width: windowWidth < 600 ? "100%" : "47%" }}
+                                                placeholder='-- Chọn công đoạn --'
+                                                items={stage_name}
                                             />
                                         </div>
                                         <div
                                             className='col-4'
-                                            style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
-                                            <p>Mã SO</p>
-                                            <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled></TextBox>
-                                        </div>
-                                        <div
-                                            className='col-4'
-                                            style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
-                                            <p>Tên công đoạn</p>
-                                            <SelectBox placeholder='-- Chọn tên công đoạn --' items={stage_name} />
-                                        </div>
-                                        <div
-                                            className='col-4'
-                                            style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
+                                            style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
                                             <p>Tên Job</p>
-                                            <SelectBox placeholder='-- Chọn job --' items={job_name} />
+                                            <SelectBox
+                                                style={{ width: windowWidth < 600 ? "100%" : "47%" }}
+                                                placeholder='-- Chọn job --'
+                                                items={job_name}
+                                            />
                                         </div>
                                     </div>
 
@@ -376,7 +384,6 @@ export const DeclareProductionObject = () => {
                                         className='content'
                                         style={{
                                             display: windowWidth < 600 ? "none" : "flex",
-                                            backgroundColor: "rgba(0, 0, 0, 0.1)",
                                             justifyContent: "space-between",
                                             margin: ".5rem",
                                             padding: "1rem 0.3rem",
@@ -388,13 +395,13 @@ export const DeclareProductionObject = () => {
                                                 disabled
                                                 style={{
                                                     background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
-                                                    width: "70%",
+                                                    width: "90%",
                                                     padding: "0 0 0 2rem",
                                                     borderRadius: "4px",
                                                     border: "1px solid rgba(0, 0, 0, 0.4)",
                                                     marginBottom: "1rem",
                                                 }}
-                                                placeholder='Quét mã trên ứng dụng mobile  '>
+                                                placeholder='Quét mã trên Zebra  '>
                                                 {" "}
                                             </TextBox>
 
@@ -403,13 +410,13 @@ export const DeclareProductionObject = () => {
                                                 disabled
                                                 style={{
                                                     background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
-                                                    width: "70%",
+                                                    width: "90%",
                                                     padding: "0 0 0 2rem",
                                                     borderRadius: "4px",
                                                     border: "1px solid rgba(0, 0, 0, 0.4)",
                                                     marginBottom: "1rem",
                                                 }}
-                                                placeholder='Quét mã trên ứng dụng mobile  '>
+                                                placeholder='Quét mã trên Zebra  '>
                                                 {" "}
                                             </TextBox>
                                         </div>
@@ -419,13 +426,13 @@ export const DeclareProductionObject = () => {
                                                 disabled
                                                 style={{
                                                     background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
-                                                    width: "70%",
+                                                    width: "90%",
                                                     padding: "0 0 0 2rem",
                                                     borderRadius: "4px",
                                                     border: "1px solid rgba(0, 0, 0, 0.4)",
                                                     marginBottom: "1rem",
                                                 }}
-                                                placeholder='Quét mã trên ứng dụng mobile  '>
+                                                placeholder='Quét mã trên Zebra  '>
                                                 {" "}
                                             </TextBox>
 
@@ -434,13 +441,13 @@ export const DeclareProductionObject = () => {
                                                 disabled
                                                 style={{
                                                     background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
-                                                    width: "70%",
+                                                    width: "90%",
                                                     padding: "0 0 0 2rem",
                                                     borderRadius: "4px",
                                                     border: "1px solid rgba(0, 0, 0, 0.4)",
                                                     marginBottom: "1rem",
                                                 }}
-                                                placeholder='Quét mã trên ứng dụng mobile  '>
+                                                placeholder='Quét mã trên Zebra  '>
                                                 {" "}
                                             </TextBox>
                                         </div>
@@ -448,13 +455,108 @@ export const DeclareProductionObject = () => {
                                     <div style={{ display: "flex", flexDirection: "row-reverse", padding: "1rem" }}>
                                         <Button
                                             style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
-                                            text={windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}
+                                            text={"Khai báo thông tin sản xuất"}
                                             height={35}
                                             width={250}
                                             onClick={handleChangeScreen}
                                         />
                                     </div>
                                 </div>
+                                <div className='col-4' style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
+                                    <p>Mã SO</p>
+                                    <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled></TextBox>
+                                </div>
+                                <div className='col-4' style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
+                                    <p>Tên công đoạn</p>
+                                    <SelectBox placeholder='-- Chọn tên công đoạn --' items={stage_name} />
+                                </div>
+                                <div className='col-4' style={{ width: windowWidth < 600 ? "100%" : "22%", margin: "0 1rem 1rem 0" }}>
+                                    <p>Tên Job</p>
+                                    <SelectBox placeholder='-- Chọn job --' items={job_name} />
+                                </div>
+                            </div>
+
+                            <div
+                                className='content'
+                                style={{
+                                    display: windowWidth < 600 ? "none" : "flex",
+                                    backgroundColor: "rgba(0, 0, 0, 0.1)",
+                                    justifyContent: "space-between",
+                                    margin: ".5rem",
+                                    padding: "1rem 0.3rem",
+                                    borderRadius: "4px",
+                                }}>
+                                <div className='col-4' style={{ width: "47%", margin: "0.2rem" }}>
+                                    <p>Mã sản xuất</p>
+                                    <TextBox
+                                        disabled
+                                        style={{
+                                            background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
+                                            width: "70%",
+                                            padding: "0 0 0 2rem",
+                                            borderRadius: "4px",
+                                            border: "1px solid rgba(0, 0, 0, 0.4)",
+                                            marginBottom: "1rem",
+                                        }}
+                                        placeholder='Quét mã trên ứng dụng mobile  '>
+                                        {" "}
+                                    </TextBox>
+
+                                    <p>Mã máy</p>
+                                    <TextBox
+                                        disabled
+                                        style={{
+                                            background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
+                                            width: "70%",
+                                            padding: "0 0 0 2rem",
+                                            borderRadius: "4px",
+                                            border: "1px solid rgba(0, 0, 0, 0.4)",
+                                            marginBottom: "1rem",
+                                        }}
+                                        placeholder='Quét mã trên ứng dụng mobile  '>
+                                        {" "}
+                                    </TextBox>
+                                </div>
+                                <div className='col-4' style={{ width: "47%", margin: "0.2rem" }}>
+                                    <p>Mã công nhân</p>
+                                    <TextBox
+                                        disabled
+                                        style={{
+                                            background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
+                                            width: "70%",
+                                            padding: "0 0 0 2rem",
+                                            borderRadius: "4px",
+                                            border: "1px solid rgba(0, 0, 0, 0.4)",
+                                            marginBottom: "1rem",
+                                        }}
+                                        placeholder='Quét mã trên ứng dụng mobile  '>
+                                        {" "}
+                                    </TextBox>
+
+                                    <p>Mã lô NVL/BTP</p>
+                                    <TextBox
+                                        disabled
+                                        style={{
+                                            background: `url(${qrTextbox}) no-repeat scroll 5px 4px`,
+                                            width: "70%",
+                                            padding: "0 0 0 2rem",
+                                            borderRadius: "4px",
+                                            border: "1px solid rgba(0, 0, 0, 0.4)",
+                                            marginBottom: "1rem",
+                                        }}
+                                        placeholder='Quét mã trên ứng dụng mobile  '>
+                                        {" "}
+                                    </TextBox>
+                                </div>
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "row-reverse", padding: "1rem" }}>
+                                <Button
+                                    style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
+                                    text={windowWidth < 600 ? "Quét Qr" : "Khai báo thông tin sản xuất"}
+                                    height={35}
+                                    width={250}
+                                    onClick={handleChangeScreen}
+                                />
                             </div>
                             <div
                                 className='informer'
@@ -464,6 +566,12 @@ export const DeclareProductionObject = () => {
                                 }}></div>
                         </div>
                     </div>
+                    <div
+                        className='informer'
+                        style={{
+                            backgroundColor: "#ffffff",
+                            paddingLeft: 13,
+                        }}></div>
                 </div>
             )}
         </>

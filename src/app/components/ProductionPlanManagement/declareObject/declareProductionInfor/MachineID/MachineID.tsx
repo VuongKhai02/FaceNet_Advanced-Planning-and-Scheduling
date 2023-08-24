@@ -110,6 +110,7 @@ export const MachineID: React.FC<MachineID> = observer(({ isOpen = false, setClo
                                                     {buttonData.text}
                                                 </p>
                                             )}
+                                            hint='Khai báo lô'
                                         />
                                         <Button
                                             text='Quét lại'

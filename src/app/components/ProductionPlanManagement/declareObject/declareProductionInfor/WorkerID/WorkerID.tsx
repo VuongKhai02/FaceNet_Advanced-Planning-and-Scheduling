@@ -109,6 +109,7 @@ export const WorkerID: React.FC<WorkerID> = observer(({ isOpen = false, setClose
                                                     {buttonData.text}
                                                 </p>
                                             )}
+                                            hint='Khai báo máy'
                                         />
                                         <Button
                                             text='Quét lại'
