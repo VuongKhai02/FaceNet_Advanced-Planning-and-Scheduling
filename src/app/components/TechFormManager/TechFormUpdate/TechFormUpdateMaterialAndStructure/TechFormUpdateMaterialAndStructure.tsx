@@ -197,7 +197,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                         </label>
                                     </div>
                                 </div>
-                                <div style={{ marginTop: 30 }}>
+                                <div style={{ paddingTop: 30 }}>
                                     <DataGrid
                                         key={"no"}
                                         keyExpr={"no"}
@@ -255,46 +255,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             />
                                         </Column>
                                     </DataGrid>
-                                    <div className='container'>
-                                        <div className='checkbox'>
-                                            <label htmlFor='raPhim' style={{ fontWeight: 500 }}>
-                                                Ra phim/Pre-press
-                                            </label>
-                                            <input type='checkbox' id='raPhim' checked={true} />
-                                        </div>
-                                        <div className='checkbox'>
-                                            <label htmlFor='raBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                                Ra bản/PC to plate
-                                            </label>
-                                            <input type='checkbox' id='raBan' checked={true} />
-                                        </div>
-                                        <div className='input'>
-                                            <label htmlFor='tongSoBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                                Tổng số bản: {"6"}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div style={{ marginTop: 30 }}>
-                                        <DataGrid
-                                            key={"Id"}
-                                            keyExpr={"Id"}
-                                            dataSource={data1}
-                                            showBorders={true}
-                                            showRowLines={true}
-                                            showColumnLines={true}>
-                                            <Column dataField='Id' caption='Id' visible={false} />
-                                            <Column alignment='center' caption='Mặt trước/Front' fixed>
-                                                <Column dataField='contentFront' caption='Nội dung/Item' />
-                                                <Column dataField='quantityFront' caption="Số lượng/Q'ty" alignment='left' />
-                                                <Column dataField='sizeFront' caption='Kích thước bản/Plate size' />
-                                            </Column>
-                                            <Column alignment='center' caption='Mặt sau/Back' fixed>
-                                                <Column dataField='contentFront' caption='Nội dung/Item' />
-                                                <Column dataField='quantityFront' caption="Số lượng/Q'ty" alignment='left' />
-                                                <Column dataField='sizeFront' caption='Kích thước bản/Plate size' />
-                                            </Column>
-                                        </DataGrid>
-                                    </div>
+
                                     <div
                                         className='toolbar'
                                         style={{
