@@ -7,7 +7,8 @@ import qr_img from "../../images/qrCode.svg"
 
 type productionOrder = {
     isOpen: boolean,
-    setClose?: () => void;
+    setClose?: () => void,
+
 };
 
 const fakeProductionInfo = [{
@@ -19,7 +20,7 @@ const fakeProductionInfo = [{
 
 
 export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
-    isOpen = false, setClose }) => {
+    isOpen = false, setClose, }) => {
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [productionInfo, setProductionInfo] = useState(fakeProductionInfo);
@@ -49,6 +50,10 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         console.log(newObj)
     }
 
+    const checkedInfo = () => {
+        console.log("Chấm công");
+    }
+
     useEffect(() => {
         const updateDimension = () => {
             setwindowWidth(window.innerWidth)
@@ -60,7 +65,12 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
 
     return (
         <>
-            {isDeclareInfo ? <ProductionID isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)} status={fakeProductionInfo[0].status} /> :
+            {isDeclareInfo ? <ProductionID isOpen={isDeclareInfo}
+                setClose={() => setisDeclareInfo(false)}
+                status={fakeProductionInfo[0].status}
+                p_id={productionInfo[0].id}
+                p_cardName={productionInfo[0].cardName}
+            /> :
                 <div>
                     <div className="table-responsive">
                         <div className="informer" style={{
@@ -68,6 +78,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                             textAlign: "left",
                             paddingTop: 12
                         }}>
+                            <button onClick={updateDt}>update</button>
                             <h2 className="name" style={{
                                 marginBottom: 0,
                                 fontWeight: 700,
@@ -77,6 +88,17 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                 <div style={{ textAlign: "center", margin: "2rem" }}>
                                     <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
                                     <img src={qr_img} width={200} height={200} alt="" />
+                                    <div>
+                                        <Button
+                                            text="Quét lại"
+                                            onClick={refresh}
+                                            height={30}
+                                            width={80}
+                                            render={(buttonData) =>
+                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                            }
+                                        />
+                                    </div>
                                 </div>
                                 <div className="dx-fieldset">
                                     <h4 style={{ margin: "1rem 0" }}>Thông tin lệnh sản xuất</h4>
@@ -104,7 +126,18 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             <TextBox value={productionInfo[0].quantity} />
                                         </div>
                                     </div>
-                                    <div style={{ gap: "10px", display: "flex", flexDirection: "row-reverse", padding: "2rem 0" }}>
+                                    <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
+
+                                        <Button
+                                            text="Trở lại"
+                                            onClick={setClose}
+                                            height={30}
+                                            width={80}
+                                            render={(buttonData) =>
+                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                            }
+                                            hint="Khai báo thông tin"
+                                        />
                                         <Button
                                             text="Tiếp theo"
                                             onClick={handleChangeScreen}
@@ -116,23 +149,13 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             hint="Khai báo mã sản xuất"
                                         />
                                         <Button
-                                            text="Quét lại"
-                                            onClick={refresh}
+                                            text="Chấm công"
+                                            onClick={checkedInfo}
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                             }
-                                        />
-                                        <Button
-                                            text="Trở lại  "
-                                            onClick={setClose}
-                                            height={30}
-                                            width={80}
-                                            render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
-                                            }
-                                            hint="Khai báo thông tin"
                                         />
                                     </div>
                                 </div>
