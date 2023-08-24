@@ -5,111 +5,117 @@ import { observer } from "mobx-react";
 import { Table, Checkbox } from "antd";
 
 type TechFormBodyCardProps = {
-    isOpen: boolean,
+    isOpen: boolean;
     setClose?: () => void;
-
 };
-export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observer(({
-    isOpen = false, setClose }) => {
-
+export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose }) => {
     const data1 = [
-        { title1: 'Mã sx/Production', data1: '1500928', title2: 'Người gửi/Sender', data2: 'Nguyễn Thị A' },
-        { title1: 'Tên khách hàng/Customer', data1: 'Ngân hang A', title2: 'Số lượng thẻ/Quantity', data2: '15000' },
-        { title1: 'Tên thẻ/Card name', data1: 'Thẻ VP-Bank', title2: 'Số lượng đã tính bù hao', data2: '16000' },
-        { title1: 'Số HĐ/PO', data1: 'PO0001', title2: 'Kết thúc sx/Finish', data2: '30/7/2023' },
-        { title1: 'Bắt đầu sx/Start', data1: '30/6/2023', title2: 'Giao hàng/Delivery date', data2: '1/8/2023' },
+        { title1: "Mã sx/Production", data1: "1500928", title2: "Người gửi/Sender", data2: "Nguyễn Thị A" },
+        { title1: "Tên khách hàng/Customer", data1: "Ngân hang A", title2: "Số lượng thẻ/Quantity", data2: "15000" },
+        { title1: "Tên thẻ/Card name", data1: "Thẻ VP-Bank", title2: "Số lượng đã tính bù hao", data2: "16000" },
+        { title1: "Số HĐ/PO", data1: "PO0001", title2: "Kết thúc sx/Finish", data2: "30/7/2023" },
+        { title1: "Bắt đầu sx/Start", data1: "30/6/2023", title2: "Giao hàng/Delivery date", data2: "1/8/2023" },
     ];
 
     const data2 = [
         {
-            key: '1',
-            cardName: 'Card 1',
+            key: "1",
+            cardName: "Card 1",
             quantity: 10,
-            quality: 'High',
-            content: 'Lorem ipsum dolor sit amet',
-            color: 'Blue',
+            quality: "High",
+            content: "Lorem ipsum dolor sit amet",
+            color: "Blue",
         },
         {
-            key: '2',
-            cardName: 'Card 2',
+            key: "2",
+            cardName: "Card 2",
             quantity: 5,
-            quality: 'Medium',
-            content: 'Consectetur adipiscing elit',
-            color: 'Green',
+            quality: "Medium",
+            content: "Consectetur adipiscing elit",
+            color: "Green",
         },
     ];
 
     return (
         <>
             {
-                <div>
-                    <div className="table-responsive">
-                        <div className="informer" style={{
-                            textAlign: "left",
-                            paddingTop: 12
-                        }}>
-                            <h5 className="name" style={{
-                                fontSize: 18,
-                                marginBottom: 0
-                            }}>Xem chi tiết yêu cầu sản xuất</h5>
-                            <h5 className="name" style={{
-                                fontSize: 18,
-                                marginBottom: 0,
-                                textAlign: "center"
-                            }}>PHIẾU YÊU CẦU SẢN XUẤT</h5>
-                            <h5 className="name" style={{
-                                fontSize: 18,
-                                marginBottom: 0,
-                                textAlign: "center"
-                            }}>(Mã sản xuất: 09020523)</h5>
+                <div className='box__shadow-table-responsive'>
+                    <div className='table-responsive'>
+                        <div
+                            className='informer'
+                            style={{
+                                textAlign: "left",
+                                paddingTop: 12,
+                            }}>
+                            <h5
+                                className='name'
+                                style={{
+                                    fontSize: 18,
+                                    marginBottom: 0,
+                                }}>
+                                Xem chi tiết yêu cầu sản xuất
+                            </h5>
+                            <h5
+                                className='name'
+                                style={{
+                                    fontSize: 18,
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                }}>
+                                PHIẾU YÊU CẦU SẢN XUẤT
+                            </h5>
+                            <h5
+                                className='name'
+                                style={{
+                                    fontSize: 18,
+                                    marginBottom: 0,
+                                    textAlign: "center",
+                                }}>
+                                (Mã sản xuất: 09020523)
+                            </h5>
                         </div>
                         <div style={{ marginTop: 10 }}>
                             <DataGrid
-                                key={'title1'}
-                                keyExpr={'title1'}
+                                key={"title1"}
+                                keyExpr={"title1"}
                                 dataSource={data1}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showColumnHeaders={false}
                                 showRowLines={true}
-                                showColumnLines={true}
-                            >
-                                <Column dataField="title1" alignment={"left"} cssClass={"highlightColumn"}>
-                                    <Template name="title1">
-                                        {(rowData) => <span className="alkoji" style={{ fontWeight: "bold" }}>{rowData.title1}</span>}
+                                showColumnLines={true}>
+                                <Column dataField='title1' alignment={"left"} cssClass={"highlightColumn"}>
+                                    <Template name='title1'>
+                                        {(rowData) => (
+                                            <span className='alkoji' style={{ fontWeight: "bold" }}>
+                                                {rowData.title1}
+                                            </span>
+                                        )}
                                     </Template>
                                 </Column>
-                                <Column dataField="data1" caption="Data 1" alignment={"left"}>
-                                    <Template name={"abc"}>
-                                        {(rowData) => <span>{rowData.data1}</span>}
+                                <Column dataField='data1' caption='Data 1' alignment={"left"}>
+                                    <Template name={"abc"}>{(rowData) => <span>{rowData.data1}</span>}</Template>
+                                </Column>
+                                <Column dataField='title2' alignment={"left"} cssClass={"highlightColumn"}>
+                                    <Template name='title1'>
+                                        {(rowData) => <span style={{ fontWeight: "bold" }}>{rowData.title2}</span>}
                                     </Template>
                                 </Column>
-                                <Column dataField="title2" alignment={"left"} cssClass={"highlightColumn"}>
-                                    <Template name="title1">
-                                        {(rowData) => <span style={{ fontWeight: 'bold' }}>{rowData.title2}</span>}
-                                    </Template>
-                                </Column>
-                                <Column dataField="data2" caption="Data 2" alignment={"left"}>
-                                    <Template name="abcd">
-                                        {(rowData) => <span>{rowData.title2}</span>}
-                                    </Template>
+                                <Column dataField='data2' caption='Data 2' alignment={"left"}>
+                                    <Template name='abcd'>{(rowData) => <span>{rowData.title2}</span>}</Template>
                                 </Column>
                             </DataGrid>
                             <div style={{ marginTop: 30 }}>
-                                <Table
-                                    dataSource={data2}
-                                    rowKey="No"
-                                    bordered
-                                    pagination={false}>
+                                <Table dataSource={data2} rowKey='No' bordered pagination={false}>
                                     <Table.Column
                                         width={250}
-                                        title="Tên thẻ"
-                                        dataIndex="cardName"
-                                        key="cardName"
+                                        title='Tên thẻ'
+                                        dataIndex='cardName'
+                                        key='cardName'
                                         onCell={(item: any, index) => {
-                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                         }}
-                                        render={() =>
+                                        render={() => (
                                             <div>
                                                 <div>
                                                     <p>Tên thẻ:</p>
@@ -121,19 +127,19 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
                                                     <p>Chất liệu:</p>
-                                                    <div className="checkbox-row">
+                                                    <div className='checkbox-row'>
                                                         PVC thường <Checkbox checked={true} style={{ marginLeft: 80 }} />
                                                     </div>
-                                                    <div className="checkbox-row">
+                                                    <div className='checkbox-row'>
                                                         PVC màu <Checkbox style={{ marginLeft: 98 }} />
                                                     </div>
-                                                    <div className="checkbox-row">
+                                                    <div className='checkbox-row'>
                                                         PVC transparent <Checkbox style={{ marginLeft: 55 }} />
                                                     </div>
-                                                    <div className="checkbox-row">
+                                                    <div className='checkbox-row'>
                                                         PVC kim loại <Checkbox style={{ marginLeft: 77 }} />
                                                     </div>
-                                                    <div className="checkbox-row">
+                                                    <div className='checkbox-row'>
                                                         PVC rainbow <Checkbox checked={true} style={{ marginLeft: 76 }} />
                                                     </div>
                                                 </div>
@@ -142,32 +148,32 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                     Cr 80 Độ dày theo chuẩn thẻ EMV dành cho bank
                                                 </div>
                                             </div>
-                                        }
+                                        )}
                                     />
                                     <Table.Column
                                         width={200}
-                                        title="Số lượng"
-                                        dataIndex="quantity"
-                                        key="quantity"
+                                        title='Số lượng'
+                                        dataIndex='quantity'
+                                        key='quantity'
                                         onCell={(item: any, index: number) => {
-                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                         }}
-                                        render={() =>
+                                        render={() => (
                                             <div>
                                                 <p>3,000</p>
                                                 <p>(Làm thêm 10 thẻ gắn chip Demo màu vàng)</p>
                                             </div>
-                                        }
+                                        )}
                                     />
                                     <Table.Column
                                         width={300}
-                                        title="Chất lượng"
-                                        dataIndex="quality"
-                                        key="quality"
+                                        title='Chất lượng'
+                                        dataIndex='quality'
+                                        key='quality'
                                         onCell={(item: any, index) => {
-                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                         }}
-                                        render={() =>
+                                        render={() => (
                                             <div>
                                                 <div>
                                                     <Checkbox style={{ marginRight: 20 }} checked={true} />
@@ -181,24 +187,22 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                     <Checkbox style={{ marginRight: 20 }} checked={true} />
                                                     Yêu cầu khác:
                                                     <ul>
-                                                        <li>
-                                                            Thẻ sản xuất xong dán LP2 file đính kèm
-                                                        </li>
+                                                        <li>Thẻ sản xuất xong dán LP2 file đính kèm</li>
                                                         <li> Seribarcode chạy từ: FDA000001 đến hết FDA0000</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                        }
+                                        )}
                                     />
                                     <Table.Column
                                         width={1000}
-                                        title="Nội dung"
-                                        dataIndex="content"
-                                        key="content"
+                                        title='Nội dung'
+                                        dataIndex='content'
+                                        key='content'
                                         onCell={(item: any, index) => {
-                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                         }}
-                                        render={() =>
+                                        render={() => (
                                             <div>
                                                 <div>
                                                     <p>Công nghệ in:</p>
@@ -232,9 +236,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                             <Checkbox style={{ marginRight: 10 }} />
                                                             Hologram
                                                         </div>
-                                                        <div style={{ marginLeft: 30 }}>
-                                                            Màu: bạc
-                                                        </div>
+                                                        <div style={{ marginLeft: 30 }}>Màu: bạc</div>
                                                     </div>
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
@@ -248,9 +250,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                             <Checkbox style={{ marginRight: 10 }} />
                                                             Mặt sau
                                                         </div>
-                                                        <div style={{ marginLeft: 30 }}>
-                                                            In UV chìm
-                                                        </div>
+                                                        <div style={{ marginLeft: 30 }}>In UV chìm</div>
                                                         <div style={{ marginLeft: 30 }}>
                                                             <Checkbox style={{ marginRight: 10 }} checked={true} />
                                                             Mặt trước
@@ -343,9 +343,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                             <Checkbox style={{ marginRight: 10 }} />
                                                             Mẫu
                                                         </div>
-                                                        <div style={{ marginLeft: 30 }}>
-                                                            Khác
-                                                        </div>
+                                                        <div style={{ marginLeft: 30 }}>Khác</div>
                                                     </div>
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
@@ -486,14 +484,12 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                             <Checkbox style={{ marginRight: 10 }} />
                                                             Phủ cào
                                                         </div>
-                                                        <div style={{ marginLeft: 30 }}>
-                                                            Size phủ cào:
-                                                        </div>
+                                                        <div style={{ marginLeft: 30 }}>Size phủ cào:</div>
                                                     </div>
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
                                                     <p>Đóng gói:</p>
-                                                    <div >
+                                                    <div>
                                                         <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
                                                             <div>Túi: </div>
                                                             <div style={{ marginLeft: 50 }}>
@@ -575,26 +571,22 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                         <div>
                                                             1. Nội dung chuẩn LP, màu sắc hiệu ứng như mẫu gửi xuống, vật liệu PVC rainbow
                                                         </div>
-                                                        <div>
-                                                            2. Hiệu ứng Rainbow và UV định vị “Cụm chữ” trên bề mặt thẻ
-                                                        </div>
-                                                        <div>
-                                                            3. Hostamping bạc rainbow “Flash 2in1”. Metal sticker cụm logo “TPBank”
-                                                        </div>
+                                                        <div>2. Hiệu ứng Rainbow và UV định vị “Cụm chữ” trên bề mặt thẻ</div>
+                                                        <div>3. Hostamping bạc rainbow “Flash 2in1”. Metal sticker cụm logo “TPBank”</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        }
+                                        )}
                                     />
                                     <Table.Column
                                         width={200}
-                                        title="Màu sắc"
-                                        dataIndex="color"
-                                        key="color"
+                                        title='Màu sắc'
+                                        dataIndex='color'
+                                        key='color'
                                         onCell={(item: any, index) => {
-                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 }
+                                            return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                         }}
-                                        render={() =>
+                                        render={() => (
                                             <div>
                                                 <div>
                                                     <Checkbox style={{ marginRight: 20 }} checked={true} />
@@ -615,27 +607,25 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                         <Checkbox style={{ marginRight: 20 }} checked={true} />
                                                         Mặt sau : -4
                                                     </div>
-
                                                 </div>
                                             </div>
-                                        }
+                                        )}
                                     />
                                 </Table>
                             </div>
                             <div
-                                className="toolbar"
+                                className='toolbar'
                                 style={{
                                     marginTop: 10,
                                     float: "right",
                                     // background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
-                                }}
-                            >
+                                }}>
                                 <Button
-                                    text="Trở lại"
+                                    text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                    style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                                 />
                                 {/* <Button
                                     text="Tiếp theo"
@@ -643,12 +633,11 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                 /> */}
                             </div>
                         </div>
-                    </div >
-                </div >
-
+                    </div>
+                </div>
             }
         </>
-    )
-})
+    );
+});
 
 export default ViewDetailProductRequires;

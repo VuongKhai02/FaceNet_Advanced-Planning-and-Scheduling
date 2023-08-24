@@ -52,11 +52,7 @@ const App = observer(() => {
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
-          style={{
-            fontSize: '16px',
-            color: '#fff',
-            marginLeft: 40
-          }}
+          className="collapsed-icons"
         />
       </AppHeader>
     </Layout.Header>
@@ -90,10 +86,10 @@ const App = observer(() => {
     <Footer style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div className="container">
         <div className="copyright">
-          © Copyright <strong>Facenet</strong>. All Rights Reserved &nbsp;
+          © Copyright <strong>FaceNet</strong>. All Rights Reserved &nbsp;
         </div>
         <div className="credits">
-          Designed by <a href="https://facenet.vn/">Facenet</a>
+          Designed by <a href="https://facenet.vn/">FaceNet</a>
         </div>
       </div>
     </Footer>

@@ -1,103 +1,103 @@
 .app-header {
-  display: flex;
-  align-items: center;
-  color: #FFFFFF;
-  padding-top: 8px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    padding-top: 8px;
 }
 
 .app-header__icon {
-  width: 64px;
-  height: 64px;
-  line-height: 0px;
+    width: 64px;
+    height: 64px;
+    line-height: 0px;
 }
 
 .app-header__content {
-  margin-left: 12px;
-  /* flex-grow: 1; */
-  overflow: hidden;
+    margin-left: 12px;
+    /* flex-grow: 1; */
+    overflow: hidden;
 }
 
 .app-header__user-panel {
-  margin-left: 12px;
+    margin-left: 12px;
 }
 
 .app-header__user-panel__logout-btn {
-  color: #FFFFFF !important;
+    color: #ffffff !important;
 }
 
 .app-header__user-panel__logout-btn:hover {
-  color: #FFF !important;
+    color: #fff !important;
 }
 
-.ant-layout-header-sticky .app-header__user-panel__logout-btn{
-  color: #f05b41 !important;
-  font-weight:"bold"
-
+.ant-layout-header-sticky .app-header__user-panel__logout-btn {
+    /* color: #f05b41 !important; */
+    font-weight: "bold";
 }
 
 .ant-layout-header-sticky .app-header__user-panel__logout-btn:hover {
-  color: #f04147 !important;
-
+    color: #f04147 !important;
 }
 
 .ant-layout-header-sticky .app-header {
-  padding-top: 5px;
-  color: #333 !important;
+    /* padding-top: 5px; */
+    /* color: #333 !important; */
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
     position: relative;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
     border: none !important;
     border-radius: 2px;
-    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .ant-layout-header-sticky .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  color: #333 !important;
+    /* color: #333 !important; */
 }
 .ant-select-arrow {
-  color: #FFF !important;
+    color: #fff !important;
 }
 .ant-layout-header-sticky .ant-select-arrow {
-  color: #333 !important;
+    /* color: #333 !important; */
 }
 
 .app-header_bell {
-  font-size: 21px;
-  color: #FFFFFF !important;
+    font-size: 21px;
+    color: #ffffff !important;
+    cursor: pointer;
 }
 .ant-layout-header-sticky .app-header_bell {
-  color: #333 !important;
+    /* color: #333 !important; */
 }
 .app-header_logo {
-  color: #FFFFFF !important;
+    color: #ffffff !important;
 }
 
 .ant-layout-header-sticky .app-header_logo {
-  color: #333 !important;
+    /* color: #333 !important; */
 }
 
-.app-header_title_logo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin-left: 10px 
+.app-header_title_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    font-weight: bold !important;
+    color: #ffffff;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .ant-layout-header-sticky .app-header_title_logo {
-   color: #2A3884 !important;
-  font-weight: bold;
+    /* color: #2A3884 !important; */
+    font-weight: bold;
 }
 
 .fullscreen-container {
-  height: 100vh;
-  width: 100%;  
+    height: 100vh;
+    width: 100%;
 }
 .fullscreen-icon {
-  cursor: pointer; 
-  font-size: 20px;
-  color: #FFFFFF;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ffffff;
 }

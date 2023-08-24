@@ -2,14 +2,14 @@ import { MenuProps } from "antd";
 import React from "react";
 import { MenuItem, SubMenuItem, VerticalMenu } from "@haulmont/jmix-react-ui";
 import {
-  AppstoreOutlined,
-  DashboardOutlined,
-  ShoppingFilled,
-  ShoppingOutlined,
-  SignalFilled,
-  UploadOutlined,
-  UserOutlined,
-  WarningOutlined,
+    AppstoreOutlined,
+    DashboardOutlined,
+    ShoppingFilled,
+    ShoppingOutlined,
+    SignalFilled,
+    UploadOutlined,
+    UserOutlined,
+    WarningOutlined,
     ApartmentOutlined,
     BarsOutlined,
     CalendarFilled,
@@ -108,190 +108,143 @@ export const AppMenu = (props: AppMenuProps) => {
     return (
         // @ts-ignore
         <VerticalMenu {...props}>
-          <MenuItem
-        screenId="HomePage"
-        icon={<HomeFilled />}
-        caption={"screen.home"}
-        key={"home"}
-      />
-      <MenuItem
-        icon={<DashboardOutlined />}
-        caption={"Dashboard"}
-      />
-      <SubMenuItem caption={"Quản lý thông tin"} icon={<AppstoreOutlined />}>
-        <MenuItem
-          screenId="MrpSaleOrders"
-          caption={"Quản lý đơn hàng"}
-          key={"mrporders"}
-        />
-
-        <MenuItem
-          screenId="manageProductionRequirements"
-          caption={"Quản lý yêu cầu sản xuất"}
-          key={"manageProductionRequirements"}
-        />
-        <MenuItem
-          screenId="cardManagement"
-          caption={"Quản lý hộp chứa thẻ"}
-          key={"cardManagement"}
-        />
-        <MenuItem
-          screenId="manageJobOutput"
-          caption={"Quản lý Job output"}
-          key={"manageJobOutput"}
-        />
-      </SubMenuItem>
-      <SubMenuItem caption={"Quản lý BOM"} icon={<AppstoreOutlined />}>
-        <MenuItem
-          screenId="bomBodyCard"
-          caption={"Quản lý BOM body card"}
-          key={"bomBodyCard"}
-        />
-
-        <MenuItem
-          screenId="bomPersonalized"
-          caption={"Quản lý BOM cá thể hóa"}
-          key={"bomPersonalized"}
-        />
-      </SubMenuItem>
-      <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
-        <MenuItem
-          screenId="techFormList"
-          // icon={<HomeFilled />}
-          caption={"Danh sách phiếu công nghệ"}
-          key={"techFormList"}
-        />
-
-        <MenuItem
-          screenId="techFormApprove"
-          caption={"Phê duyệt phiếu công nghệ"}
-          key={"techFormApprove"}
-        />
-      </SubMenuItem>
-      <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
-        <MenuItem
-          screenId="productionPlanList"
-          caption={"Danh sách kế hoạch sản xuất"}
-          key={"productionPlanList"}
-        />
-
-        <MenuItem
-          screenId="dnlNvlList"
-          caption={"Danh sách đề nghị lĩnh NVL"}
-          key={"dnlNvlList"}
-        />
-      </SubMenuItem>
-
-      <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>
-        <MenuItem
-          screenId="progressMonitoringWO"
-          caption={"Giám sát tiến độ WO"}
-          key={"progressMonitoringWO"}
-        />
-        <MenuItem
-          screenId="progressMonitoringManufacture"
-          caption={"Giám sát tiến độ sản xuất"}
-          key={"progressMonitoringManufacture"}
-        />
-
-        <MenuItem
-          screenId="progressMonitoringOrder"
-          caption={"Giám sát tiến độ đơn hàng"}
-          key={"progressMonitoringOrder"}
-        />
-        <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
-          caption={"Giám sát máy"}
-          key={"gsm"}
-        />
-        <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
-          caption={"Hàng chờ công đoạn"}
-          key={"hc"}
-        />
-      </SubMenuItem>
-      {/* user */}
-      <SubMenuItem caption="Quản lý tài khoản" icon={<UserOutlined />}>
-
-      </SubMenuItem>
-      <SubMenuItem caption={"Cảnh báo"} icon={<WarningOutlined />}>
-        <MenuItem
-          screenId=""
-          // icon={<HomeFilled />}
-          caption={"Danh sách phiếu công nghệ"}
-          key={"g"}
-        />
-
-        <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
-          caption={"Phê duyệt phiếu công nghệ"}
-          key={"h"}
-        />
-      </SubMenuItem>
-      <SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined />}>
-        <MenuItem
-          screenId=""
-          // icon={<HomeFilled />}
-          caption={"Danh sách phiếu công nghệ"}
-          key={"i"}
-        />
-
-        <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
-          caption={"Phê duyệt phiếu công nghệ"}
-          key={"k"}
-        />
-      </SubMenuItem>
             <MenuItem screenId='HomePage' icon={<HomeFilled />} caption={"screen.home"} key={"home"} />
+            <MenuItem icon={<DashboardOutlined />} caption={"Dashboard"} />
+            <SubMenuItem caption={"Quản lý thông tin"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='MrpSaleOrders' caption={"Quản lý đơn hàng"} key={"mrporders"} />
+
+                <MenuItem
+                    screenId='manageProductionRequirements'
+                    caption={"Quản lý yêu cầu sản xuất"}
+                    key={"manageProductionRequirements"}
+                />
+                <MenuItem screenId='cardManagement' caption={"Quản lý hộp chứa thẻ"} key={"cardManagement"} />
+                <MenuItem screenId='manageJobOutput' caption={"Quản lý Job output"} key={"manageJobOutput"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý BOM"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='bomBodyCard' caption={"Quản lý BOM body card"} key={"bomBodyCard"} />
+
+                <MenuItem screenId='bomPersonalized' caption={"Quản lý BOM cá thể hóa"} key={"bomPersonalized"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
+                <MenuItem
+                    screenId='techFormList'
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"techFormList"}
+                />
+
+                <MenuItem screenId='techFormApprove' caption={"Phê duyệt phiếu công nghệ"} key={"techFormApprove"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='productionPlanList' caption={"Danh sách kế hoạch sản xuất"} key={"productionPlanList"} />
+
+                <MenuItem screenId='dnlNvlList' caption={"Danh sách đề nghị lĩnh NVL"} key={"dnlNvlList"} />
+
+                <MenuItem screenId='declareProductionObject' caption={"Khai báo người/máy/lô sản xuất"} key={"dd"} />
+            </SubMenuItem>
+
+            <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='progressMonitoringWO' caption={"Giám sát tiến độ WO"} key={"progressMonitoringWO"} />
+                <MenuItem
+                    screenId='progressMonitoringManufacture'
+                    caption={"Giám sát tiến độ sản xuất"}
+                    key={"progressMonitoringManufacture"}
+                />
+
+                <MenuItem screenId='progressMonitoringOrder' caption={"Giám sát tiến độ đơn hàng"} key={"progressMonitoringOrder"} />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Giám sát máy"}
+                    key={"gsm"}
+                />
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Hàng chờ công đoạn"}
+                    key={"hc"}
+                />
+            </SubMenuItem>
+            {/* user */}
+            <SubMenuItem caption='Quản lý tài khoản' icon={<UserOutlined />}></SubMenuItem>
+            <SubMenuItem caption={"Cảnh báo"} icon={<WarningOutlined />}>
+                <MenuItem
+                    screenId=''
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"g"}
+                />
+
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Phê duyệt phiếu công nghệ"}
+                    key={"h"}
+                />
+            </SubMenuItem>
+            <SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined />}>
+                <MenuItem
+                    screenId=''
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"i"}
+                />
+
+                <MenuItem
+                    screenId=''
+                    // icon={<ShoppingOutlined />}
+                    caption={"Phê duyệt phiếu công nghệ"}
+                    key={"k"}
+                />
+            </SubMenuItem>
+            {/*<MenuItem screenId='HomePage' icon={<HomeFilled/>} caption={"screen.home"} key={"home"}/>*/}
             {/*<MenuItem*/}
             {/*  screenId="Warnings"*/}
             {/*  icon={<HomeFilled/>}*/}
             {/*  caption={"Content 1"}*/}
             {/*  key={"Content 1"}*/}
             {/*/>*/}
-            <SubMenuItem caption={"Quản lý thông tin"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='MrpSaleOrders' icon={<HomeFilled />} caption={"Quản lý đơn hàng"} key={"mrporders"} />
+            {/*<SubMenuItem caption={"Quản lý thông tin"} icon={<ShoppingFilled/>}>*/}
+            {/*  <MenuItem screenId='MrpSaleOrders' icon={<HomeFilled/>} caption={"Quản lý đơn hàng"} key={"mrporders"}/>*/}
 
-                <MenuItem screenId='Template' icon={<ShoppingOutlined />} caption={"Quản lý mã QR lô sản phẩm"} key={"Content 2.2"} />
-            </SubMenuItem>
-            <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='techFormList' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"techFormList"} />
+            {/*  <MenuItem screenId='Template' icon={<ShoppingOutlined/>} caption={"Quản lý mã QR lô sản phẩm"}*/}
+            {/*            key={"Content 2.2"}/>*/}
+            {/*</SubMenuItem>*/}
+            {/*<SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<ShoppingFilled/>}>*/}
+            {/*  <MenuItem screenId='techFormList' icon={<HomeFilled/>} caption={"Danh sách phiếu công nghệ"}*/}
+            {/*            key={"techFormList"}/>*/}
+            {/*  <MenuItem*/}
+            {/*    screenId='techFormApprove'*/}
+            {/*    icon={<ShoppingOutlined/>}*/}
+            {/*    caption={"Phê duyệt phiếu công nghệ"}*/}
+            {/*    key={"techFormApprove"}*/}
+            {/*  />*/}
+            {/*</SubMenuItem>*/}
+            {/*<SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<ShoppingFilled/>}>*/}
+            {/*  <MenuItem screenId='' icon={<HomeFilled/>} caption={"Danh sách kế hoạch sản xuất"} key={"c"}/>*/}
 
-                <MenuItem
-                    screenId='techFormApprove'
-                    icon={<ShoppingOutlined />}
-                    caption={"Phê duyệt phiếu công nghệ"}
-                    key={"techFormApprove"}
-                />
-            </SubMenuItem>
-            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách kế hoạch sản xuất"} key={"c"} />
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Danh sách đề nghị lĩnh NVL"} key={"d"}/>*/}
+            {/*</SubMenuItem>*/}
+            {/*<SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled/>}>*/}
+            {/*  <MenuItem screenId='' icon={<HomeFilled/>} caption={"Giám sát tiến độ sản xuất"} key={"e"}/>*/}
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Danh sách đề nghị lĩnh NVL"} key={"d"} />
-            </SubMenuItem>
-            <SubMenuItem caption={"Giám sát tiến độ"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Giám sát tiến độ sản xuất"} key={"e"} />
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Giám sát tiến độ đơn hàng"} key={"f"}/>*/}
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Giám sát máy"} key={"gsm"}/>*/}
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Hàng chờ công đoạn"} key={"hc"}/>*/}
+            {/*</SubMenuItem>*/}
+            {/*/!* user *!/*/}
+            {/*<SubMenuItem caption='Quản lý tài khoản' icon={<UserOutlined/>}></SubMenuItem>*/}
+            {/*<SubMenuItem caption={"Cảnh báo"} icon={<ShoppingFilled/>}>*/}
+            {/*  <MenuItem screenId='' icon={<HomeFilled/>} caption={"Danh sách phiếu công nghệ"} key={"g"}/>*/}
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Giám sát tiến độ đơn hàng"} key={"f"} />
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Giám sát máy"} key={"gsm"} />
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Hàng chờ công đoạn"} key={"hc"} />
-            </SubMenuItem>
-            {/* user */}
-            <SubMenuItem caption='Quản lý tài khoản' icon={<UserOutlined />}></SubMenuItem>
-            <SubMenuItem caption={"Cảnh báo"} icon={<ShoppingFilled />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"g"} />
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Phê duyệt phiếu công nghệ"} key={"h"}/>*/}
+            {/*</SubMenuItem>*/}
+            {/*<SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined/>}>*/}
+            {/*  <MenuItem screenId='' icon={<HomeFilled/>} caption={"Danh sách phiếu công nghệ"} key={"i"}/>*/}
 
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Phê duyệt phiếu công nghệ"} key={"h"} />
-            </SubMenuItem>
-            <SubMenuItem caption={"Báo cáo, thống kê"} icon={<FormOutlined />}>
-                <MenuItem screenId='' icon={<HomeFilled />} caption={"Danh sách phiếu công nghệ"} key={"i"} />
-
-                <MenuItem screenId='' icon={<ShoppingOutlined />} caption={"Phê duyệt phiếu công nghệ"} key={"k"} />
-            </SubMenuItem>
+            {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Phê duyệt phiếu công nghệ"} key={"k"}/>*/}
+            {/*</SubMenuItem>*/}
             {orderMenu}
             {workOrderManagerMenu}
             {importManager}
@@ -322,78 +275,78 @@ export const AppMenu = (props: AppMenuProps) => {
                     caption={"Báo cáo tiêu hao NVL chi tiết"}
                     key={"MaterialAttritionReport"}
                 />
-                <MenuItem
-                    screenId={"screen.ProductionMeansReport"}
-                    icon={<BarsOutlined />}
-                    caption={"Báo cáo công cụ sản xuất"}
-                    key={"ProductionMeansReport"}
-                />
-            </SubMenuItem>
-            <SubMenuItem caption={"QUẢN LÝ PART"} icon={<RadarChartOutlined />}>
-                <MenuItem screenId={"screen.PartNumberManager"} icon={<BarsOutlined />} caption={"Part"} key={"PartNumberManager"} />
-                <MenuItem
-                    screenId={"screen.GroupFeederManager"}
-                    icon={<BarsOutlined />}
-                    caption={"Equipment Group"}
-                    key={"GroupFeederManager"}
-                />
-                <MenuItem
-                    screenId={"screen.FeederSerialManager"}
-                    icon={<BarsOutlined />}
-                    caption={"Equipment"}
-                    key={"FeederSerialManager"}
-                />
                 {/*<MenuItem*/}
-                {/*  screenId={"screen.QrFeederManager"}*/}
-                {/*  icon={<BarsOutlined />}*/}
-                {/*  caption={"Qr Feeder"}*/}
-                {/*  key={"QrFeederManager"}*/}
+                {/*    screenId={"screen.ProductionMeansReport"}*/}
+                {/*    icon={<BarsOutlined />}*/}
+                {/*    caption={"Báo cáo công cụ sản xuất"}*/}
+                {/*    key={"ProductionMeansReport"}*/}
                 {/*/>*/}
-                <MenuItem
-                    screenId={"screen.EquipmentTypeManager"}
-                    icon={<BarsOutlined />}
-                    caption={"Equipment Type"}
-                    key={"EquipmentTypeManager"}
-                />
             </SubMenuItem>
-            <MenuItem screenId={"screen.ProfileManager"} icon={<UserOutlined />} caption={"QUẢN LÝ PROFILE"} key={"ProfileManager"} />
-            <MenuItem
-                screenId={"screen.ProgrammingManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ PROGRAMMING"}
-                key={"ProgrammingManager"}
-            />
+            {/*<SubMenuItem caption={"QUẢN LÝ PART"} icon={<RadarChartOutlined />}>*/}
+            {/*    <MenuItem screenId={"screen.PartNumberManager"} icon={<BarsOutlined />} caption={"Part"} key={"PartNumberManager"} />*/}
+            {/*    <MenuItem*/}
+            {/*        screenId={"screen.GroupFeederManager"}*/}
+            {/*        icon={<BarsOutlined />}*/}
+            {/*        caption={"Equipment Group"}*/}
+            {/*        key={"GroupFeederManager"}*/}
+            {/*    />*/}
+            {/*    <MenuItem*/}
+            {/*        screenId={"screen.FeederSerialManager"}*/}
+            {/*        icon={<BarsOutlined />}*/}
+            {/*        caption={"Equipment"}*/}
+            {/*        key={"FeederSerialManager"}*/}
+            {/*    />*/}
+            {/*<MenuItem*/}
+            {/*  screenId={"screen.QrFeederManager"}*/}
+            {/*  icon={<BarsOutlined />}*/}
+            {/*  caption={"Qr Feeder"}*/}
+            {/*  key={"QrFeederManager"}*/}
+            {/*/>*/}
+            {/*      <MenuItem*/}
+            {/*    screenId={"screen.EquipmentTypeManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"Equipment Type"}*/}
+            {/*    key={"EquipmentTypeManager"}*/}
+            {/*/>*/}
+            {/*</SubMenuItem>*/}
+            {/*<MenuItem screenId={"screen.ProfileManager"} icon={<UserOutlined />} caption={"QUẢN LÝ PROFILE"} key={"ProfileManager"} />*/}
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.ProgrammingManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ PROGRAMMING"}*/}
+            {/*    key={"ProgrammingManager"}*/}
+            {/*/>*/}
             <MenuItem screenId={"screen.DnlnvlManager"} icon={<BarsOutlined />} caption={"QUẢN LÝ ĐỀ NGHỊ LĨNH"} key={"DnlnvlManager"} />
-            <MenuItem
-                screenId={"screen.DnlnvlApproveManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ PHÊ DUYỆT "}
-                key={"DnlnvlApproveManager"}
-            />
-            <MenuItem
-                screenId={"screen.DnlnvlWarehouseManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ ĐỐI CHIẾU NVL"}
-                key={"DnlnvlWarehouseManager"}
-            />
-            <MenuItem
-                screenId={"screen.DnlnvlGivebackRedundantManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ TRẢ NVL DƯ THỪA "}
-                key={"DnlnvlGivebackRedundantManager"}
-            />
-            <MenuItem
-                screenId={"screen.DnlnvlApproveRedundantManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ PHÊ DUYỆT TRẢ NVL "}
-                key={"DnlnvlApproveRedundantManager"}
-            />
-            <MenuItem
-                screenId={"screen.LocationRFIDManager"}
-                icon={<BarsOutlined />}
-                caption={"QUẢN LÝ LOCATION  "}
-                key={"LocationRFIDManager"}
-            />
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.DnlnvlApproveManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ PHÊ DUYỆT "}*/}
+            {/*    key={"DnlnvlApproveManager"}*/}
+            {/*/>*/}
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.DnlnvlWarehouseManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ ĐỐI CHIẾU NVL"}*/}
+            {/*    key={"DnlnvlWarehouseManager"}*/}
+            {/*/>*/}
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.DnlnvlGivebackRedundantManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ TRẢ NVL DƯ THỪA "}*/}
+            {/*    key={"DnlnvlGivebackRedundantManager"}*/}
+            {/*/>*/}
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.DnlnvlApproveRedundantManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ PHÊ DUYỆT TRẢ NVL "}*/}
+            {/*    key={"DnlnvlApproveRedundantManager"}*/}
+            {/*/>*/}
+            {/*<MenuItem*/}
+            {/*    screenId={"screen.LocationRFIDManager"}*/}
+            {/*    icon={<BarsOutlined />}*/}
+            {/*    caption={"QUẢN LÝ LOCATION  "}*/}
+            {/*    key={"LocationRFIDManager"}*/}
+            {/*/>*/}
         </VerticalMenu>
     );
 };
