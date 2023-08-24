@@ -20,6 +20,9 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import PopupDetailProductionRequire from "../../../shared/components/PopupDetailProductionRequire/PopupDetailProductionRequire";
 import ViewDetailProductRequires from "./ViewDetailProductRequires/ViewDetailProductRequires";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../config";
 
 const data = [
     {
@@ -60,6 +63,28 @@ export const ManageProductionRequirements = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisibleDetailProductionRequire, setIsVisibleDetailProductionRequire] = React.useState<boolean>(false);
     const [isViewDetailProductRequire, setIsViewDetailProductRequire] = React.useState<boolean>(false);
+    const mainStore = useMainStore();
+    const [productionRequirements, setProductionRequirements] = React.useState<any>([]);
+    const [productionRequirementChoosed, setProductionRequirementChoosed] = React.useState<any>(null);
+    
+    console.log(productionRequirementChoosed)
+
+    const getProductionRequirements = () => {
+        const headers = {
+            Authorization: "Bearer " + mainStore.authToken,
+            "content-type": "application/json",
+        };
+        axios.get(PLANNING_API_URL + "/api/production_requirements", { headers }).then((response) => {
+            if (response.status === 200) {
+                console.log(response.data.data);
+                setProductionRequirements(response.data.data.data)
+            }
+        });
+    }
+
+    React.useEffect(() => {
+        getProductionRequirements()
+    }, [])
 
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
@@ -67,6 +92,9 @@ export const ManageProductionRequirements = () => {
     const handleHideModalDel = () => {
         setIsConfirmDelete(false);
     };
+
+    const getProductionRequirementById = () => {
+    }
 
     return (
         <>
@@ -115,9 +143,9 @@ export const ManageProductionRequirements = () => {
                         </div>
                         <div>
                             <DataGrid
-                                key='productCode'
-                                keyExpr={"productCode"}
-                                dataSource={data}
+                                key='productionCode'
+                                keyExpr={"productionCode"}
+                                dataSource={productionRequirements}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
@@ -135,61 +163,61 @@ export const ManageProductionRequirements = () => {
                                                     <TextBox
                                                         id='productionCode'
                                                         key={"productionCode"}
-                                                        value='09020523'
+                                                        value= {productionRequirementChoosed?.productionCode}
                                                         width={300}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên khách hàng/Customer</p>
                                                     <TextBox
                                                         id='customer'
                                                         key={"customer"}
-                                                        value='Chi nhánh Công Ty Cổ Phần Thông Minh MK'
+                                                        value={productionRequirementChoosed?.customer}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên thẻ/Card name </p>
                                                     <TextBox
                                                         id='cardName'
                                                         key={"cardName"}
-                                                        value='Phôi thẻ Visa Cam 1, TPBank, T5/2023, Slg 3k '
+                                                        value={productionRequirementChoosed?.cardName}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Số HĐ/P.O</p>
                                                     <TextBox
                                                         id='someContracts'
                                                         key={"someContracts"}
-                                                        value='1245886'
+                                                        value={productionRequirementChoosed?.poNumber}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Bắt đầu sx/Start </p>
-                                                    <TextBox id='start' key={"start"} value='16/06/2023' className='colorTextBox'></TextBox>
+                                                    <TextBox id='start' key={"start"} value={productionRequirementChoosed?.startDate} className='colorTextBox'></TextBox>
                                                 </td>
                                                 <td style={{ marginRight: 30 }}>
                                                     <p>Người gửi/Sender</p>
                                                     <TextBox
                                                         id='sender'
                                                         key={"sender"}
-                                                        value='Bùi Thanh Quang'
+                                                        value={productionRequirementChoosed?.sender} 
                                                         width={300}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Số lượng thẻ/Q'ty</p>
                                                     <TextBox
                                                         id='quantity'
-                                                        key={"quantity"}
-                                                        value='3,000'
+                                                        key={"'quantity'"}
+                                                        value={productionRequirementChoosed?.quantityRequirement} 
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>SL thẻ đã tính bù hao</p>
                                                     <TextBox
                                                         id='lossCard'
                                                         key={"lossCard"}
-                                                        value='3,000'
+                                                        value={productionRequirementChoosed?.quantityCompensation}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Kết thúc sx/Finish</p>
                                                     <TextBox
                                                         id='finish'
                                                         key={"finish"}
-                                                        value='30/06/2023'
+                                                        value={productionRequirementChoosed?.endDate}
                                                         className='colorTextBox'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Giao hàng/ Delivery Date</p>
                                                     <TextBox
                                                         id='deliveryDate'
                                                         key={"deliveryDate"}
-                                                        value='30/06/2023'
+                                                        value={productionRequirementChoosed?.deliveryDate}
                                                         className='colorTextBox'></TextBox>
                                                 </td>
                                             </table>
@@ -207,7 +235,7 @@ export const ManageProductionRequirements = () => {
                                         </div>
                                     }
                                     width={800}
-                                    onCancel={() => setIsVisibleDetailProductionRequire(false)}
+                                    onCancel={() => {setIsVisibleDetailProductionRequire(false); setProductionRequirementChoosed(null)}}
                                     onSubmit={() => {}}
                                 />
                                 <PopupConfirmDelete
@@ -284,18 +312,18 @@ export const ManageProductionRequirements = () => {
                                     infoText='Trang số {0} trên {1} ({2} bản ghi)'
                                 />
 
-                                <Column dataField='productCode' caption='Mã sản xuất' />
-                                <Column dataField='someContracts' caption='Số hợp đồng' />
+                                <Column dataField='productionCode' caption='Mã sản xuất' />
+                                <Column dataField='poNumber' caption='Số hợp đồng' />
 
-                                <Column dataField='customerName' caption='Tên khách hàng' alignment='left' />
+                                <Column dataField='customer' caption='Tên khách hàng' alignment='left' />
 
                                 <Column dataField='cardName' caption='Tên thẻ' alignment={"left"} />
-                                <Column dataField='quantity' caption='Số lượng' />
-                                <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy hh:mm:ss' />
+                                <Column dataField='quantityRequirement' caption='Số lượng' />
+                                <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy' />
                                 <Column
                                     dataField='endDate'
                                     dataType='datetime'
-                                    format='dd/MM/yyyy hh:mm:ss'
+                                    format='dd/MM/yyyy'
                                     alignment={"left"}
                                     caption={"Ngày kết thúc"}
                                 />
@@ -304,7 +332,7 @@ export const ManageProductionRequirements = () => {
                                     type={"buttons"}
                                     caption={"Thao tác"}
                                     alignment='left'
-                                    cellRender={() => (
+                                    cellRender={(cellInfo) => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
                                                 onClick={() => {
@@ -319,7 +347,9 @@ export const ManageProductionRequirements = () => {
                                             />
                                             <SvgIcon
                                                 onClick={() => {
+                                                    console.log(cellInfo.data.id)
                                                     setIsVisibleDetailProductionRequire(true);
+                                                    setProductionRequirementChoosed(productionRequirements.find(item => item.id === cellInfo.data.id))
                                                 }}
                                                 tooltipTitle='Thêm phiếu công nghệ'
                                                 sizeIcon={17}

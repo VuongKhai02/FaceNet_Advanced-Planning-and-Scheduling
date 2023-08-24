@@ -110,6 +110,7 @@ export const TechFormList = () => {
         };
         axios.get(PLANNING_API_URL + "/api/techforms", { headers }).then((response) => {
             if (response.status === 200) {
+                console.log(response.data.data.data)
                 setTechForms(response.data.data.data);
             }
         });
@@ -356,12 +357,12 @@ export const TechFormList = () => {
                             />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
-                            <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
-                            <Column caption={"Tên khách hàng"} dataField={"customerName"} />
-                            <Column caption={"Tên thẻ"} dataField={"cardName"} />
-                            <Column caption={"Số lượng"} dataField={"quantity"} />
-                            <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy hh:mm:ss' />
-                            <Column caption={"Ngày kết thúc"} dataType='datetime' dataField={"endDate"} format='dd/MM/yyyy hh:mm:ss' />
+                            <Column caption={"Mã sản xuất"} dataField={"productionRequirement.productionCode"} />
+                            <Column caption={"Tên khách hàng"} dataField={"productionRequirement.customer"} />
+                            <Column caption={"Tên thẻ"} dataField={"productionRequirement.cardName"} />
+                            <Column caption={"Số lượng"} dataField={"productionRequirement.quantityRequirement"} />
+                            <Column caption={"Ngày bắt đầu"} dataType='date' dataField={"productionRequirement.startDate"} format='dd/MM/yyyy' />
+                            <Column caption={"Ngày kết thúc"} dataType='date' dataField={"productionRequirement.endDate"} format='dd/MM/yyyy' />
                             <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
