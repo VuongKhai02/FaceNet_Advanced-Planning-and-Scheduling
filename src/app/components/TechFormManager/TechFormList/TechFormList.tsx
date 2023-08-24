@@ -17,11 +17,13 @@ import { registerScreen } from "@haulmont/jmix-react-ui";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
-import { WarningOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import PopupSendSAP from "../../../shared/components/PopupSendSAP/PopupSendSAP";
 import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
 import BOMBodyCardAddInfo from "../../BOM/BOMBodyCard/BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupConfirmGeneral from "../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
+import CreateProductionPlan from "../../ProductionPlanManagement/ProductionPlanList/CreateProductionPlan/CreateProductionPlan";
+import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 
 
 const data = [
@@ -38,12 +40,17 @@ const dataSource = [
 const ROUTING_PATH = "/techFormList";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 export const TechFormList = () => {
+
   const [popupVisible, setPopupVisible] = useState(false);
   const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
   const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
+
   const [isPrioritizeLevelChange, setIsPrioritizeLevelChange] = React.useState<boolean>(false);
   const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
   const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
+  const [isCreateProductionPlan, setCreateProductionPlan] = React.useState<boolean>(false);
+  const [isConfirmDelete, setIsisConfirmDelete] = React.useState<boolean>(false);
+
   const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
   const [newButtons, setNewButtons] = React.useState<any>([]);
 
@@ -164,6 +171,20 @@ export const TechFormList = () => {
                   </div>
                 }
                 width={600} />
+              <PopupConfirmDelete
+                isVisible={isConfirmDelete}
+                onCancel={() => setIsisConfirmDelete(false)}
+                onSubmit={() => console.log('ok')}
+                modalTitle={
+                  <div>
+                    <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
+                      <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
+                      Xác nhận xóa?
+                    </h3>
+                  </div>
+                }
+                modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
+                width={600} />
               <Popup
                 title="Các Icon thao tác"
                 visible={popupVisibleIcon}
@@ -236,8 +257,8 @@ export const TechFormList = () => {
                     <SvgIcon onClick={() => setIsVisibleTechFormUpdate(true)} tooltipTitle="Cập nhật PCN" sizeIcon={17} textSize={17} icon="assets/icons/Edit.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => setIsVisibleBOMBodyCardAddInfo(true)} tooltipTitle="Tạo BOM" sizeIcon={17} textSize={17} icon="assets/icons/Folder.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => setIsModalVisibleSendSAP(true)} tooltipTitle="Gửi duyệt" sizeIcon={17} textSize={17} icon="assets/icons/Send.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                    <SvgIcon onClick={() => { }} tooltipTitle="Tạo KHSX" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                    <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => setCreateProductionPlan(true)} tooltipTitle="Tạo KHSX" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon onClick={() => setIsisConfirmDelete(true)} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     <SvgIcon onClick={() => setPopupVisibleIcon(true)} tooltipTitle="Khác" sizeIcon={17} textSize={17} icon="assets/icons/More.svg" textColor="#FF7A00" />
                   </div>} />
                 {
@@ -248,6 +269,11 @@ export const TechFormList = () => {
                 {
                   isVisibleBOMBodyCardAddInfo && (
                     <BOMBodyCardAddInfo isOpen={isVisibleBOMBodyCardAddInfo} setClose={() => setIsVisibleBOMBodyCardAddInfo(false)} />
+                  )
+                }
+                {
+                  isCreateProductionPlan && (
+                    <CreateProductionPlan isOpen={isCreateProductionPlan} setClose={() => setCreateProductionPlan(false)} />
                   )
                 }
               </DataGrid>

@@ -12,6 +12,7 @@ import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput
 import ProgressMonitoringWO from "../app/components/ProgressMonitoring/ProgressMonitoringWO/ProgressMonitoringWO";
 import ProgressMonitoringManufacture from "../app/components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture";
 import ProgressMonitoringOrder from "../app/components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder";
+import ProgressMonitoringStageQueue from "../app/components/ProgressMonitoring/ProgressMonitoringStageQueue/ProgressMonitoringStageQueue";
 
 export const ComponentPreviews = () => {
   return (
@@ -63,6 +64,9 @@ export const ComponentPreviews = () => {
       </ComponentPreview>
       <ComponentPreview path="/progressMonitoringOrder">
         <ProgressMonitoringOrder />
+      </ComponentPreview>
+      <ComponentPreview path="/progressMonitoringStageQueue">
+        <ProgressMonitoringStageQueue />
       </ComponentPreview>
     </Previews>
   );

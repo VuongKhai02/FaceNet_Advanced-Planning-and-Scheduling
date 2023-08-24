@@ -126,10 +126,9 @@ export const AppMenu = (props: AppMenuProps) => {
           key={"gsm"}
         />
         <MenuItem
-          screenId=""
-          // icon={<ShoppingOutlined />}
+          screenId="progressMonitoringStageQueue"
           caption={"Hàng chờ công đoạn"}
-          key={"hc"}
+          key={"progressMonitoringStageQueue"}
         />
       </SubMenuItem>
       {/* user */}

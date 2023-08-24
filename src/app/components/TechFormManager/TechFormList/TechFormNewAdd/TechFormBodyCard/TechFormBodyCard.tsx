@@ -5,6 +5,7 @@ import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/Te
 import { observer } from "mobx-react";
 import { Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
+import TextArea from "antd/lib/input/TextArea";
 
 type TechFormBodyCardProps = {
     isOpen: boolean,
@@ -168,8 +169,8 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                 <h5 className="name" style={{
                                     fontSize: 18,
                                 }}>Thiết kế/Card design</h5>
-                                {/* <ImportTechForm /> */}
-                                <div className="mt-24" >
+                                <div className="mt-24" style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                                    <div><TextArea placeholder="Nhập ghi chú" rows={8} style={{ resize: "horizontal" }} /></div>
                                     <Upload.Dragger
                                         multiple={false}
                                         accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -180,7 +181,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                             </svg>
                                         </p>
                                         <p className="ant-upload-text">Kéo thả file hoặc <a style={{ color: '#FF7A00' }} >Chọn file</a> để tải lên</p>
-                                        <p className="ant-upload-hint">Chỉ cho phép file dạng .xls, .xlsx và dung lượng không quá 1MB</p>
+                                        <p className="ant-upload-hint">Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.</p>
                                     </Upload.Dragger>
                                 </div>
                             </div>
@@ -253,7 +254,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({
                                                     </svg>
                                                 </p>
                                                 <p className="ant-upload-text">Kéo thả file hoặc <a style={{ color: '#FF7A00' }} >Chọn file</a> để tải lên</p>
-                                                <p className="ant-upload-hint">Chỉ cho phép file dạng .xls, .xlsx và dung lượng không quá 1MB</p>
+                                                <p className="ant-upload-hint">Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.</p>
                                             </Upload.Dragger></div>}
                                         />
                                         <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row" }}>

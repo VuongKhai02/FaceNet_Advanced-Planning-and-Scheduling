@@ -23,7 +23,9 @@ type BOMBodyCardAddInfoProps = {
 };
 
 const data = [
-    { materialCode: 'HH01', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
+    { materialCode: 'HH01', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH02', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH03', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
 ];
 export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     isOpen = false, setClose }) => {
@@ -105,26 +107,28 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                         <div style={{ marginTop: 30 }}>
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
-                                    <p>Mã sản phẩm</p>
-                                    <TextBox placeholder="SP001" width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Số lượng</p>
-                                    <TextBox placeholder="15000"></TextBox>
+                                    <p>Tên thẻ</p>
+                                    <TextBox placeholder="Phôi Thẻ MC Tita cashback debit, VP Bank" width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Lưu ý</p>
+                                    <TextBox placeholder="15000" disabled></TextBox>
+                                    <p style={{ marginTop: 30 }}>Tổng số bản</p>
+                                    <TextBox placeholder="Nhập"></TextBox>
+                                </td>
+                                <td>
+                                    <p>Version</p>
+                                    <TextBox placeholder="Nhập" width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Ghi chú</p>
+                                    <TextBox placeholder="" disabled></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
                                     <SelectBox placeholder="Chọn"></SelectBox>
                                 </td>
-                                <td>
-                                    <p>Mô tả sản phẩm</p>
-                                    <TextBox placeholder="Phôi thẻ MC " width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Lưu ý</p>
-                                    <TextBox placeholder=""></TextBox>
-                                    <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
-                                    <TextBox placeholder=""></TextBox>
-                                </td>
                                 <td style={{ marginRight: 30 }}>
-                                    <p>Version</p>
-                                    <TextBox placeholder="1.1" width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Ghi chú</p>
-                                    <TextBox placeholder=""></TextBox>
+                                    <p>Số lượng</p>
+                                    <TextBox placeholder="1.1" width={350} disabled></TextBox>
+                                    <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
+                                    <SelectBox placeholder="Chọn"></SelectBox>
+                                    <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
+                                    <TextBox placeholder="1.1" disabled></TextBox>
                                 </td>
                             </table>
                         </div>
@@ -169,14 +173,14 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 }
                                 modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
                                 width={600} />
-                            <Toolbar>
+                            {/* <Toolbar>
                                 <ToolbarItem >
                                     <SvgIcon onClick={handleAddNewInfoMaterial} text="Thêm vật tư" tooltipTitle="Thêm vật tư" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem >
                                     <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
-                            </Toolbar>
+                            </Toolbar> */}
                             <HeaderFilter visible={true} texts={{
                                 cancel: "Hủy bỏ",
                                 ok: "Đồng ý",
@@ -226,7 +230,8 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <Column type={'buttons'} caption={"Thao tác"} alignment="center"
                                 cellRender={() =>
                                     <div style={{ display: "flex", justifyContent: "center" }}>
-                                        <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon onClick={() => { }} tooltipTitle="Thêm vật tư" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon onClick={handleShowModalDel} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                     </div>
                                 }>
                             </Column>

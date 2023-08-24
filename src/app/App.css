@@ -69,6 +69,14 @@
   /* color: #333 !important; */
 }
 
+.ant-input {
+  width: 300px !important;
+}
+.ant-input-affix-wrapper{
+  width: 350px !important;
+  padding: 8px 12px !important;
+}
+
 .dx-datagrid-search-panel{
   margin: 0 !important;
 }

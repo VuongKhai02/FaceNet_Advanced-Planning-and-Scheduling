@@ -83,7 +83,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
 
                             <Column caption={"Mã Job"} dataField={"codeJob"} alignment="left" width={100} />
                             <Column caption={"Tên Job"} dataField={"nameJob"} />
-                            <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={""}
+                            <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"}
                                 format="dd/MM/yyyy hh:mm:ss">
                             </Column>
                             <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"endTime"}

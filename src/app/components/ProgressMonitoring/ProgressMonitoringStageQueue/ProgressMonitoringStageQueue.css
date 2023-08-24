@@ -1,0 +1,8 @@
+.border__table-row {
+    border-bottom: 1px solid #ccc;
+    width: 455px; 
+}
+
+label {
+    font-weight: 500;
+}
