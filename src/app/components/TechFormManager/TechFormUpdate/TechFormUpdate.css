@@ -38,3 +38,28 @@
     gap: 10px;
     flex-direction: row;
 }
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+.row {
+    display: flex;
+    flex-shrink: 1;
+    font-size: 18px;
+}
+
+.title {
+    font-weight: 800;
+    width: 25%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.value {
+    border: 1px solid black;
+    width: 25%;
+    padding: 10px;
+}

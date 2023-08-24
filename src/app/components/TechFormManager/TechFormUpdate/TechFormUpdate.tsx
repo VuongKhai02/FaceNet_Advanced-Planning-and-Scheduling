@@ -131,7 +131,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                         </div>
 
                         <div style={{ marginTop: 10 }}>
-                            <DataGrid
+                            {/* <DataGrid
                                 dataSource={data1}
                                 showBorders={true}
                                 columnAutoWidth={true}
@@ -158,7 +158,8 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                 <Column dataField='data2' caption='Data 2' alignment={"left"}>
                                     <Template name='abcd'>{(rowData) => <span>{rowData.title2}</span>}</Template>
                                 </Column>
-                            </DataGrid>
+                            </DataGrid> */}
+                            <TechFormGeneralInfo dataGeneral={techFormData.productionRequirement}/>
                             <div
                                 className='informer'
                                 style={{
@@ -295,3 +296,43 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
 });
 
 export default TechFormUpdate;
+
+
+export const TechFormGeneralInfo = (dataGeneral) => {
+
+    console.log(dataGeneral.dataGeneral)
+    return (
+        <div className="wrapper">
+            <div className="row">
+                <div className="title">Mã sx/Production Code</div>
+                <div className="value">{dataGeneral?.dataGeneral?.productionCode}</div>
+                <div className="title">Người gửi/Sender</div>
+                <div className="value">{dataGeneral?.dataGeneral?.sender}</div>                
+            </div>
+            <div className="row">
+                <div className="title">Tên khách hàng/Customer</div>
+                <div className="value">{dataGeneral?.dataGeneral?.customer}</div>
+                <div className="title">Số lượng thẻ/Q'ty</div>
+                <div className="value">{dataGeneral?.dataGeneral?.quantityRequirement}</div>
+            </div>
+            <div className="row">
+            <div className="title">Tên thẻ/Card name</div>
+                <div className="value">{dataGeneral?.dataGeneral?.cardName}</div>
+                <div className="title">SL thẻ đã tính bù hao</div>
+                <div className="value">{dataGeneral?.dataGeneral?.quantityCompensation}</div>
+            </div>
+            <div className="row">
+                <div className="title">Số HĐ/P.O</div>
+                <div className="value">{dataGeneral?.dataGeneral?.poNumber}</div>
+                <div className="title">Kết thúc sx/Finish</div>
+                <div className="value">{dataGeneral?.dataGeneral?.endDate}</div>
+            </div>
+            <div className="row">
+                <div className="title">Bắt đầu sx/ Start</div>
+                <div className="value">{dataGeneral?.dataGeneral?.startDate}</div>
+                <div className="title">Giao hàng/ Delivery date</div>
+                <div className="value">{dataGeneral?.dataGeneral?.deliveryDate}</div>
+            </div>
+        </div>
+    )
+}
