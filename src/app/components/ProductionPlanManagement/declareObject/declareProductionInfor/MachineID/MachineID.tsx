@@ -95,6 +95,8 @@ export const MachineID: React.FC<MachineID> = observer(({
                                             render={(buttonData) =>
                                                 <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                             }
+                                            hint="Khai báo lô"
+
                                         />
                                         <Button
                                             text="Quét lại"

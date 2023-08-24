@@ -113,6 +113,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             render={(buttonData) =>
                                                 <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                             }
+                                            hint="Khai báo mã sản xuất"
                                         />
                                         <Button
                                             text="Quét lại"
@@ -131,6 +132,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             render={(buttonData) =>
                                                 <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                             }
+                                            hint="Khai báo thông tin"
                                         />
                                     </div>
                                 </div>
