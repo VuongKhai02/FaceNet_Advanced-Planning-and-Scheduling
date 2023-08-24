@@ -286,7 +286,7 @@ export const DeclareProductionObject = () => {
                                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                                 <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                        <SvgIcon tooltipTitle="Xem danh sách NVL" onClick={() => { setisVisibleProgressWODetailJob(true) }} sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Giám sát tiến độ theo công đoạn" onClick={() => { setisVisibleProgressWODetailJob(true) }} sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </div>}>
                                 </Column>
                                 <Export enabled={true} allowExportSelectedData={true} />
