@@ -111,8 +111,18 @@ export const AppMenu = (props: AppMenuProps) => {
             <MenuItem screenId='HomePage' icon={<HomeFilled />} caption={"screen.home"} key={"home"} />
             <MenuItem icon={<DashboardOutlined />} caption={"Dashboard"} />
             <SubMenuItem caption={"Quản lý thông tin"} icon={<AppstoreOutlined />}>
-                <MenuItem screenId='MrpSaleOrders' caption={"Quản lý đơn hàng"} key={"mrporders"} />
-
+                <MenuItem
+                    screenId='screen.ProductOrder'
+                    icon={<UploadOutlined />}
+                    caption={"screen.ProductOrder"}
+                    key={"screen.ProductOrder"}
+                />
+                <MenuItem
+                    screenId='ProductOrderManager'
+                    icon={<ShoppingOutlined />}
+                    caption={"screen.ProductOrderManager"}
+                    key={"screen.ProductOrderManager"}
+                />
                 <MenuItem
                     screenId='manageProductionRequirements'
                     caption={"Quản lý yêu cầu sản xuất"}
@@ -245,7 +255,7 @@ export const AppMenu = (props: AppMenuProps) => {
 
             {/*  <MenuItem screenId='' icon={<ShoppingOutlined/>} caption={"Phê duyệt phiếu công nghệ"} key={"k"}/>*/}
             {/*</SubMenuItem>*/}
-            {orderMenu}
+            {/*{orderMenu}*/}
             {workOrderManagerMenu}
             {importManager}
             {employeeMenu}
