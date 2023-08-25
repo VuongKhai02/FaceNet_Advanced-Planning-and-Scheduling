@@ -80,7 +80,11 @@
     border-radius: 3px !important;
 }
 .ant-tabs-content-holder {
-    background: #ffffff !important;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
+    /*border: 10px black;*/
+    padding: 10px;
+    border-radius: 10px !important;
+    background-color: white !important;
 }
 .movie-tooltip .movie-title {
     font-size: 1.5em;
@@ -157,8 +161,12 @@ h3 {
     background-color: #ffe0c2;
 }
 
+.main-layout-datagrid {
+    /*margin: 100px;*/
+}
+
 .dx-datagrid .dx-row-alt > td {
-    background-color: #ffffff !important;
+    /*background-color: #ffffff !important;*/
 }
 
 .dx-datagrid .dx-header-filter {

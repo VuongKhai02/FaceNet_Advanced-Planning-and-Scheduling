@@ -327,147 +327,145 @@ export const MrpSaleOrders = () => {
     };
 
     return (
-        <div className='box__shadow-table-responsive'>
-            <div className='table-responsive'>
-                <div
-                    className='informer'
+        <div className='table-responsive main-layout-datagrid'>
+            <div
+                className='informer'
+                style={{
+                    background: "#fff",
+                    textAlign: "center",
+                    // paddingTop: 12,
+                }}>
+                <h5
+                    className='name'
                     style={{
-                        background: "#fff",
-                        textAlign: "center",
-                        paddingTop: 12,
+                        fontSize: 18,
+                        marginBottom: 0,
                     }}>
-                    <h5
-                        className='name'
-                        style={{
-                            fontSize: 18,
-                            marginBottom: 0,
-                        }}>
-                        Danh sách đơn hàng
-                    </h5>
-                </div>
-                <div
-                    className='informer'
-                    style={{
-                        backgroundColor: "#ffffff",
-                    }}>
-                    <h5
-                        className='name'
-                        style={{
-                            color: "rgba(0, 0, 0, 0.7)",
-                            marginBottom: 0,
-                            fontSize: 15,
-                            boxSizing: "border-box",
-                            fontWeight: 550,
-                        }}>
-                        Tìm kiếm chung
-                    </h5>
-                </div>
-
-                <DataGrid
-                    key={"saleOrderId"}
-                    keyExpr={"saleOrderId"}
-                    dataSource={content}
-                    showBorders={true}
-                    columnAutoWidth={true}
-                    showRowLines={true}
-                    rowAlternationEnabled={true}
-                    allowColumnResizing={true}
-                    allowColumnReordering={true}
-                    focusedRowEnabled={true}
-                    onSelectionChanged={onSelectedRowKeysChange}
-                    onRowClick={onSelectedRowKeysChange}
-                    onRowUpdating={updateOrder}
-                    onRowRemoving={removeOrder}>
-                    <PopupImportFile
-                        visible={isVisibleImportFile}
-                        onCancel={() => setIsVisibleImportFile(false)}
-                        title={"Import file"}
-                        onSubmit={() => {}}
-                        width={900}
-                    />
-                    <Toolbar>
-                        <ToolbarItem location='after'>
-                            <SvgIcon
-                                onClick={() => setIsVisibleImportFile(true)}
-                                text='Thêm mới'
-                                tooltipTitle='Thêm mới'
-                                sizeIcon={17}
-                                textSize={17}
-                                icon='assets/icons/ImportFile.svg'
-                                textColor='#FF7A00'
-                                style={{ marginRight: 17 }}
-                            />
-                        </ToolbarItem>
-                        <ToolbarItem location='after'>
-                            <SvgIcon
-                                text='Xuất Excel'
-                                tooltipTitle='Xuất Excel'
-                                sizeIcon={17}
-                                textSize={17}
-                                icon='assets/icons/ExportFile.svg'
-                                textColor='#FF7A00'
-                                style={{ marginRight: 17 }}
-                            />
-                        </ToolbarItem>
-                        <ToolbarItem name='searchPanel' location='before' />
-                        <ToolbarItem name='columnChooserButton' />
-                    </Toolbar>
-                    <HeaderFilter
-                        visible={true}
-                        texts={{
-                            cancel: "Hủy bỏ",
-                            ok: "Đồng ý",
-                            emptyValue: "Rỗng",
-                        }}
-                    />
-                    <FilterRow visible={true} />
-                    <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
-                    <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                    <Paging defaultPageSize={10} />
-                    <Pager
-                        visible={true}
-                        displayMode={"full"}
-                        showInfo={true}
-                        showNavigationButtons={true}
-                        allowedPageSizes={[5, 10]}
-                        infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                    />
-                    <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment='center' width={100} />
-                    <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
-                    <Column caption={"Tên khách hàng"} dataField={"customer"} />
-                    <Column caption={"Tên thẻ"} dataField={"cardName"} />
-                    <Column caption={"Số lượng"} dataField={"quantity"} />
-                    <Column caption={"Số lượng đã tính bù hao"} dataField={"totalQuantity"} />
-                    <Column caption={"Số HD/PO"} dataField={"contractNumber"} width={200} />
-                    <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startTime"} format='dd/MM/yyyy hh:mm:ss' />
-                    <Column caption={"Ngày kết thúc"} dataType='datetime' dataField={"finishTime"} format='dd/MM/yyyy hh:mm:ss' />
-                    <Column caption={"Ngày giao hàng"} dataType='datetime' dataField={"deliveryDate"} format='dd/MM/yyyy hh:mm:ss' />
-                    <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
-                    <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                    <Column
-                        type={"buttons"}
-                        caption={"Thao tác"}
-                        alignment='left'
-                        cellRender={() => (
-                            <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
-                                <SvgIcon
-                                    onClick={() => {}}
-                                    tooltipTitle='Xóa'
-                                    sizeIcon={17}
-                                    textSize={17}
-                                    icon='assets/icons/Trash.svg'
-                                    textColor='#FF7A00'
-                                    style={{ marginRight: 17 }}
-                                />
-                            </div>
-                        )}></Column>
-                    <MasterDetail
-                        enabled={true}
-                        component={getProductOrderItemTemplate}
-                        // autoExpandAll={true}
-                    />
-                </DataGrid>
+                    Danh sách đơn hàng
+                </h5>
             </div>
+            <div
+                className='informer'
+                style={{
+                    backgroundColor: "#ffffff",
+                }}>
+                <h5
+                    className='name'
+                    style={{
+                        color: "rgba(0, 0, 0, 0.7)",
+                        marginBottom: 0,
+                        fontSize: 15,
+                        boxSizing: "border-box",
+                        fontWeight: 550,
+                    }}>
+                    Tìm kiếm chung
+                </h5>
+            </div>
+
+            <DataGrid
+                key={"saleOrderId"}
+                keyExpr={"saleOrderId"}
+                dataSource={content}
+                showBorders={true}
+                columnAutoWidth={true}
+                showRowLines={true}
+                rowAlternationEnabled={true}
+                allowColumnResizing={true}
+                allowColumnReordering={true}
+                focusedRowEnabled={true}
+                onSelectionChanged={onSelectedRowKeysChange}
+                onRowClick={onSelectedRowKeysChange}
+                onRowUpdating={updateOrder}
+                onRowRemoving={removeOrder}>
+                <PopupImportFile
+                    visible={isVisibleImportFile}
+                    onCancel={() => setIsVisibleImportFile(false)}
+                    title={"Import file"}
+                    onSubmit={() => {}}
+                    width={900}
+                />
+                <Toolbar>
+                    <ToolbarItem location='after'>
+                        <SvgIcon
+                            onClick={() => setIsVisibleImportFile(true)}
+                            text='Thêm mới'
+                            tooltipTitle='Thêm mới'
+                            sizeIcon={17}
+                            textSize={17}
+                            icon='assets/icons/ImportFile.svg'
+                            textColor='#FF7A00'
+                            style={{ marginRight: 17 }}
+                        />
+                    </ToolbarItem>
+                    <ToolbarItem location='after'>
+                        <SvgIcon
+                            text='Xuất Excel'
+                            tooltipTitle='Xuất Excel'
+                            sizeIcon={17}
+                            textSize={17}
+                            icon='assets/icons/ExportFile.svg'
+                            textColor='#FF7A00'
+                            style={{ marginRight: 17 }}
+                        />
+                    </ToolbarItem>
+                    <ToolbarItem name='searchPanel' location='before' />
+                    <ToolbarItem name='columnChooserButton' />
+                </Toolbar>
+                <HeaderFilter
+                    visible={true}
+                    texts={{
+                        cancel: "Hủy bỏ",
+                        ok: "Đồng ý",
+                        emptyValue: "Rỗng",
+                    }}
+                />
+                <FilterRow visible={true} />
+                <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
+                <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
+                <Paging defaultPageSize={10} />
+                <Pager
+                    visible={true}
+                    displayMode={"full"}
+                    showInfo={true}
+                    showNavigationButtons={true}
+                    allowedPageSizes={[5, 10]}
+                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
+                />
+                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment='center' width={100} />
+                <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
+                <Column caption={"Tên khách hàng"} dataField={"customer"} />
+                <Column caption={"Tên thẻ"} dataField={"cardName"} />
+                <Column caption={"Số lượng"} dataField={"quantity"} />
+                <Column caption={"Số lượng đã tính bù hao"} dataField={"totalQuantity"} />
+                <Column caption={"Số HD/PO"} dataField={"contractNumber"} width={200} />
+                <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startTime"} format='dd/MM/yyyy hh:mm:ss' />
+                <Column caption={"Ngày kết thúc"} dataType='datetime' dataField={"finishTime"} format='dd/MM/yyyy hh:mm:ss' />
+                <Column caption={"Ngày giao hàng"} dataType='datetime' dataField={"deliveryDate"} format='dd/MM/yyyy hh:mm:ss' />
+                <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
+                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                <Column
+                    type={"buttons"}
+                    caption={"Thao tác"}
+                    alignment='left'
+                    cellRender={() => (
+                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
+                            <SvgIcon
+                                onClick={() => {}}
+                                tooltipTitle='Xóa'
+                                sizeIcon={17}
+                                textSize={17}
+                                icon='assets/icons/Trash.svg'
+                                textColor='#FF7A00'
+                                style={{ marginRight: 17 }}
+                            />
+                        </div>
+                    )}></Column>
+                <MasterDetail
+                    enabled={true}
+                    component={getProductOrderItemTemplate}
+                    // autoExpandAll={true}
+                />
+            </DataGrid>
         </div>
     );
 };
