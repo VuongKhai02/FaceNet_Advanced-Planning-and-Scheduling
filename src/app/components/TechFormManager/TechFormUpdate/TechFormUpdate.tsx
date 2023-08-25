@@ -284,7 +284,9 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                 className='toolbar'
                                 style={{
                                     marginTop: 10,
-                                    float: "right",
+                                    // float: "right",
+                                    display: "flex",
+                                    justifyContent:'flex-end',
                                     // background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
