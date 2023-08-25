@@ -222,8 +222,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                 <div
                                     className='toolbar'
                                     style={{
-                                        marginTop: 10,
-                                        float: "right",
+                                        display: "flex",
+                                        justifyContent:'flex-end',
                                         // background: "#ffffff",
                                         padding: "8px",
                                         borderRadius: "4px",
