@@ -259,6 +259,37 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </div>
                             </div>
                             <div
+                                    className='toolbar'
+                                    style={{
+                                        paddingTop: 10,
+                                        // background: "#ffffff",
+                                        padding: "8px",
+                                        borderRadius: "4px",
+                                        display: "flex",
+                                        justifyContent: 'flex-end'
+                                    }}>
+                                    <Button
+                                        text='Trở lại'
+                                        onClick={setClose}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                    />
+                                    <Button
+                                        text='Tiếp theo'
+                                        onClick={() => {}}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                    />
+                                    <Button
+                                        text='Ký lập'
+                                        onClick={() => {}}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
+                                    />
+                                    <Button
+                                        text='Gửi duyệt'
+                                        onClick={() => {}}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                    />
+                                </div>
+                            {/* <div
                                 className='informer'
                                 style={{
                                     textAlign: "left",
@@ -484,37 +515,8 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    className='toolbar'
-                                    style={{
-                                        marginTop: 10,
-                                        float: "right",
-                                        // background: "#ffffff",
-                                        padding: "8px",
-                                        borderRadius: "4px",
-                                    }}>
-                                    <Button
-                                        text='Trở lại'
-                                        onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                    />
-                                    <Button
-                                        text='Tiếp theo'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                    />
-                                    <Button
-                                        text='Ký lập'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
-                                    />
-                                    <Button
-                                        text='Gửi duyệt'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                    />
-                                </div>
-                            </div>
+                                
+                            </div> */}
                         </div>
                     </div>
                 </div>

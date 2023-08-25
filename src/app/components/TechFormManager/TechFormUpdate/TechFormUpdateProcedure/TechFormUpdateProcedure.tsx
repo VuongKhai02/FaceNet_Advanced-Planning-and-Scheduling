@@ -137,6 +137,93 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
             });
         };
 
+        const onAddRowCutting = (currentIndex) => {
+            console.log(currentIndex);
+            const newCuttingInfo = [
+                ...techFormData.cutting.cuttingInfos.slice(0, currentIndex + 1),
+                { no: currentIndex + 2 },
+                ...techFormData.cutting.cuttingInfos.slice(currentIndex + 1),
+            ].map((step, index) => {
+                return {
+                    ...step,
+                    no: index + 1,
+                };
+            });
+            setTechFormData({
+                ...techFormData,
+                cutting: {
+                    ...techFormData.cutting,
+                    cuttingInfos: newCuttingInfo,
+                },
+            });
+        }
+
+        const onRemoveRowCutting = (rowIndex) => {
+            const newCuttingInfo = techFormData.cutting.cuttingInfos
+                .filter((step, index) => index !== rowIndex)
+                .map((step, index) => {
+                    return {
+                        ...step,
+                        no: index + 1,
+                    };
+                });
+
+            if (newCuttingInfo.length === 0) {
+                newCuttingInfo.push({ no: 1 });
+            }
+
+            setTechFormData({
+                ...techFormData,
+                cutting: {
+                    ...techFormData.lamination,
+                    cuttingInfos: newCuttingInfo,
+                },
+            });
+        }
+
+        const onAddRowHostamping= (currentIndex) => {
+            console.log(currentIndex);
+            const newHostampingInfos = [
+                ...techFormData.hostamping.hostampingInfos.slice(0, currentIndex + 1),
+                { step: currentIndex + 2 },
+                ...techFormData.hostamping.hostampingInfos.slice(currentIndex + 1),
+            ].map((step, index) => {
+                return {
+                    ...step,
+                    step: index + 1,
+                };
+            });
+            setTechFormData({
+                ...techFormData,
+                hostamping: {
+                    ...techFormData.hostamping,
+                    hostampingInfos: newHostampingInfos,
+                }
+            });
+        }
+
+        const onRemoveRowHostamping = (rowIndex) => {
+            const newHostampingInfos = techFormData.hostamping.hostampingInfos
+                .filter((step, index) => index !== rowIndex)
+                .map((step, index) => {
+                    return {
+                        ...step,
+                        step: index + 1,
+                    };
+                });
+
+            if (newHostampingInfos.length === 0) {
+                newHostampingInfos.push({ step: 1 });
+            }
+
+            setTechFormData({
+                ...techFormData,
+                hostamping: {
+                    ...techFormData.hostamping,
+                    hostampingInfos: newHostampingInfos,
+                }
+            });
+        }
         return (
             <>
                 {isVisibleTechFormUpdateHostamping ? (
@@ -209,8 +296,6 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 )}
                                             />
                                         </Column>
-                                        <Column dataField='item' caption='Nội dung/Item' />
-                                        <Column dataField='method' caption='Phương pháp/Method' />
                                     </Column>
                                     <Column
                                         alignment='left'
@@ -262,29 +347,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 </DataGrid>
                             </div>
                             <div style={{ marginTop: 30 }}>
-                                <div>
-                                    <div className='subtile' style={{ marginBottom: 15 }}>
-                                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
-                                        <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                            Thời gian từ 09/08/2022 đến 19/08/2022
-                                        </h6>
-                                    </div>
 
-                                    <DataGrid
-                                        key={"id"}
-                                        dataSource={data1}
-                                        keyExpr='id'
-                                        showBorders={true}
-                                        showRowLines={true}
-                                        showColumnLines={true}>
-                                        <Column dataField='id' caption='Bước' alignment='left' width={100} />
-                                        <Column dataField='contens' caption='Nội dung ép/Contens' />
-                                        <Column dataField='classify' caption='Phân loại/Classify' />
-                                        <Column dataField='lamination' caption='Thông số máy/Lamination Parameter' width={270} />
-                                        <Column dataField='other' caption='Khác/Other'></Column>
-                                        <Column dataField='structure' caption='Cấu trúc/Structure' />
-                                    </DataGrid>
-                                </div>
                                 <div style={{ marginTop: 30 }}>
                                     <div>
                                         <div className='subtile' style={{ marginBottom: 15 }}>
@@ -449,12 +512,6 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                         </DataGrid>
                                     </div>
                                     <div style={{ marginTop: 30 }}>
-                                        <div className='subtile' style={{ marginBottom: 15 }}>
-                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
-                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
-                                                Thời gian từ 09/08/2022 đến 19/08/2022
-                                            </h6>
-                                        </div>
                                         <div style={{ marginTop: 30 }}>
                                             <div className='subtile' style={{ marginBottom: 15 }}>
                                                 <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
@@ -482,6 +539,40 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     caption='Máy/Machine'
                                                     cellRender={(cellInfo) => (
                                                         <TextBox placeholder='Nhập' value={cellInfo.value} key={"machine"} />
+                                                    )}
+                                                />
+                                                <Column
+                                                    caption=''
+                                                    dataField=''
+                                                    alignment='center'
+                                                    width={150}
+                                                    cellRender={(cellInfo) => (
+                                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                            <SvgIcon
+                                                                onClick={() => {
+                                                                    // onAddRowProcessing(cellInfo.data.no);
+                                                                    onAddRowCutting(cellInfo.rowIndex)
+                                                                    // console.log(cellInfo);
+                                                                }}
+                                                                tooltipTitle='Thêm mới'
+                                                                sizeIcon={17}
+                                                                textSize={17}
+                                                                icon='assets/icons/Add.svg'
+                                                                textColor='#FF7A00'
+                                                                style={{ marginRight: 17 }}
+                                                            />
+                                                            <SvgIcon
+                                                                onClick={() => {
+                                                                    // onRemoveRowProcessing(cellInfo.data.no);
+                                                                    onRemoveRowCutting(cellInfo.rowIndex)
+                                                                }}
+                                                                tooltipTitle='Xóa hàng'
+                                                                sizeIcon={17}
+                                                                textSize={17}
+                                                                icon='assets/icons/Trash.svg'
+                                                                textColor='#FF7A00'
+                                                            />
+                                                        </div>
                                                     )}
                                                 />
                                             </DataGrid>
@@ -555,18 +646,64 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                         <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
                                                     )}
                                                 />
+                                                <Column
+                                                    caption=''
+                                                    dataField=''
+                                                    alignment='center'
+                                                    width={80}
+                                                    cellRender={(cellInfo) => (
+                                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                            <SvgIcon
+                                                                onClick={() => {
+                                                                    // onAddRowProcessing(cellInfo.data.no);
+                                                                    onAddRowHostamping(cellInfo.rowIndex)
+                                                                }}
+                                                                tooltipTitle='Thêm mới'
+                                                                sizeIcon={17}
+                                                                textSize={17}
+                                                                icon='assets/icons/Add.svg'
+                                                                textColor='#FF7A00'
+                                                                style={{ marginRight: 17 }}
+                                                            />
+                                                            <SvgIcon
+                                                                onClick={() => {
+                                                                    // onRemoveRowProcessing(cellInfo.data.no);
+                                                                    onRemoveRowHostamping(cellInfo.rowIndex)
+                                                                }}
+                                                                tooltipTitle='Xóa hàng'
+                                                                sizeIcon={17}
+                                                                textSize={17}
+                                                                icon='assets/icons/Trash.svg'
+                                                                textColor='#FF7A00'
+                                                            />
+                                                        </div>
+                                                    )}
+                                                />
                                             </DataGrid>
                                         </div>
                                         <div
                                             className='toolbar'
                                             style={{
-                                                marginTop: 10,
-                                                float: "right",
+                                                paddingTop: 10,
                                                 // background: "#ffffff",
                                                 padding: "8px",
                                                 borderRadius: "4px",
+                                                display: "flex",
+                                                justifyContent: 'flex-end'
                                             }}
                                             // style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                        >
+                                        <Button
+                                            text='Trở lại'
+                                            onClick={setClose}
+                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                        />
+                                        <Button
+                                            text='Tiếp theo'
+                                            onClick={() => {
+                                                setIsVisibleTechFormUpdateHostamping(true);
+                                            }}
+                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
                                         />
                                         <Button
                                             text='Ký lập'
@@ -578,6 +715,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                             onClick={() => {}}
                                             style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
                                         />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

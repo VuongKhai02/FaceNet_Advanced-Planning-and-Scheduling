@@ -46,7 +46,32 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             };
             axios.get(PLANNING_API_URL + "/api/techforms/" + id, { headers }).then((response) => {
                 if (response.status === 200) {
-                    setTechFormData(response.data.data);
+                    let techForm = response.data.data;
+                    console.log(techForm)
+                    if (techForm.prePressPcToPlate.back.length === 0 && techForm.prePressPcToPlate.front.length === 0) {
+                        techForm.prePressPcToPlate.back.push({}) 
+                        techForm.prePressPcToPlate.front.push({}) 
+                    }
+
+                    if (techForm.printingTech.front.length === 0 && techForm.printingTech.back.length === 0) {
+                        techForm.printingTech.front.push({step: 1}) 
+                    }
+                    if (techForm.lamination.steps.length === 0) {
+                        techForm.lamination.steps.push({step: 1}) 
+                    }
+                    if (techForm.processing.processingInfos.length === 0) {
+                        techForm.processing.processingInfos.push({no: 1}) 
+                    }
+                    if (techForm.cutting.cuttingInfos.length === 0) {
+                        techForm.cutting.cuttingInfos.push({no: 1}) 
+                    }
+                    if (techForm.hostamping.hostampingInfos.length === 0) {
+                        techForm.hostamping.hostampingInfos.push({step: 1}) 
+                    }
+                    setTechFormData(techForm);
+                
+                
+
                 }
             });
         }
@@ -202,7 +227,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                 <TextBox
                                                     style={{ width: "100%" }}
                                                     placeholder='Nhập'
-                                                    value={cellIfo.value.split(";")[0].replace("Width(W):", "").trim()}
+                                                    value={cellIfo.value?.split(";")[0].replace("Width(W):", "").trim()}
                                                     key={"size"}
                                                 />
                                             </div>{" "}
@@ -212,7 +237,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                 <TextBox
                                                     style={{ width: "100%" }}
                                                     placeholder='Nhập'
-                                                    value={cellIfo.value.split(";")[1].replace("Height(H):", "").trim()}
+                                                    value={cellIfo.value?.split(";")[1].replace("Height(H):", "").trim()}
                                                     key={"size"}
                                                 />
                                             </div>{" "}
