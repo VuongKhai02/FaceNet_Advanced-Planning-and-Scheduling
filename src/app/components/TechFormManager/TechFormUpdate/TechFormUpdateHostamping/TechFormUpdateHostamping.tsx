@@ -3,6 +3,10 @@ import { Button, DataGrid, SelectBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Input, Table } from "antd";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../../config";
+import { error } from "console";
 
 type TechFormDetailHostampingProps = {
     techFormData: any;
@@ -32,6 +36,21 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
         const handleNextClick = () => {
             console.log("Tiếp theo");
         };
+
+        const mainStore = useMainStore();
+
+
+        const handleSaveClick = () => {
+            const headers = {
+                Authorization: "Bearer " + mainStore.authToken,
+                "content-type": "application/json",
+            };
+            axios.put(PLANNING_API_URL + "/api/techforms/" + techFormData.id,techFormData, { headers }).then((response) => {
+                if (response.status === 200) {
+                    console.log(response.data.data);
+                }
+            }).catch(error => console.error(error));
+        }
 
         const onChangeValueIc = (key, value) => {
             let tfIcInfo
@@ -315,9 +334,9 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                         style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
                                     />
                                     <Button
-                                        text='Tiếp theo'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                        text='Lưu'
+                                        onClick={() => {handleSaveClick()}}
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
                                     />
                                     <Button
                                         text='Ký lập'
