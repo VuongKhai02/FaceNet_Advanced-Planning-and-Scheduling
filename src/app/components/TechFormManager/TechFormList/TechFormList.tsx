@@ -77,11 +77,7 @@ export const TechFormList = () => {
     const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
     const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
-
-    // const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
-    // const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
-    // const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
-    // const [newButtons, setNewButtons] = React.useState<any>([]);
+    const [requestInfoChoosed, setRequestInfoChoosed] = React.useState<any>(null);
     const [techFormIdChoosed, setTechFormIdChoosed] = React.useState(null);
     const mainStore = useMainStore();
 
@@ -384,7 +380,10 @@ export const TechFormList = () => {
                                             style={{ marginRight: 17 }}
                                         />
                                         <SvgIcon
-                                            onClick={() => setIsVisibleBOMBodyCardAddInfo(true)}
+                                            onClick={() => {
+                                                // console.log(cellInfo.data.productionRequirement?.id)
+                                                setRequestInfoChoosed(cellInfo.data.productionRequirement)
+                                                setIsVisibleBOMBodyCardAddInfo(true)}}
                                             tooltipTitle='Tạo BOM'
                                             sizeIcon={17}
                                             textSize={17}
@@ -439,9 +438,12 @@ export const TechFormList = () => {
                             )}
                             {isVisibleBOMBodyCardAddInfo && (
                                 <BOMBodyCardAddInfo
+                                    requestInfo={requestInfoChoosed}
                                     id={null}
                                     isOpen={isVisibleBOMBodyCardAddInfo}
-                                    setClose={() => setIsVisibleBOMBodyCardAddInfo(false)}
+                                    setClose={() => {
+                                        setRequestInfoChoosed(null)
+                                        setIsVisibleBOMBodyCardAddInfo(false)}}
                                 />
                             )}
                         </DataGrid>

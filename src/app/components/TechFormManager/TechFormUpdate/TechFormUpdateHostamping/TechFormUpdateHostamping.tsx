@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, DataGrid, SelectBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
@@ -7,6 +7,7 @@ import { useMainStore } from "@haulmont/jmix-react-core";
 import axios from "axios";
 import { PLANNING_API_URL } from "../../../../../config";
 import { error } from "console";
+import Loading from "../../../../common/Loading";
 
 type TechFormDetailHostampingProps = {
     techFormData: any;
@@ -39,8 +40,11 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
 
         const mainStore = useMainStore();
 
+        const [isLoading, setIsLoading] = React.useState(false);
+
 
         const handleSaveClick = () => {
+            setIsLoading(true);
             const headers = {
                 Authorization: "Bearer " + mainStore.authToken,
                 "content-type": "application/json",
@@ -49,6 +53,9 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                 if (response.status === 200) {
                     console.log(response.data.data);
                 }
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 1500)
             }).catch(error => console.error(error));
         }
 
@@ -580,6 +587,9 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                         </div>
                     </div>
                 </div>
+                {
+                    isLoading && <Loading isShow={true} />
+                }
             </>
         );
     },

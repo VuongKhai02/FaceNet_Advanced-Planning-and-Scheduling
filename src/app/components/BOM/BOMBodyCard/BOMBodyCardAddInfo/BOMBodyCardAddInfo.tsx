@@ -14,6 +14,7 @@ import { MDM_API_URL, PLANNING_API_URL } from "../../../../../config";
 
 type BOMBodyCardAddInfoProps = {
     id: Number | null;
+    requestInfo: any;
     isOpen: boolean;
     setClose?: () => void;
 };
@@ -47,36 +48,153 @@ const data = [
         inventoryQuantity: "1000",
     },
 ];
-export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id }) => {
+
+const convertToMaterialBOM = (value) => {
+    let classify;
+    switch (value.itemGroupCode) {
+        case 101:
+            classify = 'NVL'
+            break;
+        case 102:
+            classify = 'BTP'
+            break;
+        case 103:
+            classify = 'TP'
+            break;
+        default:
+            classify = 'Không xác định'
+            break;
+    }
+    return {
+        materialCode: value.productCode,
+        materialName: value.proName,
+        materialTechName: value.techName,
+        classify: classify,
+        quantity: value.quantity,
+        quota: value.quota,
+        unit: value.unit,
+        version: value.version
+    }
+}
+
+
+export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [bomData, setBomData] = React.useState<any>({});
-
     const [materialDetail, setMaterialDetail] = React.useState<MaterialDetail | null | any>();
-    const handleShowModalDel = () => {
+    const gridRef = React.useRef(null);
+    const [idRemoveChoosed, setIdRemoveChoosed] = React.useState<any>(null);
+
+    console.log('rq info', requestInfo);
+
+    const handleShowModalDel = (id) => {
+        setIdRemoveChoosed(id)
         setIsConfirmDelete(true);
     };
     const handleHideModalDel = () => {
         setIsConfirmDelete(false);
+        setIdRemoveChoosed(null)
     };
+
 
     const handleAddNewInfoMaterial = () => {
         setIsVisiblePopupAddInfoMaterial(true);
     };
 
-    const [materialCodes, setMaterialCodes] = React.useState<any>([]);
+    const [materialList, setMaterialList] = React.useState<any>([]);
 
     const mainStore = useMainStore();
 
-    const onAddMatetialToBom = () => {
+    const onAddMatetialToBom = (id, value) => {
+
+        let newbomBodyCardMaterials = bomData.bomBodyCardMaterials;
+        newbomBodyCardMaterials = newbomBodyCardMaterials.map((data, index) => {
+            if (data.id === id) {
+                return {
+                    ...data,
+                    ...convertToMaterialBOM(value),
+                }
+            } else {
+                return data;
+            }
+        })
+
+        console.log('new ',newbomBodyCardMaterials)
         setBomData({
             ...bomData,
-            bomBodyCardMaterials: [...bomData.bomBodyCardMaterials, materialDetail],
+            bomBodyCardMaterials: newbomBodyCardMaterials,
         });
-        setMaterialDetail({});
-        setIsVisiblePopupAddInfoMaterial(false);
     };
+
+    const onAddMaterialReplace = (id, value) => {
+        let updateMaterialBom = bomData.bomBodyCardMaterials.map((data) => {
+            if (data.id === id) {
+                return {
+                    ...data,
+                    replaceMaterialCode: value.productCode,
+                    replaceMaterialName: value.proName
+                }
+            } else {
+                return data
+            }
+        })
+
+        setBomData({
+            ...bomData,
+            bomBodyCardMaterials: updateMaterialBom,
+        });
+    }
+
+    const addNewRowMaterial = (index) => {
+        const newbomBodyCardMaterials = [...bomData.bomBodyCardMaterials.slice(0, index + 1), {
+            id: bomData.bomBodyCardMaterials.length + 1
+        }, ...bomData.bomBodyCardMaterials.slice(index + 1)]
+
+        setBomData({
+            ...bomData,
+            bomBodyCardMaterials: newbomBodyCardMaterials,
+        });
+    }
+
+    const removeRowMaterial = (id) => {
+        let newData = bomData.bomBodyCardMaterials.filter((data) => data.id !== id)
+        .map((data, index) => {
+            return {
+                ...data,
+                id: index + 1
+            }
+        });
+        if (newData.length === 0) {
+            newData.push({id: 1})
+        }
+        setBomData({
+            ...bomData,
+            bomBodyCardMaterials: newData,
+        });
+    }
+
+
+    const getAllMaterial = () => {
+        const data = JSON.stringify({
+            pageNumber: 0,
+            pageSize: 9999,
+            common: "",
+            filter: {
+            },
+        });
+        const headers = {
+            Authorization: "Bearer " + mainStore.authToken,
+            "content-type": "application/json",
+        };
+        axios({ method: "post", url: MDM_API_URL + "/api/products", headers: headers, data: data }).then((response) => {
+            if (response.status === 200) {
+                setMaterialList(response.data.data)
+            }
+        });
+    }
+
 
     const onChangeMaterialCode = (e) => {
         if (materialDetail?.materialCode.trim() !== "") {
@@ -94,7 +212,6 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
             };
             axios({ method: "post", url: MDM_API_URL + "/api/products", headers: headers, data: data }).then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data.data);
                     const data = response.data.data.find((data) => data.productCode === materialDetail?.materialCode);
                     if (data) {
                         setMaterialDetail({
@@ -122,17 +239,34 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     };
 
     React.useEffect(() => {
-        const headers = {
-            Authorization: "Bearer " + mainStore.authToken,
-            "content-type": "application/json",
-        };
-        axios.get(PLANNING_API_URL + "/api/boms/" + id, { headers }).then((response) => {
-            if (response.status === 200) {
-                console.log(response.data.data);
-                setBomData(response.data.data);
-            }
-        });
+        if (id !== null) {
+            const headers = {
+                Authorization: "Bearer " + mainStore.authToken,
+                "content-type": "application/json",
+            };
+            axios.get(PLANNING_API_URL + "/api/boms/" + id, { headers }).then((response) => {
+                if (response.status === 200) {
+                    setBomData(response.data.data);
+                }
+            });
+        } else {
+            setBomData({bomBodyCardMaterials: [{id: 1}]})
+        }
     }, [id]);
+
+    React.useEffect(() => {
+        getAllMaterial();
+    }, [])
+
+    React.useEffect(() => {
+        setBomData({
+            ...bomData,
+            productName: requestInfo.cardName,
+            quantity: requestInfo.quantityRequirement
+        })
+    }, [requestInfo])
+
+    console.log('bomData', bomData)
 
     return (
         <>
@@ -221,9 +355,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                         setIsVisiblePopupAddInfoMaterial(false);
                         setMaterialDetail({});
                     }}
-                    onSubmit={() => onAddMatetialToBom()}
-                    // onCancel={() => setIsVisiblePopupAddInfoMaterial(false)}
-                    // onSubmit={() => console.log("ok")}
+                    onSubmit={() => {}}
                     width={800}
                 />
             ) : (
@@ -291,8 +423,8 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                         </div>
 
                         <DataGrid
-                            key='materialCode'
-                            keyExpr={"materialCode"}
+                            key='id'
+                            keyExpr={"id"}
                             dataSource={bomData.bomBodyCardMaterials}
                             showBorders={true}
                             columnAutoWidth={true}
@@ -300,7 +432,9 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            focusedRowEnabled={true}>
+                            focusedRowEnabled={true}
+                            ref={gridRef}
+                            >
                             <PopupImportFile
                                 visible={isVisibleImportFile}
                                 onCancel={() => setIsVisibleImportFile(false)}
@@ -311,7 +445,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <PopupConfirmDelete
                                 isVisible={isConfirmDelete}
                                 onCancel={handleHideModalDel}
-                                onSubmit={() => console.log("ok")}
+                                onSubmit={() => {removeRowMaterial(idRemoveChoosed); handleHideModalDel()}}
                                 modalTitle={
                                     <div>
                                         <h3
@@ -392,33 +526,64 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             />
                             <FilterRow visible={true} />
 
-                            <Column dataField='materialCode' caption='Mã vật tư'></Column>
-                            <Column dataField='materialDescription' caption='Mô tả vật tư'></Column>
+                            <Column fixed={true} width={250} dataField='productCode' caption='Chọn mã vật tư' cellRender={(cellIfo) => (
+                                                    <SelectBox 
+                                                        dataSource={materialList}
+                                                        searchExpr={"productCode"}
+                                                        valueExpr={"productCode"}
+                                                        displayExpr={"productCode"}
+                                                        // value={cellIfo.value}
+                                                        // selectedItem={cellIfo.data}
+                                                        onSelectionChanged={(e) => {
+                                                            onAddMatetialToBom(cellIfo.data.id, e.selectedItem)
+                                                        }}
+                                                    placeholder='Nhập' searchEnabled={true} key={"productCode"} />
+                                                )}></Column>
+                            <Column fixed={true} width={250} dataField='materialCode' caption='Mã vật tư' />              
+                            <Column dataField='materialName' caption='Mô tả vật tư'></Column>
 
-                            <Column dataField='materialName' caption='Tên kỹ thuật' alignment='left'></Column>
+                            <Column dataField='materialTechName' caption='Tên kỹ thuật' alignment='left'></Column>
 
                             <Column dataField='version' caption='Version' alignment={"left"}></Column>
                             <Column dataField='classify' caption='Phân loại' alignment={"left"}></Column>
-                            <Column dataField='norm' caption='Định mức' />
+                            <Column dataField='quota' caption='Định mức' />
+                            <Column dataField='quantity' caption='Số lượng' />
                             <Column dataField='unit' caption='Đơn vị tính' />
-                            <Column dataField='supplier' alignment={"left"} caption={"Nhà cung cấp"}></Column>
-                            <Column caption={"Kho hàng"} dataField='warehouse' />
-                            <Column caption={"Mã vật tư thay thế"} dataField='materialCodeChange' />
-                            <Column caption={"Mô tả vật tư thay thế"} dataField='materialDescriptChange' />
-                            <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
-                            <Column dataField='supplier' alignment={"left"} caption={"Nhà cung cấp"}></Column>
-                            <Column caption={"Kho hàng"} dataField='warehouse' />
+                            <Column caption={"Chọn mã vật tư thay thế"} dataField='replaceMaterialCode' cellRender={(cellIfo) => (
+                                <SelectBox 
+                                    dataSource={materialList}
+                                    searchExpr={"productCode"}
+                                    valueExpr={"productCode"}
+                                    displayExpr={"productCode"}
+                                    onSelectionChanged={(e) => {
+                                        onAddMaterialReplace(cellIfo.data.id, e.selectedItem)
+                                    }}
+                                placeholder='Nhập' searchEnabled={true} key={"productCode"} />
+                            )}/>
                             <Column caption={"Mã vật tư thay thế"} dataField='replaceMaterialCode' />
-                            <Column caption={"Mô tả vật tư thay thế"} dataField='materialDescriptChange' />
+                            <Column caption={"Mô tả vật tư thay thế"} dataField='replaceMaterialName' />
                             <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
                             <Column
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'
-                                cellRender={() => (
+                                fixed={true}
+                                cellRender={(cellInfo) => {
+                                    return(
                                     <div style={{ display: "flex", justifyContent: "center" }}>
                                         <SvgIcon
-                                            onClick={handleShowModalDel}
+                                            onClick={() => {
+                                                addNewRowMaterial(cellInfo.rowIndex)
+                                            }}
+                                            tooltipTitle='Thêm mới'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/Add.svg'
+                                            textColor='#FF7A00'
+                                            style={{ marginRight: 17 }}
+                                        />
+                                        <SvgIcon
+                                            onClick={() => handleShowModalDel(cellInfo.data.id)}
                                             tooltipTitle='Xóa'
                                             sizeIcon={17}
                                             textSize={17}
@@ -427,7 +592,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                             style={{ marginRight: 17 }}
                                         />
                                     </div>
-                                )}></Column>
+                                )}}></Column>
                         </DataGrid>
                         <div
                             className='toolbar'

@@ -112,6 +112,7 @@ export const BOMBodyCard = () => {
         <>
             {isBOMCardAddInfo ? (
                 <BOMBodyCardAddInfo
+                    requestInfo={{}}
                     id={bomIdChoosed}
                     isOpen={isBOMCardAddInfo}
                     setClose={() => {

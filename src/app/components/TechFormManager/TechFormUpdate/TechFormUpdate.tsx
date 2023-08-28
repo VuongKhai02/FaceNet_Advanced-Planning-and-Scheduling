@@ -7,6 +7,7 @@ import TechnologyProcedureUpdate from "./TechnologyProcedureUpdate/TechnologyPro
 import { useMainStore } from "@haulmont/jmix-react-core";
 import axios from "axios";
 import { PLANNING_API_URL } from "../../../../config";
+import Loading from "../../../common/Loading";
 
 type TechFormUpdateProps = {
     id: any;
@@ -346,6 +347,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                     </div>
                 </div>
             )}
+
         </>
     );
 });
