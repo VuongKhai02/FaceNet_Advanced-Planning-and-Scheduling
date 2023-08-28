@@ -144,10 +144,25 @@ export const AppMenu = (props: AppMenuProps) => {
                     key={"techFormList"}
                 />
 
-                <MenuItem screenId='techFormApprove' caption={"Phê duyệt phiếu công nghệ"} key={"techFormApprove"} />
-            </SubMenuItem>
-            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
-                <MenuItem screenId='productionPlanList' caption={"Danh sách kế hoạch sản xuất"} key={"productionPlanList"} />
+        <MenuItem
+          screenId="progressMonitoringOrder"
+          caption={"Giám sát tiến độ đơn hàng"}
+          key={"progressMonitoringOrder"}
+        />
+        <MenuItem
+          screenId=""
+          // icon={<ShoppingOutlined />}
+          caption={"Giám sát máy"}
+          key={"gsm"}
+        />
+        <MenuItem
+          screenId="progressMonitoringStageQueue"
+          caption={"Hàng chờ công đoạn"}
+          key={"progressMonitoringStageQueue"}
+        />
+      </SubMenuItem>
+      {/* user */}
+      <SubMenuItem caption="Quản lý tài khoản" icon={<UserOutlined />}>
 
                 <MenuItem screenId='dnlNvlList' caption={"Danh sách đề nghị lĩnh NVL"} key={"dnlNvlList"} />
 

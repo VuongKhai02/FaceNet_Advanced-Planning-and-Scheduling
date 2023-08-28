@@ -32,20 +32,9 @@ type MaterialDetail = {
 };
 
 const data = [
-    {
-        materialCode: "HH01",
-        materialDescript: "Vật tư 1",
-        technicalName: "Vật tư 1",
-        version: "1.1",
-        classify: "NVL",
-        norm: "1",
-        unit: "Cái",
-        supplier: "NCC01",
-        warehouse: "03,05",
-        materialCodeChange: "HH04",
-        materialDescriptChange: "Vật tư 04",
-        inventoryQuantity: "1000",
-    },
+    { materialCode: 'HH01', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH02', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH03', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
 ];
 export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);

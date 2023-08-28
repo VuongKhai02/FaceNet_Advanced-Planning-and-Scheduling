@@ -16,7 +16,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import "./BOMBodyCard.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
@@ -67,6 +67,18 @@ const data = [
         status: "Hoạt động",
     },
 ];
+const data1 = [
+    { no: '1', codeMaterial: 'Mã vật tư 1', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 2', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 3', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' }
+];
+
+const data2 = [
+    { codeMaterial: 'VT0001', nameMaterial: 'Chip vàng 6 chân', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', replaceMaterialCode: 'VT002', replaceMaterialDescription: 'Vật tư 01', inventoryQuantity: 'Số lượng tồn kho' },
+    { codeMaterial: 'VT0002', nameMaterial: 'Chip vàng 6 chân', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', replaceMaterialCode: 'VT002', replaceMaterialDescription: 'Vật tư 01', inventoryQuantity: 'Số lượng tồn kho' },
+    { codeMaterial: 'VT0003', nameMaterial: 'Chip vàng 6 chân', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', replaceMaterialCode: 'VT002', replaceMaterialDescription: 'Vật tư 01', inventoryQuantity: 'Số lượng tồn kho' }
+];
+
 
 const ROUTING_PATH = "/BOMBodyCard";
 
@@ -76,6 +88,8 @@ export const BOMBodyCard = () => {
 
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
+    const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
+    const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
 
     const [bom, setBom] = React.useState<any>({});
 
@@ -149,7 +163,7 @@ export const BOMBodyCard = () => {
                                 className='name'
                                 style={{
                                     color: "rgba(0, 0, 0, 0.7)",
-                                    marginBottom: 0,
+                                    marginBottom: 10,
                                     fontSize: 15,
                                     boxSizing: "border-box",
                                     fontWeight: 550,
