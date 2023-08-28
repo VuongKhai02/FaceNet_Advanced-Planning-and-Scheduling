@@ -105,7 +105,7 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                         </td>
                                     </table>
                                     <Button text="Xem chi tiết"
-                                        style={{ marginLeft: 300, backgroundColor: "#FF7A00", color: "#fff", width: 120, marginBottom: 30, marginTop: 30 }}
+                                        style={{ marginLeft: 200, backgroundColor: "#FF7A00", color: "#fff", width: 120, marginBottom: 30, marginTop: 30 }}
                                         onClick={() => setIsVisibleProgressWODetailJob(true)}
                                     />
                                 </div>

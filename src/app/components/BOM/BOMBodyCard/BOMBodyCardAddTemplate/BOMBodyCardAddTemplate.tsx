@@ -1,14 +1,9 @@
 import React, { } from "react";
-import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
+import { Button, DataGrid, SelectBox, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
-    Item as ToolbarItem,
-    Toolbar,
-    Button as ButtonB
 } from "devextreme-react/data-grid";
-import "./BOMBodyCardAddInfo.css";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
@@ -16,7 +11,7 @@ import PopupBOMAddNewInfoMaterial from "../../../../shared/components/PopupBOMAd
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
 
-type BOMBodyCardAddInfoProps = {
+type BOMBodyCardAddTemplateProps = {
     isOpen: boolean,
     setClose?: () => void;
 
@@ -27,7 +22,7 @@ const data = [
     { materialCode: 'HH02', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
     { materialCode: 'HH03', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
 ];
-export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
+export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = observer(({
     isOpen = false, setClose }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
@@ -84,7 +79,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                     }
                     modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
                         <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                        Thêm mới thông tin vật tư
+                        Thêm mới thông tin BOM mẫu
                     </div>}
                     onCancel={() => setIsVisiblePopupAddInfoMaterial(false)}
                     onSubmit={() => console.log('ok')
@@ -102,33 +97,26 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <h5 className="name" style={{
                                 fontSize: 18,
                                 marginBottom: 0
-                            }}>Thêm mới thông tin BOM sản phẩm</h5>
+                            }}>Thêm mới thông tin BOM mẫu</h5>
                         </div>
                         <div style={{ marginTop: 30 }}>
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
-                                    <p>Tên thẻ</p>
-                                    <TextBox placeholder="Phôi Thẻ MC Tita cashback debit, VP Bank" width={350}></TextBox>
+                                    <p>Mã khách hàng</p>
+                                    <TextBox id="customerCode" key={'customerCode'} placeholder="Nhập" width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Lưu ý</p>
-                                    <TextBox placeholder="15000" disabled></TextBox>
-                                    <p style={{ marginTop: 30 }}>Tổng số bản</p>
-                                    <TextBox placeholder="Nhập"></TextBox>
+                                    <TextBox id="notice" key={'notice'} placeholder="Nhập"></TextBox>
                                 </td>
                                 <td>
-                                    <p>Version</p>
-                                    <TextBox placeholder="Nhập" width={350}></TextBox>
+                                    <p>Tên khách hàng</p>
+                                    <TextBox id="customerName" key={'customerName'} placeholder="Nhập" width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Ghi chú</p>
-                                    <TextBox placeholder="" disabled></TextBox>
-                                    <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
-                                    <SelectBox placeholder="Chọn"></SelectBox>
+                                    <TextBox placeholder="Nhập" id="note" key={'note'}></TextBox>
+
                                 </td>
                                 <td style={{ marginRight: 30 }}>
-                                    <p>Số lượng</p>
-                                    <TextBox placeholder="1.1" width={350} disabled></TextBox>
-                                    <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
-                                    <SelectBox placeholder="Chọn"></SelectBox>
-                                    <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
-                                    <TextBox placeholder="1.1" disabled></TextBox>
+                                    <p>Version</p>
+                                    <TextBox placeholder="Nhập" width={350} ></TextBox>
                                 </td>
                             </table>
                         </div>
@@ -266,4 +254,4 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
 
 })
 
-export default BOMBodyCardAddInfo;
+export default BOMBodyCardAddTemplate;

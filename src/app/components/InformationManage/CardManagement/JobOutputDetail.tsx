@@ -79,12 +79,12 @@ export const JobOutPutDetail = React.memo((props: any) => {
 
                     />
                 </FilterRow>
-                <HeaderFilter visible={true} texts={{
+                {/* <HeaderFilter visible={true} texts={{
                     cancel: "Hủy bỏ",
                     ok: "Đồng ý",
                     emptyValue: "Rỗng"
 
-                }} />
+                }} /> */}
                 <SearchPanel visible={true}
                     width={240}
                     placeholder="Tìm kiếm..."

@@ -264,10 +264,10 @@ export const CardManagement = () => {
                             />
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <SvgIcon text="Thêm mới mã thẻ" onClick={() => { }} tooltipTitle="Thêm mới mã thẻ" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon text="Thêm mới mã thẻ" onClick={() => { }} tooltipTitle="Thêm mới mã thẻ" sizeIcon={17} textSize={17} icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem location="after">
-                                    <SvgIcon text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon text="Thêm mới" onClick={() => { setIsVisibleAddBoxCard(true) }} tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem >
                                     <SvgIcon text="In mã" onClick={() => setIsVisibleScanBarCode(true)} tooltipTitle="In mã" sizeIcon={17} textSize={17} icon="assets/icons/Print.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -275,12 +275,12 @@ export const CardManagement = () => {
                                 <ToolbarItem name="columnChooserButton" />
                                 <ToolbarItem name="searchPanel" location="before" />
                             </Toolbar>
-                            <HeaderFilter visible={true} texts={{
+                            {/* <HeaderFilter visible={true} texts={{
                                 cancel: "Hủy bỏ",
                                 ok: "Đồng ý",
                                 emptyValue: "Rỗng"
 
-                            }} allowSearch={true} />
+                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} title="Chọn cột" />
                             <SearchPanel visible={true} placeholder={"VD: PO"} />

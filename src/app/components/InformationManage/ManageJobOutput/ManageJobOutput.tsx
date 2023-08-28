@@ -105,12 +105,12 @@ export const ManageJobOutput = () => {
                                     <ToolbarItem name="columnChooserButton" />
                                     <ToolbarItem name="searchPanel" location="before" />
                                 </Toolbar>
-                                <HeaderFilter visible={true} texts={{
+                                {/* <HeaderFilter visible={true} texts={{
                                     cancel: "Hủy bỏ",
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} allowSearch={true} />
+                                }} allowSearch={true} /> */}
                                 <FilterRow visible={true} />
                                 <ColumnChooser enabled={true} allowSearch={true} />
                                 <SearchPanel visible={true} placeholder={"Tìm kiếm"} width={300} />

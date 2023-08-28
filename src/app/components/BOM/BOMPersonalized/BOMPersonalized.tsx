@@ -3,14 +3,12 @@ import { Button, DataGrid } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
     Item as ToolbarItem,
     Pager,
     Paging,
     SearchPanel,
     Toolbar,
     MasterDetail, ColumnChooser,
-    Button as ButtonIcon
 } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import PopupImportFile from "../../../shared/components/PopupImportFile/PopupImportFile";
@@ -88,7 +86,7 @@ export const BOMPersonalized = () => {
                         >
                             <Toolbar>
                                 <ToolbarItem location="after">
-                                    <SvgIcon onClick={handleAddFormTech} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                    <SvgIcon onClick={handleAddFormTech} text="Thêm mới" tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </ToolbarItem>
                                 <ToolbarItem >
                                     <SvgIcon onClick={() => setPopupVisible(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -99,12 +97,12 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem name="searchPanel" location="before" />
                                 <ToolbarItem name="columnChooserButton" />
                             </Toolbar>
-                            <HeaderFilter visible={true} texts={{
+                            {/* <HeaderFilter visible={true} texts={{
                                 cancel: "Hủy bỏ",
                                 ok: "Đồng ý",
                                 emptyValue: "Rỗng"
 
-                            }} allowSearch={true} />
+                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={320} />
                             <ColumnChooser enabled={true} allowSearch={true} />

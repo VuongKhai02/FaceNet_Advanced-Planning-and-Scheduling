@@ -73,12 +73,12 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
 
                         >
 
-                            <HeaderFilter visible={true} texts={{
+                            {/* <HeaderFilter visible={true} texts={{
                                 cancel: "Hủy bỏ",
                                 ok: "Đồng ý",
                                 emptyValue: "Rỗng"
 
-                            }} allowSearch={true} />
+                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
 
                             <Column caption={"Mã Job"} dataField={"codeJob"} alignment="left" width={100} />

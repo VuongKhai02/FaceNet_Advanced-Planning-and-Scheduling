@@ -237,12 +237,12 @@ export const DnlNvlList = () => {
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
                                 </Toolbar>
-                                <HeaderFilter visible={true} texts={{
+                                {/* <HeaderFilter visible={true} texts={{
                                     cancel: "Hủy bỏ",
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} allowSearch={true} />
+                                }} allowSearch={true} /> */}
                                 <FilterRow visible={true} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                                 <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
@@ -324,12 +324,12 @@ export const DnlNvlList = () => {
                                     showInfo={true}
                                     showNavigationButtons={true}
                                     infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                                <HeaderFilter visible={true} texts={{
+                                {/* <HeaderFilter visible={true} texts={{
                                     cancel: "Hủy bỏ",
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} allowSearch={true} />
+                                }} allowSearch={true} /> */}
                                 <FilterRow visible={true} />
                                 <Paging defaultPageSize={5} />
                                 <Column caption={"No."} dataField={"no"} alignment="left" width={100} />

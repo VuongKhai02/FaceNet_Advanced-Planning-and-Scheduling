@@ -293,12 +293,12 @@ export const TechFormApprove = () => {
                                     <ToolbarItem name="searchPanel" location="before" />
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                 </Toolbar>
-                                <HeaderFilter visible={true} texts={{
+                                {/* <HeaderFilter visible={true} texts={{
                                     cancel: "Hủy bỏ",
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} allowSearch={true} />
+                                }} allowSearch={true} /> */}
                                 <FilterRow visible={true} />
                                 <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
                                 <Paging defaultPageSize={10} />

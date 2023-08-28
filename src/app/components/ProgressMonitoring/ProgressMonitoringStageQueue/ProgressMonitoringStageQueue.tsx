@@ -81,28 +81,24 @@ export const ProgressMonitoringStageQueue = () => {
                             </Steps>
                         </div>
                         <div>
-                            <div style={{ border: '1px solid #004C98', borderRadius: 5, marginTop: 30, width: '30%', marginLeft: 20 }}>
+                            <div style={{ border: '1px solid #004C98', borderRadius: 5, marginTop: 30, width: '40%', marginLeft: 20 }}>
                                 <h3><p>Danh sách lệnh sản xuất đang chờ</p></h3>
                                 <div className="border__table-row"></div>
-                                <table >
-                                    <td>
-                                        <InfoRow label='Mã sản xuất ' data='1234' />
-                                        <InfoRow label='Số lượng yêu cầu' data='10000' />
-                                        <div className="border__table-row"></div>
-                                        <InfoRow label='Mã sản xuất ' data='2345' />
-                                        <InfoRow label='Số lượng yêu cầu' data='5000' />
-                                        <div className="border__table-row"></div>
-                                        <InfoRow label='Mã sản xuất ' data='3456' />
-                                        <InfoRow label='Số lượng yêu cầu' data='9000' />
-                                        <div className="border__table-row"></div>
-                                        <InfoRow label='Mã sản xuất ' data='5678' />
-                                        <InfoRow label='Số lượng yêu cầu' data='69000' />
-                                        <div className="border__table-row"></div>
-                                        <InfoRow label='Tổng số lượng' data='96000' />
-                                    </td>
-                                </table>
+                                <InfoRow label='Mã sản xuất ' data='1234' />
+                                <InfoRow label='Số lượng yêu cầu' data='10000' />
+                                <div className="border__table-row"></div>
+                                <InfoRow label='Mã sản xuất ' data='2345' />
+                                <InfoRow label='Số lượng yêu cầu' data='5000' />
+                                <div className="border__table-row"></div>
+                                <InfoRow label='Mã sản xuất ' data='3456' />
+                                <InfoRow label='Số lượng yêu cầu' data='9000' />
+                                <div className="border__table-row"></div>
+                                <InfoRow label='Mã sản xuất ' data='5678' />
+                                <InfoRow label='Số lượng yêu cầu' data='69000' />
+                                <div className="border__table-row"></div>
+                                <InfoRow label='Tổng số lượng' data='96000' />
                                 <Button text="Bắt đầu công đoạn"
-                                    style={{ marginLeft: 250, backgroundColor: "#FF7A00", color: "#fff", width: 180, marginBottom: 30, marginTop: 30 }}
+                                    style={{ marginLeft: 200, backgroundColor: "#FF7A00", color: "#fff", width: 180, marginBottom: 30, marginTop: 30 }}
                                     onClick={() => setIsVisibleDefineStageQueue(true)}
                                 />
                                 <PopupConfirmGeneral

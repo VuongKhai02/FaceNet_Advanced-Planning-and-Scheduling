@@ -211,7 +211,7 @@ export const TechFormList = () => {
               >
                 <Toolbar>
                   <ToolbarItem location="after">
-                    <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={handleAddFormTech} sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                    <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={handleAddFormTech} sizeIcon={17} textSize={17} icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                   </ToolbarItem>
                   <ToolbarItem location="after">
                     <SvgIcon tooltipTitle="Import File" text="Import File" onClick={handleShowUploadImport} sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -222,12 +222,12 @@ export const TechFormList = () => {
                   <ToolbarItem name="searchPanel" location="before" />
                   <ToolbarItem name="columnChooserButton" />
                 </Toolbar>
-                <HeaderFilter visible={true} texts={{
+                {/* <HeaderFilter visible={true} texts={{
                   cancel: "Hủy bỏ",
                   ok: "Đồng ý",
                   emptyValue: "Rỗng"
 
-                }} allowSearch={true} />
+                }} allowSearch={true} /> */}
                 <FilterRow visible={true} />
                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                 <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />

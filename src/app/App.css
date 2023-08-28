@@ -172,6 +172,10 @@ h3 {
   background-color: #FFFFFF !important;
 }
 
+.dx-datagrid-rowsview .dx-master-detail-row:not(.dx-datagrid-edit-form) .dx-master-detail-cell {
+  background: #ffffff !important;
+}
+
 .dx-datagrid .dx-header-filter {
   font-weight: bold !important;
   color: rgb(35, 34, 34) !important;

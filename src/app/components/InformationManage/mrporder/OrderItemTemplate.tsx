@@ -361,12 +361,12 @@ export const OrderItemTemplate = React.memo((props: any) => {
 
           />
         </FilterRow>
-        <HeaderFilter visible={false} texts={{
+        {/* <HeaderFilter visible={false} texts={{
           cancel: "Hủy bỏ",
           ok: "Đồng ý",
           emptyValue: "Rỗng"
 
-        }} />
+        }} /> */}
         <SearchPanel visible={true}
           width={240}
           placeholder="Tìm kiếm..."

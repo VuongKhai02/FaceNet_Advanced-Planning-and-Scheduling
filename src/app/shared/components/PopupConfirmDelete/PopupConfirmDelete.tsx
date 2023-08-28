@@ -42,7 +42,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                         onClick={onCancel}
                     >
                         Hủy
-                    </Button>,
+                    </Button>
                     <Button
                         style={{
                             borderRadius: '4px',

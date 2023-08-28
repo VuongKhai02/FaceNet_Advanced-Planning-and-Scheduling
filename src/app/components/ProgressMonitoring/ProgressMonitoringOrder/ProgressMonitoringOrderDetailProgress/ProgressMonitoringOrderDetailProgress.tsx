@@ -93,12 +93,12 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                             focusedRowEnabled={true}
 
                         >
-                            <HeaderFilter visible={true} texts={{
+                            {/* <HeaderFilter visible={true} texts={{
                                 cancel: "Hủy bỏ",
                                 ok: "Đồng ý",
                                 emptyValue: "Rỗng"
 
-                            }} allowSearch={true} />
+                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
 
                             <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />

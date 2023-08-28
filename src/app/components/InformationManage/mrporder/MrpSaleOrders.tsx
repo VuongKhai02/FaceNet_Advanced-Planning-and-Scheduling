@@ -363,12 +363,12 @@ export const MrpSaleOrders = () => {
           <ToolbarItem name="columnChooserButton" />
 
         </Toolbar>
-        <HeaderFilter visible={true} texts={{
+        {/* <HeaderFilter visible={true} texts={{
           cancel: "Hủy bỏ",
           ok: "Đồng ý",
           emptyValue: "Rỗng"
 
-        }} />
+        }} /> */}
         <FilterRow visible={true} />
         <SearchPanel visible={true} placeholder={"Tìm kiếm"} />
         <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />

@@ -1,6 +1,6 @@
 .border__table-row {
     border-bottom: 1px solid #ccc;
-    width: 455px; 
+    width: 100% !important; 
 }
 
 label {

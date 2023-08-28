@@ -609,7 +609,7 @@ export const ProductionPlanList = () => {
                             >
                                 <Toolbar>
                                     <ToolbarItem location="after">
-                                        <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/CirclePlus.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        <SvgIcon tooltipTitle="Thêm mới" text="Thêm mới" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </ToolbarItem>
                                     <ToolbarItem location="after">
                                         <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -617,12 +617,12 @@ export const ProductionPlanList = () => {
                                     <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     <ToolbarItem name="searchPanel" location="before" />
                                 </Toolbar>
-                                <HeaderFilter visible={true} texts={{
+                                {/* <HeaderFilter visible={true} texts={{
                                     cancel: "Hủy bỏ",
                                     ok: "Đồng ý",
                                     emptyValue: "Rỗng"
 
-                                }} allowSearch={true} />
+                                }} allowSearch={true} /> */}
                                 <FilterRow visible={true} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                                 <SearchPanel visible={true} placeholder={"Tìm kiếm..."} />
@@ -709,12 +709,12 @@ export const ProductionPlanList = () => {
                                     allowColumnReordering={true}
                                     focusedRowEnabled={true}
                                 >
-                                    <HeaderFilter visible={true} texts={{
+                                    {/* <HeaderFilter visible={true} texts={{
                                         cancel: "Hủy bỏ",
                                         ok: "Đồng ý",
                                         emptyValue: "Rỗng"
 
-                                    }} allowSearch={true} />
+                                    }} allowSearch={true} /> */}
                                     <FilterRow visible={true} />
                                     <Paging defaultPageSize={5} />
                                     <Column caption={"No."} dataField={"no"} alignment="left" width={100} />
@@ -765,7 +765,7 @@ export const ProductionPlanList = () => {
                                     showBorders={true}
                                     columnAutoWidth={true}
                                     showRowLines={true}>
-                                    <HeaderFilter visible={true} allowSearch={true} />
+                                    {/* <HeaderFilter visible={true} allowSearch={true} /> */}
                                     <Column caption="Mã công đoạn" dataField="codeStage" />
                                     <Column caption="Tên công đoạn" dataField="nameStage" />
                                     <Column caption="Mã Job" dataField="codeJob" />
