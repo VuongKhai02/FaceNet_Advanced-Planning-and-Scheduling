@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
 import qr_img from "../../images/qrCode.svg"
 
 import { MachineID } from "../MachineID/MachineID";
 import { NvlBtpPlot } from "../NvlBtp/NvlBtpPlot";
+import { infoMappedContext } from "../../DeclareProductionObject";
+import "../../styleCommon.css"
+
 
 type WorkerID = {
     isOpen: boolean,
@@ -27,7 +30,7 @@ export const WorkerID: React.FC<WorkerID> = observer(({
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [workerID, setworkerID] = useState(fakeWorkerID)
-
+    const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
     useEffect(() => {
         const updateDimension = () => {
@@ -40,10 +43,6 @@ export const WorkerID: React.FC<WorkerID> = observer(({
         console.log("Chấm công");
     }
 
-    const handleChangeScreen = () => {
-        setisDeclareInfo(true);
-    }
-
     const refresh = () => {
         workerID[0].id = "";
         workerID[0].workerName = "";
@@ -51,6 +50,10 @@ export const WorkerID: React.FC<WorkerID> = observer(({
         let newObj = JSON.parse(JSON.stringify(workerID))
         setworkerID(newObj);
         console.log(newObj)
+
+        infoMapped[0].worker_id = "";
+        let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+        setInfoMapped(newInfoMpaped);
     }
 
     return (
@@ -71,7 +74,7 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                             }}>Bước 2: Khai báo công nhân</h2>
                             <div style={{ width: windowWidth < 600 ? '100%' : '40%', margin: "auto" }}>
                                 <div style={{ textAlign: "center", margin: "2rem" }}>
-                                    <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
+                                    <h2 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h2>
                                     <img src={qr_img} width={200} height={200} alt="" />
                                     <div>
                                         <Button
@@ -86,23 +89,23 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                                     </div>
                                 </div>
                                 <div className="dx-fieldset">
-                                    <h4 style={{ margin: "1rem 0" }}>Thông tin công nhân</h4>
+                                    <h3 style={{ margin: "1rem 0" }}>Thông tin công nhân</h3>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Mã công nhân</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeWorkerID[0].id} > </TextBox>
+                                            <TextBox disabled value={fakeWorkerID[0].id} > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Tên công nhân</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeWorkerID[0].workerName} />
+                                            <TextBox disabled value={fakeWorkerID[0].workerName} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Nhóm/tổ</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeWorkerID[0].group} />
+                                            <TextBox disabled value={fakeWorkerID[0].group} />
                                         </div>
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
@@ -110,19 +113,19 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                                             text="Trở lại  "
                                             onClick={setClose}
                                             height={30}
-                                            width={80}
+                                            width={100}
                                             render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.9rem" }}>{buttonData.text}</p>
                                             }
                                             hint="Khai báo máy"
                                         />
                                         <Button
                                             text="Tiếp theo"
-                                            width={80}
+                                            width={100}
                                             height={30}
-                                            onClick={handleChangeScreen}
+                                            onClick={() => { setisDeclareInfo(true) }}
                                             render={(buttonData) =>
-                                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                             }
                                             hint="Khai báo lô"
 
@@ -131,9 +134,9 @@ export const WorkerID: React.FC<WorkerID> = observer(({
                                             text="Chấm công  "
                                             onClick={checkedInfo}
                                             height={30}
-                                            width={80}
+                                            width={100}
                                             render={(buttonData) =>
-                                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                             }
                                             hint="Khai báo thông tin"
                                         />

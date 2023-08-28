@@ -97,13 +97,13 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                         <div className="dx-field">
                                             <div className="dx-field-label">Mã sản xuất</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={p_id} > </TextBox>
+                                                <TextBox disabled value={p_id} > </TextBox>
                                             </div>
                                         </div>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Tên thẻ</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={p_cardName} > </TextBox>
+                                                <TextBox disabled value={p_cardName} > </TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +113,7 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                         <div className="dx-field">
                                             <div className="dx-field-label">Tên máy</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={m_name} > </TextBox>
+                                                <TextBox disabled value={m_name} > </TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                         <div className="dx-field">
                                             <div className="dx-field-label">Tên công nhân</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={w_name} > </TextBox>
+                                                <TextBox disabled value={w_name} > </TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -132,19 +132,19 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Mã NVL</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value={nvl_id} > </TextBox>
+                                                    <TextBox disabled value={nvl_id} > </TextBox>
                                                 </div>
                                             </div>
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Tên NVL</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value={nvl_name} > </TextBox>
+                                                    <TextBox disabled value={nvl_name} > </TextBox>
                                                 </div>
                                             </div>
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Số lượng</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value={nvl_quantity} > </TextBox>
+                                                    <TextBox disabled value={nvl_quantity} > </TextBox>
                                                 </div>
                                             </div>
                                         </div> : <div>
@@ -152,19 +152,19 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Mã hộp</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value="Công đoạn 2" > </TextBox>
+                                                    <TextBox disabled value="Công đoạn 2" > </TextBox>
                                                 </div>
                                             </div>
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Công đoạn</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value="Công đoạn 2" > </TextBox>
+                                                    <TextBox disabled value="Công đoạn 2" > </TextBox>
                                                 </div>
                                             </div>
                                             <div className="dx-field">
                                                 <div className="dx-field-label">Số lượng</div>
                                                 <div className="dx-field-value">
-                                                    <TextBox value="Công đoạn 2" > </TextBox>
+                                                    <TextBox disabled value="Công đoạn 2" > </TextBox>
                                                 </div>
                                             </div>
                                         </div>}
@@ -188,7 +188,7 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                             height={30}
                                             width={80}
                                             render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.9rem" }}>{buttonData.text}</p>
                                             }
                                             hint="Khai báo công nhân"
                                         />

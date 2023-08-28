@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import "./DeclareProductionObject.css"
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
 import qr_img from "../../images/qrCode.svg"
 import ConfirmInformation from "../confirmInformation/ConfirmInformation";
+import { infoMappedContext } from "../../DeclareProductionObject";
+import "../../styleCommon.css"
+
 
 type NvlBtpPlot = {
     isOpen: boolean,
@@ -26,8 +29,7 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [nvlBtpPlot, setnvlBtpPlot] = useState(fakeNvlBtpPlot);
-
-
+    const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
     useEffect(() => {
         const updateDimension = () => {
@@ -40,10 +42,6 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
         console.log("Chấm công");
     }
 
-    const handleChangeScreen = () => {
-        setisDeclareInfo(true);
-    }
-
     const refresh = () => {
         nvlBtpPlot[0].id = "";
         nvlBtpPlot[0].plotName = "";
@@ -51,6 +49,10 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
         let newObj = JSON.parse(JSON.stringify(nvlBtpPlot))
         setnvlBtpPlot(newObj);
         console.log(newObj)
+
+        infoMapped[0].plot_id = "";
+        let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+        setInfoMapped(newInfoMpaped);
     }
     return (
         <>
@@ -103,19 +105,19 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                         <div className="dx-field">
                                             <div className="dx-field-label">Mã nguyên vật liệu</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={fakeNvlBtpPlot[0].id} > </TextBox>
+                                                <TextBox disabled value={fakeNvlBtpPlot[0].id} > </TextBox>
                                             </div>
                                         </div>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Tên nguyên vật liệu</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={fakeNvlBtpPlot[0].plotName} > </TextBox>
+                                                <TextBox disabled value={fakeNvlBtpPlot[0].plotName} > </TextBox>
                                             </div>
                                         </div>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Số lượng</div>
                                             <div className="dx-field-value">
-                                                <TextBox value={fakeNvlBtpPlot[0].quantity} />
+                                                <TextBox disabled value={fakeNvlBtpPlot[0].quantity} />
                                             </div>
                                         </div>
                                         <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
@@ -134,7 +136,7 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                                 text="Tiếp theo"
                                                 width={80}
                                                 height={30}
-                                                onClick={handleChangeScreen}
+                                                onClick={() => { setisDeclareInfo(true) }}
                                                 render={(buttonData) =>
                                                     <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                                 }
@@ -155,7 +157,7 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                 :
                                 <div style={{ width: windowWidth < 600 ? '100%' : '40%', margin: "auto" }}>
                                     <div style={{ textAlign: "center", margin: "2rem" }}>
-                                        <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
+                                        <h2 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h2>
                                         <img src={qr_img} width={200} height={200} alt="" />
                                         <div>
                                             <Button
@@ -171,23 +173,23 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                     </div>
 
                                     <div className="dx-fieldset">
-                                        <h4 style={{ margin: "1rem 0" }}>Thông tin lô NVL/BTP</h4>
+                                        <h3 style={{ margin: "1rem 0" }}>Thông tin lô NVL/BTP</h3>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Mã hộp</div>
                                             <div className="dx-field-value">
-                                                <TextBox value="công đoạn 2" > </TextBox>
+                                                <TextBox disabled value="công đoạn 2" > </TextBox>
                                             </div>
                                         </div>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Số lượng</div>
                                             <div className="dx-field-value">
-                                                <TextBox value="công đoạn 2" > </TextBox>
+                                                <TextBox disabled value="công đoạn 2" > </TextBox>
                                             </div>
                                         </div>
                                         <div className="dx-field">
                                             <div className="dx-field-label">Tên công đoạn</div>
                                             <div className="dx-field-value">
-                                                <TextBox value="công đoạn 2" />
+                                                <TextBox disabled value="công đoạn 2" />
                                             </div>
                                         </div>
                                         <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
@@ -196,19 +198,19 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                                 text="Trở lại  "
                                                 onClick={setClose}
                                                 height={30}
-                                                width={80}
+                                                width={100}
                                                 render={(buttonData) =>
-                                                    <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                    <p style={{ fontSize: "18px", color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.9rem" }}>{buttonData.text}</p>
                                                 }
                                                 hint="Khai báo công nhân"
                                             />
                                             <Button
                                                 text="Tiếp theo"
-                                                width={80}
+                                                width={100}
                                                 height={30}
-                                                onClick={handleChangeScreen}
+                                                onClick={() => { setisDeclareInfo(true) }}
                                                 render={(buttonData) =>
-                                                    <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                                    <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                                 }
                                                 hint="Xác nhận thông tin"
                                             />
@@ -216,9 +218,9 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                                 text="Chấm công  "
                                                 onClick={checkedInfo}
                                                 height={30}
-                                                width={80}
+                                                width={100}
                                                 render={(buttonData) =>
-                                                    <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                    <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                                 }
                                             />
                                         </div>

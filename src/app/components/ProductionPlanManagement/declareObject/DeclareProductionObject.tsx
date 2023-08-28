@@ -15,7 +15,6 @@ import {
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../../shared/model/Warning.model";
 import { PLANNING_API_URL } from "../../../../config";
 import { customizeColor } from "../../../../utils/utils";
 import { Modal, Tag } from "antd";
@@ -26,7 +25,6 @@ import { saveAs } from 'file-saver-es';
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import DeclareProductionInfor from "./declareProductionInfor/ProductionOder/DeclareProductionInfor";
 import ProgressMonitoringWODetail from "../../ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringWODetail/ProgressMonitoringWODetail";
-
 
 const ROUTING_PATH = "/declareProductionObject";
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
@@ -51,6 +49,14 @@ const job_name = [
     'In trắng',
 ];
 
+const fakeInfoMapped = [{
+    pro_id: "default",
+    machine_id: "default",
+    worker_id: "default",
+    plot_id: "default",
+}]
+
+export const infoMappedContext = React.createContext<any | null>(null);
 
 export const DeclareProductionObject = () => {
     const mainStore = useMainStore();
@@ -64,6 +70,7 @@ export const DeclareProductionObject = () => {
         so_id: "0"
     }]);
 
+    const [infoMapped, setInfoMapped] = useState(fakeInfoMapped);
     const fakeDtselect = [
         {
             id: '1',
@@ -82,9 +89,6 @@ export const DeclareProductionObject = () => {
         }
     ]
 
-    const handleChangeScreen = () => {
-        setisDeclareInfo(true);
-    }
     const loadOrders = () => {
         const headers = {
             'Authorization': 'Bearer ' + mainStore.authToken,
@@ -199,113 +203,119 @@ export const DeclareProductionObject = () => {
         e.cancel = true;
     }
     return (
-        <>
-            {
-                isVisibleProgressWODetailJob == true ? <ProgressMonitoringWODetail isOpen={isDeclareInfo}
-                    setClose={() => setisDeclareInfo(false)} /> :
-                    isDeclareInfo ? <DeclareProductionInfor
-                        isOpen={isDeclareInfo}
+        <infoMappedContext.Provider value={[infoMapped, setInfoMapped]}>
+            <>
+                {
+                    isVisibleProgressWODetailJob == true ? <ProgressMonitoringWODetail isOpen={isDeclareInfo}
                         setClose={() => setisDeclareInfo(false)} /> :
-                        <div>
+                        isDeclareInfo ? <DeclareProductionInfor
+                            isOpen={isDeclareInfo}
+                            setClose={() => setisDeclareInfo(false)} /> :
                             <div>
-                                <div className="table-responsive">
-                                    <div className="informer" style={{
-                                        background: "#fff",
-                                        textAlign: "center",
-                                        paddingTop: 12
-                                    }}>
-                                        <h5 className="name" style={{
-                                            fontSize: 18,
-                                            marginBottom: 0
-                                        }}>Danh sách khai báo người/máy/lô sản xuất</h5>
-                                    </div>
-                                    <div className="informer" style={{
-                                        backgroundColor: "#ffffff",
-                                        paddingLeft: 13
-                                    }}>
-                                        <h5 className="name" style={{
-                                            color: "rgba(0, 0, 0, 0.7)",
-                                            marginBottom: 0,
-                                            fontSize: 15,
-                                            boxSizing: "border-box",
-                                            fontWeight: 550,
-                                            marginLeft: ".5rem"
-                                        }}>Tìm kiếm chung</h5>
+                                <div>
+                                    <div className="table-responsive">
+                                        <div className="informer" style={{
+                                            background: "#fff",
+                                            textAlign: "center",
+                                            paddingTop: 12
+                                        }}>
+                                            <h5 className="name" style={{
+                                                fontSize: 18,
+                                                marginBottom: 0
+                                            }}>Danh sách khai báo người/máy/lô sản xuất</h5>
+                                        </div>
+                                        <div className="informer" style={{
+                                            backgroundColor: "#ffffff",
+                                            paddingLeft: 13
+                                        }}>
+                                            <h5 className="name" style={{
+                                                color: "rgba(0, 0, 0, 0.7)",
+                                                marginBottom: 0,
+                                                fontSize: 15,
+                                                boxSizing: "border-box",
+                                                fontWeight: 550,
+                                                marginLeft: ".5rem"
+                                            }}>Tìm kiếm chung</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <DataGrid
-                                style={{ marginLeft: "0 .5rem" }}
-                                keyExpr={"saleOrderId"}
-                                dataSource={content}
-                                showBorders={true}
-                                columnAutoWidth={true}
-                                showRowLines={true}
-                                rowAlternationEnabled={true}
-                                allowColumnResizing={true}
-                                allowColumnReordering={true}
-                                focusedRowEnabled={true}
-                                onExporting={onExporting}
-                            // onSelectionChanged={onSelectedRowKeysChange}
-                            // onRowClick={onSelectedRowKeysChange}
-                            // onRowUpdating={updateOrder}
-                            // onRowRemoving={removeOrder}
-                            >
-                                <Toolbar>
-                                    {/* <ToolbarItem location="after">
+                                <DataGrid
+                                    style={{ marginLeft: "0 .5rem" }}
+                                    keyExpr={"saleOrderId"}
+                                    dataSource={content}
+                                    showBorders={true}
+                                    columnAutoWidth={true}
+                                    showRowLines={true}
+                                    rowAlternationEnabled={true}
+                                    allowColumnResizing={true}
+                                    allowColumnReordering={true}
+                                    focusedRowEnabled={true}
+                                    onExporting={onExporting}
+                                // onSelectionChanged={onSelectedRowKeysChange}
+                                // onRowClick={onSelectedRowKeysChange}
+                                // onRowUpdating={updateOrder}
+                                // onRowRemoving={removeOrder}
+                                >
+                                    <Toolbar>
+                                        {/* <ToolbarItem location="after">
                             <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                         </ToolbarItem> */}
-                                    <ToolbarItem name="exportButton" html="Xuất excel" location="after"></ToolbarItem>
-                                    <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
-                                    <ToolbarItem name="searchPanel" location="before" />
-                                </Toolbar>
-                                <HeaderFilter visible={true} texts={{
-                                    cancel: "Hủy bỏ",
-                                    ok: "Đồng ý",
-                                    emptyValue: "Rỗng"
-                                }} />
-                                <FilterRow visible={true} />
-                                <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
-                                <Paging defaultPageSize={10} />
-                                <Pager
-                                    visible={true}
-                                    allowedPageSizes={allowedPageSizes}
-                                    displayMode={"full"}
-                                    showPageSizeSelector={true}
-                                    showInfo={true}
-                                    showNavigationButtons={true}
-                                    infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                                <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
-                                <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
-                                <Column caption={"Mã công nhân"} dataField={"customer"} />
-                                <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
-                                <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
-                                <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                                <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
-                                <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
+                                        <ToolbarItem name="exportButton" html="Xuất excel" location="after"></ToolbarItem>
+                                        <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
+                                        <ToolbarItem name="searchPanel" location="before" />
+                                    </Toolbar>
+                                    <HeaderFilter visible={true} texts={{
+                                        cancel: "Hủy bỏ",
+                                        ok: "Đồng ý",
+                                        emptyValue: "Rỗng"
+                                    }} />
+                                    <FilterRow visible={true} />
+                                    <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
+                                    <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
+                                    <Paging defaultPageSize={10} />
+                                    <Pager
+                                        visible={true}
+                                        allowedPageSizes={allowedPageSizes}
+                                        displayMode={"full"}
+                                        showPageSizeSelector={true}
+                                        showInfo={true}
+                                        showNavigationButtons={true}
+                                        infoText="Trang số {0} trên {1} ({2} bản ghi)" />
+                                    <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment="left" />
+                                    <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
+                                    <Column caption={"Mã công nhân"} dataField={"customer"} />
+                                    <Column caption={"Số lô NVL/BTP đầu vào"} dataField={"customer"} alignment="left" />
+                                    <Column caption={"Số lô NVL/BTP đầu ra"} dataField={"customer"} alignment="left" />
+                                    <Column caption={"Thời gian bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
+                                    <Column caption={"Thời gian kết thúc"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
+                                    <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                                    {/* <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                         <SvgIcon tooltipTitle="Giám sát tiến độ theo công đoạn" onClick={() => { setisVisibleProgressWODetailJob(true) }} sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     </div>}>
-                                </Column>
-                                <Export enabled={true} allowExportSelectedData={true} />
-                            </DataGrid>
-                            <div>
-                                <div className="table-responsive">
-                                    <div className="informer" style={{
-                                        background: "#fff",
-                                        textAlign: "left",
-                                        paddingTop: 12
-                                    }}>
-                                        <h2 className="name" style={{
-                                            marginBottom: 0,
-                                            fontWeight: 700,
-                                            margin: "0 0 .6rem .5rem"
-                                        }}>Khai báo thông tin</h2>
-                                        <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem', padding: windowWidth < 600 ? "0" : "0 3rem" }}>
-                                            <div className="content" style={{ display: "flex", height: "45vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
-                                                {/* <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
+                                </Column> */}
+                                    <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                            <SvgIcon tooltipTitle="Giám sát tiến độ theo công đoạn" onClick={() => { setisVisibleProgressWODetailJob(true) }} sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                        </div>}>
+                                    </Column>
+                                    <Export enabled={true} allowExportSelectedData={true} />
+                                </DataGrid>
+                                <div>
+                                    <div className="table-responsive">
+                                        <div className="informer" style={{
+                                            background: "#fff",
+                                            textAlign: "left",
+                                            paddingTop: 12
+                                        }}>
+                                            <h2 className="name" style={{
+                                                marginBottom: 0,
+                                                fontWeight: 700,
+                                                margin: "0 0 .6rem .5rem"
+                                            }}>Khai báo thông tin</h2>
+                                            <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem', padding: windowWidth < 600 ? "0" : "0 3rem" }}>
+                                                <div className="content" style={{ display: "flex", height: "30vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
+                                                    {/* <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
                                                 <p>Mã sản xuất</p>
                                                 <SelectBox placeholder="-- Chọn mã sản xuất --"
                                                     dataSource={fakeDtselect}
@@ -318,55 +328,56 @@ export const DeclareProductionObject = () => {
                                                 <p>Mã SO</p>
                                                 <TextBox value={dataSelected[0].so_id} style={{ backgroundColor: "#CCC" }} disabled ></TextBox>
                                             </div> */}
-                                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
-                                                    <p>Tên công đoạn</p>
-                                                    <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn công đoạn --" items={stage_name} />
+                                                    <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
+                                                        <p>Tên công đoạn</p>
+                                                        <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn công đoạn --" items={stage_name} />
 
-                                                </div>
-                                                <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
-                                                    <p>Tên Job</p>
-                                                    <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn job --" items={job_name} />
-                                                </div>
-                                            </div>
-
-                                            <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
-                                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                                    <p>Mã sản xuất</p>
-                                                    <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-
-                                                    <p>Mã máy</p>
-                                                    <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-                                                </div>
-                                                <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                                    <p>Mã công nhân</p>
-                                                    <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-
-                                                    <p>Mã lô NVL/BTP</p>
-                                                    <TextBox disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                    </div>
+                                                    <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
+                                                        <p>Tên Job</p>
+                                                        <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn job --" items={job_name} />
+                                                    </div>
                                                 </div>
 
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
-                                                <Button
-                                                    style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
-                                                    text={"Khai báo thông tin sản xuất"}
-                                                    height={35}
-                                                    width={250}
-                                                    onClick={handleChangeScreen}
-                                                />
+                                                <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
+                                                    <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
+                                                        <p>Mã sản xuất</p>
+                                                        <TextBox value={infoMapped[0].pro_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+
+                                                        <p>Mã máy</p>
+                                                        <TextBox value={infoMapped[0].machine_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                    </div>
+                                                    <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
+                                                        <p>Mã công nhân</p>
+                                                        <TextBox value={infoMapped[0].worker_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+
+                                                        <p>Mã lô NVL/BTP</p>
+                                                        <TextBox value={infoMapped[0].plot_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                    </div>
+
+                                                </div>
+                                                <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
+                                                    <Button
+                                                        style={{ backgroundColor: "rgba(255, 122, 0, 1)", color: "#fff" }}
+                                                        text={"Khai báo thông tin sản xuất"}
+                                                        height={35}
+                                                        width={250}
+                                                        onClick={() => { setisDeclareInfo(true) }}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="informer" style={{
-                                        backgroundColor: "#ffffff",
-                                        paddingLeft: 13
-                                    }}>
+                                        <div className="informer" style={{
+                                            backgroundColor: "#ffffff",
+                                            paddingLeft: 13
+                                        }}>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-            }
-        </>
+                }
+            </>
+        </infoMappedContext.Provider>
     )
 }
 

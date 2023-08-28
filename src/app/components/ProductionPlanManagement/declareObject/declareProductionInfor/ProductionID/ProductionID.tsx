@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import "./DeclareProductionObject.css"
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
@@ -6,6 +6,9 @@ import qr_img from "../../images/qrCode.svg"
 import warning_img from "../../images/warning.svg"
 import { WorkerID } from "../WorkerID/WorkerID";
 import { MachineID } from "../MachineID/MachineID";
+import { infoMappedContext } from "../../DeclareProductionObject";
+import "../../styleCommon.css"
+
 
 type ProductionID = {
     isOpen: boolean,
@@ -23,11 +26,20 @@ const fakeProductionID = [{
 }]
 
 export const ProductionID: React.FC<ProductionID> = observer(({
-    isOpen = false, setClose, status = "", p_id = "", p_cardName = "" }) => {
+    isOpen = false, setClose, p_id = "", p_cardName = "", status }) => {
     const [popupVisible, setPopupVisible] = React.useState<boolean>(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [productionId, setproductionId] = useState(fakeProductionID);
+    const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
+
+    console.log("pop", popupVisible)
+    console.log("is op", isOpen)
+
+    const handleChang = () => {
+        setisDeclareInfo(true);
+        setPopupVisible(false);
+    }
 
     const togglePopup = () => {
         setPopupVisible(!popupVisible)
@@ -43,9 +55,6 @@ export const ProductionID: React.FC<ProductionID> = observer(({
         window.addEventListener('resize', updateDimension);
     }, [])
 
-    const handleChangeScreen = () => {
-        setisDeclareInfo(true);
-    }
     const renderPopUpContent = () => {
         return (
             <>
@@ -59,17 +68,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                         Bạn có chắc muốn tiếp tục thực hiện không?
                     </h5>
                     <div style={{ display: "flex", justifyContent: "space-between", width: "40%", margin: "auto", paddingTop: "2rem" }}>
-                        <Button
-                            onClick={handleChangeScreen}
-                            text="Xác nhận"
-                            width={80}
-                            height={30}
-                            render={(buttonData) =>
-                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
-                            }
-                            hint="Khai báo máy"
 
-                        />
                         <Button
                             onClick={setClose}
                             text="Hủy bỏ"
@@ -79,6 +78,17 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                 <p style={{ color: '#fff', background: '#ccc', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                             }
                             hint="Khai báo lệnh sản xuất"
+                        />
+                        <Button
+                            onClick={handleChang}
+                            text="Xác nhận"
+                            width={80}
+                            height={30}
+                            render={(buttonData) =>
+                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                            }
+                            hint="Khai báo máy"
+
                         />
                     </div>
                 </div>
@@ -93,7 +103,10 @@ export const ProductionID: React.FC<ProductionID> = observer(({
         productionId[0].quantity = "";
         let newObj = JSON.parse(JSON.stringify(productionId))
         setproductionId(newObj);
-        console.log(newObj)
+
+        infoMapped[0].pro_id = "";
+        let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+        setInfoMapped(newInfoMpaped);
     }
     return (
         <>
@@ -125,7 +138,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                             />
                             <div style={{ width: windowWidth < 600 ? '100%' : '40%', margin: "auto" }}>
                                 <div style={{ textAlign: "center", margin: "2rem" }}>
-                                    <h4 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h4>
+                                    <h2 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h2>
                                     <img src={qr_img} width={200} height={200} alt="" />
                                     <div>
                                         <Button
@@ -140,29 +153,29 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                     </div>
                                 </div>
                                 <div className="dx-fieldset">
-                                    <h4 style={{ margin: "1rem 0" }}>Thông tin mã sản xuất</h4>
+                                    <h3 style={{ margin: "1rem 0" }}>Thông tin mã sản xuất</h3>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Mã sản xuất</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeProductionID[0].id} > </TextBox>
+                                            <TextBox disabled value={fakeProductionID[0].id} > </TextBox>
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Tên thẻ</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeProductionID[0].cardName} />
+                                            <TextBox disabled value={fakeProductionID[0].cardName} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Trạng thái</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeProductionID[0].status} />
+                                            <TextBox disabled value={fakeProductionID[0].status} />
                                         </div>
                                     </div>
                                     <div className="dx-field">
                                         <div className="dx-field-label">Số lượng</div>
                                         <div className="dx-field-value">
-                                            <TextBox value={fakeProductionID[0].quantity} />
+                                            <TextBox disabled value={fakeProductionID[0].quantity} />
                                         </div>
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
@@ -170,19 +183,19 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                             text="Trở lại  "
                                             onClick={setClose}
                                             height={30}
-                                            width={80}
+                                            width={100}
                                             render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.9rem" }}>{buttonData.text}</p>
                                             }
                                             hint="Khai báo lệnh sản xuất"
                                         />
                                         <Button
                                             text="Tiếp theo"
-                                            width={80}
+                                            width={100}
                                             height={30}
-                                            onClick={status === "Chưa phát lệnh sản xuất" ? togglePopup : handleChangeScreen}
+                                            onClick={status === "Chưa phát lệnh sản xuất" ? togglePopup : () => { setisDeclareInfo(true) }}
                                             render={(buttonData) =>
-                                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
                                             }
 
                                         />
@@ -190,9 +203,9 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                             text="Chấm công"
                                             onClick={checkedInfo}
                                             height={30}
-                                            width={80}
+                                            width={100}
                                             render={(buttonData) =>
-                                                <p style={{ color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
+                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
                                             }
                                         />
 
@@ -214,3 +227,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
 
 
 export default ProductionID;
+
+
+
+
