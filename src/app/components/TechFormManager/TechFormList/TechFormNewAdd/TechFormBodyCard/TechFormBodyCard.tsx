@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { Button, DataGrid, Template, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/TechProcedure";
 import { observer } from "mobx-react";
 import { Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
+import { TechFormGeneralInfo } from "../../../TechFormUpdate/TechFormUpdate";
 
 type TechFormBodyCardProps = {
+    prInfo: any;
     isOpen: boolean;
     setClose?: () => void;
 };
-export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose }) => {
-    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
 
+export const TechFormContext = createContext<any>(null)
+export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose, prInfo }) => {
+    const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
+    const [techFormData, setTechFormData] = React.useState<any>({
+        status: 'Bản nháp',
+        priority: 3
+    })
+
+
+    console.log("mdfkd", prInfo)
     const data1 = [
         { title1: "Mã sx/Production", data1: "1500928", title2: "Người gửi/Sender", data2: "Nguyễn Thị A" },
         { title1: "Tên khách hàng/Customer", data1: "Ngân hang A", title2: "Số lượng thẻ/Quantity", data2: "15000" },
@@ -53,8 +63,13 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
         setIsAddNewTechForm(true);
     };
 
+    const save = () => {
+        console.log(techFormData)
+    }
+
     return (
         <>
+        <TechFormContext.Provider value={[techFormData, setTechFormData, save]}>
             {isAddNewTechForm ? (
                 <TechProcedure isOpen={isAddNewTechForm} setClose={() => setIsAddNewTechForm(false)} />
             ) : (
@@ -95,7 +110,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                         </div>
 
                         <div style={{ marginTop: 10 }}>
-                            <DataGrid
+                            {/* <DataGrid
                                 key={"title1"}
                                 keyExpr={"title1"}
                                 dataSource={data1}
@@ -124,7 +139,8 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                 <Column dataField='data2' caption='Data 2' alignment={"left"}>
                                     <Template name='abcd'>{(rowData) => <span>{rowData.title2}</span>}</Template>
                                 </Column>
-                            </DataGrid>
+                            </DataGrid> */}
+                            <TechFormGeneralInfo dataGeneral={prInfo}/>
                             <div
                                 className='informer'
                                 style={{
@@ -471,6 +487,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                     </div>
                 </div>
             )}
+            </TechFormContext.Provider>
         </>
     );
 });

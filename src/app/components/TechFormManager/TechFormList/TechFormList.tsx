@@ -24,6 +24,7 @@ import BOMBodyCardAddInfo from "../../BOM/BOMBodyCard/BOMBodyCardAddInfo/BOMBody
 import PopupConfirmGeneral from "../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
 import { PLANNING_API_URL } from "../../../../config";
 import axios from "axios";
+import PopupSelectProductionRequirement from "../../../shared/components/PopupSelectProductionRequirement/PopupSelectProductionRequirement";
 
 const data = [
     {
@@ -80,10 +81,15 @@ export const TechFormList = () => {
     const [requestInfoChoosed, setRequestInfoChoosed] = React.useState<any>(null);
     const [techFormIdChoosed, setTechFormIdChoosed] = React.useState(null);
     const mainStore = useMainStore();
+    const [isOpenSelectPR, setIsOpenSelectPR] = React.useState<boolean>(false)
 
     const [techForms, setTechForms] = React.useState([]);
+    const [pRChoosed, setPRChoosed] = React.useState(null)
 
-    const handleAddFormTech = () => {
+    const handleAddFormTech = (info) => {
+        // console.log(id)
+        setPRChoosed(info);
+        setIsOpenSelectPR(false)
         setIsAddNewTechForm(true);
     };
 
@@ -188,7 +194,7 @@ export const TechFormList = () => {
     return (
         <>
             {isAddNewTechForm ? (
-                <TechFormBodyCard isOpen={isAddNewTechForm} setClose={() => setIsAddNewTechForm(false)} />
+                <TechFormBodyCard prInfo={pRChoosed} isOpen={isAddNewTechForm} setClose={() => setIsAddNewTechForm(false)} />
             ) : (
                 <div>
                     <div className='table-responsive'>
@@ -226,6 +232,13 @@ export const TechFormList = () => {
                                 Tìm kiếm chung
                             </h5>
                         </div>
+                        <PopupSelectProductionRequirement
+                            visible={isOpenSelectPR}
+                            onCancel={() => setIsOpenSelectPR(false)}
+                            title={"Chọn yêu cầu sản xuất"}
+                            onSubmit={handleAddFormTech}
+                            width={1200}
+                        />
                         <PopupImportFile
                             visible={popupVisible}
                             onCancel={() => setPopupVisible(false)}
@@ -295,7 +308,7 @@ export const TechFormList = () => {
                                     <SvgIcon
                                         tooltipTitle='Thêm mới'
                                         text='Thêm mới'
-                                        onClick={handleAddFormTech}
+                                        onClick={() => setIsOpenSelectPR(true)}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/CirclePlus.svg'
@@ -381,14 +394,16 @@ export const TechFormList = () => {
                                         />
                                         <SvgIcon
                                             onClick={() => {
-                                                // console.log(cellInfo.data.productionRequirement?.id)
-                                                setRequestInfoChoosed(cellInfo.data.productionRequirement)
-                                                setIsVisibleBOMBodyCardAddInfo(true)}}
-                                            tooltipTitle='Tạo BOM'
+                                                if (!cellInfo.data.isCreatedBOM) {
+                                                    setRequestInfoChoosed(cellInfo.data.productionRequirement)
+                                                    setTechFormIdChoosed(cellInfo.data.id);
+                                                    setIsVisibleBOMBodyCardAddInfo(true)}}
+                                                }
+                                            tooltipTitle={cellInfo.data.isCreatedBOM ? 'Đã tạo BOM cho phiếu công nghệ này' : 'Tạo BOM'}
                                             sizeIcon={17}
                                             textSize={17}
-                                            icon='assets/icons/Folder.svg'
-                                            textColor='#FF7A00'
+                                            icon= {cellInfo.data.isCreatedBOM ? 'assets/icons/FolderDisable.svg' :'assets/icons/Folder.svg'}
+                                            textColor={cellInfo.data.isCreatedBOM ? "#BDBDBD" :'#FF7A00'}
                                             style={{ marginRight: 17 }}
                                         />
                                         <SvgIcon
@@ -439,6 +454,7 @@ export const TechFormList = () => {
                             {isVisibleBOMBodyCardAddInfo && (
                                 <BOMBodyCardAddInfo
                                     requestInfo={requestInfoChoosed}
+                                    techFormId={techFormIdChoosed}
                                     id={null}
                                     isOpen={isVisibleBOMBodyCardAddInfo}
                                     setClose={() => {

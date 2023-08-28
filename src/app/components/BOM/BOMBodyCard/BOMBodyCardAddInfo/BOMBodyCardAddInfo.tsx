@@ -15,6 +15,7 @@ import { MDM_API_URL, PLANNING_API_URL } from "../../../../../config";
 type BOMBodyCardAddInfoProps = {
     id: Number | null;
     requestInfo: any;
+    techFormId: any;
     isOpen: boolean;
     setClose?: () => void;
 };
@@ -71,14 +72,14 @@ const convertToMaterialBOM = (value) => {
         materialTechName: value.techName,
         classify: classify,
         quantity: value.quantity,
-        quota: value.quota,
+        quota: value.quota ? value.quota : 1,
         unit: value.unit,
         version: value.version
     }
 }
 
 
-export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo }) => {
+export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo, techFormId }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
@@ -87,7 +88,6 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     const gridRef = React.useRef(null);
     const [idRemoveChoosed, setIdRemoveChoosed] = React.useState<any>(null);
 
-    console.log('rq info', requestInfo);
 
     const handleShowModalDel = (id) => {
         setIdRemoveChoosed(id)
@@ -120,8 +120,6 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                 return data;
             }
         })
-
-        console.log('new ',newbomBodyCardMaterials)
         setBomData({
             ...bomData,
             bomBodyCardMaterials: newbomBodyCardMaterials,
@@ -195,6 +193,20 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
         });
     }
 
+    const handleCreateBOM = () => {
+        const headers = {
+            Authorization: "Bearer " + mainStore.authToken,
+            "content-type": "application/json",
+        };
+        axios({ method: "post", url: PLANNING_API_URL+ "/api/boms", headers: headers, data: JSON.stringify(bomData) }).then((response) => {
+            if (response.data.message === 'Thành công') {
+                if (techFormId !== null) {
+                    axios({ method: "post", url: PLANNING_API_URL+ `/api/techforms/${techFormId}/boms`, headers: headers, data: JSON.stringify(response.data.data) }).then(response => {
+                    })
+                }
+            }
+        })
+    }
 
     const onChangeMaterialCode = (e) => {
         if (materialDetail?.materialCode.trim() !== "") {
@@ -250,21 +262,17 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                 }
             });
         } else {
-            setBomData({bomBodyCardMaterials: [{id: 1}]})
+            setBomData({
+                productName: requestInfo?.cardName,
+                quantity: requestInfo?.quantityCompensation,
+                bomBodyCardMaterials: [{id: 1}]})
         }
-    }, [id]);
+    }, [id, requestInfo]);
 
     React.useEffect(() => {
         getAllMaterial();
     }, [])
 
-    React.useEffect(() => {
-        setBomData({
-            ...bomData,
-            productName: requestInfo.cardName,
-            quantity: requestInfo.quantityRequirement
-        })
-    }, [requestInfo])
 
     console.log('bomData', bomData)
 
@@ -380,26 +388,30 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                         <div style={{ marginTop: 30 }}>
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
-                                    <p>Mã sản phẩm</p>
-                                    <TextBox value={bomData.productCode} placeholder='SP001' width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Số lượng</p>
-                                    <TextBox placeholder='15000'></TextBox>
+                                    <p>Tên thẻ</p>
+                                    <TextBox value={bomData.productName} style={{backgroud: 'black'}} disabled={requestInfo!== null} placeholder='SP001' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Mã loại thẻ mẫu</p>
+                                    <SelectBox placeholder='Chọn'></SelectBox>
+                                    <p style={{ marginTop: 30 }}>Tổng số bản</p>
+                                    <TextBox placeholder='Nhập'></TextBox>
+                                </td>
+                                <td>
+                                    <p>Version</p>
+                                    <TextBox value={bomData.version} onChange={(e) => {
+                                        console.log(e);
+                                    }} placeholder='Nhập' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
+                                    <TextBox value={bomData.notice} placeholder='Visa'></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
                                     <SelectBox placeholder='Chọn'></SelectBox>
                                 </td>
-                                <td>
-                                    <p>Mô tả sản phẩm</p>
-                                    <TextBox value={bomData.productName} placeholder='Phôi thẻ MC ' width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Lưu ý</p>
-                                    <TextBox value={bomData.notice} placeholder=''></TextBox>
-                                    <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
-                                    <TextBox placeholder=''></TextBox>
-                                </td>
                                 <td style={{ marginRight: 30 }}>
-                                    <p>Version</p>
-                                    <TextBox value={bomData.version} placeholder='1.1' width={350}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Ghi chú</p>
-                                    <TextBox value={bomData.note} placeholder=''></TextBox>
+                                    <p>Số lượng đã tính bù hao</p>
+                                    <TextBox  value={bomData.quantity} disabled={requestInfo!== null} placeholder='Nhập' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
+                                    <SelectBox value={bomData.note} placeholder=''></SelectBox>
+                                    <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
+                                    <TextBox value={bomData.note} placeholder='1.1'></TextBox>
                                 </td>
                             </table>
                         </div>
@@ -610,7 +622,9 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 text='Hủy bỏ'
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                             />
-                            <Button text='Thêm mới' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                            <Button 
+                                onClick={handleCreateBOM}
+                            text='Thêm mới' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
                         </div>
                     </div>
                 </div>
