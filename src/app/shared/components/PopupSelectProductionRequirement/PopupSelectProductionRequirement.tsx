@@ -29,8 +29,6 @@ const PopupSelectProductionRequirement = ({ title, visible, onSubmit, onCancel, 
         }
     }, [visible])
 
-    console.log("dfkjsdfjsdf", dataChoosed);
-
     const style = () => {
         if (dataChoosed) {
             return {

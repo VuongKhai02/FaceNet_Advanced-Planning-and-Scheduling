@@ -11,6 +11,7 @@ import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import { MDM_API_URL, PLANNING_API_URL } from "../../../../../config";
+import Loading from "../../../../common/Loading";
 
 type BOMBodyCardAddInfoProps = {
     id: Number | null;
@@ -87,6 +88,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     const [materialDetail, setMaterialDetail] = React.useState<MaterialDetail | null | any>();
     const gridRef = React.useRef(null);
     const [idRemoveChoosed, setIdRemoveChoosed] = React.useState<any>(null);
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
 
     const handleShowModalDel = (id) => {
@@ -194,6 +196,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     }
 
     const handleCreateBOM = () => {
+        setIsLoading(true)
         const headers = {
             Authorization: "Bearer " + mainStore.authToken,
             "content-type": "application/json",
@@ -205,6 +208,10 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                     })
                 }
             }
+        }).finally(() => {
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 1000)
         })
     }
 
@@ -265,6 +272,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
             setBomData({
                 productName: requestInfo?.cardName,
                 quantity: requestInfo?.quantityCompensation,
+                version: '1.0',
                 bomBodyCardMaterials: [{id: 1}]})
         }
     }, [id, requestInfo]);
@@ -397,8 +405,11 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 </td>
                                 <td>
                                     <p>Version</p>
-                                    <TextBox value={bomData.version} onChange={(e) => {
-                                        console.log(e);
+                                    <TextBox value={bomData.version} onValueChanged={(e) => {
+                                        setBomData({
+                                            ...bomData,
+                                            version: e.value
+                                        })
                                     }} placeholder='Nhập' width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
                                     <TextBox value={bomData.notice} placeholder='Visa'></TextBox>
@@ -629,6 +640,9 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                     </div>
                 </div>
             )}
+            {
+                isLoading && <Loading />
+            }
         </>
     );
 });
