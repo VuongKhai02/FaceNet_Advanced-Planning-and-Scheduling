@@ -90,16 +90,19 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             render={(value, record: any, index) => {
                                                 return index !== 2 ? (
                                                     [1, 3].includes(index) ? (
-                                                        <Input
-                                                            style={{ width: 250, float: "left" }}
-                                                            className='inputRow'
-                                                            placeholder='Nhập'
-                                                        />
+                                                        ''
+                                                        // <Input
+                                                        //     style={{ width: 250, float: "left" }}
+                                                        //     className='inputRow'
+                                                        //     placeholder='Nhập'
+                                                        // />
                                                     ) : (
-                                                        <Input className='inputRow' placeholder='Nhập' />
+                                                        ''
+                                                        // <Input className='inputRow' placeholder='Nhập' />
                                                     )
                                                 ) : (
-                                                    <SelectBox style={{ width: 250, float: "left" }} placeholder='Lựa chọn' />
+                                                    ''
+                                                    // <SelectBox style={{ width: 250, float: "left" }} placeholder='Lựa chọn' />
                                                 );
                                             }}
                                         />
@@ -113,7 +116,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -127,7 +131,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -141,7 +146,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -157,7 +163,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -171,7 +178,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -185,7 +193,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
@@ -199,7 +208,8 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                             align='center'
                                             render={(value, record: any, index) => {
                                                 return record.position === "Kích thước/Size" ? (
-                                                    <Input className='inputRow' placeholder='Nhập' />
+                                                    ''
+                                                    // <Input className='inputRow' placeholder='Nhập' />
                                                 ) : null;
                                             }}
                                         />
