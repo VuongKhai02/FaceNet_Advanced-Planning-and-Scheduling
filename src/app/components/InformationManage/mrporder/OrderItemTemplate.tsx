@@ -342,7 +342,7 @@ export const OrderItemTemplate = React.memo((props: any) => {
           emptyValue: "Rỗng"
 
         }} /> */}
-                <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Selection mode='single' />
                 <Column type={"buttons"} caption={"Tùy chọn"} alignment='left' />
                 {/*<Column cellRender={rowIndexRender} width={50} caption={"STT"} alignment={"left"} />*/}

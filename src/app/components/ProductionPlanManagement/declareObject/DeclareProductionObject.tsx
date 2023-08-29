@@ -270,7 +270,7 @@ export const DeclareProductionObject = () => {
                         />
                         <FilterRow visible={true} />
                         <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                        <SearchPanel visible={true} placeholder={"Tìm kiếm..."} width={300} />
+                        <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                         <Paging defaultPageSize={10} />
                         <Pager
                             visible={true}

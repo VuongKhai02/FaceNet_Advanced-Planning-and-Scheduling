@@ -220,8 +220,7 @@ export const TechFormListDetail = React.memo((props: any) => {
                                 between='Nằm giữa'
                             />
                         </FilterRow>
-                        <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
-                        <SearchPanel visible={true} width={240} placeholder='Tìm kiếm...' />
+                        <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                         <Selection mode='single' />
                         <Column
                             width={140}

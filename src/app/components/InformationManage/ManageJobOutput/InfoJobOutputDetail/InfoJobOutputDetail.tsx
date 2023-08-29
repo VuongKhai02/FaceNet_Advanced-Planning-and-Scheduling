@@ -64,9 +64,8 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                             justifyContent: "flex-end",
                             alignItems: "center",
                             // background: "#ffffff",
-                            padding: "8px",
                             borderRadius: "4px",
-                            marginRight: "23px",
+                            marginRight: 30,
                         }}>
                         <Button
                             onClick={setClose}

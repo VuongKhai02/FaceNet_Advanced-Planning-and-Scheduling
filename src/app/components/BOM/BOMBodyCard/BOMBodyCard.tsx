@@ -14,7 +14,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import "./BOMBodyCard.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 // import { Table } from "antd";
@@ -396,63 +396,15 @@ export const BOMBodyCard = () => {
                                     onSubmit={() => {}}
                                     customFooter={handleCustomFooter}
                                 />
-
-                                <PopupConfirmDelete
-                                    isVisible={isConfirmDelete}
-                                    onCancel={handleHideModalDel}
-                                    onSubmit={() => console.log("ok")}
-                                    modalTitle={
-                                        <div>
-                                            <h3
-                                                style={{
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    color: "#ff794e",
-                                                    fontWeight: 500,
-                                                    fontSize: 25,
-                                                }}>
-                                                <InfoCircleOutlined
-                                                    style={{
-                                                        color: "#ff794e",
-                                                        marginRight: "8px",
-                                                        display: "flex",
-                                                        justifyContent: "center",
-                                                        alignItems: "center",
-                                                        fontSize: 30,
-                                                    }}
-                                                />
-                                                Xác nhận xóa?
-                                            </h3>
-                                        </div>
-                                    }
-                                    modalContent={
-                                        <div>
-                                            <h5
-                                                style={{
-                                                    height: 80,
-                                                    fontWeight: 400,
-                                                    marginTop: 30,
-                                                    fontSize: 20,
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                }}>
-                                                Bạn có chắc chắn muốn thực hiện thao tác xóa không?
-                                            </h5>
-                                        </div>
-                                    }
-                                    width={600}
-                                />
                                 <Toolbar>
                                     <ToolbarItem>
                                         <SvgIcon
-                                            onClick={() => setIsVisibleImportFile(true)}
-                                            text='Import file'
-                                            tooltipTitle='Import file'
+                                            onClick={() => setIsBOMCardAddTemplate(true)}
+                                            text='Thêm mới'
+                                            tooltipTitle='Thêm mới thông tin BOM mẫu'
                                             sizeIcon={17}
                                             textSize={17}
-                                            icon='assets/icons/ImportFile.svg'
+                                            icon='assets/icons/CircleAdd.svg'
                                             textColor='#FF7A00'
                                             style={{ marginRight: 17 }}
                                         />
@@ -498,7 +450,7 @@ export const BOMBodyCard = () => {
                                 <Column
                                     type={"buttons"}
                                     caption={"Thao tác"}
-                                    alignment='left'
+                                    alignment='center'
                                     cellRender={(cellInfo) => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
@@ -514,7 +466,7 @@ export const BOMBodyCard = () => {
                                                 onClick={() => {
                                                     handleBOMBodyCardAddInfo(cellInfo);
                                                 }}
-                                                tooltipTitle='Thêm mới thông tin BOM body card'
+                                                tooltipTitle='Thêm mới BOM sản phẩm'
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Add.svg'
@@ -540,6 +492,7 @@ export const BOMBodyCard = () => {
                                             />
                                         </div>
                                     )}></Column>
+                                <MasterDetail enabled={true} component={handleListProduct} />
                             </DataGrid>
                         </div>
                     </div>
@@ -553,8 +506,8 @@ export const BOMBodyCard = () => {
                         />
                         <PopupConfirmDelete
                             isVisible={isConfirmDelete}
-                            onCancel={handleHideModalDel}
-                            onSubmit={() => console.log("ok")}
+                            onCancel={() => setIsConfirmDelete(false)}
+                            onSubmit={() => {}}
                             modalTitle={
                                 <div>
                                     <h3
@@ -564,36 +517,31 @@ export const BOMBodyCard = () => {
                                             alignItems: "center",
                                             color: "#ff794e",
                                             fontWeight: 500,
-                                            fontSize: 25,
                                         }}>
-                                        <InfoCircleOutlined
-                                            style={{
-                                                color: "#ff794e",
-                                                marginRight: "8px",
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                fontSize: 30,
-                                            }}
-                                        />
-                                        Xác nhận xóa?
+                                        Xóa dữ liệu
                                     </h3>
                                 </div>
                             }
                             modalContent={
                                 <div>
-                                    <h5
+                                    <h4 style={{ fontWeight: 400 }}>
+                                        Bạn có chắc chắn muốn xóa <b>Dữ liệu hiện tại</b>?
+                                    </h4>
+                                    <div
                                         style={{
-                                            height: 80,
-                                            fontWeight: 400,
-                                            marginTop: 30,
-                                            fontSize: 20,
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
+                                            backgroundColor: "#ffe0c2",
+                                            borderLeft: "4px solid #ff794e",
+                                            height: 100,
+                                            borderRadius: 5,
                                         }}>
-                                        Bạn có chắc chắn muốn thực hiện thao tác xóa không?
-                                    </h5>
+                                        <h3 style={{ color: "#ff794e", fontWeight: 500 }}>
+                                            <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
+                                            Lưu ý:
+                                        </h3>
+                                        <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>
+                                            Nếu bạn xóa <b>Dữ liệu hiện tại </b> thì các thông tin liên quan đều bị mất
+                                        </p>
+                                    </div>
                                 </div>
                             }
                             width={600}

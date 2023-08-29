@@ -120,35 +120,6 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                             </table>
                         </div>
                         <div>
-                            <Steps
-                                current={1}
-                                size='small'
-                                labelPlacement='vertical'
-                                style={{ width: "60%", marginLeft: 300, marginTop: 40 }}>
-                                {items.map((item, index) => (
-                                    <Step key={index} title={item.title} description={item.description} />
-                                ))}
-                            </Steps>
-                        </div>
-                        <div>
-                            <div style={{ border: "1px solid #004C98", borderRadius: 5, marginTop: 30, width: "30%", marginLeft: 20 }}>
-                                <h3>
-                                    <p>Chi tiết công đoạn</p>
-                                </h3>
-                                <table>
-                                    <td>
-                                        <InfoRow label='Mã công đoạn' data='CĐ01' />
-                                        <InfoRow label='Tên công đoạn' data='In offset' />
-                                        <InfoRow label='Thời gian bắt đầu' data='11/7/2023 15:08:50' />
-                                        <InfoRow label='Thời gian kết thúc' data='11/7/2023 15:08:50' />
-                                        <InfoRow label='Trạng thái' data='Hoàn thành' />
-                                        <InfoRow label='Sản lượng kế hoạch' data='105' />
-                                        <InfoRow label='Sản lượng hoàn thành' data='105' />
-                                        <InfoRow label='Sản lượng lỗi' data='8' />
-                                        <InfoRow label='Tỉ lệ lỗi' data='9% ' />
-                                    </td>
-                                </table>
-                            </div>
                             <div>
                                 <Steps
                                     current={1}
@@ -191,28 +162,6 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                         onClick={() => setIsVisibleProgressWODetailJob(true)}
                                     />
                                 </div>
-                            </div>
-                            <div
-                                className='toolbar'
-                                style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
-                                    borderRadius: "4px",
-                                }}>
-                                <Button
-                                    text='Xem chi tiết'
-                                    style={{
-                                        marginLeft: 300,
-                                        backgroundColor: "#FF7A00",
-                                        color: "#fff",
-                                        width: 120,
-                                        marginBottom: 30,
-                                        marginTop: 30,
-                                    }}
-                                    onClick={() => setIsVisibleProgressWODetailJob(true)}
-                                />
                             </div>
                         </div>
                         <div

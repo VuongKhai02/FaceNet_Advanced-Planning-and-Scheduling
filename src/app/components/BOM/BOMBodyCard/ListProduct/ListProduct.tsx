@@ -57,7 +57,7 @@ const data2 = [
         inventoryQuantity: "Số lượng tồn kho",
     },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ListProduct = React.memo((props: any) => {
     const [isDetailBOMTemplate, setIsDetailBOMTemplate] = React.useState<boolean>(false);
     locale("en");
@@ -173,12 +173,12 @@ export const ListProduct = React.memo((props: any) => {
                 />
                 <Toolbar>
                     <TItem location={"before"}>
-                        <div className={"master-detail-title"}>Danh sách sản phẩm</div>
+                        <div>Danh sách sản phẩm</div>
                     </TItem>
                     <TItem name='columnChooserButton' />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} mode='select' />
-                <Paging defaultPageSize={5} />
+                <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
                     allowedPageSizes={allowedPageSizes}
@@ -215,7 +215,7 @@ export const ListProduct = React.memo((props: any) => {
                 <Column
                     type={"buttons"}
                     caption={"Thao tác"}
-                    alignment='left'
+                    alignment='center'
                     cellRender={() => (
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <SvgIcon

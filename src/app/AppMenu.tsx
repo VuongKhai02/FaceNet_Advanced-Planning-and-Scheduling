@@ -111,18 +111,8 @@ export const AppMenu = (props: AppMenuProps) => {
             <MenuItem screenId='HomePage' icon={<HomeFilled />} caption={"screen.home"} key={"home"} />
             <MenuItem icon={<DashboardOutlined />} caption={"Dashboard"} />
             <SubMenuItem caption={"Quản lý thông tin"} icon={<AppstoreOutlined />}>
-                <MenuItem
-                    screenId='screen.ProductOrder'
-                    icon={<UploadOutlined />}
-                    caption={"screen.ProductOrder"}
-                    key={"screen.ProductOrder"}
-                />
-                <MenuItem
-                    screenId='ProductOrderManager'
-                    icon={<ShoppingOutlined />}
-                    caption={"screen.ProductOrderManager"}
-                    key={"screen.ProductOrderManager"}
-                />
+                <MenuItem screenId='screen.ProductOrder' caption={"screen.ProductOrder"} key={"screen.ProductOrder"} />
+                <MenuItem screenId='ProductOrderManager' caption={"screen.ProductOrderManager"} key={"screen.ProductOrderManager"} />
                 <MenuItem
                     screenId='manageProductionRequirements'
                     caption={"Quản lý yêu cầu sản xuất"}
@@ -137,20 +127,24 @@ export const AppMenu = (props: AppMenuProps) => {
                 <MenuItem screenId='bomPersonalized' caption={"Quản lý BOM cá thể hóa"} key={"bomPersonalized"} />
             </SubMenuItem>
             <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='techFormList' caption={"Danh sách phiếu công nghệ"} key={"techFormList"} />
+                <MenuItem screenId='techFormApprove' caption={"Phê duyệt phiếu công nghệ"} key={"techFormApprove"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='productionPlanList' caption={"Danh sách kế hoạch sản xuất"} key={"productionPlanList"} />
+
+                <MenuItem screenId='dnlNvlList' caption={"Danh sách yêu cầu sản xuất lại"} key={"dnlNvlList"} />
+            </SubMenuItem>
+            <SubMenuItem caption={"Giám sát tiến độ"} icon={<AppstoreOutlined />}>
+                <MenuItem screenId='progressMonitoringWO' caption={"Giám sát tiến độ WO"} key={"progressMonitoringWO"} />
                 <MenuItem
-                    screenId='techFormList'
-                    // icon={<HomeFilled />}
-                    caption={"Danh sách phiếu công nghệ"}
-                    key={"techFormList"}
+                    screenId='progressMonitoringManufacture'
+                    caption={"Giám sát tiến độ sản xuất"}
+                    key={"progressMonitoringManufacture"}
                 />
 
                 <MenuItem screenId='progressMonitoringOrder' caption={"Giám sát tiến độ đơn hàng"} key={"progressMonitoringOrder"} />
-                <MenuItem
-                    screenId=''
-                    // icon={<ShoppingOutlined />}
-                    caption={"Giám sát máy"}
-                    key={"gsm"}
-                />
+                <MenuItem screenId='' caption={"Giám sát máy"} key={"gsm"} />
                 <MenuItem screenId='progressMonitoringStageQueue' caption={"Hàng chờ công đoạn"} key={"progressMonitoringStageQueue"} />
             </SubMenuItem>
             {/* user */}

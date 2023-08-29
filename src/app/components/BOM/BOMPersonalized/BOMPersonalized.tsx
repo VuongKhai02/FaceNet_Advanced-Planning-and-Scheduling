@@ -154,7 +154,7 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem name='columnChooserButton' />
                             </Toolbar>
                             <FilterRow visible={true} />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={320} />
+                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' />
                             <Paging defaultPageSize={10} />
                             <Pager

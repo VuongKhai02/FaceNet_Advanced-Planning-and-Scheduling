@@ -219,7 +219,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                     emptyValue: "Rỗng"
 
                 }} /> */}
-                <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Selection mode='single' />
                 <Column
                     width={140}

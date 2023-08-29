@@ -242,7 +242,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Thêm mới thông tin BOM body card
+                                Thêm mới thông tin BOM sản phẩm
                             </h5>
                         </div>
                         <div style={{ marginTop: 30 }}>
@@ -311,7 +311,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <PopupConfirmDelete
                                 isVisible={isConfirmDelete}
                                 onCancel={handleHideModalDel}
-                                onSubmit={() => console.log("ok")}
+                                onSubmit={() => {}}
                                 modalTitle={
                                     <div>
                                         <h3
@@ -321,74 +321,34 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                                 alignItems: "center",
                                                 color: "#ff794e",
                                                 fontWeight: 500,
-                                                fontSize: 25,
                                             }}>
-                                            <InfoCircleOutlined
-                                                style={{
-                                                    color: "#ff794e",
-                                                    marginRight: "8px",
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    fontSize: 30,
-                                                }}
-                                            />
-                                            Xác nhận xóa?
+                                            Xóa dữ liệu
                                         </h3>
                                     </div>
                                 }
                                 modalContent={
                                     <div>
-                                        <h5
+                                        <h4 style={{ fontWeight: 400 }}>
+                                            Bạn có chắc chắn muốn xóa <b>Dữ liệu hiện tại</b>?
+                                        </h4>
+                                        <div
                                             style={{
-                                                height: 80,
-                                                fontWeight: 400,
-                                                marginTop: 30,
-                                                fontSize: 20,
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
+                                                backgroundColor: "#ffe0c2",
+                                                borderLeft: "4px solid #ff794e",
+                                                height: 100,
+                                                borderRadius: 5,
                                             }}>
-                                            Bạn có chắc chắn muốn thực hiện thao tác xóa không?
-                                        </h5>
+                                            <h3 style={{ color: "#ff794e", fontWeight: 500 }}>
+                                                <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
+                                                Lưu ý:
+                                            </h3>
+                                            <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>
+                                                Nếu bạn xóa <b>Dữ liệu hiện tại </b> thì các thông tin liên quan đều bị mất
+                                            </p>
+                                        </div>
                                     </div>
                                 }
                                 width={600}
-                            />
-                            <Toolbar>
-                                <ToolbarItem>
-                                    <SvgIcon
-                                        onClick={handleAddNewInfoMaterial}
-                                        text='Thêm vật tư'
-                                        tooltipTitle='Thêm vật tư'
-                                        sizeIcon={17}
-                                        textSize={17}
-                                        icon='assets/icons/Add.svg'
-                                        textColor='#FF7A00'
-                                        style={{ marginRight: 17 }}
-                                    />
-                                </ToolbarItem>
-                                <ToolbarItem>
-                                    <SvgIcon
-                                        onClick={() => setIsVisibleImportFile(true)}
-                                        text='Import file'
-                                        tooltipTitle='Import file'
-                                        sizeIcon={17}
-                                        textSize={17}
-                                        icon='assets/icons/ImportFile.svg'
-                                        textColor='#FF7A00'
-                                        style={{ marginRight: 17 }}
-                                    />
-                                </ToolbarItem>
-                            </Toolbar>
-                            <HeaderFilter
-                                visible={true}
-                                texts={{
-                                    cancel: "Hủy bỏ",
-                                    ok: "Đồng ý",
-                                    emptyValue: "Rỗng",
-                                }}
-                                allowSearch={true}
                             />
                             <FilterRow visible={true} />
 
@@ -418,13 +378,21 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 cellRender={() => (
                                     <div style={{ display: "flex", justifyContent: "center" }}>
                                         <SvgIcon
+                                            onClick={() => {}}
+                                            tooltipTitle='Thêm hàng'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/Add.svg'
+                                            textColor='#FF7A00'
+                                            style={{ marginRight: 17 }}
+                                        />
+                                        <SvgIcon
                                             onClick={handleShowModalDel}
                                             tooltipTitle='Xóa'
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Trash.svg'
                                             textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
                                         />
                                     </div>
                                 )}></Column>

@@ -571,7 +571,7 @@ const DnlnvlApproveView: React.FC<DnlnvlViewProps> = observer(({ planningWorkOrd
                                                 <Button onClick={onExport} icon='xlsxfile' hint='Xuất file xlsx' />
                                             </ToolbarItem1>
                                         </Toolbar>
-                                        <SearchPanel visible={true} placeholder={"Tìm kiếm..."} />
+                                        <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                                         <Paging enabled={true} defaultPageSize={10} />
                                         <Pager
                                             visible={true}

@@ -38,7 +38,7 @@ export const TechFormApprove = () => {
     const [rejectReason, setRejectReason] = useState("");
 
     const mainStore = useMainStore();
-    const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
+    const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
     const onConfirmClick = () => {
         setShowPopup(false);

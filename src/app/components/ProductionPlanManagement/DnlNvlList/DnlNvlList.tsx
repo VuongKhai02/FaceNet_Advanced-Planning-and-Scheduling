@@ -1,25 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
-import {
-    Column,
-    FilterRow,
-    HeaderFilter,
-    Item as ToolbarItem,
-    Pager,
-    Paging,
-    SearchPanel,
-    Toolbar,
-    ColumnChooser,
-    Button as ButtonIcon,
-} from "devextreme-react/data-grid";
-import axios from "axios";
-import { useMainStore } from "@haulmont/jmix-react-core";
+import React from "react";
+import { Button, DataGrid, Popup } from "devextreme-react";
+import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
-import { IWarning } from "../../../shared/model/Warning.model";
-import { PLANNING_API_URL } from "../../../../config";
-import { customizeColor } from "../../../../utils/utils";
-import { Modal, Tag } from "antd";
-import notify from "devextreme/ui/notify";
 import InfoRow from "../../../shared/components/InfoRow/InfoRow";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 
@@ -28,193 +10,35 @@ const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const data = [
     {
-        no: "1",
-        codeMaterial: "1C01CBANK000021",
-        nameMaterial: "Chíp vàng 6 chân S3D350AACS-6GK6DEA(U-MA/VI/VC) load Visa Master",
-        quantity: "1500",
-        unit: "Cái",
+        soCode: "312324",
+        manufactureCode: "MSX-123",
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        numberReProduction: "15,000",
+        reasonReProduction: "Khách hàng thay đổi yêu cầu",
+        status: "Đang chờ phê duyệt",
     },
     {
-        no: "2",
-        codeMaterial: "1C02P0.15TQ0010",
-        nameMaterial: "Tấm nhựa PVC B trong suốt, kt: 0.15x480x590mm",
-        quantity: "1500",
-        unit: "Cái",
+        soCode: "312325",
+        manufactureCode: "MSX-123",
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        numberReProduction: "15,000",
+        reasonReProduction: "Khách hàng thay đổi yêu cầu",
+        status: "Đang chờ phê duyệt",
     },
     {
-        no: "2",
-        codeMaterial: "1C02P0.15YS0003",
-        nameMaterial: "PVC bạc 7 màu (rainbow bạc) kt 295*480*0.15 - boyuan",
-        quantity: "1500",
-        unit: "Cái",
+        soCode: "312326",
+        manufactureCode: "MSX-123",
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        numberReProduction: "15,000",
+        reasonReProduction: "Khách hàng thay đổi yêu cầu",
+        status: "Đang chờ phê duyệt",
     },
 ];
 export const DnlNvlList = () => {
-    const [content, setContent] = useState<string>();
-    const [currentWarning, setCurrentWarning] = useState<IWarning>();
-    const mainStore = useMainStore();
-    const [isVisibleAdd, setIsVisibleAdd] = React.useState<boolean>(false);
-
     const [isViewMaterial, setIsViewMaterial] = React.useState<boolean>(false);
-
-    const loadOrders = () => {
-        const headers = {
-            Authorization: "Bearer " + mainStore.authToken,
-            "content-type": "application/json",
-        };
-        axios.get(PLANNING_API_URL + "/api/orders", { headers }).then((response) => {
-            if (response.status === 200) {
-                // console.log(response.data)
-                setContent(response.data.data);
-            }
-        });
-    };
-
-    const onSelectedRowKeysChange = (e) => {
-        if (e.data) {
-            setCurrentWarning(e.data);
-        }
-    };
-
-    useEffect(() => {
-        loadOrders();
-    }, []);
-
-    const updateOrder = (e) => {
-        // return <WarningDetail warningDetail={currentWarning} />
-        const headers = {
-            Authorization: "Bearer " + mainStore.authToken,
-            "content-type": "application/json",
-        };
-        console.log(e);
-        let data = JSON.stringify(e.newData);
-        axios.put(PLANNING_API_URL + "/api/orders/" + e.oldData.saleOrderId, data, { headers }).then((response) => {
-            if (response.status === 200) {
-                notify(
-                    {
-                        message: "Cập nhật thành công!",
-                        width: 450,
-                    },
-                    "SUCCESS",
-                    3000,
-                );
-            } else {
-                notify(
-                    {
-                        message: "Cập nhật thất bại!",
-                        width: 450,
-                    },
-                    "error",
-                    3000,
-                );
-            }
-        });
-    };
-    const removeOrder = (e) => {
-        // return <WarningDetail warningDetail={currentWarning} />
-        const headers = {
-            Authorization: "Bearer " + mainStore.authToken,
-            "content-type": "application/json",
-        };
-        console.log(e);
-        let data = JSON.stringify(e.newData);
-        axios.delete(PLANNING_API_URL + "/api/orders/" + e.data.saleOrderId, { headers }).then((response) => {
-            if (response.status === 200) {
-                notify(
-                    {
-                        message: "Xóa thành công đơn hàng!",
-                        width: 450,
-                    },
-                    "SUCCESS",
-                    3000,
-                );
-            } else {
-                notify(
-                    {
-                        message: "Xóa thất bại!",
-                        width: 450,
-                    },
-                    "error",
-                    3000,
-                );
-            }
-        });
-    };
-
-    const onStatusPoRender = (rowInfo) => {
-        let customColor: {
-            color: string;
-            backgroundColor: string;
-        } = {
-            color: "",
-            backgroundColor: "",
-        };
-        let status = "";
-        // let backgroundColor = "";
-        let padding = "";
-        let borderRadius = "";
-        let width = "";
-        let border = "";
-
-        // let value = rowInfo.data.data.processStatus;
-        const getColor = (value) => {
-            // let color = ""
-            switch (value) {
-                case "new":
-                    status = "Chờ sản xuất";
-                    break;
-                case "complete":
-                    status = "Hoàn thành";
-                    break;
-                case "not_complete":
-                    status = "Chưa hoàn thành";
-                    break;
-                case "in_production":
-                    status = "Đang sản xuất";
-                    break;
-                case "early_complete":
-                    status = "Hoàn thành sớm";
-                    break;
-                case "delay":
-                    status = "Chậm tiến độ";
-                    break;
-                case "unknown":
-                    status = "Chưa xác định";
-                    break;
-                case "wait_production":
-                    status = "Chờ sản xuất";
-                    break;
-                case "stop":
-                    status = "Ngưng sản xuất";
-                    break;
-                default:
-                    status = "Chưa xác định";
-                    break;
-            }
-        };
-
-        getColor(rowInfo.data.data.processStatus);
-        customColor = customizeColor(status);
-        border = "1px solid " + customColor.color;
-        // const color = getColor(rowInfo.data.data.processStatus)
-        // return <Tag color={color}>{status}</Tag>
-        return (
-            <Tag
-                style={{
-                    fontWeight: "bold",
-                    width: "100%",
-                    textAlign: "center",
-                    color: customColor.color,
-                    backgroundColor: customColor.backgroundColor,
-                    // "padding": padding,
-                    borderRadius: "4px",
-                    // "width": width,
-                    border: border,
-                }}>
-                {status}
-            </Tag>
-        );
-    };
 
     return (
         <>
@@ -234,7 +58,7 @@ export const DnlNvlList = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Danh sách đề nghị lĩnh nguyên vật liệu
+                                Danh sách yêu cầu sản xuất lại
                             </h5>
                         </div>
                         <div
@@ -256,26 +80,22 @@ export const DnlNvlList = () => {
                         </div>
                         <div>
                             <DataGrid
-                                key={"saleOrderId"}
-                                keyExpr={"saleOrderId"}
-                                dataSource={content}
+                                key={"soCode"}
+                                keyExpr={"soCode"}
+                                dataSource={data}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}
-                                onSelectionChanged={onSelectedRowKeysChange}
-                                onRowClick={onSelectedRowKeysChange}
-                                onRowUpdating={updateOrder}
-                                onRowRemoving={removeOrder}>
+                                focusedRowEnabled={true}>
                                 <Toolbar>
                                     <ToolbarItem location='after'>
                                         <SvgIcon
                                             tooltipTitle='Xuất Excel'
                                             text='Xuất Excel'
-                                            onClick={() => setIsVisibleAdd(true)}
+                                            onClick={() => {}}
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/ExportFile.svg'
@@ -299,15 +119,14 @@ export const DnlNvlList = () => {
                                     showNavigationButtons={true}
                                     infoText='Trang số {0} trên {1} ({2} bản ghi)'
                                 />
-                                <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment='left' width={100} />
-                                <Column caption={"Mã SO"} dataField={"productionCode"} />
-                                <Column caption={"Mã PCN"} dataField={"productionCode"} />
-                                <Column caption={"Tên khách hàng"} dataField={"customer"} />
-                                <Column caption={"Tên thẻ "} dataType='datetime' dataField={"startTime"} />
-                                <Column caption={"Số lượng"} dataType='datetime' dataField={"deliveryDate"} />
-                                <Column caption={"Bom version"} dataField={"customer"} />
-                                <Column caption={"Mức độ ưu tiên"} dataField={"customer"} />
-                                <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+
+                                <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
+                                <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
+                                <Column caption={"Tên khách hàng"} dataField={"customerName"} />
+                                <Column caption={"Tên thẻ "} dataField={"cardName"} />
+                                <Column caption={"Số lượng sản xuất lại"} dataField={"numberReProduction"} />
+                                <Column caption={"Lý do sản xuất lại"} dataField={"reasonReProduction"} />
+                                <Column caption={"Trạng thái"} dataField='status' />
                                 <Column
                                     type={"buttons"}
                                     caption={"Thao tác"}
@@ -315,13 +134,13 @@ export const DnlNvlList = () => {
                                     cellRender={() => (
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                             <SvgIcon
-                                                tooltipTitle='Xem danh sách NVL'
+                                                tooltipTitle='Thông tin'
                                                 onClick={() => {
                                                     setIsViewMaterial(true);
                                                 }}
                                                 sizeIcon={17}
                                                 textSize={17}
-                                                icon='assets/icons/EyeOpen.svg'
+                                                icon='assets/icons/InfoCircle.svg'
                                                 textColor='#FF7A00'
                                                 style={{ marginRight: 17 }}
                                             />
@@ -331,7 +150,6 @@ export const DnlNvlList = () => {
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
                                             />
                                         </div>
                                     )}
@@ -371,8 +189,8 @@ export const DnlNvlList = () => {
                                 </div>
                             </div>
                             <DataGrid
-                                key={"no"}
-                                keyExpr={"no"}
+                                key={"soCode"}
+                                keyExpr={"soCode"}
                                 dataSource={data}
                                 showBorders={true}
                                 columnAutoWidth={true}
@@ -425,7 +243,7 @@ export const DnlNvlList = () => {
 };
 
 registerScreen({
-    caption: "Danh sách đề nghị lĩnh nguyên vật liệu",
+    caption: "Danh sách yêu cầu sản xuất lại",
     component: DnlNvlList,
     menuOptions: {
         pathPattern: ROUTING_PATH,

@@ -80,7 +80,7 @@ export const JobOutPutDetail = React.memo((props: any) => {
                         between='Nằm giữa'
                     />
                 </FilterRow>
-                <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Column caption='Mã Job output' dataField={"jobOutputCode"} />
                 <Column dataField='jobOutputName' caption='Tên Job output' />
                 <Column dataField='cardBoxQuantity' caption='Số lượng thẻ trong hộp' />
