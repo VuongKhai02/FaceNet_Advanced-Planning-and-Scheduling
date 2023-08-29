@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 
-interface PopupConfirmGeneralProps {
+interface PopupWOProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -11,17 +11,10 @@ interface PopupConfirmGeneralProps {
     customFooter?: React.ReactNode[] | null;
 }
 
-const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
-    isVisible,
-    onCancel,
-    onSubmit,
-    modalTitle,
-    modalContent,
-    width,
-    customFooter,
-}) => {
+const PopupBOM: React.FC<PopupWOProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width, customFooter }) => {
     return (
         <Modal
+            bodyStyle={{ padding: 0 }}
             // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
@@ -29,11 +22,11 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
                 customFooter !== undefined
                     ? customFooter
                     : [
-                          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+                          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
                               <Button
                                   key='cancel'
                                   style={{
-                                      marginRight: 20,
+                                      marginRight: "30px",
                                       backgroundColor: "#E5E5E5",
                                       display: "inline-block",
                                       borderRadius: "4px",
@@ -42,7 +35,7 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
                                       fontSize: 16,
                                   }}
                                   onClick={onCancel}>
-                                  Hủy bỏ
+                                  Hủy
                               </Button>
                               ,
                               <Button
@@ -53,12 +46,11 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
                                       width: 100,
                                       height: 40,
                                       fontSize: 16,
-                                      marginRight: 20,
                                   }}
                                   key='submit'
                                   onClick={onSubmit}
                                   className='btn btn-save'>
-                                  Xác nhận
+                                  Lưu lại
                               </Button>
                           </div>,
                       ]
@@ -70,4 +62,4 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
     );
 };
 
-export default PopupConfirmGeneral;
+export default PopupBOM;

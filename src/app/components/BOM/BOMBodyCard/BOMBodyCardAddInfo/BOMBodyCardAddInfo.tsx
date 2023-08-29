@@ -2,7 +2,7 @@ import React from "react";
 import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow, HeaderFilter, Item as ToolbarItem, Toolbar, Button as ButtonB } from "devextreme-react/data-grid";
 import "./BOMBodyCardAddInfo.css";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
 import PopupBOMAddNewInfoMaterial from "../../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
@@ -433,11 +433,11 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             className='toolbar'
                             style={{
                                 marginTop: 15,
+                                paddingBottom: 15,
                                 display: "flex",
                                 justifyContent: "right",
                                 alignItems: "center",
                                 // background: "#ffffff",
-                                padding: "8px",
                                 borderRadius: "4px",
                             }}>
                             <Button

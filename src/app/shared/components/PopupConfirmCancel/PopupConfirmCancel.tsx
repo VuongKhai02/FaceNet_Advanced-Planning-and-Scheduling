@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 
-interface PopupSendSAPProps {
+interface PopupConfirmCancelProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
@@ -10,7 +10,7 @@ interface PopupSendSAPProps {
     width: number;
 }
 
-const PopupSendSAP: React.FC<PopupSendSAPProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
+const PopupConfirmCancel: React.FC<PopupConfirmCancelProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
     return (
         <Modal
             // closeIcon={true}
@@ -56,4 +56,4 @@ const PopupSendSAP: React.FC<PopupSendSAPProps> = ({ isVisible, onCancel, onSubm
     );
 };
 
-export default PopupSendSAP;
+export default PopupConfirmCancel;

@@ -5,6 +5,7 @@ import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/Te
 import { observer } from "mobx-react";
 import { Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
+import TextArea from "antd/lib/input/TextArea";
 
 type TechFormBodyCardProps = {
     isOpen: boolean;
@@ -185,8 +186,10 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                     }}>
                                     Thiết kế/Card design
                                 </h5>
-                                {/* <ImportTechForm /> */}
-                                <div className='mt-24'>
+                                <div className='mt-24' style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+                                    <div>
+                                        <TextArea placeholder='Nhập ghi chú' rows={8} style={{ resize: "horizontal" }} />
+                                    </div>
                                     <Upload.Dragger
                                         multiple={false}
                                         accept='.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'>
@@ -203,7 +206,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         <p className='ant-upload-text'>
                                             Kéo thả file hoặc <a style={{ color: "#FF7A00" }}>Chọn file</a> để tải lên
                                         </p>
-                                        <p className='ant-upload-hint'>Chỉ cho phép file dạng .xls, .xlsx và dung lượng không quá 1MB</p>
+                                        <p className='ant-upload-hint'>Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.</p>
                                     </Upload.Dragger>
                                 </div>
                             </div>
@@ -346,44 +349,6 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             }}
                                             title='Tên vật liệu/Materials Name'
                                             dataIndex=''
-                                            key='materialName'
-                                            align='center'
-                                            render={() => <TextBox placeholder='Nhập' key='step8' />}
-                                        />
-                                        <Table.Column
-                                            title='Xuất xứ/Supplier'
-                                            dataIndex=''
-                                            key='supplier'
-                                            align='center'
-                                            render={() => <TextBox placeholder='Nhập' key='step8' />}
-                                        />
-                                        <Table.Column
-                                            title='Độ dày/Thickness(mm)'
-                                            dataIndex=''
-                                            key='thickNess'
-                                            align='center'
-                                            render={() => <TextBox placeholder='Nhập' key='step8' />}
-                                        />
-                                        <Table.Column
-                                            title="Số lượng/Q'ty(tấm)"
-                                            dataIndex=''
-                                            key='quantity'
-                                            align='center'
-                                            render={() => <TextBox placeholder='Nhập' key='step8' />}
-                                        />
-                                        <Table.Column
-                                            title='Ghi chú/Remark'
-                                            dataIndex=''
-                                            key='remark'
-                                            align='center'
-                                            render={() => <TextBox placeholder='Nhập' key='step8' />}
-                                        />
-                                        <Table.Column
-                                            onCell={(item, index: any) => {
-                                                return index === 0 ? { rowSpan: 9 } : { rowSpan: 0 };
-                                            }}
-                                            title='Cấu trúc/Structure'
-                                            dataIndex=''
                                             key='structure'
                                             align='center'
                                             className='no-border-column'
@@ -412,33 +377,9 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                             Kéo thả file hoặc <a style={{ color: "#FF7A00" }}>Chọn file</a> để tải lên
                                                         </p>
                                                         <p className='ant-upload-hint'>
-                                                            Chỉ cho phép file dạng .xls, .xlsx và dung lượng không quá 1MB
+                                                            Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.
                                                         </p>
                                                     </Upload.Dragger>
-                                                </div>
-                                            )}
-                                        />
-                                        <Table.Column
-                                            title=''
-                                            align='center'
-                                            render={() => (
-                                                <div style={{ display: "flex", flexDirection: "row" }}>
-                                                    <SvgIcon
-                                                        tooltipTitle='Thêm mới'
-                                                        sizeIcon={17}
-                                                        textSize={17}
-                                                        icon='assets/icons/Add.svg'
-                                                        textColor='#FF7A00'
-                                                        style={{ marginRight: 17 }}
-                                                    />
-                                                    <SvgIcon
-                                                        tooltipTitle='Xóa hàng'
-                                                        sizeIcon={17}
-                                                        textSize={17}
-                                                        icon='assets/icons/Trash.svg'
-                                                        textColor='#FF7A00'
-                                                        style={{ marginRight: 17 }}
-                                                    />
                                                 </div>
                                             )}
                                         />

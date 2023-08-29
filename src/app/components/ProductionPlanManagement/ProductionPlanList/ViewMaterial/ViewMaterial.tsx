@@ -37,18 +37,9 @@ export const ViewMaterial = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}>
-                                <HeaderFilter
-                                    visible={true}
-                                    texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng",
-                                    }}
-                                    allowSearch={true}
-                                />
                                 <FilterRow visible={true} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                                <SearchPanel visible={true} placeholder={"Tìm kiếm..."} />
+                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} />
                                 <Paging defaultPageSize={5} />
                                 <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment='left' width={100} />
                                 <Column caption={"Mã SO"} dataField={"productionCode"} />

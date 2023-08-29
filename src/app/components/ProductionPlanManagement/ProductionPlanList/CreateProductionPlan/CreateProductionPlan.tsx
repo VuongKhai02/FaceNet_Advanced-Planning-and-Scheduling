@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, DataGrid } from "devextreme-react";
 
-import { Column, FilterRow, HeaderFilter, MasterDetail } from "devextreme-react/data-grid";
+import { Column, FilterRow, MasterDetail } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
@@ -66,20 +66,14 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}>
-                            <HeaderFilter
-                                visible={true}
-                                texts={{
-                                    cancel: "Hủy bỏ",
-                                    ok: "Đồng ý",
-                                    emptyValue: "Rỗng",
-                                }}
-                                allowSearch={true}
-                            />
                             <FilterRow visible={true} />
-
                             <Column caption={"Mã Job"} dataField={"codeJob"} alignment='left' width={100} />
                             <Column caption={"Tên Job"} dataField={"nameJob"} />
-                            <Column caption={"Thời gian bắt đầu"} dataType='datetime' dataField={""} format='dd/MM/yyyy hh:mm:ss'></Column>
+                            <Column
+                                caption={"Thời gian bắt đầu"}
+                                dataType='datetime'
+                                dataField={"startTime"}
+                                format='dd/MM/yyyy hh:mm:ss'></Column>
                             <Column caption={"Thời gian kết thúc"} dataType='datetime' dataField={"endTime"} format='dd/MM/yyyy hh:mm:ss' />
                             <MasterDetail
                                 enabled={true}

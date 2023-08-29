@@ -1,6 +1,6 @@
-import React from 'react';
-import { Modal, Button, Radio } from 'antd';
-import { QrcodeOutlined } from '@ant-design/icons';
+import React from "react";
+import { Modal, Button, Radio } from "antd";
+import { QrcodeOutlined } from "@ant-design/icons";
 
 interface PopupDetailProductionRequireProps {
     isVisible: boolean;
@@ -19,7 +19,7 @@ const PopupDetailProductionRequire: React.FC<PopupDetailProductionRequireProps> 
     modalTitle,
     modalContent,
     width,
-    className
+    className,
 }) => {
     return (
         <Modal
@@ -30,28 +30,26 @@ const PopupDetailProductionRequire: React.FC<PopupDetailProductionRequireProps> 
             title={modalTitle}
             footer={[
                 <div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                         <Button
-                            key="cancel"
+                            key='cancel'
                             style={{
-                                marginRight: '15px',
-                                backgroundColor: '#E5E5E5',
-                                display: 'inline-block',
-                                borderRadius: '4px',
+                                marginRight: "15px",
+                                backgroundColor: "#E5E5E5",
+                                display: "inline-block",
+                                borderRadius: "4px",
                                 width: 100,
                                 height: 40,
-                                fontSize: 16
+                                fontSize: 16,
                             }}
-                            onClick={onCancel}
-                        >
+                            onClick={onCancel}>
                             Đóng
                         </Button>
                     </div>
-                </div>
+                </div>,
             ]}
             width={width}
-            onCancel={onCancel}
-        >
+            onCancel={onCancel}>
             {modalContent}
         </Modal>
     );

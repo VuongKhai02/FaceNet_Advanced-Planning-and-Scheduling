@@ -58,7 +58,8 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                     <div
                         className='toolbar'
                         style={{
-                            marginTop: 15,
+                            marginTop: 35,
+                            paddingBottom: 35,
                             display: "flex",
                             justifyContent: "flex-end",
                             alignItems: "center",

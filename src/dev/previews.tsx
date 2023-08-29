@@ -78,6 +78,7 @@ import COITTImport from "../app/profile/COITTImport";
 import OITMImport from "../app/profile/OITMImport";
 import ProgressMonitoringOrder from "../app/components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder";
 import DeclareProductionObject from "../app/components/ProductionPlanManagement/declareObject/DeclareProductionObject";
+import ProgressMonitoringStageQueue from "../app/components/ProgressMonitoring/ProgressMonitoringStageQueue/ProgressMonitoringStageQueue";
 
 export const ComponentPreviews = () => {
     return (
@@ -323,6 +324,19 @@ export const ComponentPreviews = () => {
             </ComponentPreview>
             <ComponentPreview path='/progressMonitoringOrder'>
                 <ProgressMonitoringOrder />
+            </ComponentPreview>
+            {/* Giám sát tiến độ */}
+            <ComponentPreview path='/progressMonitoringWO'>
+                <ProgressMonitoringWO />
+            </ComponentPreview>
+            <ComponentPreview path='/progressMonitoringManufacture'>
+                <ProgressMonitoringManufacture />
+            </ComponentPreview>
+            <ComponentPreview path='/progressMonitoringOrder'>
+                <ProgressMonitoringOrder />
+            </ComponentPreview>
+            <ComponentPreview path='/progressMonitoringStageQueue'>
+                <ProgressMonitoringStageQueue />
             </ComponentPreview>
         </Previews>
     );

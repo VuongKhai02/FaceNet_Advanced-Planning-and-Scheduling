@@ -16,7 +16,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import "./ManageProductionRequirements.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import PopupDetailProductionRequire from "../../../shared/components/PopupDetailProductionRequire/PopupDetailProductionRequire";
 import ViewDetailProductRequires from "./ViewDetailProductRequires/ViewDetailProductRequires";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
@@ -58,7 +58,7 @@ const data = [
 ];
 
 const ROUTING_PATH = "/manageProductionRequirements";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageProductionRequirements = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisibleDetailProductionRequire, setIsVisibleDetailProductionRequire] = React.useState<boolean>(false);
