@@ -476,7 +476,7 @@ export const TechFormList = () => {
                     </div>
                     <div className='icon-more'>
                         <SvgIcon
-                            onClick={handleAddNewButton}
+                            onClick={() => {}}
                             text='Thêm mới'
                             tooltipTitle='Thêm mới'
                             sizeIcon={17}

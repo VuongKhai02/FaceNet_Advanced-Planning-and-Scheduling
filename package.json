@@ -50,7 +50,6 @@
         "react-error-overlay": "6.0.9"
     },
     "scripts": {
-        "postinstall": "npx husky install",
         "start": "set PORT=6080 HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
         "start-3001": "set PORT=9081 HOST=0.0.0.0 TZ=Asia/Bangkok&&react-scripts start",
         "start:test": "env-cmd -f .env.test react-scripts start",
@@ -73,7 +72,6 @@
         "@types/react-router-dom": "^5.1.5",
         "devextreme-aspnet-data-nojquery": "^2.8.6",
         "env-cmd": "^10.1.0",
-        "husky": "^8.0.3",
         "lint-staged": "^14.0.0",
         "prettier": "^3.0.2",
         "react-error-overlay": "^6.0.9",
@@ -84,12 +82,13 @@
             "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
         ]
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
+  "eslintConfig": {
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ]
+},
+
     "jmix": {
         "generator": "react-typescript"
     },
