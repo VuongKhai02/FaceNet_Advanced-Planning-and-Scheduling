@@ -124,7 +124,7 @@ export const TechFormList = () => {
             }}>
             <div className='icon-more'>
                 <SvgIcon
-                    onClick={() => {}}
+                    onClick={() => { }}
                     text='Thay đổi mức độ ưu tiên'
                     tooltipTitle='Thay đổi mức độ ưu tiên'
                     sizeIcon={17}
@@ -147,7 +147,7 @@ export const TechFormList = () => {
             </div>
             <div className='icon-more'>
                 <SvgIcon
-                    onClick={() => {}}
+                    onClick={() => { }}
                     text='Gửi SAP'
                     tooltipTitle='Gửi SAP'
                     sizeIcon={17}
@@ -159,7 +159,7 @@ export const TechFormList = () => {
             </div>
             <div className='icon-more'>
                 <SvgIcon
-                    onClick={handleAddNewButton}
+                    onClick={() => { }}
                     text='Thêm mới'
                     tooltipTitle='Thêm mới'
                     sizeIcon={17}
@@ -264,13 +264,13 @@ export const TechFormList = () => {
                             }
                             width={600}
                             onCancel={() => setIsPrioritizeLevelChange(false)}
-                            onSubmit={() => {}}
+                            onSubmit={() => { }}
                         />
                         <PopupImportFile
                             visible={popupVisible}
                             onCancel={() => setPopupVisible(false)}
                             title={"Import file"}
-                            onSubmit={() => {}}
+                            onSubmit={() => { }}
                             width={900}
                         />
                         <PopupSendSAP
@@ -278,7 +278,7 @@ export const TechFormList = () => {
                             onCancel={() => {
                                 setIsModalVisibleSendSAP(false);
                             }}
-                            onSubmit={() => {}}
+                            onSubmit={() => { }}
                             modalTitle={
                                 <div>
                                     <h3

@@ -21,7 +21,7 @@ import {
 } from "@ant-design/icons";
 import UserService from "../Keycloak";
 
-export interface AppMenuProps extends MenuProps {}
+export interface AppMenuProps extends MenuProps { }
 
 export const AppMenu = (props: AppMenuProps) => {
     const orderMenu = UserService.hasRole(["screen.ProductOrder"]) ? (
@@ -127,11 +127,32 @@ export const AppMenu = (props: AppMenuProps) => {
                 <MenuItem screenId='bomPersonalized' caption={"Quản lý BOM cá thể hóa"} key={"bomPersonalized"} />
             </SubMenuItem>
             <SubMenuItem caption={"Quản lý phiếu công nghệ"} icon={<AppstoreOutlined />}>
-                <MenuItem screenId='techFormList' caption={"Danh sách phiếu công nghệ"} key={"techFormList"} />
-                <MenuItem screenId='techFormApprove' caption={"Phê duyệt phiếu công nghệ"} key={"techFormApprove"} />
+                <MenuItem
+                    screenId='techFormList'
+                    // icon={<HomeFilled />}
+                    caption={"Danh sách phiếu công nghệ"}
+                    key={"techFormList"}
+                />
+
+                <MenuItem
+                    screenId="progressMonitoringOrder"
+                    caption={"Giám sát tiến độ đơn hàng"}
+                    key={"progressMonitoringOrder"}
+                />
+                <MenuItem
+                    screenId=""
+                    // icon={<ShoppingOutlined />}
+                    caption={"Giám sát máy"}
+                    key={"gsm"}
+                />
+                <MenuItem
+                    screenId="progressMonitoringStageQueue"
+                    caption={"Hàng chờ công đoạn"}
+                    key={"progressMonitoringStageQueue"}
+                />
             </SubMenuItem>
-            <SubMenuItem caption={"Quản lý kế hoạch sản xuất"} icon={<AppstoreOutlined />}>
-                <MenuItem screenId='productionPlanList' caption={"Danh sách kế hoạch sản xuất"} key={"productionPlanList"} />
+            {/* user */}
+            <SubMenuItem caption="Quản lý tài khoản" icon={<UserOutlined />}>
 
                 <MenuItem screenId='dnlNvlList' caption={"Danh sách yêu cầu sản xuất lại"} key={"dnlNvlList"} />
             </SubMenuItem>

@@ -69,6 +69,11 @@ const data = [
         status: "Hoạt động",
     },
 ];
+const data1 = [
+    { no: '1', codeMaterial: 'Mã vật tư 1', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 2', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' },
+    { no: '2', codeMaterial: 'Mã vật tư 3', nameMaterial: 'Tên vật tư', version: '1.1', norm: 'Định mức', supplierName: 'Tên nhà cung cấp', replaceMaterial: 'Vật tư thay thế', inventoryQuantity: 'Số lượng tồn kho' }
+];
 
 const data2 = [
     {
@@ -110,8 +115,8 @@ const ROUTING_PATH = "/BOMBodyCard";
 export const BOMBodyCard = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
-    const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
+    const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isBOMCardAddTemplate, setIsBOMCardAddTemplate] = React.useState<boolean>(false);
     const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
@@ -228,7 +233,7 @@ export const BOMBodyCard = () => {
                                     visible={isVisibleImportFile}
                                     onCancel={() => setIsVisibleImportFile(false)}
                                     title={"Import file"}
-                                    onSubmit={() => {}}
+                                    onSubmit={() => { }}
                                     width={900}
                                 />
                                 <PopupBOM
@@ -315,7 +320,7 @@ export const BOMBodyCard = () => {
                                     }
                                     width={1300}
                                     onCancel={() => setIsDetailBOM(false)}
-                                    onSubmit={() => {}}
+                                    onSubmit={() => { }}
                                     customFooter={handleCustomFooter}
                                 />
                                 <PopupBOM
@@ -393,7 +398,7 @@ export const BOMBodyCard = () => {
                                     }
                                     width={1300}
                                     onCancel={() => setIsVisibleListMaterialReplacement(false)}
-                                    onSubmit={() => {}}
+                                    onSubmit={() => { }}
                                     customFooter={handleCustomFooter}
                                 />
                                 <Toolbar>
@@ -411,7 +416,7 @@ export const BOMBodyCard = () => {
                                     </ToolbarItem>
                                     <ToolbarItem>
                                         <SvgIcon
-                                            onClick={() => {}}
+                                            onClick={() => { }}
                                             text='Xuất Excel'
                                             tooltipTitle='Xuất Excel'
                                             sizeIcon={17}
@@ -474,7 +479,7 @@ export const BOMBodyCard = () => {
                                                 style={{ marginRight: 17 }}
                                             />
                                             <SvgIcon
-                                                onClick={() => {}}
+                                                onClick={() => { }}
                                                 tooltipTitle='Chuyển trạng thái'
                                                 sizeIcon={17}
                                                 textSize={17}
@@ -501,13 +506,13 @@ export const BOMBodyCard = () => {
                             visible={isVisibleImportFile}
                             onCancel={() => setIsVisibleImportFile(false)}
                             title={"Import file"}
-                            onSubmit={() => {}}
+                            onSubmit={() => { }}
                             width={900}
                         />
                         <PopupConfirmDelete
                             isVisible={isConfirmDelete}
                             onCancel={() => setIsConfirmDelete(false)}
-                            onSubmit={() => {}}
+                            onSubmit={() => { }}
                             modalTitle={
                                 <div>
                                     <h3

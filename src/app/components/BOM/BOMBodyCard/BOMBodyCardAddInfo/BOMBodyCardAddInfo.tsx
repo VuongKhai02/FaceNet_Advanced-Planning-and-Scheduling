@@ -32,20 +32,9 @@ type MaterialDetail = {
 };
 
 const data = [
-    {
-        materialCode: "HH01",
-        materialDescript: "Vật tư 1",
-        technicalName: "Vật tư 1",
-        version: "1.1",
-        classify: "NVL",
-        norm: "1",
-        unit: "Cái",
-        supplier: "NCC01",
-        warehouse: "03,05",
-        materialCodeChange: "HH04",
-        materialDescriptChange: "Vật tư 04",
-        inventoryQuantity: "1000",
-    },
+    { materialCode: 'HH01', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH02', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' },
+    { materialCode: 'HH03', materialDescript: 'Vật tư 1', technicalName: 'Vật tư 1', version: '1.1', classify: 'NVL', norm: '1', unit: 'Cái', supplier: 'NCC01', warehouse: '03,05', materialCodeChange: 'HH04', materialDescriptChange: 'Vật tư 04', inventoryQuantity: '1000' }
 ];
 export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -305,13 +294,13 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 visible={isVisibleImportFile}
                                 onCancel={() => setIsVisibleImportFile(false)}
                                 title={"Import file"}
-                                onSubmit={() => {}}
+                                onSubmit={() => { }}
                                 width={900}
                             />
                             <PopupConfirmDelete
                                 isVisible={isConfirmDelete}
                                 onCancel={handleHideModalDel}
-                                onSubmit={() => {}}
+                                onSubmit={() => { }}
                                 modalTitle={
                                     <div>
                                         <h3
@@ -377,15 +366,6 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 alignment='center'
                                 cellRender={() => (
                                     <div style={{ display: "flex", justifyContent: "center" }}>
-                                        <SvgIcon
-                                            onClick={() => {}}
-                                            tooltipTitle='Thêm hàng'
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon='assets/icons/Add.svg'
-                                            textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
-                                        />
                                         <SvgIcon
                                             onClick={handleShowModalDel}
                                             tooltipTitle='Xóa'

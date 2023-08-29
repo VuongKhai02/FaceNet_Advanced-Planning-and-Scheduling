@@ -325,19 +325,20 @@ export const ComponentPreviews = () => {
             <ComponentPreview path='/progressMonitoringOrder'>
                 <ProgressMonitoringOrder />
             </ComponentPreview>
-            {/* Giám sát tiến độ */}
-            <ComponentPreview path='/progressMonitoringWO'>
+            <ComponentPreview path="/progressMonitoringWO">
                 <ProgressMonitoringWO />
             </ComponentPreview>
-            <ComponentPreview path='/progressMonitoringManufacture'>
+            <ComponentPreview path="/progressMonitoringManufacture">
                 <ProgressMonitoringManufacture />
             </ComponentPreview>
-            <ComponentPreview path='/progressMonitoringOrder'>
+            <ComponentPreview path="/progressMonitoringOrder">
                 <ProgressMonitoringOrder />
             </ComponentPreview>
-            <ComponentPreview path='/progressMonitoringStageQueue'>
+            <ComponentPreview path="/progressMonitoringStageQueue">
                 <ProgressMonitoringStageQueue />
             </ComponentPreview>
         </Previews>
     );
+
+
 };

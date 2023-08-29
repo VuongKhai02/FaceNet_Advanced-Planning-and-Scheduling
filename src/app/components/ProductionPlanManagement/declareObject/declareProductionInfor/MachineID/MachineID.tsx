@@ -196,4 +196,4 @@ export const MachineID: React.FC<MachineID> = observer(({ isOpen = false, setClo
     );
 });
 
-export default MachineID;
+
