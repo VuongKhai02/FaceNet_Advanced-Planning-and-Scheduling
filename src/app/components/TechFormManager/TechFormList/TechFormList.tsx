@@ -16,6 +16,7 @@ import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
 import CreateProductionPlan from "../../ProductionPlanManagement/ProductionPlanList/CreateProductionPlan/CreateProductionPlan";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import PopupSelectProductionRequirement from "../../../shared/components/PopupSelectProductionRequirement/PopupSelectProductionRequirement";
 
 const data = [
     {
@@ -74,17 +75,17 @@ export const TechFormList = () => {
 
     const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
-
-    // const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
-    // const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
-    // const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
-    // const [newButtons, setNewButtons] = React.useState<any>([]);
     const [techFormIdChoosed, setTechFormIdChoosed] = React.useState(null);
     const mainStore = useMainStore();
+    const [isOpenSelectPR, setIsOpenSelectPR] = React.useState<boolean>(false)
 
     const [techForms, setTechForms] = React.useState([]);
+    const [pRChoosed, setPRChoosed] = React.useState(null)
 
-    const handleAddFormTech = () => {
+    const handleAddFormTech = (info) => {
+        // console.log(id)
+        setPRChoosed(info);
+        setIsOpenSelectPR(false)
         setIsAddNewTechForm(true);
     };
 
@@ -106,8 +107,7 @@ export const TechFormList = () => {
             "content-type": "application/json",
         };
         axios.get(PLANNING_API_URL + "/api/techforms", { headers }).then((response) => {
-            if (response.status === 200) {
-                console.log(response.data.data.data);
+            if (response.status === 200 && response.data.responseCode === '00') {
                 setTechForms(response.data.data.data);
             }
         });
@@ -188,13 +188,27 @@ export const TechFormList = () => {
     return (
         <>
             {isAddNewTechForm ? (
-                <TechFormBodyCard isOpen={isAddNewTechForm} setClose={() => setIsAddNewTechForm(false)} />
+                <TechFormBodyCard prInfo={pRChoosed} isOpen={isAddNewTechForm} setClose={() => setIsAddNewTechForm(false)} />
             ) : isCreateProductionPlan ? (
                 <CreateProductionPlan isOpen={isCreateProductionPlan} setClose={() => setCreateProductionPlan(false)} />
             ) : isVisibleTechFormUpdate ? (
-                <TechFormUpdate id={2} isOpen={isVisibleTechFormUpdate} setClose={() => setIsVisibleTechFormUpdate(false)} />
+                <TechFormUpdate
+                    id={techFormIdChoosed}
+                    isOpen={isVisibleTechFormUpdate}
+                    setClose={() => setIsVisibleTechFormUpdate(false)}
+                />
             ) : isVisibleBOMBodyCardAddInfo ? (
-                <BOMBodyCardAddInfo id={2} isOpen={isVisibleBOMBodyCardAddInfo} setClose={() => setIsVisibleBOMBodyCardAddInfo(false)} />
+                <BOMBodyCardAddInfo
+                    requestInfo={requestInfoChoosed}
+                    techFormId={techFormIdChoosed}
+                    id={null}
+                    isOpen={isVisibleBOMBodyCardAddInfo}
+                    setClose={() => {
+                        setRequestInfoChoosed(null)
+                        setTechFormIdChoosed(null)
+                        setIsVisibleBOMBodyCardAddInfo(false)
+                    }}
+                />
             ) : (
                 <div className='box__shadow-table-responsive'>
                     <div className='table-responsive'>
@@ -266,6 +280,13 @@ export const TechFormList = () => {
                             width={600}
                             onCancel={() => setIsPrioritizeLevelChange(false)}
                             onSubmit={() => { }}
+                        />
+                        <PopupSelectProductionRequirement
+                            visible={isOpenSelectPR}
+                            onCancel={() => setIsOpenSelectPR(false)}
+                            title={"Chọn yêu cầu sản xuất"}
+                            onSubmit={handleAddFormTech}
+                            width={1200}
                         />
                         <PopupImportFile
                             visible={popupVisible}
@@ -378,7 +399,7 @@ export const TechFormList = () => {
                                     <SvgIcon
                                         tooltipTitle='Thêm mới'
                                         text='Thêm mới'
-                                        onClick={handleAddFormTech}
+                                        onClick={() => setIsOpenSelectPR(true)}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/CircleAdd.svg'

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, DataGrid, DropDownBox, SelectBox, TextBox } from "devextreme-react";
 import DateBox from "devextreme-react/date-box";
 import "./TechFormHostamping.css";
@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import { Input, Table, Button as ButtonAnt, Select } from "antd";
 import { DeleteOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
+import { TechFormContext } from "../TechFormBodyCard/TechFormBodyCard";
 
 type TechFormHostampingProps = {
     isOpen: boolean;
@@ -36,6 +37,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
     const handleNextClick = () => {
         console.log("Tiếp theo");
     };
+    const [techFormData, setTechFormData, save] = useContext(TechFormContext)
 
     return (
         <div className='box__shadow-table-responsive'>
@@ -552,7 +554,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         />
                         <Button
                             text='Thêm mới'
-                            onClick={handleNextClick}
+                            onClick={save}
                             style={{ backgroundColor: "#FF7A00", color: "#fff", width: 110 }}
                         />
                     </div>

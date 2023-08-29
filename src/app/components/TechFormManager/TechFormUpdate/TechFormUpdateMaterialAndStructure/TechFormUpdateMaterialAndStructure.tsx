@@ -94,8 +94,6 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                 } else {
                     back = {};
                 }
-                console.log("front: ", front);
-                console.log("back", back);
                 data.push({
                     no: i,
                     front: front,
@@ -148,7 +146,6 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                 },
             });
         }
-
         const onUpdatePlateInfo = (isFront, index, key, value) => {
             let side;
             let newData;
