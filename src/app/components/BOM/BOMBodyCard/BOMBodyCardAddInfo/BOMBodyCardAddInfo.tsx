@@ -79,6 +79,8 @@ const convertToMaterialBOM = (value) => {
     }
 }
 
+const classify = ['Thành phẩm', 'Bán thành phẩm', 'Nguyên vật liệu']
+
 
 export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo, techFormId }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -275,13 +277,15 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                 version: '1.0',
                 bomBodyCardMaterials: [{id: 1}]})
         }
-    }, [id, requestInfo]);
+    }, [id, requestInfo, techFormId]);
 
     React.useEffect(() => {
         getAllMaterial();
     }, [])
 
-
+    const test = () => {
+        console.log('bomData 22' , bomData)
+    }
     console.log('bomData', bomData)
 
     return (
@@ -341,7 +345,8 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                         placeholder='Nhập mô tả vật tư'
                                         width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Verion</p>
-                                    <TextBox value={materialDetail?.version} id='version' key={"version"} placeholder='Nhập'></TextBox>
+                                    <TextBox defaultValue={materialDetail?.version} 
+                                     id='version' key={"version"} placeholder='Nhập'></TextBox>
                                     <p style={{ marginTop: 30 }}>Định mức</p>
                                     <SelectBox id='norm' key={"norm"} placeholder='Chọn'></SelectBox>
                                     <p style={{ marginTop: 30 }}>Nhà cung cấp</p>
@@ -405,10 +410,10 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 </td>
                                 <td>
                                     <p>Version</p>
-                                    <TextBox value={bomData.version} onValueChanged={(e) => {
+                                    <TextBox value={bomData.version} onValueChange={(e) => {
                                         setBomData({
                                             ...bomData,
-                                            version: e.value
+                                            version: e
                                         })
                                     }} placeholder='Nhập' width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
@@ -420,7 +425,13 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     <p>Số lượng đã tính bù hao</p>
                                     <TextBox  value={bomData.quantity} disabled={requestInfo!== null} placeholder='Nhập' width={350}></TextBox>
                                     <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
-                                    <SelectBox value={bomData.note} placeholder=''></SelectBox>
+                                    <SelectBox onValueChange={e => {
+                                        console.log(e)
+                                        setBomData({
+                                            ...bomData,
+                                            productClassify: e
+                                        })
+                                    }} dataSource={classify} placeholder=''></SelectBox>
                                     <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
                                     <TextBox value={bomData.note} placeholder='1.1'></TextBox>
                                 </td>
@@ -572,7 +583,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <Column dataField='quota' caption='Định mức' />
                             <Column dataField='quantity' caption='Số lượng' />
                             <Column dataField='unit' caption='Đơn vị tính' />
-                            <Column caption={"Chọn mã vật tư thay thế"} dataField='replaceMaterialCode' cellRender={(cellIfo) => (
+                            <Column caption={"Chọn mã vật tư thay thế"} dataField='' cellRender={(cellIfo) => (
                                 <SelectBox 
                                     dataSource={materialList}
                                     searchExpr={"productCode"}

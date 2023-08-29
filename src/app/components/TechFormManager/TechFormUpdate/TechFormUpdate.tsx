@@ -255,6 +255,11 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                     style={{ width: "100%" }}
                                                     placeholder='Nhập'
                                                     value={cellIfo.value?.split(";")[0].replace("Width(W):", "").trim()}
+                                                    onValueChange={(e) => {
+                                                        // let newValue = "Width(W): " + e + ";" + cellIfo.value?.split(";")[1];
+                                                        console.log(e)
+                                                        // onChangeProductSpec('size', newValue)
+                                                    }}
                                                     key={"size"}
                                                 />
                                             </div>{" "}
@@ -357,7 +362,6 @@ export default TechFormUpdate;
 
 export const TechFormGeneralInfo = (dataGeneral) => {
 
-    console.log(dataGeneral.dataGeneral)
     return (
         <div className="wrapper">
             <div className="row">

@@ -111,7 +111,7 @@ export const TechFormList = () => {
             "content-type": "application/json",
         };
         axios.get(PLANNING_API_URL + "/api/techforms", { headers }).then((response) => {
-            if (response.status === 200 && response.data.data.responseCode === '00') {
+            if (response.status === 200 && response.data.responseCode === '00') {
                 console.log(response)
                 setTechForms(response.data.data.data);
             }
@@ -459,6 +459,7 @@ export const TechFormList = () => {
                                     isOpen={isVisibleBOMBodyCardAddInfo}
                                     setClose={() => {
                                         setRequestInfoChoosed(null)
+                                        setTechFormIdChoosed(null)
                                         setIsVisibleBOMBodyCardAddInfo(false)}}
                                 />
                             )}

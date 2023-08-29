@@ -6,6 +6,9 @@ import { observer } from "mobx-react";
 import { Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../icons/SvgIcon/SvgIcon";
 import { TechFormGeneralInfo } from "../../../TechFormUpdate/TechFormUpdate";
+import axios from "axios"
+import { useMainStore } from "@haulmont/jmix-react-core";
+import { PLANNING_API_URL } from "../../../../../../config";
 
 type TechFormBodyCardProps = {
     prInfo: any;
@@ -13,16 +16,97 @@ type TechFormBodyCardProps = {
     setClose?: () => void;
 };
 
+const initTechForm = {
+    priority: 1,
+    status: "Bản nháp",
+    prePressPcToPlate: {
+      isPrePress: false,
+      isPcToPlate: false,
+      totalPlate: 0,
+      front: [
+        {}
+      ],
+      back: [
+        {}
+      ]
+    },
+    printingTech: {
+      printingTechnology: 0,
+      front: [
+        {}
+      ],
+      back: [
+        {}
+      ]
+    },
+    productSpec: {
+      sizeType: "",
+      thickness: "",
+      size: "Width(W): ;Height(H): ",
+      other: ""
+    },
+    procedure: {
+      tfJobProcedures: [
+        {}
+      ]
+    },
+    lamination: {
+      startDate: "2023-08-29",
+      endDate: "2023-08-29",
+      steps: [
+        {}
+      ]
+    },
+    processing: {
+      startDate: "2023-08-29",
+      endDate: "2023-08-29",
+      processingInfos: [
+        {}
+      ]
+    },
+    cutting: {
+      startDate: "2023-08-29",
+      endDate: "2023-08-29",
+      cuttingInfos: [
+        {}
+      ]
+    },
+    hostamping: {
+      startDate: "2023-08-29",
+      endDate: "2023-08-29",
+      hostampingInfos: [
+        {}
+      ]
+    },
+    tfIcInfo: {
+      outsideHoleLength: "",
+      outsideHoleWidth: "",
+      outsideHoleDepth: "",
+      outsideHoleDiameter: "",
+      insideHoleLength: "",
+      insideHoleWidth: "",
+      insideHoleDepth: "",
+      insideHoleDiameter: "",
+      type: "",
+      machine: "",
+      temp: ""
+    },
+    packing: {
+      startDate: "2023-08-29",
+      endDate: "2023-08-29",
+      boxType: "",
+      packingLabelQuantity: 0,
+      packingLabelFrom: 0,
+      packingLabelTo: 0
+    }
+  }
+
 export const TechFormContext = createContext<any>(null)
 export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose, prInfo }) => {
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-    const [techFormData, setTechFormData] = React.useState<any>({
-        status: 'Bản nháp',
-        priority: 3
-    })
+    const [techFormData, setTechFormData] = React.useState<any>(initTechForm)
+    const mainStore = useMainStore()
 
-
-    console.log("mdfkd", prInfo)
     const data1 = [
         { title1: "Mã sx/Production", data1: "1500928", title2: "Người gửi/Sender", data2: "Nguyễn Thị A" },
         { title1: "Tên khách hàng/Customer", data1: "Ngân hang A", title2: "Số lượng thẻ/Quantity", data2: "15000" },
@@ -48,7 +132,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
         },
     ];
 
-    const data3 = [{ Id: 1 }];
+    const data3 = [{ Id: 1, size: "jhgfhjdh" }];
 
     const data4 = [
         { no: "1", materialName: "Overlay (Front)", supplier: "CPPC", thickNess: "0.05", quantity: "850", note: "", structure: "" },
@@ -64,8 +148,27 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
     };
 
     const save = () => {
-        console.log(techFormData)
+        const headers = {
+            Authorization: "Bearer " + mainStore.authToken,
+            "content-type": "application/json",
+        }; 
+        axios({ method: "post", url: PLANNING_API_URL+ `/api/production_requirements/${prInfo.id}/techforms`, headers: headers, data: techFormData })
+        .then(response => {
+            console.log(response);
+        })
     }
+
+    const onChangeValueSpec = (key, value) => {
+        setTechFormData({
+            ...techFormData,
+            productSpec: {
+                ...techFormData.productSpec,
+                [key]: value
+            }
+        })
+    }
+
+    console.log(techFormData);
 
     return (
         <>
@@ -110,36 +213,6 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                         </div>
 
                         <div style={{ marginTop: 10 }}>
-                            {/* <DataGrid
-                                key={"title1"}
-                                keyExpr={"title1"}
-                                dataSource={data1}
-                                showBorders={true}
-                                columnAutoWidth={true}
-                                showColumnHeaders={false}
-                                showRowLines={true}
-                                showColumnLines={true}>
-                                <Column dataField='title1' alignment={"left"} cssClass={"highlightColumn"}>
-                                    <Template name='title1'>
-                                        {(rowData) => (
-                                            <span className='alkoji' style={{ fontWeight: "bold" }}>
-                                                {rowData.title1}
-                                            </span>
-                                        )}
-                                    </Template>
-                                </Column>
-                                <Column dataField='data1' caption='Data 1' alignment={"left"}>
-                                    <Template name={"abc"}>{(rowData) => <span>{rowData.data1}</span>}</Template>
-                                </Column>
-                                <Column dataField='title2' alignment={"left"} cssClass={"highlightColumn"}>
-                                    <Template name='title1'>
-                                        {(rowData) => <span style={{ fontWeight: "bold" }}>{rowData.title2}</span>}
-                                    </Template>
-                                </Column>
-                                <Column dataField='data2' caption='Data 2' alignment={"left"}>
-                                    <Template name='abcd'>{(rowData) => <span>{rowData.title2}</span>}</Template>
-                                </Column>
-                            </DataGrid> */}
                             <TechFormGeneralInfo dataGeneral={prInfo}/>
                             <div
                                 className='informer'
@@ -159,30 +232,71 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                     Quy cách sản phẩm/Product Spec
                                 </h5>
                             </div>
-                            <Table dataSource={data3} bordered rowKey='Id' pagination={false}>
+                            <Table dataSource={[techFormData.productSpec]} bordered rowKey='Id' pagination={false}>
                                 <Table.Column
                                     title='Khổ thẻ/Size'
-                                    dataIndex='size'
-                                    key='size'
-                                    render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                    dataIndex='sizeType'
+                                    key='sizeType'
+                                    render={(value, record) => {
+                                        return <Input value={value} onChange={e => {
+                                            onChangeValueSpec('sizeType', e.target.value)
+                                        }} className='inputRow' placeholder='Nhập' />
+                                        
+                                }}
+                                />
+                                <Table.Column
+                                    title='Độ dày/Thickness(mm)'
+                                    dataIndex='thickness'
+                                    key='thickness'
+                                    render={(value) => <Input value={value} onChange={e => {
+                                        onChangeValueSpec('thickness', e.target.value)
+                                    }} className='inputRow' placeholder='Nhập' />}
                                 />
                                 <Table.Column
                                     title='Kích thước/Size, Dài/Length * Rộng/Width(mm)'
-                                    dataIndex='sizes'
-                                    key='sizes'
-                                    render={() => <Input className='inputRow' placeholder='Nhập' />}
-                                />
-                                <Table.Column
-                                    title='Kích thước/size'
                                     dataIndex='size'
                                     key='size'
-                                    render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                    render={(value) => <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                                    {" "}
+                                    <div className='textbox-row'>
+                                        <label>Width(W)</label>
+                                        <Input
+                                        className="inputRow"
+                                            style={{ width: "100%" }}
+                                            placeholder='Nhập'
+                                            value={value?.split(";")[0]?.replace("Width(W):", "").trim()}
+                                            key={"size"}
+                                            onChange={e => {
+                                                let newValue = "Width(W): " + e.target.value + ";" + value?.split(";")[1];
+                                                console.log(newValue)
+                                                onChangeValueSpec('size', newValue)
+                                            }}
+                                        />
+                                    </div>{" "}
+                                    <div className='textbox-row'>
+                                        {" "}
+                                        <label>Height(H)</label>
+                                        <Input
+                                        className="inputRow"
+                                            style={{ width: "100%" }}
+                                            placeholder='Nhập'
+                                            value={value?.split(";")[1]?.replace("Height(H):", "").trim()}
+                                            key={"size"}
+                                            onChange={e => {
+                                                let newValue = value?.split(";")[0] +  "; Height(H): " + e.target.value ;
+                                                onChangeValueSpec('size', newValue)
+                                            }}
+                                        />
+                                    </div>{" "}
+                                </div>}
                                 />
                                 <Table.Column
                                     title='Khác/other'
                                     dataIndex='other'
                                     key='other'
-                                    render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                    render={(value) => <Input value={value} onChange={e => {
+                                        onChangeValueSpec('other', e.target.value)
+                                    }} className='inputRow' placeholder='Nhập' />}
                                 />
                             </Table>
                             <div
@@ -246,7 +360,10 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             dataIndex='step1'
                                             key='step1'
                                             align='left'
-                                            render={() => <TextBox placeholder='Nhập' key='step1' />}
+                                            render={(e) => {
+                                                return (
+                                                    <TextBox placeholder='Nhập' key='step1' />
+                                                )}}
                                         />
                                         <Table.Column
                                             title='Step2'
