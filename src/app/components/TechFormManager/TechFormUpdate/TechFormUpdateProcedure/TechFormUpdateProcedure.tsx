@@ -37,6 +37,89 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
 
+        const onUpdateLaminationInfo = (index_, key, value) => {
+            let newLaminationInfos = techFormData.lamination.steps.map((step, index) => {
+                if (index !== index_) {
+                    return step;
+                } else {
+                    return {
+                        ...step,
+                        [key]: value
+                    }
+                }
+            })
+
+            setTechFormData({
+                ...techFormData,
+                lamination: {
+                    ...techFormData.lamination,
+                    steps: newLaminationInfos
+                }
+            })
+        }
+        const onUpdateProcessingInfo = (index_, key, value) => {
+            let newProcessingInfo = techFormData.processing.processingInfos.map((step, index) => {
+                if (index !== index_) {
+                    return step;
+                } else {
+                    return {
+                        ...step,
+                        [key]: value
+                    }
+                }
+            })
+
+            setTechFormData({
+                ...techFormData,
+                processing: {
+                    ...techFormData.processing,
+                    processingInfos: newProcessingInfo
+                }
+            })
+        }
+
+        const onUpdateCuttingInfo = (index_, key, value) => {
+            let newCuttingInfo = techFormData.cutting.cuttingInfos.map((step, index) => {
+                if (index !== index_) {
+                    return step;
+                } else {
+                    return {
+                        ...step,
+                        [key]: value
+                    }
+                }
+            })
+
+            setTechFormData({
+                ...techFormData,
+                cutting: {
+                    ...techFormData.cutting,
+                    cuttingInfos: newCuttingInfo
+                }
+            })
+        }
+
+        const onUpdateHostamping = (index_, key, value) => {
+            let newHostampingInfos = techFormData.hostamping.hostampingInfos.map((step, index) => {
+                if (index !== index_) {
+                    return step;
+                } else {
+                    return {
+                        ...step,
+                        [key]: value
+                    }
+                }
+            })
+
+            setTechFormData({
+                ...techFormData,
+                hostamping: {
+                    ...techFormData.hostamping,
+                    hostampingInfos: newHostampingInfos
+                }
+            })
+        }
+
         const onChoosePrintingTechnology = (option) => {
             setTechFormData({
                 ...techFormData,
@@ -181,7 +264,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
             });
         }
 
-        const onAddRowHostamping= (currentIndex) => {
+        const onAddRowHostamping = (currentIndex) => {
             console.log(currentIndex);
             const newHostampingInfos = [
                 ...techFormData.hostamping.hostampingInfos.slice(0, currentIndex + 1),
@@ -369,14 +452,19 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 dataField='contents'
                                                 caption='Nội dung ép/Contens'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"contents"} />
+                                                    <TextBox onValueChange={(e) => {
+                                                        onUpdateLaminationInfo(cellInfo.rowIndex, 'contents', e)
+                                                    }} placeholder='Nhập' value={cellInfo.value} key={"contents"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='classify'
                                                 caption='Phân loại/Classify'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"classify"} />
+                                                    <TextBox placeholder='Nhập'
+                                                        onValueChange={(e) => {
+                                                            onUpdateLaminationInfo(cellInfo.rowIndex, 'classify', e)
+                                                        }} value={cellInfo.value} key={"classify"} />
                                                 )}
                                             />
                                             <Column
@@ -384,16 +472,21 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 caption='Thông số máy/Lamination Parameter'
                                                 width={270}
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"parameter"} />
+                                                    <TextBox placeholder='Nhập'
+                                                        onValueChange={(e) => {
+                                                            onUpdateLaminationInfo(cellInfo.rowIndex, 'parameter', e)
+                                                        }} value={cellInfo.value} key={"parameter"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='other'
                                                 caption='Khác/Other'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                    <TextBox placeholder='Nhập'
+                                                        onValueChange={(e) => {
+                                                            onUpdateLaminationInfo(cellInfo.rowIndex, 'other', e)
+                                                        }} value={cellInfo.value} key={"other"} />
                                                 )}></Column>
-                                            <Column dataField='structure' caption='Cấu trúc/Structure' />
                                             <Column
                                                 caption=''
                                                 dataField=''
@@ -445,38 +538,51 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 dataField='ink'
                                                 caption='Mực/Lnk'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"lnk"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'ink', e)
+                                                    }} value={cellInfo.value} key={"lnk"} />
                                                 )}></Column>
                                             <Column
                                                 dataField='nilon'
                                                 caption='Nilon'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"nilon"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'nilon', e)
+                                                    }} value={cellInfo.value} key={"nilon"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='cut'
                                                 caption='Cắt'
-                                                cellRender={(cellInfo) => <TextBox placeholder='Nhập' value={cellInfo.value} key={"cut"} />}
+                                                cellRender={(cellInfo) => <TextBox placeholder='Nhập'
+                                                    onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'cut', e)
+                                                    }} value={cellInfo.value} key={"cut"} />}
                                             />
                                             <Column
                                                 dataField='hold'
                                                 caption='Bế'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox value={cellInfo.value} placeholder='Nhập' key={"hold"} />
+                                                    <TextBox value={cellInfo.value} onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'hold', e)
+                                                    }} placeholder='Nhập' key={"hold"} />
                                                 )}></Column>
                                             <Column
                                                 dataField='pull'
                                                 caption='Đùn'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"pull"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'pull', e)
+                                                    }} value={cellInfo.value} key={"pull"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='other'
                                                 caption='Khác/Other'
                                                 cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdateProcessingInfo(cellInfo.rowIndex, 'other', e)
+                                                    }} value={cellInfo.value} key={"other"} />
                                                 )}
                                             />
                                             <Column
@@ -531,14 +637,18 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     dataField='content'
                                                     caption='Nội dung/Content'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"content"} />
+                                                        <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                            onUpdateCuttingInfo(cellInfo.rowIndex, 'content', e)
+                                                        }} value={cellInfo.value} key={"content"} />
                                                     )}
                                                 />
                                                 <Column
                                                     dataField='machine'
                                                     caption='Máy/Machine'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"machine"} />
+                                                        <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                            onUpdateCuttingInfo(cellInfo.rowIndex, 'machine', e)
+                                                        }} value={cellInfo.value} key={"machine"} />
                                                     )}
                                                 />
                                                 <Column
@@ -596,7 +706,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     dataField='process'
                                                     caption='Công đoạn/Process'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"process"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'process', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"process"} />
                                                     )}
                                                 />
                                                 <Column
@@ -604,7 +716,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     caption='Nội dung hots/Content'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"content"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'content', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"content"} />
                                                     )}
                                                 />
                                                 <Column
@@ -612,7 +726,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     caption='Mã vật liệu/RMcode'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"rmCode"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'rmCode', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"rmCode"} />
                                                     )}
                                                 />
                                                 <Column
@@ -620,7 +736,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     caption='Loại phôi hots/Type'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"type"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'type', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"type"} />
                                                     )}
                                                 />
                                                 <Column
@@ -628,14 +746,18 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     caption='Vị trí'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"position"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'position', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"position"} />
                                                     )}></Column>
                                                 <Column
                                                     dataField='machine'
                                                     alignment='center'
                                                     caption='Máy/Machine'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"machine"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'machine', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"machine"} />
                                                     )}
                                                 />
                                                 <Column
@@ -643,7 +765,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     caption='Khác/Other'
                                                     cellRender={(cellInfo) => (
-                                                        <TextBox placeholder='Nhập' value={cellInfo.value} key={"other"} />
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdateHostamping(cellInfo.rowIndex, 'other', e)
+                                                        }} placeholder='Nhập' value={cellInfo.value} key={"other"} />
                                                     )}
                                                 />
                                                 <Column
@@ -691,30 +815,30 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 display: "flex",
                                                 justifyContent: 'flex-end'
                                             }}
-                                            // style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                        // style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
                                         >
-                                        <Button
-                                            text='Trở lại'
-                                            onClick={setClose}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                        />
-                                        <Button
-                                            text='Tiếp theo'
-                                            onClick={() => {
-                                                setIsVisibleTechFormUpdateHostamping(true);
-                                            }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                        />
-                                        <Button
-                                            text='Ký lập'
-                                            onClick={() => {}}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
-                                        />
-                                        <Button
-                                            text='Gửi duyệt'
-                                            onClick={() => {}}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                        />
+                                            <Button
+                                                text='Trở lại'
+                                                onClick={setClose}
+                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                            />
+                                            <Button
+                                                text='Tiếp theo'
+                                                onClick={() => {
+                                                    setIsVisibleTechFormUpdateHostamping(true);
+                                                }}
+                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                            />
+                                            <Button
+                                                text='Ký lập'
+                                                onClick={() => { }}
+                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                            />
+                                            <Button
+                                                text='Gửi duyệt'
+                                                onClick={() => { }}
+                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                            />
                                         </div>
                                     </div>
                                 </div>

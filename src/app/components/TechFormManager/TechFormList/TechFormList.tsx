@@ -70,6 +70,7 @@ export const TechFormList = () => {
     const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
     const [isCreateProductionPlan, setCreateProductionPlan] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsisConfirmDelete] = React.useState<boolean>(false);
+    const [requestInfoChoosed, setRequestInfoChoosed] = React.useState<any>({})
 
     const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
@@ -362,9 +363,9 @@ export const TechFormList = () => {
                             hideOnOutsideClick={true}
                         />
                         <DataGrid
-                            key={"soCode"}
-                            keyExpr={"soCode"}
-                            dataSource={data}
+                            key={"id"}
+                            keyExpr={"id"}
+                            dataSource={techForms}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
@@ -426,22 +427,25 @@ export const TechFormList = () => {
                             />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
-                            <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
-                            <Column caption={"Tên khách hàng"} dataField={"customerName"} />
-                            <Column caption={"Tên thẻ"} dataField={"cardName"} />
-                            <Column caption={"Số lượng"} dataField={"quantity"} />
-                            <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy hh:mm:ss' />
-                            <Column caption={"Ngày kết thúc"} dataType='datetime' dataField={"endDate"} format='dd/MM/yyyy hh:mm:ss' />
+                            <Column caption={"Mã sản xuất"} dataField={"productionRequirement.productionCode"} />
+                            <Column caption={"Tên khách hàng"} dataField={"productionRequirement.customer"} />
+                            <Column caption={"Tên thẻ"} dataField={"productionRequirement.cardName"} />
+                            <Column caption={"Số lượng"} dataField={"productionRequirement.quantityRequirement"} />
+                            <Column caption={"Ngày bắt đầu"} dataType='date' dataField={"productionRequirement.startDate"} format='dd/MM/yyyy' />
+                            <Column caption={"Ngày kết thúc"} dataType='date' dataField={"productionRequirement.endDate"} format='dd/MM/yyyy' />
                             <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'
-                                cellRender={() => (
+                                cellRender={(cellInfo) => (
                                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
                                         <SvgIcon
-                                            onClick={() => setIsVisibleTechFormUpdate(true)}
+                                            onClick={() => {
+                                                setIsVisibleTechFormUpdate(true);
+                                                setTechFormIdChoosed(cellInfo.data.id);
+                                            }}
                                             tooltipTitle='Cập nhật PCN'
                                             sizeIcon={17}
                                             textSize={17}
@@ -450,12 +454,19 @@ export const TechFormList = () => {
                                             style={{ marginRight: 17 }}
                                         />
                                         <SvgIcon
-                                            onClick={() => setIsVisibleBOMBodyCardAddInfo(true)}
-                                            tooltipTitle='Tạo BOM'
+                                            onClick={() => {
+                                                if (!cellInfo.data.isCreatedBOM) {
+                                                    setRequestInfoChoosed(cellInfo.data.productionRequirement)
+                                                    setTechFormIdChoosed(cellInfo.data.id);
+                                                    setIsVisibleBOMBodyCardAddInfo(true)
+                                                }
+                                            }
+                                            }
+                                            tooltipTitle={cellInfo.data.isCreatedBOM ? 'Đã tạo BOM cho phiếu công nghệ này' : 'Tạo BOM'}
                                             sizeIcon={17}
                                             textSize={17}
-                                            icon='assets/icons/Folder.svg'
-                                            textColor='#FF7A00'
+                                            icon={cellInfo.data.isCreatedBOM ? 'assets/icons/FolderDisable.svg' : 'assets/icons/Folder.svg'}
+                                            textColor={cellInfo.data.isCreatedBOM ? "#BDBDBD" : '#FF7A00'}
                                             style={{ marginRight: 17 }}
                                         />
                                         <SvgIcon

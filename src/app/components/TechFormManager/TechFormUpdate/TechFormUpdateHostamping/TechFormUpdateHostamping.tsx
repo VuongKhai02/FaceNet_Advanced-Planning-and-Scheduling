@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, DataGrid, SelectBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Input, Table } from "antd";
+import { useMainStore } from "@haulmont/jmix-react-core";
+import axios from "axios";
+import { PLANNING_API_URL } from "../../../../../config";
+import { error } from "console";
+import Loading from "../../../../common/Loading";
 
 type TechFormDetailHostampingProps = {
     techFormData: any;
@@ -32,6 +37,27 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
         const handleNextClick = () => {
             console.log("Tiếp theo");
         };
+
+        const mainStore = useMainStore();
+
+        const [isLoading, setIsLoading] = React.useState(false);
+
+
+        const handleSaveClick = () => {
+            setIsLoading(true);
+            const headers = {
+                Authorization: "Bearer " + mainStore.authToken,
+                "content-type": "application/json",
+            };
+            axios.put(PLANNING_API_URL + "/api/techforms/" + techFormData.id, techFormData, { headers }).then((response) => {
+                if (response.status === 200) {
+                    console.log(response.data.data);
+                }
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 1500)
+            }).catch(error => console.error(error));
+        }
 
         const onChangeValueIc = (key, value) => {
             let tfIcInfo
@@ -125,7 +151,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                                             ) : (
                                                                 <Input value={techFormData.tfIcInfo?.outsideHoleLength} onChange={(e) => {
                                                                     onChangeValueIc("outsideHoleLength", e.target.value)
-                                                                }}  className='inputRow' placeholder='--Nhập--' />
+                                                                }} className='inputRow' placeholder='--Nhập--' />
                                                             )
                                                         ) : (
                                                             <SelectBox value={techFormData.tfIcInfo?.machine} style={{ width: 250, float: "left" }} placeholder='--Lựa chọn--' />
@@ -144,7 +170,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                                         return record.position === "Kích thước/Size" ? (
                                                             <Input value={techFormData.tfIcInfo?.outsideHoleWidth} className='inputRow' onChange={(e) => {
                                                                 onChangeValueIc("outsideHoleWidth", e.target.value)
-                                                            }}  placeholder='--Nhập--' />
+                                                            }} placeholder='--Nhập--' />
                                                         ) : null;
                                                     }}
                                                 />
@@ -158,7 +184,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                                     align='center'
                                                     render={(value, record: any, index) => {
                                                         return record.position === "Kích thước/Size" ? (
-                                                            <Input value={techFormData.tfIcInfo?.outsideHoleDepth}  className='inputRow' onChange={(e) => {
+                                                            <Input value={techFormData.tfIcInfo?.outsideHoleDepth} className='inputRow' onChange={(e) => {
                                                                 onChangeValueIc("outsideHoleDepth", e.target.value)
                                                             }} placeholder='--Nhập--' />
                                                         ) : null;
@@ -193,9 +219,9 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                                     render={(value, record: any, index) => {
                                                         return record.position === "Kích thước/Size" ? (
                                                             <Input value={techFormData.tfIcInfo?.insideHoleLength}
-                                                            onChange={(e) => {
-                                                                onChangeValueIc("insideHoleLength", e.target.value)
-                                                            }} className='inputRow' placeholder='--Nhập--' />
+                                                                onChange={(e) => {
+                                                                    onChangeValueIc("insideHoleLength", e.target.value)
+                                                                }} className='inputRow' placeholder='--Nhập--' />
                                                         ) : null;
                                                     }}
                                                 />
@@ -300,36 +326,36 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </div>
                             </div>
                             <div
-                                    className='toolbar'
-                                    style={{
-                                        paddingTop: 10,
-                                        // background: "#ffffff",
-                                        padding: "8px",
-                                        borderRadius: "4px",
-                                        display: "flex",
-                                        justifyContent: 'flex-end'
-                                    }}>
-                                    <Button
-                                        text='Trở lại'
-                                        onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                    />
-                                    <Button
-                                        text='Tiếp theo'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                    />
-                                    <Button
-                                        text='Ký lập'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
-                                    />
-                                    <Button
-                                        text='Gửi duyệt'
-                                        onClick={() => {}}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                    />
-                                </div>
+                                className='toolbar'
+                                style={{
+                                    paddingTop: 10,
+                                    // background: "#ffffff",
+                                    padding: "8px",
+                                    borderRadius: "4px",
+                                    display: "flex",
+                                    justifyContent: 'flex-end'
+                                }}>
+                                <Button
+                                    text='Trở lại'
+                                    onClick={setClose}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                />
+                                <Button
+                                    text='Lưu'
+                                    onClick={() => { handleSaveClick() }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                />
+                                <Button
+                                    text='Ký lập'
+                                    onClick={() => { }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
+                                />
+                                <Button
+                                    text='Gửi duyệt'
+                                    onClick={() => { }}
+                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                />
+                            </div>
                             {/* <div
                                 className='informer'
                                 style={{
@@ -561,6 +587,9 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                         </div>
                     </div>
                 </div>
+                {
+                    isLoading && <Loading isShow={true} />
+                }
             </>
         );
     },
