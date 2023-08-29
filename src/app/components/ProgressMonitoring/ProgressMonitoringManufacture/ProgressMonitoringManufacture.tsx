@@ -1,23 +1,24 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
     Item as ToolbarItem,
     Pager,
     Paging,
     SearchPanel,
-    Toolbar, ColumnChooser, Button as ButtonIcon
+    Toolbar, ColumnChooser
 } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import { Tooltip } from 'antd';
 import ProgressMonitoringWODetail from "./ProgressMonitoringWODetail/ProgressMonitoringWODetail";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
+import { WarningOutlined } from "@ant-design/icons";
+import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 
 
 const ROUTING_PATH = "/progressMonitoringManufacture";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const data = [
     { woCode: 'WO-T82023', soCode: 'SO-001', productionCode: '15010623', customer: 'TP Bank', cardName: 'Visa TPBank', hopeQuantity: '3000', finishQuantity: '2000', finishRatio: '2%', errorRatio: '2%', status: 'Đang sản xuất' },
@@ -26,6 +27,7 @@ const data = [
 ]
 export const ProgressMonitoringManufacture = () => {
     const [isVisibleWODetail, setIsVisibleWODetail] = React.useState<boolean>(false);
+    const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
     return (
         <>
             {isVisibleWODetail
@@ -71,6 +73,30 @@ export const ProgressMonitoringManufacture = () => {
                             focusedRowEnabled={true}
 
                         >
+                            <PopupConfirmDelete
+                                isVisible={isVisibleConfirmDelete}
+                                onCancel={() => setIsVisibleConfirmDelete(false)}
+                                onSubmit={() => { }}
+                                modalTitle={
+                                    <div>
+                                        <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                                            Xóa dữ liệu
+                                        </h3>
+                                    </div>
+                                }
+                                modalContent={
+                                    <div>
+                                        <h4 style={{ fontWeight: 400 }}>Bạn có chắc chắn muốn xóa <b>Dữ liệu hiện tại</b>?</h4>
+                                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', height: 100, borderRadius: 5 }}>
+                                            <h3 style={{ color: '#ff794e', fontWeight: 500 }}>
+                                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                                Lưu ý:
+                                            </h3>
+                                            <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>Nếu bạn xóa <b>Dữ liệu hiện tại </b> thì các thông tin liên quan đều bị mất</p>
+                                        </div>
+                                    </div>
+                                }
+                                width={600} />
                             <Toolbar>
                                 <ToolbarItem location="after">
                                     <SvgIcon onClick={() => { }} text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
@@ -78,16 +104,10 @@ export const ProgressMonitoringManufacture = () => {
                                 <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                 <ToolbarItem name="searchPanel" location="before" />
                             </Toolbar>
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                            <SearchPanel visible={true} placeholder={"Tìm kiếm..."} />
-                            <Paging defaultPageSize={5} />
+                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <Paging defaultPageSize={10} />
                             <Pager
                                 visible={true}
                                 allowedPageSizes={allowedPageSizes}
@@ -107,10 +127,10 @@ export const ProgressMonitoringManufacture = () => {
                             <Column caption={"Tỉ lệ hoàn thành"} dataField={"finishRatio"} />
                             <Column caption={"Tỉ lệ lỗi"} dataField={"errorRatio"} />
                             <Column caption={"Trạng thái"} dataField="status" />
-                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" cellRender={() =>
+                            <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                     <SvgIcon onClick={() => setIsVisibleWODetail(true)} tooltipTitle="Thông tin chi tiết - WO" sizeIcon={17} textSize={17} icon="assets/icons/EyeOpen.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                    <SvgIcon onClick={() => { }} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
+                                    <SvgIcon onClick={() => setIsVisibleConfirmDelete(true)} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                 </div>
                             }>
                             </Column>

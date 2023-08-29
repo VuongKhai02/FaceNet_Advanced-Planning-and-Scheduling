@@ -14,7 +14,7 @@ import {
 import { registerScreen } from "@haulmont/jmix-react-ui";
 import "./ManageProductionRequirements.css";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import PopupDetailProductionRequire from "../../../shared/components/PopupDetailProductionRequire/PopupDetailProductionRequire";
 import ViewDetailProductRequires from "./ViewDetailProductRequires/ViewDetailProductRequires";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
@@ -34,7 +34,7 @@ const data = [
 
 
 const ROUTING_PATH = "/manageProductionRequirements";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageProductionRequirements = () => {
 
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -142,24 +142,28 @@ export const ManageProductionRequirements = () => {
                                         }
                                         modalTitle={
                                             <div>
-                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
-                                                    <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
-                                                    Xác nhận xóa?
+                                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                                                    Xóa dữ liệu
                                                 </h3>
                                             </div>
                                         }
-                                        modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
+                                        modalContent={
+                                            <div>
+                                                <h4 style={{ fontWeight: 400 }}>Bạn có chắc chắn muốn xóa <b>Dữ liệu hiện tại</b>?</h4>
+                                                <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', height: 100, borderRadius: 5 }}>
+                                                    <h3 style={{ color: '#ff794e', fontWeight: 500 }}>
+                                                        <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                                        Lưu ý:
+                                                    </h3>
+                                                    <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>Nếu bạn xóa <b>Dữ liệu hiện tại </b> thì các thông tin liên quan đều bị mất</p>
+                                                </div>
+                                            </div>
+                                        }
                                         width={600} />
                                     <Toolbar>
                                         <ToolbarItem name="searchPanel" location="before" />
                                         <ToolbarItem name="columnChooserButton" location="after"></ToolbarItem>
                                     </Toolbar>
-                                    {/* <HeaderFilter visible={true} texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng"
-
-                                    }} allowSearch={true} /> */}
                                     <FilterRow visible={true} />
                                     <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                                     <Paging defaultPageSize={10} />

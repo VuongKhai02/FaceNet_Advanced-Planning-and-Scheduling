@@ -133,7 +133,7 @@ export const ListProduct = React.memo((props: any) => {
                     </TItem>
                     <TItem name="columnChooserButton" />
                 </Toolbar>
-                <ColumnChooser enabled={true} allowSearch={true} />
+                <ColumnChooser enabled={true} allowSearch={true} mode="select" />
                 <Paging defaultPageSize={5} />
                 <Pager
                     visible={true}

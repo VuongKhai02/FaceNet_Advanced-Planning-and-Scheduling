@@ -4,7 +4,7 @@ import {
     Column,
     FilterRow,
 } from "devextreme-react/data-grid";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
 import PopupBOMAddNewInfoMaterial from "../../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
@@ -122,12 +122,11 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                         </div>
                         <div className="informer" style={{
                             backgroundColor: "#ffffff",
-                            paddingLeft: 13
                         }}>
                             <h4 className="name" style={{
                                 color: "rgba(0, 0, 0, 0.7)",
                                 marginTop: 30,
-                                fontSize: 25,
+                                fontSize: 23,
                                 boxSizing: "border-box",
                                 fontWeight: 550
                             }}>Danh sách vật tư</h4>
@@ -153,28 +152,24 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                                 }
                                 modalTitle={
                                     <div>
-                                        <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500, fontSize: 25 }}>
-                                            <InfoCircleOutlined style={{ color: '#ff794e', marginRight: '8px', display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30 }} />
-                                            Xác nhận xóa?
+                                        <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
+                                            Xóa dữ liệu
                                         </h3>
                                     </div>
                                 }
-                                modalContent={<div><h5 style={{ height: 80, fontWeight: 400, marginTop: 30, fontSize: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>Bạn có chắc chắn muốn thực hiện thao tác xóa không?</h5></div>}
+                                modalContent={
+                                    <div>
+                                        <h4 style={{ fontWeight: 400 }}>Bạn có chắc chắn muốn xóa <b>Dữ liệu hiện tại</b>?</h4>
+                                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', height: 100, borderRadius: 5 }}>
+                                            <h3 style={{ color: '#ff794e', fontWeight: 500 }}>
+                                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                                Lưu ý:
+                                            </h3>
+                                            <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>Nếu bạn xóa <b>Dữ liệu hiện tại </b> thì các thông tin liên quan đều bị mất</p>
+                                        </div>
+                                    </div>
+                                }
                                 width={600} />
-                            {/* <Toolbar>
-                                <ToolbarItem >
-                                    <SvgIcon onClick={handleAddNewInfoMaterial} text="Thêm vật tư" tooltipTitle="Thêm vật tư" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                </ToolbarItem>
-                                <ToolbarItem >
-                                    <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                </ToolbarItem>
-                            </Toolbar> */}
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
 
                             <Column dataField="materialCode"
@@ -228,11 +223,11 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                             className="toolbar"
                             style={{
                                 marginTop: 15,
+                                paddingBottom: 15,
                                 display: "flex",
                                 justifyContent: "right",
                                 alignItems: "center",
                                 // background: "#ffffff",
-                                padding: "8px",
                                 borderRadius: "4px",
                             }}
                         >

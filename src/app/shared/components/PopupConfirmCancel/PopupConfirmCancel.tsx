@@ -1,37 +1,34 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 
-interface PopupConfirmDeleteProps {
+interface PopupConfirmCancelProps {
     isVisible: boolean;
     onCancel: () => void;
     onSubmit: () => void;
     modalTitle: React.ReactNode;
     modalContent: React.ReactNode;
     width: number;
-    customFooter?: React.ReactNode[] | null;
 }
 
-const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
+const PopupConfirmCancel: React.FC<PopupConfirmCancelProps> = ({
     isVisible,
     onCancel,
     onSubmit,
     modalTitle,
     modalContent,
     width,
-    customFooter
 }) => {
     return (
         <Modal
-            bodyStyle={{ padding: 0 }}
             // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
-            footer={customFooter !== undefined ? customFooter : [
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20, marginBottom: 20 }}>
+            footer={[
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 14, marginBottom: 14 }}>
                     <Button
                         key="cancel"
                         style={{
-                            marginRight: '30px',
+                            marginRight: 14,
                             backgroundColor: '#E5E5E5',
                             display: 'inline-block',
                             borderRadius: '4px',
@@ -42,7 +39,7 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
                         onClick={onCancel}
                     >
                         Hủy bỏ
-                    </Button>,
+                    </Button>
                     <Button
                         style={{
                             borderRadius: '4px',
@@ -50,13 +47,14 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
                             color: '#ffff',
                             width: 100,
                             height: 40,
-                            fontSize: 16
+                            fontSize: 16,
+                            marginRight: 7
                         }}
                         key="submit"
                         onClick={onSubmit}
                         className="btn btn-save"
                     >
-                        Thêm mới
+                        Xác nhận
                     </Button>
                 </div>
             ]}
@@ -68,4 +66,4 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
     );
 };
 
-export default PopupAddBoxCard;
+export default PopupConfirmCancel;

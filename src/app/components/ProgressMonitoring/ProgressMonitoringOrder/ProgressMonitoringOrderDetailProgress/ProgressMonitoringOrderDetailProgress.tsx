@@ -93,14 +93,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                             focusedRowEnabled={true}
 
                         >
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
-
                             <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
                             <Column caption={"Mã sản phẩm"} dataField={"productionCode"} />
                             <Column caption={"Tên thẻ"} dataField={"cardName"} />
@@ -118,7 +111,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 format={"dd/MM/yyyy"}
                                 dataType="datetime"
                             />
-                            <Column type={"buttons"} caption={"Thao tác"} alignment="left" cellRender={() =>
+                            <Column type={"buttons"} caption={"Thao tác"} alignment="center" cellRender={() =>
                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                     <SvgIcon onClick={() => { }} tooltipTitle="Thông tin" sizeIcon={17} textSize={17} icon="assets/icons/InfoCircle.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                 </div>

@@ -28,7 +28,7 @@ const data = [
     { boxCode: 'HO3', stageCode: 'CD01', jobCode: 'J01-001', jobName: 'In offset : Ra bản', jobOutputCode: 'J01', jobOutPutName: 'WO-123-CĐ01-01' }
 ];
 const ROUTING_PATH = "/cardManagement";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const CardManagement = () => {
     const [isVisibleScanBarCode, setIsVisibleScanBarCode] = React.useState<boolean>(false);
     const [isVisibleDetailBoxCard, setIsVisibleDetailBoxCard] = React.useState<boolean>(false);
@@ -45,7 +45,7 @@ export const CardManagement = () => {
 
     const handleCustomFooterButton = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                 <Button
                     key="cancel"
                     style={{
@@ -84,7 +84,9 @@ export const CardManagement = () => {
                         color: '#ffff',
                         width: 100,
                         height: 40,
-                        fontSize: 16
+                        fontSize: 16,
+                        marginRight: 15
+
                     }}
                     key="submit"
                     onClick={() => { }}
@@ -137,7 +139,7 @@ export const CardManagement = () => {
                         >
                             <PopupScanBarCode
                                 isVisible={isVisibleScanBarCode}
-                                modalContent={<div><Barcode value="Nguyen Minh Son" textAlign="center" font="monospace" /></div>}
+                                modalContent={<div style={{ display: "flex", justifyContent: "center" }}><Barcode value="Cool Girl" textAlign="center" font="monospace" /></div>}
                                 modalTitle={<div style={{ display: "flex", flexDirection: "row" }}>
                                     <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                     Quét mã Bar code
@@ -150,7 +152,6 @@ export const CardManagement = () => {
                                 isVisible={isVisibleDetailBoxCard}
                                 modalContent={
                                     <div>
-                                        <h3><p style={{ marginTop: 20 }}>Xem chi tiết hộp chứa thẻ</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <td>
@@ -200,7 +201,6 @@ export const CardManagement = () => {
                                 </div>}
                                 modalContent={
                                     <div>
-                                        <h3><p style={{ marginTop: 20 }}>Thêm mới hộp chứa thẻ</p></h3>
                                         <div style={{ marginTop: 40, marginBottom: 30 }}>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <td>
@@ -251,13 +251,15 @@ export const CardManagement = () => {
                                     </div>
                                 }
                                 modalContent={
-                                    <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', marginLeft: 20, marginRight: 20 }}>
-                                        <h5 style={{ fontWeight: 500, marginTop: 20, marginLeft: 20, fontSize: 20 }}>{'Bạn có chắc chắn muốn xóa Job out này không?'}</h5>
-                                        <h3 style={{ color: '#ff794e' }}>
-                                            <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
-                                            Lưu ý:
-                                        </h3>
-                                        <p style={{ marginLeft: 20, fontSize: 15 }}>{'Nếu bạn xóa Job output thì mọi dữ liệu liên quan đến Job output này đều sẽ biến mất!'}</p>
+                                    <div>
+                                        <h4 style={{ fontWeight: 400 }}>{'Bạn có chắc chắn muốn xóa Job out này không?'}</h4>
+                                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', borderRadius: 5, height: 100 }}>
+                                            <h3 style={{ color: '#ff794e' }}>
+                                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                                Lưu ý:
+                                            </h3>
+                                            <p style={{ marginLeft: 20, fontSize: 15 }}>{'Nếu bạn xóa Job output thì mọi dữ liệu liên quan đến Job output này đều sẽ biến mất!'}</p>
+                                        </div>
                                     </div>
                                 }
                                 width={600}
@@ -275,16 +277,11 @@ export const CardManagement = () => {
                                 <ToolbarItem name="columnChooserButton" />
                                 <ToolbarItem name="searchPanel" location="before" />
                             </Toolbar>
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
 
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
-                            <ColumnChooser enabled={true} allowSearch={true} title="Chọn cột" />
-                            <SearchPanel visible={true} placeholder={"VD: PO"} />
-                            <Paging defaultPageSize={5} />
+                            <ColumnChooser enabled={true} allowSearch={true} title="Chọn cột" mode="select" />
+                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <Paging defaultPageSize={10} />
                             <Pager
                                 visible={true}
                                 allowedPageSizes={allowedPageSizes}

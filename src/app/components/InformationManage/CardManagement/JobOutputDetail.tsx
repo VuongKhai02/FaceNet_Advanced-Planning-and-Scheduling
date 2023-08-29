@@ -13,7 +13,7 @@ const data = [
     { jobOutputCode: 'J03', jobOutputName: 'WO-123-CĐ01-01', cardBoxQuantity: '01', startDate: '15/08/2023', endDate: '16/08/2023' }
 ];
 
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const JobOutPutDetail = React.memo((props: any) => {
 
     locale("en");
@@ -54,7 +54,7 @@ export const JobOutPutDetail = React.memo((props: any) => {
                     <TItem name="columnChooserButton" />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} />
-                <Paging defaultPageSize={5} />
+                <Paging defaultPageSize={10} />
                 <Pager
                     visible={true}
                     allowedPageSizes={allowedPageSizes}
@@ -79,15 +79,9 @@ export const JobOutPutDetail = React.memo((props: any) => {
 
                     />
                 </FilterRow>
-                {/* <HeaderFilter visible={true} texts={{
-                    cancel: "Hủy bỏ",
-                    ok: "Đồng ý",
-                    emptyValue: "Rỗng"
-
-                }} /> */}
                 <SearchPanel visible={true}
                     width={240}
-                    placeholder="Tìm kiếm..."
+                    placeholder="Nhập thông tin và ấn Enter để tìm kiếm"
                 />
                 <Column
                     caption="Mã Job output"

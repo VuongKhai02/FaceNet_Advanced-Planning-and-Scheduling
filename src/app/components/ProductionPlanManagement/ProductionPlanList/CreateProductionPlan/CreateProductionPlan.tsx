@@ -4,7 +4,6 @@ import { Button, DataGrid } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
     MasterDetail,
 } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
@@ -70,15 +69,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
-
                         >
-
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
 
                             <Column caption={"Mã Job"} dataField={"codeJob"} alignment="left" width={100} />

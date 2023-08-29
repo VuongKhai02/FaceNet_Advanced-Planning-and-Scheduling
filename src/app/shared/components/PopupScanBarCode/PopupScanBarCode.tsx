@@ -20,15 +20,14 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({
 }) => {
     return (
         <Modal
-            bodyStyle={{ padding: 0 }}
             visible={isVisible}
             title={modalTitle}
             footer={[
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20, marginBottom: 20 }}>
                     <Button
                         key="cancel"
                         style={{
-                            marginRight: '30px',
+                            marginRight: 10,
                             backgroundColor: '#E5E5E5',
                             display: 'inline-block',
                             borderRadius: '4px',
@@ -47,7 +46,8 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({
                             color: '#ffff',
                             width: 100,
                             height: 40,
-                            fontSize: 16
+                            fontSize: 16,
+                            marginRight: 10
                         }}
                         key="submit"
                         onClick={onSubmit}

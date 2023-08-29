@@ -30,7 +30,7 @@ const PopupDetailProductionRequire: React.FC<PopupDetailProductionRequireProps> 
             title={modalTitle}
             footer={[
                 <div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                         <Button
                             key="cancel"
                             style={{

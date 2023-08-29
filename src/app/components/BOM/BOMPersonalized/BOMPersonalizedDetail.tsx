@@ -215,7 +215,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                 }} /> */}
                 <SearchPanel visible={true}
                     width={240}
-                    placeholder="Tìm kiếm..."
+                    placeholder="Nhập thông tin và ấn Enter để tìm kiếm"
                 />
                 <Selection mode="single" />
                 <Column
@@ -287,13 +287,15 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                         </div>
                     }
                     modalContent={
-                        <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e' }}>
-                            <h4 style={{ fontWeight: 600, marginTop: 20, marginLeft: 20 }}>Bạn chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h4>
-                            <h3 style={{ color: '#ff794e' }}>
-                                <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
-                                Lưu ý:
-                            </h3>
-                            <p style={{ marginLeft: 20, fontSize: 15 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
+                        <div>
+                            <h4 style={{ fontWeight: 400 }}>Bạn chắc chắn muốn gửi thông tin phiếu công nghệ sang SAP?</h4>
+                            <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', borderRadius: 5 }}>
+                                <h3 style={{ color: '#ff794e', fontWeight: 500 }}>
+                                    <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
+                                    Lưu ý:
+                                </h3>
+                                <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>Tất cả các thông tin của phiếu công nghệ sẽ được gửi lên SAP và không được chỉnh sửa !</p>
+                            </div>
                         </div>
                     }
                     width={600} />

@@ -22,7 +22,7 @@ const data = [
 ];
 
 const ROUTING_PATH = "/BOMPersonalized";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const BOMPersonalized = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
@@ -97,16 +97,10 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem name="searchPanel" location="before" />
                                 <ToolbarItem name="columnChooserButton" />
                             </Toolbar>
-                            {/* <HeaderFilter visible={true} texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng"
-
-                            }} allowSearch={true} /> */}
                             <FilterRow visible={true} />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={320} />
-                            <ColumnChooser enabled={true} allowSearch={true} />
-                            <Paging defaultPageSize={5} />
+                            <ColumnChooser enabled={true} allowSearch={true} mode="select" />
+                            <Paging defaultPageSize={10} />
                             <Pager
                                 visible={true}
                                 allowedPageSizes={allowedPageSizes}

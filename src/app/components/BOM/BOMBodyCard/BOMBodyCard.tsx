@@ -150,14 +150,7 @@ export const BOMBodyCard = () => {
                                                                 allowColumnReordering={true}
                                                                 focusedRowEnabled={true}
                                                             >
-                                                                {/* <HeaderFilter visible={true} texts={{
-                                                            cancel: "Hủy bỏ",
-                                                            ok: "Đồng ý",
-                                                            emptyValue: "Rỗng"
-
-                                                        }} allowSearch={true} /> */}
                                                                 <FilterRow visible={true} />
-
                                                                 <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
                                                                 <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />
                                                                 <Column caption={"Version"} dataField={"version"} />
@@ -209,7 +202,6 @@ export const BOMBodyCard = () => {
                                                                     </td>
                                                                 </table>
                                                             </div>
-                                                            <div style={{ marginTop: 40 }}><h4>Danh sách vật tư</h4></div>
                                                             <DataGrid
                                                                 key={'replaceMaterialCode'}
                                                                 keyExpr={"replaceMaterialCode"}
@@ -223,6 +215,9 @@ export const BOMBodyCard = () => {
                                                                 focusedRowEnabled={true}
                                                             >
                                                                 <Toolbar >
+                                                                    <ToolbarItem location="before">
+                                                                        <div><h4>Danh sách vật tư</h4></div>
+                                                                    </ToolbarItem>
                                                                     <ToolbarItem >
                                                                         <SvgIcon sizeIcon={25} text="Thêm mới" tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)' icon="assets/icons/CircleAdd.svg" textColor="#FF7A00" />
                                                                     </ToolbarItem>

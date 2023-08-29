@@ -30,11 +30,11 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
             title={modalTitle}
             footer={[
                 <div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                         <Button
                             key="cancel"
                             style={{
-                                marginRight: '30px',
+                                marginRight: 20,
                                 backgroundColor: '#E5E5E5',
                                 display: 'inline-block',
                                 borderRadius: '4px',
@@ -53,7 +53,8 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
                                 color: '#ffff',
                                 width: 100,
                                 height: 40,
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: 15
                             }}
                             key="submit"
                             onClick={onSubmit}

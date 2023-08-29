@@ -14,12 +14,14 @@ const PopupImportFile = ({ title, visible, onSubmit, onCancel, width }) => {
                 </div>
             }
             footer={[
-                <Button key="cancel" onClick={onCancel} style={{ width: 100, height: 40, marginRight: '20px', backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
-                    Hủy bỏ
-                </Button>,
-                <Button key="confirm" onClick={onSubmit} style={{ width: 100, height: 40, backgroundColor: '#FF7A00', color: "#fff", borderRadius: 5, marginRight: 8 }}>
-                    Tải lên
-                </Button>,
+                <div style={{ marginTop: 15, marginBottom: 15 }}>
+                    <Button key="cancel" onClick={onCancel} style={{ width: 100, height: 40, marginRight: 15, backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
+                        Hủy bỏ
+                    </Button>,
+                    <Button key="confirm" onClick={onSubmit} style={{ width: 100, height: 40, backgroundColor: '#FF7A00', color: "#fff", borderRadius: 5, marginRight: 8 }}>
+                        Tải lên
+                    </Button>
+                </div>
             ]}
             width={width || 900}
             onCancel={onCancel}
