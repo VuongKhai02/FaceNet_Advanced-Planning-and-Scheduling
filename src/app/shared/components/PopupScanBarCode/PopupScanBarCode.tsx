@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Button } from 'antd';
+import React from "react";
+import { Modal, Button } from "antd";
 
 interface PopupScanBarCodeProps {
     isVisible: boolean;
@@ -10,56 +10,47 @@ interface PopupScanBarCodeProps {
     width: number;
 }
 
-const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({
-    isVisible,
-    onCancel,
-    onSubmit,
-    modalTitle,
-    modalContent,
-    width,
-}) => {
+const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
     return (
         <Modal
-            bodyStyle={{ padding: 0 }}
             visible={isVisible}
             title={modalTitle}
             footer={[
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20, marginBottom: 20 }}>
                     <Button
-                        key="cancel"
+                        key='cancel'
                         style={{
-                            marginRight: '30px',
-                            backgroundColor: '#E5E5E5',
-                            display: 'inline-block',
-                            borderRadius: '4px',
+                            marginRight: 10,
+                            backgroundColor: "#E5E5E5",
+                            display: "inline-block",
+                            borderRadius: "4px",
                             width: 100,
                             height: 40,
-                            fontSize: 16
+                            fontSize: 16,
                         }}
-                        onClick={onCancel}
-                    >
+                        onClick={onCancel}>
                         Hủy bỏ
-                    </Button>,
+                    </Button>
+                    ,
                     <Button
                         style={{
-                            borderRadius: '4px',
-                            backgroundColor: '#ff794e',
-                            color: '#ffff',
+                            borderRadius: "4px",
+                            backgroundColor: "#ff794e",
+                            color: "#ffff",
                             width: 100,
                             height: 40,
-                            fontSize: 16
+                            fontSize: 16,
+                            marginRight: 10,
                         }}
-                        key="submit"
+                        key='submit'
                         onClick={onSubmit}
-                        className="btn btn-save"
-                    >
+                        className='btn btn-save'>
                         In mã
                     </Button>
-                </div>
+                </div>,
             ]}
             width={width}
-            onCancel={onCancel}
-        >
+            onCancel={onCancel}>
             {modalContent}
         </Modal>
     );

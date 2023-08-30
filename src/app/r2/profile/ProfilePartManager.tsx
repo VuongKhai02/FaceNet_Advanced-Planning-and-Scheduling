@@ -436,16 +436,7 @@ const ProfilePartManager = observer(({ programmingDetail, profile }) => {
                         <ToolbarItem name='searchPanel' location='before' />
                         <ToolbarItem name='columnChooserButton'></ToolbarItem>
                     </Toolbar>
-                    <HeaderFilter
-                        visible={true}
-                        allowSearch={true}
-                        texts={{
-                            cancel: "Hủy bỏ",
-                            ok: "Đồng ý",
-                            emptyValue: "Rỗng",
-                        }}
-                    />
-                    <SearchPanel visible={true} width={240} placeholder='Tìm kiếm...' />
+                    <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                     <Paging enabled={true} />
                     <Editing
                         mode={"batch"}

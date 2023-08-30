@@ -7,6 +7,7 @@ import TechnologyProcedureUpdate from "./TechnologyProcedureUpdate/TechnologyPro
 import { useMainStore } from "@haulmont/jmix-react-core";
 import axios from "axios";
 import { PLANNING_API_URL } from "../../../../config";
+import Loading from "../../../common/Loading";
 
 type TechFormUpdateProps = {
     id: any;
@@ -46,7 +47,32 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             };
             axios.get(PLANNING_API_URL + "/api/techforms/" + id, { headers }).then((response) => {
                 if (response.status === 200) {
-                    setTechFormData(response.data.data);
+                    let techForm = response.data.data;
+                    console.log(techForm)
+                    if (techForm.prePressPcToPlate.back.length === 0 && techForm.prePressPcToPlate.front.length === 0) {
+                        techForm.prePressPcToPlate.back.push({}) 
+                        techForm.prePressPcToPlate.front.push({}) 
+                    }
+
+                    if (techForm.printingTech.front.length === 0 && techForm.printingTech.back.length === 0) {
+                        techForm.printingTech.front.push({step: 1}) 
+                    }
+                    if (techForm.lamination.steps.length === 0) {
+                        techForm.lamination.steps.push({step: 1}) 
+                    }
+                    if (techForm.processing.processingInfos.length === 0) {
+                        techForm.processing.processingInfos.push({no: 1}) 
+                    }
+                    if (techForm.cutting.cuttingInfos.length === 0) {
+                        techForm.cutting.cuttingInfos.push({no: 1}) 
+                    }
+                    if (techForm.hostamping.hostampingInfos.length === 0) {
+                        techForm.hostamping.hostampingInfos.push({step: 1}) 
+                    }
+                    setTechFormData(techForm);
+                
+                
+
                 }
             });
         }
@@ -62,6 +88,26 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             </p>
         );
     };
+
+    const onChangeProductSpec = (key, value) => {
+        console.log(key, value)
+        // if (key.startsWith('size')) {
+        //     let type = key.substring(4, key.length);
+
+        // }
+        let productSpec = {};
+        if (techFormData.productSpec !== null) {
+            productSpec = techFormData.productSpec;
+        }
+        setTechFormData({
+            ...techFormData,
+            productSpec: {
+                ...productSpec,
+                [key]: value
+            }
+
+        })
+    }
 
     useEffect(() => {
         loadTechFormData(id);
@@ -176,20 +222,26 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                         fontSize: 18,
                                         marginTop: 30,
                                     }}>
-                                    Quy cách sản phẩm/Product Spee
+                                    Quy cách sản phẩm/Product Spec
                                 </h5>
                             </div>
                             <DataGrid dataSource={[techFormData.productSpec]} showBorders={true} showRowLines={true} showColumnLines={true}>
                                 <Column
                                     dataField='sizeType'
                                     caption='Khổ thẻ/Size'
-                                    cellRender={(cellIfo) => <TextBox placeholder='Nhập' value={cellIfo.value} key={"sizeType"} />}
+                                    cellRender={(cellIfo) => <TextBox
+                                        onValueChange={(e) => {
+                                            onChangeProductSpec("sizeType", e)
+                                        }} placeholder='Nhập' value={cellIfo.value} key={"sizeType"} />}
                                 />
                                 <Column
                                     alignment='left'
                                     dataField='thickness'
                                     caption='Độ dày/Thickness(mm)'
-                                    cellRender={(cellIfo) => <TextBox placeholder='Nhập' value={cellIfo.value} key={"thickness"} />}
+                                    cellRender={(cellIfo) => <TextBox
+                                        onValueChange={(e) => {
+                                            onChangeProductSpec("thickness", e)
+                                        }} placeholder='Nhập' value={cellIfo.value} key={"thickness"} />}
                                 />
                                 <Column
                                     dataField='size'
@@ -202,7 +254,12 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                 <TextBox
                                                     style={{ width: "100%" }}
                                                     placeholder='Nhập'
-                                                    value={cellIfo.value.split(";")[0].replace("Width(W):", "").trim()}
+                                                    value={cellIfo.value?.split(";")[0].replace("Width(W):", "").trim()}
+                                                    onValueChange={(e) => {
+                                                        // let newValue = "Width(W): " + e + ";" + cellIfo.value?.split(";")[1];
+                                                        console.log(e)
+                                                        // onChangeProductSpec('size', newValue)
+                                                    }}
                                                     key={"size"}
                                                 />
                                             </div>{" "}
@@ -212,7 +269,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                 <TextBox
                                                     style={{ width: "100%" }}
                                                     placeholder='Nhập'
-                                                    value={cellIfo.value.split(";")[1].replace("Height(H):", "").trim()}
+                                                    value={cellIfo.value?.split(";")[1].replace("Height(H):", "").trim()}
                                                     key={"size"}
                                                 />
                                             </div>{" "}
@@ -222,7 +279,9 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                 <Column
                                     dataField='other'
                                     caption='Khác/other'
-                                    cellRender={(cellIfo) => <TextArea placeholder='Nhập' value={cellIfo.value} key={"other"} />}
+                                    cellRender={(cellIfo) => <TextArea onValueChange={(e) => {
+                                        onChangeProductSpec("other", e)
+                                    }} placeholder='Nhập' value={cellIfo.value} key={"other"} />}
                                 />
                             </DataGrid>
                             <div
@@ -259,7 +318,9 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                 className='toolbar'
                                 style={{
                                     marginTop: 10,
-                                    float: "right",
+                                    // float: "right",
+                                    display: "flex",
+                                    justifyContent:'flex-end',
                                     // background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
@@ -291,6 +352,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                     </div>
                 </div>
             )}
+
         </>
     );
 });
@@ -300,7 +362,6 @@ export default TechFormUpdate;
 
 export const TechFormGeneralInfo = (dataGeneral) => {
 
-    console.log(dataGeneral.dataGeneral)
     return (
         <div className="wrapper">
             <div className="row">

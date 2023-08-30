@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Button } from 'antd';
+import React from "react";
+import { Modal, Button } from "antd";
 
 interface PopupConfirmDeleteProps {
     isVisible: boolean;
@@ -18,7 +18,7 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
     modalTitle,
     modalContent,
     width,
-    customFooter
+    customFooter,
 }) => {
     return (
         <Modal
@@ -26,43 +26,52 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
             // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
-            footer={customFooter !== undefined ? customFooter : [
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
-                    <Button
-                        key="cancel"
-                        style={{
-                            marginRight: '30px',
-                            backgroundColor: '#E5E5E5',
-                            display: 'inline-block',
-                            borderRadius: '4px',
-                            width: 100,
-                            height: 40,
-                            fontSize: 16
-                        }}
-                        onClick={onCancel}
-                    >
-                        Hủy bỏ
-                    </Button>,
-                    <Button
-                        style={{
-                            borderRadius: '4px',
-                            backgroundColor: '#ff794e',
-                            color: '#ffff',
-                            width: 100,
-                            height: 40,
-                            fontSize: 16
-                        }}
-                        key="submit"
-                        onClick={onSubmit}
-                        className="btn btn-save"
-                    >
-                        Thêm mới
-                    </Button>
-                </div>
-            ]}
+            footer={
+                customFooter !== undefined
+                    ? customFooter
+                    : [
+                          <div
+                              style={{
+                                  display: "flex",
+                                  justifyContent: "flex-end",
+                                  alignItems: "center",
+                                  marginTop: 20,
+                                  marginBottom: 20,
+                              }}>
+                              <Button
+                                  key='cancel'
+                                  style={{
+                                      marginRight: "30px",
+                                      backgroundColor: "#E5E5E5",
+                                      display: "inline-block",
+                                      borderRadius: "4px",
+                                      width: 100,
+                                      height: 40,
+                                      fontSize: 16,
+                                  }}
+                                  onClick={onCancel}>
+                                  Hủy bỏ
+                              </Button>
+                              ,
+                              <Button
+                                  style={{
+                                      borderRadius: "4px",
+                                      backgroundColor: "#ff794e",
+                                      color: "#ffff",
+                                      width: 100,
+                                      height: 40,
+                                      fontSize: 16,
+                                  }}
+                                  key='submit'
+                                  onClick={onSubmit}
+                                  className='btn btn-save'>
+                                  Thêm mới
+                              </Button>
+                          </div>,
+                      ]
+            }
             width={width}
-            onCancel={onCancel}
-        >
+            onCancel={onCancel}>
             {modalContent}
         </Modal>
     );

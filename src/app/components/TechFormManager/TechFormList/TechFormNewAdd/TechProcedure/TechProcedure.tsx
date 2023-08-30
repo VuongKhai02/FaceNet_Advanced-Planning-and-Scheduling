@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, DataGrid, DropDownBox, Popup } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { registerScreen } from "@haulmont/jmix-react-ui";
@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import MaterialAndStructure from "../MaterialAndStructure/MaterialAndStructure";
 import { Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { TechFormContext } from "../TechFormBodyCard/TechFormBodyCard";
 
 const ROUTING_PATH = "/TechProcedure";
 type TechProcedureProps = {
@@ -25,6 +26,8 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({ isOpen = 
     const [rowData, setRowData] = useState(data);
 
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
+
+    const [techFormData, setTechFormData, save] = useContext(TechFormContext)
 
     const handleCongDoanChange = (e, rowKey) => {
         const newData = rowData.map((row) => (row.No === rowKey ? { ...row, CongDoan: e.value } : row));

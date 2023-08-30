@@ -1,6 +1,6 @@
-import React from 'react';
-import { Modal, Button, Radio } from 'antd';
-import { QrcodeOutlined } from '@ant-design/icons';
+import React from "react";
+import { Modal, Button, Radio } from "antd";
+import { QrcodeOutlined } from "@ant-design/icons";
 
 interface PopupDetailBoxCardProps {
     isVisible: boolean;
@@ -19,7 +19,7 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
     modalTitle,
     modalContent,
     width,
-    className
+    className,
 }) => {
     return (
         <Modal
@@ -30,43 +30,42 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
             title={modalTitle}
             footer={[
                 <div>
-                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                         <Button
-                            key="cancel"
+                            key='cancel'
                             style={{
-                                marginRight: '30px',
-                                backgroundColor: '#E5E5E5',
-                                display: 'inline-block',
-                                borderRadius: '4px',
+                                marginRight: 20,
+                                backgroundColor: "#E5E5E5",
+                                display: "inline-block",
+                                borderRadius: "4px",
                                 width: 100,
                                 height: 40,
-                                fontSize: 16
+                                fontSize: 16,
                             }}
-                            onClick={onCancel}
-                        >
+                            onClick={onCancel}>
                             Hủy bỏ
-                        </Button>,
+                        </Button>
+                        ,
                         <Button
                             style={{
-                                borderRadius: '4px',
-                                backgroundColor: '#ff794e',
-                                color: '#ffff',
+                                borderRadius: "4px",
+                                backgroundColor: "#ff794e",
+                                color: "#ffff",
                                 width: 100,
                                 height: 40,
-                                fontSize: 16
+                                fontSize: 16,
+                                marginRight: 15,
                             }}
-                            key="submit"
+                            key='submit'
                             onClick={onSubmit}
-                            className="btn btn-save"
-                        >
+                            className='btn btn-save'>
                             Cập nhật
                         </Button>
                     </div>
-                </div>
+                </div>,
             ]}
             width={width}
-            onCancel={onCancel}
-        >
+            onCancel={onCancel}>
             {modalContent}
         </Modal>
     );

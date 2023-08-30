@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, DataGrid } from "devextreme-react";
 
-import { Column, FilterRow, HeaderFilter, MasterDetail } from "devextreme-react/data-grid";
+import { Column, FilterRow, MasterDetail } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
@@ -66,41 +66,33 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}>
-                            <HeaderFilter
-                                visible={true}
-                                texts={{
-                                    cancel: "Hủy bỏ",
-                                    ok: "Đồng ý",
-                                    emptyValue: "Rỗng",
-                                }}
-                                allowSearch={true}
-                            />
                             <FilterRow visible={true} />
-
                             <Column caption={"Mã Job"} dataField={"codeJob"} alignment='left' width={100} />
                             <Column caption={"Tên Job"} dataField={"nameJob"} />
                             <Column caption={"Thời gian bắt đầu"} dataType='datetime' dataField={""} format='dd/MM/yyyy hh:mm:ss'></Column>
                             <Column caption={"Thời gian kết thúc"} dataType='datetime' dataField={"endTime"} format='dd/MM/yyyy hh:mm:ss' />
                             <MasterDetail
                                 enabled={true}
-                                // component={getProductOrderItemTemplate}
+                            // component={getProductOrderItemTemplate}
                             />
                         </DataGrid>
                         <div
                             className='toolbar'
                             style={{
-                                marginTop: 10,
-                                float: "right",
+                                marginTop: 20,
+                                paddingBottom: 20,
+                                display: "flex",
+                                justifyContent: "flex-end",
                                 // background: "#ffffff",
-                                padding: "8px",
+                                // padding: "8px",
                                 borderRadius: "4px",
                             }}>
                             <Button
                                 text='Hủy bỏ'
                                 onClick={setClose}
-                                style={{ marginRight: "20px", backgroundColor: "#E5E5E5", color: "#333" }}
+                                style={{ marginRight: "20px", backgroundColor: "#E5E5E5", color: "#333", width: 150 }}
                             />
-                            <Button text='Lưu lại' style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff" }} />
+                            <Button text='Lưu lại' style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff", width: 150 }} />
                             <Button text='Phát lệnh sản xuất' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
                         </div>
                     </div>

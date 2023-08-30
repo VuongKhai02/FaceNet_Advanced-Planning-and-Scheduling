@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Button } from 'antd';
+import React from "react";
+import { Modal, Button } from "antd";
 
 interface PopupConfirmGeneralProps {
     isVisible: boolean;
@@ -18,51 +18,53 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
     modalTitle,
     modalContent,
     width,
-    customFooter
+    customFooter,
 }) => {
     return (
         <Modal
-            bodyStyle={{ padding: 0 }}
             // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
-            footer={customFooter !== undefined ? customFooter : [
-                <div style={{ display: "flex", justifyContent: 'flex-end', marginTop: 20 }}>
-                    <Button
-                        key="cancel"
-                        style={{
-                            marginRight: '30px',
-                            backgroundColor: '#E5E5E5',
-                            display: 'inline-block',
-                            borderRadius: '4px',
-                            width: 100,
-                            height: 40,
-                            fontSize: 16
-                        }}
-                        onClick={onCancel}
-                    >
-                        Hủy bỏ
-                    </Button>,
-                    <Button
-                        style={{
-                            borderRadius: '4px',
-                            backgroundColor: '#ff794e',
-                            color: '#ffff',
-                            width: 100,
-                            height: 40,
-                            fontSize: 16
-                        }}
-                        key="submit"
-                        onClick={onSubmit}
-                        className="btn btn-save"
-                    >
-                        Xác nhận
-                    </Button>
-                </div>
-            ]}
+            footer={
+                customFooter !== undefined
+                    ? customFooter
+                    : [
+                          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+                              <Button
+                                  key='cancel'
+                                  style={{
+                                      marginRight: 20,
+                                      backgroundColor: "#E5E5E5",
+                                      display: "inline-block",
+                                      borderRadius: "4px",
+                                      width: 100,
+                                      height: 40,
+                                      fontSize: 16,
+                                  }}
+                                  onClick={onCancel}>
+                                  Hủy bỏ
+                              </Button>
+                              ,
+                              <Button
+                                  style={{
+                                      borderRadius: "4px",
+                                      backgroundColor: "#ff794e",
+                                      color: "#ffff",
+                                      width: 100,
+                                      height: 40,
+                                      fontSize: 16,
+                                      marginRight: 20,
+                                  }}
+                                  key='submit'
+                                  onClick={onSubmit}
+                                  className='btn btn-save'>
+                                  Xác nhận
+                              </Button>
+                          </div>,
+                      ]
+            }
             width={width}
-            onCancel={onCancel}
-        >
+            onCancel={onCancel}>
             {modalContent}
         </Modal>
     );

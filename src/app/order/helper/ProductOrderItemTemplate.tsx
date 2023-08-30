@@ -585,15 +585,7 @@ export const ProductOrderItemTemplate = React.memo((props: any) => {
                         between='Nằm giữa'
                     />
                 </FilterRow>
-                <HeaderFilter
-                    visible={false}
-                    texts={{
-                        cancel: "Hủy bỏ",
-                        ok: "Đồng ý",
-                        emptyValue: "Rỗng",
-                    }}
-                />
-                <SearchPanel visible={true} width={240} placeholder='Tìm kiếm...' />
+                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Selection mode='single' />
                 <Column type={"buttons"} caption={"Tùy chọn"} alignment='left' />
                 <Column cellRender={rowIndexRender} width={50} caption={"STT"} alignment={"left"} />

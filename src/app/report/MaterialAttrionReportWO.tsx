@@ -174,10 +174,15 @@ const MaterialAttritionReportWO: React.FC<DnlnvlViewProps> = observer(({ plannin
                         between='Nằm giữa'
                     />
                 </FilterRow>
-                <SearchPanel visible={true} placeholder='Tìm kiếm...' />
-                {/* <HeaderFilter visible={true} /> */}
+                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Paging enabled={true} defaultPageSize={10} />
-                <Pager visible={true} displayMode={"full"} showInfo={true} showNavigationButtons={true} allowedPageSizes={[5, 10, "all"]} />
+                <Pager
+                    visible={true}
+                    displayMode={"compact"}
+                    showInfo={true}
+                    showNavigationButtons={true}
+                    allowedPageSizes={[10, 20, 40]}
+                />
                 <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
                     <OperationDescriptions
                         startsWith='Bắt đầu với'

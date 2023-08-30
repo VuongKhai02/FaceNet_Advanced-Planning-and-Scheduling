@@ -58,14 +58,14 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                     <div
                         className='toolbar'
                         style={{
-                            marginTop: 15,
+                            marginTop: 35,
+                            paddingBottom: 35,
                             display: "flex",
                             justifyContent: "flex-end",
                             alignItems: "center",
                             // background: "#ffffff",
-                            padding: "8px",
                             borderRadius: "4px",
-                            marginRight: "23px",
+                            marginRight: 30,
                         }}>
                         <Button
                             onClick={setClose}

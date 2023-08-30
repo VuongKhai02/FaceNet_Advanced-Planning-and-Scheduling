@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, DateBox as DateSelect, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
+import { Button, DataGrid, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
     Item as ToolbarItem,
     Pager,
     Paging,
@@ -27,10 +26,9 @@ import PopupWO from "../../../shared/components/PopupWO/PopupWO";
 import QRCode from "react-qr-code";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 import PopupConfirmGeneral from "../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
-import { InfoCircleOutlined } from "@ant-design/icons";
 
 const ROUTING_PATH = "/ProductionPlanList";
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const data = [
     {
@@ -97,8 +95,8 @@ const data1 = [
     },
 ];
 export const ProductionPlanList = () => {
-    const [content, setContent] = useState<string>();
-    const [currentWarning, setCurrentWarning] = useState<IWarning>();
+    const [, setContent] = useState<string>();
+    const [, setCurrentWarning] = useState<IWarning>();
     const mainStore = useMainStore();
     const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
     const [isVisibleAdd, setIsVisibleAdd] = React.useState<boolean>(false);
@@ -352,11 +350,11 @@ export const ProductionPlanList = () => {
 
     const handleCustomFooterAddQRCodeWO = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                 <Button
                     key='cancel'
                     style={{
-                        marginRight: "30px",
+                        marginRight: 20,
                         backgroundColor: "#E5E5E5",
                         display: "inline-block",
                         borderRadius: "4px",
@@ -375,7 +373,7 @@ export const ProductionPlanList = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
-                        marginRight: "30px",
+                        marginRight: 20,
                     }}
                     key='submit'
                     onClick={() => {}}
@@ -390,6 +388,7 @@ export const ProductionPlanList = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
+                        marginRight: 10,
                     }}
                     key='submit'
                     onClick={() => {}}
@@ -401,11 +400,11 @@ export const ProductionPlanList = () => {
     ];
     const handleCustomFooterDetailQRCodeWO = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
                 <Button
                     key='cancel'
                     style={{
-                        marginRight: "30px",
+                        marginRight: 20,
                         backgroundColor: "#E5E5E5",
                         display: "inline-block",
                         borderRadius: "4px",
@@ -424,6 +423,7 @@ export const ProductionPlanList = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
+                        marginRight: 10,
                     }}
                     key='submit'
                     onClick={() => {}}
@@ -587,9 +587,6 @@ export const ProductionPlanList = () => {
                             customFooter={handleCustomFooterDetailQRCodeWO}
                             modalContent={
                                 <div>
-                                    <h3>
-                                        <p style={{ marginTop: 20 }}>Xem chi tiết QR code WO</p>
-                                    </h3>
                                     <div style={{ marginTop: 40, marginBottom: 30 }}>
                                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                                             <td style={{ marginLeft: 30 }}>
@@ -644,9 +641,6 @@ export const ProductionPlanList = () => {
                             customFooter={handleCustomFooterAddQRCodeWO}
                             modalContent={
                                 <div>
-                                    <h3>
-                                        <p style={{ marginTop: 20 }}>Thêm mới QR code cho WO</p>
-                                    </h3>
                                     <div style={{ marginTop: 40, marginBottom: 30 }}>
                                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                                             <td style={{ marginLeft: 30 }}>
@@ -711,41 +705,34 @@ export const ProductionPlanList = () => {
                                 </div>
                             }
                             footer={[
-                                <Button
-                                    key='cancel'
-                                    onClick={() => {
-                                        setIsVisibleAdd(false);
-                                    }}
-                                    style={{
-                                        fontSize: 17,
-                                        width: 100,
-                                        height: 40,
-                                        marginRight: "20px",
-                                        backgroundColor: "#C0C0C0",
-                                        borderRadius: 5,
-                                        color: "#333",
-                                    }}>
-                                    Hủy bỏ
-                                </Button>,
-                                <Button
-                                    key='confirm'
-                                    onClick={handleCreateProductionPlan}
-                                    style={{
-                                        fontSize: 17,
-                                        width: 100,
-                                        height: 40,
-                                        backgroundColor: "#FF7A00",
-                                        color: "#fff",
-                                        borderRadius: 5,
-                                    }}>
-                                    Tiếp theo
-                                </Button>,
+                                <div style={{ marginTop: 14, paddingBottom: 14 }}>
+                                    <Button
+                                        key='cancel'
+                                        onClick={() => {
+                                            setIsVisibleAdd(false);
+                                        }}
+                                        style={{
+                                            width: 100,
+                                            marginRight: "20px",
+                                            backgroundColor: "#C0C0C0",
+                                            borderRadius: 5,
+                                            color: "#333",
+                                        }}>
+                                        Hủy bỏ
+                                    </Button>
+                                    ,
+                                    <Button
+                                        key='confirm'
+                                        onClick={handleCreateProductionPlan}
+                                        style={{ width: 100, backgroundColor: "#FF7A00", color: "#fff", borderRadius: 5, marginRight: 8 }}>
+                                        Tiếp theo
+                                    </Button>
+                                </div>,
                             ]}
                             onCancel={() => {
                                 setIsVisibleAdd(false);
                             }}
                             width={900}>
-                            <p style={{ marginBottom: 5, color: "#333", fontSize: 20 }}>Chọn phiếu công nghệ</p>
                             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", columnGap: "20px" }}>
                                 <div style={{ marginBottom: 20 }}>
                                     <label htmlFor='techFormCode' style={{ display: "block", marginBottom: 5 }}>
@@ -765,13 +752,13 @@ export const ProductionPlanList = () => {
                             isVisible={isCloseWorkOrder}
                             modalContent={
                                 <div>
-                                    <div style={{ marginLeft: 20, marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: "500" }}>
+                                    <div style={{ marginLeft: 10, marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: "400" }}>
                                         Lệnh sản xuất hiện tại đang ở trạng thái .... Nếu bạn đóng lệnh sản xuất, tất cả thông tin của lệnh
                                         sản xuất này sẽ bị hủy và cảnh báo về việc đóng sẽ được gửi đến các bộ phận liên quan. Bạn có chắc
                                         chắn muốn đóng lệnh sản xuất 13342?
                                     </div>
                                     <div className='reject-reason-container'>
-                                        <label style={{ marginLeft: 20, fontSize: 18 }}>
+                                        <label style={{ marginLeft: 10, fontSize: 18 }}>
                                             Lý do đóng lệnh sản xuất<span className='required'>*</span>
                                         </label>
                                         <TextArea
@@ -779,7 +766,7 @@ export const ProductionPlanList = () => {
                                             onValueChanged={() => {}}
                                             placeholder='Nhập lý do từ chối...'
                                             height={100}
-                                            style={{ marginTop: 10, marginLeft: 20, marginRight: 20 }}
+                                            style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
                                         />
                                     </div>
                                 </div>
@@ -818,7 +805,7 @@ export const ProductionPlanList = () => {
                                         onClick={() => setIsVisibleAdd(true)}
                                         sizeIcon={17}
                                         textSize={17}
-                                        icon='assets/icons/CirclePlus.svg'
+                                        icon='assets/icons/CircleAdd.svg'
                                         textColor='#FF7A00'
                                         style={{ marginRight: 17 }}
                                     />
@@ -838,23 +825,14 @@ export const ProductionPlanList = () => {
                                 <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 <ToolbarItem name='searchPanel' location='before' />
                             </Toolbar>
-                            <HeaderFilter
-                                visible={true}
-                                texts={{
-                                    cancel: "Hủy bỏ",
-                                    ok: "Đồng ý",
-                                    emptyValue: "Rỗng",
-                                }}
-                                allowSearch={true}
-                            />
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <SearchPanel visible={true} placeholder={"Tìm kiếm..."} />
-                            <Paging defaultPageSize={5} />
+                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <Paging defaultPageSize={10} />
                             <Pager
                                 visible={true}
                                 allowedPageSizes={allowedPageSizes}
-                                displayMode={"full"}
+                                displayMode={"compact"}
                                 showPageSizeSelector={true}
                                 showInfo={true}
                                 showNavigationButtons={true}
@@ -975,15 +953,6 @@ export const ProductionPlanList = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}>
-                                <HeaderFilter
-                                    visible={true}
-                                    texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng",
-                                    }}
-                                    allowSearch={true}
-                                />
                                 <FilterRow visible={true} />
                                 <Paging defaultPageSize={5} />
                                 <Column caption={"No."} dataField={"no"} alignment='left' width={100} />
@@ -1040,7 +1009,7 @@ export const ProductionPlanList = () => {
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}>
-                                <HeaderFilter visible={true} allowSearch={true} />
+                                {/* <HeaderFilter visible={true} allowSearch={true} /> */}
                                 <Column caption='Mã công đoạn' dataField='codeStage' />
                                 <Column caption='Tên công đoạn' dataField='nameStage' />
                                 <Column caption='Mã Job' dataField='codeJob' />

@@ -3,6 +3,7 @@ import { Button, DataGrid, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
+import SvgIcon from "../../../../icons/SvgIcon/SvgIcon";
 
 type TechFormUpdateMaterialAndStructureProps = {
     techFormData: any;
@@ -98,10 +99,80 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                     front: front,
                     back: back,
                 });
+
+                console.log(data)
             }
 
             return data;
         };
+
+        const onRemoveRowPlate = (rowIndex) => {
+            const newPlateInfosFront = techFormData.prePressPcToPlate.front
+                .filter((step, index) => index !== rowIndex);
+            const newPlateInfosBack = techFormData.prePressPcToPlate.back
+                .filter((step, index) => index !== rowIndex);
+            if (newPlateInfosFront.length === 0 && newPlateInfosBack.length === 0) {
+                newPlateInfosFront.push({})
+                newPlateInfosBack.push({})
+            }
+            setTechFormData({
+                ...techFormData,
+                prePressPcToPlate: {
+                    ...techFormData.prePressPcToPlate,
+                    front: newPlateInfosFront,
+                    back: newPlateInfosBack
+                },
+            });
+        }
+
+        const onAddNewRowPlate = (currentIndex) => {
+            console.log(currentIndex);
+            const newPlateInfosFront = [
+                ...techFormData.prePressPcToPlate.front.slice(0, currentIndex + 1),
+                {},
+                ...techFormData.prePressPcToPlate.front.slice(currentIndex + 1),
+            ];
+            const newPlateInfosBack = [
+                ...techFormData.prePressPcToPlate.back.slice(0, currentIndex + 1),
+                {},
+                ...techFormData.prePressPcToPlate.back.slice(currentIndex + 1),
+            ];
+            setTechFormData({
+                ...techFormData,
+                prePressPcToPlate: {
+                    ...techFormData.prePressPcToPlate,
+                    front: newPlateInfosFront,
+                    back: newPlateInfosBack
+                },
+            });
+        }
+        const onUpdatePlateInfo = (isFront, index, key, value) => {
+            let side;
+            let newData;
+            if (isFront) {
+                side = 'front';
+                newData = techFormData.prePressPcToPlate.front;
+            } else {
+                side = 'back';
+                newData = techFormData.prePressPcToPlate.back;
+            }
+            console.log("before", newData)
+            newData[index] = {
+                ...newData[index],
+                [key]: value
+            }
+
+            console.log("after", newData)
+
+            setTechFormData({
+                ...techFormData,
+                prePressPcToPlate: {
+                    ...techFormData.prePressPcToPlate,
+                    [side]: newData,
+                },
+            });
+
+        }
 
         console.log(getMaterialFormTechForm());
 
@@ -210,23 +281,30 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             <Column
                                                 dataField='front.item'
                                                 caption='Nội dung/Item'
-                                                cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"front.item"} />
-                                                )}
+                                                cellRender={(cellIfo) => {
+                                                    return (
+                                                        <TextBox onValueChange={(e) => {
+                                                            onUpdatePlateInfo(true, cellIfo.rowIndex, "item", e)
+                                                        }} placeholder='Nhập' value={cellIfo.value} key={"front.item"} />)
+                                                }}
                                             />
                                             <Column
                                                 dataField='front.quantity'
                                                 caption="Số lượng/Q'ty"
                                                 alignment='left'
                                                 cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"front.quantity"} />
+                                                    <TextBox onValueChange={(e) => {
+                                                        onUpdatePlateInfo(true, cellIfo.rowIndex, "quantity", e)
+                                                    }} placeholder='Nhập' value={cellIfo.value} key={"front.quantity"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='front.plateSize'
                                                 caption='Kích thước bản/Plate size'
                                                 cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"front.plateSize"} />
+                                                    <TextBox onValueChange={(e) => {
+                                                        onUpdatePlateInfo(true, cellIfo.rowIndex, "plateSize", e)
+                                                    }} placeholder='Nhập' value={cellIfo.value} key={"front.plateSize"} />
                                                 )}
                                             />
                                         </Column>
@@ -235,7 +313,9 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                                 dataField='back.item'
                                                 caption='Nội dung/Item'
                                                 cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"back.item"} />
+                                                    <TextBox onValueChange={(e) => {
+                                                        onUpdatePlateInfo(false, cellIfo.rowIndex, "item", e)
+                                                    }} placeholder='Nhập' value={cellIfo.value} key={"back.item"} />
                                                 )}
                                             />
                                             <Column
@@ -243,24 +323,62 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                                 caption="Số lượng/Q'ty"
                                                 alignment='left'
                                                 cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"back.quantity"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdatePlateInfo(false, cellIfo.rowIndex, "quantity", e)
+                                                    }} value={cellIfo.value} key={"back.quantity"} />
                                                 )}
                                             />
                                             <Column
                                                 dataField='back.plateSize'
                                                 caption='Kích thước bản/Plate size'
                                                 cellRender={(cellIfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellIfo.value} key={"back.plateSiz"} />
+                                                    <TextBox placeholder='Nhập' onValueChange={(e) => {
+                                                        onUpdatePlateInfo(false, cellIfo.rowIndex, "plateSize", e)
+                                                    }} value={cellIfo.value} key={"back.plateSiz"} />
                                                 )}
                                             />
                                         </Column>
+                                        <Column
+                                            caption=''
+                                            dataField=''
+                                            alignment='center'
+                                            width={80}
+                                            cellRender={(cellInfo) => (
+                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                    <SvgIcon
+                                                        onClick={() => {
+                                                            onAddNewRowPlate(cellInfo.rowIndex)
+                                                        }}
+                                                        tooltipTitle='Thêm mới'
+                                                        sizeIcon={17}
+                                                        textSize={17}
+                                                        icon='assets/icons/Add.svg'
+                                                        textColor='#FF7A00'
+                                                        style={{ marginRight: 17 }}
+                                                    />
+                                                    <SvgIcon
+                                                        onClick={() => {
+                                                            // onRemoveRowProcessing(cellInfo.data.no);
+                                                            // onRemoveRowHostamping(cellInfo.rowIndex)
+                                                            onRemoveRowPlate(cellInfo.rowIndex)
+                                                        }}
+                                                        tooltipTitle='Xóa hàng'
+                                                        sizeIcon={17}
+                                                        textSize={17}
+                                                        icon='assets/icons/Trash.svg'
+                                                        textColor='#FF7A00'
+                                                    />
+                                                </div>
+                                            )}
+                                        />
                                     </DataGrid>
 
                                     <div
                                         className='toolbar'
                                         style={{
                                             marginTop: 10,
-                                            float: "right",
+                                            display: "flex",
+                                            justifyContent: 'flex-end',
                                             // background: "#ffffff",
                                             padding: "8px",
                                             borderRadius: "4px",
@@ -279,12 +397,12 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                         />
                                         <Button
                                             text='Ký lập'
-                                            onClick={() => {}}
+                                            onClick={() => { }}
                                             style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
                                         />
                                         <Button
                                             text='Gửi duyệt'
-                                            onClick={() => {}}
+                                            onClick={() => { }}
                                             style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
                                         />
                                     </div>

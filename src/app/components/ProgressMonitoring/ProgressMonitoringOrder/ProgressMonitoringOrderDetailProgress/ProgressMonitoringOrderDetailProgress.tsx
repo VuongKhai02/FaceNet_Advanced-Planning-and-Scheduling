@@ -145,17 +145,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}>
-                                <HeaderFilter
-                                    visible={true}
-                                    texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng",
-                                    }}
-                                    allowSearch={true}
-                                />
                                 <FilterRow visible={true} />
-
                                 <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
                                 <Column caption={"Mã sản phẩm"} dataField={"productionCode"} />
                                 <Column caption={"Tên thẻ"} dataField={"cardName"} />
@@ -168,7 +158,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 <Column
                                     type={"buttons"}
                                     caption={"Thao tác"}
-                                    alignment='left'
+                                    alignment='center'
                                     cellRender={() => (
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                             <SvgIcon
