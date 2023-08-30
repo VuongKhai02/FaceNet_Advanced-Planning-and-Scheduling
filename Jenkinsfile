@@ -67,7 +67,6 @@
 // //     	    bat "npm run start-3001"
 // //     	  }
 // //     	}
-// }
 
 pipeline {
     agent {label "APS_MK"}
