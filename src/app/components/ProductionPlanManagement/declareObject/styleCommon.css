@@ -1,3 +1,29 @@
 .dx-field-label{
     font-size: 20px;
 }
+
+.textbox:hover .underTextbox{
+    display: block;
+}
+
+.underTextbox{
+    background-color: #fff;
+    display: none;
+    position: absolute;
+    top: -14px;
+    z-index: 9999;
+}
+
+.test{
+    background-color: rgba(242, 242, 242, 1);
+    width: .5%;
+    border: none;
+    
+
+}
+
+
+.test:focus{
+    outline: none;
+
+}

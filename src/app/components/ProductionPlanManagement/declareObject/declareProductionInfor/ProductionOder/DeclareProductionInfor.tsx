@@ -80,7 +80,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                 <div >
                     <div className="table-responsive">
                         <div className="informer" style={{
-                            background: "#fff",
+                            background: "rgba(242, 242, 242, 1)",
                             textAlign: "left",
                             paddingTop: 12
                         }}>
@@ -108,32 +108,30 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                 </div>
                                 <div className="dx-fieldset">
                                     <h3 style={{ margin: "1rem 0" }}>Thông tin lệnh sản xuất</h3>
-                                    <div className="dx-field">
-                                        <div className="dx-field-label">Mã sản xuất</div>
-                                        <div className="dx-field-value">
-                                            <TextBox disabled value={productionInfo[0].id} > </TextBox>
-                                        </div>
+                                    <div>
+                                        <TextBox value={fakeProductionInfo[0].id} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
+                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Mã sản xuất</p>
+                                        </TextBox>
                                     </div>
-                                    <div className="dx-field">
-                                        <div className="dx-field-label">Tên thẻ</div>
-                                        <div className="dx-field-value">
-                                            <TextBox disabled value={productionInfo[0].cardName}></TextBox>
-                                        </div>
+                                    <div className="textbox">
+                                        <TextBox value={fakeProductionInfo[0].cardName} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
+                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Tên thẻ</p>
+                                            <p className="underTextbox">
+                                                {fakeProductionInfo[0].cardName}
+                                            </p>
+                                        </TextBox>
                                     </div>
-                                    <div className="dx-field">
-                                        <div className="dx-field-label">Trạng thái</div>
-                                        <div className="dx-field-value">
-                                            <TextBox disabled value={productionInfo[0].status} />
-                                        </div>
+                                    <div>
+                                        <TextBox value={fakeProductionInfo[0].status} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
+                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Trạng thái</p>
+                                        </TextBox>
                                     </div>
-                                    <div className="dx-field">
-                                        <div className="dx-field-label">Số lượng</div>
-                                        <div className="dx-field-value">
-                                            <TextBox disabled value={productionInfo[0].quantity} />
-                                        </div>
+                                    <div>
+                                        <TextBox value={fakeProductionInfo[0].quantity} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
+                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Số lượng</p>
+                                        </TextBox>
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
-
                                         <Button
                                             text="Trở lại"
                                             onClick={setClose}

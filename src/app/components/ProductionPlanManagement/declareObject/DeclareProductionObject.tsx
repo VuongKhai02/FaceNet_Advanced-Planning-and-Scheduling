@@ -50,10 +50,10 @@ const job_name = [
 ];
 
 const fakeInfoMapped = [{
-    pro_id: "default",
-    machine_id: "default",
-    worker_id: "default",
-    plot_id: "default",
+    pro_id: "",
+    machine_id: "",
+    worker_id: "",
+    plot_id: "",
 }]
 
 export const infoMappedContext = React.createContext<any | null>(null);
@@ -314,7 +314,7 @@ export const DeclareProductionObject = () => {
                                                 margin: "0 0 .6rem .5rem"
                                             }}>Khai báo thông tin</h2>
                                             <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem', padding: windowWidth < 600 ? "0" : "0 3rem" }}>
-                                                <div className="content" style={{ display: "flex", height: "30vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
+                                                <div className="content" style={{ display: "flex", height: "20vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
                                                     {/* <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "23%", margin: "0 1rem 1rem 0" }}>
                                                 <p>Mã sản xuất</p>
                                                 <SelectBox placeholder="-- Chọn mã sản xuất --"
@@ -342,17 +342,17 @@ export const DeclareProductionObject = () => {
                                                 <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
                                                     <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
                                                         <p>Mã sản xuất</p>
-                                                        <TextBox value={infoMapped[0].pro_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                        <TextBox hint="Quét mã trên Zebra" value={infoMapped[0].pro_id} disabled style={{ background: infoMapped[0].pro_id == "" ? `url(${qrTextbox}) no-repeat scroll 5px 4px` : "none", width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
 
                                                         <p>Mã máy</p>
-                                                        <TextBox value={infoMapped[0].machine_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                        <TextBox value={infoMapped[0].machine_id} disabled style={{ background: infoMapped[0].machine_id == "" ? `url(${qrTextbox}) no-repeat scroll 5px 4px` : "none", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
                                                     </div>
                                                     <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
                                                         <p>Mã công nhân</p>
-                                                        <TextBox value={infoMapped[0].worker_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                        <TextBox value={infoMapped[0].worker_id} disabled style={{ background: infoMapped[0].worker_id == "" ? `url(${qrTextbox}) no-repeat scroll 5px 4px` : "none", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
 
                                                         <p>Mã lô NVL/BTP</p>
-                                                        <TextBox value={infoMapped[0].plot_id} disabled style={{ background: `url(${qrTextbox}) no-repeat scroll 5px 4px`, width: "90%", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
+                                                        <TextBox value={infoMapped[0].plot_id} disabled style={{ background: infoMapped[0].plot_id == "" ? `url(${qrTextbox}) no-repeat scroll 5px 4px` : "none", padding: "0 0 0 2rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
                                                     </div>
 
                                                 </div>
