@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, TextArea } from "devextreme-react";
+import { DataGrid, TextArea } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -13,7 +13,7 @@ import {
 } from "devextreme-react/data-grid";
 import { PLANNING_API_URL } from "../../../../utils/config";
 import { customizeColor } from "../../../../utils/utils";
-import { Tag } from "antd";
+import { Button, Tag } from "antd";
 import notify from "devextreme/ui/notify";
 import { OrderItem } from "../../../../fake_data/OrderItem";
 import TechFormDetail from "../TechFormDetail/TechFormDetail";
@@ -340,6 +340,7 @@ export const TechFormApprove = () => {
                                 renderAsync={true}></Column>
                             <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'
@@ -415,15 +416,13 @@ export const TechFormApprove = () => {
                                 </div>
                                 <div className='button-container'>
                                     <Button
-                                        text='Hủy bỏ'
                                         onClick={onCancelClick}
                                         style={{ backgroundColor: "#E5E5E5", marginRight: 20, width: 100 }}
-                                    />
+                                    >Hủy bỏ</Button>
                                     <Button
-                                        text='Xác nhận'
                                         onClick={onConfirmClick}
                                         style={{ backgroundColor: "#FF7A00", color: "#FFF" }}
-                                    />
+                                    >Xác nhận</Button>
                                 </div>
                             </div>
                         </PopupCofirm>

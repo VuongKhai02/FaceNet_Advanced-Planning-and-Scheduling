@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DataGrid, SelectBox, TextBox } from "devextreme-react";
+import { DataGrid, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow } from "devextreme-react/data-grid";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
@@ -10,6 +10,7 @@ import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { MDM_API_URL, PLANNING_API_URL } from "../../../../../utils/config";
 import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
+import { Button } from "antd";
 
 type BOMPersonalizedAddInfoProductProps = {
     id: Number | null;
@@ -563,12 +564,11 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                             }}>
                             <Button
                                 onClick={setClose}
-                                text='Hủy bỏ'
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                            />
+                            >Hủy bỏ</Button>
                             <Button
                                 onClick={handleCreateBOM}
-                                text='Thêm mới' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                                style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Thêm mới</Button>
                         </div>
                     </div>
                 </div>

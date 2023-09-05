@@ -170,6 +170,7 @@ export const ManageJobOutput = () => {
                             <Column caption={"Số lượng thẻ"} dataField={"quantity"} />
                             <Column caption={"Trạng thái"} dataField={"status"} />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'

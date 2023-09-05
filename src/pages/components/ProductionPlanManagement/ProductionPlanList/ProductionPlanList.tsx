@@ -825,6 +825,7 @@ export const ProductionPlanList = () => {
                             <Column caption='Lý do đóng lệnh sản xuất' dataField='reasonClose' />
                             <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='left'
@@ -939,6 +940,7 @@ export const ProductionPlanList = () => {
                                         <Column caption={"Vật tư thay thế"} dataField={"replaceMaterial"} />
                                         <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
                                         <Column type={"buttons"} caption={"Thao tác"} alignment='center'
+                                            fixed={true}
                                             cellRender={() =>
                                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                     <SvgIcon

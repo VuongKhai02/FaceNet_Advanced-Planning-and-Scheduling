@@ -1,8 +1,8 @@
 import React, { } from "react";
-import { Button, DataGrid, Template } from "devextreme-react";
+import { DataGrid, Template } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import { Table, Checkbox } from "antd";
+import { Table, Checkbox, Button } from "antd";
 
 type TechFormBodyCardProps = {
     isOpen: boolean;
@@ -624,10 +624,9 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
                                     style={{ backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                />
+                                >Trở lại</Button>
                                 {/* <Button
                                     text="Tiếp theo"
                                     style={{ backgroundColor: "#FF7A00", color: "#fff" }}

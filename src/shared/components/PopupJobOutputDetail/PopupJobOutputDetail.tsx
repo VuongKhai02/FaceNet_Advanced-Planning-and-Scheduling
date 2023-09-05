@@ -47,7 +47,7 @@ const PopupJobOutputDetail: React.FC<PopupJobOutputDetailProps> = ({
                             onClick={onCancel}
                         >
                             Hủy bỏ
-                        </Button>,
+                        </Button>
                         <Button
                             style={{
                                 borderRadius: '4px',

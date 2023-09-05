@@ -31,7 +31,6 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel
                         onClick={onCancel}>
                         Hủy bỏ
                     </Button>
-                    ,
                     <Button
                         style={{
                             borderRadius: "4px",

@@ -419,6 +419,7 @@ export const CardManagement = () => {
                             <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
                             <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'

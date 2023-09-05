@@ -45,7 +45,6 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
                             onClick={onCancel}>
                             Hủy bỏ
                         </Button>
-                        ,
                         <Button
                             style={{
                                 borderRadius: "4px",

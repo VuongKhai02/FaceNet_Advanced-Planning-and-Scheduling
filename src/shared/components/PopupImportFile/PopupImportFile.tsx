@@ -35,7 +35,6 @@ const PopupImportFile: React.FC<PopupImportFile> = ({ title, visible, onSubmit, 
                         type='default'>
                         Hủy bỏ
                     </Button>
-                    ,
                     <Button
                         key='confirm'
                         onClick={onSubmit}

@@ -46,7 +46,7 @@ export const ViewMaterial = () => {
                                 <Column caption={"Mã QR"} dataField={"customer"} />
                                 <Column caption={"Mức độ ưu tiên"} dataField={"customer"} />
                                 <Column caption={"Trạng thái"} />
-                                <Column type={"buttons"} caption={"Thao tác"} alignment='left'>
+                                <Column fixed={true} type={"buttons"} caption={"Thao tác"} alignment='left'>
                                     <ButtonIcon icon='info' />
                                     <ButtonIcon icon='smalliconslayout' />
                                     <ButtonIcon icon='chevronright' />

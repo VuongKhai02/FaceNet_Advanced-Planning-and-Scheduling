@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DataGrid, SelectBox, TextBox } from "devextreme-react";
+import { DataGrid, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow } from "devextreme-react/data-grid";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import PopupBOMAddNewInfoMaterial from "../../../../../shared/components/PopupBOMAddNewInfoMaterial/PopupBOMAddNewInfoMaterial";
 import PopupImportFile from "../../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
+import { Button } from "antd";
 
 type BOMPersonalizedAddInfoTemplateProps = {
     isOpen: boolean;
@@ -266,6 +267,7 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
                             <Column caption={"Mô tả vật tư thay thế"} dataField='materialDescriptChange' />
                             <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'
@@ -304,10 +306,9 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
                             }}>
                             <Button
                                 onClick={setClose}
-                                text='Hủy bỏ'
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                            />
-                            <Button text='Thêm mới' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                            >Hủy bỏ</Button>
+                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Thêm mới</Button>
                         </div>
                     </div>
                 </div>

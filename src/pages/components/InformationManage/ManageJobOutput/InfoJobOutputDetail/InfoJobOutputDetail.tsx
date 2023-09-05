@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, SelectBox, TextBox } from "devextreme-react";
+import { SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
+import { Button } from "antd";
 
 type InfoJobOutputDetailProps = {
     isOpen: boolean;
@@ -69,10 +70,9 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                         }}>
                         <Button
                             onClick={setClose}
-                            text='Hủy bỏ'
                             style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                        />
-                        <Button onClick={() => { }} text='Cập nhật' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                        >Hủy bỏ</Button>
+                        <Button onClick={() => { }} style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Cập nhật</Button>
                     </div>
                 </div>
             </div>

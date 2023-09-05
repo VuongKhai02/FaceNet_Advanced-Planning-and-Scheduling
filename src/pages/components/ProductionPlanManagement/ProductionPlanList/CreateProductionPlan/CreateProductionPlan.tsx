@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import { Column, FilterRow, MasterDetail } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
+import { Button } from "antd";
 
 type CreateProductionPlanProps = {
     isOpen: boolean;
@@ -87,12 +88,11 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                                 borderRadius: "4px",
                             }}>
                             <Button
-                                text='Hủy bỏ'
                                 onClick={setClose}
                                 style={{ marginRight: "20px", backgroundColor: "#E5E5E5", color: "#333", width: 150 }}
-                            />
-                            <Button text='Lưu lại' style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff", width: 150 }} />
-                            <Button text='Phát lệnh sản xuất' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                            >Hủy bỏ</Button>
+                            <Button style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff", width: 150 }} >Lưu lại</Button>
+                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Phát lệnh sản xuất</Button>
                         </div>
                     </div>
                 </div>

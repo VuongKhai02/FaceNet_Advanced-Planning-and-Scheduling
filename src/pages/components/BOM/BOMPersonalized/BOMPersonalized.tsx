@@ -363,6 +363,7 @@ export const BOMPersonalized = () => {
                                                 />
                                                 <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
                                                 <Column
+                                                    fixed={true}
                                                     type={"buttons"}
                                                     caption={"Thao tác"}
                                                     alignment='center'
@@ -513,6 +514,7 @@ export const BOMPersonalized = () => {
                             <Column caption={"Ghi chú"} dataField={"note"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'

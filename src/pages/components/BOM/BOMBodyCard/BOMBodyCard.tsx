@@ -303,6 +303,7 @@ export const BOMBodyCard = () => {
                                                         />
                                                         <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
                                                         <Column
+                                                            fixed={true}
                                                             type={"buttons"}
                                                             caption={"Thao tác"}
                                                             alignment='center'
@@ -470,6 +471,7 @@ export const BOMBodyCard = () => {
                                 <Column dataField='note' alignment={"left"} caption={"Ghi chú"} width={140}></Column>
                                 <Column caption={"Trạng thái"} dataField='status' />
                                 <Column
+                                    fixed={true}
                                     type={"buttons"}
                                     caption={"Thao tác"}
                                     alignment='center'

@@ -416,6 +416,7 @@ export const TechFormList = () => {
                             <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'

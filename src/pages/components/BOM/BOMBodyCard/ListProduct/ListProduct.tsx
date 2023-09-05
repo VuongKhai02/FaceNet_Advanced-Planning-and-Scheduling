@@ -218,6 +218,7 @@ export const ListProduct = React.memo((props: any) => {
                                         <Column caption={"Mô tả vật tư thay thế"} dataField={"replaceMaterialDescription"} />
                                         <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
                                         <Column
+                                            fixed={true}
                                             type={"buttons"}
                                             caption={"Thao tác"}
                                             alignment='center'
@@ -334,6 +335,7 @@ export const ListProduct = React.memo((props: any) => {
                 <Column dataField='note' caption='Ghi chú' />
                 <Column caption={"Trạng thái"} dataField='status' />
                 <Column
+                    fixed={true}
                     type={"buttons"}
                     caption={"Thao tác"}
                     alignment='center'

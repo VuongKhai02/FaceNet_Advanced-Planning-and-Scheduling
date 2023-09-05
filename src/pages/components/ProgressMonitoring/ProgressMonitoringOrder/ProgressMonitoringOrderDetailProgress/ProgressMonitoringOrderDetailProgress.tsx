@@ -156,6 +156,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 <Column dataField='startTime' caption='Thời gian đặt hàng' format={"dd/MM/yyyy"} dataType='datetime' />
                                 <Column dataField='endTime' caption='Thời gian trả hàng' format={"dd/MM/yyyy"} dataType='datetime' />
                                 <Column
+                                    fixed={true}
                                     type={"buttons"}
                                     caption={"Thao tác"}
                                     alignment='center'

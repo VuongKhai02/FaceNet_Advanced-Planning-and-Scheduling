@@ -287,6 +287,7 @@ export const MrpSaleOrders = () => {
                 <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                 <Column type={"buttons"} caption={"Thao tác"} alignment="center"
+                    fixed={true}
                     cellRender={() =>
                         <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
                             <SvgIcon onClick={() => setIsVisibleConfirmDelete(true)} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
