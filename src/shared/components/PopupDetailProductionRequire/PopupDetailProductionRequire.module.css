@@ -1,0 +1,33 @@
+.modal-container :global(.ant-modal-close) {
+    color: var(--primary-color);
+    margin-top: 16px;
+    margin-right: 16px;
+    height: fit-content;
+    width: auto;
+
+    :global(.ant-modal-close-x) {
+        font-size: 36px;
+    }
+}
+
+.modal-container :global(.ant-modal-close):hover {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    :global(.ant-btn) {
+        margin-right: 15px;
+        background-color: #E5E5E5;
+        display: inline-block;
+        border-radius: 4px;
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,10 @@
+.app-content {
+    margin: 8px 16px;
+    min-height: 600px;
+    overflow: auto;
+}
+
+.app-breadcrumb {
+    margin-top: 8px;
+    margin-left: 16px;
+}

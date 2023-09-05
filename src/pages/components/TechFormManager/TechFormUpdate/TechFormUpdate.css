@@ -1,0 +1,65 @@
+.border-none {
+    border: none !important;
+}
+.outer-rectangle {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border: 1px solid #bbb6b6;
+    padding: 10px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.inner-rectangle {
+    border: 1px solid #bbb6b6;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+.image-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.credit-card-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.textbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+}
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(189, 187, 187);
+}
+.row {
+    display: flex;
+    flex-shrink: 1;
+    font-size: 18px;
+}
+
+.title {
+    font-weight: 700;
+    width: 25%;
+    padding: 10px;
+    border: 1px solid rgb(189, 187, 187);
+}
+
+.value {
+    border: 1px solid rgb(189, 187, 187);
+    width: 25%;
+    padding: 10px;
+}

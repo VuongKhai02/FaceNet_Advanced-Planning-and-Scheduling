@@ -1,0 +1,128 @@
+.header-container {
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.menu-left {
+    margin-right: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-right {
+    margin-right: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.button-none {
+    background-color: transparent;
+    color: var(--text-color);
+    border-color: transparent;
+}
+
+.button-none:hover {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    border-color: transparent !important;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: center;
+
+    .user-avatar {
+        width: 40px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+    }
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+
+    .user-hello {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+
+    .user-username {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+    }
+}
+
+.language-select {
+    background: transparent;
+    color: var(--text-color);
+
+    &:hover {
+        border-color: var(--secondary-color);
+    }
+}
+
+.language-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+        border-color: transparent;
+    }
+
+    .language-image {
+        width: fit-content;
+        height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .language-text {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+        margin-left: 8px;
+    }
+}
+
+.badge {
+    .bell[role="img"] {
+        font-size: 20px;
+    }
+}
+
+.mg-rignt-16 {
+    margin-right: 16px;
+}
+
+.mg-left-8 {
+    margin-left: 8px;
+}
