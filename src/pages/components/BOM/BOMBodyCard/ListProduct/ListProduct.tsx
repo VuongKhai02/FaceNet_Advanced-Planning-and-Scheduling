@@ -341,7 +341,7 @@ export const ListProduct = React.memo((props: any) => {
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <SvgIcon
                                 onClick={() => setIsDetailBOMTemplate(true)}
-                                tooltipTitle='Thông tin'
+                                tooltipTitle='Thông tin chi tiết BOM sản phẩm'
                                 sizeIcon={17}
                                 textSize={17}
                                 icon='assets/icons/InfoCircle.svg'

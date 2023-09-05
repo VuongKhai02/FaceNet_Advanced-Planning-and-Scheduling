@@ -292,10 +292,7 @@ export const MrpSaleOrders = () => {
                             <SvgIcon onClick={() => setIsVisibleConfirmDelete(true)} tooltipTitle="Xóa" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
 
                         </div>
-                    }
-                    fixed={true}
-                    fixedPosition="right"
-                >
+                    }>
                 </Column>
                 <MasterDetail
                     enabled={true}

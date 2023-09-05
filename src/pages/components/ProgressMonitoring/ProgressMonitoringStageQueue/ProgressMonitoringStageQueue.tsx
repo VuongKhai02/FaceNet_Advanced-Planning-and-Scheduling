@@ -29,6 +29,7 @@ export const ProgressMonitoringStageQueue = () => {
                     {
                         key: "progress-monitoring",
                         title: "Giám sát tiến độ",
+
                     },
                     {
                         key: "stage-queue",

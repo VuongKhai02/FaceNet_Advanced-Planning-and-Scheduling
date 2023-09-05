@@ -29,7 +29,7 @@ import httpRequests from "../../../../utils/httpRequests";
 const data2 = [
     {
         codeMaterial: "VT0001",
-        nameMaterial: "Chip vàng 6 chân",
+        replaceMaterialName: "Mực 02",
         version: "1.1",
         classify: "NVL",
         norm: "1",
@@ -40,7 +40,7 @@ const data2 = [
     },
     {
         codeMaterial: "VT0002",
-        nameMaterial: "Chip vàng 6 chân",
+        replaceMaterialName: "Mực 02",
         version: "1.1",
         classify: "NVL",
         norm: "1",
@@ -51,7 +51,7 @@ const data2 = [
     },
     {
         codeMaterial: "VT0003",
-        nameMaterial: "Chip vàng 6 chân",
+        replaceMaterialName: "Mực 02",
         version: "1.1",
         classify: "NVL",
         norm: "1",
@@ -66,9 +66,9 @@ export const BOMBodyCard = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
-    const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isBOMCardAddTemplate, setIsBOMCardAddTemplate] = React.useState<boolean>(false);
+    const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
     const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [bom, setBom] = React.useState<any>({});
@@ -266,11 +266,11 @@ export const BOMBodyCard = () => {
                                                                 justifyContent: "space-arround",
                                                             }}>
                                                             <td>
-                                                                <InfoRow label='Mã thẻ' data='TH001' />
+                                                                <InfoRow label='Mã loại thẻ' data='TH001' />
                                                                 <InfoRow label='Bom version' data='1.1' />
                                                             </td>
                                                             <td>
-                                                                <InfoRow label='Tên thẻ' data='Thẻ visa TP Bank' />
+                                                                <InfoRow label='Tên loại thẻ' data='Thẻ visa TP Bank' />
                                                                 <InfoRow label='Trạng thái' data='Hoạt động' />
                                                             </td>
                                                         </table>
@@ -477,7 +477,7 @@ export const BOMBodyCard = () => {
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
                                                 onClick={() => setIsDetailBOM(true)}
-                                                tooltipTitle='Thông tin'
+                                                tooltipTitle='Thông tin chi tiết BOM mẫu'
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/InfoCircle.svg'

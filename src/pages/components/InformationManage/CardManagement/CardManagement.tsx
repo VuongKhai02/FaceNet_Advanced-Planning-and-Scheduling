@@ -20,6 +20,7 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import { WarningOutlined } from "@ant-design/icons";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
 const data = [
     {
@@ -149,7 +150,6 @@ export const CardManagement = () => {
                                 Danh sách hộp chứa thẻ
                             </h5>
                         </div>
-
                         <DataGrid
                             key={"boxCode"}
                             keyExpr={"boxCode"}
@@ -164,8 +164,28 @@ export const CardManagement = () => {
                             <PopupScanBarCode
                                 isVisible={isVisibleScanBarCode}
                                 modalContent={
-                                    <div style={{ display: "flex", justifyContent: "center" }}>
-                                        <Barcode value='Cool Girl' textAlign='center' font='monospace' />
+                                    <div style={{
+                                        border: '1px solid #E5E5E5',
+                                        marginLeft: 30,
+                                        marginRight: 30,
+                                        borderRadius: '5px'
+                                    }}>
+                                        <h3 style={{ display: "flex", justifyContent: "center", fontWeight: 500 }}>Customer: VP Bank - Chíp D350</h3>
+                                        <div style={{
+                                            display: "flex", justifyContent: "center", flexDirection: 'row',
+                                        }}>
+                                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                                <Barcode value='Cool Girl' textAlign='center' font='monospace' />
+                                            </div>
+                                            <div>
+                                                <InfoRow label='Quantity' data='500 pcs' />
+                                                <InfoRow label='Pro.code' data='<Empty>' />
+                                                <InfoRow label='Box' data='<Empty>' />
+                                                <InfoRow label='Card type' data='<Empty>' />
+                                                <InfoRow label='Packing date' data='25/08/2023' />
+                                            </div>
+                                        </div>
+
                                     </div>
                                 }
                                 modalTitle={

@@ -117,10 +117,6 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
 
     ];
 
-    const data3 = [
-        { Id: 1 }
-    ];
-
     const data4 = [
         { no: '1', materialName: 'Overlay (Front)', supplier: 'CPPC', thickNess: '0.05', quantity: '850', note: '', structure: '' },
         { no: '2', materialName: 'PVC (Front)', supplier: 'JHNM', thickNess: '0.15', quantity: '850', note: '', structure: '' },
