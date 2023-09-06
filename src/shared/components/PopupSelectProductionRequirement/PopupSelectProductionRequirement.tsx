@@ -31,7 +31,7 @@ const PopupSelectProductionRequirement = ({ title, visible, onSubmit, onCancel, 
             }
         } else {
             return {
-                width: 100, height: 40, backgroundColor: '#A8A8A8', color: "#fff", borderRadius: 5, marginRight: 8
+                width: 100, height: 40, backgroundColor: 'rgba(0, 0, 0, 0.04)', color: "rgba(0, 0, 0, 0.25)", borderRadius: 5, marginRight: 8
             }
         }
     }
@@ -46,7 +46,7 @@ const PopupSelectProductionRequirement = ({ title, visible, onSubmit, onCancel, 
                 </div>
             }
             footer={[
-                <Button key="cancel" onClick={onCancel} style={{ width: 100, height: 40, marginRight: '20px', backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
+                <Button key="cancel" onClick={onCancel} style={{ width: 100, height: 40, marginRight: '20px', backgroundColor: 'gray', borderRadius: 5, color: '#fff' }} >
                     Hủy bỏ
                 </Button>,
                 <Button disabled={dataChoosed === null} key="confirm" onClick={() => { onSubmit(dataChoosed) }} style={style()}>

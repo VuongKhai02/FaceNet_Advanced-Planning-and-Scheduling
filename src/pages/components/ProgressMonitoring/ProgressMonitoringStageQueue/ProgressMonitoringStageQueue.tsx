@@ -1,12 +1,12 @@
 import React from "react";
-import { Button, SelectBox, TextBox } from "devextreme-react";
+import { SelectBox, TextBox } from "devextreme-react";
 import "./ProgressMonitoringStageQueue.css";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import PopupConfirmGeneral from "../../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
-const ROUTING_PATH = "/progressMonitoringStageQueue";
+import { Button } from "antd";
 const { Step } = Steps;
 
 const items = [
@@ -125,7 +125,6 @@ export const ProgressMonitoringStageQueue = () => {
                                 <div className='border__table-row'></div>
                                 <InfoRow label='Tổng số lượng' data='96000' />
                                 <Button
-                                    text='Bắt đầu công đoạn'
                                     style={{
                                         marginLeft: 200,
                                         backgroundColor: "#FF7A00",
@@ -135,7 +134,7 @@ export const ProgressMonitoringStageQueue = () => {
                                         marginTop: 30,
                                     }}
                                     onClick={() => setIsVisibleDefineStageQueue(true)}
-                                />
+                                >Bắt đầu công đoạn</Button>
                                 <PopupConfirmGeneral
                                     isVisible={isVisibleDefineStageQueue}
                                     modalContent={
@@ -213,10 +212,9 @@ export const ProgressMonitoringStageQueue = () => {
                                 borderRadius: "4px",
                             }}>
                             <Button
-                                text='Trở lại'
                                 onClick={() => { }}
-                                style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 120 }}
-                            />
+                                style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                            >Trở lại</Button>
                         </div>
                     </div>
                 </div>

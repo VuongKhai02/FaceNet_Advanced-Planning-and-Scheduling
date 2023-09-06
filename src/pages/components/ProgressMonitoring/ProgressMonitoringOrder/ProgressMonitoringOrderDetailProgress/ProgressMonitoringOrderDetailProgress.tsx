@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import { Column, FilterRow } from "devextreme-react/data-grid";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
+import { Button } from "antd";
 
 const data = [
     {
@@ -184,10 +185,9 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 120 }}
-                                />
+                                    style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                                >Trở lại</Button>
                             </div>
                         </div>
                     </div>

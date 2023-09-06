@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Button, DataGrid, DropDownBox } from "devextreme-react";
+import { DataGrid, DropDownBox } from "devextreme-react";
 import DateBox from "devextreme-react/date-box";
 import "./TechFormNewAddProcedure.css";
 import { observer } from "mobx-react";
 import TechFormHostamping from "../TechFormHostamping/TechFormHostamping";
 import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
-import { Input, Select, Table } from "antd";
+import { Button, Input, Select, Table } from "antd";
 import { Column } from "devextreme-react/data-grid";
 
 type TechFormNewAddProcedureProps = {
@@ -92,7 +92,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         <Column
                                             dataField='Item'
                                             caption='Nội dung/Item'
-                                            cellRender={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            cellRender={() => <Input placeholder='Nhập' />}
                                         />
                                         <Column
                                             dataField='method'
@@ -131,17 +131,17 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                             </div>
                                         );
                                     }}>
-                                    <Column alignment='center' caption='File' fixed>
+                                    <Column alignment='center' caption='File'>
                                         <Column
                                             dataField='colour'
                                             caption='Màu/Colour'
-                                            cellRender={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            cellRender={() => <Input placeholder='Nhập' />}
                                         />
 
                                         <Column
                                             dataField='note'
                                             caption='Ghi chú/Note'
-                                            cellRender={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            cellRender={() => <Input placeholder='Nhập' />}
                                         />
                                     </Column>
                                 </Column>
@@ -201,28 +201,28 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Table.Column
                                         title='Nội dung ép/Contens'
                                         dataIndex='contens'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Phân loại/Classify'
                                         dataIndex='classify'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Thông số máy/Lamination Parameter'
                                         dataIndex='lamination'
                                         width={270}
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Khác/Other'
                                         dataIndex='other'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Cấu trúc/Structure'
                                         dataIndex='structure'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title=''
@@ -230,7 +230,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         align='center'
                                         width={80}
                                         render={() => (
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon
                                                     tooltipTitle='Thêm mới'
                                                     sizeIcon={17}
@@ -279,32 +279,32 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Table.Column
                                         title='Mực/Lnk'
                                         dataIndex='lnk'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Nilon'
                                         dataIndex='nilon'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Cắt'
                                         dataIndex='cut'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Bế'
                                         dataIndex='be'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Đùn'
                                         dataIndex='dun'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Khác/Other'
                                         dataIndex='other'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title=''
@@ -312,7 +312,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         align='center'
                                         width={80}
                                         render={() => (
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon
                                                     tooltipTitle='Thêm mới'
                                                     sizeIcon={17}
@@ -361,12 +361,12 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Table.Column
                                         title='Nội dung/Content'
                                         dataIndex='content'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title='Máy/Machine'
                                         dataIndex='machine'
-                                        render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                        render={() => <Input placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title=''
@@ -374,7 +374,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         align='center'
                                         width={80}
                                         render={() => (
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon
                                                     tooltipTitle='Thêm mới'
                                                     sizeIcon={17}
@@ -406,16 +406,14 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                />
+                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                >Trở lại</Button>
                                 <Button
-                                    text='Tiếp theo'
                                     onClick={handleAddFormTechHostamping}
                                     style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
-                                />
-                                <Button text='Thêm mới' style={{ backgroundColor: "gray", color: "#fff" }} />
+                                >Tiếp theo</Button>
+                                <Button disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

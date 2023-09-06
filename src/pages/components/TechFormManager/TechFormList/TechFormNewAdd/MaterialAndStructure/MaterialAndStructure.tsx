@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, TextBox } from "devextreme-react";
+import { TextBox } from "devextreme-react";
 import DateBox from "devextreme-react/date-box";
 import "./MaterialAndStructure.css";
 import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
-import { Input, Table } from "antd";
+import { Button, Input, Table } from "antd";
 import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
 
 type MaterialAndStructureProps = {
@@ -162,7 +162,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 </div>
                                 <div className='input'>
                                     <label htmlFor='tongSoBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                        Tổng số bản:
+                                        Tổng số bản: &ensp;
                                     </label>
                                     <TextBox
                                         className='inputRow'
@@ -178,36 +178,36 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                         <Table.Column
                                             dataIndex='MatTruocNoiDung'
                                             title='Nội dung/Item'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                         <Table.Column
                                             dataIndex='MatTruocSoLuong'
                                             title="Số lượng/Q'ty"
                                             align='left'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                         <Table.Column
                                             dataIndex='MatTruocKichThuocBan'
                                             title='Kích thước bản/Plate size'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                     </Table.ColumnGroup>
                                     <Table.ColumnGroup title='Mặt sau/Back' fixed='left'>
                                         <Table.Column
                                             dataIndex='MatTruocNoiDung'
                                             title='Nội dung/Item'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                         <Table.Column
                                             dataIndex='MatTruocSoLuong'
                                             title="Số lượng/Q'ty"
                                             align='left'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                         <Table.Column
                                             dataIndex='MatTruocKichThuocBan'
                                             title='Kích thước bản/Plate size'
-                                            render={() => <Input className='inputRow' placeholder='Nhập' />}
+                                            render={() => <Input placeholder='Nhập' />}
                                         />
                                     </Table.ColumnGroup>
                                     <Table.Column
@@ -216,7 +216,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                         align='center'
                                         width={80}
                                         render={() => (
-                                            <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon
                                                     tooltipTitle='Thêm mới'
                                                     sizeIcon={17}
@@ -242,22 +242,21 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 className='toolbar'
                                 style={{
                                     marginTop: 10,
-                                    float: "right",
+                                    display: 'flex',
+                                    justifyContent: "flex-end",
                                     // background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                />
+                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                >Trở lại</Button>
                                 <Button
-                                    text='Tiếp theo'
                                     onClick={handleAddFormTechProcedure}
                                     style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
-                                />
-                                <Button text='Thêm mới' style={{ backgroundColor: "gray", color: "#fff" }} />
+                                >Tiếp theo</Button>
+                                <Button disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

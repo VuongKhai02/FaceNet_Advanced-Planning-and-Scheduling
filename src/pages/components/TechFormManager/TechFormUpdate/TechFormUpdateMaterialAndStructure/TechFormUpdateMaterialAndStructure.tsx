@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, DataGrid, TextBox } from "devextreme-react";
+import { DataGrid, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
+import { Button } from "antd";
 
 type TechFormUpdateMaterialAndStructureProps = {
     techFormData: any;
@@ -384,27 +385,24 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             borderRadius: "4px",
                                         }}>
                                         <Button
-                                            text='Trở lại'
                                             onClick={setClose}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                        />
+                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                        >Trở lại</Button>
                                         <Button
-                                            text='Tiếp theo'
                                             onClick={() => {
                                                 setIsVisibleTechFormUpdateProcedure(true);
                                             }}
                                             style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                        />
+                                        >Tiếp theo</Button>
                                         <Button
-                                            text='Ký lập'
+                                            disabled
                                             onClick={() => { }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
-                                        />
+                                            style={{ marginRight: "20px", width: 100 }}
+                                        >Ký lập</Button>
                                         <Button
-                                            text='Gửi duyệt'
+                                            disabled
                                             onClick={() => { }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                        />
+                                        >Gửi duyệt</Button>
                                     </div>
                                 </div>
                             </div>

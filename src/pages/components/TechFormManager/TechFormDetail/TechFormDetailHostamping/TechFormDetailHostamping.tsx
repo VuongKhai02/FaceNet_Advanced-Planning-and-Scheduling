@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import "./TechFormDetailHostamping.css";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 
 type TechFormDetailHostampingProps = {
     isOpen: boolean;
@@ -269,16 +269,14 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                             borderRadius: "4px",
                         }}>
                         <Button
-                            text='Trở lại'
                             onClick={setClose}
-                            style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                        />
+                            style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                        >Trở lại</Button>
                         <Button
-                            text='Từ chối'
                             onClick={handleNextClick}
                             style={{ backgroundColor: "#737070", color: "#fff", width: 100, marginRight: "8px" }}
-                        />
-                        <Button text='Ký duyệt' onClick={handleNextClick} className='buttons' />
+                        >Từ chối</Button>
+                        <Button onClick={handleNextClick} className='buttons' >Ký duyệt</Button>
                     </div>
                 </div>
             </div>

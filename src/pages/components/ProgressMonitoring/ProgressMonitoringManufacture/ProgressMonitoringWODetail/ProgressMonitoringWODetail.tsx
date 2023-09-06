@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "devextreme-react";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import ProgressWODetailJob from "./ProgressWODetailJob/ProgressWODetailJob";
+import { Button } from "antd";
 
 const { Step } = Steps;
 const items = [
@@ -93,7 +93,7 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                 </Steps>
                             </div>
                             <div>
-                                <div style={{ border: "1px solid #004C98", borderRadius: 5, marginTop: 30, width: "30%", marginLeft: 20 }}>
+                                <div style={{ border: "1px solid #004C98", borderRadius: 5, marginTop: 30, width: "35%", marginLeft: 20 }}>
                                     <h3>
                                         <p>Chi tiết công đoạn</p>
                                     </h3>
@@ -102,7 +102,8 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                             <InfoRow label='Mã công đoạn' data='CĐ01' />
                                             <InfoRow label='Tên công đoạn' data='In offset' />
                                             <InfoRow label='Thời gian bắt đầu' data='11/7/2023 15:08:50' />
-                                            <InfoRow label='Thời gian kết thúc' data='11/7/2023 15:08:50' />
+                                            <InfoRow label='Thời gian kết thúc dự kiến' data='11/7/2023 15:08:50' />
+                                            <InfoRow label='Thời gian kết thúc thực tế' data='11/7/2023 15:08:50' />
                                             <InfoRow label='Trạng thái' data='Hoàn thành' />
                                             <InfoRow label='Sản lượng kế hoạch' data='105' />
                                             <InfoRow label='Sản lượng hoàn thành' data='105' />
@@ -111,9 +112,8 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                         </td>
                                     </table>
                                     <Button
-                                        text='Xem chi tiết'
                                         style={{
-                                            marginLeft: 200,
+                                            marginLeft: 250,
                                             backgroundColor: "#FF7A00",
                                             color: "#fff",
                                             width: 120,
@@ -121,7 +121,7 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                             marginTop: 30,
                                         }}
                                         onClick={() => setIsVisibleProgressWODetailJob(true)}
-                                    />
+                                    >Xem chi tiết</Button>
                                 </div>
                             </div>
                         </div>
@@ -135,10 +135,9 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                 borderRadius: "4px",
                             }}>
                             <Button
-                                text='Trở lại'
                                 onClick={setClose}
-                                style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 120 }}
-                            />
+                                style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                            >Trở lại</Button>
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                             <td style={{ marginLeft: 30 }}>
                                 <p>Mã Job output</p>
-                                <TextBox value='J01' key={"jobOutputCode"} id='jobOutputCode' width={350}></TextBox>
+                                <TextBox value='J01' key={"jobOutputCode"} id='jobOutputCode' width={300}></TextBox>
                                 <p style={{ marginTop: 30 }}>Mã Job</p>
                                 <TextBox value='J01-001' key={"jobCode"} id='jobCode'></TextBox>
                                 <p style={{ marginTop: 30 }}>Trạng thái</p>
@@ -40,7 +40,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                             </td>
                             <td>
                                 <p>Tên Job output</p>
-                                <TextBox value='WO-123' key={"jobOutputName"} id='jobOutputName' width={350}></TextBox>
+                                <TextBox value='WO-123' key={"jobOutputName"} id='jobOutputName' width={300}></TextBox>
                                 <p style={{ marginTop: 30 }}>Tên Job</p>
                                 <TextBox value='In offset : Ra bản' key={"jobName"} id='jobName'></TextBox>
                                 <p style={{ marginTop: 30 }}>Mã công đoạn</p>
@@ -48,7 +48,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                             </td>
                             <td style={{ marginRight: 30 }}>
                                 <p>Số lượng thẻ</p>
-                                <TextBox value='100' width={350} key={"cardQuantity"} id='cardQuantity'></TextBox>
+                                <TextBox value='100' width={300} key={"cardQuantity"} id='cardQuantity'></TextBox>
                                 <p style={{ marginTop: 30 }}>Mã hộp</p>
                                 <SelectBox value={"H02"} id='boxCode' key={"boxCode"} placeholder='Chọn'></SelectBox>
                                 <p style={{ marginTop: 30 }}>In lưới</p>

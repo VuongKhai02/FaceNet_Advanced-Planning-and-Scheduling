@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DataGrid, SelectBox, TextBox } from "devextreme-react";
+import { DataGrid, SelectBox, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -21,6 +21,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
+import { Button } from "antd";
 
 const data = [
     {
@@ -214,7 +215,7 @@ export const CardManagement = () => {
                                                 </td>
                                                 <td style={{ marginLeft: 30 }}>
                                                     <p>Mã hộp</p>
-                                                    <TextBox id='boxCode' key={"boxCode"} value='H12' width={300}></TextBox>
+                                                    <TextBox id='boxCode' key={"boxCode"} value='H12' width={250}></TextBox>
                                                     <p style={{ marginTop: 30 }}>Mã công đoạn</p>
                                                     <TextBox id='stageCode' key={"stageCode"} value='CDD01, CDD02, CĐ03'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Mã Job</p>
@@ -226,7 +227,7 @@ export const CardManagement = () => {
                                                 </td>
                                                 <td style={{ marginRight: 30 }}>
                                                     <p>Tên hộp</p>
-                                                    <TextBox id='boxName' key={"boxName"} value='Hộp đựng BTP' width={300}></TextBox>
+                                                    <TextBox id='boxName' key={"boxName"} value='Hộp đựng BTP' width={250}></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên công đoạn</p>
                                                     <TextBox id='stageName' key={"stageName"} value='In offset, In lưới'></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên Job</p>
@@ -275,7 +276,7 @@ export const CardManagement = () => {
                                                 </td>
                                                 <td style={{ marginLeft: 30 }}>
                                                     <p>Mã hộp</p>
-                                                    <TextBox id='boxCode' key={"boxCode"} value='H12' width={300}></TextBox>
+                                                    <TextBox id='boxCode' key={"boxCode"} value='H12' width={250}></TextBox>
                                                     <p style={{ marginTop: 30 }}>Mã công đoạn</p>
                                                     <TextBox id='stageCode' key={"stageCode"} value=''></TextBox>
                                                     <p style={{ marginTop: 30 }}>Mã Job</p>
@@ -293,7 +294,7 @@ export const CardManagement = () => {
                                                 </td>
                                                 <td style={{ marginRight: 30 }}>
                                                     <p>Tên hộp</p>
-                                                    <TextBox id='boxName' key={"boxName"} placeholder='Nhập tên hộp' width={300}></TextBox>
+                                                    <TextBox id='boxName' key={"boxName"} placeholder='Nhập tên hộp' width={250}></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên công đoạn</p>
                                                     <SelectBox id='stageName' key={"stageName"} placeholder='Chọn'></SelectBox>
                                                     <p style={{ marginTop: 30 }}>Tên Job</p>

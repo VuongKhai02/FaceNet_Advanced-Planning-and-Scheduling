@@ -1,8 +1,8 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import { Table, Upload } from "antd";
+import { Button, Table, Upload } from "antd";
 import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
 
 type TechnologyProcedureUpdateProps = {
@@ -175,7 +175,7 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                     </div>
                                     <div
                                         className='mt-24'
-                                        style={{ marginBottom: 30, width: "100%", display: "flex", justifyContent: "center" }}>
+                                        style={{ marginBottom: 30, width: "100%" }}>
                                         <Upload.Dragger
                                             multiple={false}
                                             accept='.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'>
@@ -229,27 +229,25 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                         borderRadius: "4px",
                                     }}>
                                     <Button
-                                        text='Trở lại'
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
-                                    />
+                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                    >Trở lại</Button>
                                     <Button
-                                        text='Tiếp theo'
                                         onClick={() => {
                                             setIsVisibleTechFormUpdateMaterialAndStructure(true);
                                         }}
                                         style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
-                                    />
+                                    >Tiếp theo</Button>
                                     <Button
-                                        text='Ký lập'
+                                        disabled
                                         onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
-                                    />
+                                        style={{ marginRight: "20px", width: 100 }}
+                                    >Ký lập</Button>
                                     <Button
-                                        text='Gửi duyệt'
+                                        disabled
                                         onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
-                                    />
+                                        style={{ marginRight: "20px" }}
+                                    >Gửi duyệt</Button>
                                 </div>
                             </div>
                         </div>

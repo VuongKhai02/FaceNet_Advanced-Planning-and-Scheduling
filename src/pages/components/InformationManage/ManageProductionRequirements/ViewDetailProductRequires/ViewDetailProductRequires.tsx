@@ -625,12 +625,8 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
+                                    style={{ backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
-                                {/* <Button
-                                    text="Tiếp theo"
-                                    style={{ backgroundColor: "#FF7A00", color: "#fff" }}
-                                /> */}
                             </div>
                         </div>
                     </div>

@@ -376,7 +376,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Tên thẻ</p>
-                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={350}></TextBox>
+                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Mã loại thẻ mẫu</p>
                                     <SelectBox placeholder='Chọn'></SelectBox>
                                     <p style={{ marginTop: 30 }}>Tổng số bản</p>
@@ -389,7 +389,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                             ...bomData,
                                             version: e
                                         })
-                                    }} placeholder='Nhập' width={350}></TextBox>
+                                    }} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
                                     <TextBox value={bomData.notice} placeholder='Visa'></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
@@ -397,7 +397,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                 </td>
                                 <td style={{ marginRight: 30 }}>
                                     <p>Số lượng đã tính bù hao</p>
-                                    <TextBox value={bomData.quantity} disabled={requestInfo !== null} placeholder='Nhập' width={350}></TextBox>
+                                    <TextBox value={bomData.quantity} disabled={requestInfo !== null} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
                                     <SelectBox onValueChange={e => {
                                         console.log(e)
