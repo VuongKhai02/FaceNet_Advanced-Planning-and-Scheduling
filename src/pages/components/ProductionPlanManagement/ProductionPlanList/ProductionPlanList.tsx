@@ -705,7 +705,7 @@ export const ProductionPlanList = () => {
                                     <Button
                                         key='confirm'
                                         onClick={handleCreateProductionPlan}
-                                        style={{ width: 100, backgroundColor: "#FF7A00", color: "#fff", borderRadius: 5, marginRight: 8 }}>
+                                        style={{ width: 100, backgroundColor: "#FF7A00", color: "#fff", borderRadius: 5 }}>
                                         Tiếp theo
                                     </Button>
                                 </div>,

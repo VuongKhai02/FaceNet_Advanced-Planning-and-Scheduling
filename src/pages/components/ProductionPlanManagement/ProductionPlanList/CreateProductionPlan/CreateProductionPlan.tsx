@@ -1,5 +1,5 @@
 import React from "react";
-import { DataGrid } from "devextreme-react";
+import { DataGrid, DateBox, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow, MasterDetail } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
@@ -42,16 +42,22 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                         <div style={{ marginBottom: 50 }}>
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td>
-                                    <InfoRow label='Mã WO' data='WO-T06/2023' />
+                                    <InfoRow label='Mã đơn hàng' data='SO-T06/2023' />
                                     <InfoRow label='Tên thẻ' data='Phôi thẻ Visa Credit Classic, TP Bank, T8/2022' />
-                                </td>
-                                <td>
-                                    <InfoRow label='Mã phiếu công nghệ' data='PCN-T06/2023' />
-                                    <InfoRow label='Số lượng' data='20000' />
-                                </td>
-                                <td>
                                     <InfoRow label='Tên khách hàng' data='TP bank' />
+                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center" }}>
+                                        <p style={{ fontWeight: 'bold', marginRight: 60 }}>Thời gian bắt đầu:</p>
+                                        <DateBox value={'08/8/2023'} width={200} />
+                                    </div>
+                                </td>
+                                <td>
+                                    <InfoRow label='Mã sản xuất' data='1501023' />
+                                    <InfoRow label='Số lượng' data='20000' />
                                     <InfoRow label='Số lượng đã bù hao' data='20400' />
+                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center" }}>
+                                        <p style={{ fontWeight: 'bold', marginRight: 60 }}>Thời gian kết thúc:</p>
+                                        <DateBox value={'10/8/2023'} width={200} />
+                                    </div>
                                 </td>
                             </table>
                         </div>

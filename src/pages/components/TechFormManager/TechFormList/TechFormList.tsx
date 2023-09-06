@@ -423,7 +423,6 @@ export const TechFormList = () => {
                                 fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
-                                fixed={true}
                                 fixedPosition="right"
                                 alignment='center'
                                 cellRender={(cellInfo) => (

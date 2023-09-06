@@ -1,0 +1,34 @@
+
+.custom-pagesize{
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 4px;
+  width: 120px;
+}
+
+#pagination-container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dx-pages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dx-info {
+  color: rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.button-selected {
+  background-color: rgb(212, 212, 212);
+}
+
+::ng-deep .dx-button-has-text .dx-button-content {
+  padding: 8px 8px;
+}

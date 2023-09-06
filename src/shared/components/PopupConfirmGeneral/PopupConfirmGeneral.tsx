@@ -52,7 +52,6 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
                                     width: 100,
                                     height: 40,
                                     fontSize: 16,
-                                    marginRight: 20,
                                 }}
                                 key='submit'
                                 onClick={onSubmit}

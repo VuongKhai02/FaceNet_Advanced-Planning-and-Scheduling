@@ -80,7 +80,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({ isO
                                 textAlign: "left",
                                 paddingTop: 12,
                             }}>
-                            <button onClick={updateDt}>update</button>
+                            <Button onClick={updateDt}>Update</Button>
                             <h2
                                 className='name'
                                 style={{

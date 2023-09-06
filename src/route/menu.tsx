@@ -135,21 +135,29 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     },
     {
         key: '6',
-        icon: <UserOutlined />,
-        label: 'Quản lý tài khoản',
-        path: '/progress-management',
+        icon: <AppstoreAddOutlined />,
+        label: 'Khai báo sản lượng',
+        path: '/declare-quantity',
         hidden: false,
 
     },
     {
         key: '7',
+        icon: <UserOutlined />,
+        label: 'Quản lý tài khoản',
+        path: '/user-management',
+        hidden: false,
+
+    },
+    {
+        key: '8',
         icon: <WarningOutlined />,
         label: 'Cảnh báo',
         path: '/warning-management',
         hidden: false,
     },
     {
-        key: '8',
+        key: '9',
         icon: <FormOutlined />,
         label: 'Báo cáo, thống kê',
         path: '/report-management',

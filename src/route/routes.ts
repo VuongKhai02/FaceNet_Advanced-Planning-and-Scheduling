@@ -15,6 +15,7 @@ import {
     Welcome
 } from "../pages";
 import { withNavigationWatcher } from '../contexts/navigate';
+import DeclareQuantity from "../pages/components/DeclareQuantity/DeclareQuantity";
 
 type Route = {
     path: string;
@@ -86,6 +87,12 @@ const routes: Route[] = [
       {
         path: "/stage-queue",
         component: ProgressMonitoringStageQueue,
+    },
+
+    //KHAI BÁO SẢN LƯỢNG
+        {
+        path: "/declare-quantity",
+        component: DeclareQuantity,
     }
 ]
 
