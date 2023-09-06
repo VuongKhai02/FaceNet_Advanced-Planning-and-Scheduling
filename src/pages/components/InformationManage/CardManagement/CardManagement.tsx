@@ -167,8 +167,6 @@ export const CardManagement = () => {
                                 modalContent={
                                     <div style={{
                                         border: '1px solid #E5E5E5',
-                                        marginLeft: 30,
-                                        marginRight: 30,
                                         borderRadius: '5px'
                                     }}>
                                         <h3 style={{ display: "flex", justifyContent: "center", fontWeight: 500 }}>Customer: VP Bank - Chíp D350</h3>

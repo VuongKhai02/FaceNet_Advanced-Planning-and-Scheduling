@@ -567,28 +567,32 @@ export const ProductionPlanList = () => {
                                     <div style={{ marginTop: 40, marginBottom: 30 }}>
                                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                                             <td style={{ marginLeft: 30 }}>
-                                                <p>Mã WO</p>
-                                                <TextBox id='woCode' key={"woCode"} value='WO_123'></TextBox>
+                                                <p>Mã sản xuất</p>
+                                                <TextBox id='woCode' key={"woCode"} value='132355' disabled={true}></TextBox>
                                                 <p style={{ marginTop: 30 }}>Tên khách hàng</p>
-                                                <TextBox id='customerName' key={"customerName"} value='TP Bank'></TextBox>
+                                                <TextBox id='customerName' key={"customerName"} value='TP Bank' disabled={true}></TextBox>
+                                                <p style={{ marginTop: 30 }}>Số lô</p>
+                                                <TextBox id='lotNumber' key={"lotNumber"} value='1' disabled={true}></TextBox>
                                                 <p style={{ marginTop: 30 }}>Số lượng</p>
                                                 <TextBox id='quantity' key={"quantity"} value='20000'></TextBox>
                                                 <p style={{ marginTop: 30 }}>Thời gian bắt đầu</p>
-                                                <TextBox id='startTime' key={"startTime"} value='08/09/2023'></TextBox>
+                                                <TextBox id='startTime' key={"startTime"} value='08/09/2023' disabled={true}></TextBox>
                                             </td>
                                             <td style={{ marginRight: 30 }}>
-                                                <p>Mã sản xuất</p>
+                                                <p>Mã đơn hàng</p>
                                                 <TextBox
                                                     id='manufactureCode'
                                                     key={"manufactureCode"}
-                                                    value='Phôi Thẻ MC Tita cashback debit, VP Bank'
-                                                    width={300}></TextBox>
+                                                    value='124889'
+                                                    width={300} disabled={true}></TextBox>
                                                 <p style={{ marginTop: 30 }}>Tên thẻ</p>
-                                                <TextBox id='cardName' key={"cardName"} value='In offset, In lưới'></TextBox>
+                                                <TextBox id='cardName' key={"cardName"} value='Phôi Thẻ MC Tita cashback debit, VP Bank'></TextBox>
                                                 <p style={{ marginTop: 30 }}>Trạng thái</p>
                                                 <TextBox id='status' key={"status"} value='3,000'></TextBox>
+                                                <p style={{ marginTop: 30 }}>Số lượng đã tính bù hao</p>
+                                                <TextBox id='lostQuantity' key={"lotQuantity"} value='20000' disabled={true}></TextBox>
                                                 <p style={{ marginTop: 30 }}>Thời gian kết thúc</p>
-                                                <TextBox id='endTime' key={"endTime"} value='18/09/2023'></TextBox>
+                                                <TextBox id='endTime' key={"endTime"} value='18/09/2023' disabled={true}></TextBox>
                                             </td>
                                             <td>
                                                 <p>Mã QR</p>
@@ -606,7 +610,7 @@ export const ProductionPlanList = () => {
                                         textColor='#FF7A00'
                                         style={{ marginRight: 17 }}
                                     />
-                                    Xem chi tiết QR code WO
+                                    Xem chi tiết QR code lệnh sản xuất
                                 </div>
                             }
                             width={1000}
@@ -621,7 +625,7 @@ export const ProductionPlanList = () => {
                                     <div style={{ marginTop: 40, marginBottom: 30 }}>
                                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                                             <td style={{ marginLeft: 30 }}>
-                                                <p>Mã WO</p>
+                                                <p>Mã sản xuất</p>
                                                 <TextBox id='woCode' key={"woCode"} placeholder='Nhập' width={300}></TextBox>
                                                 <p style={{ marginTop: 30 }}>Tên khách hàng</p>
                                                 <TextBox id='customerName' key={"customerName"} value='TP Bank' disabled></TextBox>

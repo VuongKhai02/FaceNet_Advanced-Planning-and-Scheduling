@@ -116,6 +116,10 @@
     border-radius: 2px 2px 0 0 !important;
 }
 
+.ant-modal .ant-modal-content {
+     padding: 10px 20px 10px 20px !important;
+}
+
 .layout-content {
     padding: 0px 24px 24px;
 }
@@ -132,7 +136,7 @@
 }
 
  table  {
- table-layout: fixed !important;
+    table-layout: fixed !important;
 }
 
 .ant-tabs-content-holder {
@@ -194,6 +198,8 @@
     margin-left: 20px !important;
     margin-right: 20px !important;
 }
+
+/* Box-shadow layout */
 
 /* .box__shadow-table-responsive {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;

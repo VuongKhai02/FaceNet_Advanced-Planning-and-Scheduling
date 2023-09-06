@@ -15,6 +15,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import InfoJobOutputDetail from "./InfoJobOutputDetail/InfoJobOutputDetail";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import VerificationJobOutput from "./VerificationJobOutput/VerificationJobOutput";
 
 const data = [
     {
@@ -46,6 +47,7 @@ const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageJobOutput = () => {
     const [isVisibleJobOutputDetail, setIsVisibleJobOutputDetail] = React.useState<boolean>(false);
     const [isVisibleDelJobOutput, setIsVisibleDelJobOutput] = React.useState<boolean>(false);
+    const [isVisibleVerificationJobOutput, setIsVisibleVerificationJobOutput] = React.useState<boolean>(false);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -75,130 +77,145 @@ export const ManageJobOutput = () => {
                         setIsVisibleJobOutputDetail(false);
                     }}
                 />
-            ) : (
-                <div className='box__shadow-table-responsive'>
-                    <div className='table-responsive'>
-                        <div
-                            className='informer'
-                            style={{
-                                background: "#fff",
-                                textAlign: "center",
-                                paddingTop: 12,
-                            }}>
-                            <h5
-                                className='name'
+            ) : isVisibleVerificationJobOutput ? (
+                <VerificationJobOutput
+                    isOpen={isVisibleVerificationJobOutput}
+                    setClose={() => setIsVisibleVerificationJobOutput(false)}
+                />
+            ) :
+                (
+                    <div className='box__shadow-table-responsive'>
+                        <div className='table-responsive'>
+                            <div
+                                className='informer'
                                 style={{
-                                    fontSize: 18,
-                                    marginBottom: 0,
+                                    background: "#fff",
+                                    textAlign: "center",
+                                    paddingTop: 12,
                                 }}>
-                                Danh sách Job output
-                            </h5>
-                        </div>
+                                <h5
+                                    className='name'
+                                    style={{
+                                        fontSize: 18,
+                                        marginBottom: 0,
+                                    }}>
+                                    Danh sách Job output
+                                </h5>
+                            </div>
 
-                        <DataGrid
-                            key={"jobOutputCode"}
-                            keyExpr={"jobOutputCode"}
-                            dataSource={data}
-                            showBorders={true}
-                            columnAutoWidth={true}
-                            showRowLines={true}
-                            rowAlternationEnabled={true}
-                            allowColumnResizing={true}
-                            allowColumnReordering={true}
-                            focusedRowEnabled={true}>
-                            <PopupConfirmDelete
-                                isVisible={isVisibleDelJobOutput}
-                                onCancel={() => setIsVisibleDelJobOutput(false)}
-                                onSubmit={() => { }}
-                                modalTitle={
-                                    <div>
-                                        <h3
+                            <DataGrid
+                                key={"jobOutputCode"}
+                                keyExpr={"jobOutputCode"}
+                                dataSource={data}
+                                showBorders={true}
+                                columnAutoWidth={true}
+                                showRowLines={true}
+                                rowAlternationEnabled={true}
+                                allowColumnResizing={true}
+                                allowColumnReordering={true}
+                                focusedRowEnabled={true}>
+                                <PopupConfirmDelete
+                                    isVisible={isVisibleDelJobOutput}
+                                    onCancel={() => setIsVisibleDelJobOutput(false)}
+                                    onSubmit={() => { }}
+                                    modalTitle={
+                                        <div>
+                                            <h3
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    color: "#ff794e",
+                                                    fontWeight: 500,
+                                                }}>
+                                                Xóa Job output
+                                            </h3>
+                                        </div>
+                                    }
+                                    modalContent={
+                                        <div
                                             style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                color: "#ff794e",
-                                                fontWeight: 500,
+                                                backgroundColor: "#ffe0c2",
+                                                borderLeft: "4px solid #ff794e",
+                                                marginLeft: 20,
+                                                marginRight: 20,
                                             }}>
-                                            Xóa Job output
-                                        </h3>
-                                    </div>
-                                }
-                                modalContent={
-                                    <div
-                                        style={{
-                                            backgroundColor: "#ffe0c2",
-                                            borderLeft: "4px solid #ff794e",
-                                            marginLeft: 20,
-                                            marginRight: 20,
-                                        }}>
-                                        <h5 style={{ fontWeight: 500, marginTop: 20, marginLeft: 20, fontSize: 20 }}>
-                                            {"Bạn có chắc chắn muốn xóa Job out này không?"}
-                                        </h5>
-                                        <h3 style={{ color: "#ff794e" }}>
-                                            <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
-                                            Lưu ý:
-                                        </h3>
-                                        <p style={{ marginLeft: 20, fontSize: 15 }}>
-                                            {"Nếu bạn xóa Job output thì mọi dữ liệu liên quan đến Job output này đều sẽ biến mất!"}
-                                        </p>
-                                    </div>
-                                }
-                                width={600}
-                            />
-                            <Toolbar>
-                                <ToolbarItem name='columnChooserButton' />
-                                <ToolbarItem name='searchPanel' location='before' />
-                            </Toolbar>
-                            <FilterRow visible={true} />
-                            <ColumnChooser enabled={true} allowSearch={true} />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
-                            <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
-                            <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
-                            <Column caption={"Mã Job"} dataField={"jobCode"} />
-                            <Column caption={"Tên Job"} dataField={"jobName"} />
-                            <Column caption={"Số lượng thẻ"} dataField={"quantity"} />
-                            <Column caption={"Trạng thái"} dataField={"status"} />
-                            <Column
-                                fixed={true}
-                                type={"buttons"}
-                                caption={"Thao tác"}
-                                alignment='center'
-                                cellRender={() => (
-                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                                        <SvgIcon
-                                            onClick={() => setIsVisibleJobOutputDetail(true)}
-                                            tooltipTitle='Thông tin chi tiết Job output'
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon='assets/icons/InfoCircle.svg'
-                                            textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
-                                        />
-                                        <SvgIcon
-                                            onClick={() => setIsVisibleDelJobOutput(true)}
-                                            tooltipTitle='Xóa Job output'
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon='assets/icons/Trash.svg'
-                                            textColor='#FF7A00'
-                                        />
-                                    </div>
-                                )}></Column>
-                        </DataGrid>
+                                            <h5 style={{ fontWeight: 500, marginTop: 20, marginLeft: 20, fontSize: 20 }}>
+                                                {"Bạn có chắc chắn muốn xóa Job out này không?"}
+                                            </h5>
+                                            <h3 style={{ color: "#ff794e" }}>
+                                                <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
+                                                Lưu ý:
+                                            </h3>
+                                            <p style={{ marginLeft: 20, fontSize: 15 }}>
+                                                {"Nếu bạn xóa Job output thì mọi dữ liệu liên quan đến Job output này đều sẽ biến mất!"}
+                                            </p>
+                                        </div>
+                                    }
+                                    width={600}
+                                />
+                                <Toolbar>
+                                    <ToolbarItem name='columnChooserButton' />
+                                    <ToolbarItem name='searchPanel' location='before' />
+                                </Toolbar>
+                                <FilterRow visible={true} />
+                                <ColumnChooser enabled={true} allowSearch={true} />
+                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <Paging defaultPageSize={10} />
+                                <Pager
+                                    visible={true}
+                                    allowedPageSizes={allowedPageSizes}
+                                    displayMode={"compact"}
+                                    showPageSizeSelector={true}
+                                    showInfo={true}
+                                    showNavigationButtons={true}
+                                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
+                                />
+                                <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
+                                <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
+                                <Column caption={"Mã Job"} dataField={"jobCode"} />
+                                <Column caption={"Tên Job"} dataField={"jobName"} />
+                                <Column caption={"Số lượng thẻ"} dataField={"quantity"} />
+                                <Column caption={"Trạng thái"} dataField={"status"} />
+                                <Column
+                                    fixed={true}
+                                    type={"buttons"}
+                                    caption={"Thao tác"}
+                                    alignment='center'
+                                    cellRender={() => (
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                            <SvgIcon
+                                                onClick={() => setIsVisibleJobOutputDetail(true)}
+                                                tooltipTitle='Thông tin chi tiết Job output'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/InfoCircle.svg'
+                                                textColor='#FF7A00'
+                                                style={{ marginRight: 17 }}
+                                            />
+                                            <SvgIcon
+                                                onClick={() => setIsVisibleVerificationJobOutput(true)}
+                                                tooltipTitle='Xác minh Job output'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/FileEarmarkCheck.svg'
+                                                textColor='#FF7A00'
+                                                style={{ marginRight: 17 }}
+                                            />
+                                            <SvgIcon
+                                                onClick={() => setIsVisibleDelJobOutput(true)}
+                                                tooltipTitle='Xóa Job output'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/Trash.svg'
+                                                textColor='#FF7A00'
+                                            />
+                                        </div>
+                                    )}></Column>
+                            </DataGrid>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
         </>
     );
 };

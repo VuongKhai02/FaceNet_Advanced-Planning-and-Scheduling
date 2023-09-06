@@ -108,7 +108,6 @@ export const ListProduct = React.memo((props: any) => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
-                        marginRight: 8
                     }}
                     key='submit'
                     onClick={() => { }}

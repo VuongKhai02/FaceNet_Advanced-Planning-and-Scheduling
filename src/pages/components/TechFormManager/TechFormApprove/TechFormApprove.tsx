@@ -309,34 +309,30 @@ export const TechFormApprove = () => {
                                 infoText='Trang số {0} trên {1} ({2} bản ghi)'
                             />
                             <Selection mode='multiple' />
-                            <Column dataField='productCode' minWidth={140} caption='Mã phiếu công nghệ'></Column>
-                            <Column dataField='productName' caption='Tên thẻ' minWidth={200}></Column>
+                            <Column dataField='productCode' caption='Mã phiếu công nghệ'></Column>
+                            <Column dataField='productName' caption='Tên thẻ' ></Column>
 
-                            <Column dataField='quantity' minWidth={140} caption='Số lượng' alignment='left'></Column>
+                            <Column dataField='quantity' caption='Số lượng' alignment='left'></Column>
 
                             <Column
                                 dataField='startDate'
                                 caption='Ngày bắt đầu'
                                 format={"dd/MM/yyyy"}
                                 dataType='datetime'
-                                alignment={"left"}
-                                minWidth={140}
-                                hidingPriority={0}></Column>
+                                alignment={"left"}></Column>
                             <Column
                                 dataField='endDate'
                                 caption='Ngày kết thúc'
                                 dataType='datetime'
                                 format={"dd/MM/yyyy"}
                                 alignment={"left"}
-                                minWidth={140}
-                                hidingPriority={1}></Column>
+                            ></Column>
                             <Column dataField='createdBy' caption='Người tạo' />
                             <Column dataField='checkBy' caption='Người kiểm tra' />
                             <Column
                                 dataField='priority'
                                 alignment={"left"}
                                 caption={"Mức độ ưu tiên"}
-                                width={140}
                                 renderAsync={true}></Column>
                             <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                             <Column
@@ -345,7 +341,7 @@ export const TechFormApprove = () => {
                                 caption={"Thao tác"}
                                 alignment='center'
                                 cellRender={() => (
-                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                         <SvgIcon
                                             tooltipTitle='Xem Phiếu công nghệ'
                                             onClick={handleTechFormDetail}

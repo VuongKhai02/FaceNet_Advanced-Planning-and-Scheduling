@@ -142,7 +142,6 @@ export const BOMPersonalized = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
-                        marginRight: 8
                     }}
                     key='submit'
                     onClick={() => { }}
@@ -507,7 +506,7 @@ export const BOMPersonalized = () => {
                                 showNavigationButtons={true}
                                 infoText='Trang số {0} trên {1} ({2} bản ghi)'
                             />
-                            <Column caption={"Mã khách hàng"} dataField={"customerCode"} alignment='left' width={100} />
+                            <Column caption={"Mã khách hàng"} dataField={"customerCode"} alignment='left' />
                             <Column caption={"Tên khách hàng"} dataField={"customerName"} />
                             <Column caption={"Version"} dataField={"version"} />
                             <Column caption={"Lưu ý"} dataField={"notice"} />

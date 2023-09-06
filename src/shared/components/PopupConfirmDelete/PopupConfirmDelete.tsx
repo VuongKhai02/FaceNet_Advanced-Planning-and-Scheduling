@@ -33,45 +33,45 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                     customFooter !== undefined
                         ? customFooter
                         : [
-                              <div
-                                  style={{
-                                      display: "flex",
-                                      justifyContent: "flex-end",
-                                      alignItems: "center",
-                                      marginTop: 14,
-                                      marginBottom: 14,
-                                  }}>
-                                  <Button
-                                      key='cancel'
-                                      style={{
-                                          marginRight: 14,
-                                          backgroundColor: "#E5E5E5",
-                                          display: "inline-block",
-                                          borderRadius: "4px",
-                                          width: 100,
-                                          height: 40,
-                                          fontSize: 16,
-                                      }}
-                                      onClick={onCancel}>
-                                      Hủy
-                                  </Button>
-                                  <Button
-                                      style={{
-                                          borderRadius: "4px",
-                                          backgroundColor: "#ff794e",
-                                          color: "#ffff",
-                                          width: 100,
-                                          height: 40,
-                                          fontSize: 16,
-                                          marginRight: 7,
-                                      }}
-                                      key='submit'
-                                      onClick={onSubmit}
-                                      className='btn btn-save'>
-                                      Xóa
-                                  </Button>
-                              </div>,
-                          ]
+                            <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "flex-end",
+                                    alignItems: "center",
+                                    marginTop: 14,
+                                    marginBottom: 14,
+                                }}>
+                                <Button
+                                    key='cancel'
+                                    style={{
+                                        marginRight: 14,
+                                        backgroundColor: "#E5E5E5",
+                                        display: "inline-block",
+                                        borderRadius: "4px",
+                                        width: 100,
+                                        height: 40,
+                                        fontSize: 16,
+                                    }}
+                                    onClick={onCancel}>
+                                    Hủy
+                                </Button>
+                                <Button
+                                    style={{
+                                        borderRadius: "4px",
+                                        backgroundColor: "#ff794e",
+                                        color: "#ffff",
+                                        width: 100,
+                                        height: 40,
+                                        fontSize: 16,
+                                        //   marginRight: 7,
+                                    }}
+                                    key='submit'
+                                    onClick={onSubmit}
+                                    className='btn btn-save'>
+                                    Xóa
+                                </Button>
+                            </div>,
+                        ]
                 }
                 width={width}
                 onCancel={onCancel}>

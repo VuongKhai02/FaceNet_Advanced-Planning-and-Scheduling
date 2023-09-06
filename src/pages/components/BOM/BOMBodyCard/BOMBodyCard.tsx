@@ -144,7 +144,6 @@ export const BOMBodyCard = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
-                        marginRight: 8
                     }}
                     key='submit'
                     onClick={() => { }}

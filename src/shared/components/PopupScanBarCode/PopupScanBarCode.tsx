@@ -39,7 +39,6 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel
                             width: 100,
                             height: 40,
                             fontSize: 16,
-                            marginRight: 10,
                         }}
                         key='submit'
                         onClick={onSubmit}

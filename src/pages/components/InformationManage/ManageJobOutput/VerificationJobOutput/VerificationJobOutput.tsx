@@ -3,11 +3,11 @@ import { SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
 import { Button } from "antd";
 
-type InfoJobOutputDetailProps = {
+type VerificationJobOutputProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
-export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(({ isOpen = false, setClose }) => {
+export const VerificationJobOutput: React.FC<VerificationJobOutputProps> = observer(({ isOpen = false, setClose }) => {
     return (
         <>
             <div className='box__shadow-table-responsive'>
@@ -25,34 +25,34 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                                 fontSize: 18,
                                 marginBottom: 0,
                             }}>
-                            Thông tin chi tiết Job output
+                            Xác minh Job output
                         </h5>
                     </div>
                     <div style={{ marginTop: 30 }}>
                         <table style={{ display: "flex", justifyContent: "space-between" }}>
                             <td style={{ marginLeft: 30 }}>
-                                <p>Mã Job output</p>
-                                <TextBox value='J01' key={"jobOutputCode"} id='jobOutputCode' width={300}></TextBox>
-                                <p style={{ marginTop: 30 }}>Mã Job</p>
-                                <TextBox value='J01-001' key={"jobCode"} id='jobCode'></TextBox>
-                                <p style={{ marginTop: 30 }}>Trạng thái</p>
-                                <SelectBox placeholder='Chọn' value={"Chuyển công đoạn"} key={"forwardStage"} id='forwardStage'></SelectBox>
+                                <p>Trạng thái</p>
+                                <TextBox value='Công đoạn cắt' key={"status"} id='status' width={300}></TextBox>
+                                <p style={{ marginTop: 30 }}>Tên Job</p>
+                                <TextBox value='In offset: Ra bản' key={"jobName"} id='jobName'></TextBox>
+                                <p style={{ marginTop: 30 }}>Mã Job output</p>
+                                <TextBox value={"J01"} key={"joboutputCode"} id='joboutputCode'></TextBox>
                             </td>
                             <td>
-                                <p>Tên Job output</p>
-                                <TextBox value='WO-123' key={"jobOutputName"} id='jobOutputName' width={300}></TextBox>
-                                <p style={{ marginTop: 30 }}>Tên Job</p>
-                                <TextBox value='In offset : Ra bản' key={"jobName"} id='jobName'></TextBox>
-                                <p style={{ marginTop: 30 }}>Mã công đoạn</p>
+                                <p >Mã công đoạn</p>
                                 <TextBox value='CĐ02' key={"stageCode"} id='stageCode'></TextBox>
+                                <p style={{ marginTop: 30 }}>Mã hộp</p>
+                                <TextBox value={"H02"} id='boxCode' key={"boxCode"} placeholder='Chọn'></TextBox>
+                                <p style={{ marginTop: 30 }}>Tên Job output</p>
+                                <TextBox value='WO-123' key={"jobOutputName"} id='jobOutputName' width={300}></TextBox>
                             </td>
                             <td style={{ marginRight: 30 }}>
-                                <p>Số lượng thẻ</p>
+                                <p>Mã Job</p>
+                                <TextBox value={"J01-001"} key={'jobCode'} id={'jobCode'}></TextBox>
+                                <p style={{ marginTop: 30 }}>Tên hộp</p>
+                                <TextBox value='Hộp đựng BTP' width={300} key={"boxName"} id='boxName'></TextBox>
+                                <p style={{ marginTop: 30 }}>Số lượng thẻ</p>
                                 <TextBox value='100' width={300} key={"cardQuantity"} id='cardQuantity'></TextBox>
-                                <p style={{ marginTop: 30 }}>Mã hộp</p>
-                                <SelectBox value={"H02"} id='boxCode' key={"boxCode"} placeholder='Chọn'></SelectBox>
-                                <p style={{ marginTop: 30 }}>In lưới</p>
-                                <TextBox value={"In lưới"}></TextBox>
                             </td>
                         </table>
                     </div>
@@ -70,9 +70,9 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                         }}>
                         <Button
                             onClick={setClose}
-                            style={{ backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
+                            style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                         >Hủy bỏ</Button>
-                        {/* <Button onClick={() => { }} style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Cập nhật</Button> */}
+                        <Button onClick={() => { }} style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Cập nhật</Button>
                     </div>
                 </div>
             </div>
@@ -80,4 +80,4 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
     );
 });
 
-export default InfoJobOutputDetail;
+export default VerificationJobOutput;
