@@ -1,7 +1,6 @@
 import React from "react";
 import { DataGrid, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow } from "devextreme-react/data-grid";
-import "./BOMBodyCardAddInfo.css";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
@@ -13,7 +12,7 @@ import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 import { Button } from "antd";
 
-type BOMBodyCardAddInfoProps = {
+type BOMPersonalizedAddInfoProductProps = {
     id: Number | null;
     requestInfo: any;
     techFormId: any;
@@ -65,7 +64,7 @@ const convertToMaterialBOM = (value: any) => {
 const classify = ['Thành phẩm', 'Bán thành phẩm', 'Nguyên vật liệu']
 
 
-export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo, techFormId }) => {
+export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProductProps> = observer(({ isOpen = false, setClose, id, requestInfo, techFormId }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
@@ -258,10 +257,6 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     }
     console.log('bomData', bomData)
 
-
-    console.log('bomData bomBodyCardMaterials', bomData.bomBodyCardMaterials);
-
-
     return (
         <>
             {isVisiblePopupAddInfoMaterial ? (
@@ -376,36 +371,30 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Tên thẻ</p>
-                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={300}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Mã loại thẻ mẫu</p>
-                                    <SelectBox placeholder='Chọn'></SelectBox>
-                                    <p style={{ marginTop: 30 }}>Tổng số bản</p>
-                                    <TextBox placeholder='Nhập'></TextBox>
-                                </td>
-                                <td>
-                                    <p>Version</p>
+                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Version</p>
                                     <TextBox value={bomData.version} onValueChange={(e) => {
                                         setBomData({
                                             ...bomData,
                                             version: e
                                         })
-                                    }} placeholder='Nhập' width={300}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
-                                    <TextBox value={bomData.notice} placeholder='Visa'></TextBox>
+                                    }} placeholder='Nhập' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Ghi chú</p>
+                                    <TextBox value={bomData.notice} placeholder='Nhập'></TextBox>
+                                </td>
+                                <td>
+                                    <p>Mã khách hàng</p>
+                                    <SelectBox value={''} placeholder='Chọn' width={350}></SelectBox>
+                                    <p style={{ marginTop: 30 }}>Số lượng</p>
+                                    <TextBox value={bomData.quantity} placeholder='Nhập'></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
                                     <SelectBox placeholder='Chọn'></SelectBox>
                                 </td>
                                 <td style={{ marginRight: 30 }}>
-                                    <p>Số lượng đã tính bù hao</p>
-                                    <TextBox value={bomData.quantity} disabled={requestInfo !== null} placeholder='Nhập' width={300}></TextBox>
-                                    <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
-                                    <SelectBox onValueChange={e => {
-                                        console.log(e)
-                                        setBomData({
-                                            ...bomData,
-                                            productClassify: e
-                                        })
-                                    }} dataSource={classify} placeholder=''></SelectBox>
+                                    <p>Tên khách hàng</p>
+                                    <TextBox value={'TP Bank'} disabled={requestInfo !== null} placeholder='Nhập' width={350}></TextBox>
+                                    <p style={{ marginTop: 30 }}>Lưu ý</p>
+                                    <TextBox placeholder='Nhập' value={bomData.notice}></TextBox>
                                     <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>
                                     <TextBox value={bomData.note} placeholder='1.1'></TextBox>
                                 </td>
@@ -591,4 +580,4 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     );
 });
 
-export default BOMBodyCardAddInfo;
+export default BOMPersonalizedAddInfoProduct;

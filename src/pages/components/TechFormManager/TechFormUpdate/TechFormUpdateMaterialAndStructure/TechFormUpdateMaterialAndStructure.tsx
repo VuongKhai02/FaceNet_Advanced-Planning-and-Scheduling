@@ -1,10 +1,11 @@
 import React from "react";
+import { DataGrid, TextBox } from "devextreme-react";
 import classNames from "classnames/bind";
-import { Button, DataGrid, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
+import { Button } from "antd";
 
 import styles from "./TechFormUpdateMaterialAndStructure.module.css";
 
@@ -381,27 +382,25 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                     <div
                                         className={cx('toolbar')}>
                                         <Button
-                                            text='Trở lại'
                                             onClick={setClose}
                                             className={cx('btn-back')}
-                                        />
+                                        >Trở lại</Button>
                                         <Button
-                                            text='Tiếp theo'
                                             onClick={() => {
                                                 setIsVisibleTechFormUpdateProcedure(true);
                                             }}
                                             className={cx('btn-next')}
-                                        />
+                                        >Tiếp theo</Button>
                                         <Button
-                                            text='Ký lập'
+                                            disabled
                                             onClick={() => { }}
                                             className={cx('btn-sign')}
-                                        />
+                                        >Ký lập</Button>
                                         <Button
-                                            text='Gửi duyệt'
+                                            disabled
                                             onClick={() => { }}
                                             className={cx('btn-send')}
-                                        />
+                                        >Gửi duyệt</Button>
                                     </div>
                                 </div>
                             </div>

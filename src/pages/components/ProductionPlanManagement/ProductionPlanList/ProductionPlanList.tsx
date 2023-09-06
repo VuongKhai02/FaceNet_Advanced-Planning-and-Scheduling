@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, DataGrid, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
+import { DataGrid, Popup, SelectBox, TextArea, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
@@ -13,7 +13,7 @@ import {
 import DateBox from "devextreme-react/date-box";
 import { PLANNING_API_URL } from "../../../../utils/config";
 import { customizeColor } from "../../../../utils/utils";
-import { Modal, Tag } from "antd";
+import { Button, Modal, Tag } from "antd";
 import notify from "devextreme/ui/notify";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import CreateProductionPlan from "./CreateProductionPlan/CreateProductionPlan";
@@ -825,6 +825,7 @@ export const ProductionPlanList = () => {
                             <Column caption='Lý do đóng lệnh sản xuất' dataField='reasonClose' />
                             <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='left'
@@ -939,6 +940,7 @@ export const ProductionPlanList = () => {
                                         <Column caption={"Vật tư thay thế"} dataField={"replaceMaterial"} />
                                         <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
                                         <Column type={"buttons"} caption={"Thao tác"} alignment='center'
+                                            fixed={true}
                                             cellRender={() =>
                                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                     <SvgIcon
@@ -1007,7 +1009,6 @@ export const ProductionPlanList = () => {
                             <div style={{ marginTop: 30, float: "right" }}>
                                 <Button
                                     icon=''
-                                    text='Hủy bỏ'
                                     style={{
                                         marginRight: 30,
                                         fontSize: 15,
@@ -1016,10 +1017,9 @@ export const ProductionPlanList = () => {
                                         backgroundColor: "#E5E5E5",
                                         borderRadius: 5,
                                     }}
-                                />
+                                >Hủy bỏ</Button>
                                 <Button
                                     icon=''
-                                    text='Gửi QMS'
                                     style={{
                                         fontSize: 15,
                                         width: 100,
@@ -1028,7 +1028,7 @@ export const ProductionPlanList = () => {
                                         color: "#fff",
                                         borderRadius: 5,
                                     }}
-                                />
+                                >Gửi QMS</Button>
                             </div>
                         </Popup>
                     </div>

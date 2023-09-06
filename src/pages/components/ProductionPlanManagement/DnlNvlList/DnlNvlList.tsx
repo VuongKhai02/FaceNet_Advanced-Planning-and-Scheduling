@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, DataGrid, Popup } from "devextreme-react";
+import { DataGrid, Popup } from "devextreme-react";
 import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
+import { Button } from "antd";
 
-const ROUTING_PATH = "/DnlNvlList";
 const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const data = [
@@ -110,6 +110,7 @@ export const DnlNvlList = () => {
                                 <Column caption={"Lý do sản xuất lại"} dataField={"reasonReProduction"} />
                                 <Column caption={"Trạng thái"} dataField='status' />
                                 <Column
+                                    fixed={true}
                                     type={"buttons"}
                                     caption={"Thao tác"}
                                     alignment='center'
@@ -211,10 +212,9 @@ export const DnlNvlList = () => {
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Hủy bỏ'
                                     style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                />
-                                <Button text='Gửi đề nghị lĩnh' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                                >Hủy bỏ</Button>
+                                <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Gửi đề nghị lĩnh</Button>
                             </div>
                         </Popup>
                     </div>

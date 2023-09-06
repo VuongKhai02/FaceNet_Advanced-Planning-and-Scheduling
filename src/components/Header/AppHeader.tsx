@@ -41,11 +41,28 @@ const itemsLanguage = [
 ]
 
 const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed = () => { } }) => {
-    const [fullScreen] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
     function logout() {
         AuthService.doLogout();
     }
+
+    const handleToggleFullScreen = () => {
+        if (!isFullScreen) {
+            enterFullScreen();
+        } else {
+            exitFullScreen();
+        }
+    };
+
+    const enterFullScreen = () => {
+        setIsFullScreen(true);
+        document.documentElement.requestFullscreen();
+    };
+    const exitFullScreen = () => {
+        setIsFullScreen(false);
+        document.exitFullscreen();
+    };
 
     return (<Header className={cx("header-container")} style={{ padding: 0 }}>
         <div className={cx("menu-left")}>
@@ -81,7 +98,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
                 </Select>
             </div>
             <div>
-                <Button className={cx("button-none")} icon={!fullScreen ? <FullscreenOutlined /> : <FullscreenExitOutlined />} />
+                <Button className={cx("button-none")} icon={!isFullScreen ? <FullscreenOutlined onClick={handleToggleFullScreen} /> : <FullscreenExitOutlined onClick={handleToggleFullScreen} />} />
             </div>
             <div>
                 <Badge count={5} className={cx("badge")}>

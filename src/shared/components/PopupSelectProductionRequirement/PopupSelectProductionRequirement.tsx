@@ -43,7 +43,7 @@ const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequiremen
             }
         } else {
             return {
-                width: 100, height: 40, backgroundColor: '#A8A8A8', color: "#fff", borderRadius: 5, marginRight: 8
+                width: 100, height: 40, backgroundColor: 'rgba(0, 0, 0, 0.04)', color: "rgba(0, 0, 0, 0.25)", borderRadius: 5, marginRight: 8
             }
         }
     }

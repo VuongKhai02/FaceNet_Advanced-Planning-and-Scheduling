@@ -196,6 +196,7 @@ export const ProgressMonitoringOrder = () => {
                             <Column caption={"Mức độ ưu tiên"} dataField={"priorityLevel"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='left'

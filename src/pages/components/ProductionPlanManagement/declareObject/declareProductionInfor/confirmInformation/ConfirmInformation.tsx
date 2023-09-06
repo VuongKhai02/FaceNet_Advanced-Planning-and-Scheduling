@@ -199,7 +199,7 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(
                                                 hint='Xác nhận thông tin'
                                             />
                                             <Button
-                                                text='Trở lại  '
+                                                text='Trở lại'
                                                 onClick={setClose}
                                                 height={30}
                                                 width={80}

@@ -1,8 +1,7 @@
 import React from "react";
-import { Button } from "devextreme-react";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../../shared/components/InfoRow/InfoRow";
-import { Progress } from "antd";
+import { Progress, Button } from "antd";
 
 type ProgressWODetailProps = {
     isOpen: boolean;
@@ -88,10 +87,9 @@ export const ProgressWODetailJob: React.FC<ProgressWODetailProps> = observer(({ 
                                 borderRadius: "4px",
                             }}>
                             <Button
-                                text='Trở lại'
                                 onClick={setClose}
-                                style={{ marginRight: "8px", backgroundColor: "#E5E5E5", color: "#333", width: 120 }}
-                            />
+                                style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                            >Trở lại</Button>
                         </div>
                     </div>
                 </div>

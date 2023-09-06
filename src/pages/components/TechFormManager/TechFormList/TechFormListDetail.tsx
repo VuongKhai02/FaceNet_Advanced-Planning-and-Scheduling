@@ -280,7 +280,8 @@ export const TechFormListDetail = React.memo((props: any) => {
                             }
                             width={600}
                         />
-                        <Column type={"buttons"} caption={"Thao tác"} alignment='left'>
+                        <Column
+                            fixed={true} type={"buttons"} caption={"Thao tác"} alignment='left'>
                             <Button icon='edit' onClick={() => setIsVisibleTechFormUpdate(true)} />
                             <Button icon='airplane' />
                             <Button icon='globe' />

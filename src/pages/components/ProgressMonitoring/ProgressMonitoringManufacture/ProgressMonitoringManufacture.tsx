@@ -187,6 +187,7 @@ export const ProgressMonitoringManufacture = () => {
                             <Column caption={"Tỉ lệ lỗi"} dataField={"errorRatio"} />
                             <Column caption={"Trạng thái"} dataField='status' />
                             <Column
+                                fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
                                 alignment='center'

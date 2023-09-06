@@ -5,7 +5,6 @@ import {
     Export,
     Column,
     FilterRow,
-    HeaderFilter,
     Item as ToolbarItem,
     Pager,
     Paging,
@@ -26,7 +25,7 @@ import ProgressMonitoringWODetail from "../../ProgressMonitoring/ProgressMonitor
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 
-const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
+const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const stage_name = ["In offset", "In lưới", "Ép", "Cắt"];
 
@@ -221,7 +220,7 @@ export const DeclareProductionObject = () => {
                         </div>
                     </div>
                     <DataGrid
-                        style={{ marginLeft: "0 .5rem" }}
+                        className='table-responsive'
                         keyExpr={"saleOrderId"}
                         dataSource={content}
                         showBorders={true}
@@ -232,10 +231,6 @@ export const DeclareProductionObject = () => {
                         allowColumnReordering={true}
                         focusedRowEnabled={true}
                         onExporting={onExporting}
-                    // onSelectionChanged={onSelectedRowKeysChange}
-                    // onRowClick={onSelectedRowKeysChange}
-                    // onRowUpdating={updateOrder}
-                    // onRowRemoving={removeOrder}
                     >
                         <Toolbar>
                             {/* <ToolbarItem location="after">
@@ -245,14 +240,6 @@ export const DeclareProductionObject = () => {
                             <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                             <ToolbarItem name='searchPanel' location='before' />
                         </Toolbar>
-                        <HeaderFilter
-                            visible={true}
-                            texts={{
-                                cancel: "Hủy bỏ",
-                                ok: "Đồng ý",
-                                emptyValue: "Rỗng",
-                            }}
-                        />
                         <FilterRow visible={true} />
                         <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                         <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
@@ -260,7 +247,7 @@ export const DeclareProductionObject = () => {
                         <Pager
                             visible={true}
                             allowedPageSizes={allowedPageSizes}
-                            displayMode={"full"}
+                            displayMode={"compact"}
                             showPageSizeSelector={true}
                             showInfo={true}
                             showNavigationButtons={true}
@@ -275,6 +262,7 @@ export const DeclareProductionObject = () => {
                         <Column caption={"Thời gian kết thúc"} dataType='datetime' dataField={"startTime"} format='dd/MM/yyyy hh:mm:ss' />
                         <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                         <Column
+                            fixed={true}
                             type='buttons'
                             width={110}
                             caption='Thao tác'
@@ -309,7 +297,7 @@ export const DeclareProductionObject = () => {
                                     style={{
                                         marginBottom: 0,
                                         fontWeight: 700,
-                                        margin: "0 0 .6rem .5rem",
+                                        // margin: "0 0 .6rem .5rem",
                                     }}>
                                     Khai báo thông tin
                                 </h2>
@@ -317,7 +305,7 @@ export const DeclareProductionObject = () => {
                                     style={{
                                         border: "1px solid #ccc",
                                         borderRadius: "6px",
-                                        margin: "0.5rem",
+                                        // margin: "0.5rem",
                                         padding: windowWidth < 600 ? "0" : "0 3rem",
                                     }}>
                                     <div

@@ -9,7 +9,7 @@ import PopupImportFile from "../../../../../shared/components/PopupImportFile/Po
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
 
-type BOMBodyCardAddTemplateProps = {
+type BOMPersonalizedAddInfoTemplateProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
@@ -61,7 +61,7 @@ const data = [
         inventoryQuantity: "1000",
     },
 ];
-export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = observer(({ isOpen = false, setClose }) => {
+export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemplateProps> = observer(({ isOpen = false, setClose }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
@@ -133,7 +133,7 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                         </div>
                     }
                     onCancel={() => setIsVisiblePopupAddInfoMaterial(false)}
-                    onSubmit={() => console.log("ok")}
+                    onSubmit={() => { }}
                     width={800}
                 />
             ) : (
@@ -158,14 +158,14 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                         <div style={{ marginTop: 30 }}>
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
-                                    <p>Mã loại thẻ</p>
-                                    <TextBox id='cardTypeCode' key={"cardTypeCode"} placeholder='Nhập' width={300}></TextBox>
+                                    <p>Mã khách hàng</p>
+                                    <TextBox id='customerCode' key={"customerCode"} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Lưu ý</p>
                                     <TextBox id='notice' key={"notice"} placeholder='Nhập'></TextBox>
                                 </td>
                                 <td>
-                                    <p>Tên loại thẻ</p>
-                                    <TextBox id='cardTypeName' key={"cardTypeName"} placeholder='Nhập' width={300}></TextBox>
+                                    <p>Tên khách hàng</p>
+                                    <TextBox id='customerName' key={"customerName"} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Ghi chú</p>
                                     <TextBox placeholder='Nhập' id='note' key={"note"}></TextBox>
                                 </td>
@@ -257,9 +257,7 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
 
                             <Column dataField='materialCode' caption='Mã vật tư'></Column>
                             <Column dataField='materialDescript' caption='Mô tả vật tư'></Column>
-
                             <Column dataField='technicalName' caption='Tên kỹ thuật' alignment='left'></Column>
-
                             <Column dataField='version' caption='Version' alignment={"left"}></Column>
                             <Column dataField='classify' caption='Phân loại' alignment={"left"}></Column>
                             <Column dataField='norm' caption='Định mức' />
@@ -277,7 +275,7 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                                     <div style={{ display: "flex", justifyContent: "center" }}>
                                         <SvgIcon
                                             onClick={() => { }}
-                                            tooltipTitle='Thêm hàng'
+                                            tooltipTitle='Thêm vật tư'
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Add.svg'
@@ -319,4 +317,4 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
     );
 });
 
-export default BOMBodyCardAddTemplate;
+export default BOMPersonalizedAddInfoTemplate;

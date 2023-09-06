@@ -94,6 +94,7 @@ export const ManageJobOutput = () => {
                                 Danh sách Job output
                             </h5>
                         </div>
+
                         <DataGrid
                             key={"jobOutputCode"}
                             keyExpr={"jobOutputCode"}

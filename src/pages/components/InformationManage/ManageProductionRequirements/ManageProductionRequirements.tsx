@@ -293,11 +293,10 @@ export const ManageProductionRequirements = () => {
                                 />
                                 <Column caption={"Trạng thái"} dataField='status' />
                                 <Column
+                                    fixed={true}
                                     type={"buttons"}
                                     caption={"Thao tác"}
                                     alignment='left'
-                                    fixed={true}
-                                    fixedPosition="right"
                                     cellRender={(cellInfo) => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon

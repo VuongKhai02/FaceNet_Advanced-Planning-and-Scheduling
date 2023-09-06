@@ -2,7 +2,6 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
-    text-align: center;
 }
 
 .logo {
@@ -110,7 +109,7 @@
 }
 
 .ant-modal-header {
-    padding: 16px 24px !important;
+    padding: 10px 20px 10px 20px !important;
     color: rgba(0, 0, 0, 0.85) !important;
     background: #fff3e8 !important;
     border-bottom: 1px solid #f0f0f0 !important;
@@ -122,10 +121,9 @@
 }
 
 .ant-input-affix-wrapper {
-    width: 350px !important;
+    width: 250px !important;
     padding: 8px 12px !important;
 }
-
 
 
 .ant-table td,
@@ -133,15 +131,20 @@
     border: 1px solid #ddd !important;
 }
 
+ table  {
+ table-layout: fixed !important;
+}
+
 .ant-tabs-content-holder {
     background: #ffffff !important;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
 }
-
-.ant-layout-footer {
-    padding: 0px 280px !important;
+.ant-layout .ant-layout-sider-children {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
 }
-
+ /* .ant-menu-light {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px !important;
+} */
 .narrow-layout {
     max-width: 1024px;
     margin: auto;
@@ -192,9 +195,14 @@
     margin-right: 20px !important;
 }
 
-.box__shadow-table-responsive {
+/* .box__shadow-table-responsive {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
     border-radius: 3px !important;
+} */
+
+.ant-layout-content {
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
+    border-radius: 5px !important;
 }
 
 .movie-tooltip .movie-title {
@@ -259,7 +267,6 @@ h3 {
     content: "Tìm kiếm chung";
     position: absolute;
     top: -28px;
-    left: 8px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.6);
 
@@ -276,6 +283,14 @@ h3 {
     vertical-align: inherit !important;
 }
 
+/* .dx-datagrid .dx-row:nth-child(odd) {
+    background-color: #fff3e8;
+}
+
+.dx-datagrid .dx-row:nth-child(even) {
+    background-color: #ffffff;
+} */
+
 tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
     background-color: #FFE0C2;
 }
@@ -285,13 +300,6 @@ tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
     background-color: var(--text-color);
 }
 
-.dx-datagrid .dx-row:nth-child(odd) {
-    background-color: #fff3e8;
-}
-
-.dx-datagrid .dx-row:nth-child(even) {
-    background-color: #ffffff;
-}
 
 .dx-datagrid .dx-header-row {
     font-weight: 500;

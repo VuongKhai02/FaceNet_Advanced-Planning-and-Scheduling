@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import { DataGrid, TextArea, TextBox } from "devextreme-react";
 import classNames from "classnames/bind";
-import { Button, DataGrid, TextArea, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechnologyProcedureUpdate from "./TechnologyProcedureUpdate/TechnologyProcedureUpdate";
 import { PLANNING_API_URL } from "../../../../utils/config";
 import httpRequests from "../../../../utils/httpRequests";
+import { Button } from "antd";
 
 import styles from "./TechFormUpdate.module.css";
 
@@ -266,27 +267,25 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                             </div>
                             <div className={cx('toolbar')}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
                                     className={cx("btn-back")}
-                                />
+                                >Trở lại</Button>
                                 <Button
-                                    text='Tiếp theo'
                                     onClick={() => {
                                         setIsVisibleTechProcedureUpdate(true);
                                     }}
                                     className={cx("btn-next")}
-                                />
+                                >Tiếp theo</Button>
                                 <Button
-                                    text='Ký lập'
+                                    disabled
                                     onClick={() => { }}
                                     className={cx("btn-sign")}
-                                />
+                                >Ký lập</Button>
                                 <Button
-                                    text='Gửi duyệt'
+                                    disabled
                                     onClick={() => { }}
                                     className={cx("btn-send")}
-                                />
+                                >Gửi duyệt</Button>
                             </div>
                         </div>
                     </div>

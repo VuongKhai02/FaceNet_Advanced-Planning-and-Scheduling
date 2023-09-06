@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import React, { } from "react";
+import { DataGrid } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import MaterialAndStructure from "../MaterialAndStructure/MaterialAndStructure";
-import { Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { TechFormContext } from "../TechFormBodyCard/TechFormBodyCard";
+import { Button, Upload } from "antd";
 
-const ROUTING_PATH = "/TechProcedure";
 type TechProcedureProps = {
     isOpen: boolean;
     setClose?: () => void;
@@ -48,7 +45,6 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({ isOpen = 
                                 Thêm mới phiếu công nghệ
                             </h5>
                         </div>
-                        {/* <ImportTechForm /> */}
                         <h6 style={{ fontSize: 15, fontWeight: 500, marginTop: 30 }}>Trình tự công nghệ/Technology procedure </h6>
                         <div className='mt-24'>
                             <Upload.Dragger
@@ -94,20 +90,17 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({ isOpen = 
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                />
+                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                >Trở lại</Button>
                                 <Button
-                                    text='Tiếp theo'
                                     onClick={handleAddFormTechMaterialAndStructure}
                                     style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
-                                />
+                                >Tiếp theo</Button>
                                 <Button
-                                    text='Thêm mới'
-                                    onClick={handleAddFormTechMaterialAndStructure}
-                                    style={{ backgroundColor: "gray", color: "#fff" }}
-                                />
+                                    disabled
+                                    onClick={() => { }}
+                                >Thêm mới</Button>
                             </div>
                         </div>
                     </div>

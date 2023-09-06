@@ -1,8 +1,8 @@
 import React, { createContext } from "react";
-import { Button, TextBox } from "devextreme-react";
+import { TextBox } from "devextreme-react";
 import TechProcedure from "../../../TechFormList/TechFormNewAdd/TechProcedure/TechProcedure";
 import { observer } from "mobx-react";
-import { Input, Table, Upload } from "antd";
+import { Button, Input, Table, Upload } from "antd";
 import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
 import TextArea from "antd/lib/input/TextArea";
 
@@ -115,10 +115,6 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
             step10: 'Loadkey', step11: 'CTH', step12: 'Đóng gói'
         }
 
-    ];
-
-    const data3 = [
-        { Id: 1 }
     ];
 
     const data4 = [
@@ -415,7 +411,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                 title=''
                                                 align='center'
                                                 render={() => (
-                                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
                                                         <SvgIcon
                                                             tooltipTitle='Thêm mới'
                                                             sizeIcon={17}
@@ -473,7 +469,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                     <p className="ant-upload-hint">Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.</p>
                                                 </Upload.Dragger></div>}
                                             />
-                                            <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
                                                 <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                                 <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                             </div>} />
@@ -486,26 +482,24 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                     className="toolbar"
                                     style={{
                                         marginTop: 10,
-                                        float: "right",
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
                                         // background: "#ffffff",
                                         padding: "8px",
                                         borderRadius: "4px",
                                     }}
                                 >
                                     <Button
-                                        text="Trở lại"
                                         onClick={setClose}
-                                        style={{ marginRight: "18px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                    />
+                                        style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    >Trở lại</Button>
                                     <Button
-                                        text="Tiếp theo"
                                         onClick={handleAddFormTechProcedure}
                                         style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
-                                    />
+                                    >Tiếp theo</Button>
                                     <Button
-                                        text="Thêm mới"
-                                        style={{ backgroundColor: "gray", color: "#fff" }}
-                                    />
+                                        disabled
+                                    >Thêm mới</Button>
                                 </div>
                             </div>
                         </div>
