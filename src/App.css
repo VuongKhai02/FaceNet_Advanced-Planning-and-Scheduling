@@ -297,6 +297,16 @@ h3 {
     background-color: #ffffff;
 } */
 
+tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
+    background-color: #FFE0C2;
+}
+
+.dx-datagrid .dx-row-alt>td,
+.dx-datagrid .dx-row-alt>tr>td {
+    background-color: var(--text-color);
+}
+
+
 .dx-datagrid .dx-header-row {
     font-weight: 500;
     color: black;

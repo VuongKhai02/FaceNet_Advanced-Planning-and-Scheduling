@@ -1,0 +1,26 @@
+.toolbar {
+    margin-top: 35px;
+    padding-bottom: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 4px;
+    margin-right: 30px;
+}
+
+.btn-cancel {
+    margin-right: 15px;
+    background-color: #E5E5E5;
+    color: #333;
+    width: 100px;
+}
+
+.btn-update {
+    background-color: rgba(255, 122, 0, 1);
+    width: 100px;
+    color: #fff;
+
+    &:hover {
+        background-color: rgba(255, 122, 0, 0.8);
+    }
+}

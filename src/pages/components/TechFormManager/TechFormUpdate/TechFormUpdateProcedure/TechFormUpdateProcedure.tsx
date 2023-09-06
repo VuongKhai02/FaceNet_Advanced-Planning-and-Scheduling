@@ -1,10 +1,13 @@
 import React, { } from "react";
 import { DataGrid, TextBox } from "devextreme-react";
+import classNames from "classnames/bind";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateHostamping from "../TechFormUpdateHostamping/TechFormUpdateHostamping";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
+
+import styles from "./TechFormUpdateProcedure.module.css";
 
 type TechFormDetailProcedureProps = {
     techFormData: any;
@@ -12,6 +15,8 @@ type TechFormDetailProcedureProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
+
+const cx = classNames.bind(styles);
 
 const data = [
     { id: 1, item: "Nền nhũ", method: "Lưới", colour: "K", note: "Tal 211 100%, 200 line/cm" },
@@ -336,8 +341,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 </h5>
                             </div>
                             <div className='subtile'>
-                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
-                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                <h6 className={cx('subtitle-label')}>In/Printing : </h6>
+                                <h6 className={cx('subtitle-content')}>
                                     Thời gian từ 09/08/2022 đến 19/08/2022
                                 </h6>
                             </div>
@@ -435,8 +440,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 <div style={{ marginTop: 30 }}>
                                     <div>
                                         <div className='subtile' style={{ marginBottom: 15 }}>
-                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
-                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                            <h6 className={cx('subtitle-label')}>Ép/Lamination : </h6>
+                                            <h6 className={cx('subtitle-content')}>
                                                 Thời gian từ 09/08/2022 đến 19/08/2022
                                             </h6>
                                         </div>
@@ -522,8 +527,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     </div>
                                     <div style={{ marginTop: 30 }}>
                                         <div className='subtile' style={{ marginBottom: 15 }}>
-                                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
-                                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                            <h6 className={cx('subtitle-label')}>Gia công/Processing : </h6>
+                                            <h6 className={cx('subtitle-content')}>
                                                 Thời gian từ 09/08/2022 đến 19/08/2022
                                             </h6>
                                         </div>
@@ -591,7 +596,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 dataField=''
                                                 alignment='center'
                                                 cellRender={(cellInfo) => (
-                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                                    <div className={cx('action-container')}>
                                                         <SvgIcon
                                                             onClick={() => {
                                                                 onAddRowProcessing(cellInfo.data.no);
@@ -621,8 +626,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     <div style={{ marginTop: 30 }}>
                                         <div style={{ marginTop: 30 }}>
                                             <div className='subtile' style={{ marginBottom: 15 }}>
-                                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
-                                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                <h6 className={cx("subtitle-label")}>Cut/Cutting : </h6>
+                                                <h6 className={cx("subtitle-content")}>
                                                     Thời gian từ 09/08/2022 đến 19/08/2022
                                                 </h6>
                                             </div>
@@ -658,7 +663,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     width={150}
                                                     cellRender={(cellInfo) => (
-                                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                        <div className={cx('action-container')}>
                                                             <SvgIcon
                                                                 onClick={() => {
                                                                     // onAddRowProcessing(cellInfo.data.no);
@@ -690,8 +695,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                         </div>
                                         <div>
                                             <div className='subtile' style={{ marginBottom: 15 }}>
-                                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
-                                                <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                                <h6 className={cx("subtitle-label")}>Hostamping: </h6>
+                                                <h6 className={cx("subtitle-content")}>
                                                     Thời gian từ 09/08/2022 đến 19/08/2022
                                                 </h6>
                                             </div>
@@ -777,7 +782,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     alignment='center'
                                                     width={80}
                                                     cellRender={(cellInfo) => (
-                                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                        <div className={cx("action-container")}>
                                                             <SvgIcon
                                                                 onClick={() => {
                                                                     // onAddRowProcessing(cellInfo.data.no);
@@ -806,35 +811,26 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 />
                                             </DataGrid>
                                         </div>
-                                        <div
-                                            className='toolbar'
-                                            style={{
-                                                paddingTop: 10,
-                                                // background: "#ffffff",
-                                                padding: "8px",
-                                                borderRadius: "4px",
-                                                display: "flex",
-                                                justifyContent: 'flex-end'
-                                            }}
-                                        >
+                                        <div className={cx("toolbar")}>
                                             <Button
                                                 onClick={setClose}
-                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                                className={cx("btn-back")}
                                             >Trở lại</Button>
                                             <Button
                                                 onClick={() => {
                                                     setIsVisibleTechFormUpdateHostamping(true);
                                                 }}
-                                                style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                                className={cx("btn-next")}
                                             >Tiếp theo</Button>
                                             <Button
                                                 disabled
                                                 onClick={() => { }}
-                                                style={{ marginRight: "20px", width: 100 }}
+                                                className={cx("btn-sign")}
                                             >Ký lập</Button>
                                             <Button
                                                 disabled
                                                 onClick={() => { }}
+                                                className={cx("btn-send")}
                                             >Gửi duyệt</Button>
                                         </div>
                                     </div>

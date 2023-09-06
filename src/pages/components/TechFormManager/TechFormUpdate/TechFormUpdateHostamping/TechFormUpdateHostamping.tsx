@@ -1,5 +1,6 @@
 import React, { } from "react";
 import { DataGrid, SelectBox } from "devextreme-react";
+import classNames from "classnames/bind";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Button, Input, Table } from "antd";
@@ -7,12 +8,17 @@ import { PLANNING_API_URL } from "../../../../../utils/config";
 import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 
+import styles from "./TechFormUpdateHostamping.module.css";
+
 type TechFormDetailHostampingProps = {
     techFormData: any;
     setTechFormData: any;
     isOpen: boolean;
     setClose?: () => void;
 };
+
+const cx = classNames.bind(styles);
+
 const data = [{ id: 1, boxType: "Hộp 500", quantity: "40", from: "10", to: "40" }];
 const data1 = [
     {
@@ -85,8 +91,8 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                         <div style={{ marginTop: 30 }}>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>IC: </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                    <h6 className={cx("subtitle-label")}>IC: </h6>
+                                    <h6 className={cx("subtitle-content")}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
                                 </div>
@@ -284,8 +290,8 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Đóng gói/Package: </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
+                                    <h6 className={cx("subtitle-lable")}>Đóng gói/Package: </h6>
+                                    <h6 className={cx("subtitle-content")}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
                                 </div>
@@ -307,7 +313,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                             </div>
                             <div className='noteRemark'>
                                 <div className='note'>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ghi chú/Remark: 60 </h6>
+                                    <h6 className={cx("subtitle-label")}>Ghi chú/Remark: 60 </h6>
                                 </div>
                                 <div className='rectangle-container'>
                                     <div className='text-section'>
@@ -330,30 +336,22 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </div>
                             </div>
                             <div
-                                className='toolbar'
-                                style={{
-                                    paddingTop: 10,
-                                    // background: "#ffffff",
-                                    padding: "8px",
-                                    borderRadius: "4px",
-                                    display: "flex",
-                                    justifyContent: 'flex-end'
-                                }}>
+                                className={cx("toolbar")}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                    className={cx("btn-back")}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={() => { handleSaveClick() }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
+                                    className={cx("btn-save")}
                                 >Lưu</Button>
                                 <Button
                                     onClick={() => { }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00", width: 100 }}
+                                    className={cx("btn-sign")}
                                 >Ký lập</Button>
                                 <Button
                                     onClick={() => { }}
-                                    style={{ color: "#fff", backgroundColor: "#FF7A00" }}
+                                    className={cx("btn-send")}
                                 >Gửi duyệt</Button>
                             </div>
                         </div>

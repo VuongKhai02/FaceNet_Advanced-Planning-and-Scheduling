@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import classNames from "classnames/bind";
 import { DataGrid, Popup, SelectBox } from "devextreme-react";
 import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
-import "./TechFormList.css";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -16,6 +16,10 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import PopupSelectProductionRequirement from "../../../../shared/components/PopupSelectProductionRequirement/PopupSelectProductionRequirement";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+
+import styles from "./TechFormList.module.css";
+
+const cx = classNames.bind(styles);
 
 const dataSource = [
     { id: 1, label: "Option 1", checked: false },
@@ -99,7 +103,7 @@ export const TechFormList = () => {
             onClick={() => {
                 hidePopupIcon();
             }}>
-            <div className='icon-more'>
+            <div className={cx("icon-more")}>
                 <SvgIcon
                     onClick={() => { }}
                     text='Thay đổi mức độ ưu tiên'
@@ -111,7 +115,7 @@ export const TechFormList = () => {
                     style={{ marginLeft: 17 }}
                 />
             </div>
-            <div className='icon-more'>
+            <div className={cx("icon-more")}>
                 <SvgIcon
                     text='In'
                     tooltipTitle='In'
@@ -122,7 +126,7 @@ export const TechFormList = () => {
                     style={{ marginLeft: 17 }}
                 />
             </div>
-            <div className='icon-more'>
+            <div className={cx("icon-more")}>
                 <SvgIcon
                     onClick={() => { }}
                     text='Gửi SAP'
@@ -134,7 +138,7 @@ export const TechFormList = () => {
                     style={{ marginLeft: 17 }}
                 />
             </div>
-            <div className='icon-more'>
+            <div className={cx("icon-more")}>
                 <SvgIcon
                     onClick={() => { }}
                     text='Thêm mới'
@@ -147,7 +151,7 @@ export const TechFormList = () => {
                 />
             </div>
             {newButtons.map((button: any, index: any) => (
-                <div key={index} className='icon-more'>
+                <div key={index} className={cx("icon-more")}>
                     <SvgIcon
                         text='Thêm mới button icon'
                         tooltipTitle='Thêm mới'
@@ -419,6 +423,8 @@ export const TechFormList = () => {
                                 fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
+                                fixed={true}
+                                fixedPosition="right"
                                 alignment='center'
                                 cellRender={(cellInfo) => (
                                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
