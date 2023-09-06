@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames/bind";
 import { Button, DataGrid, SelectBox, TextBox } from "devextreme-react";
 import {
     Column,
@@ -18,8 +19,13 @@ import PopupDetailBoxCard from "../../../../shared/components/PopupDetailBoxCard
 import PopupAddBoxCard from "../../../../shared/components/PopupAddBoxCard/PopupAddBoxCard";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
+
+import styles from "./CardManagement.module.css";
+
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+
+const cx = classNames.bind(styles);
 
 const data = [
     {
@@ -79,49 +85,24 @@ export const CardManagement = () => {
 
     const handleCustomFooterButton = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: "30px",
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsVisibleAddBoxCard(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                        marginRight: 30,
-                    }}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                    className={cx(["btn", "btn-add"])}
+                >
                     Thêm mới
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                        marginRight: 15,
-                    }}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                    className={cx(["btn", "btn-save"])}>
                     In mã
                 </Button>
             </div>
@@ -400,6 +381,8 @@ export const CardManagement = () => {
                             <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
                             <Column
                                 type={"buttons"}
+                                fixed={true}
+                                fixedPosition="right"
                                 caption={"Thao tác"}
                                 alignment='center'
                                 cellRender={() => (

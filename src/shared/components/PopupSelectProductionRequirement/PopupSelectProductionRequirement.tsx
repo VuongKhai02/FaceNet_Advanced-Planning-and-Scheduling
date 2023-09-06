@@ -1,14 +1,26 @@
-import { Button, Modal } from "antd"
-import "./PopupSelectProductionRequirement.css"
+import React, { useEffect } from "react";
+import { Button, Modal } from "antd";
+import classNames from "classnames/bind";
+import { DataGrid } from "devextreme-react";
+import { Column, Selection } from "devextreme-react/data-grid";
 import SvgIcon from "../SvgIcon/SvgIcon";
-import React, { useEffect } from "react"
 import { PLANNING_API_URL } from "../../../utils/config"
-import { DataGrid } from "devextreme-react"
-import { Column, Selection } from "devextreme-react/data-grid"
 import httpRequests from "../../../utils/httpRequests";
 
+import styles from "./PopupSelectProductionRequirement.module.css";
 
-const PopupSelectProductionRequirement = ({ title, visible, onSubmit, onCancel, width }) => {
+const cx = classNames.bind(styles);
+
+type PopupSelectProductionRequirementProps = {
+    title: string,
+    visible: boolean,
+    onSubmit: (data: any) => void,
+    onCancel: () => void,
+    width?: number
+    children?: React.ReactNode
+}
+
+const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequirementProps> = ({ title, visible, onSubmit, onCancel, width }) => {
 
     const [dataGrid, setDataGrid] = React.useState<any>([])
     const [dataChoosed, setDataChoosed] = React.useState<any>(null);
@@ -38,15 +50,16 @@ const PopupSelectProductionRequirement = ({ title, visible, onSubmit, onCancel, 
 
     return (
         <Modal
-            visible={visible}
+            open={visible}
+            className={cx("modal-container")}
             title={
-                <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                <div className={cx("title-container")}>
                     <SvgIcon sizeIcon={25} icon="assets/icons/Announcement.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                    <p style={{ lineHeight: '38px', padding: 0, margin: 0, fontSize: 20 }}>{title}</p>
+                    <p className={cx("title")}>{title}</p>
                 </div>
             }
             footer={[
-                <Button key="cancel" onClick={onCancel} style={{ width: 100, height: 40, marginRight: '20px', backgroundColor: '#C0C0C0', borderRadius: 5 }} type="default">
+                <Button key="cancel" onClick={onCancel} className={cx("btn-cancel")} type="default">
                     Hủy bỏ
                 </Button>,
                 <Button disabled={dataChoosed === null} key="confirm" onClick={() => { onSubmit(dataChoosed) }} style={style()}>

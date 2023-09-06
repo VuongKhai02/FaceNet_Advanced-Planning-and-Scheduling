@@ -276,6 +276,15 @@ h3 {
     vertical-align: inherit !important;
 }
 
+tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
+    background-color: #FFE0C2;
+}
+
+.dx-datagrid .dx-row-alt>td,
+.dx-datagrid .dx-row-alt>tr>td {
+    background-color: var(--text-color);
+}
+
 .dx-datagrid .dx-row:nth-child(odd) {
     background-color: #fff3e8;
 }

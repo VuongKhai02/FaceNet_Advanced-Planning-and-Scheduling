@@ -1,9 +1,12 @@
 import React, { } from "react";
+import classNames from "classnames/bind";
 import { Button, DataGrid } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Table, Upload } from "antd";
 import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
+
+import styles from "./TechnologyProcedureUpdate.module.css";
 
 type TechnologyProcedureUpdateProps = {
     techFormData: any;
@@ -11,6 +14,8 @@ type TechnologyProcedureUpdateProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
+
+const cx = classNames.bind(styles);
 
 const data = [
     { No: 1, CongDoan: "In Offset", MaJob: "JB01-001", TenJob: "In Offset ra bản" },
@@ -173,9 +178,7 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                             Trình tự công nghệ/Technology procedure
                                         </h5>
                                     </div>
-                                    <div
-                                        className='mt-24'
-                                        style={{ marginBottom: 30, width: "100%", display: "flex", justifyContent: "center" }}>
+                                    <div className={cx('mt-24', 'upload-container')}>
                                         <Upload.Dragger
                                             multiple={false}
                                             accept='.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'>
@@ -219,36 +222,28 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                         <Column dataField='' caption='Tên Job' />
                                     </DataGrid>
                                 </div>
-                                <div
-                                    className='toolbar'
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: 'flex-end',
-                                        // background: "#ffffff",
-                                        padding: "8px",
-                                        borderRadius: "4px",
-                                    }}>
+                                <div className={cx('toolbar')}>
                                     <Button
                                         text='Trở lại'
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                        className={cx("btn-back")}
                                     />
                                     <Button
                                         text='Tiếp theo'
                                         onClick={() => {
                                             setIsVisibleTechFormUpdateMaterialAndStructure(true);
                                         }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                        className={cx("btn-next")}
                                     />
                                     <Button
                                         text='Ký lập'
                                         onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                        className={cx("btn-sign")}
                                     />
                                     <Button
                                         text='Gửi duyệt'
                                         onClick={() => { }}
-                                        style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                        className={cx("btn-send")}
                                     />
                                 </div>
                             </div>

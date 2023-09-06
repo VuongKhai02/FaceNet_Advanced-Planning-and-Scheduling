@@ -1,0 +1,36 @@
+.modal-container :global(.ant-modal-close) {
+    width: auto;
+    height: auto;
+    margin-right: 20px;
+    margin-top: 28px;
+
+    :global(.ant-modal-close-x) {
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+}
+
+.modal-container :global(.ant-modal-close):hover {
+    background-color: transparent;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .title {
+        line-height: 38px;
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+    }
+}
+
+.btn-cancel {
+    width: 100px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: #C0C0C0;
+    border-radius: 5px;
+}

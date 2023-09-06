@@ -1,6 +1,11 @@
 import React from "react";
+import classNames from "classnames/bind";
 import { Button, SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
+
+import styles from "./InfoJobOutputDetail.module.css";
+
+const cx = classNames.bind(styles);
 
 type InfoJobOutputDetailProps = {
     isOpen: boolean;
@@ -55,24 +60,17 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                             </td>
                         </table>
                     </div>
-                    <div
-                        className='toolbar'
-                        style={{
-                            marginTop: 35,
-                            paddingBottom: 35,
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            alignItems: "center",
-                            // background: "#ffffff",
-                            borderRadius: "4px",
-                            marginRight: 30,
-                        }}>
+                    <div className={cx("toolbar")}>
                         <Button
                             onClick={setClose}
                             text='Hủy bỏ'
-                            style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
+                            className={cx("btn", "btn-cancel")}
                         />
-                        <Button onClick={() => { }} text='Cập nhật' style={{ backgroundColor: "#FF7A00", color: "#fff" }} />
+                        <Button
+                            className={cx("btn", "btn-update")}
+                            onClick={() => { }}
+                            text='Cập nhật'
+                        />
                     </div>
                 </div>
             </div>

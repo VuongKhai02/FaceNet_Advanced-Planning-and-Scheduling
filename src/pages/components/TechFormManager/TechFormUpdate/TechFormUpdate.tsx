@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
+import classNames from "classnames/bind";
 import { Button, DataGrid, TextArea, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
-import "./TechFormUpdate.css";
 import TechnologyProcedureUpdate from "./TechnologyProcedureUpdate/TechnologyProcedureUpdate";
 import { PLANNING_API_URL } from "../../../../utils/config";
-import Loading from "../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../utils/httpRequests";
+
+import styles from "./TechFormUpdate.module.css";
+
+const cx = classNames.bind(styles);
 
 type TechFormUpdateProps = {
     id: any;
@@ -196,7 +199,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     cellRender={(cellIfo) => (
                                         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                                             {" "}
-                                            <div className='textbox-row'>
+                                            <div className={cx('textbox-row')}>
                                                 <label>Width(W)</label>
                                                 <TextBox
                                                     style={{ width: "100%" }}
@@ -210,7 +213,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                                     key={"size"}
                                                 />
                                             </div>{" "}
-                                            <div className='textbox-row'>
+                                            <div className={cx('textbox-row')}>
                                                 {" "}
                                                 <label>Height(H)</label>
                                                 <TextBox
@@ -248,51 +251,41 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     Thiết kế - Card design
                                 </h5>
                             </div>
-                            <div className='outer-rectangle'>
-                                <div className='inner-rectangle'>
-                                    <div className='text'>Chú ý: -Màu theo tờ mẫu đã làm T05/2020</div>
+                            <div className={cx('outer-rectangle')}>
+                                <div className={cx('inner-rectangle')}>
+                                    <div className={cx('text')}>Chú ý: -Màu theo tờ mẫu đã làm T05/2020</div>
                                 </div>
 
-                                <div className='image-container'>
+                                <div className={cx('image-container')}>
                                     <img
                                         src='https://www.visa.com.vn/dam/VCOM/regional/ap/vietnam/global-elements/images/vn-visa-classic-card-498x280.png'
                                         alt='Credit Card'
-                                        className='credit-card-image'
+                                        className={cx('credit-card-image')}
                                     />
                                 </div>
                             </div>
-                            <div
-                                className='toolbar'
-                                style={{
-                                    marginTop: 10,
-                                    // float: "right",
-                                    display: "flex",
-                                    justifyContent: 'flex-end',
-                                    // background: "#ffffff",
-                                    padding: "8px",
-                                    borderRadius: "4px",
-                                }}>
+                            <div className={cx('toolbar')}>
                                 <Button
                                     text='Trở lại'
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                    className={cx("btn-back")}
                                 />
                                 <Button
                                     text='Tiếp theo'
                                     onClick={() => {
                                         setIsVisibleTechProcedureUpdate(true);
                                     }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                    className={cx("btn-next")}
                                 />
                                 <Button
                                     text='Ký lập'
                                     onClick={() => { }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                    className={cx("btn-sign")}
                                 />
                                 <Button
                                     text='Gửi duyệt'
                                     onClick={() => { }}
-                                    style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                    className={cx("btn-send")}
                                 />
                             </div>
                         </div>
@@ -310,36 +303,36 @@ export default TechFormUpdate;
 export const TechFormGeneralInfo = (dataGeneral: any) => {
 
     return (
-        <div className="wrapper">
-            <div className="row">
-                <div className="title">Mã sx/Production Code</div>
-                <div className="value">{dataGeneral?.dataGeneral?.productionCode}</div>
-                <div className="title">Người gửi/Sender</div>
-                <div className="value">{dataGeneral?.dataGeneral?.sender}</div>
+        <div className={cx("wrapper")}>
+            <div className={cx("row")}>
+                <div className={cx("title")}>Mã sx/Production Code</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.productionCode}</div>
+                <div className={cx("title")}>Người gửi/Sender</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.sender}</div>
             </div>
-            <div className="row">
-                <div className="title">Tên khách hàng/Customer</div>
-                <div className="value">{dataGeneral?.dataGeneral?.customer}</div>
-                <div className="title">Số lượng thẻ/Q'ty</div>
-                <div className="value">{dataGeneral?.dataGeneral?.quantityRequirement}</div>
+            <div className={cx("row")}>
+                <div className={cx("title")}>Tên khách hàng/Customer</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.customer}</div>
+                <div className={cx("title")}>Số lượng thẻ/Q'ty</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityRequirement}</div>
             </div>
-            <div className="row">
-                <div className="title">Tên thẻ/Card name</div>
-                <div className="value">{dataGeneral?.dataGeneral?.cardName}</div>
-                <div className="title">SL thẻ đã tính bù hao</div>
-                <div className="value">{dataGeneral?.dataGeneral?.quantityCompensation}</div>
+            <div className={cx("row")}>
+                <div className={cx("title")}>Tên thẻ/Card name</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.cardName}</div>
+                <div className={cx("title")}>SL thẻ đã tính bù hao</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityCompensation}</div>
             </div>
-            <div className="row">
-                <div className="title">Số HĐ/P.O</div>
-                <div className="value">{dataGeneral?.dataGeneral?.poNumber}</div>
-                <div className="title">Kết thúc sx/Finish</div>
-                <div className="value">{dataGeneral?.dataGeneral?.endDate}</div>
+            <div className={cx("row")}>
+                <div className={cx("title")}>Số HĐ/P.O</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.poNumber}</div>
+                <div className={cx("title")}>Kết thúc sx/Finish</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.endDate}</div>
             </div>
-            <div className="row">
-                <div className="title">Bắt đầu sx/ Start</div>
-                <div className="value">{dataGeneral?.dataGeneral?.startDate}</div>
-                <div className="title">Giao hàng/ Delivery date</div>
-                <div className="value">{dataGeneral?.dataGeneral?.deliveryDate}</div>
+            <div className={cx("row")}>
+                <div className={cx("title")}>Bắt đầu sx/ Start</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.startDate}</div>
+                <div className={cx("title")}>Giao hàng/ Delivery date</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.deliveryDate}</div>
             </div>
         </div>
     )

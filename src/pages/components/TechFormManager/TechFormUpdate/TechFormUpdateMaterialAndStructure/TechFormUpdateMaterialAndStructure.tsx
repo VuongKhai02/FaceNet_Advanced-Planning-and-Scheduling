@@ -1,9 +1,12 @@
 import React from "react";
+import classNames from "classnames/bind";
 import { Button, DataGrid, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormUpdateProcedure from "../TechFormUpdateProcedure/TechFormUpdateProcedure";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
+
+import styles from "./TechFormUpdateMaterialAndStructure.module.css";
 
 type TechFormUpdateMaterialAndStructureProps = {
     techFormData: any;
@@ -11,6 +14,8 @@ type TechFormUpdateMaterialAndStructureProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
+
+const cx = classNames.bind(styles);
 
 const data = [
     {
@@ -204,7 +209,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                 </h5>
                             </div>
                             <div className='subtile'>
-                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>
+                                <h6 className={cx('sub-title-content')}>
                                     Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022{" "}
                                 </h6>
                             </div>
@@ -344,7 +349,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             alignment='center'
                                             width={80}
                                             cellRender={(cellInfo) => (
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignContent: 'space-between' }}>
+                                                <div className={cx("action-container")}>
                                                     <SvgIcon
                                                         onClick={() => {
                                                             onAddNewRowPlate(cellInfo.rowIndex)
@@ -374,36 +379,28 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                     </DataGrid>
 
                                     <div
-                                        className='toolbar'
-                                        style={{
-                                            marginTop: 10,
-                                            display: "flex",
-                                            justifyContent: 'flex-end',
-                                            // background: "#ffffff",
-                                            padding: "8px",
-                                            borderRadius: "4px",
-                                        }}>
+                                        className={cx('toolbar')}>
                                         <Button
                                             text='Trở lại'
                                             onClick={setClose}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#E5E5E5", width: 100 }}
+                                            className={cx('btn-back')}
                                         />
                                         <Button
                                             text='Tiếp theo'
                                             onClick={() => {
                                                 setIsVisibleTechFormUpdateProcedure(true);
                                             }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "#FF7A00" }}
+                                            className={cx('btn-next')}
                                         />
                                         <Button
                                             text='Ký lập'
                                             onClick={() => { }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray", width: 100 }}
+                                            className={cx('btn-sign')}
                                         />
                                         <Button
                                             text='Gửi duyệt'
                                             onClick={() => { }}
-                                            style={{ marginRight: "20px", color: "#fff", backgroundColor: "gray" }}
+                                            className={cx('btn-send')}
                                         />
                                     </div>
                                 </div>
