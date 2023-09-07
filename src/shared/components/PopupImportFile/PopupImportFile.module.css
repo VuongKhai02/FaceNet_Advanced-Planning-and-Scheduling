@@ -13,13 +13,11 @@
 
 .modal-container :global(.ant-modal-content) :global(.ant-modal-close) {
     color: var(--primary-color);
-    margin-right: 16px;
-    margin-top: 16px;
     height: fit-content;
     width: auto;
 
     :global(.anticon.anticon-close.ant-modal-close-icon) {
-        font-size: 40px;
+        font-size: 24px;
     }
 }
 

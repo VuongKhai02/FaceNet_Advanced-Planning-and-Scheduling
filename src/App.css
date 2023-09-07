@@ -94,6 +94,12 @@
     user-select: none;
 }
 
+/* reset css btn ant */
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    border-color: transparent;
+    opacity: 0.6;
+}
+
 /* css antd + devextreme */
 
 .main-layout {
@@ -108,16 +114,30 @@
     background: #ffffff;
 }
 
-.ant-modal-header {
-    padding: 10px 20px 10px 20px !important;
-    color: rgba(0, 0, 0, 0.85) !important;
-    background: #fff3e8 !important;
-    border-bottom: 1px solid #f0f0f0 !important;
-    border-radius: 2px 2px 0 0 !important;
+.ant-modal-content .ant-modal-header {
+    padding: 10px 20px 10px 20px;
+    color: rgba(0, 0, 0, 0.85);
+    background: #fff3e8;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
+}
+
+.ant-modal .ant-modal-header {
+    margin-bottom: 0;
 }
 
 .ant-modal .ant-modal-content {
-     padding: 10px 20px 10px 20px !important;
+    padding: 0 0 0 0;
+}
+
+.ant-modal .ant-modal-body {
+    padding: 20px 20px 0 20px;
+}
+
+.ant-modal .ant-modal-footer {
+    padding-bottom: 20px;
+    padding-top: 8px;
+    padding-right: 10px;
 }
 
 .layout-content {
@@ -135,7 +155,7 @@
     border: 1px solid #ddd !important;
 }
 
- table  {
+table {
     table-layout: fixed !important;
 }
 
@@ -143,10 +163,12 @@
     background: #ffffff !important;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
 }
+
 .ant-layout .ant-layout-sider-children {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
 }
- /* .ant-menu-light {
+
+/* .ant-menu-light {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px !important;
 } */
 .narrow-layout {
@@ -289,13 +311,13 @@ h3 {
     vertical-align: inherit !important;
 }
 
-/* .dx-datagrid .dx-row:nth-child(odd) {
+.dx-datagrid .dx-row:nth-child(odd) {
     background-color: #fff3e8;
 }
 
 .dx-datagrid .dx-row:nth-child(even) {
     background-color: #ffffff;
-} */
+}
 
 tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
     background-color: #FFE0C2;

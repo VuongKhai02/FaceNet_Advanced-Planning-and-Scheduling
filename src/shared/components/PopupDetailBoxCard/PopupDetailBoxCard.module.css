@@ -2,13 +2,17 @@
     color: var(--primary-color);
     height: auto;
     width: auto;
-    margin-top: 20px;
-    margin-right: 16px;
+    right: 20px;
+    top: 12px;
 
     :global(.ant-modal-close-x) {
         font-size: 24px;
         color: var(--primary-color);
     }
+}
+
+.modal-container :global(.ant-modal-content) :global(.ant-modal-body) {
+    padding: 20px 20px 0px 20px !important;
 }
 
 .modal-container :global(.ant-modal-close):hover {
@@ -18,8 +22,6 @@
 .footer-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .btn-cancel {

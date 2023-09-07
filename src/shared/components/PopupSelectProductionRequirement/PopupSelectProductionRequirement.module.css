@@ -1,8 +1,6 @@
 .modal-container :global(.ant-modal-close) {
     width: auto;
     height: auto;
-    margin-right: 20px;
-    margin-top: 28px;
 
     :global(.ant-modal-close-x) {
         font-size: 24px;

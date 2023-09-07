@@ -1,12 +1,12 @@
 .modal-container :global(.ant-modal-close) {
     color: var(--primary-color);
-    margin-top: 16px;
-    margin-right: 16px;
     height: fit-content;
     width: auto;
+    right: 20px;
+    top: 12px;
 
     :global(.ant-modal-close-x) {
-        font-size: 36px;
+        font-size: 24px;
     }
 }
 
@@ -15,14 +15,16 @@
     background-color: transparent;
 }
 
+.modal-container :global(.ant-modal-content) :global(.ant-modal-body) {
+    padding: 20px 20px 0 20px !important;
+}
+
 .footer-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-right: 10px;
 
     :global(.ant-btn) {
-        margin-right: 15px;
         background-color: #E5E5E5;
         display: inline-block;
         border-radius: 4px;

@@ -116,9 +116,9 @@ export const ManageProductionRequirements = () => {
                                 <PopupDetailProductionRequire
                                     isVisible={isVisibleDetailProductionRequire}
                                     modalContent={
-                                        <div style={{ marginTop: 30, marginBottom: 50 }}>
+                                        <div >
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
-                                                <td style={{ marginLeft: 30 }}>
+                                                <td>
                                                     <p>Mã sx/Production Code </p>
                                                     <TextBox
                                                         disabled
@@ -151,7 +151,7 @@ export const ManageProductionRequirements = () => {
                                                     <p style={{ marginTop: 30 }}>Bắt đầu sx/Start </p>
                                                     <TextBox disabled id='start' key={"start"} value={productionRequirementChoosed?.startDate} className='colorTextBox'></TextBox>
                                                 </td>
-                                                <td style={{ marginRight: 30 }}>
+                                                <td>
                                                     <p>Người gửi/Sender</p>
                                                     <TextBox
                                                         disabled

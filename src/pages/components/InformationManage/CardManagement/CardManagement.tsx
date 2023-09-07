@@ -187,7 +187,7 @@ export const CardManagement = () => {
                                 isVisible={isVisibleDetailBoxCard}
                                 modalContent={
                                     <div>
-                                        <div style={{ marginTop: 40, marginBottom: 30 }}>
+                                        <div>
                                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                 <td>
                                                     <Barcode value='712345 67001' textAlign='center' font='monospace' />
@@ -204,7 +204,7 @@ export const CardManagement = () => {
                                                     <p style={{ marginTop: 30 }}>Số lượng thẻ trong hộp</p>
                                                     <TextBox id='boxCardQuantity' key={"boxCardQuantity"} value='25'></TextBox>
                                                 </td>
-                                                <td style={{ marginRight: 30 }}>
+                                                <td>
                                                     <p>Tên hộp</p>
                                                     <TextBox id='boxName' key={"boxName"} value='Hộp đựng BTP' width={250}></TextBox>
                                                     <p style={{ marginTop: 30 }}>Tên công đoạn</p>

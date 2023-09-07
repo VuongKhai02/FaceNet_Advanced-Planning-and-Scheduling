@@ -55,36 +55,6 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                 onCancel={onCancel}>
                 {modalContent}
             </Modal>
-
-            {/* {
-                isConfirmCancel && (
-                    <PopupConfirmCancel
-                        isVisible={isConfirmCancel}
-                        onCancel={() => setIsConfirmCancel(false)}
-                        onSubmit={() => { }}
-                        width={600}
-                        modalTitle={
-                            <div>
-                                <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center", color: '#ff794e', fontWeight: 500 }}>
-                                    Xác nhận hủy
-                                </h3>
-                            </div>
-                        }
-                        modalContent={
-                            <div>
-                                <h4 style={{ fontWeight: 400 }}>Bạn có chắc chắn muốn <b>Hủy thao tác</b>?</h4>
-                                <div style={{ backgroundColor: '#ffe0c2', borderLeft: '4px solid #ff794e', height: 100, borderRadius: 5 }}>
-                                    <h3 style={{ color: '#ff794e', fontWeight: 500 }}>
-                                        <WarningOutlined style={{ color: '#ff794e', marginRight: '8px' }} />
-                                        Lưu ý:
-                                    </h3>
-                                    <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>Nếu bạn <b>Hủy thao tác</b> thì các dữ liệu nhập sẽ bị mất</p>
-                                </div>
-                            </div>
-                        }
-                    />
-                )
-            } */}
         </>
     );
 };
