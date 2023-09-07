@@ -27,7 +27,7 @@ const PopupImportFile: React.FC<PopupImportFile> = ({ title, visible, onSubmit, 
                 </div>
             }
             footer={[
-                <div style={{ marginTop: 15, marginBottom: 15 }}>
+                <div>
                     <Button
                         key='cancel'
                         onClick={onCancel}

@@ -1,17 +1,3 @@
-.modal-container :global(.ant-modal-close) {
-    width: auto;
-    height: auto;
-
-    :global(.ant-modal-close-x) {
-        color: var(--primary-color);
-        font-size: 24px;
-    }
-}
-
-.modal-container :global(.ant-modal-close):hover {
-    background-color: transparent;
-}
-
 .footer-container {
     display: flex;
     justify-content: flex-end;
@@ -19,21 +5,22 @@
 }
 
 .btn-cancel {
-    margin-right: 14px;
+    margin-right: 20px;
     background-color: #E5E5E5;
     display: inline-block;
     border-radius: 4px;
     width: 100px;
     height: 40px;
-    font-size: 16px
+    font-size: 16px;
 }
 
 .btn-save {
-    margin-right: 7px;
+    margin-right: 15px;
     background-color: #ff794e;
+    color: var(--text-color);
     display: inline-block;
     border-radius: 4px;
     width: 100px;
     height: 40px;
-    font-size: 16px
+    font-size: 16px;
 }

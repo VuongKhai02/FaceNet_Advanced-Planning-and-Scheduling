@@ -1,8 +1,6 @@
 .modal-container :global(.ant-modal-close) {
     width: auto;
     height: auto;
-    margin-top: 16px;
-    margin-right: 16px;
 
     :global(.ant-modal-close-x) {
         color: var(--primary-color);

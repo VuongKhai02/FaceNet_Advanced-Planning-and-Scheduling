@@ -1,6 +1,8 @@
 import React from "react";
+import classNames from "classnames/bind";
 import { Modal, Button } from "antd";
 
+import styles from "./PopupScanBarCode.module.css";
 interface PopupScanBarCodeProps {
     isVisible: boolean;
     onCancel: () => void;
@@ -10,39 +12,25 @@ interface PopupScanBarCodeProps {
     width: number;
 }
 
+const cx = classNames.bind(styles);
+
 const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
     return (
         <Modal
-            visible={isVisible}
+            open={isVisible}
             title={modalTitle}
             footer={[
-                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20, marginBottom: 20 }}>
+                <div className={cx("footer-container")}>
                     <Button
                         key='cancel'
-                        style={{
-                            marginRight: 10,
-                            backgroundColor: "#E5E5E5",
-                            display: "inline-block",
-                            borderRadius: "4px",
-                            width: 100,
-                            height: 40,
-                            fontSize: 16,
-                        }}
+                        className={cx("btn-cancel")}
                         onClick={onCancel}>
                         Hủy bỏ
                     </Button>
                     <Button
-                        style={{
-                            borderRadius: "4px",
-                            backgroundColor: "#ff794e",
-                            color: "#ffff",
-                            width: 100,
-                            height: 40,
-                            fontSize: 16,
-                        }}
+                        className={cx("btn-save")}
                         key='submit'
-                        onClick={onSubmit}
-                        className='btn btn-save'>
+                        onClick={onSubmit}>
                         In mã
                     </Button>
                 </div>,
