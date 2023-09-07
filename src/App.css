@@ -143,12 +143,15 @@
     background: #ffffff !important;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
 }
-.ant-layout .ant-layout-sider-children {
+
+/* .ant-layout .ant-layout-sider-children {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+} */
+
+.ant-layout-sider {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
 }
- /* .ant-menu-light {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px !important;
-} */
+
 .narrow-layout {
     max-width: 1024px;
     margin: auto;
