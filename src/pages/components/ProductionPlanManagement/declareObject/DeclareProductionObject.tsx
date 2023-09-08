@@ -233,10 +233,10 @@ export const DeclareProductionObject = () => {
                         onExporting={onExporting}
                     >
                         <Toolbar>
-                            {/* <ToolbarItem location="after">
-                            <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => setIsVisibleAdd(true)} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                        </ToolbarItem> */}
-                            <ToolbarItem name='exportButton' html='Xuất excel' location='after'></ToolbarItem>
+                            <ToolbarItem location="after">
+                                <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => { }} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                            </ToolbarItem>
+                            {/* <ToolbarItem name='exportButton' html='Xuất Excel' location='after'></ToolbarItem> */}
                             <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                             <ToolbarItem name='searchPanel' location='before' />
                         </Toolbar>
@@ -277,7 +277,6 @@ export const DeclareProductionObject = () => {
                                         textSize={17}
                                         icon='assets/icons/InfoCircle.svg'
                                         textColor='#FF7A00'
-                                        style={{ marginRight: 17 }}
                                     />
                                 </div>
                             )}></Column>

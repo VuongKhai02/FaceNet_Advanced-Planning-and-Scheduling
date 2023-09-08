@@ -19,6 +19,7 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel
         <Modal
             open={isVisible}
             title={modalTitle}
+            className={cx(["modal-container"])}
             footer={[
                 <div className={cx("footer-container")}>
                     <Button

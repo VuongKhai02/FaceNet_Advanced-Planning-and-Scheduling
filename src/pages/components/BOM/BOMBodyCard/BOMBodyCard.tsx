@@ -4,14 +4,13 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     ColumnChooser,
     MasterDetail,
 } from "devextreme-react/data-grid";
-import "./BOMBodyCard.css";
+import styles from "./BOMBodyCard.module.css";
+import classNames from "classnames/bind";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
@@ -24,8 +23,9 @@ import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import { Button } from "antd";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import httpRequests from "../../../../utils/httpRequests";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
-
+const cx = classNames.bind(styles);
 const data2 = [
     {
         codeMaterial: "VT0001",
@@ -64,7 +64,6 @@ const data2 = [
 
 export const BOMBodyCard = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
-    const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
     const [isBOMCardAddInfo, setIsBOMCardAddInfo] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isBOMCardAddTemplate, setIsBOMCardAddTemplate] = React.useState<boolean>(false);
@@ -73,6 +72,11 @@ export const BOMBodyCard = () => {
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [bom, setBom] = React.useState<any>({});
     const [bomIdChoosed, setBomIdChoosed] = React.useState<Number | null>(null);
+
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(bom?.data?.length / pageSize);
+    const dataPage = bom?.data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -121,33 +125,18 @@ export const BOMBodyCard = () => {
     ];
     const handleCustomFooterButtonChangeState = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: 18,
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                >
                     Xác nhận
                 </Button>
             </div>
@@ -201,14 +190,16 @@ export const BOMBodyCard = () => {
                             <DataGrid
                                 key='productCode'
                                 keyExpr={"productCode"}
-                                dataSource={bom.data}
+                                dataSource={dataPage}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}>
+                                focusedRowEnabled={true}
+                                noDataText='Không có dữ liệu để hiển thị'
+                            >
                                 <PopupBOM
                                     isVisible={isChangeState}
                                     onCancel={() => setIsChangeState(false)}
@@ -448,17 +439,8 @@ export const BOMBodyCard = () => {
                                 </Toolbar>
                                 <FilterRow visible={true} />
                                 <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                                <Paging defaultPageSize={10} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                                <Pager
-                                    visible={true}
-                                    allowedPageSizes={allowedPageSizes}
-                                    displayMode={"compact"}
-                                    showPageSizeSelector={true}
-                                    showInfo={true}
-                                    showNavigationButtons={true}
-                                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                                />
+
                                 <Column dataField='productCode' minWidth={140} caption='Mã sản phẩm'></Column>
                                 <Column dataField='productName' caption='Tên sản phẩm' minWidth={200}></Column>
 
@@ -517,6 +499,15 @@ export const BOMBodyCard = () => {
                                     )}></Column>
                                 <MasterDetail enabled={true} component={handleListProduct} />
                             </DataGrid>
+                            <PaginationComponent
+                                pageSizeOptions={[10, 20, 40]}
+                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: bom?.data?.length }}
+                                totalPages={totalPage}
+                                pageIndex={pageIndex}
+                                pageSize={pageSize}
+                                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                            />
                         </div>
                     </div>
                     <div>

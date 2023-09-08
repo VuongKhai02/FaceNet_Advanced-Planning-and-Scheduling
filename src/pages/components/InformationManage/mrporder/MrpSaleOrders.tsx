@@ -1,19 +1,15 @@
 import React, { useEffect } from "react";
 import "./MrpSaleOrder.css"
-
 // @ts-ignore
 import { Button, DataGrid, Popup } from "devextreme-react";
 import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     MasterDetail, ColumnChooser
 } from "devextreme-react/data-grid";
-import { PLANNING_API_URL } from "../../../../utils/config";
 import { getColor, customizeColor } from "../../../../utils/utils";
 import OrderItemTemplate from "./OrderItemTemplate";
 import { Tag } from "antd";
@@ -24,16 +20,20 @@ import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const MrpSaleOrders = () => {
 
-    const [content, setContent] = React.useState<string>();
+    const [content, setContent] = React.useState<any>();
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
 
     const breadcrumbContext = useBreadcrumb();
 
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(content?.length / pageSize);
+    const dataPage = content?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
@@ -212,7 +212,7 @@ export const MrpSaleOrders = () => {
             <DataGrid
                 key={"saleOrderId"}
                 keyExpr={"saleOrderId"}
-                dataSource={content}
+                dataSource={dataPage}
                 showBorders={true}
                 columnAutoWidth={true}
                 showRowLines={true}
@@ -222,6 +222,7 @@ export const MrpSaleOrders = () => {
                 focusedRowEnabled={true}
                 onRowUpdating={updateOrder}
                 onRowRemoving={removeOrder}
+                noDataText='Không có dữ liệu để hiển thị'
             >
                 <PopupConfirmDelete
                     isVisible={isVisibleConfirmDelete}
@@ -262,29 +263,20 @@ export const MrpSaleOrders = () => {
                 <FilterRow visible={true} />
                 <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText="Trang số {0} trên {1} ({2} bản ghi)" />
-                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="left" width={100} />
-                <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
-                <Column caption={"Tên khách hàng"} dataField={"customer"} />
-                <Column caption={"Tên thẻ"} dataField={"cardName"} />
-                <Column caption={"Số lượng"} dataField={"quantity"} />
-                <Column caption={"Số lượng đã tính bù hao"} dataField={"totalQuantity"} alignment="left" />
-                <Column caption={"Số HD/PO"} dataField={"contractNumber"} width={200} />
+                <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="left" width={60} />
+                <Column caption={"Mã sản xuất"} dataField={"productionCode"} width={100} />
+                <Column caption={"Tên khách hàng"} dataField={"customer"} width={120} />
+                <Column caption={"Tên thẻ"} dataField={"cardName"} width={80} />
+                <Column caption={"Số lượng"} dataField={"quantity"} width={100} alignment="left" />
+                <Column caption={"Số lượng đã tính bù hao"} dataField={"totalQuantity"} alignment="left" width={170} />
+                <Column caption={"Số HD/PO"} dataField={"contractNumber"} width={80} />
                 <Column caption={"Ngày bắt đầu"} dataType="datetime" dataField={"startTime"}
-                    format="dd/MM/yyyy hh:mm:ss" />
+                    format="dd/MM/yyyy hh:mm:ss" width={150} />
                 <Column caption={"Ngày kết thúc"} dataType="datetime" dataField={"finishTime"}
-                    format="dd/MM/yyyy hh:mm:ss" />
+                    format="dd/MM/yyyy hh:mm:ss" width={150} />
                 <Column caption={"Ngày giao hàng"} dataType="datetime" dataField={"deliveryDate"}
-                    format="dd/MM/yyyy hh:mm:ss" />
-                <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} />
+                    format="dd/MM/yyyy hh:mm:ss" width={150} />
+                <Column caption={"Mức độ ưu tiên"} cellComponent={onPriorityRender} alignment={"center"} width={120} />
                 <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                 <Column type={"buttons"} caption={"Thao tác"} alignment="center"
                     fixed={true}
@@ -301,6 +293,15 @@ export const MrpSaleOrders = () => {
                 // autoExpandAll={true}
                 />
             </DataGrid>
+            <PaginationComponent
+                pageSizeOptions={[10, 20, 40]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: content?.length }}
+                totalPages={totalPage}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+            />
         </div>
     </div>
 }

@@ -4,8 +4,6 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     MasterDetail,
@@ -22,7 +20,11 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import BOMPersonalizedAddInfoProduct from "./BOMPersonalizedAddInfoProduct/BOMPersonalizedAddInfoProduct";
 import BOMPersonalizedAddInfoTemplate from "./BOMPersonalizedAddInfoTemplate/BOMPersonalizedAddInfoTemplate";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import styles from "./BOMPersonalized.module.css";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 const data = [
     {
         customerCode: "TH01",
@@ -78,7 +80,6 @@ const data2 = [
     },
 ];
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const BOMPersonalized = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
@@ -87,6 +88,11 @@ export const BOMPersonalized = () => {
     const [isBOMPersonalizedAddTemplate, setIsBOMPersonalizedAddTemplate] = React.useState<boolean>(false);
     const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
     const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
+
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -119,33 +125,18 @@ export const BOMPersonalized = () => {
 
     const handleCustomFooterButtonChangeState = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: 18,
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                >
                     Xác nhận
                 </Button>
             </div>
@@ -445,14 +436,16 @@ export const BOMPersonalized = () => {
                         <DataGrid
                             key={"customerCode"}
                             keyExpr={"customerCode"}
-                            dataSource={data}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            focusedRowEnabled={true}>
+                            focusedRowEnabled={true}
+                            noDataText='Không có dữ liệu để hiển thị'
+                        >
                             <Toolbar>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
@@ -496,16 +489,7 @@ export const BOMPersonalized = () => {
                             <FilterRow visible={true} />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
+
                             <Column caption={"Mã khách hàng"} dataField={"customerCode"} alignment='left' />
                             <Column caption={"Tên khách hàng"} dataField={"customerName"} />
                             <Column caption={"Version"} dataField={"version"} />
@@ -562,6 +546,15 @@ export const BOMPersonalized = () => {
                                 component={getProductOrderItemTemplate}
                             />
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                     </div>
                 </div>
             }

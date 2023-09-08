@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
-
+import classNames from "classnames/bind";
+import styles from "./PopupBOM.module.css";
 interface PopupWOProps {
     isVisible: boolean;
     onCancel: () => void;
@@ -10,45 +11,30 @@ interface PopupWOProps {
     width: number;
     customFooter?: React.ReactNode[] | null;
 }
-
+const cx = classNames.bind(styles);
 const PopupBOM: React.FC<PopupWOProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width, customFooter }) => {
     return (
         <Modal
-            // closeIcon={true}
             visible={isVisible}
             title={modalTitle}
+            className={cx(["modal-container"])}
             footer={
                 customFooter !== undefined
                     ? customFooter
                     : [
-                        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginTop: 20 }}>
+                        <div className={cx("footer-container")}>
                             <Button
                                 key='cancel'
-                                style={{
-                                    marginRight: "30px",
-                                    backgroundColor: "#E5E5E5",
-                                    display: "inline-block",
-                                    borderRadius: "4px",
-                                    width: 100,
-                                    height: 40,
-                                    fontSize: 16,
-                                }}
+                                className={cx("btn-cancel")}
                                 onClick={onCancel}>
                                 Hủy
                             </Button>
                             ,
                             <Button
-                                style={{
-                                    borderRadius: "4px",
-                                    backgroundColor: "#ff794e",
-                                    color: "#ffff",
-                                    width: 100,
-                                    height: 40,
-                                    fontSize: 16,
-                                }}
+                                className={cx("btn-save")}
                                 key='submit'
                                 onClick={onSubmit}
-                                className='btn btn-save'>
+                            >
                                 Lưu lại
                             </Button>
                         </div>,

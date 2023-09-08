@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames/bind";
 import { DataGrid, Popup, SelectBox } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -18,6 +18,7 @@ import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 
 import styles from "./TechFormList.module.css";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +27,6 @@ const dataSource = [
     { id: 2, label: "Option 2", checked: false },
     { id: 3, label: "Option 3", checked: false },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const TechFormList = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
@@ -46,6 +46,11 @@ export const TechFormList = () => {
 
     const [techForms, setTechForms] = React.useState([]);
     const [pRChoosed, setPRChoosed] = React.useState(null)
+
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(techForms?.length / pageSize);
+    const dataPage = techForms?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -349,13 +354,14 @@ export const TechFormList = () => {
                         <DataGrid
                             key={"id"}
                             keyExpr={"id"}
-                            dataSource={techForms}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
+                            noDataText='Không có dữ liệu để hiển thị'
                             focusedRowEnabled={true}>
                             <Toolbar>
                                 <ToolbarItem location='after'>
@@ -399,16 +405,6 @@ export const TechFormList = () => {
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
                             <Column caption={"Mã sản xuất"} dataField={"productionRequirement.productionCode"} />
@@ -494,6 +490,15 @@ export const TechFormList = () => {
                                 )}
                             />
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: techForms?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                     </div>
                 </div>
             )}

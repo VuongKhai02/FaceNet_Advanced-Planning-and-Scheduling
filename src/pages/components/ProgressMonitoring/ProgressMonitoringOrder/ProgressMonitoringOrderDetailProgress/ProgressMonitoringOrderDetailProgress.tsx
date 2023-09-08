@@ -170,7 +170,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                                 textSize={17}
                                                 icon='assets/icons/InfoCircle.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
+
                                             />
                                         </div>
                                     )}></Column>
@@ -179,14 +179,15 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 className='toolbar'
                                 style={{
                                     marginTop: 10,
-                                    float: "right",
+                                    display: 'flex',
+                                    justifyContent: "flex-end",
                                     // background: "#ffffff",
                                     padding: "8px",
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                                    style={{ backgroundColor: "gray", color: "#fff", width: 120 }}
                                 >Trở lại</Button>
                             </div>
                         </div>

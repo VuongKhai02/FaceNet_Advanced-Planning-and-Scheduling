@@ -5,8 +5,6 @@ import DataGrid, {
     FilterRow,
     Toolbar,
     Item as TItem,
-    Paging,
-    Pager,
     OperationDescriptions,
     ColumnChooser,
 } from "devextreme-react/data-grid";
@@ -17,6 +15,12 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import PopupBOM from "../../../../shared/components/PopupBOM/PopupBOM";
 import { Button } from "antd";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+
+import styles from "./BOMPersonalizedDetail.module.css";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 const data = [
     {
         id: 1,
@@ -72,12 +76,18 @@ const data2 = [
         inventoryQuantity: "Số lượng tồn kho",
     },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
+
 export const BOMPersonalizedDetail = React.memo((props: any) => {
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isDetailBOMTemplate, setIsDetailBOMTemplate] = React.useState<boolean>(false);
+
+
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const loadProductOrderItem = () => { };
     const loadProduct = () => { };
@@ -118,33 +128,18 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
     ];
     const handleCustomFooterButtonChangeState = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: 18,
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                >
                     Xác nhận
                 </Button>
             </div>
@@ -155,7 +150,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
         <div>
             <DataGrid
                 id='gridContainer'
-                dataSource={data}
+                dataSource={dataPage}
                 keyExpr='id'
                 height={"auto"}
                 onRowUpdating={onEdit}
@@ -167,7 +162,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                 rowAlternationEnabled={true}
                 wordWrapEnabled={true}
                 columnAutoWidth={true}
-                noDataText='Không có dữ liệu để hiển thị'>\
+                noDataText='Không có dữ liệu để hiển thị'>
 
                 <PopupBOM
                     isVisible={isDetailBOMTemplate}
@@ -346,16 +341,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                     </TItem>
                     <TItem name='columnChooserButton' />
                 </Toolbar>
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                />
+
                 <ColumnChooser enabled={true} mode="select" allowSearch={true} />
                 <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
                     <OperationDescriptions
@@ -447,8 +433,16 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                     }
                     width={600}
                 />
-
             </DataGrid>
+            <PaginationComponent
+                pageSizeOptions={[10, 20, 40]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                totalPages={totalPage}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+            />
         </div>
     );
 });

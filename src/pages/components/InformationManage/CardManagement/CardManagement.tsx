@@ -5,8 +5,6 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     MasterDetail,
@@ -26,6 +24,7 @@ import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import { Button } from "antd";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const cx = classNames.bind(styles);
 
@@ -55,13 +54,16 @@ const data = [
         jobOutPutName: "WO-123-CĐ01-01",
     },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const CardManagement = () => {
     const [isVisibleScanBarCode, setIsVisibleScanBarCode] = React.useState<boolean>(false);
     const [isVisibleDetailBoxCard, setIsVisibleDetailBoxCard] = React.useState<boolean>(false);
     const [isVisibleAddBoxCard, setIsVisibleAddBoxCard] = React.useState<boolean>(false);
     const [isVisibleDelJobOutput, setIsVisibleDelJobOutput] = React.useState<boolean>(false);
 
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -135,14 +137,16 @@ export const CardManagement = () => {
                         <DataGrid
                             key={"boxCode"}
                             keyExpr={"boxCode"}
-                            dataSource={data}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            focusedRowEnabled={true}>
+                            focusedRowEnabled={true}
+                            noDataText='Không có dữ liệu để hiển thị'
+                        >
                             <PopupScanBarCode
                                 isVisible={isVisibleScanBarCode}
                                 modalContent={
@@ -381,16 +385,6 @@ export const CardManagement = () => {
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} title='Chọn cột' mode='select' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
 
                             <Column caption={"Mã hộp"} dataField={"boxCode"} alignment='left' width={100} />
                             <Column caption={"Mã công đoạn"} dataField={"stageCode"} />
@@ -436,6 +430,15 @@ export const CardManagement = () => {
                                 )}></Column>
                             <MasterDetail enabled={true} component={handleJobOutputDetail} />
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                     </div>
                 </div>
             }

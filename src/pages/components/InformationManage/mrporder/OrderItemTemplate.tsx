@@ -23,6 +23,7 @@ import DataGrid, {
 import { Item } from "devextreme-react/form";
 import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const getProductName = (rowData: any) => {
     if (rowData.data.status && rowData.data.status === "created_wo") {
@@ -75,6 +76,10 @@ const quantityOut = (row: any) => {
 const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 export const OrderItemTemplate = React.memo((props: any) => {
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(OrderItem?.length / pageSize);
+    const dataPage = OrderItem?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const [branchGroupArray,] = useState<any[]>([]);
     const [groupArray,] = useState<any[]>([]);
 
@@ -191,7 +196,7 @@ export const OrderItemTemplate = React.memo((props: any) => {
         <div>
             <DataGrid
                 id='gridContainer'
-                dataSource={OrderItem}
+                dataSource={dataPage}
                 key={"id"}
                 keyExpr='id'
                 height={"auto"}
@@ -212,17 +217,6 @@ export const OrderItemTemplate = React.memo((props: any) => {
                     </TItem>
                     <TItem name='addRowButton' />
                 </Toolbar>
-                {/*<Scrolling mode="virtual"/>*/}
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                />
                 <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
                     <OperationDescriptions
                         startsWith='Bắt đầu với'
@@ -238,12 +232,6 @@ export const OrderItemTemplate = React.memo((props: any) => {
                         between='Nằm giữa'
                     />
                 </FilterRow>
-                {/* <HeaderFilter visible={false} texts={{
-          cancel: "Hủy bỏ",
-          ok: "Đồng ý",
-          emptyValue: "Rỗng"
-
-        }} /> */}
                 <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
                 <Selection mode='single' />
                 <Column type={"buttons"} caption={"Tùy chọn"} alignment='left' />
@@ -376,7 +364,15 @@ export const OrderItemTemplate = React.memo((props: any) => {
                 </Editing>
             </DataGrid>
 
-            {/*</Popup2>*/}
+            <PaginationComponent
+                pageSizeOptions={[10, 20, 40]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: OrderItem?.length }}
+                totalPages={totalPage}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+            />
         </div>
     );
 });

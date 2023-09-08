@@ -26,14 +26,18 @@ const data = [
     },
     {
         id: 4, section: 'In offset', Foreman: 'Anh kane', Shift: 2, day: '13/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
+    },
+    {
+        id: 5, section: 'In offset', Foreman: 'Anh bảy', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
     }
 ];
 export const DeclareQuantity = () => {
 
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
-
+    const totalPage = Math.ceil(data?.length / pageSize);
     const [isVisibleDelete, setIsVisibleDelete] = React.useState<boolean>(false);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -49,7 +53,6 @@ export const DeclareQuantity = () => {
         }
     }, []);
 
-    const dataPage = data.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     return (
         <>
@@ -84,7 +87,9 @@ export const DeclareQuantity = () => {
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}>
+                                focusedRowEnabled={true}
+                                noDataText='Không có dữ liệu để hiển thị'
+                            >
                                 <PopupConfirmDelete
                                     isVisible={isVisibleDelete}
                                     onCancel={() => setIsVisibleDelete(false)}
@@ -181,8 +186,8 @@ export const DeclareQuantity = () => {
                             </DataGrid>
                             <PaginationComponent
                                 pageSizeOptions={[10, 20, 40]}
-                                pageTextInfo={{ pageIndex, numberOfPages: 1, total: data.length }}
-                                totalPages={Math.ceil(data.length / pageSize)}
+                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                                totalPages={totalPage}
                                 pageIndex={pageIndex}
                                 pageSize={pageSize}
                                 onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}

@@ -1,10 +1,12 @@
 .modal-container :global(.ant-modal-close) {
     width: auto;
     height: auto;
+    right: 20px;
+    top: 12px;
 
     :global(.ant-modal-close-x) {
         color: var(--primary-color);
-        font-size: 32px;
+        font-size: 24px;
     }
 }
 

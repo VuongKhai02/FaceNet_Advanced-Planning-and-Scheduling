@@ -20,6 +20,7 @@ import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { PLANNING_API_URL } from "../../../../utils/config";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageProductionRequirements = () => {
@@ -29,6 +30,10 @@ export const ManageProductionRequirements = () => {
     const [productionRequirements, setProductionRequirements] = React.useState<any>([]);
     const [productionRequirementChoosed, setProductionRequirementChoosed] = React.useState<any>(null);
 
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(productionRequirements?.length / pageSize);
+    const dataPage = productionRequirements?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -70,9 +75,6 @@ export const ManageProductionRequirements = () => {
         setIsConfirmDelete(false);
     };
 
-    const getProductionRequirementById = () => {
-    }
-
     return (
         <>
             {isViewDetailProductRequire ? (
@@ -105,14 +107,16 @@ export const ManageProductionRequirements = () => {
                             <DataGrid
                                 key='productionCode'
                                 keyExpr={"productionCode"}
-                                dataSource={productionRequirements}
+                                dataSource={dataPage}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}>
+                                focusedRowEnabled={true}
+                                noDataText='Không có dữ liệu để hiển thị'
+                            >
                                 <PopupDetailProductionRequire
                                     isVisible={isVisibleDetailProductionRequire}
                                     modalContent={
@@ -253,36 +257,15 @@ export const ManageProductionRequirements = () => {
                                     <ToolbarItem name='searchPanel' location='before' />
                                     <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 </Toolbar>
-                                <HeaderFilter
-                                    visible={true}
-                                    texts={{
-                                        cancel: "Hủy bỏ",
-                                        ok: "Đồng ý",
-                                        emptyValue: "Rỗng",
-                                    }}
-                                    allowSearch={true}
-                                />
                                 <FilterRow visible={true} />
                                 <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                                <Paging defaultPageSize={10} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                                <Pager
-                                    visible={true}
-                                    allowedPageSizes={allowedPageSizes}
-                                    displayMode={"compact"}
-                                    showPageSizeSelector={true}
-                                    showInfo={true}
-                                    showNavigationButtons={true}
-                                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                                />
 
                                 <Column dataField='productionCode' caption='Mã sản xuất' />
                                 <Column dataField='poNumber' caption='Số hợp đồng' />
-
                                 <Column dataField='customer' caption='Tên khách hàng' alignment='left' />
-
                                 <Column dataField='cardName' caption='Tên thẻ' alignment={"left"} />
-                                <Column dataField='quantityRequirement' caption='Số lượng' />
+                                <Column dataField='quantityRequirement' caption='Số lượng' alignment="left" />
                                 <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy' />
                                 <Column
                                     dataField='endDate'
@@ -334,6 +317,15 @@ export const ManageProductionRequirements = () => {
                                         </div>
                                     )}></Column>
                             </DataGrid>
+                            <PaginationComponent
+                                pageSizeOptions={[10, 20, 40]}
+                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: productionRequirements?.length }}
+                                totalPages={totalPage}
+                                pageIndex={pageIndex}
+                                pageSize={pageSize}
+                                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                            />
                         </div>
                     </div>
                 </div>

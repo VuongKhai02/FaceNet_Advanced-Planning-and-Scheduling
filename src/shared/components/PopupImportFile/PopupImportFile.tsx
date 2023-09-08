@@ -31,14 +31,14 @@ const PopupImportFile: React.FC<PopupImportFile> = ({ title, visible, onSubmit, 
                     <Button
                         key='cancel'
                         onClick={onCancel}
-                        style={{ width: 100, height: 40, marginRight: 15, backgroundColor: "#C0C0C0", borderRadius: 5 }}
+                        style={{ width: 100, height: 40, backgroundColor: "#C0C0C0", borderRadius: 5 }}
                         type='default'>
                         Hủy bỏ
                     </Button>
                     <Button
                         key='confirm'
                         onClick={onSubmit}
-                        style={{ width: 100, height: 40, backgroundColor: "#FF7A00", color: "#fff", borderRadius: 5 }}>
+                        style={{ width: 100, height: 40, backgroundColor: "#FF7A00", color: "#ffffff", borderRadius: 5, marginRight: 10 }}>
                         Tải lên
                     </Button>
                 </div>,

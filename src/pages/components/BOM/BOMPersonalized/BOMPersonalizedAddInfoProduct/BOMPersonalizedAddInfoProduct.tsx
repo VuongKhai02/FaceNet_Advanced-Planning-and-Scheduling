@@ -371,14 +371,14 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Tên thẻ</p>
-                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={350}></TextBox>
+                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Version</p>
                                     <TextBox value={bomData.version} onValueChange={(e) => {
                                         setBomData({
                                             ...bomData,
                                             version: e
                                         })
-                                    }} placeholder='Nhập' width={350}></TextBox>
+                                    }} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Ghi chú</p>
                                     <TextBox value={bomData.notice} placeholder='Nhập'></TextBox>
                                 </td>
@@ -392,7 +392,7 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                                 </td>
                                 <td style={{ marginRight: 30 }}>
                                     <p>Tên khách hàng</p>
-                                    <TextBox value={'TP Bank'} disabled={requestInfo !== null} placeholder='Nhập' width={350}></TextBox>
+                                    <TextBox value={'TP Bank'} disabled={requestInfo !== null} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Lưu ý</p>
                                     <TextBox placeholder='Nhập' value={bomData.notice}></TextBox>
                                     <p style={{ marginTop: 30 }}>BOM version thẻ sao chép</p>

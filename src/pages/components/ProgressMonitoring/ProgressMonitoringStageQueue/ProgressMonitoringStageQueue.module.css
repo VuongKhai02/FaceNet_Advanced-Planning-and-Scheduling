@@ -1,3 +1,12 @@
+.border__table-row {
+    border-bottom: 1px solid #ccc;
+    width: 100% !important;
+}
+
+label {
+    font-weight: 500;
+}
+
 .footer-container {
     display: flex;
     justify-content: flex-end;
@@ -40,3 +49,4 @@
 .modal-container :global(.ant-modal-close):hover {
     background-color: transparent;
 }
+

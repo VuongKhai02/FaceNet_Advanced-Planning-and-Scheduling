@@ -1,13 +1,7 @@
 
-.custom-pagesize{
-  border: 1px solid #ddd;
-  padding: 8px 15px;
-  border-radius: 4px;
-  width: 120px;
-}
-
-#pagination-container {
-  margin-top: 30px;
+.pagination-container {
+  padding-bottom: 15px;
+  margin-top: 15px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -27,6 +21,15 @@
 
 .button-selected {
   background-color: rgb(212, 212, 212);
+}
+
+.pagination-container :global(.ant-select-single:not(.ant-select-customize-input)) :global(.ant-select-selector) {
+  border-color: #ddd;
+  color: rgb(55, 54, 53);
+}
+
+.pagination-container :global(.ant-select-selector):hover {
+    background-color: #eeecec;
 }
 
 ::ng-deep .dx-button-has-text .dx-button-content {

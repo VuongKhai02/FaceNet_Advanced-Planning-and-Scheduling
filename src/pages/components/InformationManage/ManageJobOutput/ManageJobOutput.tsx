@@ -16,6 +16,7 @@ import InfoJobOutputDetail from "./InfoJobOutputDetail/InfoJobOutputDetail";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import VerificationJobOutput from "./VerificationJobOutput/VerificationJobOutput";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const data = [
     {
@@ -43,12 +44,14 @@ const data = [
         status: "Chuyển công đoạn",
     },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageJobOutput = () => {
     const [isVisibleJobOutputDetail, setIsVisibleJobOutputDetail] = React.useState<boolean>(false);
     const [isVisibleDelJobOutput, setIsVisibleDelJobOutput] = React.useState<boolean>(false);
     const [isVisibleVerificationJobOutput, setIsVisibleVerificationJobOutput] = React.useState<boolean>(false);
-
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -106,14 +109,16 @@ export const ManageJobOutput = () => {
                             <DataGrid
                                 key={"jobOutputCode"}
                                 keyExpr={"jobOutputCode"}
-                                dataSource={data}
+                                dataSource={dataPage}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}>
+                                focusedRowEnabled={true}
+                                noDataText='Không có dữ liệu để hiển thị'
+                            >
                                 <PopupConfirmDelete
                                     isVisible={isVisibleDelJobOutput}
                                     onCancel={() => setIsVisibleDelJobOutput(false)}
@@ -161,16 +166,7 @@ export const ManageJobOutput = () => {
                                 <FilterRow visible={true} />
                                 <ColumnChooser enabled={true} allowSearch={true} />
                                 <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                                <Paging defaultPageSize={10} />
-                                <Pager
-                                    visible={true}
-                                    allowedPageSizes={allowedPageSizes}
-                                    displayMode={"compact"}
-                                    showPageSizeSelector={true}
-                                    showInfo={true}
-                                    showNavigationButtons={true}
-                                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                                />
+
                                 <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
                                 <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
                                 <Column caption={"Mã Job"} dataField={"jobCode"} />
@@ -214,6 +210,15 @@ export const ManageJobOutput = () => {
                                         </div>
                                     )}></Column>
                             </DataGrid>
+                            <PaginationComponent
+                                pageSizeOptions={[10, 20, 40]}
+                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                                totalPages={totalPage}
+                                pageIndex={pageIndex}
+                                pageSize={pageSize}
+                                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                            />
                         </div>
                     </div>
                 )}
