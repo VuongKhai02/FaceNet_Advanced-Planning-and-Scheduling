@@ -11,7 +11,7 @@
 
 .dx-toolbar-item .dx-toolbar-item-content {
     font-size: 16px;
-    color: rgba(255, 122, 0, 1);
+    /* color: rgba(255, 122, 0, 1); */
 }
 
 [title~="Export"] .dx-buttongroup-item-has-width {

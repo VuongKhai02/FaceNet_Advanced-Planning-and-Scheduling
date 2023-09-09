@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
-
+import classNames from "classnames/bind";
+import styles from "./PopupWO.module.css";
 interface PopupWOProps {
     isVisible: boolean;
     onCancel: () => void;
@@ -10,57 +11,34 @@ interface PopupWOProps {
     width: number;
     customFooter?: React.ReactNode[] | null;
 }
-
+const cx = classNames.bind(styles);
 const PopupWO: React.FC<PopupWOProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width, customFooter }) => {
     return (
         <Modal
-            // closeIcon={true}
+            className={cx(["modal-container"])}
             visible={isVisible}
             title={modalTitle}
             footer={
                 customFooter !== undefined
                     ? customFooter
                     : [
-                          <div
-                              style={{
-                                  display: "flex",
-                                  justifyContent: "flex-end",
-                                  alignItems: "center",
-                                  marginTop: 20,
-                                  marginBottom: 20,
-                              }}>
-                              <Button
-                                  key='cancel'
-                                  style={{
-                                      marginRight: 20,
-                                      backgroundColor: "#E5E5E5",
-                                      display: "inline-block",
-                                      borderRadius: "4px",
-                                      width: 100,
-                                      height: 40,
-                                      fontSize: 16,
-                                  }}
-                                  onClick={onCancel}>
-                                  Hủy
-                              </Button>
-                              ,
-                              <Button
-                                  style={{
-                                      borderRadius: "4px",
-                                      backgroundColor: "#ff794e",
-                                      color: "#ffff",
-                                      width: 100,
-                                      height: 40,
-                                      fontSize: 16,
-                                      marginRight: 20,
-                                  }}
-                                  key='submit'
-                                  onClick={onSubmit}
-                                  className='btn btn-save'>
-                                  Lưu lại
-                              </Button>
-                          </div>,
-                      ]
+                        <div className={cx("footer-container")}>
+                            <Button
+                                key='cancel'
+                                className={cx("btn-cancel")}
+                                onClick={onCancel}>
+                                Hủy
+                            </Button>
+                            ,
+                            <Button
+                                className={cx("btn-save")}
+                                key='submit'
+                                onClick={onSubmit}
+                            >
+                                Lưu lại
+                            </Button>
+                        </div>,
+                    ]
             }
             width={width}
             onCancel={onCancel}>

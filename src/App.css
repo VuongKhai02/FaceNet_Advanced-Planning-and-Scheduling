@@ -100,6 +100,10 @@
     opacity: 0.6;
 }
 
+.ant-btn-default {
+    border : none;
+}
+
 /* css antd + devextreme */
 
 .main-layout {
@@ -344,6 +348,10 @@ tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
     font-weight: bold !important;
     color: rgb(35, 34, 34) !important;
     font-size: 10px !important;
+}
+
+.dx-datagrid {
+    margin-top: 30px;
 }
 
 .dx-icon-column-chooser {

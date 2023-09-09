@@ -11,7 +11,7 @@ import DataGrid, {
     OperationDescriptions,
     ColumnChooser,
 } from "devextreme-react/data-grid";
-import PopupScanBarCode from "../../../../shared/components/PopupScanBarCode/PopupScanBarCode";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 const data = [
     { jobOutputCode: "J01", jobOutputName: "WO-123-CĐ01-01", cardBoxQuantity: "01", startDate: "15/08/2023", endDate: "16/08/2023" },
@@ -19,8 +19,11 @@ const data = [
     { jobOutputCode: "J03", jobOutputName: "WO-123-CĐ01-01", cardBoxQuantity: "01", startDate: "15/08/2023", endDate: "16/08/2023" },
 ];
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const JobOutPutDetail = React.memo((props: any) => {
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     locale("en");
     loadMessages({
         en: {
@@ -37,7 +40,7 @@ export const JobOutPutDetail = React.memo((props: any) => {
                 id='gridContainer'
                 key={"jobOutputCode"}
                 keyExpr='jobOutputCode'
-                dataSource={data}
+                dataSource={dataPage}
                 height={"auto"}
                 showBorders={true}
                 showColumnLines={true}
@@ -54,16 +57,7 @@ export const JobOutPutDetail = React.memo((props: any) => {
                     <TItem name='columnChooserButton' />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} />
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                />
+
                 <FilterRow visible={false} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
                     <OperationDescriptions
                         startsWith='Bắt đầu với'
@@ -86,6 +80,15 @@ export const JobOutPutDetail = React.memo((props: any) => {
                 <Column dataField='startDate' caption='Ngày tiếp nhận' format={"dd/MM/yyyy"} dataType='datetime' />
                 <Column dataField='endDate' caption='Ngày kết thúc' dataType='datetime' format={"dd/MM/yyyy"} alignment={"center"} />
             </DataGrid>
+            <PaginationComponent
+                pageSizeOptions={[10, 20, 40]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                totalPages={totalPage}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+            />
         </div>
     );
 });

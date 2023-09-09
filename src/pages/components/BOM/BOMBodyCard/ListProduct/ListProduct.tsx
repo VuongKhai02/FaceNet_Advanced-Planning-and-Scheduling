@@ -7,8 +7,6 @@ import DataGrid, {
     Selection,
     Toolbar,
     Item as TItem,
-    Paging,
-    Pager,
     OperationDescriptions,
     ColumnChooser,
 } from "devextreme-react/data-grid";
@@ -18,7 +16,11 @@ import PopupBOM from "../../../../../shared/components/PopupBOM/PopupBOM";
 import { WarningOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
+import PaginationComponent from "../../../../../shared/components/PaginationComponent/PaginationComponent";
+import styles from "./ListProduct.module.css";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 const data = [
     { cardCode: "SP091", cardName: "Sản phẩm 09.1", bomversion: "1.1", notice: "VT001", note: "Vật tư 01", status: "Hoạt động" },
     { cardCode: "SP092", cardName: "Sản phẩm 09.2", bomversion: "1.1", notice: "VT001", note: "Vật tư 01", status: "Hoạt động" },
@@ -60,13 +62,15 @@ const data2 = [
         inventoryQuantity: "Số lượng tồn kho",
     },
 ];
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ListProduct = React.memo((props: any) => {
 
     const [isDetailBOMTemplate, setIsDetailBOMTemplate] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
-
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     locale("en");
     loadMessages({
@@ -85,33 +89,17 @@ export const ListProduct = React.memo((props: any) => {
     ];
     const handleCustomFooterButtonChangeState = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20, marginBottom: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: 18,
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                    className={cx("btn-save")}>
                     Xác nhận
                 </Button>
             </div>
@@ -122,7 +110,7 @@ export const ListProduct = React.memo((props: any) => {
         <div>
             <DataGrid
                 id='gridContainer'
-                dataSource={data}
+                dataSource={dataPage}
                 keyExpr='cardCode'
                 key={"cardCode"}
                 height={"auto"}
@@ -299,16 +287,6 @@ export const ListProduct = React.memo((props: any) => {
                     <TItem name='columnChooserButton' />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} mode='select' />
-                <Paging defaultPageSize={10} />
-                <Pager
-                    visible={true}
-                    allowedPageSizes={allowedPageSizes}
-                    displayMode={"compact"}
-                    showPageSizeSelector={true}
-                    showInfo={true}
-                    showNavigationButtons={true}
-                    infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                />
                 <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
                     <OperationDescriptions
                         startsWith='Bắt đầu với'
@@ -370,6 +348,15 @@ export const ListProduct = React.memo((props: any) => {
                     )}
                 />
             </DataGrid>
+            <PaginationComponent
+                pageSizeOptions={[10, 20, 40]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                totalPages={totalPage}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+            />
         </div>
     );
 });

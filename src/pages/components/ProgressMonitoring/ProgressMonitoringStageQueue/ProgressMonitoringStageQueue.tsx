@@ -1,6 +1,5 @@
 import React from "react";
 import { SelectBox, TextBox } from "devextreme-react";
-import "./ProgressMonitoringStageQueue.css";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -8,7 +7,10 @@ import PopupConfirmGeneral from "../../../../shared/components/PopupConfirmGener
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import { Button } from "antd";
 const { Step } = Steps;
+import classNames from "classnames/bind";
+import styles from "./ProgressMonitoringStageQueue.module.css";
 
+const cx = classNames.bind(styles);
 const items = [
     { title: "In offset", description: "" },
     { title: "In lưới", description: "" },
@@ -41,33 +43,18 @@ export const ProgressMonitoringStageQueue = () => {
     }, []);
     const handleCustomFooterButtonDefineStageQueue = [
         <div>
-            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}>
+            <div className={cx("footer-container")}>
                 <Button
                     key='cancel'
-                    style={{
-                        marginRight: "30px",
-                        backgroundColor: "#E5E5E5",
-                        display: "inline-block",
-                        borderRadius: "4px",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+                    className={cx("btn-cancel")}
                     onClick={() => setIsVisibleDefineStageQueue(false)}>
                     Hủy bỏ
                 </Button>
                 <Button
-                    style={{
-                        borderRadius: "4px",
-                        backgroundColor: "#ff794e",
-                        color: "#ffff",
-                        width: 100,
-                        height: 40,
-                        fontSize: 16,
-                    }}
+
                     key='submit'
                     onClick={() => { }}
-                    className='btn btn-save'>
+                    className={cx("btn-save")}>
                     Thiết lập
                 </Button>
             </div>

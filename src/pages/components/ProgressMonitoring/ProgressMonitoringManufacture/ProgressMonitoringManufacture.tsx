@@ -1,14 +1,13 @@
 import React from "react";
 import { DataGrid } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
 import ProgressMonitoringWODetail from "./ProgressMonitoringWODetail/ProgressMonitoringWODetail";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
-const ROUTING_PATH = "/progressMonitoringManufacture";
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 const data = [
     {
@@ -52,6 +51,10 @@ export const ProgressMonitoringManufacture = () => {
     const [isVisibleWODetail, setIsVisibleWODetail] = React.useState<boolean>(false);
     const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
 
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data?.length / pageSize);
+    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -96,14 +99,16 @@ export const ProgressMonitoringManufacture = () => {
                         <DataGrid
                             key={"woCode"}
                             keyExpr={"woCode"}
-                            dataSource={data}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            focusedRowEnabled={true}>
+                            focusedRowEnabled={true}
+                            noDataText="Không có dữ liệu để hiển thị"
+                        >
                             <PopupConfirmDelete
                                 isVisible={isVisibleConfirmDelete}
                                 onCancel={() => setIsVisibleConfirmDelete(false)}
@@ -165,16 +170,6 @@ export const ProgressMonitoringManufacture = () => {
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
 
                             <Column caption={"Mã WO"} dataField={"woCode"} alignment='left' width={100} />
                             <Column caption={"Mã SO"} dataField={"soCode"} />
@@ -213,6 +208,15 @@ export const ProgressMonitoringManufacture = () => {
                                     </div>
                                 )}></Column>
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                     </div>
                 </div>
             )}

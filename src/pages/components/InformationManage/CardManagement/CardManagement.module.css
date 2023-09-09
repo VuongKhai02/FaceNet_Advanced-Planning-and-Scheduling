@@ -6,7 +6,7 @@
 }
 
 .btn-cancel {
-    margin-right: 30px;
+    margin-right: 10px;
     background-color: #E5E5E5;
     display: inline-block;
     border-radius: 4px;
@@ -22,7 +22,7 @@
     width: 100px;
     height: 40px;
     font-size: 16px;
-    margin-right: 30px;
+    margin-right: 10px;
 
     &:hover {
         background-color: rgba(255, 121, 78, 0.8);

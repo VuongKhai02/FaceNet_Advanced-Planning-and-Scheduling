@@ -4,8 +4,6 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     ColumnChooser,
@@ -23,9 +21,12 @@ import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import PopupConfirmGeneral from "../../../../shared/components/PopupConfirmGeneral/PopupConfirmGeneral";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
+import classNames from "classnames/bind";
+import styles from "./ProductionPlanList.module.css";
 
+const cx = classNames.bind(styles);
 const data = [
     {
         no: "1",
@@ -46,7 +47,7 @@ const data = [
         inventoryQuantity: "Số lượng tồn kho",
     },
     {
-        no: "2",
+        no: "3",
         codeMaterial: "Mã vật tư 3",
         nameMaterial: "Tên vật tư",
         norm: "Định mức",
@@ -105,6 +106,10 @@ export const ProductionPlanList = () => {
     const [isCloseWorkOrder, setIsCloseWorkOrder] = React.useState<boolean>(false);
     const [newButtons, setNewButtons] = React.useState<any>([]);
 
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(data1?.length / pageSize);
+    const dataPage = data1?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -674,6 +679,7 @@ export const ProductionPlanList = () => {
                         />
                         <Modal
                             visible={isVisibleAdd}
+                            className={cx(["modal-container"])}
                             title={
                                 <div style={{ display: "flex", flexDirection: "row" }}>
                                     <SvgIcon
@@ -686,26 +692,20 @@ export const ProductionPlanList = () => {
                                 </div>
                             }
                             footer={[
-                                <div style={{ marginTop: 14, paddingBottom: 14 }}>
+                                <div className={cx("footer-container")}>
                                     <Button
                                         key='cancel'
                                         onClick={() => {
                                             setIsVisibleAdd(false);
                                         }}
-                                        style={{
-                                            width: 100,
-                                            marginRight: "20px",
-                                            backgroundColor: "#C0C0C0",
-                                            borderRadius: 5,
-                                            color: "#333",
-                                        }}>
+                                        className={cx("btn-cancel")}>
                                         Hủy bỏ
                                     </Button>
                                     ,
                                     <Button
                                         key='confirm'
                                         onClick={handleCreateProductionPlan}
-                                        style={{ width: 100, backgroundColor: "#FF7A00", color: "#fff", borderRadius: 5 }}>
+                                        className={cx("btn-save")}>
                                         Tiếp theo
                                     </Button>
                                 </div>,
@@ -766,7 +766,7 @@ export const ProductionPlanList = () => {
                         <DataGrid
                             key={"soCode"}
                             keyExpr={"soCode"}
-                            dataSource={data1}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
@@ -775,7 +775,9 @@ export const ProductionPlanList = () => {
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
                             onRowUpdating={updateOrder}
-                            onRowRemoving={removeOrder}>
+                            onRowRemoving={removeOrder}
+                            noDataText='Không có dữ liệu để hiển thị'
+                        >
                             <Toolbar>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
@@ -807,16 +809,6 @@ export const ProductionPlanList = () => {
                             <FilterRow visible={true} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
                             <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
@@ -881,6 +873,15 @@ export const ProductionPlanList = () => {
                                     </div>
                                 )}></Column>
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data1?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                         <Popup
                             title='Các Icon thao tác'
                             visible={popupVisibleIcon}
@@ -935,7 +936,6 @@ export const ProductionPlanList = () => {
                                         allowColumnReordering={true}
                                         focusedRowEnabled={true}>
                                         <FilterRow visible={true} />
-                                        <Paging defaultPageSize={5} />
                                         <Column caption={"No."} dataField={"no"} alignment='left' width={100} />
                                         <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
                                         <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />

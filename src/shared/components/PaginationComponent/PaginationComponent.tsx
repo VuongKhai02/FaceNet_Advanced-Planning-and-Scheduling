@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './PaginationComponent.css';
+import classNames from 'classnames/bind';
+import styles from './PaginationComponent.module.css';
 import { Button, Input } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import Select from 'antd/lib/select';
 
+const { Option } = Select;
+const cx = classNames.bind(styles);
 interface PageTextInfo {
     pageIndex: number;
     numberOfPages: number;
@@ -88,31 +92,31 @@ const PaginationComponent: React.FC<PaginationProps> = ({
     };
 
     return (
-        <div id="pagination-container">
-            <div className="page-size-selector-container">
+        <div className={cx("pagination-container")}>
+            <div className={cx("page-size-selector-container")}>
                 {pageSizeOptions && (
-                    <select
-                        className="custom-pagesize"
+                    <Select
+                        className={cx("custom-pagesize")}
                         value={pageSize}
-                        onChange={(e) => changePageSize(parseInt(e.target.value, 10))}
+                        onChange={changePageSize}
                     >
                         {pageSizeOptions.map((option) => (
-                            <option key={option} value={option}>
+                            <Option key={option} value={option}>
                                 {option}/Trang
-                            </option>
+                            </Option>
                         ))}
-                    </select>
+                    </Select>
                 )}
             </div>
-            <div className="dx-pages">
-                <div className="dx-info">
+            <div className={cx("dx-pages")}>
+                <div className={cx("dx-info")}>
                     {`Trang số`} {pageTextInfo.pageIndex} {`của`}{' '}
                     {pageTextInfo.numberOfPages} ({pageTextInfo.total} {`bản ghi`}) &ensp;
                 </div>
                 <Button
                     icon={<LeftOutlined />}
                     style={{ border: 'none' }}
-                    className="dx-navigate-button dx-prev-button"
+                    className={cx("dx-navigate-button", "dx-prev-button")}
                     onClick={() => goToPage('prev')}
                     disabled={pageIndex === 1}
                 /> &emsp;
@@ -120,7 +124,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                     <Button
                         style={{ border: 'none' }}
                         key={index}
-                        className={`dx-page dx-selection ${pageNum === pageIndex ? 'button-selected' : ''}`}
+                        className={cx("dx-page", "dx-selection", pageNum === pageIndex ? 'button-selected' : '')}
                         onClick={() => goToPage(pageNum)}
                     >
                         {pageNum.toString()}
@@ -130,17 +134,17 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 <Button
                     icon={<RightOutlined />}
                     style={{ border: 'none' }}
-                    className="dx-navigate-button dx-next-button"
+                    className={cx("dx-navigate-button", "dx-next-button")}
                     onClick={() => goToPage('next')}
                     disabled={pageIndex === totalPages}
                 />
             </div>
-            <div className="dx-pages">
-                <div className="dx-info">{`Đi đến trang`} &ensp;</div>
+            <div className={cx("dx-pages")}>
+                <div className={cx("dx-info")}>{`Đi đến trang`} &ensp;</div>
                 <Input
                     style={{ width: 70 }}
                     type="number"
-                    className="custom-goto"
+                    className={cx("custom-goto")}
                     value={goPage || ''}
                     onChange={onGoToPageValueChange}
                     onKeyPress={(e) => {

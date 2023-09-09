@@ -4,8 +4,6 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     Selection,
@@ -24,6 +22,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
 
 export const TechFormApprove = () => {
@@ -33,7 +32,10 @@ export const TechFormApprove = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [rejectReason, setRejectReason] = useState("");
 
-    const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const totalPage = Math.ceil(OrderItem?.length / pageSize);
+    const dataPage = OrderItem?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -227,7 +229,7 @@ export const TechFormApprove = () => {
                         <DataGrid
                             key='id'
                             keyExpr={"id"}
-                            dataSource={OrderItem}
+                            dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
@@ -236,7 +238,9 @@ export const TechFormApprove = () => {
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
                             onRowUpdating={updateOrder}
-                            onRowRemoving={removeOrder}>
+                            onRowRemoving={removeOrder}
+                            noDataText='Không có dữ liệu để hiển thị'
+                        >
                             <PopupConfirmDelete
                                 isVisible={isConfirmDelete}
                                 onCancel={handleHideModalDel}
@@ -297,17 +301,8 @@ export const TechFormApprove = () => {
 
                             <FilterRow visible={true} />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
-                            <Paging defaultPageSize={10} />
+
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <Pager
-                                visible={true}
-                                allowedPageSizes={allowedPageSizes}
-                                displayMode={"compact"}
-                                showPageSizeSelector={true}
-                                showInfo={true}
-                                showNavigationButtons={true}
-                                infoText='Trang số {0} trên {1} ({2} bản ghi)'
-                            />
                             <Selection mode='multiple' />
                             <Column dataField='productCode' caption='Mã phiếu công nghệ'></Column>
                             <Column dataField='productName' caption='Tên thẻ' ></Column>
@@ -379,6 +374,15 @@ export const TechFormApprove = () => {
                                     </div>
                                 )}></Column>
                         </DataGrid>
+                        <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: OrderItem?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
                         <PopupCofirm
                             titleRender={() => (
                                 <div style={{ display: "flex", flexDirection: "row" }}>
