@@ -3,6 +3,11 @@
     z-index: 1000;
 }
 
+.app-sider :global(.ant-layout-sider-children) {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo {
     height: 72px;
     background-color: var(--secondary-color);
@@ -18,6 +23,17 @@
 
     .logo-text {
         margin-left: 12px;
+    }
+}
+
+.sider-wrapper {
+    height: 100%;
+    overflow: scroll;
+    flex: 1;
+
+    &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
     }
 }
 

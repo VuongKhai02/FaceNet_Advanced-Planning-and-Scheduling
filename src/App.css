@@ -101,7 +101,7 @@
 }
 
 .ant-btn-default {
-    border : none;
+    border: none;
 }
 
 /* css antd + devextreme */
@@ -171,9 +171,11 @@ table {
 .ant-layout-sider {
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important; */
 }
+
 .ant-menu-inline.ant-menu-root {
-      /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;  */
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;  */
 }
+
 .narrow-layout {
     max-width: 1024px;
     margin: auto;
@@ -234,6 +236,11 @@ table {
 .ant-layout-content {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
     border-radius: 5px !important;
+}
+
+.ant-table-wrapper .ant-table-thead>tr>th,
+.ant-table-wrapper .ant-table-thead>tr>td {
+    background-color: #FFE0C2;
 }
 
 .movie-tooltip .movie-title {
@@ -302,14 +309,17 @@ h3 {
     color: rgba(0, 0, 0, 0.6);
 
 }
+
 .dx-icon-close {
-   color: #FF7A00 !important;
-   font-size: 24px !important;
+    color: #FF7A00 !important;
+    font-size: 24px !important;
 }
-.dx-icon-clear{
-   color: #FF7A00 !important;
-   font-size: 20px !important;
+
+.dx-icon-clear {
+    color: #FF7A00 !important;
+    font-size: 20px !important;
 }
+
 /* .dx-toolbar-item-content{
     color: #FF7A00 !important;
     font-size: larger !important;
