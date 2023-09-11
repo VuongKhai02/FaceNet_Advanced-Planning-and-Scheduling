@@ -1,0 +1,52 @@
+.upload-container {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.btn-back {
+    margin-right: 20px;
+    color: #fff;
+    background-color: #E5E5E5;
+    width: 100px;
+    color: #000;
+}
+
+.btn-next {
+    margin-right: 20px;
+    color: #fff;
+    background-color: rgba(255, 122, 0, 1);
+
+    &:hover {
+        background-color: rgba(255, 122, 0, 0.8);
+    }
+}
+
+.btn-sign {
+    margin-right: 20px;
+    color: #fff;
+    background-color: rgb(128, 128, 128);
+    width: 100px;
+
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.8);
+    }
+}
+
+.btn-send {
+    margin-right: 20px;
+    color: #fff;
+    background-color: rgb(128, 128, 128);
+
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.8);
+    }
+}

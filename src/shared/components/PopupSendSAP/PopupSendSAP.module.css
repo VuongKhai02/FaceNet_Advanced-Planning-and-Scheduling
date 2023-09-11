@@ -1,0 +1,42 @@
+.footer-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-cancel {
+    margin-right: 10px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.btn-save {
+    margin-right: 10px;
+    background-color: #ff794e;
+    color: var(--text-color);
+    display: inline-block;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.modal-container :global(.ant-modal-close) {
+    width: auto;
+    height: auto;
+    right: 20px;
+    top: 12px;
+
+    :global(.ant-modal-close-x) {
+        color: var(--primary-color);
+        font-size: 24px;
+    }
+}
+
+.modal-container :global(.ant-modal-close):hover {
+    background-color: transparent;
+}

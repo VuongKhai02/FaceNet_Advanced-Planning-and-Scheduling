@@ -1,0 +1,26 @@
+.title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.title {
+    line-height: 38px;
+    padding: 0;
+    margin: 0;
+    font-size: 20px
+}
+
+.modal-container :global(.ant-modal-content) :global(.ant-modal-close) {
+    color: var(--primary-color);
+    height: fit-content;
+    width: auto;
+
+    :global(.anticon.anticon-close.ant-modal-close-icon) {
+        font-size: 24px;
+    }
+}
+
+.modal-container :global(.ant-modal-content) :global(.ant-modal-close):hover {
+    background-color: transparent;
+}

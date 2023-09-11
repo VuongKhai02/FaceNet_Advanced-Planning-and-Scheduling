@@ -1,0 +1,35 @@
+.modal-container :global(.ant-modal-close) {
+    color: var(--primary-color);
+    height: fit-content;
+    width: auto;
+    right: 20px;
+    top: 12px;
+
+    :global(.ant-modal-close-x) {
+        font-size: 24px;
+    }
+}
+
+.modal-container :global(.ant-modal-close):hover {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.modal-container :global(.ant-modal-content) :global(.ant-modal-body) {
+    padding: 20px 20px 0 20px !important;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+
+    :global(.ant-btn) {
+        background-color: #E5E5E5;
+        display: inline-block;
+        border-radius: 4px;
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
