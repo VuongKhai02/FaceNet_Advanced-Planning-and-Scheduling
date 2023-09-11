@@ -22,7 +22,7 @@ const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
         navigate(path || "/");
     }
     return <Sider
-        width={340}
+        width={320}
         trigger={null}
         collapsible
         collapsed={collapsed}

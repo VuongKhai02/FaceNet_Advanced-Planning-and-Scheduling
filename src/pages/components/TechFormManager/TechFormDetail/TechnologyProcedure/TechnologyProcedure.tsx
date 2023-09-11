@@ -80,7 +80,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
 
                         <div style={{ marginTop: 30 }}>
                             <div>
-                                <Table dataSource={data1} rowKey='step1' bordered pagination={false}>
+                                <Table dataSource={data1} rowKey='step1' bordered={false} pagination={false}>
                                     <Table.Column title='Step1' dataIndex='step1' key='step1' align='left' width={130} />
                                     <Table.Column title='Step2' dataIndex='step2' key='step2' align='center' />
                                     <Table.Column title='Step3' dataIndex='step3' key='step3' align='center' />
@@ -94,7 +94,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                     <Table.Column title='Step11' dataIndex='step11' key='step11' align='center' />
                                     <Table.Column title='Step12' dataIndex='step12' key='step12' align='center' />
                                 </Table>
-                                <Table dataSource={data2} rowKey='no' bordered pagination={false}>
+                                <Table dataSource={data2} rowKey='no' bordered={false} pagination={false}>
                                     <Table.Column title='No.' dataIndex='no' key='no' align='left' width={130} />
                                     <Table.Column
                                         onCell={(item, index) => {
@@ -181,17 +181,18 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    marginTop: 20,
+                                    paddingBottom: 30,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     className='border-none'
                                     icon='back'
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#333" }}
+                                    style={{ marginRight: "10px", color: "#333" }}
                                 />
                                 <Button
                                     className='border-none'

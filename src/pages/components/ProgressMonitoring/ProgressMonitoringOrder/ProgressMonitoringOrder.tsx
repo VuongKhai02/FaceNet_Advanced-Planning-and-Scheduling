@@ -196,7 +196,7 @@ export const ProgressMonitoringOrder = () => {
                                 fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
-                                alignment='left'
+                                alignment='center'
                                 cellRender={() => (
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                         <SvgIcon

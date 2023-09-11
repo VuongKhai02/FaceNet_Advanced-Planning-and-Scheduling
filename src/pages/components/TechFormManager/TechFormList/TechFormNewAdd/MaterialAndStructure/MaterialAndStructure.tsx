@@ -87,7 +87,6 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 value={fromDateTime}
                                 onValueChanged={handleFromDateTimeChange}
                                 type='datetime'
-                            // displayFormat="shortdatetime"
                             />
                             <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến/to</h6>
                             <DateBox
@@ -96,32 +95,11 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 value={toDateTime}
                                 onValueChanged={handleToDateTimeChange}
                                 type='datetime'
-                            // displayFormat="shortdatetime"
                             />
                         </div>
                         <div style={{ marginTop: 30 }}>
-                            {/* <DataGrid
-                                dataSource={rowData}
-                                keyExpr="No"
-                                showBorders={true}
-                                showRowLines={true}
-                                showColumnLines={true}
-                            >
-                                <Column dataField="No" caption="No." allowEditing={false} alignment="left" />
-                                <Column dataField="CongDoan" caption="Công đoạn" />
-                                <Column dataField="MaterialCode" caption="Mã vật tư" />
-                                <Column dataField="quantity" caption="Số lượng" />
-                                <Column dataField="note" caption="Ghi chú/Remarks"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="Nhập"
-                                        />
-                                    )}>
-                                </Column>
-                                <Column dataField="structure" caption="Cấu trúc/Structure" />
-                            </DataGrid> */}
-                            <Table dataSource={data} rowKey='No' key='No' bordered pagination={false}>
+
+                            <Table dataSource={data} rowKey='No' key='No' bordered={false} pagination={false}>
                                 <Table.Column dataIndex='No' title='No.' align='left' />
                                 <Table.Column dataIndex='CongDoan' title='Công đoạn' />
                                 <Table.Column dataIndex='MaterialCode' title='Mã vật tư' />
@@ -173,7 +151,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 </div>
                             </div>
                             <div style={{ marginTop: 30 }}>
-                                <Table dataSource={data1} bordered rowKey='Id' pagination={false}>
+                                <Table dataSource={data1} bordered={false} rowKey='Id' pagination={false}>
                                     <Table.ColumnGroup title='Mặt trước/Front' fixed='left'>
                                         <Table.Column
                                             dataIndex='MatTruocNoiDung'
@@ -231,7 +209,6 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -241,22 +218,22 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
+                                    marginTop: 20,
+                                    paddingBottom: 30,
                                     display: 'flex',
-                                    justifyContent: "flex-end",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={handleAddFormTechProcedure}
-                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                 >Tiếp theo</Button>
-                                <Button disabled>Thêm mới</Button>
+                                <Button style={{ width: 100 }} disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

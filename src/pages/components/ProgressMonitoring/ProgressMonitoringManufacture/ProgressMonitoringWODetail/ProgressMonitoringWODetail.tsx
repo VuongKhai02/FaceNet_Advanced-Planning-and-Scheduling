@@ -128,15 +128,16 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                         <div
                             className='toolbar'
                             style={{
-                                marginTop: 10,
-                                float: "right",
-                                // background: "#ffffff",
-                                padding: "8px",
+                                marginTop: 20,
+                                paddingBottom: 30,
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                // background: "#ffffff"
                                 borderRadius: "4px",
                             }}>
                             <Button
                                 onClick={setClose}
-                                style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
+                                style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 120 }}
                             >Trở lại</Button>
                         </div>
                     </div>

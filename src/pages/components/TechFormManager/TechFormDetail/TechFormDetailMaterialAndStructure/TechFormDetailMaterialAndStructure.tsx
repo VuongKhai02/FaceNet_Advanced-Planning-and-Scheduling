@@ -151,17 +151,18 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                 <div
                                     className='toolbar'
                                     style={{
-                                        marginTop: 10,
-                                        float: "right",
-                                        // background: "#ffffff",
-                                        padding: "8px",
+                                        marginTop: 20,
+                                        paddingBottom: 30,
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        // background: "#ffffff"
                                         borderRadius: "4px",
                                     }}>
                                     <Button
                                         className='border-none'
                                         icon='back'
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#333" }}
+                                        style={{ marginRight: "10px", color: "#333" }}
                                     />
                                     <Button
                                         className='border-none'

@@ -192,10 +192,11 @@ export const ProgressMonitoringStageQueue = () => {
                         <div
                             className='toolbar'
                             style={{
-                                marginTop: 10,
-                                float: "right",
-                                // background: "#ffffff",
-                                padding: "8px",
+                                marginTop: 20,
+                                paddingBottom: 30,
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                // background: "#ffffff"
                                 borderRadius: "4px",
                             }}>
                             <Button

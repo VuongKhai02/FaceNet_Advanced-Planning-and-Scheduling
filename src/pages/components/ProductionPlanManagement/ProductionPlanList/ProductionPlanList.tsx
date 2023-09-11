@@ -353,7 +353,7 @@ export const ProductionPlanList = () => {
                 <Button
                     key='cancel'
                     style={{
-                        marginRight: 20,
+                        marginRight: 10,
                         backgroundColor: "#E5E5E5",
                         display: "inline-block",
                         borderRadius: "4px",
@@ -372,7 +372,7 @@ export const ProductionPlanList = () => {
                         width: 100,
                         height: 40,
                         fontSize: 16,
-                        marginRight: 20,
+                        marginRight: 10,
                     }}
                     key='submit'
                     onClick={() => { }}
@@ -403,7 +403,7 @@ export const ProductionPlanList = () => {
                 <Button
                     key='cancel'
                     style={{
-                        marginRight: 20,
+                        marginRight: 10,
                         backgroundColor: "#E5E5E5",
                         display: "inline-block",
                         borderRadius: "4px",
@@ -824,7 +824,7 @@ export const ProductionPlanList = () => {
                                 fixed={true}
                                 type={"buttons"}
                                 caption={"Thao tác"}
-                                alignment='left'
+                                alignment='center'
                                 cellRender={() => (
                                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "row" }}>
                                         <SvgIcon

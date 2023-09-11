@@ -98,7 +98,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </div>
                                 <div>
                                     <div>
-                                        <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                        <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                             <Table.Column title='Trình tự/Step' dataIndex='' key='id' align='left' width={130} />
                                             <Table.Column title='Chủng loại/IC Type' dataIndex='icType' key='icType' align='center' />
                                             <Table.Column title='Số lượng/Quantity' dataIndex='quantity' key='quantity' align='center' />
@@ -108,14 +108,14 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                             <Table.Column title='' key='actions' align='center' />
                                         </Table>
 
-                                        <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                        <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                             <Table.Column title='Trình tự/Step' dataIndex='step' key='id' align='left' width={130} />
                                             <Table.Column title='Step 1' dataIndex='icType' key='step1' align='center' />
                                             <Table.Column title='Step 2' dataIndex='icType' key='step2' align='center' />
                                             <Table.Column title='Step 3' dataIndex='icType' key='step3' align='center' />
                                             <Table.Column title='Step 4' dataIndex='icType' key='step4' align='center' />
                                         </Table>
-                                        <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered pagination={false}>
+                                        <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered={false} pagination={false}>
                                             <Table.Column title='Vị trí/Position' dataIndex='position' key='position' />
                                             <Table.ColumnGroup title='Lỗ ngoài/Outside Hole'>
                                                 <Table.Column

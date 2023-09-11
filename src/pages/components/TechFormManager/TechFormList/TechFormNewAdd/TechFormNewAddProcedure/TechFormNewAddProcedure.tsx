@@ -165,7 +165,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
                                             />
                                         </div>
                                     )}
@@ -183,7 +182,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={fromDateTime}
                                         onValueChanged={handleFromDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
                                     />
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                                     <DateBox
@@ -192,11 +190,11 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={toDateTime}
                                         onValueChanged={handleToDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
+
                                     />
                                 </div>
 
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='Bước' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Nội dung ép/Contens'
@@ -245,7 +243,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -262,7 +259,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={fromDateTime}
                                         onValueChanged={handleFromDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
                                     />
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                                     <DateBox
@@ -271,10 +267,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={toDateTime}
                                         onValueChanged={handleToDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
                                     />
                                 </div>
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='No.' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Mực/Lnk'
@@ -327,7 +322,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -344,7 +338,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={fromDateTime}
                                         onValueChanged={handleFromDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
                                     />
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
                                     <DateBox
@@ -353,10 +346,9 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                         value={toDateTime}
                                         onValueChanged={handleToDateTimeChange}
                                         type='datetime'
-                                    // displayFormat="shortdatetime"
                                     />
                                 </div>
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='No.' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Nội dung/Content'
@@ -389,7 +381,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -399,21 +390,22 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    marginTop: 20,
+                                    paddingBottom: 30,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={handleAddFormTechHostamping}
-                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                 >Tiếp theo</Button>
-                                <Button disabled>Thêm mới</Button>
+                                <Button style={{ width: 100 }} disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

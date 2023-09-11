@@ -142,6 +142,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
             <div className={cx("dx-pages")}>
                 <div className={cx("dx-info")}>{`Đi đến trang`} &ensp;</div>
                 <Input
+                    placeholder={'1'}
                     style={{ width: 70 }}
                     type="number"
                     className={cx("custom-goto")}

@@ -83,21 +83,22 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({ isOpen = 
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    marginTop: 20,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={handleAddFormTechMaterialAndStructure}
-                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                 >Tiếp theo</Button>
                                 <Button
+                                    style={{ width: 100 }}
                                     disabled
                                     onClick={() => { }}
                                 >Thêm mới</Button>

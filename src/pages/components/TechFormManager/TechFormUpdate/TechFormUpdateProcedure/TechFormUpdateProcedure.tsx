@@ -494,6 +494,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                         }} value={cellInfo.value} key={"other"} />
                                                 )}></Column>
                                             <Column
+                                                width={100}
                                                 caption=''
                                                 dataField=''
                                                 alignment='center'
@@ -592,6 +593,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 )}
                                             />
                                             <Column
+                                                width={100}
                                                 caption=''
                                                 dataField=''
                                                 alignment='center'
@@ -661,7 +663,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     caption=''
                                                     dataField=''
                                                     alignment='center'
-                                                    width={150}
+                                                    width={100}
                                                     cellRender={(cellInfo) => (
                                                         <div className={cx('action-container')}>
                                                             <SvgIcon
@@ -780,7 +782,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     caption=''
                                                     dataField=''
                                                     alignment='center'
-                                                    width={80}
+                                                    width={100}
                                                     cellRender={(cellInfo) => (
                                                         <div className={cx("action-container")}>
                                                             <SvgIcon
