@@ -15,7 +15,7 @@ ENV NODE_OPTIONS=--max_old_space_size=4096
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build:test
+RUN npm run dev
 
 FROM nginx:1.25.1-alpine-slim
 RUN rm /etc/nginx/conf.d/default.conf
