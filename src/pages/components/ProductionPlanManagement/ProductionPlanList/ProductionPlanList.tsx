@@ -433,6 +433,12 @@ export const ProductionPlanList = () => {
         </div>,
     ];
 
+    const handleCustomFooterViewMaterial = [
+        <div>
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}></div>
+        </div>,
+    ];
+
     return (
         <>
             {isCreateProductionPlan ? (
@@ -733,13 +739,13 @@ export const ProductionPlanList = () => {
                             isVisible={isCloseWorkOrder}
                             modalContent={
                                 <div>
-                                    <div style={{ marginLeft: 10, marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: "400" }}>
+                                    <div style={{ marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: "400" }}>
                                         Lệnh sản xuất hiện tại đang ở trạng thái .... Nếu bạn đóng lệnh sản xuất, tất cả thông tin của lệnh
                                         sản xuất này sẽ bị hủy và cảnh báo về việc đóng sẽ được gửi đến các bộ phận liên quan. Bạn có chắc
                                         chắn muốn đóng lệnh sản xuất 13342?
                                     </div>
                                     <div className='reject-reason-container'>
-                                        <label style={{ marginLeft: 10, fontSize: 18 }}>
+                                        <label style={{ fontSize: 18 }}>
                                             Lý do đóng lệnh sản xuất<span className='required'>*</span>
                                         </label>
                                         <TextArea
@@ -961,7 +967,7 @@ export const ProductionPlanList = () => {
                                     </DataGrid>
                                 </div>
                             }
-                            customFooter={null}
+                            customFooter={handleCustomFooterViewMaterial}
                         />
                         <PopupConfirmGeneral
                             isVisible={isVisibleInventoryQuantity}
@@ -984,7 +990,7 @@ export const ProductionPlanList = () => {
                                     <Column caption='Số lượng' dataField='inventoryQuantity' />
                                 </DataGrid>
                             }
-                            customFooter={null}
+                            customFooter={handleCustomFooterViewMaterial}
                         />
 
                         {/* Khai báo người phụ trách công đoạn QMS */}

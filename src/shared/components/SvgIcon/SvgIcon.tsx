@@ -33,7 +33,12 @@ const SvgIcon: FC<SvgIconProps> = ({
     );
 
     return (
-        <Tooltip title={tooltipTitle} placement="top" overlayClassName='custom-tooltip' color='#FF7A00' overlayStyle={{ color: 'blue' }}>
+        <Tooltip
+            title={tooltipTitle}
+            placement="top"
+            overlayClassName='custom-tooltip'
+            // color='#FF7A00'
+            overlayStyle={{ color: 'blue' }}>
             <div
                 onClick={onClick}
                 style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', ...style }}

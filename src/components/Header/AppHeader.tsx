@@ -27,16 +27,16 @@ export type AppHeaderProps = {
 
 const itemsLanguage = [
     {
-        value: "en",
-        label: "English",
-        imageUrl: "assets/images/GreatBritainFlag.png",
-        imageAlt: "English"
-    },
-    {
         value: "vi",
         label: "Tiếng Việt",
         imageUrl: "assets/images/VietNamFlag.png",
         imageAlt: "Tiếng Việt"
+    },
+    {
+        value: "en",
+        label: "English",
+        imageUrl: "assets/images/GreatBritainFlag.png",
+        imageAlt: "English"
     }
 ]
 

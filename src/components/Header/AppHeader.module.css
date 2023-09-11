@@ -54,7 +54,8 @@
     justify-content: center;
 
     .user-avatar {
-        width: 40px;
+        width: 45px;
+        height: 45px;
         background-size: cover;
         background-repeat: no-repeat;
         border-radius: 50%;
