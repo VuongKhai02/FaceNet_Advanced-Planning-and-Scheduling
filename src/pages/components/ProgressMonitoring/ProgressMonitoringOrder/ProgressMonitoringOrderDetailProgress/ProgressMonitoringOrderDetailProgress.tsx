@@ -178,11 +178,11 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
+                                    marginTop: 20,
+                                    paddingBottom: 20,
                                     display: 'flex',
-                                    justifyContent: "flex-end",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button

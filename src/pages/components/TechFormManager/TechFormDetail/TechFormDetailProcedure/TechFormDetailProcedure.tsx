@@ -107,7 +107,7 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                             </div>
                                         );
                                     }}>
-                                    <Column alignment='center' caption='File' fixed>
+                                    <Column alignment='center' caption='File'>
                                         <Column dataField='colour' caption='Màu/Colour' />
                                         <Column dataField='note' caption='Ghi chú/Note' />
                                     </Column>
@@ -207,17 +207,18 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    marginTop: 20,
+                                    paddingBottom: 30,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     className='border-none'
                                     icon='back'
                                     onClick={setClose}
-                                    style={{ marginRight: "20px", color: "#333" }}
+                                    style={{ marginRight: "10px", color: "#333" }}
                                 />
                                 <Button
                                     className='border-none'

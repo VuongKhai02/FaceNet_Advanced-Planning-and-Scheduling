@@ -568,7 +568,7 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                             >Hủy bỏ</Button>
                             <Button
                                 onClick={handleCreateBOM}
-                                style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Thêm mới</Button>
+                                style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >Thêm mới</Button>
                         </div>
                     </div>
                 </div>

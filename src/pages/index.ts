@@ -1,23 +1,43 @@
-export { default as Welcome } from './Welcome/Welcome';
-export { default as InformationManagement } from './InformationManagement/InformationManagement';
-// export { default as ManageProductionRequirements } from './InformationManagement/ManageProductionRequirements';
-export { default as WarningManagement } from './WarningManagement/WarningManagement';
+import { lazy } from 'react';
+
+const Welcome = lazy(() => import('./Welcome/Welcome'));
+const InformationManagement = lazy(() => import('./InformationManagement/InformationManagement'));
+const WarningManagement = lazy(() => import('./WarningManagement/WarningManagement'));
 //QUẢN LÝ THÔNG TIN
-export { default as MrpSaleOrders } from './components/InformationManage/mrporder/MrpSaleOrders';
-export { default as ManageProductionRequirements } from './components/InformationManage/ManageProductionRequirements/ManageProductionRequirements';
-export { default as ManageJobOutput } from './components/InformationManage/ManageJobOutput/ManageJobOutput';
-export { default as CardManagement } from './components/InformationManage/CardManagement/CardManagement';
+const MrpSaleOrders = lazy(() => import('./components/InformationManage/mrporder/MrpSaleOrders'));
+const ManageProductionRequirements = lazy(() => import('./components/InformationManage/ManageProductionRequirements/ManageProductionRequirements'));
+const ManageJobOutput = lazy(() => import('./components/InformationManage/ManageJobOutput/ManageJobOutput'));
+const CardManagement = lazy(() => import('./components/InformationManage/CardManagement/CardManagement'));
 //BOM
-export { default as BOMBodyCard } from './components/BOM/BOMBodyCard/BOMBodyCard';
-export { default as BOMPersonalized } from './components/BOM/BOMPersonalized/BOMPersonalized';
+const BOMBodyCard = lazy(() => import('./components/BOM/BOMBodyCard/BOMBodyCard'));
+const BOMPersonalized = lazy(() => import('./components/BOM/BOMPersonalized/BOMPersonalized'));
 //QUẢN LÝ PCN
-export { default as TechFormList } from './components/TechFormManager/TechFormList/TechFormList';
-export { default as TechFormApprove } from './components/TechFormManager/TechFormApprove/TechFormApprove';
+const TechFormList = lazy(() => import('./components/TechFormManager/TechFormList/TechFormList'));
+const TechFormApprove = lazy(() => import('./components/TechFormManager/TechFormApprove/TechFormApprove'));
 //QUẢN LÝ KẾ HOẠCH SẢN XUẤT
-export { default as ProductionPlanList } from './components/ProductionPlanManagement/ProductionPlanList/ProductionPlanList';
-export { default as DeclareProductionObject } from './components/ProductionPlanManagement/declareObject/DeclareProductionObject';
+const ProductionPlanList = lazy(() => import('./components/ProductionPlanManagement/ProductionPlanList/ProductionPlanList'));
+const DeclareProductionObject = lazy(() => import('./components/ProductionPlanManagement/declareObject/DeclareProductionObject'));
 
 //GIÁM SÁT TIẾN ĐỘ
-export { default as ProgressMonitoringManufacture } from './components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture';
-export { default as ProgressMonitoringOrder } from './components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder';
-export { default as ProgressMonitoringStageQueue} from './components/ProgressMonitoring/ProgressMonitoringStageQueue/ProgressMonitoringStageQueue';
+const ProgressMonitoringManufacture = lazy(() => import('./components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture'));
+const ProgressMonitoringOrder = lazy(() => import('./components/ProgressMonitoring/ProgressMonitoringOrder/ProgressMonitoringOrder'));
+const ProgressMonitoringStageQueue = lazy(() => import('./components/ProgressMonitoring/ProgressMonitoringStageQueue/ProgressMonitoringStageQueue'));
+
+export {
+    Welcome,
+    InformationManagement,
+    WarningManagement,
+    MrpSaleOrders,
+    ManageProductionRequirements,
+    ManageJobOutput,
+    CardManagement,
+    BOMBodyCard,
+    BOMPersonalized,
+    TechFormList,
+    TechFormApprove,
+    ProductionPlanList,
+    DeclareProductionObject,
+    ProgressMonitoringManufacture,
+    ProgressMonitoringOrder,
+    ProgressMonitoringStageQueue
+}

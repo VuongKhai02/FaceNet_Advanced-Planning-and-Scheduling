@@ -101,7 +101,7 @@
 }
 
 .ant-btn-default {
-    border : none;
+    border: none;
 }
 
 /* css antd + devextreme */
@@ -168,12 +168,12 @@ table {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
 }
 
-/* .ant-layout .ant-layout-sider-children {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
-} */
-
 .ant-layout-sider {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important; */
+}
+
+.ant-menu-inline.ant-menu-root {
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;  */
 }
 
 .narrow-layout {
@@ -236,6 +236,37 @@ table {
 .ant-layout-content {
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
     border-radius: 5px !important;
+}
+
+.ant-table-wrapper .ant-table-thead>tr>th,
+.ant-table-wrapper .ant-table-thead>tr>td {
+    background-color: #FFE0C2;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+    border-start-start-radius: unset;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
+     border-start-end-radius: unset;
+}
+
+::-webkit-scrollbar {
+  width: 4px !important;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c0c0; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff7a00; 
+}
+
+.ant-steps .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-tail::after,
+.ant-steps .ant-steps-item-wait>.ant-steps-item-container>.ant-steps-item-tail::after,
+.ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+    background-color: #1677ff;
+    border: 2px solid #1677ff;
 }
 
 .movie-tooltip .movie-title {
@@ -304,6 +335,22 @@ h3 {
     color: rgba(0, 0, 0, 0.6);
 
 }
+
+.dx-icon-close {
+    color: #FF7A00 !important;
+    font-size: 24px !important;
+}
+
+.dx-icon-clear {
+    color: #FF7A00 !important;
+    font-size: 20px !important;
+}
+
+/* .dx-toolbar-item-content{
+    color: #FF7A00 !important;
+    font-size: larger !important;
+    font-weight: 400 !important;
+} */
 
 .dx-toolbar .dx-toolbar-after {
     display: flex;

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     BOMBodyCard,
     BOMPersonalized,
@@ -40,7 +41,7 @@ const routes: Route[] = [
         path: '/manage-card-box',
         component: CardManagement
     },
-      {
+    {
         path: '/manage-job-output',
         component: ManageJobOutput
     },
@@ -49,48 +50,48 @@ const routes: Route[] = [
         path: "/BOM-bodycard",
         component: BOMBodyCard,
     },
-      {
+    {
         path: "/BOM-personalized",
         component: BOMPersonalized,
     },
     //QUẢN LÝ PCN
-       {
+    {
         path: "/tech-form-list",
         component: TechFormList,
     },
-      {
+    {
         path: "/tech-form-approve",
         component: TechFormApprove,
     },
     //QUẢN LÝ KẾ HOẠCH SẢN XUẤT
-          {
+    {
         path: "/production-plan-list",
         component: ProductionPlanList,
     },
-      {
+    {
         path: "/declare-production-object",
         component: DeclareProductionObject,
     },
-      //GIÁM SÁT TIẾN ĐỘ
-            {
+    //GIÁM SÁT TIẾN ĐỘ
+    {
         path: "/progress-monitoring-manufacture",
         component: ProgressMonitoringManufacture,
     },
-      {
+    {
         path: "/progress-monitoring-order",
-        component: ProgressMonitoringOrder ,
+        component: ProgressMonitoringOrder,
     },
     //         {
     //     path: "/machine-monitoring",
     //     component: ProductionPlanList,
     // },
-      {
+    {
         path: "/stage-queue",
         component: ProgressMonitoringStageQueue,
     },
 
     //KHAI BÁO SẢN LƯỢNG
-        {
+    {
         path: "/declare-quantity",
         component: DeclareQuantity,
     }

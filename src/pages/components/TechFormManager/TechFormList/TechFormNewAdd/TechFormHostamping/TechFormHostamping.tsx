@@ -33,9 +33,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
         setToDateTime(e.value);
     };
 
-    const handleNextClick = () => {
-        console.log("Tiếp theo");
-    };
     const [techFormData, setTechFormData, save] = useContext(TechFormContext)
 
     return (
@@ -58,24 +55,26 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                 </div>
                 <div style={{ marginTop: 30 }}>
                     <div>
-                        <div className='subtile' style={{ marginBottom: 15 }}>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={fromDateTime}
-                                onValueChanged={handleFromDateTimeChange}
-                                type='datetime'
-                            />
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={toDateTime}
-                                onValueChanged={handleToDateTimeChange}
-                                type='datetime'
-                            />
+                        <div className='subtile'>
+                            <div className="style-title">
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
+                                <h6 className="h6-time">Thời gian từ</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={fromDateTime}
+                                    onValueChanged={handleFromDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
+                            <div className="style-title">
+                                <h6 className="h6-time"> đến</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={toDateTime}
+                                    onValueChanged={handleToDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
                         </div>
 
                         <DataGrid key={"id"} dataSource={data} keyExpr='id' showBorders={true} showRowLines={true} showColumnLines={true}>
@@ -158,7 +157,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                             textSize={17}
                                             icon='assets/icons/Trash.svg'
                                             textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
                                         />
                                     </div>
                                 )}
@@ -166,27 +164,29 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         </DataGrid>
                     </div>
                     <div style={{ marginTop: 30 }}>
-                        <div className='subtile' style={{ marginBottom: 15 }}>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>IC: </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={fromDateTime}
-                                onValueChanged={handleFromDateTimeChange}
-                                type='datetime'
-                            />
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={toDateTime}
-                                onValueChanged={handleToDateTimeChange}
-                                type='datetime'
-                            />
+                        <div className='subtile' style={{ marginBottom: 30 }}>
+                            <div className="style-title">
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>IC: </h6>
+                                <h6 className="h6-time">Thời gian từ</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={fromDateTime}
+                                    onValueChanged={handleFromDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
+                            <div className="style-title">
+                                <h6 className="h6-time">đến</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={toDateTime}
+                                    onValueChanged={handleToDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
                         </div>
                         <div>
-                            <Table dataSource={data} rowKey='id' bordered pagination={false}>
+                            <Table dataSource={data} rowKey='id' bordered={false} pagination={false}>
                                 <Table.Column title='Trình tự/Step' dataIndex='' key='id' align='left' width={130} />
                                 <Table.Column
                                     title='Chủng loại/IC Type'
@@ -243,14 +243,13 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
                                             />
                                         </div>
                                     )}
                                 />
                             </Table>
 
-                            <Table dataSource={data} rowKey='id' bordered pagination={false}>
+                            <Table dataSource={data} rowKey='id' bordered={false} pagination={false}>
                                 <Table.Column title='Trình tự/Step' dataIndex='process' key='id' align='left' width={130} />
                                 <Table.Column
                                     title='Step 1'
@@ -300,14 +299,13 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
                                             />
                                         </div>
                                     )}
                                 />
                             </Table>
 
-                            <Table key={"type"} id='type' dataSource={data1} rowKey='position' bordered pagination={false}>
+                            <Table key={"type"} id='type' dataSource={data1} rowKey='position' bordered={false} pagination={false}>
                                 <Table.Column title='Vị trí/Position' dataIndex='position' key='position' width={130} />
                                 <Table.ColumnGroup title='Lỗ ngoài/Outside Hole'>
                                     <Table.Column
@@ -435,26 +433,26 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         </div>
                     </div>
                     <div style={{ marginTop: 30 }}>
-                        <div className='subtile' style={{ marginBottom: 15 }}>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Đóng gói/Package: </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={fromDateTime}
-                                onValueChanged={handleFromDateTimeChange}
-                                type='datetime'
-                            // displayFormat="shortdatetime"
-                            />
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={toDateTime}
-                                onValueChanged={handleToDateTimeChange}
-                                type='datetime'
-                            // displayFormat="shortdatetime"
-                            />
+                        <div className='subtile'>
+                            <div className="style-title">
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Đóng gói/Package: </h6>
+                                <h6 className="h6-time">Thời gian từ</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={fromDateTime}
+                                    onValueChanged={handleFromDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
+                            <div className="style-title">
+                                <h6 className="h6-time">đến</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={toDateTime}
+                                    onValueChanged={handleToDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
                         </div>
                         <DataGrid key={"id"} dataSource={data} keyExpr='id' showBorders={true} showRowLines={true} showColumnLines={true}>
                             <Column dataField='id' caption='No.' alignment='center' width={100} />
@@ -505,7 +503,6 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                             textSize={17}
                                             icon='assets/icons/Trash.svg'
                                             textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
                                         />
                                     </div>
                                 )}
@@ -535,25 +532,25 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                     <div
                         className='toolbar'
                         style={{
-                            marginTop: 10,
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            // background: "#ffffff",
-                            padding: "8px",
+                            marginTop: 20,
+                            paddingBottom: 30,
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            // background: "#ffffff"
                             borderRadius: "4px",
                         }}>
                         <Button
                             onClick={setClose}
-                            style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 110 }}
+                            style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                         >Trở lại</Button>
                         <Button
                             disabled
                             onClick={() => { }}
-                            style={{ marginRight: "18px", width: 110 }}
+                            style={{ marginRight: "10px", width: 100 }}
                         >Tiếp theo</Button>
                         <Button
                             onClick={save}
-                            style={{ backgroundColor: "#FF7A00", color: "#fff", width: 110 }}
+                            style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                         >Thêm mới</Button>
                     </div>
                 </div>

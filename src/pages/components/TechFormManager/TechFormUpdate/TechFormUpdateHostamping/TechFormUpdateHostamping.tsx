@@ -98,7 +98,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </div>
                                 <div>
                                     <div>
-                                        <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                        <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                             <Table.Column title='Trình tự/Step' dataIndex='' key='id' align='left' width={130} />
                                             <Table.Column title='Chủng loại/IC Type' dataIndex='icType' key='icType' align='center' />
                                             <Table.Column title='Số lượng/Quantity' dataIndex='quantity' key='quantity' align='center' />
@@ -108,14 +108,14 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                             <Table.Column title='' key='actions' align='center' />
                                         </Table>
 
-                                        <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                        <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                             <Table.Column title='Trình tự/Step' dataIndex='step' key='id' align='left' width={130} />
                                             <Table.Column title='Step 1' dataIndex='icType' key='step1' align='center' />
                                             <Table.Column title='Step 2' dataIndex='icType' key='step2' align='center' />
                                             <Table.Column title='Step 3' dataIndex='icType' key='step3' align='center' />
                                             <Table.Column title='Step 4' dataIndex='icType' key='step4' align='center' />
                                         </Table>
-                                        <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered pagination={false}>
+                                        <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered={false} pagination={false}>
                                             <Table.Column title='Vị trí/Position' dataIndex='position' key='position' />
                                             <Table.ColumnGroup title='Lỗ ngoài/Outside Hole'>
                                                 <Table.Column
@@ -290,7 +290,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 className={cx("subtitle-lable")}>Đóng gói/Package: </h6>
+                                    <p className={cx("subtitle-label")}>Đóng gói/Package: </p>
                                     <h6 className={cx("subtitle-content")}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
@@ -312,8 +312,8 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 </DataGrid>
                             </div>
                             <div className='noteRemark'>
-                                <div className='note'>
-                                    <h6 className={cx("subtitle-label")}>Ghi chú/Remark: 60 </h6>
+                                <div style={{ marginTop: 30 }}>
+                                    <p className={cx("subtitle-label")}>Ghi chú/Remark: 60 </p>
                                 </div>
                                 <div className='rectangle-container'>
                                     <div className='text-section'>

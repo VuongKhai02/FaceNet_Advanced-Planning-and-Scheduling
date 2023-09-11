@@ -90,7 +90,7 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                             </div>
                             <div className='subtile'>
                                 <h6 style={{ fontSize: 15, fontWeight: 500 }}>
-                                    Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022{" "}
+                                    Vật liệu và cấu trúc/Material and Structure : Thời gian từ 09/08/2022 đến 19/08/2022{" "}
                                 </h6>
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -151,17 +151,18 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                 <div
                                     className='toolbar'
                                     style={{
-                                        marginTop: 10,
-                                        float: "right",
-                                        // background: "#ffffff",
-                                        padding: "8px",
+                                        marginTop: 20,
+                                        paddingBottom: 30,
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        // background: "#ffffff"
                                         borderRadius: "4px",
                                     }}>
                                     <Button
                                         className='border-none'
                                         icon='back'
                                         onClick={setClose}
-                                        style={{ marginRight: "20px", color: "#333" }}
+                                        style={{ marginRight: "10px", color: "#333" }}
                                     />
                                     <Button
                                         className='border-none'

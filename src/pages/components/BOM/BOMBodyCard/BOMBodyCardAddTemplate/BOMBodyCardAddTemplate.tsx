@@ -310,7 +310,7 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
                                 onClick={setClose}
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
                             >Hủy bỏ</Button>
-                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Thêm mới</Button>
+                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >Thêm mới</Button>
                         </div>
                     </div>
                 </div>
