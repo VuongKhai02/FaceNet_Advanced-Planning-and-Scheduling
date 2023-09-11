@@ -59,7 +59,7 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                         </div>
                         <div>
                             <div>
-                                <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                     <Table.Column title='Trình tự/Step' dataIndex='' key='id' align='left' width={130} />
                                     <Table.Column title='Chủng loại/IC Type' dataIndex='icType' key='icType' align='center' />
                                     <Table.Column title='Số lượng/Quantity' dataIndex='quantity' key='quantity' align='center' />
@@ -69,14 +69,14 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                     <Table.Column title='' key='actions' align='center' />
                                 </Table>
 
-                                <Table dataSource={data1} rowKey='id' bordered pagination={false}>
+                                <Table dataSource={data1} rowKey='id' bordered={false} pagination={false}>
                                     <Table.Column title='Trình tự/Step' dataIndex='step' key='id' align='left' width={130} />
                                     <Table.Column title='Step 1' dataIndex='icType' key='step1' align='center' />
                                     <Table.Column title='Step 2' dataIndex='icType' key='step2' align='center' />
                                     <Table.Column title='Step 3' dataIndex='icType' key='step3' align='center' />
                                     <Table.Column title='Step 4' dataIndex='icType' key='step4' align='center' />
                                 </Table>
-                                <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered pagination={false}>
+                                <Table key={"type"} id='type' dataSource={data2} rowKey='position' bordered={false} pagination={false}>
                                     <Table.Column title='Vị trí/Position' dataIndex='position' key='position' width={130} />
                                     <Table.ColumnGroup title='Lỗ ngoài/Outside Hole'>
                                         <Table.Column
@@ -248,12 +248,12 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                 <div className='text'>Kiểm tra/Checked By</div>
                                 <div className='date'>Ngày/tháng/năm</div>
                             </div>
-                            <div className='text-section' style={{ display: "flex", justifyContent: "flex-end" }}>
+                            <div className='text-section' >
                                 <div className='text'>Người lập biểu/Created By</div>
                                 <img
                                     src='https://img6.thuthuatphanmem.vn/uploads/2022/09/13/mau-chu-ky-tay-tuyet-dep_013426708.png'
                                     width={100}
-                                    height={100}
+                                // height={100}
                                 />
                                 <div className='date'>28/11/2023</div>
                             </div>
@@ -262,21 +262,22 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                     <div
                         className='toolbar'
                         style={{
-                            marginTop: 10,
-                            float: "right",
-                            // background: "#ffffff",
-                            padding: "8px",
+                            marginTop: 20,
+                            paddingBottom: 30,
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            // background: "#ffffff"
                             borderRadius: "4px",
                         }}>
                         <Button
                             onClick={setClose}
-                            style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                            style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                         >Trở lại</Button>
                         <Button
                             onClick={handleNextClick}
-                            style={{ backgroundColor: "#737070", color: "#fff", width: 100, marginRight: "8px" }}
+                            style={{ backgroundColor: "#737070", color: "#fff", width: 100, marginRight: "10px" }}
                         >Từ chối</Button>
-                        <Button onClick={handleNextClick} className='buttons' >Ký duyệt</Button>
+                        <Button style={{ width: 100 }} onClick={handleNextClick} className='buttons' >Ký duyệt</Button>
                     </div>
                 </div>
             </div>

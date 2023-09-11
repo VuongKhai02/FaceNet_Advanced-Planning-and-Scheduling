@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataGrid, DropDownBox } from "devextreme-react";
+import { DataGrid, DropDownBox, SelectBox } from "devextreme-react";
 import DateBox from "devextreme-react/date-box";
 import "./TechFormNewAddProcedure.css";
 import { observer } from "mobx-react";
@@ -60,23 +60,25 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             </h5>
                         </div>
                         <div className='subtile'>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={fromDateTime}
-                                onValueChanged={handleFromDateTimeChange}
-                                type='datetime'
-                            />
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={toDateTime}
-                                onValueChanged={handleToDateTimeChange}
-                                type='datetime'
-                            />
+                            <div className="style-title">
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
+                                <h6 className="h6-time">Thời gian từ</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={fromDateTime}
+                                    onValueChanged={handleFromDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
+                            <div className="style-title">
+                                <h6 className="h6-time">đến</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={toDateTime}
+                                    onValueChanged={handleToDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
                         </div>
                         <div style={{ marginTop: 30 }}>
                             <DataGrid
@@ -165,7 +167,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
                                             />
                                         </div>
                                     )}
@@ -175,28 +176,28 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                         <div style={{ marginTop: 30 }}>
                             <div>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={fromDateTime}
-                                        onValueChanged={handleFromDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={toDateTime}
-                                        onValueChanged={handleToDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
+                                    <div className="style-title">
+                                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
+                                        <h6 className="h6-time">Thời gian từ</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={fromDateTime}
+                                            onValueChanged={handleFromDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
+                                    <div className="style-title">
+                                        <h6 className="h6-time">đến</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={toDateTime}
+                                            onValueChanged={handleToDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
                                 </div>
 
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='Bước' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Nội dung ép/Contens'
@@ -245,7 +246,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -254,27 +254,27 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={fromDateTime}
-                                        onValueChanged={handleFromDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={toDateTime}
-                                        onValueChanged={handleToDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
+                                    <div className="style-title">
+                                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
+                                        <h6 className="h6-time">Thời gian từ</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={fromDateTime}
+                                            onValueChanged={handleFromDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
+                                    <div className="style-title">
+                                        <h6 className="h6-time">đến</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={toDateTime}
+                                            onValueChanged={handleToDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
                                 </div>
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='No.' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Mực/Lnk'
@@ -327,7 +327,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -336,27 +335,27 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={fromDateTime}
-                                        onValueChanged={handleFromDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
-                                    <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến</h6>
-                                    <DateBox
-                                        placeholder='dd/mm/yyyy'
-                                        style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                        value={toDateTime}
-                                        onValueChanged={handleToDateTimeChange}
-                                        type='datetime'
-                                    // displayFormat="shortdatetime"
-                                    />
+                                    <div className="style-title">
+                                        <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting: </h6>
+                                        <h6 className="h6-time">Thời gian từ</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={fromDateTime}
+                                            onValueChanged={handleFromDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
+                                    <div className="style-title">
+                                        <h6 className="h6-time"> đến</h6>
+                                        <DateBox
+                                            placeholder='dd/mm/yyyy'
+                                            value={toDateTime}
+                                            onValueChanged={handleToDateTimeChange}
+                                            type='datetime'
+                                        />
+                                    </div>
                                 </div>
-                                <Table dataSource={data} bordered rowKey='id' pagination={false}>
+                                <Table dataSource={data} bordered={false} rowKey='id' pagination={false}>
                                     <Table.Column title='No.' dataIndex='id' align='left' width={100} />
                                     <Table.Column
                                         title='Nội dung/Content'
@@ -366,7 +365,7 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                     <Table.Column
                                         title='Máy/Machine'
                                         dataIndex='machine'
-                                        render={() => <Input placeholder='Nhập' />}
+                                        render={() => <SelectBox placeholder='Nhập' />}
                                     />
                                     <Table.Column
                                         title=''
@@ -389,7 +388,6 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -399,21 +397,22 @@ export const TechFormNewAddProcedure: React.FC<TechFormNewAddProcedureProps> = o
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
-                                    float: "right",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    marginTop: 20,
+                                    paddingBottom: 30,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={handleAddFormTechHostamping}
-                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                 >Tiếp theo</Button>
-                                <Button disabled>Thêm mới</Button>
+                                <Button style={{ width: 100 }} disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

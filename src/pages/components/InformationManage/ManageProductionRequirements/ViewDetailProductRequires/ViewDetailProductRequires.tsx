@@ -3,7 +3,7 @@ import { DataGrid, Template } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Table, Checkbox, Button } from "antd";
-
+import "./ViewDetailProductRequires.css";
 type TechFormBodyCardProps = {
     isOpen: boolean;
     setClose?: () => void;
@@ -75,7 +75,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                             </h5>
                         </div>
                         <div style={{ marginTop: 10 }}>
-                            <div>
+                            <div style={{ width: 1500 }}>
                                 <DataGrid
                                     key={"title1"}
                                     keyExpr={"title1"}
@@ -107,17 +107,17 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                     </Column>
                                 </DataGrid>
                                 <div style={{ marginTop: 30 }}>
-                                    <Table dataSource={data2} rowKey='No' bordered pagination={false}>
+                                    <Table dataSource={data2} rowKey='No' bordered={false} pagination={false}>
                                         <Table.Column
                                             width={250}
-                                            title='Tên thẻ'
+                                            title={() => <div style={{ display: "flex", justifyContent: "center" }}>Tên thẻ</div>}
                                             dataIndex='cardName'
                                             key='cardName'
                                             onCell={(item: any, index: any) => {
                                                 return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                             }}
                                             render={() => (
-                                                <div>
+                                                <div style={{ marginBottom: 680 }}>
                                                     <div>
                                                         <p>Tên thẻ:</p>
                                                         Phôi thẻ MC Tita Cashback debit, VP Bank, SL thẻ đã tính bù hao T6/2023, Slg 15k thẻ
@@ -129,19 +129,21 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                     <div style={{ marginTop: 30 }}>
                                                         <p>Chất liệu:</p>
                                                         <div className='checkbox-row'>
-                                                            PVC thường <Checkbox checked={true} style={{ marginLeft: 80 }} />
+                                                            PVC thường
+                                                            <Checkbox checked={true} />
                                                         </div>
                                                         <div className='checkbox-row'>
-                                                            PVC màu <Checkbox style={{ marginLeft: 98 }} />
+                                                            PVC màu
+                                                            <Checkbox />
                                                         </div>
                                                         <div className='checkbox-row'>
-                                                            PVC transparent <Checkbox style={{ marginLeft: 55 }} />
+                                                            PVC transparent <Checkbox />
                                                         </div>
                                                         <div className='checkbox-row'>
-                                                            PVC kim loại <Checkbox style={{ marginLeft: 77 }} />
+                                                            PVC kim loại <Checkbox />
                                                         </div>
                                                         <div className='checkbox-row'>
-                                                            PVC rainbow <Checkbox checked={true} style={{ marginLeft: 76 }} />
+                                                            PVC rainbow <Checkbox checked={true} />
                                                         </div>
                                                     </div>
                                                     <div style={{ marginTop: 30 }}>
@@ -153,14 +155,14 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                         />
                                         <Table.Column
                                             width={200}
-                                            title='Số lượng'
+                                            title={() => <div style={{ display: "flex", justifyContent: "center" }}>Số lượng</div>}
                                             dataIndex='quantity'
                                             key='quantity'
                                             onCell={(item: any, index: any) => {
                                                 return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                             }}
                                             render={() => (
-                                                <div>
+                                                <div style={{ marginBottom: 1030 }}>
                                                     <p>3,000</p>
                                                     <p>(Làm thêm 10 thẻ gắn chip Demo màu vàng)</p>
                                                 </div>
@@ -168,14 +170,14 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                         />
                                         <Table.Column
                                             width={300}
-                                            title='Chất lượng'
+                                            title={() => <div style={{ display: "flex", justifyContent: "center" }}>Chất lượng</div>}
                                             dataIndex='quality'
                                             key='quality'
                                             onCell={(item: any, index: any) => {
                                                 return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                             }}
                                             render={() => (
-                                                <div>
+                                                <div style={{ marginBottom: 850 }}>
                                                     <div>
                                                         <Checkbox style={{ marginRight: 20 }} checked={true} />
                                                         Đảm bảo độ dày cứng, không cong vênh, cắt phẳng, không có bavia, không bong tróc
@@ -196,8 +198,8 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                             )}
                                         />
                                         <Table.Column
-                                            width={600}
-                                            title='Nội dung'
+                                            width={550}
+                                            title={() => <div style={{ display: "flex", justifyContent: "center" }}>Nội dung</div>}
                                             dataIndex='content'
                                             key='content'
                                             onCell={(item: any, index: any) => {
@@ -399,7 +401,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                     </div>
                                                     <div style={{ marginTop: 30 }}>
                                                         <p>Chip:</p>
-                                                        <div style={{ flexDirection: "row", display: "flex" }}>
+                                                        <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap", maxWidth: 400 }}>
                                                             <div>
                                                                 <Checkbox style={{ marginRight: 10 }} />
                                                                 Mifare
@@ -416,11 +418,11 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                                 <Checkbox style={{ marginRight: 10 }} />
                                                                 Proximity
                                                             </div>
-                                                            <div style={{ marginLeft: 30 }}>
+                                                            <div>
                                                                 <Checkbox style={{ marginRight: 10 }} />
                                                                 Felica
                                                             </div>
-                                                            <div style={{ marginLeft: 30 }}>
+                                                            <div style={{ marginLeft: 35 }}>
                                                                 <Checkbox style={{ marginRight: 10 }} checked={true} />
                                                                 Khác:
                                                             </div>
@@ -449,7 +451,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                                 <Checkbox style={{ marginRight: 10 }} />
                                                                 In phun
                                                             </div>
-                                                            <div >
+                                                            <div>
                                                                 <Checkbox style={{ marginRight: 10 }} />
                                                                 Encode từ
                                                             </div>
@@ -491,75 +493,75 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                                     <div style={{ marginTop: 30 }}>
                                                         <p>Đóng gói:</p>
                                                         <div>
-                                                            <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
+                                                            <div style={{ flexDirection: "row", display: "flex", justifyContent: "space-between", flexWrap: "wrap", maxWidth: 500 }}>
                                                                 <div>Túi: </div>
-                                                                <div style={{ marginLeft: 50 }}>
+                                                                <div style={{ marginLeft: 38 }}>
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     100 thẻ
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     25 thẻ
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     50 thẻ
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     100 thẻ
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     Móc khóa
                                                                 </div>
                                                             </div>
-                                                            <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
+                                                            <div style={{ flexDirection: "row", display: "flex", justifyContent: "space-between", flexWrap: "wrap", maxWidth: 500 }}>
                                                                 <div>Hộp: </div>
-                                                                <div style={{ marginLeft: 42 }}>
+                                                                <div style={{ marginLeft: 22 }}>
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     100
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     200
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     250
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     400
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     500
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     Khác:
                                                                 </div>
                                                             </div>
-                                                            <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
+                                                            <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap", justifyContent: "space-between", maxWidth: 500 }}>
                                                                 <div>Thùng: </div>
-                                                                <div style={{ marginLeft: 29 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     1000
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     2000
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     2500
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     10000
                                                                 </div>
-                                                                <div style={{ marginLeft: 30 }}>
+                                                                <div >
                                                                     <Checkbox style={{ marginRight: 10 }} />
                                                                     Khác:
                                                                 </div>
@@ -580,15 +582,16 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                             )}
                                         />
                                         <Table.Column
+
                                             width={200}
-                                            title='Màu sắc'
+                                            title={() => <div style={{ display: "flex", justifyContent: "center" }}>Màu sắc</div>}
                                             dataIndex='color'
                                             key='color'
                                             onCell={(item: any, index: any) => {
                                                 return index === 0 ? { rowSpan: 3 } : { rowSpan: 0 };
                                             }}
                                             render={() => (
-                                                <div>
+                                                <div style={{ marginBottom: 880 }}>
                                                     <div>
                                                         <Checkbox style={{ marginRight: 20 }} checked={true} />
                                                         Theo bản in thử khách hàng đã ký duyệt gửi kèm

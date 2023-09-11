@@ -213,7 +213,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         Quy cách sản phẩm/Product Spec
                                     </h5>
                                 </div>
-                                <Table dataSource={[techFormData.productSpec]} bordered rowKey='Id' pagination={false}>
+                                <Table dataSource={[techFormData.productSpec]} bordered={false} rowKey='Id' pagination={false}>
                                     <Table.Column
                                         title='Khổ thẻ/Size'
                                         dataIndex='sizeType'
@@ -318,7 +318,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         }}>1. Trình tự công nghệ/Technology procedure</h5>
                                     </div>
                                     <div>
-                                        <Table key={"step1"} dataSource={data2} rowKey='step1' bordered pagination={false}>
+                                        <Table key={"step1"} dataSource={data2} rowKey='step1' bordered={false} pagination={false}>
                                             <Table.Column
                                                 title='Step1'
                                                 dataIndex='step1'
@@ -408,6 +408,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                 render={() => <TextBox placeholder='Nhập' key='step12' />}
                                             />
                                             <Table.Column
+                                                width={90}
                                                 title=''
                                                 align='center'
                                                 render={() => (
@@ -426,7 +427,6 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                             textSize={17}
                                                             icon='assets/icons/Trash.svg'
                                                             textColor='#FF7A00'
-                                                            style={{ marginRight: 17 }}
                                                         />
                                                     </div>
                                                 )}
@@ -436,7 +436,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             dataSource={data4}
                                             key={'no'}
                                             rowKey="no"
-                                            bordered
+                                            bordered={false}
                                             pagination={false}
                                         >
                                             <Table.Column title="No." dataIndex="no" key="no" align="left" width={130} />
@@ -448,6 +448,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             <Table.Column title="Số lượng/Q'ty(tấm)" dataIndex="" key="quantity" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
                                             <Table.Column title="Ghi chú/Remark" dataIndex="" key="remark" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
                                             <Table.Column
+                                                width={300}
                                                 onCell={(item, index: any) => {
                                                     return index === 0 ? { rowSpan: 9 } : { rowSpan: 0 }
                                                 }}
@@ -469,9 +470,9 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                     <p className="ant-upload-hint">Chỉ cho phép file dạng .jpg, .png và dung lượng không quá 1Mb.</p>
                                                 </Upload.Dragger></div>}
                                             />
-                                            <Table.Column title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
+                                            <Table.Column width={90} title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
                                                 <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
-                                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                             </div>} />
                                         </Table>
 
@@ -481,23 +482,24 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                 <div
                                     className="toolbar"
                                     style={{
-                                        marginTop: 10,
+                                        marginTop: 20,
+                                        paddingBottom: 30,
                                         display: 'flex',
                                         justifyContent: 'flex-end',
-                                        // background: "#ffffff",
-                                        padding: "8px",
+                                        // background: "#ffffff"
                                         borderRadius: "4px",
                                     }}
                                 >
                                     <Button
                                         onClick={setClose}
-                                        style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                        style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                     >Trở lại</Button>
                                     <Button
                                         onClick={handleAddFormTechProcedure}
-                                        style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                        style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                     >Tiếp theo</Button>
                                     <Button
+                                        style={{ width: 100 }}
                                         disabled
                                     >Thêm mới</Button>
                                 </div>

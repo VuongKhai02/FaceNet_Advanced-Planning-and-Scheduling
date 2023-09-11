@@ -2,7 +2,6 @@
     background-color: #FF7A00 !important;
     color: #fff !important ;
     width: 100px; 
-    margin-right: 8px;
     
 }
 .note{
@@ -56,4 +55,18 @@
 }
 .ant-table-thead .ant-table-cell {
     background-color: #fff2e6;
+}
+
+.style-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.h6-time{
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    margin-left: 10px;
+    margin-right: 10px;
 }

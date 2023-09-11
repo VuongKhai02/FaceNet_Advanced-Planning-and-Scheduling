@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextBox } from "devextreme-react";
+import { SelectBox, TextBox } from "devextreme-react";
 import DateBox from "devextreme-react/date-box";
 import "./MaterialAndStructure.css";
 import { observer } from "mobx-react";
@@ -79,49 +79,43 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             </h5>
                         </div>
                         <div className='subtile'>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu cấu trúc/ Material and Structure : </h6>
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>Thời gian từ/from</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={fromDateTime}
-                                onValueChanged={handleFromDateTimeChange}
-                                type='datetime'
-                            // displayFormat="shortdatetime"
-                            />
-                            <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}> đến/to</h6>
-                            <DateBox
-                                placeholder='dd/mm/yyyy'
-                                style={{ width: 200, marginTop: -10, marginLeft: 10 }}
-                                value={toDateTime}
-                                onValueChanged={handleToDateTimeChange}
-                                type='datetime'
-                            // displayFormat="shortdatetime"
-                            />
+                            <div className="style-title">
+                                <h6 style={{ fontSize: 15, fontWeight: 500 }}>Vật liệu cấu trúc/ Material and Structure : </h6>
+                                <h6 className="h6-time">Thời gian từ</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={fromDateTime}
+                                    onValueChanged={handleFromDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
+                            <div className="style-title">
+                                <h6 className="h6-time">đến</h6>
+                                <DateBox
+                                    placeholder='dd/mm/yyyy'
+                                    value={toDateTime}
+                                    onValueChanged={handleToDateTimeChange}
+                                    type='datetime'
+                                />
+                            </div>
                         </div>
+                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 30 }}>
+                            <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                                <p >Chọn BOM:</p>&emsp;<SelectBox placeholder="Chọn" width={250} />
+                            </div>
+                            <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                                <p>Version:</p>&emsp;<SelectBox placeholder="Chọn" width={250} />
+                            </div>
+                            <div>
+                                <Button
+                                    onClick={() => { }}
+                                    style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
+                                >Áp dụng</Button>
+                            </div>
+                        </div>
+
                         <div style={{ marginTop: 30 }}>
-                            {/* <DataGrid
-                                dataSource={rowData}
-                                keyExpr="No"
-                                showBorders={true}
-                                showRowLines={true}
-                                showColumnLines={true}
-                            >
-                                <Column dataField="No" caption="No." allowEditing={false} alignment="left" />
-                                <Column dataField="CongDoan" caption="Công đoạn" />
-                                <Column dataField="MaterialCode" caption="Mã vật tư" />
-                                <Column dataField="quantity" caption="Số lượng" />
-                                <Column dataField="note" caption="Ghi chú/Remarks"
-                                    cellRender={() => (
-                                        <TextBox
-                                            className="inputRow"
-                                            placeholder="Nhập"
-                                        />
-                                    )}>
-                                </Column>
-                                <Column dataField="structure" caption="Cấu trúc/Structure" />
-                            </DataGrid> */}
-                            <Table dataSource={data} rowKey='No' key='No' bordered pagination={false}>
+                            <Table dataSource={data} rowKey='No' key='No' bordered={false} pagination={false}>
                                 <Table.Column dataIndex='No' title='No.' align='left' />
                                 <Table.Column dataIndex='CongDoan' title='Công đoạn' />
                                 <Table.Column dataIndex='MaterialCode' title='Mã vật tư' />
@@ -138,11 +132,36 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     dataIndex='structure'
                                     title='Cấu trúc/Structure'
                                     render={() => (
-                                        <div>
+                                        <div style={{ display: "flex", justifyContent: "center" }}>
                                             <img
                                                 src='https://img3.thuthuatphanmem.vn/uploads/2019/07/05/anh-chan-dung-con-gai-toc-ngan_082837328.jpg'
                                                 width={150}
                                                 height={220}></img>
+                                        </div>
+                                    )}
+                                />
+                                <Table.Column
+                                    title=''
+                                    dataIndex='operation'
+                                    align='center'
+                                    width={80}
+                                    render={() => (
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                            <SvgIcon
+                                                tooltipTitle='Thêm mới'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/Add.svg'
+                                                textColor='#FF7A00'
+                                                style={{ marginRight: 17 }}
+                                            />
+                                            <SvgIcon
+                                                tooltipTitle='Xóa hàng'
+                                                sizeIcon={17}
+                                                textSize={17}
+                                                icon='assets/icons/Trash.svg'
+                                                textColor='#FF7A00'
+                                            />
                                         </div>
                                     )}
                                 />
@@ -152,7 +171,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     <label htmlFor='raPhim' style={{ fontWeight: 500 }}>
                                         Ra phim/Pre-press
                                     </label>
-                                    <input type='checkbox' id='raPhim' />
+                                    <input type='checkbox' id='raPhim' checked={true} />
                                 </div>
                                 <div className='checkbox'>
                                     <label htmlFor='raBan' style={{ fontWeight: 500, marginLeft: 50 }}>
@@ -173,7 +192,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 </div>
                             </div>
                             <div style={{ marginTop: 30 }}>
-                                <Table dataSource={data1} bordered rowKey='Id' pagination={false}>
+                                <Table dataSource={data1} bordered={false} rowKey='Id' pagination={false}>
                                     <Table.ColumnGroup title='Mặt trước/Front' fixed='left'>
                                         <Table.Column
                                             dataIndex='MatTruocNoiDung'
@@ -231,7 +250,6 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                                     textSize={17}
                                                     icon='assets/icons/Trash.svg'
                                                     textColor='#FF7A00'
-                                                    style={{ marginRight: 17 }}
                                                 />
                                             </div>
                                         )}
@@ -241,22 +259,22 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                             <div
                                 className='toolbar'
                                 style={{
-                                    marginTop: 10,
+                                    marginTop: 20,
+                                    paddingBottom: 30,
                                     display: 'flex',
-                                    justifyContent: "flex-end",
-                                    // background: "#ffffff",
-                                    padding: "8px",
+                                    justifyContent: 'flex-end',
+                                    // background: "#ffffff"
                                     borderRadius: "4px",
                                 }}>
                                 <Button
                                     onClick={setClose}
-                                    style={{ marginRight: "18px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
                                 >Trở lại</Button>
                                 <Button
                                     onClick={handleAddFormTechProcedure}
-                                    style={{ marginRight: "18px", backgroundColor: "#FF7A00", color: "#fff" }}
+                                    style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
                                 >Tiếp theo</Button>
-                                <Button disabled>Thêm mới</Button>
+                                <Button style={{ width: 100 }} disabled>Thêm mới</Button>
                             </div>
                         </div>
                     </div>

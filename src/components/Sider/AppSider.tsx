@@ -22,7 +22,7 @@ const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
         navigate(path || "/");
     }
     return <Sider
-        width={340}
+        width={320}
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -32,33 +32,34 @@ const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
         }}
     >
         <div className={cx("logo")}>
-            <img className={cx("logo-image")} src="src/assets/facenet-logo.svg" alt="logo" />
-            {!collapsed && <img className={cx("logo-text")} src="src/assets/facenet.svg" alt="facenet" />}
+            <img className={cx("logo-image")} src="assets/icons/facenet-logo.svg" alt="logo" />
+            {!collapsed && <img className={cx("logo-text")} src="assets/icons/facenet.svg" alt="facenet" />}
         </div>
-        <Menu
-            className={cx("menu")}
-            mode="inline"
-            defaultActiveFirst
-            items={items.filter(item => !item.hidden).map(item => {
-                return {
-                    key: item.key,
-                    title: item.label,
-                    icon: item.icon,
-                    label: item.label,
-                    children: item.children?.filter(child => !child.hidden).map(child => {
-                        return {
-                            key: child.key,
-                            title: child.label,
-                            icon: child.icon,
-                            label: child.label,
-                            onClick: () => navigateTo(child.path)
-                        }
-                    }),
-                    onClick: item.children ? undefined : () => navigateTo(item.path)
-                }
-            })}
-        >
-        </Menu>
+        <div className={cx("sider-wrapper")}>
+            <Menu
+                className={cx("menu")}
+                mode="inline"
+                items={items.filter(item => !item.hidden).map(item => {
+                    return {
+                        key: item.key,
+                        title: item.label,
+                        icon: item.icon,
+                        label: item.label,
+                        children: item.children?.filter(child => !child.hidden).map(child => {
+                            return {
+                                key: child.key,
+                                title: child.label,
+                                icon: child.icon,
+                                label: child.label,
+                                onClick: () => navigateTo(child.path)
+                            }
+                        }),
+                        onClick: item.children ? undefined : () => navigateTo(item.path)
+                    }
+                })}
+            >
+            </Menu>
+        </div>
     </Sider>
 }
 

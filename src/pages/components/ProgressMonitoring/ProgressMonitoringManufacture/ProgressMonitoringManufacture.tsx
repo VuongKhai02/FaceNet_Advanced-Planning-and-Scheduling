@@ -11,9 +11,9 @@ import PaginationComponent from "../../../../shared/components/PaginationCompone
 
 const data = [
     {
-        woCode: "WO-T82023",
         soCode: "SO-001",
         productionCode: "15010623",
+        lotNumber: 1,
         customer: "TP Bank",
         cardName: "Visa TPBank",
         hopeQuantity: "3000",
@@ -23,9 +23,9 @@ const data = [
         status: "Đang sản xuất",
     },
     {
-        woCode: "WO-T82024",
         soCode: "SO-001",
         productionCode: "15010623",
+        lotNumber: 1,
         customer: "TP Bank",
         cardName: "Visa TPBank",
         hopeQuantity: "3000",
@@ -35,9 +35,9 @@ const data = [
         status: "Hoàn thành",
     },
     {
-        woCode: "WO-T82025",
         soCode: "SO-001",
         productionCode: "15010623",
+        lotNumber: 2,
         customer: "TP Bank",
         cardName: "Visa TPBank",
         hopeQuantity: "3000",
@@ -97,8 +97,8 @@ export const ProgressMonitoringManufacture = () => {
                             </h5>
                         </div>
                         <DataGrid
-                            key={"woCode"}
-                            keyExpr={"woCode"}
+                            key={"soCode"}
+                            keyExpr={"soCode"}
                             dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
@@ -171,9 +171,10 @@ export const ProgressMonitoringManufacture = () => {
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
 
-                            <Column caption={"Mã WO"} dataField={"woCode"} alignment='left' width={100} />
-                            <Column caption={"Mã SO"} dataField={"soCode"} />
+                            {/* <Column caption={"Mã WO"} dataField={"woCode"} alignment='left' width={100} /> */}
+                            <Column caption={"Mã đơn hàng"} dataField={"soCode"} />
                             <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
+                            <Column caption={"Số lô"} dataField={"lotNumber"} alignment="left" />
                             <Column caption={"Tên khách hàng"} dataField={"customer"} />
                             <Column caption={"Tên thẻ "} dataField={"cardName"} />
                             <Column caption={"Sản lượng dự kiến"} dataField={"hopeQuantity"} />

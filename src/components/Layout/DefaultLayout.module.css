@@ -4,10 +4,8 @@
     right: 0;
     bottom: 0;
     left: 0;
-    overflow: auto;
 }
 
 .wrapper {
-    height: max-content;
     min-height: 100%;
 }

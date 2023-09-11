@@ -1,3 +1,4 @@
+import { memo } from "react";
 import classNames from "classnames/bind";
 import { Breadcrumb, Layout, theme } from "antd";
 
@@ -11,7 +12,7 @@ export type AppContentProps = {
     children?: React.ReactNode;
 }
 
-const AppContent: React.FC<AppContentProps> = ({ children }) => {
+const AppContent: React.FC<AppContentProps> = memo(({ children }) => {
     const { token: { colorBgContainer } } = theme.useToken();
     const breadcrumbContext = useBreadcrumb();
     return <>
@@ -29,6 +30,6 @@ const AppContent: React.FC<AppContentProps> = ({ children }) => {
             {children ?? "Content"}
         </Content>
     </>
-}
+});
 
 export default AppContent;

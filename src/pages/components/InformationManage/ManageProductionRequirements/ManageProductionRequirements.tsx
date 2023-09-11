@@ -279,7 +279,7 @@ export const ManageProductionRequirements = () => {
                                     fixed={true}
                                     type={"buttons"}
                                     caption={"Thao tác"}
-                                    alignment='left'
+                                    alignment='center'
                                     cellRender={(cellInfo) => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
