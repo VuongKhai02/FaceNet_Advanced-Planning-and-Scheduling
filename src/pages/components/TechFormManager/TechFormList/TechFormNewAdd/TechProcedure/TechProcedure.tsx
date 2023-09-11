@@ -1,9 +1,10 @@
 import React, { } from "react";
-import { DataGrid } from "devextreme-react";
+import { DataGrid, SelectBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import MaterialAndStructure from "../MaterialAndStructure/MaterialAndStructure";
 import { Button, Upload } from "antd";
+import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
 
 type TechProcedureProps = {
     isOpen: boolean;
@@ -76,9 +77,28 @@ export const TechProcedure: React.FC<TechProcedureProps> = observer(({ isOpen = 
                                 showRowLines={true}
                                 showColumnLines={true}>
                                 <Column dataField='No' caption='No.' allowEditing={false} alignment='left' />
-                                <Column dataField='CongDoan' caption='Công đoạn'></Column>
-                                <Column dataField='MaJob' caption='Mã Job'></Column>
+                                <Column dataField='CongDoan' caption='Công đoạn' cellRender={() => <SelectBox placeholder="Chọn" />}></Column>
+                                <Column dataField='MaJob' caption='Mã Job' cellRender={() => <SelectBox placeholder="Chọn" />}></Column>
                                 <Column dataField='TenJob' caption='Tên Job' />
+                                <Column caption="" dataField="" width={100} cellRender={() => (
+                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                                        <SvgIcon
+                                            tooltipTitle='Thêm mới'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/Add.svg'
+                                            textColor='#FF7A00'
+                                            style={{ marginRight: 17 }}
+                                        />
+                                        <SvgIcon
+                                            tooltipTitle='Xóa hàng'
+                                            sizeIcon={17}
+                                            textSize={17}
+                                            icon='assets/icons/Trash.svg'
+                                            textColor='#FF7A00'
+                                        />
+                                    </div>
+                                )} />
                             </DataGrid>
                             <div
                                 className='toolbar'

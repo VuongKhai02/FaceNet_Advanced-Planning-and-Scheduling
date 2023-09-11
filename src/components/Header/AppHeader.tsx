@@ -29,13 +29,13 @@ const itemsLanguage = [
     {
         value: "en",
         label: "English",
-        imageUrl: "src/assets/GreatBritainFlag.png",
+        imageUrl: "assets/images/GreatBritainFlag.png",
         imageAlt: "English"
     },
     {
         value: "vi",
         label: "Tiếng Việt",
-        imageUrl: "src/assets/VietNamFlag.png",
+        imageUrl: "assets/images/VietNamFlag.png",
         imageAlt: "Tiếng Việt"
     }
 ]
@@ -116,7 +116,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
         </div>
         <div className={cx("menu-right")}>
             <div className={cx("user")}>
-                <img className={cx("user-avatar")} src={"src/assets/thuy_nga.jpg"} alt="user" />
+                <img className={cx("user-avatar")} src={"assets/images/GirlImage.jpg"} alt="user" />
                 <div className={cx("user-container")}>
                     <span className={cx("user-hello")}>Xin chào</span>
                     <span className={cx("user-username")}>{AuthService.getUsername()}</span>

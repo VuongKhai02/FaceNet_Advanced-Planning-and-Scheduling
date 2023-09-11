@@ -135,7 +135,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                         align='center'
                                         className='no-border-column'
                                         render={() => (
-                                            <div>
+                                            <div style={{ display: "flex", justifyContent: "center" }}>
                                                 <img
                                                     src='https://img3.thuthuatphanmem.vn/uploads/2019/07/05/anh-chan-dung-con-gai-toc-ngan_082837328.jpg'
                                                     width={150}

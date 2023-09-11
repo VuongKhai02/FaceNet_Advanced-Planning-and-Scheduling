@@ -248,12 +248,12 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                                 <div className='text'>Kiểm tra/Checked By</div>
                                 <div className='date'>Ngày/tháng/năm</div>
                             </div>
-                            <div className='text-section' style={{ display: "flex", justifyContent: "flex-end" }}>
+                            <div className='text-section' >
                                 <div className='text'>Người lập biểu/Created By</div>
                                 <img
                                     src='https://img6.thuthuatphanmem.vn/uploads/2022/09/13/mau-chu-ky-tay-tuyet-dep_013426708.png'
                                     width={100}
-                                    height={100}
+                                // height={100}
                                 />
                                 <div className='date'>28/11/2023</div>
                             </div>

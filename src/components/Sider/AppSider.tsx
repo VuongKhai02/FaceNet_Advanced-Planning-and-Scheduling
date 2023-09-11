@@ -32,8 +32,8 @@ const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
         }}
     >
         <div className={cx("logo")}>
-            <img className={cx("logo-image")} src="src/assets/facenet-logo.svg" alt="logo" />
-            {!collapsed && <img className={cx("logo-text")} src="src/assets/facenet.svg" alt="facenet" />}
+            <img className={cx("logo-image")} src="assets/icons/facenet-logo.svg" alt="logo" />
+            {!collapsed && <img className={cx("logo-text")} src="assets/icons/facenet.svg" alt="facenet" />}
         </div>
         <div className={cx("sider-wrapper")}>
             <Menu

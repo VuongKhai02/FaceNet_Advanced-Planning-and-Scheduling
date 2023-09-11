@@ -211,7 +211,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                             </div>
                             <div className='subtile'>
                                 <h6 className={cx('sub-title-content')}>
-                                    Vật liệu và cấu trúc/Material and Structure : Thời gian từ/from 09/08/2022 đến/to 19/08/2022{" "}
+                                    Vật liệu và cấu trúc/Material and Structure : Thời gian từ 09/08/2022 đến 19/08/2022{" "}
                                 </h6>
                             </div>
                             <div style={{ marginTop: 30 }}>

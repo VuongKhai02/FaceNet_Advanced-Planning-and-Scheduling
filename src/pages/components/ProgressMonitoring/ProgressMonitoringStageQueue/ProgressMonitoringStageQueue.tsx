@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectBox, TextBox } from "devextreme-react";
+import { SelectBox, TextArea, TextBox } from "devextreme-react";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -9,6 +9,7 @@ import { Button } from "antd";
 const { Step } = Steps;
 import classNames from "classnames/bind";
 import styles from "./ProgressMonitoringStageQueue.module.css";
+import { WarningOutlined } from "@ant-design/icons";
 
 const cx = classNames.bind(styles);
 const items = [
@@ -22,6 +23,8 @@ const items = [
 
 export const ProgressMonitoringStageQueue = () => {
     const [isVisibleDefineStageQueue, setIsVisibleDefineStageQueue] = React.useState<boolean>(false);
+    const [defineStageQueue, setDefineStageQueue] = React.useState<boolean>(false);
+    const [startStage, setStartStage] = React.useState<boolean>(false);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -51,9 +54,8 @@ export const ProgressMonitoringStageQueue = () => {
                     Hủy bỏ
                 </Button>
                 <Button
-
                     key='submit'
-                    onClick={() => { }}
+                    onClick={() => setDefineStageQueue(true)}
                     className={cx("btn-save")}>
                     Thiết lập
                 </Button>
@@ -69,7 +71,9 @@ export const ProgressMonitoringStageQueue = () => {
                             className='informer'
                             style={{
                                 background: "#fff",
-                                textAlign: "left",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                flexDirection: "row",
                                 paddingTop: 12,
                             }}>
                             <h5
@@ -80,6 +84,13 @@ export const ProgressMonitoringStageQueue = () => {
                                 }}>
                                 Hàng chờ công đoạn
                             </h5>
+                            <SvgIcon
+                                onClick={() => setIsVisibleDefineStageQueue(true)}
+                                sizeIcon={25}
+                                tooltipTitle='Thiết lập hàng chờ công đoạn'
+                                icon='assets/icons/Setting.svg'
+                                textColor='#FF7A00'
+                            />
                         </div>
                         <div>
                             <Steps
@@ -97,31 +108,111 @@ export const ProgressMonitoringStageQueue = () => {
                                 <h3>
                                     <p>Danh sách lệnh sản xuất đang chờ</p>
                                 </h3>
-                                <div className='border__table-row'></div>
+                                <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Mã sản xuất ' data='1234' />
                                 <InfoRow label='Số lượng yêu cầu' data='10000' />
-                                <div className='border__table-row'></div>
+                                <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Mã sản xuất ' data='2345' />
                                 <InfoRow label='Số lượng yêu cầu' data='5000' />
-                                <div className='border__table-row'></div>
+                                <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Mã sản xuất ' data='3456' />
                                 <InfoRow label='Số lượng yêu cầu' data='9000' />
-                                <div className='border__table-row'></div>
+                                <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Mã sản xuất ' data='5678' />
                                 <InfoRow label='Số lượng yêu cầu' data='69000' />
-                                <div className='border__table-row'></div>
+                                <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Tổng số lượng' data='96000' />
-                                <Button
-                                    style={{
-                                        marginLeft: 200,
-                                        backgroundColor: "#FF7A00",
-                                        color: "#fff",
-                                        width: 180,
-                                        marginBottom: 30,
-                                        marginTop: 30,
-                                    }}
-                                    onClick={() => setIsVisibleDefineStageQueue(true)}
-                                >Bắt đầu công đoạn</Button>
+                                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", paddingRight: 10 }}>
+                                    <Button
+                                        onClick={() => setStartStage(true)}
+                                        style={{
+                                            backgroundColor: "#FF7A00",
+                                            color: "#fff",
+                                            marginBottom: 30,
+                                            marginTop: 30,
+                                        }}
+
+                                    >Bắt đầu công đoạn</Button>
+                                </div>
+
+                                <PopupConfirmGeneral
+                                    isVisible={startStage}
+                                    modalContent={
+                                        <div>
+                                            <div style={{ marginTop: 20, marginBottom: 30, fontSize: 18, fontWeight: "400" }}>
+                                                Hiện tại Job chưa đủ số lượng đầu vào tối thiểu.
+                                                Để bắt đầu sản xuất cần tối thiểu 20,000 BTP.
+                                                Bạn có chắc muốn bắt đầu sản xuất cho tất cả các WO đang chờ không?
+                                                Sản lượng hiện tại/Sản lượng đầu vào tối thiểu
+                                            </div>
+                                            <div className='reject-reason-container'>
+                                                <label style={{ fontSize: 18 }}>
+                                                    Lý do bắt đầu khi chưa đủ số lượng đầu vào tối thiểu<span className='required'>*</span>
+                                                </label>
+                                                <TextArea
+                                                    value={""}
+                                                    onValueChanged={() => { }}
+                                                    placeholder='Nhập'
+                                                    height={140}
+                                                    style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}
+                                                />
+                                            </div>
+                                        </div>
+                                    }
+                                    modalTitle={
+                                        <div style={{ display: "flex", flexDirection: "row" }}>
+                                            <SvgIcon sizeIcon={25} icon='assets/icons/Info.svg' textColor='#FF7A00' style={{ marginRight: 17 }} />
+                                            <span style={{ color: "#FF7A00", fontSize: 20 }}>Xác nhận bắt đầu công đoạn?</span>
+                                        </div>
+                                    }
+                                    width={800}
+                                    onCancel={() => setStartStage(false)}
+                                    onSubmit={() => { }}
+                                />
+
+                                <PopupConfirmGeneral
+                                    isVisible={defineStageQueue}
+                                    onCancel={() => setDefineStageQueue(false)}
+                                    onSubmit={() => { }}
+                                    modalTitle={
+                                        <div>
+                                            <h3
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    color: "#ff794e",
+                                                    fontWeight: 500,
+                                                }}>
+                                                Thiết lập hàng chờ
+                                            </h3>
+                                        </div>
+                                    }
+                                    modalContent={
+                                        <div>
+                                            <h4 style={{ fontWeight: 400 }}>
+                                                Bạn có chắc chắn muốn thiết lập hàng chờ với thông tin vừa nhập?
+                                            </h4>
+                                            <div
+                                                style={{
+                                                    backgroundColor: "#ffe0c2",
+                                                    borderLeft: "4px solid #ff794e",
+                                                    height: 100,
+                                                    borderRadius: 5,
+                                                }}>
+                                                <h3 style={{ color: "#ff794e", fontWeight: 500 }}>
+                                                    <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
+                                                    Lưu ý:
+                                                </h3>
+                                                <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>
+                                                    Nếu thiết lập hàng chờ thì tất cả các kế hoạch sản xuất từ thời điểm này sẽ áp dụng hàng chờ này!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    width={600}
+                                />
+
                                 <PopupConfirmGeneral
                                     isVisible={isVisibleDefineStageQueue}
                                     modalContent={

@@ -1,4 +1,4 @@
-.border__table-row {
+:global(.border__table-row) {
     border-bottom: 1px solid #ccc;
     width: 100% !important;
 }
@@ -11,6 +11,7 @@ label {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    z-index: 1000;
 }
 
 .btn-cancel {

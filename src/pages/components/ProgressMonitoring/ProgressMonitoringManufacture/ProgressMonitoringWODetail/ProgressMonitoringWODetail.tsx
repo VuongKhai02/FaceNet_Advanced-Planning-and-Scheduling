@@ -4,6 +4,7 @@ import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
 import ProgressWODetailJob from "./ProgressWODetailJob/ProgressWODetailJob";
 import { Button } from "antd";
+import { useBreadcrumb } from "../../../../../contexts/BreadcrumbItems";
 
 const { Step } = Steps;
 const items = [
@@ -32,6 +33,25 @@ type ProgressMonitoringWODetailProps = {
 
 export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProps> = observer(({ isOpen = false, setClose }) => {
     const [isVisibleProgressWODetailJob, setIsVisibleProgressWODetailJob] = React.useState<boolean>(false);
+
+    const breadcrumbContext = useBreadcrumb();
+
+    React.useEffect(() => {
+        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
+            breadcrumbContext.setBreadcrumbData({
+                items: [
+                    {
+                        key: "progress-monitoring",
+                        title: "Giám sát tiến độ",
+                    },
+                    {
+                        key: "progress-monitoring-manufacture",
+                        title: "Giám sát tiến độ sản xuất",
+                    }
+                ]
+            })
+        }
+    }, []);
     return (
         <>
             {isVisibleProgressWODetailJob ? (
@@ -56,27 +76,28 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                 style={{
                                     fontSize: 18,
                                     marginBottom: 0,
-                                    border: "1px solid #bebebe",
+                                    // border: "1px solid #bebebe",
                                 }}>
-                                Thông tin chi tiết - WO_2543_01
+                                Thông tin chi tiết
                             </h5>
                         </div>
                         <div>
-                            <table style={{ display: "flex", justifyContent: "space-around" }}>
+                            <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td>
                                     <InfoRow label='Mã đơn hàng' data='SO_2543' />
                                     <InfoRow label='Tên khách hàng' data='Công ty ABC' />
-                                    <InfoRow label='Thời gian bắt đầu' data='11/7/2023 15:08:50' />
-                                    <InfoRow label='Thời gian kết thúc' data='11/7/2023 15:08:50' />
-                                    <InfoRow label='Trạng thái' data='Đang thực hiện' />
+                                    <InfoRow label='Tên thẻ' data='Phôi thẻ Visa Credit Classic, TP Bank, T8/2022' />
+                                    <InfoRow label='Thời gian bắt đầu' data='08/7/2023 15:08:50' />
+                                    <InfoRow label='Thời gian kết thúc dự kiến' data='11/7/2023 15:08:50' />
+                                    <InfoRow label='Trạng thái' data='Đang sản xuất' />
                                 </td>
                                 <td>
                                     <InfoRow label='Mã sản xuất' data='15010623' />
-                                    <InfoRow label='Mã WO' data='KHSX-T5' />
-                                    <InfoRow label='Tên thẻ' data='Phôi thẻ Visa Credit Classic, TP Bank, T8/2022' />
                                     <InfoRow label='Sản lượng kế hoạch' data='20000' />
-                                    <InfoRow label='Số lượng thực tế' data='15000' />
+                                    <InfoRow label='Số lượng sản xuất thực tế' data='15000' />
                                     <InfoRow label='Tỷ lệ hoàn thành' data='38%' />
+                                    <InfoRow label='Số lượng đã QC' data='4000' />
+                                    <InfoRow label='Tỷ lệ lỗi' data='4%' />
                                 </td>
                             </table>
                         </div>
@@ -111,17 +132,18 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                                             <InfoRow label='Tỉ lệ lỗi' data='9% ' />
                                         </td>
                                     </table>
-                                    <Button
-                                        style={{
-                                            marginLeft: 250,
-                                            backgroundColor: "#FF7A00",
-                                            color: "#fff",
-                                            width: 120,
-                                            marginBottom: 30,
-                                            marginTop: 30,
-                                        }}
-                                        onClick={() => setIsVisibleProgressWODetailJob(true)}
-                                    >Xem chi tiết</Button>
+                                    <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", paddingRight: 10 }}>
+                                        <Button
+                                            style={{
+                                                backgroundColor: "#FF7A00",
+                                                color: "#fff",
+                                                marginBottom: 30,
+                                                marginTop: 30,
+                                            }}
+                                            onClick={() => setIsVisibleProgressWODetailJob(true)}
+                                        >Xem chi tiết</Button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
