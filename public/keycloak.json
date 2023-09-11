@@ -1,8 +1,0 @@
-{
-  "realm": "Facenet",
-  "auth-server-url": "https://dangnhap.xfactory.com.vn/",
-  "ssl-required": "external",
-  "resource": "mk_aps_frontend",
-  "public-client": true,
-  "confidential-port": 0
-}

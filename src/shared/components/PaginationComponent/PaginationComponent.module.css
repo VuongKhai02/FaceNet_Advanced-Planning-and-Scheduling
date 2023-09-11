@@ -1,0 +1,37 @@
+
+.pagination-container {
+  padding-bottom: 15px;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dx-pages {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dx-info {
+  color: rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.button-selected {
+  background-color: rgb(212, 212, 212);
+}
+
+.pagination-container :global(.ant-select-single:not(.ant-select-customize-input)) :global(.ant-select-selector) {
+  border-color: #ddd;
+  color: rgb(55, 54, 53);
+}
+
+.pagination-container :global(.ant-select-selector):hover {
+    background-color: #eeecec;
+}
+
+::ng-deep .dx-button-has-text .dx-button-content {
+  padding: 8px 8px;
+}

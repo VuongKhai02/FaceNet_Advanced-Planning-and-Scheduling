@@ -1,33 +1,94 @@
-html, body, #root {
-  height: 100%;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary-color: #FF7A00;
+  --secondary-color: #2A3884;
+  --text-color: #FFFFFF;
+  --sider-color: #E5E5E5;
+  --dark-color: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
 }
 
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: #fafafa;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
-.ant-menu-root.ant-menu-inline, .ant-menu-root.ant-menu-vertical, .ant-menu-root.ant-menu-vertical-left, .ant-menu-root.ant-menu-vertical-right {
-  box-shadow: none;
-  background-color: #BEBEBE;
-}
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: #ff794e;
-  color: white;
-}
-.ant-menu-submenu-selected {
-  color: #ff794e;
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
-.ant-menu-sub.ant-menu-inline {
-  background-color: #BEBEBE;
-}
-.ant-menu-item-selected a, .ant-menu-item-selected a:hover{
-  color: white;
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
 }
 
-.ant-layout-sider{
-  background-color: #BEBEBE;
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+.ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+  background: var(--sider-color);
+  width: 92%;
+  margin-left: auto;
+}
+
+.ant-menu-light .ant-menu-submenu-selected>.ant-menu-submenu-title,
+.ant-menu-light>.ant-menu .ant-menu-submenu-selected>.ant-menu-submenu-title {
+  color: var(--primary-color);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90%;
+    border-bottom: 2px solid var(--primary-color);
+  }
+}
+
+.ant-menu-item.ant-menu-item-selected[role="menuitem"],
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child[role="menuitem"] {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border-radius: 8px 2px 2px 8px;
 }

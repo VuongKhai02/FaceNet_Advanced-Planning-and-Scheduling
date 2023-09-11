@@ -1,9 +1,0 @@
-version: "3.8"
-services:
-  frontend:
-    container_name: mk-aps-frontend
-    build:
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "6080:80"
