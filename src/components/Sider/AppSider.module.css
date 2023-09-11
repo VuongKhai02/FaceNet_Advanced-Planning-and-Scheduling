@@ -1,6 +1,6 @@
 .app-sider {
     background: var(--sider-color);
-    z-index: 1000;
+    z-index: 10;
 }
 
 .app-sider :global(.ant-layout-sider-children) {
