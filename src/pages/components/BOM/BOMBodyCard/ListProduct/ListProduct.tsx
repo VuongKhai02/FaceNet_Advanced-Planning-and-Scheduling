@@ -95,7 +95,7 @@ export const ListProduct = React.memo((props: any) => {
 
 
     const handleChangeStatus = (bomId) => {
-        httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
+        httpRequests.put(`/api/boms/${bomId}/status`)
         .then(response => {
             console.log(response);
             getBOMsProduct(props.bomTemplateId)
