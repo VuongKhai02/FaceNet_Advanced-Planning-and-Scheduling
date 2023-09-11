@@ -19,6 +19,7 @@ export default defineConfig({
       },
     }
   },
+  assetsInclude: ["./assets"],
   envDir: "./environments",
 })
 
