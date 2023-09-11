@@ -1,42 +1,25 @@
-######################
-# Project Specific
-######################
-/src/main/webapp/content/css/main.css
-/target/classes/static/**
-/src/test/javascript/coverage/
-
-# dependencies
-node_modules/*
-# testing
-/coverage
-
-# production
-build
-build-gradle
-
-# misc
-.DS_Store
-
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
+node_modules
+dist
+dist-ssr
+*.local
+build
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-.vscode
-.gradle
-.husky
-.jmix
-
-### IntelliJ IDEA ###
-.idea/**
-!.idea/encodings.xml
-*.iws
-*.iml
-*.ipr
-out/
-logs/
-bin/**
-### VS Code ###
-.vscode/
-src/main/resources/application.properties
-node_modules/**
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

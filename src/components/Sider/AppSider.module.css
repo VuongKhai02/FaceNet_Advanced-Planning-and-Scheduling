@@ -1,0 +1,32 @@
+.app-sider {
+    background: var(--sider-color);
+    z-index: 1000;
+}
+
+.logo {
+    height: 72px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .logo-image {
+        width: 45px;
+    }
+
+    .logo-text {
+        margin-left: 12px;
+    }
+}
+
+.menu {
+    background-color: var(--sider-color);
+    color: var(--dark-color);
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline,
+.ant-menu-light>.ant-menu.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+    background: var(--sider-color);
+}

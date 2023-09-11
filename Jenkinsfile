@@ -67,23 +67,32 @@
 // //     	    bat "npm run start-3001"
 // //     	  }
 // //     	}
-// }
 
 pipeline {
     agent {label "APS_MK"}
     stages{
-        stage ('Clone') {
+        stage ('SonarQube Analysis') {
             steps {
-                git branch: 'test', credentialsId: 'github', url: 'https://github.com/nguyenquanghieu2000d/mk-aps-frontend.git'
+                script {
+                    def scannerHome = tool 'SonarScanner';
+                    withSonarQubeEnv() {
+                        sh "${scannerHome}/sonar-scanner-4.8.1.3023/bin/sonar-scanner"
+                    }
+                }
             }
         }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv("sonarqube-4.8") {
-        //             bat "./gradlew sonar"
-        //         }
-        //     }
-        // }
+        stage("Quality Gate") {
+            steps {
+                script {
+                    timeout(time: 1, unit: 'HOURS') {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
         stage("Check old image") {
             steps {
                 sh 'docker rm -f mk-aps-frontend || echo "this container does not exist" '
