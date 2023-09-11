@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { DataGrid } from "devextreme-react";
 import {
     Column,
@@ -16,7 +16,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import BOMBodyCardAddInfo from "./BOMBodyCardAddInfo/BOMBodyCardAddInfo";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
-import ListProduct from "./ListProduct/ListProduct";
+import ListProduct, { Status } from "./ListProduct/ListProduct";
 import BOMBodyCardAddTemplate from "./BOMBodyCardAddTemplate/BOMBodyCardAddTemplate";
 import PopupBOM from "../../../../shared/components/PopupBOM/PopupBOM";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
@@ -24,6 +24,7 @@ import { Button } from "antd";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import httpRequests from "../../../../utils/httpRequests";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { BOMBodyCardInfo } from "./BOMBodyCardInfo/BOMBodyCardInfo";
 
 const cx = classNames.bind(styles);
 const data2 = [
@@ -76,7 +77,7 @@ export const BOMBodyCard = () => {
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(bom?.data?.length / pageSize);
-    const dataPage = bom?.data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+    // const dataPage = bom?.data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -110,12 +111,25 @@ export const BOMBodyCard = () => {
         setIsBOMCardAddInfo(true);
     };
 
-    React.useEffect(() => {
-        httpRequests.get("/api/boms").then((response) => {
-            if (response.status === 200) {
+    const handleChangeStatus = (bomId) => {
+        httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
+        .then(response => {
+            console.log(response);
+            getBOMsProduct(props.bomTemplateId)
+        })
+    }
+
+    const getBomTemplate = () => {
+        httpRequests.get("/api/boms/templates").then((response) => {
+            if (response.status === 200 && response.data.responseCode === "00") {
+                console.log(response)
                 setBom(response.data.data);
             }
         });
+    }
+
+    React.useEffect(() => {
+        getBomTemplate();   
     }, []);
 
     const handleCustomFooter = [
@@ -143,9 +157,10 @@ export const BOMBodyCard = () => {
         </div>
     ];
 
-    const handleListProduct = () => {
-        return <ListProduct />;
-    };
+    const handleListProduct = useCallback(({data}) => {
+        console.log(data)
+        return <ListProduct bomTemplateId = {data.id}/>;
+    }, [])
 
     return (
         <>
@@ -188,9 +203,9 @@ export const BOMBodyCard = () => {
                         </div>
                         <div>
                             <DataGrid
-                                key='productCode'
-                                keyExpr={"productCode"}
-                                dataSource={dataPage}
+                                key='id'
+                                keyExpr={"id"}
+                                dataSource={bom.data}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
@@ -246,74 +261,7 @@ export const BOMBodyCard = () => {
                                 <PopupBOM
                                     isVisible={isDetailBOM}
                                     modalContent={
-                                        <div>
-                                            <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-                                                <div>
-                                                    <div>
-                                                        <table
-                                                            style={{
-                                                                display: "flex",
-                                                                justifyContent: "space-arround",
-                                                            }}>
-                                                            <td>
-                                                                <InfoRow label='Mã loại thẻ' data='TH001' />
-                                                                <InfoRow label='Bom version' data='1.1' />
-                                                            </td>
-                                                            <td>
-                                                                <InfoRow label='Tên loại thẻ' data='Thẻ visa TP Bank' />
-                                                                <InfoRow label='Trạng thái' data='Hoạt động' />
-                                                            </td>
-                                                        </table>
-                                                    </div>
-                                                    <div style={{ marginTop: 40 }}>
-                                                        <h4>Danh sách vật tư</h4>
-                                                    </div>
-                                                    <DataGrid
-                                                        key={"codeMaterial"}
-                                                        keyExpr={"codeMaterial"}
-                                                        dataSource={data2}
-                                                        showBorders={true}
-                                                        columnAutoWidth={true}
-                                                        showRowLines={true}
-                                                        rowAlternationEnabled={true}
-                                                        allowColumnResizing={true}
-                                                        allowColumnReordering={true}
-                                                        focusedRowEnabled={true}>
-                                                        <FilterRow visible={true} />
-                                                        <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
-                                                        <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />
-                                                        <Column caption={"Version"} dataField={"version"} />
-                                                        <Column caption={"Phân loại"} dataField={"classify"} />
-                                                        <Column caption={"Định mức"} dataField={"norm"} />
-                                                        <Column caption={"Đơn vị tính"} dataField={"unit"} />
-                                                        <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                                        <Column
-                                                            caption={"Mô tả vật tư thay thế"}
-                                                            dataField={"replaceMaterialDescription"}
-                                                        />
-                                                        <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
-                                                        <Column
-                                                            fixed={true}
-                                                            type={"buttons"}
-                                                            caption={"Thao tác"}
-                                                            alignment='center'
-                                                            cellRender={() => (
-                                                                <div>
-                                                                    <SvgIcon
-                                                                        onClick={() => setIsVisibleListMaterialReplacement(true)}
-                                                                        tooltipTitle='Danh sách vật tư thay thế'
-                                                                        sizeIcon={17}
-                                                                        icon='assets/icons/EyeOpen.svg'
-                                                                        textColor='#FF7A00'
-                                                                        style={{ marginLeft: 35 }}
-                                                                    />
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </DataGrid>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <BOMBodyCardInfo bomId = {bomIdChoosed} />
                                     }
                                     modalTitle={
                                         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -327,7 +275,8 @@ export const BOMBodyCard = () => {
                                         </div>
                                     }
                                     width={1300}
-                                    onCancel={() => setIsDetailBOM(false)}
+                                    onCancel={() => {setIsDetailBOM(false)
+                                    setBomIdChoosed(null)}}
                                     onSubmit={() => { }}
                                     customFooter={handleCustomFooter}
                                 />
@@ -441,16 +390,15 @@ export const BOMBodyCard = () => {
                                 <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
 
-                                <Column dataField='productCode' minWidth={140} caption='Mã sản phẩm'></Column>
+                                <Column fixed={true} dataField='productCode' minWidth={140} caption='Mã sản phẩm'></Column>
                                 <Column dataField='productName' caption='Tên sản phẩm' minWidth={200}></Column>
 
                                 <Column dataField='version' minWidth={140} caption='Version' alignment='left'></Column>
-
-                                <Column dataField='productClassify' caption='Phân loại sản phẩm' alignment={"left"} minWidth={140}></Column>
-                                <Column dataField='describe' caption='Mô tả ' />
                                 <Column dataField='notice' caption='Lưu ý' />
                                 <Column dataField='note' alignment={"left"} caption={"Ghi chú"} width={140}></Column>
-                                <Column caption={"Trạng thái"} dataField='status' />
+                                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                                    return <Status value = {cellInfo.value}/>
+                                }}/>
                                 <Column
                                     fixed={true}
                                     type={"buttons"}
@@ -459,7 +407,10 @@ export const BOMBodyCard = () => {
                                     cellRender={(cellInfo) => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
-                                                onClick={() => setIsDetailBOM(true)}
+                                                onClick={() => {
+                                                    setIsDetailBOM(true)
+                                                    setBomIdChoosed(cellInfo.key);
+                                                }}
                                                 tooltipTitle='Thông tin chi tiết BOM mẫu'
                                                 sizeIcon={17}
                                                 textSize={17}
@@ -497,7 +448,7 @@ export const BOMBodyCard = () => {
                                             />
                                         </div>
                                     )}></Column>
-                                <MasterDetail enabled={true} component={handleListProduct} />
+                                <MasterDetail  enabled={true} render={handleListProduct} />
                             </DataGrid>
                             <PaginationComponent
                                 pageSizeOptions={[10, 20, 40]}
