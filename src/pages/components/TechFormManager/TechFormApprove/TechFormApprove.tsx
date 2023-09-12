@@ -303,7 +303,7 @@ export const TechFormApprove = () => {
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
 
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <Selection mode='multiple' />
+                            {/* <Selection mode='multiple' /> */}
                             <Column dataField='productCode' caption='Mã phiếu công nghệ'></Column>
                             <Column dataField='productName' caption='Tên thẻ' ></Column>
 

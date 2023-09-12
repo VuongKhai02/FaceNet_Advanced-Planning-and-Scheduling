@@ -1,13 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import './App.css'
-import { DefaultLayout, Loading } from './components';
-
+import { DefaultLayout, Loading as LD } from './components';
 import { ROUTES } from './route';
 import { NavigationProvider } from './contexts/navigate';
 import { useLoading } from './contexts/Loading';
 import { Suspense } from 'react';
-
+import Loading from './shared/components/Loading/Loading';
 function App() {
 
   const { loadingData } = useLoading();

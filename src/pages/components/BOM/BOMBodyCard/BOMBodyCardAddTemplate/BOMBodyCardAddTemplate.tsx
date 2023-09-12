@@ -73,9 +73,6 @@ export const BOMBodyCardAddTemplate: React.FC<BOMBodyCardAddTemplateProps> = obs
         setIsConfirmDelete(false);
     };
 
-    const handleAddNewInfoMaterial = () => {
-        setIsVisiblePopupAddInfoMaterial(true);
-    };
 
     return (
         <>

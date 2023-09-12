@@ -494,7 +494,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             />
                             <FilterRow visible={true} />
 
-                            <Column fixed={true} width={250} dataField='productCode' caption='Chọn mã vật tư' cellRender={(cellIfo) => (
+                            <Column fixed={true} width={120} dataField='productCode' caption='Chọn mã vật tư' cellRender={(cellIfo) => (
                                 <SelectBox
                                     dataSource={materialList}
                                     searchExpr={"productCode"}
@@ -507,7 +507,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                     }}
                                     placeholder='Nhập' searchEnabled={true} key={"productCode"} />
                             )}></Column>
-                            <Column fixed={true} width={250} dataField='materialCode' caption='Mã vật tư' />
+                            <Column fixed={true} width={120} dataField='materialCode' caption='Mã vật tư' />
                             <Column dataField='materialName' caption='Mô tả vật tư'></Column>
 
                             <Column dataField='materialTechName' caption='Tên kỹ thuật' alignment='left'></Column>

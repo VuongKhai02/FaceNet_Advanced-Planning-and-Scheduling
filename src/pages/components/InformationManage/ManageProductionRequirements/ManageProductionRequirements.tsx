@@ -3,10 +3,7 @@ import { DataGrid, TextBox } from "devextreme-react";
 import {
     Column,
     FilterRow,
-    HeaderFilter,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     ColumnChooser,
@@ -21,8 +18,9 @@ import { PLANNING_API_URL } from "../../../../utils/config";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { Tag } from "antd";
+import { customizeColor, getColor } from "../../../../utils/utils";
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 export const ManageProductionRequirements = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisibleDetailProductionRequire, setIsVisibleDetailProductionRequire] = React.useState<boolean>(false);
@@ -71,9 +69,59 @@ export const ManageProductionRequirements = () => {
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     };
-    const handleHideModalDel = () => {
-        setIsConfirmDelete(false);
-    };
+
+    const onStatusRender = () => {
+        let customColor: {
+            color: string,
+            backgroundColor: string
+        } = {
+            color: "",
+            backgroundColor: ""
+        }
+        let status = "";
+        let border = "";
+        customColor = customizeColor(productionRequirements[0]?.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none"
+        }}>{productionRequirements[0]?.status}</Tag>
+    }
+
+    const onPriorityRender = () => {
+        let customColor: {
+            color: string,
+            backgroundColor: string
+        } = {
+            color: "",
+            backgroundColor: ""
+        }
+        let status = "";
+        let border = "";
+        getColor(productionRequirements[0]?.priority);
+        customColor = customizeColor(status)
+        border = "1px solid" + customColor.color;
+        return <>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Tag style={{
+                    height: "20px",
+                    "fontWeight": "bold",
+                    "width": "30px",
+                    "textAlign": "center",
+                    "color": customColor.color,
+                    "backgroundColor": customColor.backgroundColor,
+                    "borderRadius": "100px",
+                    "border": border
+                }}>{productionRequirements[0]?.priority}</Tag>
+            </div>
+        </>
+
+
+    }
 
     return (
         <>
@@ -105,8 +153,8 @@ export const ManageProductionRequirements = () => {
                         </div>
                         <div>
                             <DataGrid
-                                key='productionCode'
-                                keyExpr={"productionCode"}
+                                key='id'
+                                keyExpr={"id"}
                                 dataSource={dataPage}
                                 showBorders={true}
                                 columnAutoWidth={true}
@@ -262,10 +310,13 @@ export const ManageProductionRequirements = () => {
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
 
                                 <Column dataField='productionCode' caption='Mã sản xuất' />
-                                <Column dataField='poNumber' caption='Số hợp đồng' />
+                                <Column dataField='salesOrderCode' caption='Mã đơn hàng' />
+                                <Column dataField='salesOrderCode' caption='Mã khách hàng' />
+                                {/* <Column dataField='poNumber' caption='Số hợp đồng' /> */}
                                 <Column dataField='customer' caption='Tên khách hàng' alignment='left' />
+                                <Column dataField='cardName' caption='Mã thẻ' alignment={"left"} />
                                 <Column dataField='cardName' caption='Tên thẻ' alignment={"left"} />
-                                <Column dataField='quantityRequirement' caption='Số lượng' alignment="left" />
+                                <Column dataField='quantityRequirement' caption='Số lượng thẻ' alignment="left" />
                                 <Column caption={"Ngày bắt đầu"} dataType='datetime' dataField={"startDate"} format='dd/MM/yyyy' />
                                 <Column
                                     dataField='endDate'
@@ -274,7 +325,8 @@ export const ManageProductionRequirements = () => {
                                     alignment={"left"}
                                     caption={"Ngày kết thúc"}
                                 />
-                                <Column caption={"Trạng thái"} dataField='status' />
+                                <Column caption={"Mức độ ưu tiên"} dataField='priority' cellComponent={onPriorityRender} />
+                                <Column caption={"Trạng thái"} dataField='status' cellComponent={onStatusRender} />
                                 <Column
                                     fixed={true}
                                     type={"buttons"}
