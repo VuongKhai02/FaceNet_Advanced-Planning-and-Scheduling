@@ -40,3 +40,20 @@
 .modal-container :global(.ant-modal-close):hover {
     background-color: transparent;
 }
+
+.status {
+    padding: 4px 8px;
+    text-align: center;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.active {
+    background: #00AF12;
+}
+
+.inactive {
+    background: #FFC32B;
+
+}

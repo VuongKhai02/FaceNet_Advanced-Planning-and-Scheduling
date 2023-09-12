@@ -1,5 +1,5 @@
 import { locale, loadMessages } from "devextreme/localization";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataGrid, {
     Column,
     FilterRow,
@@ -19,6 +19,7 @@ import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDel
 import PaginationComponent from "../../../../../shared/components/PaginationComponent/PaginationComponent";
 import styles from "./ListProduct.module.css";
 import classNames from "classnames/bind";
+import httpRequests from "../../../../../utils/httpRequests";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -71,6 +72,35 @@ export const ListProduct = React.memo((props: any) => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+    const [bomData, setBomData] = useState({})
+    const [bomIdChoosed, setBomIdChoosed] = useState(null);
+
+    useEffect(() => {
+        if (props!.bomTemplateId){
+            getBOMsProduct(props.bomTemplateId)
+        }
+    }, [])
+
+
+
+    const getBOMsProduct = (bomTemplateId) => {
+        httpRequests.get(`/api/boms/templates/${bomTemplateId}/products?page=${pageIndex -1}&size=${pageSize}`).then((response) => {
+            if (response.status === 200) {
+                console.log("hung: ", response)
+                setBomData(response.data.data)
+                // setBom(response.data.data);
+            }
+        });
+    }
+
+
+    const handleChangeStatus = (bomId) => {
+        httpRequests.put(`/api/boms/${bomId}/status`)
+        .then(response => {
+            console.log(response);
+            getBOMsProduct(props.bomTemplateId)
+        })
+    }
 
     locale("en");
     loadMessages({
@@ -98,7 +128,11 @@ export const ListProduct = React.memo((props: any) => {
                 </Button>
                 <Button
                     key='submit'
-                    onClick={() => { }}
+                    onClick={() => { if (bomIdChoosed !== null) {
+                        handleChangeStatus(bomIdChoosed);
+                        setBomIdChoosed(null);
+                        setIsChangeState(false);
+                    } }}
                     className={cx("btn-save")}>
                     Xác nhận
                 </Button>
@@ -110,9 +144,9 @@ export const ListProduct = React.memo((props: any) => {
         <div>
             <DataGrid
                 id='gridContainer'
-                dataSource={dataPage}
-                keyExpr='cardCode'
-                key={"cardCode"}
+                dataSource={bomData!.data}
+                keyExpr='id'
+                key={"id"}
                 height={"auto"}
                 showBorders={true}
                 showColumnLines={true}
@@ -124,7 +158,7 @@ export const ListProduct = React.memo((props: any) => {
                 <PopupBOM
                     isVisible={isChangeState}
                     onCancel={() => setIsChangeState(false)}
-                    onSubmit={() => { }}
+                    onSubmit={() => {}}
                     modalTitle={
                         <div>
                             <h3
@@ -305,18 +339,20 @@ export const ListProduct = React.memo((props: any) => {
                 <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và nhấn Enter để tìm kiếm' />
 
                 <Selection mode='single' />
-                <Column caption='Mã thẻ' dataField={"cardCode"} />
-                <Column dataField='cardName' caption='Tên thẻ'></Column>
-                <Column dataField='bomversion' caption='BOM version' />
+                <Column caption='Mã thẻ' dataField={"productCode"} />
+                <Column dataField='productName' caption='Tên thẻ'></Column>
+                <Column dataField='version' caption='BOM version' />
                 <Column dataField='notice' caption='Lưu ý'></Column>
                 <Column dataField='note' caption='Ghi chú' />
-                <Column caption={"Trạng thái"} dataField='status' />
+                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                    return <Status value = {cellInfo.value}/>
+                }} />
                 <Column
                     fixed={true}
                     type={"buttons"}
                     caption={"Thao tác"}
                     alignment='center'
-                    cellRender={() => (
+                    cellRender={(cellInfo) => (
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <SvgIcon
                                 onClick={() => setIsDetailBOMTemplate(true)}
@@ -328,7 +364,10 @@ export const ListProduct = React.memo((props: any) => {
                                 style={{ marginRight: 17 }}
                             />
                             <SvgIcon
-                                onClick={() => setIsChangeState(true)}
+                                onClick={() => {
+                                    setIsChangeState(true)
+                                    setBomIdChoosed(cellInfo.key);
+                                }}
                                 tooltipTitle='Chuyển trạng thái'
                                 sizeIcon={17}
                                 textSize={17}
@@ -361,3 +400,12 @@ export const ListProduct = React.memo((props: any) => {
     );
 });
 export default ListProduct;
+
+export function Status({value}) {
+    return ( <div className={cx('status', [value === 0 ? 'active' : 'inactive'])}>
+        {
+            value === 0 ? "Hoạt động" : "Không hoạt động"
+        }
+    </div> );
+}
+
