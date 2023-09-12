@@ -115,7 +115,7 @@ export const BOMBodyCard = () => {
         httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
         .then(response => {
             console.log(response);
-            getBOMsProduct(props.bomTemplateId)
+            getBomTemplate();
         })
     }
 
@@ -149,7 +149,11 @@ export const BOMBodyCard = () => {
                 <Button
                     className={cx("btn-save")}
                     key='submit'
-                    onClick={() => { }}
+                    onClick={() => { 
+                        handleChangeStatus(bomIdChoosed);
+                        setBomIdChoosed(null);
+                        setIsChangeState(false);
+                    }}
                 >
                     Xác nhận
                 </Button>
@@ -430,7 +434,9 @@ export const BOMBodyCard = () => {
                                                 style={{ marginRight: 17 }}
                                             />
                                             <SvgIcon
-                                                onClick={() => setIsChangeState(true)}
+                                                onClick={() => {setIsChangeState(true)
+                                                    setBomIdChoosed(cellInfo.key);
+                                                }}
                                                 tooltipTitle='Chuyển trạng thái'
                                                 sizeIcon={17}
                                                 textSize={17}

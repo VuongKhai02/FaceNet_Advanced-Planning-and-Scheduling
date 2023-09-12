@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import classNames from "classnames/bind";
 import { DataGrid, Popup, SelectBox } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser, MasterDetail } from "devextreme-react/data-grid";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -19,6 +19,8 @@ import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 
 import styles from "./TechFormList.module.css";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import ListProduct from "../../BOM/BOMBodyCard/ListProduct/ListProduct";
+import ProductionRequirementTechForm from "./ProductionRequirementList/ProductionRequirementList";
 
 const cx = classNames.bind(styles);
 
@@ -86,9 +88,26 @@ export const TechFormList = () => {
         setPopupVisibleIcon(false);
     };
 
+    const handleListProduct = useCallback(({data}) => {
+        console.log(data)
+        return <ProductionRequirementTechForm techFormId = {data.id}/>;
+    }, [])
+
     const handleAddNewButton = () => {
         setNewButtons([...newButtons, { text: "Thêm mới button", width: 300 }]);
     };
+
+    const createNewTechForm = (productionRequirementsId) => {
+        if (productionRequirementsId.length > 0) {
+            httpRequests.post(PLANNING_API_URL + "/api/techforms", JSON.stringify(productionRequirementsId))
+            .then(response => {
+                console.log(response);
+                if (response.status === 200 && response.data.responseCode === '00') {
+                    console.log("Ok")
+                }
+            })
+        }
+    }
 
     const loadTechForms = () => {
         httpRequests.get(PLANNING_API_URL + "/api/techforms").then((response) => {
@@ -255,6 +274,7 @@ export const TechFormList = () => {
                             title={"Chọn yêu cầu sản xuất"}
                             onSubmit={handleAddFormTech}
                             width={1200}
+                            onCreateTechForm={createNewTechForm}
                         />
                         <PopupImportFile
                             visible={popupVisible}
@@ -406,15 +426,17 @@ export const TechFormList = () => {
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
 
-                            <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
-                            <Column caption={"Mã sản xuất"} dataField={"productionRequirement.productionCode"} />
-                            <Column caption={"Tên khách hàng"} dataField={"productionRequirement.customer"} />
-                            <Column caption={"Tên thẻ"} dataField={"productionRequirement.cardName"} />
-                            <Column caption={"Số lượng"} dataField={"productionRequirement.quantityRequirement"} />
-                            <Column caption={"Ngày bắt đầu"} dataType='date' dataField={"productionRequirement.startDate"} format='dd/MM/yyyy' />
-                            <Column caption={"Ngày kết thúc"} dataType='date' dataField={"productionRequirement.endDate"} format='dd/MM/yyyy' />
-                            <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
-                            <Column caption={"Trạng thái"} dataField='status' />
+                            <Column caption={"Mã phiếu công nghệ"} dataField={"techFormCode"} alignment='left' width={100} />
+                            <Column caption={"Tên phiếu công nghệ"} dataField={"techFormName"} />
+                            <Column caption={"Người lập"} dataField={"createdBy"} />
+                            <Column caption={"Người kiểm tra"} dataField={"checkedBy"} />
+                            <Column caption={"Người duyệt"} dataField={"approvedBy"} />
+                            <Column caption={"Ngày bắt đầu"} dataType='date' dataField={"startDate"} format='dd/MM/yyyy' />
+                            <Column caption={"Ngày kết thúc"} dataType='date' dataField={"endDate"} format='dd/MM/yyyy' />
+                            <Column caption={"Lý do"} dataField={"reason"} />
+                            <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                                return <TechFormStatus value={cellInfo.value} />
+                            }}  />
                             <Column
                                 fixed={true}
                                 type={"buttons"}
@@ -436,22 +458,6 @@ export const TechFormList = () => {
                                             style={{ marginRight: 17 }}
                                         />
                                         <SvgIcon
-                                            onClick={() => {
-                                                if (!cellInfo.data.isCreatedBOM) {
-                                                    setRequestInfoChoosed(cellInfo.data.productionRequirement)
-                                                    setTechFormIdChoosed(cellInfo.data.id);
-                                                    setIsVisibleBOMBodyCardAddInfo(true)
-                                                }
-                                            }
-                                            }
-                                            tooltipTitle={cellInfo.data.isCreatedBOM ? 'Đã tạo BOM cho phiếu công nghệ này' : 'Tạo BOM'}
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon={cellInfo.data.isCreatedBOM ? 'assets/icons/FolderDisable.svg' : 'assets/icons/Folder.svg'}
-                                            textColor={cellInfo.data.isCreatedBOM ? "#BDBDBD" : '#FF7A00'}
-                                            style={{ marginRight: 17 }}
-                                        />
-                                        <SvgIcon
                                             onClick={() => setIsModalVisibleSendSAP(true)}
                                             tooltipTitle='Gửi duyệt'
                                             sizeIcon={17}
@@ -459,17 +465,21 @@ export const TechFormList = () => {
                                             icon='assets/icons/Send.svg'
                                             textColor='#FF7A00'
                                             style={{ marginRight: 17 }}
-                                        />
-                                        <SvgIcon
-                                            onClick={() => setCreateProductionPlan(true)}
-                                            tooltipTitle='Tạo KHSX'
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon='assets/icons/CirclePlus.svg'
-                                            textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
-                                        />
-                                        <SvgIcon
+                                        />{
+                                            cellInfo.data.status === "Đã phê duyệt" && 
+                                                <SvgIcon
+                                                    onClick={() => setCreateProductionPlan(true)}
+                                                    tooltipTitle='Tạo KHSX'
+                                                    sizeIcon={17}
+                                                    textSize={17}
+                                                    icon='assets/icons/CirclePlus.svg'
+                                                    textColor='#FF7A00'
+                                                    style={{ marginRight: 17 }}
+                                                />
+                                                
+                                                
+                                            }
+                                            <SvgIcon
                                             onClick={() => setIsisConfirmDelete(true)}
                                             tooltipTitle='Xóa'
                                             sizeIcon={17}
@@ -478,17 +488,10 @@ export const TechFormList = () => {
                                             textColor='#FF7A00'
                                             style={{ marginRight: 17 }}
                                         />
-                                        <SvgIcon
-                                            onClick={() => setPopupVisibleIcon(true)}
-                                            tooltipTitle='Khác'
-                                            sizeIcon={17}
-                                            textSize={17}
-                                            icon='assets/icons/More.svg'
-                                            textColor='#FF7A00'
-                                        />
                                     </div>
                                 )}
                             />
+                            <MasterDetail  enabled={true} render={handleListProduct} />
                         </DataGrid>
                         <PaginationComponent
                             pageSizeOptions={[10, 20, 40]}
@@ -507,3 +510,27 @@ export const TechFormList = () => {
 };
 
 export default TechFormList;
+
+export function TechFormStatus({value}) {
+
+    const className = () => {
+        switch (value) {
+            case "Bản nháp":
+                return "draf"
+            case "Đã phê duyệt":
+                return "appoved"
+            case "Từ chối":
+                return "refuse"
+            case "Đang chờ phê duyệt":
+                return "waiting"
+        
+            default:
+                break;
+        }
+    }
+
+    return ( <div className={cx('status', className())}>
+        {value}
+    </div> );
+}
+

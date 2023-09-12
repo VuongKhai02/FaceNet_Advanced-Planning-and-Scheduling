@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid, TextArea, TextBox } from "devextreme-react";
 import classNames from "classnames/bind";
 import { Column } from "devextreme-react/data-grid";
@@ -20,38 +20,17 @@ type TechFormUpdateProps = {
 
 export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen = false, setClose, id }) => {
     const [isVisibleTechProcedureUpdate, setIsVisibleTechProcedureUpdate] = React.useState<boolean>(false);
-    const [techFormData, setTechFormData] = React.useState<any>({});
+    const [techFormData, setTechFormData] = React.useState<any>();
+    const [generalInfo, setGeneralInfo] = useState<any>();
 
     const loadTechFormData = (id: any) => {
         if (id > 0) {
             httpRequests.get(PLANNING_API_URL + "/api/techforms/" + id).then((response) => {
                 if (response.status === 200) {
                     let techForm = response.data.data;
-                    console.log(techForm)
-                    if (techForm.prePressPcToPlate.back.length === 0 && techForm.prePressPcToPlate.front.length === 0) {
-                        techForm.prePressPcToPlate.back.push({})
-                        techForm.prePressPcToPlate.front.push({})
-                    }
+                    console.log("Hello " ,techForm)
 
-                    if (techForm.printingTech.front.length === 0 && techForm.printingTech.back.length === 0) {
-                        techForm.printingTech.front.push({ step: 1 })
-                    }
-                    if (techForm.lamination.steps.length === 0) {
-                        techForm.lamination.steps.push({ step: 1 })
-                    }
-                    if (techForm.processing.processingInfos.length === 0) {
-                        techForm.processing.processingInfos.push({ no: 1 })
-                    }
-                    if (techForm.cutting.cuttingInfos.length === 0) {
-                        techForm.cutting.cuttingInfos.push({ no: 1 })
-                    }
-                    if (techForm.hostamping.hostampingInfos.length === 0) {
-                        techForm.hostamping.hostampingInfos.push({ step: 1 })
-                    }
                     setTechFormData(techForm);
-
-
-
                 }
             });
         }
@@ -92,8 +71,23 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
         loadTechFormData(id);
     }, [id]);
 
+    useEffect(() => {
+        console.log(techFormData);
+        
+        if (techFormData !== undefined) {
+            setGeneralInfo({
+                productionCode:[... new Set(techFormData.productionRequirements.map(pr => pr.productionCode))],
+                customer: [... new Set(techFormData.productionRequirements.map(pr => pr.customer))],
+            })
+        }
+    }, [techFormData])
+
+    console.log(generalInfo);
+    
+
     console.log(techFormData);
     return (
+        techFormData && 
         <>
             {isVisibleTechProcedureUpdate ? (
                 <TechnologyProcedureUpdate
@@ -156,7 +150,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                         </div>
 
                         <div style={{ marginTop: 10 }}>
-                            <TechFormGeneralInfo dataGeneral={techFormData.productionRequirement} />
+                            <TechFormGeneralInfo dataGeneral={techFormData!.productionRequirement} />
                             <div
                                 className='informer'
                                 style={{
@@ -304,33 +298,33 @@ export const TechFormGeneralInfo = (dataGeneral: any) => {
     return (
         <div className={cx("wrapper")}>
             <div className={cx("row")}>
-                <div className={cx("title")}>Mã sx/Production Code</div>
+                <div className={cx("title")}>Mã sx/Production Code:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.productionCode}</div>
-                <div className={cx("title")}>Người gửi/Sender</div>
+                <div className={cx("title")}>Người gửi/Sender:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.sender}</div>
             </div>
             <div className={cx("row")}>
-                <div className={cx("title")}>Tên khách hàng/Customer</div>
+                <div className={cx("title")}>Tên khách hàng/Customer:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.customer}</div>
-                <div className={cx("title")}>Số lượng thẻ/Q'ty</div>
+                <div className={cx("title")}>Số lượng thẻ/Q'ty:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityRequirement}</div>
             </div>
             <div className={cx("row")}>
-                <div className={cx("title")}>Tên thẻ/Card name</div>
+                <div className={cx("title")}>Tên thẻ/Card name:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.cardName}</div>
-                <div className={cx("title")}>SL thẻ đã tính bù hao</div>
+                <div className={cx("title")}>SL thẻ đã tính bù hao:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityCompensation}</div>
             </div>
             <div className={cx("row")}>
-                <div className={cx("title")}>Số HĐ/P.O</div>
+                <div className={cx("title")}>Số HĐ/P.O:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.poNumber}</div>
-                <div className={cx("title")}>Kết thúc sx/Finish</div>
+                <div className={cx("title")}>Kết thúc sx/Finish:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.endDate}</div>
             </div>
             <div className={cx("row")}>
-                <div className={cx("title")}>Bắt đầu sx/ Start</div>
+                <div className={cx("title")}>Bắt đầu sx/ Start:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.startDate}</div>
-                <div className={cx("title")}>Giao hàng/ Delivery date</div>
+                <div className={cx("title")}>Giao hàng/ Delivery date:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.deliveryDate}</div>
             </div>
         </div>

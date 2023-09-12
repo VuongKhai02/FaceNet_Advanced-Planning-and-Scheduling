@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid, TextBox } from "devextreme-react";
 import {
     Column,
@@ -32,8 +32,7 @@ export const ManageProductionRequirements = () => {
 
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
-    const totalPage = Math.ceil(productionRequirements?.length / pageSize);
-    const dataPage = productionRequirements?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+    const [totalPage, setTotalPage] = useState<number>(0);
     const breadcrumbContext = useBreadcrumb();
 
     React.useEffect(() => {
@@ -56,17 +55,18 @@ export const ManageProductionRequirements = () => {
 
     const getProductionRequirements = () => {
 
-        httpRequests.get(PLANNING_API_URL + "/api/production_requirements").then((response) => {
-            if (response.status === 200) {
+        httpRequests.get(PLANNING_API_URL + `/api/production_requirements?page=${pageIndex - 1}&size=${pageSize}`).then((response) => {
+            if (response.status === 200 && response.data.responseCode === "00") {
                 console.log(response.data.data);
-                setProductionRequirements(response.data.data.data)
+                setProductionRequirements(response.data.data)
+                setTotalPage(Math.ceil(response.data.data.totalItems / pageSize))
             }
         });
     }
 
     React.useEffect(() => {
         getProductionRequirements()
-    }, [])
+    }, [pageIndex, pageSize])
 
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
@@ -107,7 +107,7 @@ export const ManageProductionRequirements = () => {
                             <DataGrid
                                 key='productionCode'
                                 keyExpr={"productionCode"}
-                                dataSource={dataPage}
+                                dataSource={productionRequirements.data}
                                 showBorders={true}
                                 columnAutoWidth={true}
                                 showRowLines={true}
@@ -319,7 +319,7 @@ export const ManageProductionRequirements = () => {
                             </DataGrid>
                             <PaginationComponent
                                 pageSizeOptions={[10, 20, 40]}
-                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: productionRequirements?.length }}
+                                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: productionRequirements?.totalItems }}
                                 totalPages={totalPage}
                                 pageIndex={pageIndex}
                                 pageSize={pageSize}
