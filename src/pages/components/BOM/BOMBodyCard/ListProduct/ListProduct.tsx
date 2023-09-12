@@ -76,7 +76,7 @@ export const ListProduct = React.memo((props: any) => {
     const [bomIdChoosed, setBomIdChoosed] = useState(null);
 
     useEffect(() => {
-        if (props!.bomTemplateId){
+        if (props!.bomTemplateId) {
             getBOMsProduct(props.bomTemplateId)
         }
     }, [])
@@ -84,7 +84,7 @@ export const ListProduct = React.memo((props: any) => {
 
 
     const getBOMsProduct = (bomTemplateId) => {
-        httpRequests.get(`/api/boms/templates/${bomTemplateId}/products?page=${pageIndex -1}&size=${pageSize}`).then((response) => {
+        httpRequests.get(`/api/boms/templates/${bomTemplateId}/products?page=${pageIndex - 1}&size=${pageSize}`).then((response) => {
             if (response.status === 200) {
                 console.log("hung: ", response)
                 setBomData(response.data.data)
@@ -96,21 +96,11 @@ export const ListProduct = React.memo((props: any) => {
 
     const handleChangeStatus = (bomId) => {
         httpRequests.put(`/api/boms/${bomId}/status`)
-        .then(response => {
-            console.log(response);
-            getBOMsProduct(props.bomTemplateId)
-        })
+            .then(response => {
+                console.log(response);
+                getBOMsProduct(props.bomTemplateId)
+            })
     }
-
-    locale("en");
-    loadMessages({
-        en: {
-            Yes: "Xóa",
-            No: "Hủy bỏ",
-            "dxList-selectAll": "Chọn tất cả",
-            "dxList-pageLoadingText": "Đang tải...",
-        },
-    });
 
     const handleCustomFooter = [
         <div>
@@ -128,11 +118,13 @@ export const ListProduct = React.memo((props: any) => {
                 </Button>
                 <Button
                     key='submit'
-                    onClick={() => { if (bomIdChoosed !== null) {
-                        handleChangeStatus(bomIdChoosed);
-                        setBomIdChoosed(null);
-                        setIsChangeState(false);
-                    } }}
+                    onClick={() => {
+                        if (bomIdChoosed !== null) {
+                            handleChangeStatus(bomIdChoosed);
+                            setBomIdChoosed(null);
+                            setIsChangeState(false);
+                        }
+                    }}
                     className={cx("btn-save")}>
                     Xác nhận
                 </Button>
@@ -158,7 +150,7 @@ export const ListProduct = React.memo((props: any) => {
                 <PopupBOM
                     isVisible={isChangeState}
                     onCancel={() => setIsChangeState(false)}
-                    onSubmit={() => {}}
+                    onSubmit={() => { }}
                     modalTitle={
                         <div>
                             <h3
@@ -345,7 +337,7 @@ export const ListProduct = React.memo((props: any) => {
                 <Column dataField='notice' caption='Lưu ý'></Column>
                 <Column dataField='note' caption='Ghi chú' />
                 <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
-                    return <Status value = {cellInfo.value}/>
+                    return <Status value={cellInfo.value} />
                 }} />
                 <Column
                     fixed={true}
@@ -401,11 +393,11 @@ export const ListProduct = React.memo((props: any) => {
 });
 export default ListProduct;
 
-export function Status({value}) {
-    return ( <div className={cx('status', [value === 0 ? 'active' : 'inactive'])}>
+export function Status({ value }) {
+    return (<div className={cx('status', [value === 0 ? 'active' : 'inactive'])}>
         {
             value === 0 ? "Hoạt động" : "Không hoạt động"
         }
-    </div> );
+    </div>);
 }
 

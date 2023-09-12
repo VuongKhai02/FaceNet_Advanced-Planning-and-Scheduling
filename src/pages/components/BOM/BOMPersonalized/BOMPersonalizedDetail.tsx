@@ -103,16 +103,6 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
     const onInsert = async () => { };
     const loadBranchGroup = () => { };
 
-    locale("en");
-    loadMessages({
-        en: {
-            Yes: "Xóa",
-            No: "Hủy bỏ",
-            "dxList-selectAll": "Chọn tất cả",
-            "dxList-pageLoadingText": "Đang tải...",
-        },
-    });
-
     const handleHideModalSendSAP = () => {
         setIsModalVisibleSendSAP(false);
     };

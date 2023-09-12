@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Layout, Menu } from "antd";
 import styles from "./AppSider.module.css";
 import { AppMenuItemType } from "../../route";
@@ -17,7 +18,7 @@ const items: AppMenuItemType[] = MENU_ROUTES
 
 const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
     const navigate = useNavigate();
-
+    const { t } = useTranslation(["common"]);
     function navigateTo(path?: string) {
         navigate(path || "/");
     }
@@ -42,15 +43,15 @@ const AppSider: React.FC<AppSiderProps> = ({ collapsed = false }) => {
                 items={items.filter(item => !item.hidden).map(item => {
                     return {
                         key: item.key,
-                        title: item.label,
+                        title: t(item.label),
                         icon: item.icon,
-                        label: item.label,
+                        label: t(item.label),
                         children: item.children?.filter(child => !child.hidden).map(child => {
                             return {
                                 key: child.key,
-                                title: child.label,
+                                title: t(child.label),
                                 icon: child.icon,
-                                label: child.label,
+                                label: t(child.label),
                                 onClick: () => navigateTo(child.path)
                             }
                         }),

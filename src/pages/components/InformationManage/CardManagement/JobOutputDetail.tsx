@@ -24,15 +24,6 @@ export const JobOutPutDetail = React.memo((props: any) => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    locale("en");
-    loadMessages({
-        en: {
-            Yes: "Xóa",
-            No: "Hủy bỏ",
-            "dxList-selectAll": "Chọn tất cả",
-            "dxList-pageLoadingText": "Đang tải...",
-        },
-    });
 
     return (
         <div>

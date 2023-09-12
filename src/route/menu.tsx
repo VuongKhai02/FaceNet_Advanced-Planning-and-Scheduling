@@ -19,34 +19,34 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: 'dashboard',
         icon: <DashboardOutlined />,
-        label: 'Dashboard',
+        label: 'sider.home',
         hidden: false
     },
 
     {
         key: '1',
         icon: <AppstoreAddOutlined />,
-        label: 'Quản lý thông tin',
+        label: 'sider.information',
         hidden: false,
         children: [
             {
                 key: '1-1',
-                label: 'Quản lý đơn hàng',
+                label: 'sider.information-list.order',
                 path: '/product-order-manager',
             },
             {
                 key: '1-2',
-                label: 'Quản lý yêu cầu sản xuất',
+                label: 'sider.information-list.manufacturer',
                 path: '/manage-production-equirements',
             },
             {
                 key: '1-3',
-                label: 'Quản lý hộp chứa thẻ',
+                label: 'sider.information-list.box-card',
                 path: '/manage-card-box',
             },
             {
                 key: '1-4',
-                label: "Quản lý Job output",
+                label: "sider.information-list.job-output",
                 path: '/manage-job-output',
             }
         ]
@@ -54,16 +54,16 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '2',
         icon: <AppstoreAddOutlined />,
-        label: 'Quản lý BOM',
+        label: 'sider.bom',
         children: [
             {
                 key: '2.1',
-                label: " Quản lý BOM bodycard",
+                label: "sider.bom-list.bom-bodycard",
                 path: "/BOM-bodycard"
             },
             {
                 key: '2.2',
-                label: "Quản lý BOM cá thể hóa",
+                label: "sider.bom-list.bom-personalized",
                 path: "/BOM-personalized"
             }
         ]
@@ -71,16 +71,16 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '3',
         icon: <AppstoreAddOutlined />,
-        label: 'Quản lý phiếu công nghệ',
+        label: 'sider.techform',
         children: [
             {
                 key: '3.1',
-                label: "Danh sách phiếu công nghệ",
+                label: "sider.techform-list.techform-list",
                 path: "/tech-form-list"
             },
             {
                 key: '3.2',
-                label: "Phê duyệt phiếu công nghệ",
+                label: "sider.techform-list.techform-approve",
                 path: "/tech-form-approve"
             }
         ]
@@ -88,17 +88,17 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '4',
         icon: <AppstoreAddOutlined />,
-        label: 'Quản lý kế hoạch sản xuất',
+        label: 'sider.manufacture-plan',
         hidden: false,
         children: [
             {
                 key: '4.1',
-                label: "Danh sách kế hoạch sản xuất",
+                label: "sider.manufacture-plan-list.manufacture-plan",
                 path: "/production-plan-list"
             },
             {
                 key: '4.2',
-                label: "Khai báo thông tin sản xuất",
+                label: "sider.manufacture-plan-list.manufacture-plan-declare",
                 path: "/declare-production-object"
             }
         ]
@@ -106,28 +106,28 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '5',
         icon: <AppstoreAddOutlined />,
-        label: 'Giám sát tiến độ',
+        label: 'sider.progress-monitoring',
         path: '/progress-management',
         hidden: false,
         children: [
             {
                 key: '5.1',
-                label: "Giám sát tiến độ sản xuất",
+                label: "sider.progress-monitoring-list.manufacture-progress-monitoring",
                 path: "/progress-monitoring-manufacture"
             },
             {
                 key: '5.2',
-                label: "Giám sát tiến độ đơn hàng",
+                label: "sider.progress-monitoring-list.order-progress-monitoring",
                 path: "/progress-monitoring-order"
             },
             {
                 key: '5.3',
-                label: "Giám sát máy",
+                label: "sider.progress-monitoring-list.machine-monitoring",
                 path: "/machine-monitoring"
             },
             {
                 key: '5.4',
-                label: "Hàng chờ công đoạn",
+                label: "sider.progress-monitoring-list.stage-queue",
                 path: "/stage-queue"
             }
         ]
@@ -136,7 +136,7 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '6',
         icon: <AppstoreAddOutlined />,
-        label: 'Khai báo sản lượng',
+        label: 'sider.declare-production-quantity',
         path: '/declare-quantity',
         hidden: false,
 
@@ -144,7 +144,7 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '7',
         icon: <UserOutlined />,
-        label: 'Quản lý tài khoản',
+        label: 'sider.account',
         path: '/user-management',
         hidden: false,
 
@@ -152,14 +152,14 @@ export const MENU_ITEMS: AppMenuItemType[] = [
     {
         key: '8',
         icon: <WarningOutlined />,
-        label: 'Cảnh báo',
+        label: 'sider.warning',
         path: '/warning-management',
         hidden: false,
     },
     {
         key: '9',
         icon: <FormOutlined />,
-        label: 'Báo cáo, thống kê',
+        label: 'sider.report-statistics',
         path: '/report-management',
         hidden: false,
     }

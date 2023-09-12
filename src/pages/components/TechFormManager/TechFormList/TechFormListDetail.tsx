@@ -136,16 +136,6 @@ export const TechFormListDetail = React.memo((props: any) => {
         );
     }
 
-    locale("en");
-    loadMessages({
-        en: {
-            Yes: "Xóa",
-            No: "Hủy bỏ",
-            "dxList-selectAll": "Chọn tất cả",
-            "dxList-pageLoadingText": "Đang tải...",
-        },
-    });
-
     const handleShowModalSendSAP = () => {
         setIsModalVisibleSendSAP(true);
     };
