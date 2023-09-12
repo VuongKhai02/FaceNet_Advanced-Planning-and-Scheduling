@@ -1,4 +1,3 @@
-import { locale, loadMessages } from "devextreme/localization";
 import React, { useEffect, useState } from "react";
 import DataGrid, {
     Column,
@@ -101,16 +100,6 @@ export const ListProduct = React.memo((props: any) => {
                 getBOMsProduct(props.bomTemplateId)
             })
     }
-
-    locale("en");
-    loadMessages({
-        en: {
-            Yes: "Xóa",
-            No: "Hủy bỏ",
-            "dxList-selectAll": "Chọn tất cả",
-            "dxList-pageLoadingText": "Đang tải...",
-        },
-    });
 
     const handleCustomFooter = [
         <div>

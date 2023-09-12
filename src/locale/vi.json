@@ -1,0 +1,42 @@
+{
+    "sider": {
+        "home": "Trang chủ",
+        "information": "Quản lý thông tin",
+        "information-list": {
+            "order": "Quản lý đơn hàng",
+            "manufacturer": "Quản lý yêu cầu sản xuất",
+            "job-output": "Quản lý Job Output",
+            "box-card": "Quản lý hộp chứa thẻ"
+        },
+        "bom": "Quản lý BOM",
+        "bom-list": {
+            "bom-bodycard": "Quản lý BOM bodycard",
+            "bom-personalized": "Quản lý BOM cá thể hóa"
+        },
+        "techform": "Quản lý Phiếu Công nghệ",
+        "techform-list": {
+            "techform-list": "Danh sách Phiếu Công nghệ",
+            "techform-approve": "Phê duyệt Phiếu Công nghệ"
+        },
+        "manufacture-plan": "Quản lý kế hoạch sản xuất",
+        "manufacture-plan-list": {
+            "manufacture-plan": "Danh sách kế hoạch sản xuất",
+            "manufacture-plan-declare": "Khai báo thông tin sản xuất"
+        },
+        "progress-monitoring": "Giám sát tiến độ",
+        "progress-monitoring-list": {
+            "manufacture-progress-monitoring": "Giám sát tiến độ sản xuất",
+            "order-progress-monitoring": "Giám sát tiến độ đơn hàng",
+            "machine-monitoring": "Giám sát máy",
+            "stage-queue": "Hàng đợi công đoạn"
+        },
+        "declare-production-quantity": "Khai báo sản lượng",
+        "account": "Quản lý tài khoản",
+        "warning": "Cảnh báo",
+        "report-statistics": "Báo cáo, thống kê"
+    },
+    "Yes": "Xóa",
+    "No": "Hủy bỏ",
+    "dxList-selectAll": "Chọn tất cả",
+    "dxList-pageLoadingText": "Đang tải..."
+}

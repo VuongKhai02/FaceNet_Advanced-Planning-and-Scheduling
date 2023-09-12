@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import {
     MenuFoldOutlined,
@@ -9,10 +10,12 @@ import {
     WarningOutlined
 } from "@ant-design/icons";
 import { Badge, Button, Layout, Select } from "antd";
-import styles from "./AppHeader.module.css";
-import { AuthService } from "../../auth";
-import { useState, useEffect } from "react";
 import ConfirmLogout from "../../shared/components/ConfirmLogout/ConfirmLogout";
+
+import styles from "./AppHeader.module.css";
+
+import { AuthService } from "../../auth";
+import { useLocalized } from "../../contexts/Localization";
 
 const cx = classNames.bind(styles);
 
@@ -43,6 +46,15 @@ const itemsLanguage = [
 const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed = () => { } }) => {
     const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
     const [isLogout, setIsLogout] = useState<boolean>(false);
+
+    const { localizedData, setLocalizedData } = useLocalized();
+
+    function handleChangeLanguage(value: string) {
+        if (setLocalizedData) {
+            setLocalizedData({ language: value });
+        }
+    }
+
     const [notificationCount, setNotificationCount] = useState<number>(1);
 
     useEffect(() => {
@@ -148,7 +160,8 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
                 <Select
                     placeholder={"Choose language"}
                     className={cx("language-select")}
-                    defaultValue={itemsLanguage[0].value}
+                    defaultValue={localizedData.language}
+                    onChange={handleChangeLanguage}
                 >{itemsLanguage.map((item, index) => {
                     return <Option key={index} value={item.value}>
                         <div className={cx("language-container")}>

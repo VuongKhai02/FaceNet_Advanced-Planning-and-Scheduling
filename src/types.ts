@@ -27,6 +27,15 @@ export type LoadingContextType = {
     loadingData: LoadingData;
 }
 
+interface LocalizedData {
+    language: string;
+}
+
+export type LocalizedContextType = {
+    setLocalizedData?: ({ language }: LocalizedData) => void;
+    localizedData: LocalizedData;
+}
+
 export type ResponseType<T> = {
     data: T;
     responseCode: string;

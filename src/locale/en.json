@@ -1,0 +1,38 @@
+{
+    "sider": {
+        "home": "Dashboard",
+        "information": "Management of information",
+        "information-list": {
+            "order": "Management of order",
+            "manufacturer": "Manufacture Request",
+            "job-output": "Management of Job Output",
+            "box-card": "Management of Box Card"
+        },
+        "bom": "Management of BOM",
+        "bom-list": {
+            "bom-bodycard": "Management of bodycard BOM",
+            "bom-personalized": "Management of personalized BOM"
+        },
+        "techform": "Management of techform",
+        "techform-list": {
+            "techform-list": "Techform list",
+            "techform-approve": "Approve Techform"
+        },
+        "manufacture-plan": "Management of manufacture plan",
+        "manufacture-plan-list": {
+            "manufacture-plan": "Manufacture plan list",
+            "manufacture-plan-declare": "Declaration of manufacture information"
+        },
+        "progress-monitoring": "Progress monitoring",
+        "progress-monitoring-list": {
+            "manufacture-progress-monitoring": "Manufacture progress monitoring",
+            "order-progress-monitoring": "Order progress monitoring",
+            "machine-monitoring": "Machine monitoring",
+            "stage-queue": "Stage queue"
+        },
+        "declare-production-quantity": "Declare production quantity",
+        "account": "Account management",
+        "warning": "Warning",
+        "report-statistics": "Report, statistics"
+    }
+}
