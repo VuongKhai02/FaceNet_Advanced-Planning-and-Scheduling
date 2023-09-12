@@ -22,6 +22,12 @@ export function getColor(value: any) {
     return "#FFCCFF"
   } else if (value === "Không hoàn thành" || value === "Chưa hoàn thành") {
     return "#FF0000"
+  } else if (value === "Mới tạo") {
+    return "#A8A8A8"
+  } else if (value === "Đang chờ phê duyệt") {
+    return "#DFE229"
+  } else if (value === "Đã phê duyệt") {
+    return "#00AF12"
   }
   return "#FF0000"
 }
@@ -67,6 +73,21 @@ export function customizeColor(value: any): { color: string, backgroundColor: st
       color: "#FF0000",
       backgroundColor: "#ffdfdf"
     }
+  } else if (value === "Mới tạo") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#A8A8A8"
+    }
+  } else if (value === "Đang chờ phê duyệt") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#DFE229"
+    }
+  } else if (value === "Đã phê duyệt") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12"
+    }
   }
   return {
     color: "#FF0000",
@@ -87,7 +108,7 @@ export const onStatusRender = (data: any) => {
     let color = ""
     switch (value) {
       case 2:
-        status = "SAP"
+        status = "Đã phê duyệt"
         color = "rgba(228, 184, 25, 1)"
         backgroundColor = "rgba(228, 184, 25, 0.1)"
         padding = "3px 15px"
@@ -96,7 +117,7 @@ export const onStatusRender = (data: any) => {
         border = "1px solid rgba(228, 184, 25, 0.5)"
         break;
       case 1:
-        status = "Panacim"
+        status = "Đang chờ phê duyệt"
         color = "rgba(175, 25, 228, 1)"
         backgroundColor = "rgba(175, 25, 228, 0.1)"
         padding = "3px 15px"
@@ -105,7 +126,7 @@ export const onStatusRender = (data: any) => {
         width = "173px"
         break;
       case 3:
-        status = "Panacim, SAP"
+        status = "Mới tạo"
         color = "rgba(0, 151, 15, 1)"
         backgroundColor = "rgba(17, 168, 32, 0.1)"
         padding = "3px 18px"
@@ -113,22 +134,6 @@ export const onStatusRender = (data: any) => {
         border = "1px solid rgba(0, 151, 15, 0.5)"
         width = "105px"
         break
-      case 0:
-        status = "R2"
-        color = "rgba(229, 28, 15, 1)"
-        backgroundColor = "rgba(229, 28, 15, 0.1)"
-        padding = "3px 15px"
-        borderRadius = "4px"
-        // width = "90px"
-        border = "1px solid rgba(229, 28, 15, 0.5)"
-        break;
-      case "5":
-        status = "Đã gửi SAP, MES"
-        color = "rgba(0, 151, 15, 1)"
-        backgroundColor = "rgba(17, 168, 32, 0.1)"
-        padding = "3px 18px"
-        borderRadius = "4px"
-        break;
       default:
         status = "R2"
         color = "rgba(229, 28, 15, 1)"
@@ -137,7 +142,6 @@ export const onStatusRender = (data: any) => {
         borderRadius = "4px"
         // width = "90px"
         border = "1px solid rgba(229, 28, 15, 0.5)"
-
         break;
     }
     return color

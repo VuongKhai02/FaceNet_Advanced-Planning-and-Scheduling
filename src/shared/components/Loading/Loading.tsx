@@ -6,7 +6,7 @@ interface LoadingProps {
     title?: string
 }
 
-const Loading = ({ isShow = false, title = 'Loading...' }: LoadingProps) => {
+const Loading = ({ isShow = false, title = 'Đang tải...' }: LoadingProps) => {
 
     return (
         <div className={isShow ? 'wrapper_loading show' : 'wrapper_loading hide'}>

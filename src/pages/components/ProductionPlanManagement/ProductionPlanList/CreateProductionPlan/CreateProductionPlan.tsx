@@ -45,7 +45,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                                     <InfoRow label='Mã đơn hàng' data='SO-T06/2023' />
                                     <InfoRow label='Tên thẻ' data='Phôi thẻ Visa Credit Classic, TP Bank, T8/2022' />
                                     <InfoRow label='Tên khách hàng' data='TP bank' />
-                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center" }}>
+                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center", alignItems: "center" }}>
                                         <p style={{ fontWeight: 'bold', marginRight: 60 }}>Thời gian bắt đầu:</p>
                                         <DateBox value={'08/8/2023'} width={200} />
                                     </div>
@@ -54,7 +54,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                                     <InfoRow label='Mã sản xuất' data='1501023' />
                                     <InfoRow label='Số lượng' data='20000' />
                                     <InfoRow label='Số lượng đã bù hao' data='20400' />
-                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center" }}>
+                                    <div style={{ display: "flex", flexDirection: "row", marginTop: 20, justifyContent: "center", alignItems: "center" }}>
                                         <p style={{ fontWeight: 'bold', marginRight: 60 }}>Thời gian kết thúc:</p>
                                         <DateBox value={'10/8/2023'} width={200} />
                                     </div>

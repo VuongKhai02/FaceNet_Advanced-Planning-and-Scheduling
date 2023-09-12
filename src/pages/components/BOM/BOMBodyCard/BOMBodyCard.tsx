@@ -111,14 +111,6 @@ export const BOMBodyCard = () => {
         setIsBOMCardAddInfo(true);
     };
 
-    const handleChangeStatus = (bomId) => {
-        httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
-        .then(response => {
-            console.log(response);
-            getBOMsProduct(props.bomTemplateId)
-        })
-    }
-
     const getBomTemplate = () => {
         httpRequests.get("/api/boms/templates").then((response) => {
             if (response.status === 200 && response.data.responseCode === "00") {
@@ -129,7 +121,7 @@ export const BOMBodyCard = () => {
     }
 
     React.useEffect(() => {
-        getBomTemplate();   
+        getBomTemplate();
     }, []);
 
     const handleCustomFooter = [
@@ -157,9 +149,9 @@ export const BOMBodyCard = () => {
         </div>
     ];
 
-    const handleListProduct = useCallback(({data}) => {
-        console.log(data)
-        return <ListProduct bomTemplateId = {data.id}/>;
+    const handleListProduct = useCallback(({ data }) => {
+        console.log('data response', data)
+        return <ListProduct bomTemplateId={data.id} />;
     }, [])
 
     return (
@@ -261,7 +253,7 @@ export const BOMBodyCard = () => {
                                 <PopupBOM
                                     isVisible={isDetailBOM}
                                     modalContent={
-                                        <BOMBodyCardInfo bomId = {bomIdChoosed} />
+                                        <BOMBodyCardInfo bomId={bomIdChoosed} />
                                     }
                                     modalTitle={
                                         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -275,8 +267,10 @@ export const BOMBodyCard = () => {
                                         </div>
                                     }
                                     width={1300}
-                                    onCancel={() => {setIsDetailBOM(false)
-                                    setBomIdChoosed(null)}}
+                                    onCancel={() => {
+                                        setIsDetailBOM(false)
+                                        setBomIdChoosed(null)
+                                    }}
                                     onSubmit={() => { }}
                                     customFooter={handleCustomFooter}
                                 />
@@ -396,9 +390,9 @@ export const BOMBodyCard = () => {
                                 <Column dataField='version' minWidth={140} caption='Version' alignment='left'></Column>
                                 <Column dataField='notice' caption='Lưu ý' />
                                 <Column dataField='note' alignment={"left"} caption={"Ghi chú"} width={140}></Column>
-                                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
-                                    return <Status value = {cellInfo.value}/>
-                                }}/>
+                                <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={(cellInfo) => {
+                                    return <Status value={cellInfo.value} />
+                                }} />
                                 <Column
                                     fixed={true}
                                     type={"buttons"}
@@ -448,7 +442,7 @@ export const BOMBodyCard = () => {
                                             />
                                         </div>
                                     )}></Column>
-                                <MasterDetail  enabled={true} render={handleListProduct} />
+                                <MasterDetail enabled={true} render={handleListProduct} />
                             </DataGrid>
                             <PaginationComponent
                                 pageSizeOptions={[10, 20, 40]}

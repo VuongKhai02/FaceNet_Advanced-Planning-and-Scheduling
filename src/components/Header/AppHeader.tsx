@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import {
     MenuFoldOutlined,
@@ -32,7 +32,7 @@ const itemsLanguage = [
     {
         value: "vi",
         label: "Tiếng Việt",
-        imageUrl: "assets/images/VietNamFlag.png",
+        imageUrl: "assets/images/VietNam_Flag1.png",
         imageAlt: "Tiếng Việt"
     },
     {
@@ -54,6 +54,28 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
             setLocalizedData({ language: value });
         }
     }
+
+    const [notificationCount, setNotificationCount] = useState<number>(1);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNotificationCount(notificationCount + 1);
+        }, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [notificationCount]);
+
+    useEffect(() => {
+        if (notificationCount > 0) {
+            const badgeElement = document.querySelector(cx('.ant-badge'));
+            badgeElement?.classList.add(cx('shake'));
+            setTimeout(() => {
+                badgeElement?.classList.remove(cx('shake'));
+            }, 1000);
+        }
+    }, [notificationCount]);
 
     function logout() {
         AuthService.doLogout();
@@ -154,7 +176,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
                 <Button className={cx("button-none")} icon={!isFullScreen ? <FullscreenOutlined onClick={handleToggleFullScreen} /> : <FullscreenExitOutlined onClick={handleToggleFullScreen} />} />
             </div>
             <div>
-                <Badge count={5} className={cx("badge")}>
+                <Badge count={notificationCount} className={cx("badge", 'shake')} >
                     <Button className={cx("button-none")} icon={<BellFilled className={cx("bell")} />} />
                 </Badge>
             </div>

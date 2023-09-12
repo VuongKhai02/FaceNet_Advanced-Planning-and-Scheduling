@@ -170,6 +170,7 @@ table {
 
 .ant-layout-sider {
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important; */
+    box-shadow: 2px 0 6px rgba(0,21,41,.35) !important;
 }
 
 .ant-menu-inline.ant-menu-root {
@@ -234,6 +235,7 @@ table {
 } */
 
 .ant-layout-content {
+    /* background-color: red !important; */
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
     border-radius: 5px !important;
 }
@@ -250,16 +252,16 @@ table {
 }
 
 ::-webkit-scrollbar {
-  width: 4px !important;
+  /* width: 4px !important; */
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  /* background: #f1f1f1;  */
 }
 ::-webkit-scrollbar-thumb {
-  background: #c2c0c0; 
+  /* background: #c2c0c0;  */
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff7a00; 
+  /* background: #ff7a00;  */
 }
 
 .ant-steps .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-tail::after,

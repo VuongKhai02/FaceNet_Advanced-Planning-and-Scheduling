@@ -26,14 +26,16 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
         <>
             <Layout className={cx('container')}>
                 <AppSider collapsed={collapsed} />
-                <Layout className={cx('wrapper')}>
+                <Layout className={cx('wrapper123')}>
                     <AppHeader collapsed={collapsed} setCollapsed={setCollapsed} />
                     <BreadcrumbProvider>
                         <AppContent>{children}</AppContent>
                     </BreadcrumbProvider>
                     <AppFooter />
                 </Layout>
+
             </Layout>
+
             <ToastContainer />
         </>
     );

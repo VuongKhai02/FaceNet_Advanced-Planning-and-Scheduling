@@ -1,4 +1,3 @@
-import { locale, loadMessages } from "devextreme/localization";
 import React, { useEffect, useState } from "react";
 import DataGrid, {
     Column,
@@ -83,7 +82,7 @@ export const ListProduct = React.memo((props: any) => {
 
 
 
-    const getBOMsProduct = (bomTemplateId) => {
+    const getBOMsProduct = (bomTemplateId: any) => {
         httpRequests.get(`/api/boms/templates/${bomTemplateId}/products?page=${pageIndex - 1}&size=${pageSize}`).then((response) => {
             if (response.status === 200) {
                 console.log("hung: ", response)
@@ -94,7 +93,7 @@ export const ListProduct = React.memo((props: any) => {
     }
 
 
-    const handleChangeStatus = (bomId) => {
+    const handleChangeStatus = (bomId: any) => {
         httpRequests.put(`/api/boms/${bomId}/status`)
             .then(response => {
                 console.log(response);
@@ -105,7 +104,7 @@ export const ListProduct = React.memo((props: any) => {
     const handleCustomFooter = [
         <div>
             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 20 }}></div>
-        </div>,
+        </div>
     ];
     const handleCustomFooterButtonChangeState = [
         <div>

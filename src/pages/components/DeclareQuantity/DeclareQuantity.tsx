@@ -16,19 +16,19 @@ import PaginationComponent from "../../../shared/components/PaginationComponent/
 
 const data = [
     {
-        id: 1, section: 'In offset', Foreman: 'Anh bảy', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 1, section: 'In offset', Foreman: 'Nguyễn Minh Sơn', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
     },
     {
-        id: 2, section: 'In offset', Foreman: 'Anh si', Shift: 2, day: '11/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
+        id: 2, section: 'In offset', Foreman: 'Vũ Văn Tuấn', Shift: 2, day: '11/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
     },
     {
-        id: 3, section: 'In offset', Foreman: 'Anh beck', Shift: 3, day: '12/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 3, section: 'In offset', Foreman: 'Nguyễn Thị T.Nga', Shift: 3, day: '12/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
     },
     {
-        id: 4, section: 'In offset', Foreman: 'Anh kane', Shift: 2, day: '13/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
+        id: 4, section: 'In offset', Foreman: 'Nguyễn Quang Hiếu', Shift: 2, day: '13/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
     },
     {
-        id: 5, section: 'In offset', Foreman: 'Anh bảy', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 5, section: 'In offset', Foreman: 'Đỗ Công Đồng', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
     }
 ];
 export const DeclareQuantity = () => {

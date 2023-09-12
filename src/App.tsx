@@ -8,9 +8,10 @@ import enUS from "antd/es/locale/en_US";
 import viVN from "antd/es/locale/vi_VN";
 import { ConfigProvider } from 'antd';
 
-import './App.css'
-import { DefaultLayout, Loading } from './components';
+import Loading from './shared/components/Loading/Loading';
 
+import './App.css'
+import { DefaultLayout, Loading as LD } from './components';
 import { ROUTES } from './route';
 import { NavigationProvider } from './contexts/navigate';
 import { useLoading } from './contexts/Loading';
