@@ -23,6 +23,7 @@ import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import styles from "./BOMPersonalized.module.css";
 import classNames from "classnames/bind";
+import { Status } from "../BOMBodyCard/ListProduct/ListProduct";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -113,7 +114,7 @@ export const BOMPersonalized = () => {
     }, []);
 
 
-    const getProductOrderItemTemplate = (row: any) => {
+    const handleGotoBOMPersonalizedDetail = (row: any) => {
         return <BOMPersonalizedDetail data={row.data} />;
     };
 
@@ -451,7 +452,7 @@ export const BOMPersonalized = () => {
                                     <SvgIcon
                                         onClick={() => setIsBOMPersonalizedAddTemplate(true)}
                                         text='Thêm mới'
-                                        tooltipTitle='Thêm mới rhoong tin BOM mẫu'
+                                        tooltipTitle='Thêm mới thông tin BOM mẫu'
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/CircleAdd.svg'
@@ -495,7 +496,9 @@ export const BOMPersonalized = () => {
                             <Column caption={"Version"} dataField={"version"} />
                             <Column caption={"Lưu ý"} dataField={"notice"} />
                             <Column caption={"Ghi chú"} dataField={"note"} />
-                            <Column caption={"Trạng thái"} dataField='status' />
+                            <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                                return <Status value={cellInfo.value} />
+                            }} />
                             <Column
                                 fixed={true}
                                 type={"buttons"}
@@ -543,7 +546,7 @@ export const BOMPersonalized = () => {
 
                             <MasterDetail
                                 enabled={true}
-                                component={getProductOrderItemTemplate}
+                                component={handleGotoBOMPersonalizedDetail}
                             />
                         </DataGrid>
                         <PaginationComponent

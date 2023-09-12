@@ -19,6 +19,7 @@ import PaginationComponent from "../../../../shared/components/PaginationCompone
 
 import styles from "./BOMPersonalizedDetail.module.css";
 import classNames from "classnames/bind";
+import { Status } from "../BOMBodyCard/ListProduct/ListProduct";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -363,7 +364,9 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                 <Column caption={"BOM version"} dataField={"bomVersion"} />
                 <Column caption={"Lưu ý"} dataField={"notice"} />
                 <Column caption={"Ghi chú"} dataField={"note"} />
-                <Column caption={"Trạng thái"} dataField='status' />
+                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                    return <Status value={cellInfo.data.status} />
+                }} />
                 <Column
                     fixed={true}
                     type={"buttons"}
