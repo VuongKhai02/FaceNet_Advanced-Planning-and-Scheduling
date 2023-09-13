@@ -6,7 +6,6 @@ import { MachineID } from "../MachineID/MachineID";
 import { infoMappedContext } from "../../DeclareProductionObject";
 import "../../styleCommon.css"
 
-
 type ProductionID = {
     isOpen: boolean,
     setClose?: () => void;
@@ -38,8 +37,44 @@ export const ProductionID: React.FC<ProductionID> = observer(({
     const togglePopup = () => {
         setPopupVisible(!popupVisible)
     }
+
     const checkedInfo = () => {
         alert("Chấm công");
+    }
+
+    const refresh = () => {
+        productionId[0].id = "";
+        productionId[0].cardName = "";
+        productionId[0].status = "";
+        productionId[0].quantity = "";
+        let newObj = JSON.parse(JSON.stringify(productionId))
+        setproductionId(newObj);
+
+        infoMapped[0].pro_id = "";
+        let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+        setInfoMapped(newInfoMpaped);
+        document.getElementById("inputHide")?.focus();
+    }
+
+    const handleValueChange = (e) => {
+        let input = e.target.value;
+        if (input.includes("{")) {
+            let productionObj = JSON.parse(input);
+            productionId[0].id = infoMapped[0].pro_id = productionObj.id;
+            productionId[0].cardName = productionObj.cardName;
+            productionId[0].status = productionObj.status;
+            productionId[0].quantity = productionObj.quantity;
+
+            let newMachineObj = JSON.parse(JSON.stringify(productionId))
+            setproductionId(newMachineObj);
+
+            let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+            setInfoMapped(newInfoMpaped);
+
+            setTimeout(() => {
+                e.target.value = "";
+            }, 1000);
+        }
     }
 
     useEffect(() => {
@@ -54,7 +89,6 @@ export const ProductionID: React.FC<ProductionID> = observer(({
             <>
                 <div style={{ padding: "1rem" }}>
                     <div style={{ textAlign: "center" }}>
-                        {/* <SvgIcon icon="assets/icons/InfoCircle.svg" ></SvgIcon> */}
                         <img src="assets/icons/warning.svg" alt="" />
                         <h4 style={{ color: "rgba(255, 122, 0, 1)" }}>Xác nhận thực hiện sản xuất?</h4>
                     </div>
@@ -92,40 +126,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
         )
     }
 
-    const refresh = () => {
-        productionId[0].id = "";
-        productionId[0].cardName = "";
-        productionId[0].status = "";
-        productionId[0].quantity = "";
-        let newObj = JSON.parse(JSON.stringify(productionId))
-        setproductionId(newObj);
 
-        infoMapped[0].pro_id = "";
-        let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
-        setInfoMapped(newInfoMpaped);
-        document.getElementById("inputHide")?.focus();
-    }
-
-    const handleValueChange = (e) => {
-        let input = e.target.value;
-        if (input.includes("{")) {
-            let productionObj = JSON.parse(input);
-            productionId[0].id = infoMapped[0].pro_id = productionObj.id;
-            productionId[0].cardName = productionObj.cardName;
-            productionId[0].status = productionObj.status;
-            productionId[0].quantity = productionObj.quantity;
-
-            let newMachineObj = JSON.parse(JSON.stringify(productionId))
-            setproductionId(newMachineObj);
-
-            let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
-            setInfoMapped(newInfoMpaped);
-
-            setTimeout(() => {
-                e.target.value = "";
-            }, 1000);
-        }
-    }
     return (
         <>
             {isDeclareInfo ? <MachineID isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)}
@@ -160,8 +161,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                     <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                     <div>
                                         <div>
-
-                                            <input type="text" className="inputHidden" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
+                                            <input type="text" className="" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
                                         </div>
                                         <Button onClick={refresh} className="btn_back">Quét lại</Button>
                                         {/* <Button

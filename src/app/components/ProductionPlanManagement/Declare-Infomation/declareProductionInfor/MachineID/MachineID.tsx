@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Popup, TextBox } from "devextreme-react";
+import { TextBox } from "devextreme-react";
 import { Button } from "antd"
 import { observer } from "mobx-react";
 import { WorkerID } from "../WorkerID/WorkerID";
@@ -33,17 +33,9 @@ export const MachineID: React.FC<MachineID> = observer(({
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
 
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
-    }, [])
-
     const checkedInfo = () => {
         console.log("Chấm công");
     }
-
 
     const refresh = () => {
         machineID[0].id = "";
@@ -101,6 +93,13 @@ export const MachineID: React.FC<MachineID> = observer(({
             e.target.value = ""
         }, 1000);
     }
+
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', updateDimension);
+    }, [])
 
     return (
         <>

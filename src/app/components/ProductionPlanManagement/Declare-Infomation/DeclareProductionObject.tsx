@@ -318,7 +318,7 @@ export const DeclareProductionObject = () => {
 
                                                 </div> */}
                                                 <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
-                                                    <Button onClick={() => { setisDeclareInfo(true) }} className="btn_continue">{windowWidth > 600 ? "Chuyển sang giao diện công nhân" : "Khai báo thông tin"}</Button>
+                                                    <Button onClick={() => { setisDeclareInfo(true) }} className="btn_continue">{windowWidth > 600 ? "Chuyển sang giao diện công nhân" : "Sang công nhân"}</Button>
                                                 </div>
                                             </div>
                                         </div>

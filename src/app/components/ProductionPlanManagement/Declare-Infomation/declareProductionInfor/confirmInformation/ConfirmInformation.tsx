@@ -7,7 +7,7 @@ type ConfirmInformation = {
     isOpen: boolean,
     setClose?: () => void;
     production_id: string,
-    production_cardNames: string,
+    production_cardName: string,
     machine_name: string,
     worker_name: string,
     nvl_id: string,
@@ -21,7 +21,7 @@ type ConfirmInformation = {
 
 
 export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
-    isOpen = false, setClose, production_id, production_cardNames, machine_name = "", worker_name = "", nvl_id, nvl_name, nvl_quantity, box_id, stage, box_quantity, isNVL }) => {
+    isOpen = false, setClose, production_id, production_cardName, machine_name = "", worker_name = "", nvl_id, nvl_name, nvl_quantity, box_id, stage, box_quantity, isNVL }) => {
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -59,18 +59,15 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                         </TextBox>
                                     </div>
                                     <div >
-                                        <TextBox className="textbox" value={production_cardNames} disabled   >
+                                        <TextBox className="textbox" value={production_cardName} disabled   >
                                             <p className="textbox_label" >Tên thẻ</p>
                                             <p className="underTextbox">
-                                                {production_cardNames}
+                                                {production_cardName}
                                             </p>
                                         </TextBox>
-
                                     </div>
-
                                 </div>
                                 <div>
-
                                     <h3 className="info_head">Thông tin máy</h3>
                                     <div>
                                         <TextBox className="textbox" value={machine_name} disabled   >
@@ -110,7 +107,8 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                                 <p className="textbox_label" >Số lượng</p>
                                             </TextBox>
                                         </div>
-                                    </div> :
+                                    </div>
+                                    :
                                     <div>
                                         <h3 className="info_head">Thông tin lô NVL/BTP</h3>
                                         <div>
@@ -129,9 +127,6 @@ export const ConfirmInformation: React.FC<ConfirmInformation> = observer(({
                                             </TextBox>
                                         </div>
                                     </div>}
-
-
-
                                 <div style={{ display: "flex", gap: "10px", flexDirection: "row-reverse", padding: "2rem 0" }}>
                                     <Button onClick={handStart} className="btn_continue">Tiếp theo</Button>
                                     <Button onClick={setClose} className="btn_back">Trở lại</Button>

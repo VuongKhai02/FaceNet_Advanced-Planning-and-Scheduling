@@ -1,27 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Popup, TextBox, SelectBox } from "devextreme-react";
-
-
+import React, { useEffect, useState } from "react";
+import { SelectBox } from "devextreme-react";
 import DataGrid, {
     Column,
     Selection,
-    FilterRow,
     Paging,
 } from 'devextreme-react/data-grid';
 import { Button } from "antd"
 import { observer } from "mobx-react";
-import { MachineID } from "../MachineID/MachineID";
 import { ProductionID } from "../ProductionID/ProductionID";
-import { infoMappedContext } from "../../DeclareProductionObject";
 import "../../styleCommon.css"
 
-
-
-const stage_name = [
-    'In offset',
-    'In lưới',
-    'Ép',
-    'Cắt',
+const shift = [
+    'Ca 1',
+    'Ca 2',
+    'Ca 3',
 ];
 type GeneralInformation = {
     isOpen: boolean,
@@ -31,17 +23,18 @@ type GeneralInformation = {
     production_cardName: string,
 };
 
-const fakeProductionID = [{
-    id: "",
-    cardName: "",
-    status: "",
-    quantity: ""
-}]
-
 export const GeneralInformation: React.FC<GeneralInformation> = observer(({
     isOpen = false, setClose, production_id = "", production_cardName = "", status }) => {
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
+    const [selectedInfo, setSelectedInfo] = React.useState({
+        no: 0,
+        stage: '',
+        job_id: '',
+        job_name: '',
+        finishTime: "",
+    });
+
 
     useEffect(() => {
         const updateDimension = () => {
@@ -73,9 +66,16 @@ export const GeneralInformation: React.FC<GeneralInformation> = observer(({
 
     const onSelectionChanged = (e) => {
         const data = e.selectedRowsData;
-        console.log("lấy dl")
-        console.log(data)
+        let newObj = {
+            no: data[0].no,
+            stage: data[0].stage,
+            job_id: data[0].job_id,
+            job_name: data[0].job_name,
+            finishTime: data[0].finishTime,
+        }
+        setSelectedInfo(newObj);
     }
+
     return (
         <>
             {isDeclareInfo ? <ProductionID isOpen={isDeclareInfo}
@@ -100,7 +100,7 @@ export const GeneralInformation: React.FC<GeneralInformation> = observer(({
                                 <div className="content" style={{ margin: ".5rem", flexWrap: "wrap" }}>
                                     <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0", gap: "20px", display: "flex" }}>
                                         <p>Chọn ca/kíp</p>
-                                        <SelectBox style={{ width: windowWidth < 600 ? "65%" : "47%" }} placeholder="-- Chọn --" items={stage_name} />
+                                        <SelectBox style={{ width: windowWidth < 600 ? "65%" : "47%" }} placeholder="-- Chọn --" items={shift} />
                                     </div>
                                 </div>
 
@@ -110,11 +110,7 @@ export const GeneralInformation: React.FC<GeneralInformation> = observer(({
                                     keyExpr="no"
                                     onSelectionChanged={onSelectionChanged}
                                 >
-
-                                    <Selection
-                                        mode="single"
-                                    // showCheckBoxesMode={checkBoxesMode}
-                                    />
+                                    <Selection mode="single" />
                                     <Paging defaultPageSize={10} />
 
                                     <Column dataField="no" caption="No." alignment="center" width={40} />
@@ -123,7 +119,6 @@ export const GeneralInformation: React.FC<GeneralInformation> = observer(({
                                     <Column dataField="stage" caption="Tên Job" />
                                     <Column dataField="finishTime" alignment="right" dataType="date" format="dd/MM/yyyy " caption="Thời gian hoàn thành" />
                                 </DataGrid>
-
 
                                 <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem", gap: "10px" }}>
                                     <Button onClick={() => { setisDeclareInfo(true) }} className="btn_continue">{windowWidth > 600 ? "Khai báo thông tin sản xuất" : "Khai báo thông tin"}</Button>

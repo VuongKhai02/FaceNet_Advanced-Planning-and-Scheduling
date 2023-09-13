@@ -10,13 +10,12 @@ import "../../styleCommon.css"
 type productionOrder = {
     isOpen: boolean,
     setClose?: () => void,
-
 };
 
 const fakeProductionInfo = [{
     id: "",
     cardName: "",
-    status: "",
+    status: "Chưa phát lệnh sản xuất",
     quantity: "",
     plot_number: "",
 }]
@@ -41,7 +40,6 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
         setInfoMapped(newInfoMpaped);
         document.getElementById("inputHide")?.focus();
-
     }
 
     // Function for update after qr again
@@ -68,7 +66,6 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         const updateDimension = () => {
             setwindowWidth(window.innerWidth)
         }
-
         window.addEventListener('resize', updateDimension);
     }, [])
 
@@ -92,22 +89,14 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                 e.target.value = "";
             }, 1000);
         }
-        console.log("e", e.target.value)
     }
 
 
     return (
         < >
-            {/* {isDeclareInfo ? <ProductionID isOpen={isDeclareInfo}
-                setClose={() => setisDeclareInfo(false)}
-                status={fakeProductionInfo[0].status}
-                production_id={productionInfo[0].id}
-                production_cardName={productionInfo[0].cardName}
-            /> : */}
-
             {isDeclareInfo ? <GeneralInformation isOpen={isDeclareInfo}
                 setClose={() => setisDeclareInfo(false)}
-                status={fakeProductionInfo[0].status}
+                status={productionInfo[0].status}
                 production_id={productionInfo[0].id}
                 production_cardName={productionInfo[0].cardName}
             /> : <div >
@@ -128,12 +117,10 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                 <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                 <div>
                                     <div>
-                                        <input type="text" className="inputHidden" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
+                                        <input type="text" className="" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
                                     </div>
                                     <Button onClick={refresh} className="btn_back">Quét lại</Button>
                                     <Button onClick={updateDt} className="btn_back">Update test</Button>
-
-
                                     {/* <Button
                                             className="btn_again"
                                             text="Quét lại"
@@ -148,13 +135,12 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                             height={30}
                                             width={135}
                                         /> */}
-
                                 </div>
                             </div>
                             <div className="dx-fieldset">
                                 <h3 className="info_head">Thông tin lệnh sản xuất</h3>
                                 <div>
-                                    <TextBox className="textbox" value={productionInfo[0].id} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem ", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
+                                    <TextBox className="textbox" value={productionInfo[0].id} disabled  >
                                         <p className="textbox_label" >Mã sản xuất</p>
                                     </TextBox>
                                 </div>

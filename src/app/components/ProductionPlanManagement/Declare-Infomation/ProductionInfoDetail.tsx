@@ -1,18 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Popup, TextBox, SelectBox } from "devextreme-react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-
-
 import DataGrid, {
     Column,
-    Selection,
     FilterRow,
     Paging,
     Pager,
     MasterDetail,
 } from 'devextreme-react/data-grid';
-import { Button, Tag } from "antd"
+import { Tag } from "antd"
 import { observer } from "mobx-react";
 import SvgIcon from "../../../icons/SvgIcon/SvgIcon";
 import { useMainStore } from "@haulmont/jmix-react-core";
@@ -25,32 +20,30 @@ import { customizeColor } from "../../../../utils/utils";
 type ProductionInfoDetail = {
     isOpen: boolean,
     setClose?: () => void;
-    status: string,
-    production_id: string,
-    production_cardName: string,
+
 };
 
-const stage_value = [{
-    id: 1,
-    value: "In lưới"
-},
-{
-    id: 2,
-    value: "In offset"
-},
-{
-    id: 3,
-    value: "Cắt"
-},
+const stage_value = [
+    {
+        id: 1,
+        value: "In lưới"
+    },
+    {
+        id: 2,
+        value: "In offset"
+    },
+    {
+        id: 3,
+        value: "Cắt"
+    },
 ]
 
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 
 export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
-    isOpen = false, setClose, production_id = "", production_cardName = "", status }) => {
+    isOpen = false, setClose }) => {
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [content, setContent] = useState<string>();
-
     const [isVisibleProgressWODetailJob, setisVisibleProgressWODetailJob] = React.useState<boolean>(false);
     const mainStore = useMainStore();
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
@@ -76,27 +69,6 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
             }
             );
     }
-
-    const productionInfo = [{
-        no: 1,
-        stage: 'In offset',
-        job_id: 'JB01-001',
-        job_name: 'In offset: Ra bản',
-        finishTime: "2022/06/01",
-    },
-    {
-        no: 2,
-        stage: 'In lưới',
-        job_id: 'JB02-002',
-        job_name: 'In offset: Căng lưới + bọc lưới',
-        finishTime: "2021/03/01",
-    }, {
-        no: 3,
-        stage: 'Dải từ',
-        job_id: 'JB01-001',
-        job_name: 'Từ: Dải từ',
-        finishTime: "2022/01/01",
-    }]
 
     const onStatusPoRender = (rowInfo) => {
         // console.log("Data color,", data?.value)
@@ -285,15 +257,12 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
                             <Column caption={"Trạng thái"} dataType="datetime" />
                             <MasterDetail
                                 enabled={true}
-                                // component={DetailTemplate}
                                 render={detailData}
                             />
                         </DataGrid>
-
                     </div>
             }
         </>
-
     )
 })
 

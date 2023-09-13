@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Popup, TextBox } from "devextreme-react";
+import { TextBox } from "devextreme-react";
 import { Button } from "antd"
 import { observer } from "mobx-react";
 import ConfirmInformation from "../confirmInformation/ConfirmInformation";
@@ -38,12 +38,6 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
     const [nvlBtpPlot_barcode, setnvlBtpPlot_barcode] = useState(fakeNvlBtpPlot_barcode);
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
-    }, [])
 
     const checkedInfo = () => {
         console.log("Chấm công");
@@ -96,6 +90,15 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
             }, 1000);
         }
     }
+
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', updateDimension);
+    }, [])
+
+
     return (
         <>
             {isDeclareInfo ? <ConfirmInformation
@@ -110,7 +113,6 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                 nvl_quantity={nvlBtpPlot[0].quantity}
                 isNVL={isNVL}
             />
-
                 :
                 <div>
                     <div className="table-responsive">
@@ -132,7 +134,7 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
                                         <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                         <div>
                                             <div>
-                                                <input type="text" className="a" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
+                                                <input type="text" className="" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
                                             </div>
                                             <Button onClick={refresh} className="btn_back">Quét lại</Button>
                                             {/* 
