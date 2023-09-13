@@ -1,4 +1,27 @@
 {
+    "common" : {
+        "search" : "Common searching",
+        "search-placeholder":"Typing text & hit enter key for searching",
+        "noData-text":"No data",
+        "goTo-page": "Go to page",
+        "page":"Page",
+        "page-number":"Page number",
+        "of":"of",
+        "records":"records",
+        "startsWith":"Starts with",
+        "equal":"Equal",
+        "endWith":"Ends with",
+        "contains":"Contains",
+        "notContains":"Does not contains",
+        "notEqual":"Does not equal",
+        "lessThan":"Less than",
+        "lessThanOrEqual":"Less than or equal to",
+        "greaterThan":"Greater than",
+        "greaterThanOrEqual":"Greater than or equal to",
+        "between":"Beetween",
+        "reset":"Reset",
+        "hello":"Hello bro"
+    },
     "sider": {
         "home": "Dashboard",
         "information": "Management of information",
@@ -34,5 +57,8 @@
         "account": "Account management",
         "warning": "Warning",
         "report-statistics": "Report, statistics"
+    },
+    "bom-bodycard": {
+        "header": "Management of bodycard BOM"
     }
 }

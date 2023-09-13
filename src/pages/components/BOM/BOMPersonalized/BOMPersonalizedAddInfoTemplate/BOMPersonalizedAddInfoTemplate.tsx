@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGrid, SelectBox, TextBox } from "devextreme-react";
-import { Column, FilterRow } from "devextreme-react/data-grid";
+import { Column, FilterRow, OperationDescriptions } from "devextreme-react/data-grid";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
@@ -8,6 +8,7 @@ import PopupBOMAddNewInfoMaterial from "../../../../../shared/components/PopupBO
 import PopupImportFile from "../../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 type BOMPersonalizedAddInfoTemplateProps = {
     isOpen: boolean;
@@ -65,7 +66,7 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
-
+    const { t } = useTranslation("common");
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     };
@@ -185,7 +186,7 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
                                 style={{
                                     color: "rgba(0, 0, 0, 0.7)",
                                     marginTop: 30,
-                                    fontSize: 23,
+                                    fontSize: 20,
                                     boxSizing: "border-box",
                                     fontWeight: 550,
                                 }}>
@@ -253,19 +254,33 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
                                 }
                                 width={600}
                             />
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
 
-                            <Column dataField='materialCode' caption='Mã vật tư'></Column>
+                            <Column dataField='materialCode' caption='Mã vật tư' cellRender={() => <SelectBox placeholder="Chọn" />}></Column>
                             <Column dataField='materialDescript' caption='Mô tả vật tư'></Column>
-                            <Column dataField='technicalName' caption='Tên kỹ thuật' alignment='left'></Column>
                             <Column dataField='version' caption='Version' alignment={"left"}></Column>
                             <Column dataField='classify' caption='Phân loại' alignment={"left"}></Column>
                             <Column dataField='norm' caption='Định mức' />
-                            <Column dataField='quantity' caption='Số lượng' />
+                            <Column dataField='quantity' caption='Số lượng' alignment="left" />
                             <Column dataField='unit' caption='Đơn vị tính' />
-                            <Column caption={"Mã vật tư thay thế"} dataField='materialCodeChange' />
-                            <Column caption={"Mô tả vật tư thay thế"} dataField='materialDescriptChange' />
+                            <Column dataField="warehouseCode" caption="Mã kho" cellRender={() => <SelectBox placeholder="Chọn" />} />
                             <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
+                            <Column caption="Số lượng sẵn sàng" dataField="availableQuantity" />
+                            <Column caption="Loại" dataField="type" cellRender={() => <SelectBox placeholder="Chọn" />} />
                             <Column
                                 fixed={true}
                                 type={"buttons"}

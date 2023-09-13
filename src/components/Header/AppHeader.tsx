@@ -11,11 +11,11 @@ import {
 } from "@ant-design/icons";
 import { Badge, Button, Layout, Select } from "antd";
 import ConfirmLogout from "../../shared/components/ConfirmLogout/ConfirmLogout";
-
 import styles from "./AppHeader.module.css";
-
 import { AuthService } from "../../auth";
 import { useLocalized } from "../../contexts/Localization";
+import Notification from "../../shared/components/Notification/Notification";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -46,9 +46,9 @@ const itemsLanguage = [
 const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed = () => { } }) => {
     const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
     const [isLogout, setIsLogout] = useState<boolean>(false);
-
+    const [isVisibleNotification, setIsVisibleNotification] = useState<boolean>(false);
     const { localizedData, setLocalizedData } = useLocalized();
-
+    const { t } = useTranslation(["common"]);
     function handleChangeLanguage(value: string) {
         if (setLocalizedData) {
             setLocalizedData({ language: value });
@@ -99,7 +99,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
     };
 
     return (<Header className={cx("header-container")} style={{ padding: 0 }}>
-
+        <Notification isOpen={isVisibleNotification} onClose={() => setIsVisibleNotification(!isVisibleNotification)} onCloseOutSide={true} />
         <ConfirmLogout
             isVisible={isLogout}
             onCancel={() => setIsLogout(false)}
@@ -152,7 +152,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
             <div className={cx("user")}>
                 <img className={cx("user-avatar")} src={"assets/images/GirlImage.jpg"} alt="user" />
                 <div className={cx("user-container")}>
-                    <span className={cx("user-hello")}>Xin chào</span>
+                    <span className={cx("user-hello")}>{t("common.hello")}</span>
                     <span className={cx("user-username")}>{AuthService.getUsername()}</span>
                 </div>
             </div>
@@ -177,7 +177,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed = false, setCollapsed =
             </div>
             <div>
                 <Badge count={notificationCount} className={cx("badge", 'shake')} >
-                    <Button className={cx("button-none")} icon={<BellFilled className={cx("bell")} />} />
+                    <Button onClick={() => setIsVisibleNotification(!isVisibleNotification)} className={cx("button-none")} icon={<BellFilled className={cx("bell")} />} />
                 </Badge>
             </div>
             <div>

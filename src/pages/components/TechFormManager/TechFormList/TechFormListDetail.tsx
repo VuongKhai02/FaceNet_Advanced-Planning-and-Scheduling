@@ -1,4 +1,4 @@
-import { locale, loadMessages } from "devextreme/localization";
+
 import React, { useEffect } from "react";
 import { OrderItem } from "../../../../fake_data/OrderItem";
 import DataGrid, {
@@ -23,6 +23,7 @@ import { Tag } from "antd";
 import PopupSendSAP from "../../../../shared/components/PopupSendSAP/PopupSendSAP";
 import { WarningOutlined } from "@ant-design/icons";
 import TechFormUpdate from "../TechFormUpdate/TechFormUpdate";
+import { useTranslation } from "react-i18next";
 
 const getProductName = (rowData: any) => {
     if (rowData.data.status && rowData.data.status === "created_wo") {
@@ -56,7 +57,7 @@ const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, "all"];
 export const TechFormListDetail = React.memo((props: any) => {
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
     const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const loadProductOrderItem = () => { };
     const loadProduct = () => { };
 
@@ -170,7 +171,7 @@ export const TechFormListDetail = React.memo((props: any) => {
                         onCellPrepared={onCellPrepared}
                         wordWrapEnabled={true}
                         columnAutoWidth={true}
-                        noDataText='Không có dữ liệu để hiển thị'>
+                        noDataText={t("common.noData-text")}>
                         <Toolbar>
                             <TItem location={"before"}>
                                 <div className={"master-detail-title"}>Danh sách phiếu công nghệ</div>
@@ -188,22 +189,22 @@ export const TechFormListDetail = React.memo((props: any) => {
                             showNavigationButtons={true}
                             infoText='Trang số {0} trên {1} ({2} bản ghi)'
                         />
-                        <FilterRow visible={false} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
+                        <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
                             <OperationDescriptions
-                                startsWith='Bắt đầu với'
-                                equal='Bằng'
-                                endsWith='Kết thúc với'
-                                contains='Chứa'
-                                notContains='Không chứa'
-                                notEqual='Không bằng'
-                                lessThan='Nhỏ hơn'
-                                lessThanOrEqual='Nhỏ hơn hoặc bằng'
-                                greaterThan='Lớn hơn'
-                                greaterThanOrEqual='Lớn hơn hoặc bằng'
-                                between='Nằm giữa'
+                                startsWith={t("common.startsWith")}
+                                equal={t("common.equal")}
+                                endsWith={t("common.endsWith")}
+                                contains={t("common.contains")}
+                                notContains={t("common.notContains")}
+                                notEqual={t("common.notEqual")}
+                                lessThan={t("common.lessThan")}
+                                lessThanOrEqual={t("common.lessThanOrEqual")}
+                                greaterThan={t("common.greaterThan")}
+                                greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                between={t("common.between")}
                             />
                         </FilterRow>
-                        <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                        <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                         <Selection mode='single' />
                         <Column
                             width={140}

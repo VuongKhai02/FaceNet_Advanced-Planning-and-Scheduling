@@ -8,6 +8,7 @@ import {
     Toolbar,
     MasterDetail,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
@@ -15,7 +16,7 @@ import BOMPersonalizedDetail from "./BOMPersonalizedDetail";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupBOM from "../../../../shared/components/PopupBOM/PopupBOM";
-import { Button } from "antd";
+import { Button, Tag } from "antd";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import BOMPersonalizedAddInfoProduct from "./BOMPersonalizedAddInfoProduct/BOMPersonalizedAddInfoProduct";
 import BOMPersonalizedAddInfoTemplate from "./BOMPersonalizedAddInfoTemplate/BOMPersonalizedAddInfoTemplate";
@@ -23,11 +24,14 @@ import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import styles from "./BOMPersonalized.module.css";
 import classNames from "classnames/bind";
+import { customizeColor } from "../../../../utils/utils";
 import { Status } from "../BOMBodyCard/ListProduct/ListProduct";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 const data = [
     {
+        value: 0,
         customerCode: "TH01",
         customerName: "Sản phẩm 1",
         version: "1.1",
@@ -36,6 +40,7 @@ const data = [
         status: "Hoạt động",
     },
     {
+        value: 1,
         customerCode: "TH02",
         customerName: "Sản phẩm 2",
         version: "1.2",
@@ -47,37 +52,55 @@ const data = [
 
 const data2 = [
     {
+        id: 1,
         codeMaterial: "VT0001",
-        replaceMaterialName: "Mực 02",
+        nameMaterial: "Chip vàng 6 chân",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         version: "1.1",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
     {
-        codeMaterial: "VT0002",
-        replaceMaterialName: "Mực 02",
-        version: "1.1",
+        id: 2,
+        codeMaterial: "VT0001",
+        nameMaterial: "Chip vàng 6 chân",
+        version: "1.2",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
     {
-        codeMaterial: "VT0003",
-        replaceMaterialName: "Mực 02",
-        version: "1.1",
+        id: 3,
+        codeMaterial: "VT0001",
+        nameMaterial: "Chip vàng 6 chân",
+        version: "1.3",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
 ];
 
@@ -95,7 +118,7 @@ export const BOMPersonalized = () => {
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
-
+    const { t } = useTranslation(["common"]);
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
@@ -143,6 +166,32 @@ export const BOMPersonalized = () => {
             </div>
         </div>
     ];
+
+    const onStatusRender = (value: any) => {
+        return data.map((item) => {
+            console.log('item status', item.value);
+            const customColor = customizeColor(item.status);
+            return (
+                <Tag
+                    key={item.value}
+                    style={{
+                        fontSize: '14px',
+                        padding: '7px',
+                        width: '100%',
+                        textAlign: 'center',
+                        color: customColor.color,
+                        backgroundColor: customColor.backgroundColor,
+                        borderRadius: '4px',
+                        border: 'none',
+                        fontWeight: customColor.fontWeight,
+                    }}
+                >
+                    {item.status}
+                </Tag>
+            );
+        });
+    };
+
 
     return (
         <>
@@ -194,7 +243,7 @@ export const BOMPersonalized = () => {
                             isVisible={isVisibleListMaterialReplacement}
                             modalContent={
                                 <div>
-                                    <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
+                                    <div style={{ marginLeft: 20, marginRight: 20 }}>
                                         <div>
                                             <div>
                                                 <table
@@ -213,8 +262,8 @@ export const BOMPersonalized = () => {
                                                 </table>
                                             </div>
                                             <DataGrid
-                                                key={"replaceMaterialCode"}
-                                                keyExpr={"replaceMaterialCode"}
+                                                key={"id"}
+                                                keyExpr={"id"}
                                                 dataSource={data2}
                                                 showBorders={true}
                                                 columnAutoWidth={true}
@@ -225,8 +274,8 @@ export const BOMPersonalized = () => {
                                                 focusedRowEnabled={true}>
                                                 <Toolbar>
                                                     <ToolbarItem location='before'>
-                                                        <div>
-                                                            <h4>Danh sách vật tư</h4>
+                                                        <div style={{ fontSize: 20, fontWeight: 500 }}>
+                                                            <p>Danh sách vật tư</p>
                                                         </div>
                                                     </ToolbarItem>
                                                     <ToolbarItem>
@@ -239,9 +288,23 @@ export const BOMPersonalized = () => {
                                                         />
                                                     </ToolbarItem>
                                                 </Toolbar>
-                                                <FilterRow visible={true} />
-                                                <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                                <Column caption={"Tên vật tư thay thế"} dataField={"replaceMaterialName"} />
+                                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                                    <OperationDescriptions
+                                                        startsWith={t("common.startsWith")}
+                                                        equal={t("common.equal")}
+                                                        endsWith={t("common.endsWith")}
+                                                        contains={t("common.contains")}
+                                                        notContains={t("common.notContains")}
+                                                        notEqual={t("common.notEqual")}
+                                                        lessThan={t("common.lessThan")}
+                                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                                        greaterThan={t("common.greaterThan")}
+                                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                                        between={t("common.between")}
+                                                    />
+                                                </FilterRow>
+                                                <Column caption={"Mã vật tư thay thế"} dataField={"materialCodeReplace"} />
+                                                <Column caption={"Tên vật tư thay thế"} dataField={"materialNameReplace"} />
                                                 <Column caption={"Version"} dataField={"version"} />
                                                 <Column caption={"Phân loại"} dataField={"classify"} />
                                                 <Column caption={"Định mức"} dataField={"norm"} />
@@ -308,7 +371,7 @@ export const BOMPersonalized = () => {
                             isVisible={isDetailBOM}
                             modalContent={
                                 <div>
-                                    <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
+                                    <div style={{ marginLeft: 20, marginRight: 20 }}>
                                         <div>
                                             <div>
                                                 <table
@@ -326,12 +389,12 @@ export const BOMPersonalized = () => {
                                                     </td>
                                                 </table>
                                             </div>
-                                            <div style={{ marginTop: 40 }}>
-                                                <h4>Danh sách vật tư</h4>
+                                            <div style={{ marginTop: 40, fontSize: 20, fontWeight: 500 }}>
+                                                <p>Danh sách vật tư</p>
                                             </div>
                                             <DataGrid
-                                                key={"codeMaterial"}
-                                                keyExpr={"codeMaterial"}
+                                                key={"id"}
+                                                keyExpr={"id"}
                                                 dataSource={data2}
                                                 showBorders={true}
                                                 columnAutoWidth={true}
@@ -340,19 +403,31 @@ export const BOMPersonalized = () => {
                                                 allowColumnResizing={true}
                                                 allowColumnReordering={true}
                                                 focusedRowEnabled={true}>
-                                                <FilterRow visible={true} />
+                                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                                    <OperationDescriptions
+                                                        startsWith={t("common.startsWith")}
+                                                        equal={t("common.equal")}
+                                                        endsWith={t("common.endsWith")}
+                                                        contains={t("common.contains")}
+                                                        notContains={t("common.notContains")}
+                                                        notEqual={t("common.notEqual")}
+                                                        lessThan={t("common.lessThan")}
+                                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                                        greaterThan={t("common.greaterThan")}
+                                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                                        between={t("common.between")}
+                                                    />
+                                                </FilterRow>
                                                 <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
                                                 <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />
                                                 <Column caption={"Version"} dataField={"version"} />
                                                 <Column caption={"Phân loại"} dataField={"classify"} />
                                                 <Column caption={"Định mức"} dataField={"norm"} />
                                                 <Column caption={"Đơn vị tính"} dataField={"unit"} />
-                                                <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                                <Column
-                                                    caption={"Mô tả vật tư thay thế"}
-                                                    dataField={"replaceMaterialDescription"}
-                                                />
-                                                <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
+                                                <Column caption="Mã kho" dataField="warehouseCode" />
+                                                <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
+                                                <Column caption="Số lượng sẵn sàng" dataField="availableQuantity" />
+                                                <Column caption="Phân loại" dataField="type" />
                                                 <Column
                                                     fixed={true}
                                                     type={"buttons"}
@@ -445,7 +520,7 @@ export const BOMPersonalized = () => {
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
-                            noDataText='Không có dữ liệu để hiển thị'
+                            noDataText={t("common.noData-text")}
                         >
                             <Toolbar>
                                 <ToolbarItem location='after'>
@@ -487,8 +562,22 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem name='searchPanel' location='before' />
                                 <ToolbarItem name='columnChooserButton' />
                             </Toolbar>
-                            <FilterRow visible={true} />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
+                            <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' />
 
                             <Column caption={"Mã khách hàng"} dataField={"customerCode"} alignment='left' />
@@ -496,8 +585,9 @@ export const BOMPersonalized = () => {
                             <Column caption={"Version"} dataField={"version"} />
                             <Column caption={"Lưu ý"} dataField={"notice"} />
                             <Column caption={"Ghi chú"} dataField={"note"} />
-                            <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
-                                return <Status value={cellInfo.value} />
+                            <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={(cellInfo) => {
+                                return <Status value={cellInfo.data.value} />
+
                             }} />
                             <Column
                                 fixed={true}
@@ -531,22 +621,22 @@ export const BOMPersonalized = () => {
                                             textSize={17}
                                             icon='assets/icons/StageChange.svg'
                                             textColor='#FF7A00'
-                                            style={{ marginRight: 17 }}
+                                        // style={{ marginRight: 17 }}
                                         />
-                                        <SvgIcon
+                                        {/* <SvgIcon
                                             onClick={() => setIsConfirmDelete(true)}
                                             tooltipTitle='Xóa'
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Trash.svg'
                                             textColor='#FF7A00'
-                                        />
+                                        /> */}
                                     </div>
                                 )}></Column>
 
                             <MasterDetail
                                 enabled={true}
-                                component={handleGotoBOMPersonalizedDetail}
+                                render={handleGotoBOMPersonalizedDetail}
                             />
                         </DataGrid>
                         <PaginationComponent

@@ -1,4 +1,31 @@
 {
+     "common" : {
+        "search" : "Tìm kiếm chung",
+        "search-placeholder":"Nhập thông tin và ấn Enter để tìm kiếm",
+        "noData-text":"Không có dữ liệu để hiển thị",
+        "goTo-page": "Đi đến trang",
+        "page":"Trang",
+        "page-number":"Trang số",
+        "of":"của",
+        "records":"bản ghi",
+        "startsWith":"Bắt đầu với",
+        "equal":"Bằng",
+        "endsWith":"Kết thúc với",
+        "contains":"Chứa",
+        "notContains":"Không chứa",
+        "notEqual":"Không bằng",
+        "lessThan":"Nhỏ hơn",
+        "lessThanOrEqual":"Nhỏ hơn hoặc bằng",
+        "greaterThan":"Lớn hơn",
+        "greaterThanOrEqual":"Lớn hơn hoặc bằng",
+        "between":"Nằm giữa",
+        "reset":"Đặt lại",
+        "hello":"Xin chào"
+
+
+
+
+    },
     "sider": {
         "home": "Trang chủ",
         "information": "Quản lý thông tin",
@@ -34,6 +61,9 @@
         "account": "Quản lý tài khoản",
         "warning": "Cảnh báo",
         "report-statistics": "Báo cáo, thống kê"
+    },
+    "bom-bodycard": {
+        "header": "Quản lý BOM body card"
     },
     "Yes": "Xóa",
     "No": "Hủy bỏ",

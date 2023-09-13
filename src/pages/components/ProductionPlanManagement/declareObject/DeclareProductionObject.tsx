@@ -11,6 +11,7 @@ import {
     SearchPanel,
     Toolbar,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import { PLANNING_API_URL } from "../../../../utils/config";
 import { customizeColor } from "../../../../utils/utils";
@@ -24,6 +25,7 @@ import DeclareProductionInfor from "./declareProductionInfor/ProductionOder/Decl
 import ProgressMonitoringWODetail from "../../ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringWODetail/ProgressMonitoringWODetail";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import { useTranslation } from "react-i18next";
 
 const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
@@ -32,6 +34,7 @@ const stage_name = ["In offset", "In lưới", "Ép", "Cắt"];
 const job_name = ["Ra film", "Ra film + Chụp bản", "In màu", "In trắng"];
 
 export const DeclareProductionObject = () => {
+    const { t } = useTranslation(["common"]);
     const [content, setContent] = useState<string>();
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
@@ -240,9 +243,23 @@ export const DeclareProductionObject = () => {
                             <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                             <ToolbarItem name='searchPanel' location='before' />
                         </Toolbar>
-                        <FilterRow visible={true} />
+                        <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                            <OperationDescriptions
+                                startsWith={t("common.startsWith")}
+                                equal={t("common.equal")}
+                                endsWith={t("common.endsWith")}
+                                contains={t("common.contains")}
+                                notContains={t("common.notContains")}
+                                notEqual={t("common.notEqual")}
+                                lessThan={t("common.lessThan")}
+                                lessThanOrEqual={t("common.lessThanOrEqual")}
+                                greaterThan={t("common.greaterThan")}
+                                greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                between={t("common.between")}
+                            />
+                        </FilterRow>
                         <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                        <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                        <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                         <Paging defaultPageSize={10} />
                         <Pager
                             visible={true}

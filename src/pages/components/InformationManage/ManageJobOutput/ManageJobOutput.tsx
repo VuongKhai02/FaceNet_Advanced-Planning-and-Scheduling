@@ -4,11 +4,10 @@ import {
     Column,
     FilterRow,
     Item as ToolbarItem,
-    Pager,
-    Paging,
     SearchPanel,
     Toolbar,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
@@ -17,6 +16,7 @@ import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import VerificationJobOutput from "./VerificationJobOutput/VerificationJobOutput";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -24,6 +24,9 @@ const data = [
         jobOutPutName: "WO-123-CĐ01-01",
         jobCode: "J01-001",
         jobName: "In offset : Ra bản",
+        stageCode: "CĐ02",
+        boxCode: "H01",
+        boxName: "Hộp đựng BTP",
         quantity: "100",
         status: "Chuyển công đoạn",
     },
@@ -32,6 +35,9 @@ const data = [
         jobOutPutName: "WO-123-CĐ01-01",
         jobCode: "J01-001",
         jobName: "In offset : Ra bản",
+        stageCode: "CĐ02",
+        boxCode: "H01",
+        boxName: "Hộp đựng BTP",
         quantity: "100",
         status: "Công đoạn hiện tại",
     },
@@ -40,6 +46,9 @@ const data = [
         jobOutPutName: "WO-123-CĐ01-01",
         jobCode: "J01-001",
         jobName: "In offset : Ra bản",
+        stageCode: "CĐ02",
+        boxCode: "H01",
+        boxName: "Hộp đựng BTP",
         quantity: "100",
         status: "Chuyển công đoạn",
     },
@@ -53,7 +62,7 @@ export const ManageJobOutput = () => {
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
-
+    const { t } = useTranslation(["common"]);
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
@@ -117,7 +126,7 @@ export const ManageJobOutput = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}
-                                noDataText='Không có dữ liệu để hiển thị'
+                                noDataText={t("common.noData-text")}
                             >
                                 <PopupConfirmDelete
                                     isVisible={isVisibleDelJobOutput}
@@ -163,14 +172,31 @@ export const ManageJobOutput = () => {
                                     <ToolbarItem name='columnChooserButton' />
                                     <ToolbarItem name='searchPanel' location='before' />
                                 </Toolbar>
-                                <FilterRow visible={true} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
                                 <ColumnChooser enabled={true} allowSearch={true} />
-                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
                                 <Column caption={"Mã Job Output"} dataField={"jobOutputCode"} />
                                 <Column caption={"Tên Job Output"} dataField={"jobOutPutName"} />
                                 <Column caption={"Mã Job"} dataField={"jobCode"} />
                                 <Column caption={"Tên Job"} dataField={"jobName"} />
+                                <Column caption={"Mã công đoạn"} dataField={"stageCode"} />
+                                <Column caption={"Mã hộp"} dataField={"boxCode"} />
+                                <Column caption={"Tên hộp"} dataField={"boxName"} />
                                 <Column caption={"Số lượng thẻ"} dataField={"quantity"} />
                                 <Column caption={"Trạng thái"} dataField={"status"} />
                                 <Column

@@ -3,12 +3,15 @@ import { DataGrid, Template } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Table, Checkbox, Button } from "antd";
+import { useTranslation } from "react-i18next";
 import "./ViewDetailProductRequires.css";
 type TechFormBodyCardProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
 export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose }) => {
+
+    const { t } = useTranslation(["common"]);
     const data1 = [
         { title1: "Mã sx/Production", data1: "1500928", title2: "Người gửi/Sender", data2: "Nguyễn Thị A" },
         { title1: "Tên khách hàng/Customer", data1: "Ngân hang A", title2: "Số lượng thẻ/Quantity", data2: "15000" },
@@ -77,6 +80,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                         <div style={{ marginTop: 10 }}>
                             <div style={{ width: 1500 }}>
                                 <DataGrid
+                                    noDataText={t("common.noData-text")}
                                     key={"title1"}
                                     keyExpr={"title1"}
                                     dataSource={data1}

@@ -3,9 +3,10 @@ import { DataGrid } from "devextreme-react";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
 import Steps from "antd/lib/steps";
-import { Column, FilterRow } from "devextreme-react/data-grid";
+import { Column, FilterRow, OperationDescriptions } from "devextreme-react/data-grid";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -78,6 +79,7 @@ type ProgressMonitoringOrderDetailProgressProps = {
 
 export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringOrderDetailProgressProps> = observer(
     ({ isOpen = false, setClose }) => {
+        const { t } = useTranslation(["common"]);
         return (
             <>
                 {
@@ -146,7 +148,21 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}>
-                                <FilterRow visible={true} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
                                 <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
                                 <Column caption={"Mã sản phẩm"} dataField={"productionCode"} />
                                 <Column caption={"Tên thẻ"} dataField={"cardName"} />

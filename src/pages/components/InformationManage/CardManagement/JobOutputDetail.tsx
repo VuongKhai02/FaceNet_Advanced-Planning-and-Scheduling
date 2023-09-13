@@ -1,4 +1,4 @@
-import { locale, loadMessages } from "devextreme/localization";
+
 import React from "react";
 import DataGrid, {
     Column,
@@ -6,12 +6,11 @@ import DataGrid, {
     SearchPanel,
     Toolbar,
     Item as TItem,
-    Paging,
-    Pager,
     OperationDescriptions,
     ColumnChooser,
 } from "devextreme-react/data-grid";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 const data = [
     { jobOutputCode: "J01", jobOutputName: "WO-123-CĐ01-01", cardBoxQuantity: "01", startDate: "15/08/2023", endDate: "16/08/2023" },
@@ -24,7 +23,7 @@ export const JobOutPutDetail = React.memo((props: any) => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-
+    const { t } = useTranslation(["common"]);
     return (
         <div>
             <DataGrid
@@ -39,32 +38,32 @@ export const JobOutPutDetail = React.memo((props: any) => {
                 rowAlternationEnabled={true}
                 wordWrapEnabled={true}
                 columnAutoWidth={true}
-                noDataText='Không có dữ liệu để hiển thị'>
+                noDataText={t("common.noData-text")}>
                 <Toolbar>
                     <TItem location={"before"}>
-                        <div className={"master-detail-title"} style={{ color: '#333' }}>Danh sách Job output</div>
+                        <div style={{ fontSize: 18, fontWeight: "bold" }}>Danh sách Job output</div>
                     </TItem>
                     <TItem name='addRowButton' />
                     <TItem name='columnChooserButton' />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} />
 
-                <FilterRow visible={false} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
+                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
                     <OperationDescriptions
-                        startsWith='Bắt đầu với'
-                        equal='Bằng'
-                        endsWith='Kết thúc với'
-                        contains='Chứa'
-                        notContains='Không chứa'
-                        notEqual='Không bằng'
-                        lessThan='Nhỏ hơn'
-                        lessThanOrEqual='Nhỏ hơn hoặc bằng'
-                        greaterThan='Lớn hơn'
-                        greaterThanOrEqual='Lớn hơn hoặc bằng'
-                        between='Nằm giữa'
+                        startsWith={t("common.startsWith")}
+                        equal={t("common.equal")}
+                        endsWith={t("common.endsWith")}
+                        contains={t("common.contains")}
+                        notContains={t("common.notContains")}
+                        notEqual={t("common.notEqual")}
+                        lessThan={t("common.lessThan")}
+                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                        greaterThan={t("common.greaterThan")}
+                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                        between={t("common.between")}
                     />
                 </FilterRow>
-                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                 <Column caption='Mã Job output' dataField={"jobOutputCode"} />
                 <Column dataField='jobOutputName' caption='Tên Job output' />
                 <Column dataField='cardBoxQuantity' caption='Số lượng thẻ trong hộp' />

@@ -18,31 +18,43 @@ export function getColor(value: any) {
   return "#FF0000"
 }
 
-export function customizeColor(value: any): { color: string, backgroundColor: string } {
-  if (value === "Chờ sản xuất") {
+export function customizeColor(value: any): { color: string, backgroundColor: string, fontWeight: string } {
+  if (value === "Hoạt động") {
     return {
-      color: "#0066FF",
-      backgroundColor: "#c4dcff"
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
+    }
+  } else if (value === "Ngừng hoạt động") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#FFC32B",
+      fontWeight: '500'
     }
   } else if (value === "Mới tạo") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#A8A8A8"
+      backgroundColor: "#A8A8A8",
+      fontWeight: '500'
     }
-  } else if (value === "Đang chờ phê duyệt") {
+  }
+  else if (value === "Đang chờ phê duyệt") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#DFE229"
+      backgroundColor: "#DFE229",
+      fontWeight: '500'
     }
   } else if (value === "Đã phê duyệt") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#00AF12"
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
     }
   }
   return {
-    color: "#FF0000",
-    backgroundColor: "#fadbdb"
+    color: "#fa4d4d",
+    backgroundColor: "#fadbdb",
+    fontWeight: '500'
   }
 }
 
