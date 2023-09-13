@@ -53,9 +53,9 @@ const AppHeader = observer(({ children }: { children?: React.ReactNode }) => {
 
   return (
     <div className="app-header">
-      <RdIcon ></RdIcon>
+      {/* <RdIcon ></RdIcon> */}
       <div className="app-header__content">{children}</div>
-      <div className="app-header__user-panel__logout-btn" style={{ fontSize: "20px", flexGrow: 1 }}>Advanced Planning and Scheduling</div>
+      {/* <div className="app-header__user-panel__logout-btn" style={{ fontSize: "20px", flexGrow: 1 }}>Advanced Planning and Scheduling</div> */}
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginRight: 50 }}>
         <Avatar size={30} icon={<img src="assets/images/GirlImage.jpg" alt="Avatar" />} />
         <div style={{ flexDirection: "column", marginLeft: 10 }}>

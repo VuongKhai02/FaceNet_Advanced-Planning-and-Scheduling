@@ -1,15 +1,12 @@
 
 
 .dx-button-content .dx-icon-export::before{  
-    /* content: "\f11f"!important;   */
     content: unset;
 }  
 .dx-button-content .dx-icon-export{
-    
     background-image: url("./images/ExportFile.svg");
   }
 .dx-icon-spindown::before {
-
     content: unset;
   }
 

@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-// import "./DeclareProductionObject.css"
-import { Button, DataGrid, Popup, SelectBox, TextBox } from "devextreme-react";
+import { Popup, TextBox } from "devextreme-react";
+import { Button } from "antd"
 import { observer } from "mobx-react";
-import qr_img from "../../images/qrCode.svg"
-import warning_img from "../../images/warning.svg"
-import { WorkerID } from "../WorkerID/WorkerID";
 import { MachineID } from "../MachineID/MachineID";
 import { infoMappedContext } from "../../DeclareProductionObject";
 import "../../styleCommon.css"
@@ -14,27 +11,24 @@ type ProductionID = {
     isOpen: boolean,
     setClose?: () => void;
     status: string,
-    p_id: string,
-    p_cardName: string,
+    production_id: string,
+    production_cardName: string,
 };
 
 const fakeProductionID = [{
-    id: "12345",
-    cardName: "Phôi Thẻ MC Tita cashback debit, VP Bank",
-    status: "Chưa phát lệnh sản xuất",
-    quantity: "15,000"
+    id: "",
+    cardName: "",
+    status: "",
+    quantity: ""
 }]
 
 export const ProductionID: React.FC<ProductionID> = observer(({
-    isOpen = false, setClose, p_id = "", p_cardName = "", status }) => {
+    isOpen = false, setClose, production_id = "", production_cardName = "", status }) => {
     const [popupVisible, setPopupVisible] = React.useState<boolean>(false);
     const [windowWidth, setwindowWidth] = useState(window.innerWidth);
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [productionId, setproductionId] = useState(fakeProductionID);
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
-
-    console.log("pop", popupVisible)
-    console.log("is op", isOpen)
 
     const handleChang = () => {
         setisDeclareInfo(true);
@@ -45,7 +39,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
         setPopupVisible(!popupVisible)
     }
     const checkedInfo = () => {
-        console.log("Chấm công");
+        alert("Chấm công");
     }
 
     useEffect(() => {
@@ -61,15 +55,16 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                 <div style={{ padding: "1rem" }}>
                     <div style={{ textAlign: "center" }}>
                         {/* <SvgIcon icon="assets/icons/InfoCircle.svg" ></SvgIcon> */}
-                        <img src={warning_img} alt="" />
+                        <img src="assets/icons/warning.svg" alt="" />
                         <h4 style={{ color: "rgba(255, 122, 0, 1)" }}>Xác nhận thực hiện sản xuất?</h4>
                     </div>
                     <h5 style={{ paddingTop: "1.5rem" }}>Hiện tại WO này chưa đc tổ trưởng cho phép tiến hành sản xuất. <br />
                         Bạn có chắc muốn tiếp tục thực hiện không?
                     </h5>
                     <div style={{ display: "flex", justifyContent: "space-between", width: "40%", margin: "auto", paddingTop: "2rem", gap: "10px" }}>
-
-                        <Button
+                        <Button onClick={setClose} className="btn_back">Hủy bỏ</Button>
+                        <Button onClick={handleChang} className="btn_continue">Xác nhận</Button>
+                        {/* <Button
                             onClick={setClose}
                             text="Hủy bỏ"
                             height={30}
@@ -90,7 +85,7 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                             }
                             hint="Khai báo máy"
 
-                        />
+                        /> */}
                     </div>
                 </div>
             </>
@@ -108,12 +103,34 @@ export const ProductionID: React.FC<ProductionID> = observer(({
         infoMapped[0].pro_id = "";
         let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
         setInfoMapped(newInfoMpaped);
+        document.getElementById("inputHide")?.focus();
+    }
+
+    const handleValueChange = (e) => {
+        let input = e.target.value;
+        if (input.includes("{")) {
+            let productionObj = JSON.parse(input);
+            productionId[0].id = infoMapped[0].pro_id = productionObj.id;
+            productionId[0].cardName = productionObj.cardName;
+            productionId[0].status = productionObj.status;
+            productionId[0].quantity = productionObj.quantity;
+
+            let newMachineObj = JSON.parse(JSON.stringify(productionId))
+            setproductionId(newMachineObj);
+
+            let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
+            setInfoMapped(newInfoMpaped);
+
+            setTimeout(() => {
+                e.target.value = "";
+            }, 1000);
+        }
     }
     return (
         <>
             {isDeclareInfo ? <MachineID isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)}
-                p_id={p_id}
-                p_cardName={p_cardName}
+                production_id={production_id}
+                production_cardName={production_cardName}
             /> :
                 <div>
                     <div className="table-responsive">
@@ -138,76 +155,75 @@ export const ProductionID: React.FC<ProductionID> = observer(({
                                 width={windowWidth < 600 ? '80vw' : '28vw'}
                             />
                             <div style={{ width: windowWidth < 600 ? '100%' : '40%', margin: "auto" }}>
-                                <div style={{ textAlign: "center", margin: "2rem" }}>
-                                    <h2 style={{ margin: "1rem" }}>Hướng camera về phía mã QR</h2>
-                                    <img src={qr_img} width={200} height={200} alt="" />
+                                <div className="qr_container">
+                                    <h2 className="qr_container_head">Hướng camera về phía mã QR</h2>
+                                    <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                     <div>
-                                        <Button
+                                        <div>
+
+                                            <input type="text" className="inputHidden" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
+                                        </div>
+                                        <Button onClick={refresh} className="btn_back">Quét lại</Button>
+                                        {/* <Button
+                                            className="btn_again"
                                             text="Quét lại"
                                             onClick={refresh}
                                             height={30}
-                                            width={80}
-                                            render={(buttonData) =>
-                                                <p style={{ color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
-                                            }
-                                        />
+                                            width={105}
+                                        /> */}
                                     </div>
                                 </div>
                                 <div className="dx-fieldset">
-                                    <h3 style={{ margin: "1rem 0" }}>Thông tin mã sản xuất</h3>
+                                    <h3 className="info_head">Thông tin mã sản xuất</h3>
                                     <div>
-                                        <TextBox value={fakeProductionID[0].id} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
-                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Mã sản xuất</p>
+                                        <TextBox className="textbox" value={productionId[0].id} disabled  >
+                                            <p className="textbox_label">Mã sản xuất</p>
                                         </TextBox>
                                     </div>
-                                    <div className="textbox">
-                                        <TextBox value={fakeProductionID[0].cardName} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
-                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Tên thẻ</p>
+                                    <div>
+                                        <TextBox className="textbox" value={productionId[0].cardName} disabled  >
+                                            <p className="textbox_label">Tên thẻ</p>
                                             <p className="underTextbox">
-                                                {fakeProductionID[0].cardName}
+                                                {productionId[0].cardName}
                                             </p>
                                         </TextBox>
                                     </div>
                                     <div>
-                                        <TextBox value={fakeProductionID[0].status} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
-                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Trạng thái</p>
+                                        <TextBox className="textbox" value={productionId[0].status} disabled  >
+                                            <p className="textbox_label">Trạng thái</p>
                                         </TextBox>
                                     </div>
                                     <div>
-                                        <TextBox value={fakeProductionID[0].quantity} disabled style={{ fontSize: "18px", boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.05)", position: "relative", padding: ".2rem 0 .2rem 13rem", borderRadius: "10px", border: "none", marginBottom: "1rem" }} >
-                                            <p style={{ position: "absolute", color: "rgba(0, 90, 111, 1)", left: "9px", fontWeight: "500", top: "10px" }}>Số lượng</p>
+                                        <TextBox className="textbox" value={productionId[0].quantity} disabled  >
+                                            <p className="textbox_label">Số lượng</p>
                                         </TextBox>
                                     </div>
-                                    <div style={{ display: "flex", justifyContent: "space-between", padding: "2rem 0" }}>
-                                        <Button
-                                            text="Trở lại  "
+                                    <div className="btn_container">
+                                        <Button onClick={setClose} className="btn_back">Trở lại</Button>
+                                        <Button onClick={status === "Chưa phát lệnh sản xuất" ? togglePopup : () => { setisDeclareInfo(true) }} className="btn_continue">Tiếp theo</Button>
+                                        <Button onClick={checkedInfo} className="btn_continue">Chấm công</Button>
+                                        {/* <Button
+                                            className="btn_back"
+                                            text="Trở lại"
                                             onClick={setClose}
                                             height={30}
-                                            width={100}
-                                            render={(buttonData) =>
-                                                <p style={{ fontSize: "18px", color: 'rgba(255, 255, 255, 1)', background: 'rgba(189, 189, 189, 1)', margin: "1rem auto", padding: "1.9rem" }}>{buttonData.text}</p>
-                                            }
+                                            width={90}
                                             hint="Khai báo lệnh sản xuất"
                                         />
                                         <Button
+                                            className="btn_continue"
                                             text="Tiếp theo"
-                                            width={100}
+                                            width={120}
                                             height={30}
                                             onClick={status === "Chưa phát lệnh sản xuất" ? togglePopup : () => { setisDeclareInfo(true) }}
-                                            render={(buttonData) =>
-                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1rem" }}>{buttonData.text}</p>
-                                            }
-
                                         />
                                         <Button
                                             text="Chấm công"
+                                            className="btn_continue"
                                             onClick={checkedInfo}
                                             height={30}
-                                            width={100}
-                                            render={(buttonData) =>
-                                                <p style={{ fontSize: "18px", color: '#fff', background: 'rgba(255, 122, 0, 1)', margin: "1rem auto", padding: "1.2rem" }}>{buttonData.text}</p>
-                                            }
-                                        />
+                                            width={140}
+                                        /> */}
 
                                     </div>
                                 </div>

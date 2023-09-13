@@ -11,7 +11,7 @@ import CardManagement from "../app/components/InformationManage/CardManagement/C
 import ManageJobOutput from "../app/components/InformationManage/ManageJobOutput/ManageJobOutput";
 import ProgressMonitoringWO from "../app/components/ProgressMonitoring/ProgressMonitoringWO/ProgressMonitoringWO";
 import ProgressMonitoringManufacture from "../app/components/ProgressMonitoring/ProgressMonitoringManufacture/ProgressMonitoringManufacture";
-import DeclareProductionObject from "../app/components/ProductionPlanManagement/declareObject/DeclareProductionObject";
+import DeclareProductionObject from "../app/components/ProductionPlanManagement/Declare-Infomation/DeclareProductionObject";
 
 
 
