@@ -29,23 +29,23 @@ export const MrpSaleOrders = () => {
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
 
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(content?.length / pageSize);
     const dataPage = content?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "info-manage",
-                        title: t("management-info.mana-info"),
+                        title: "management-info.mana-info",
                     },
                     {
                         key: "product-order-manager",
-                        title: t("management-info.management-order.label"),
+                        title: "management-info.management-order.label",
                     }
                 ]
             })

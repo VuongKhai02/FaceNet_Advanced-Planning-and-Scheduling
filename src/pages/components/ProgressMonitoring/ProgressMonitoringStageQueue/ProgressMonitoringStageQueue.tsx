@@ -25,11 +25,11 @@ export const ProgressMonitoringStageQueue = () => {
     const [isVisibleDefineStageQueue, setIsVisibleDefineStageQueue] = React.useState<boolean>(false);
     const [defineStageQueue, setDefineStageQueue] = React.useState<boolean>(false);
     const [startStage, setStartStage] = React.useState<boolean>(false);
-    const breadcrumbContext = useBreadcrumb();
+    const {setBreadcrumbData} = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "progress-monitoring",

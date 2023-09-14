@@ -35,20 +35,20 @@ export const ManageProductionRequirements = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(productionRequirements?.length / pageSize);
     const dataPage = productionRequirements?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "info-manage",
-                        title: t("management-info.mana-info"),
+                        title: "management-info.mana-info",
                     },
                     {
                         key: "manage-production-equirements",
-                        title: t("management-info.manufacture-request.breadcrumb-label"),
+                        title: "management-info.manufacture-request.breadcrumb-label",
                     }
                 ]
 
