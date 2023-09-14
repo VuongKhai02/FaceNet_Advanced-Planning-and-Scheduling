@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useBreadcrumb } from "../../contexts/BreadcrumbItems";
 
 const InformationManagement: React.FC = () => {
-    const breadCrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     useEffect(() => {
-        if (breadCrumbContext && breadCrumbContext.setBreadcrumbData) {
-            breadCrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "1",

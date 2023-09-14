@@ -34,11 +34,11 @@ type ProgressMonitoringWODetailProps = {
 export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProps> = observer(({ isOpen = false, setClose }) => {
     const [isVisibleProgressWODetailJob, setIsVisibleProgressWODetailJob] = React.useState<boolean>(false);
 
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "progress-monitoring",

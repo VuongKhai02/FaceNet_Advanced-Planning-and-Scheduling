@@ -56,11 +56,11 @@ export const ProgressMonitoringManufacture = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "progress-monitoring",

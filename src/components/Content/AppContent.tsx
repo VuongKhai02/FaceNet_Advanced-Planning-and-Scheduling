@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { withTranslation } from 'react-i18next'
 import classNames from "classnames/bind";
 import { Breadcrumb, Layout, theme } from "antd";
 
@@ -19,7 +20,10 @@ const AppContent: React.FC<AppContentProps> = memo(({ children }) => {
         <Breadcrumb
             className={cx("app-breadcrumb")}
             separator=">"
-            items={breadcrumbContext.breadcrumbData.items}
+            items={breadcrumbContext.breadcrumbData.items.map((item) => ({
+                ...item,
+                title: item.title && <I18nBreadcrumb>{item.title}</I18nBreadcrumb>,
+            }))}
         />
         <Content
             className={cx("app-content")}
@@ -33,3 +37,7 @@ const AppContent: React.FC<AppContentProps> = memo(({ children }) => {
 });
 
 export default AppContent;
+
+const I18nBreadcrumb = withTranslation(["common"])(({ t, children }) => {
+    return <span>{t(children)}</span>
+});

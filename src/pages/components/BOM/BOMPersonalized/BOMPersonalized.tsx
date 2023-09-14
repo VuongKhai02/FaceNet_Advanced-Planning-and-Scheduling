@@ -117,19 +117,19 @@ export const BOMPersonalized = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "BOM-manage",
-                        title: t("BOM.bom-management"),
+                        title: "BOM.bom-management",
                     },
                     {
                         key: "BOM-personalized",
-                        title: t("BOM.bom-personalized.header"),
+                        title: "BOM.bom-personalized.header",
                     }
                 ]
             })

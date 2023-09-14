@@ -66,19 +66,19 @@ export const CardManagement = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "info-manage",
-                        title: t("management-info.mana-info"),
+                        title: "management-info.mana-info"
                     },
                     {
                         key: "manage-card-box",
-                        title: t("management-info.management-box-card.breadcrumb-label"),
+                        title: "management-info.management-box-card.breadcrumb-label"
                     }
                 ]
             })

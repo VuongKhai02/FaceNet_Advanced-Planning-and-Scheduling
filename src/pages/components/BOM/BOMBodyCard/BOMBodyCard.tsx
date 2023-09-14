@@ -47,19 +47,19 @@ export const BOMBodyCard = () => {
     const { t } = useTranslation(["common"]);
     // const dataPage = bom?.data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "BOM-manage",
-                        title: t("BOM.bom-management"),
+                        title: "BOM.bom-management",
                     },
                     {
                         key: "BOM-bodycard",
-                        title: t("BOM.bom-bodycard.header"),
+                        title: "BOM.bom-bodycard.header",
                     }
                 ]
             })

@@ -53,11 +53,11 @@ export const TechFormList = () => {
     const totalPage = Math.ceil(techForms?.length / pageSize);
     const dataPage = techForms?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "tech-form-manage",

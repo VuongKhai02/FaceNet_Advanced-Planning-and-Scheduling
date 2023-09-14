@@ -112,11 +112,11 @@ export const ProductionPlanList = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data1?.length / pageSize);
     const dataPage = data1?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "product-plan-management",

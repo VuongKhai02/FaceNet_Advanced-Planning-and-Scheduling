@@ -61,19 +61,19 @@ export const ManageJobOutput = () => {
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "info-manage",
-                        title: t("management-info.mana-info"),
+                        title: "management-info.mana-info",
                     },
                     {
                         key: "manage-job-output",
-                        title: t("management-info.management-job-output.breadcrumb-label"),
+                        title: "management-info.management-job-output.breadcrumb-label",
                     }
                 ]
             })

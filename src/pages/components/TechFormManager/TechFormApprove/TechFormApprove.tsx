@@ -41,19 +41,19 @@ export const TechFormApprove = () => {
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const { t } = useTranslation(["common"]);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "tech-form-manage",
-                        title: t("management-techform.mana-techform"),
+                        title: "management-techform.mana-techform",
                     },
                     {
                         key: "tech-form-approve",
-                        title: t("management-techform.techform-approve.header"),
+                        title: "management-techform.techform-approve.header",
                     }
                 ]
             })

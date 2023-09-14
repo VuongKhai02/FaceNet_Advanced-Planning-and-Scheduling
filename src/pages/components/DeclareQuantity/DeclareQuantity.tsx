@@ -40,11 +40,11 @@ export const DeclareQuantity = () => {
     const totalPage = Math.ceil(data?.length / pageSize);
     const [isVisibleDelete, setIsVisibleDelete] = React.useState<boolean>(false);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
-    const breadcrumbContext = useBreadcrumb();
+    const { setBreadcrumbData } = useBreadcrumb();
     const { t } = useTranslation(["common"]);
     React.useEffect(() => {
-        if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
-            breadcrumbContext.setBreadcrumbData({
+        if (setBreadcrumbData) {
+            setBreadcrumbData({
                 items: [
                     {
                         key: "declare-quantity",
