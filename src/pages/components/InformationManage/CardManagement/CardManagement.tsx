@@ -96,14 +96,14 @@ export const CardManagement = () => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsVisibleAddBoxCard(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     key='submit'
                     onClick={() => { }}
                     className={cx(["btn", "btn-add"])}
                 >
-                    Thêm mới
+                    {t("common.add-button")}
                 </Button>
                 <Button
                     key='submit'
@@ -356,11 +356,11 @@ export const CardManagement = () => {
                                 </ToolbarItem>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
-                                        text='Thêm mới'
+                                        text={t("common.add-button")}
                                         onClick={() => {
                                             setIsVisibleAddBoxCard(true);
                                         }}
-                                        tooltipTitle='Thêm mới'
+                                        tooltipTitle={t("common.add-button")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/CircleAdd.svg'

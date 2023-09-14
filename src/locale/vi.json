@@ -24,7 +24,14 @@
         "exportExcel":"Xuất Excel",
         "notification":"Thông báo",
         "notification-setting":"Cài đặt thông báo",
-        "see-more":"Xem thêm"
+        "see-more":"Xem thêm",
+        "back-button":"Trở lại",
+        "add-button":"Thêm mới",
+        "next-button":"Tiếp theo",
+        "cancel-button":"Hủy bỏ",
+        "confirm-button":"Xác nhận",
+        "signature":"Ký lập",
+        "send-approve":"Gửi duyệt"
 
     },
     "sider": {
@@ -105,9 +112,35 @@
         "manufacture-plan-list":{
             "header":"Danh sách kế hoạch sản xuất"
         },
-        "declaration-manufacture-info":{
+        "declaration-manufacture-info": {
             "header":"Danh sách khai báo thông tin sản xuất"
         }
+    },
+    "progress-monitoring": {
+        "progress-monitoring-breadcrumb":"Giám sát tiến độ",
+        "manufacture-progress-monitoring": {
+            "header":"Giám sát tiến độ sản xuất"
+        },
+        "order-progress-monitoring": {
+            "header":"Giám sát tiến độ đơn hàng"
+        },
+        "machine-monitoring": {
+
+        },
+        "stage-queue": {
+            "header":"Hàng chờ công đoạn",
+            "label-table":"Danh sách lệnh sản xuất đang chờ"
+        }
+    },
+    "declare-production-quantity": {
+        "output-declaration":"Khai báo sản lượng",
+        "declare-production-quantity":{
+            "header":"Danh sách báo cáo hằng ngày"
+        }
+    },
+    "user-management":{
+        "user-management":"Quản lý tài khoản",
+        "header":"Danh sách tài khoản"
     },
     "Yes": "Xóa",
     "No": "Hủy bỏ",

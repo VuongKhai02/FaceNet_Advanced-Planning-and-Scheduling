@@ -241,8 +241,8 @@ export const ProductionPlanList = () => {
             <div style={{ marginTop: 20, border: "1px solid #dbdedf", height: 40, display: "flex", alignItems: "center", borderRadius: 5 }}>
                 <SvgIcon
                     onClick={handleAddNewButton}
-                    text='Thêm mới'
-                    tooltipTitle='Thêm mới'
+                    text={t("common.add-button")}
+                    tooltipTitle={t("common.add-button")}
                     sizeIcon={17}
                     textSize={17}
                     icon='assets/icons/Add.svg'
@@ -263,7 +263,7 @@ export const ProductionPlanList = () => {
                     }}>
                     <SvgIcon
                         text='Thêm mới button icon'
-                        tooltipTitle='Thêm mới'
+                        tooltipTitle={t("common.add-button")}
                         sizeIcon={17}
                         textSize={17}
                         icon='assets/icons/Add.svg'
@@ -406,7 +406,7 @@ export const ProductionPlanList = () => {
                         fontSize: 16,
                     }}
                     onClick={() => setIsVisibleAddQRCodeWO(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     style={{
@@ -456,7 +456,7 @@ export const ProductionPlanList = () => {
                         fontSize: 16,
                     }}
                     onClick={() => setIsVisibleDetailQRCodeWO(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     style={{
@@ -750,14 +750,14 @@ export const ProductionPlanList = () => {
                                             setIsVisibleAdd(false);
                                         }}
                                         className={cx("btn-cancel")}>
-                                        Hủy bỏ
+                                        {t("common.cancel-button")}
                                     </Button>
                                     ,
                                     <Button
                                         key='confirm'
                                         onClick={handleCreateProductionPlan}
                                         className={cx("btn-save")}>
-                                        Tiếp theo
+                                        {t("common.next-button")}
                                     </Button>
                                 </div>,
                             ]}
@@ -832,8 +832,8 @@ export const ProductionPlanList = () => {
                             <Toolbar>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
-                                        tooltipTitle='Thêm mới'
-                                        text='Thêm mới'
+                                        tooltipTitle={t("common.add-button")}
+                                        text={t("common.add-button")}
                                         onClick={() => setIsVisibleAdd(true)}
                                         sizeIcon={17}
                                         textSize={17}
@@ -844,8 +844,8 @@ export const ProductionPlanList = () => {
                                 </ToolbarItem>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
-                                        tooltipTitle='Xuất Excel'
-                                        text='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         onClick={() => setIsVisibleAdd(true)}
                                         sizeIcon={17}
                                         textSize={17}
@@ -1110,7 +1110,7 @@ export const ProductionPlanList = () => {
                                         backgroundColor: "#E5E5E5",
                                         borderRadius: 5,
                                     }}
-                                >Hủy bỏ</Button>
+                                >{t("common.cancel-button")}</Button>
                                 <Button
                                     icon=''
                                     style={{

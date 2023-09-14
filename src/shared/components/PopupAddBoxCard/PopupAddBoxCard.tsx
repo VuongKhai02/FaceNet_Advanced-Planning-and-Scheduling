@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { Modal, Button } from "antd";
 
 import styles from "./PopupAddBoxCard.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,7 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
     width,
     customFooter,
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             bodyStyle={{ padding: 0 }}
@@ -40,13 +42,13 @@ const PopupAddBoxCard: React.FC<PopupConfirmDeleteProps> = ({
                                 key='cancel'
                                 className={cx("btn-cancel")}
                                 onClick={onCancel}>
-                                Hủy bỏ
+                                {t("common.cancel-button")}
                             </Button>
                             <Button
                                 className={cx(["btn", "btn-save"])}
                                 key='submit'
                                 onClick={onSubmit}>
-                                Thêm mới
+                                {t("common.add-button")}
                             </Button>
                         </div>
                     ]

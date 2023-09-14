@@ -5,6 +5,7 @@ import Steps from "antd/lib/steps";
 import ProgressWODetailJob from "./ProgressWODetailJob/ProgressWODetailJob";
 import { Button } from "antd";
 import { useBreadcrumb } from "../../../../../contexts/BreadcrumbItems";
+import { useTranslation } from "react-i18next";
 
 const { Step } = Steps;
 const items = [
@@ -33,7 +34,7 @@ type ProgressMonitoringWODetailProps = {
 
 export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProps> = observer(({ isOpen = false, setClose }) => {
     const [isVisibleProgressWODetailJob, setIsVisibleProgressWODetailJob] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const { setBreadcrumbData } = useBreadcrumb();
 
     React.useEffect(() => {
@@ -160,7 +161,7 @@ export const ProgressMonitoringWODetail: React.FC<ProgressMonitoringWODetailProp
                             <Button
                                 onClick={setClose}
                                 style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 120 }}
-                            >Trở lại</Button>
+                            >{t("common.back-button")}</Button>
                         </div>
                     </div>
                 </div>

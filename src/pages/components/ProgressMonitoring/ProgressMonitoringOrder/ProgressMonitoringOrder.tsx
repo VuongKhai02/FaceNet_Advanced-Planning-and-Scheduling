@@ -8,9 +8,12 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import { useTranslation } from "react-i18next";
+import { Tag } from "antd";
+import { customizeColor, getColor } from "../../../../utils/utils";
 
 const data = [
     {
+        id: 1,
         soCode: "1345643",
         customerCode: "KH001",
         customerName: "TPBank",
@@ -18,10 +21,11 @@ const data = [
         errorRatio: "2%",
         startDate: "09/08/2023",
         endDate: "19/08/2023",
-        priorityLevel: "3",
+        priority: 3,
         status: "Đang sản xuất",
     },
     {
+        id: 2,
         soCode: "1345644",
         customerCode: "KH001",
         customerName: "TPBank",
@@ -29,10 +33,11 @@ const data = [
         errorRatio: "2%",
         startDate: "09/08/2023",
         endDate: "19/08/2023",
-        priorityLevel: "2",
+        priority: 2,
         status: "Hoàn thành",
     },
     {
+        id: 3,
         soCode: "1345645",
         customerCode: "KH001",
         customerName: "TPBank",
@@ -40,10 +45,11 @@ const data = [
         errorRatio: "2%",
         startDate: "09/08/2023",
         endDate: "19/08/2023",
-        priorityLevel: "2",
+        priority: 2,
         status: "Hoàn thành",
     },
     {
+        id: 4,
         soCode: "1345646",
         customerCode: "KH001",
         customerName: "TPBank",
@@ -51,7 +57,7 @@ const data = [
         errorRatio: "2%",
         startDate: "09/08/2023",
         endDate: "19/08/2023",
-        priorityLevel: "1",
+        priority: 1,
         status: "Đang sản xuất",
     },
 ];
@@ -72,16 +78,72 @@ export const ProgressMonitoringOrder = () => {
                 items: [
                     {
                         key: "progress-monitoring",
-                        title: "Giám sát tiến độ",
+                        title: "progress-monitoring.progress-monitoring-breadcrumb",
                     },
                     {
                         key: "progress-monitoring-order",
-                        title: "Giám sát tiến độ đơn hàng",
+                        title: "progress-monitoring.order-progress-monitoring.header",
                     }
                 ]
             })
         }
     }, []);
+
+    const onStatusRender = (value: any) => {
+        console.log("value value", value.data);
+        let customColor: {
+            color: string,
+            backgroundColor: string,
+            fontWeight: string
+        } = {
+            color: "",
+            backgroundColor: "",
+            fontWeight: ""
+        }
+        let border = "";
+        customColor = customizeColor(value.data.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none",
+            fontWeight: customColor.fontWeight
+        }}>{value.data.status}</Tag>
+    }
+
+    const onPriorityRender = (value: any) => {
+        let customColor: {
+            color: string,
+            backgroundColor: string
+        } = {
+            color: "",
+            backgroundColor: ""
+        }
+        let status = "";
+        let border = "";
+        getColor(value.data.priority);
+        customColor = customizeColor(value.data.priority)
+        border = "1px solid" + customColor.color;
+        return <>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Tag style={{
+                    height: "20px",
+                    "fontWeight": "bold",
+                    "width": "30px",
+                    "textAlign": "center",
+                    "color": customColor.color,
+                    "backgroundColor": customColor.backgroundColor,
+                    "borderRadius": "100px",
+                    "border": border
+                }}>{value.data.priority}</Tag>
+            </div>
+        </>
+    }
     return (
         <>
             {isVisibleDetailProgress ? (
@@ -105,12 +167,12 @@ export const ProgressMonitoringOrder = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Giám sát tiến độ đơn hàng
+                                {t("progress-monitoring.order-progress-monitoring.header")}
                             </h5>
                         </div>
                         <DataGrid
-                            key={"soCode"}
-                            keyExpr={"soCode"}
+                            key={"id"}
+                            keyExpr={"id"}
                             dataSource={dataPage}
                             showBorders={true}
                             columnAutoWidth={true}
@@ -167,8 +229,8 @@ export const ProgressMonitoringOrder = () => {
                                 <ToolbarItem location='after'>
                                     <SvgIcon
                                         onClick={() => { }}
-                                        text='Xuất Excel'
-                                        tooltipTitle='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/ExportFile.svg'
@@ -198,15 +260,15 @@ export const ProgressMonitoringOrder = () => {
                             <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
 
-                            <Column caption={"Mã SO"} dataField={"soCode"} />
+                            <Column caption={"Mã đơn hàng"} dataField={"soCode"} />
                             <Column caption={"Mã khách hàng"} dataField={"customerCode"} />
                             <Column caption={"Tên khách hàng"} dataField={"customerName"} />
                             <Column caption={"Tỷ lệ hoàn thành "} dataField={"finishRatio"} />
                             <Column caption={"Tỷ lệ lỗi"} dataField={"errorRatio"} />
                             <Column dataField='startDate' caption='Ngày bắt đầu' format={"dd/MM/yyyy"} dataType='datetime' />
                             <Column dataField='endDate' caption='Ngày kết thúc' format={"dd/MM/yyyy"} dataType='datetime' />
-                            <Column caption={"Mức độ ưu tiên"} dataField={"priorityLevel"} />
-                            <Column caption={"Trạng thái"} dataField='status' />
+                            <Column caption={"Mức độ ưu tiên"} dataField={"priority"} cellRender={onPriorityRender} />
+                            <Column caption={"Trạng thái"} dataField='status' cellRender={onStatusRender} />
                             <Column
                                 fixed={true}
                                 type={"buttons"}

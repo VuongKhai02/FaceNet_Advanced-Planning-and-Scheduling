@@ -9,6 +9,7 @@ import TextArea from "antd/lib/input/TextArea";
 import { TechFormGeneralInfo } from "../../../TechFormUpdate/TechFormUpdate";
 import { PLANNING_API_URL } from "../../../../../../utils/config";
 import httpRequests from "../../../../../../utils/httpRequests";
+import { useTranslation } from "react-i18next";
 
 type TechFormBodyCardProps = {
     prInfo: any;
@@ -106,7 +107,7 @@ export const TechFormContext = createContext<any>(null)
 export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isOpen = false, setClose, prInfo }) => {
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
     const [techFormData, setTechFormData] = React.useState<any>(initTechForm);
-
+    const { t } = useTranslation(["common"]);
     const data2 = [
         {
             step1: 'NVL', step2: 'Ra bản', step3: 'Inlay D350 trở nó', step4: 'Nền Nhũ',
@@ -414,7 +415,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                 render={() => (
                                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
                                                         <SvgIcon
-                                                            tooltipTitle='Thêm mới'
+                                                            tooltipTitle={t("common.add-button")}
                                                             sizeIcon={17}
                                                             textSize={17}
                                                             icon='assets/icons/Add.svg'
@@ -471,7 +472,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                                 </Upload.Dragger></div>}
                                             />
                                             <Table.Column width={90} title='' align="center" render={() => <div style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
-                                                <SvgIcon tooltipTitle="Thêm mới" sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                                <SvgIcon tooltipTitle={t("common.add-button")} sizeIcon={17} textSize={17} icon="assets/icons/Add.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                                                 <SvgIcon tooltipTitle="Xóa hàng" sizeIcon={17} textSize={17} icon="assets/icons/Trash.svg" textColor="#FF7A00" />
                                             </div>} />
                                         </Table>
@@ -493,15 +494,15 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                     <Button
                                         onClick={setClose}
                                         style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
-                                    >Trở lại</Button>
+                                    >{t("common.back-button")}</Button>
                                     <Button
                                         onClick={handleAddFormTechProcedure}
                                         style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
-                                    >Tiếp theo</Button>
+                                    >{t("common.next-button")}</Button>
                                     <Button
                                         style={{ width: 100 }}
                                         disabled
-                                    >Thêm mới</Button>
+                                    >{t("common.add-button")}</Button>
                                 </div>
                             </div>
                         </div>

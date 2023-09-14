@@ -8,6 +8,7 @@ import DataGrid, {
     Item as TItem,
     OperationDescriptions,
     ColumnChooser,
+    Lookup,
 } from "devextreme-react/data-grid";
 import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import InfoRow from "../../../../../shared/components/InfoRow/InfoRow";
@@ -133,7 +134,7 @@ export const ListProduct = React.memo((props: any) => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     key='submit'
@@ -145,7 +146,7 @@ export const ListProduct = React.memo((props: any) => {
                         }
                     }}
                     className={cx("btn-save")}>
-                    Xác nhận
+                    {t("common.confirm-button")}
                 </Button>
             </div>
         </div>
@@ -342,7 +343,7 @@ export const ListProduct = React.memo((props: any) => {
                                             <TItem>
                                                 <SvgIcon
                                                     sizeIcon={25}
-                                                    text='Thêm mới'
+                                                    text={t("common.add-button")}
                                                     tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
                                                     icon='assets/icons/CircleAdd.svg'
                                                     textColor='#FF7A00'
@@ -466,7 +467,7 @@ export const ListProduct = React.memo((props: any) => {
                 <Column dataField='note' caption='Ghi chú' />
                 <Column caption={"Trạng thái"} dataField='status' alignment="left" cellRender={(cellInfo) => {
                     return <Status value={cellInfo.value} />
-                }} />
+                }} ><Lookup dataSource={["Hoạt động", "Không hoạt động"]} /></Column>
                 <Column
                     fixed={true}
                     type={"buttons"}

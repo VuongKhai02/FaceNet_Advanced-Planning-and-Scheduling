@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import InfoRow from "../../../../../../shared/components/InfoRow/InfoRow";
 import { Progress, Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 type ProgressWODetailProps = {
     isOpen: boolean;
@@ -9,6 +10,7 @@ type ProgressWODetailProps = {
 };
 
 export const ProgressWODetailJob: React.FC<ProgressWODetailProps> = observer(({ isOpen = false, setClose }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <>
             {
@@ -97,7 +99,7 @@ export const ProgressWODetailJob: React.FC<ProgressWODetailProps> = observer(({ 
                             <Button
                                 onClick={setClose}
                                 style={{ backgroundColor: "gray", color: "#fff", width: 100 }}
-                            >Trở lại</Button>
+                            >{t("common.back-button")}</Button>
                         </div>
                     </div>
                 </div>

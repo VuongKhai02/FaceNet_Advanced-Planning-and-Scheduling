@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button, Radio } from 'antd';
 import { QrcodeOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 interface PopupBOMAddNewInfoMaterialProps {
     isVisible: boolean;
@@ -21,6 +22,7 @@ const PopupBOMAddNewInfoMaterial: React.FC<PopupBOMAddNewInfoMaterialProps> = ({
     width,
     className
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             className={className}
@@ -52,7 +54,7 @@ const PopupBOMAddNewInfoMaterial: React.FC<PopupBOMAddNewInfoMaterialProps> = ({
                             }}
                             onClick={onCancel}
                         >
-                            Hủy bỏ
+                            {t("common.cancel-button")}
                         </Button>
                         <Button
                             style={{
@@ -67,7 +69,7 @@ const PopupBOMAddNewInfoMaterial: React.FC<PopupBOMAddNewInfoMaterialProps> = ({
                             onClick={onSubmit}
                             className="btn btn-save"
                         >
-                            Thêm mới
+                            {t("common.add-button")}
                         </Button>
                     </div>
                 </div>

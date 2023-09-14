@@ -237,7 +237,8 @@ export const DeclareProductionObject = () => {
                     >
                         <Toolbar>
                             <ToolbarItem location="after">
-                                <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => { }} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                <SvgIcon text={t("common.exportExcel")}
+                                    tooltipTitle={t("common.exportExcel")} onClick={() => { }} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                             </ToolbarItem>
                             {/* <ToolbarItem name='exportButton' html='Xuất Excel' location='after'></ToolbarItem> */}
                             <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>

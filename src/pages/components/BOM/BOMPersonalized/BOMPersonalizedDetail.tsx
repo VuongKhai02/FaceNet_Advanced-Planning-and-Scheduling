@@ -7,13 +7,14 @@ import DataGrid, {
     Item as TItem,
     OperationDescriptions,
     ColumnChooser,
+    Lookup,
 } from "devextreme-react/data-grid";
 import PopupSendSAP from "../../../../shared/components/PopupSendSAP/PopupSendSAP";
 import { WarningOutlined } from "@ant-design/icons";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import PopupBOM from "../../../../shared/components/PopupBOM/PopupBOM";
-import { Button } from "antd";
+import { Button, Tag } from "antd";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 
@@ -21,6 +22,7 @@ import styles from "./BOMPersonalizedDetail.module.css";
 import classNames from "classnames/bind";
 import { Status } from "../BOMBodyCard/ListProduct/ListProduct";
 import NotificationManager from "../../../../utils/NotificationManager";
+import { customizeColor } from "../../../../utils/utils";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -148,18 +150,45 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
                 >
-                    Xác nhận
+                    {t("common.confirm-button")}
                 </Button>
             </div>
         </div>
     ];
+
+    const onStatusRender = (value: any) => {
+        let customColor: {
+            color: string,
+            backgroundColor: string,
+            fontWeight: string
+        } = {
+            color: "",
+            backgroundColor: "",
+            fontWeight: ""
+        }
+        let border = "";
+        customColor = customizeColor(value.data.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none",
+            fontWeight: customColor.fontWeight
+        }}>{value.data.status}</Tag>
+    }
+
 
     return (
         <div>
@@ -317,7 +346,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                                             <TItem>
                                                 <SvgIcon
                                                     sizeIcon={25}
-                                                    text='Thêm mới'
+                                                    text={t("common.add-button")}
                                                     tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
                                                     icon='assets/icons/CircleAdd.svg'
                                                     textColor='#FF7A00'
@@ -452,8 +481,8 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                     <TItem>
                         <SvgIcon
                             onClick={() => { }}
-                            text='Xuất Excel'
-                            tooltipTitle='Xuất Excel'
+                            text={t("common.exportExcel")}
+                            tooltipTitle={t("common.exportExcel")}
                             sizeIcon={17}
                             textSize={17}
                             icon='assets/icons/ExportFile.svg'
@@ -485,9 +514,9 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
                 <Column caption={"BOM version"} dataField={"bomVersion"} />
                 <Column caption={"Lưu ý"} dataField={"notice"} />
                 <Column caption={"Ghi chú"} dataField={"note"} />
-                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
-                    return <Status value={cellInfo.data.value} />
-                }} />
+                <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={onStatusRender} >
+                    <Lookup dataSource={["Hoạt động", "Ngừng hoạt động"]} />
+                </Column>
                 <Column
                     fixed={true}
                     type={"buttons"}

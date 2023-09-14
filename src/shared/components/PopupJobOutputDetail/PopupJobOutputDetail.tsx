@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button, Radio } from 'antd';
 import { QrcodeOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 interface PopupJobOutputDetailProps {
     isVisible: boolean;
@@ -23,6 +24,7 @@ const PopupJobOutputDetail: React.FC<PopupJobOutputDetailProps> = ({
     className,
     customFooter
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             className={className}
@@ -46,7 +48,7 @@ const PopupJobOutputDetail: React.FC<PopupJobOutputDetailProps> = ({
                             }}
                             onClick={onCancel}
                         >
-                            Hủy bỏ
+                            {t("common.cancel-button")}
                         </Button>
                         <Button
                             style={{

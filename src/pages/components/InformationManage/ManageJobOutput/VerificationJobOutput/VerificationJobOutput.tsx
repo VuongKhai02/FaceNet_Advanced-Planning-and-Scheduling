@@ -2,12 +2,14 @@ import React from "react";
 import { SelectBox, TextBox } from "devextreme-react";
 import { observer } from "mobx-react";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 type VerificationJobOutputProps = {
     isOpen: boolean;
     setClose?: () => void;
 };
 export const VerificationJobOutput: React.FC<VerificationJobOutputProps> = observer(({ isOpen = false, setClose }) => {
+    const { t } = useTranslation("common");
     return (
         <>
             <div className='box__shadow-table-responsive'>
@@ -71,7 +73,7 @@ export const VerificationJobOutput: React.FC<VerificationJobOutputProps> = obser
                         <Button
                             onClick={setClose}
                             style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                        >Hủy bỏ</Button>
+                        >{t("common.cancel-button")}</Button>
                         <Button onClick={() => { }} style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >Cập nhật</Button>
                     </div>
                 </div>

@@ -66,11 +66,11 @@ export const ProgressMonitoringManufacture = () => {
                 items: [
                     {
                         key: "progress-monitoring",
-                        title: "Giám sát tiến độ",
+                        title: "progress-monitoring.progress-monitoring-breadcrumb",
                     },
                     {
                         key: "progress-monitoring-manufacture",
-                        title: "Giám sát tiến độ sản xuất",
+                        title: "progress-monitoring.manufacture-progress-monitoring.header",
                     }
                 ]
             })
@@ -123,7 +123,7 @@ export const ProgressMonitoringManufacture = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Giám sát tiến độ sản xuất
+                                {t("progress-monitoring.manufacture-progress-monitoring.header")}
                             </h5>
                         </div>
                         <DataGrid
@@ -143,8 +143,8 @@ export const ProgressMonitoringManufacture = () => {
                                 <ToolbarItem location='after'>
                                     <SvgIcon
                                         onClick={() => { }}
-                                        text='Xuất Excel'
-                                        tooltipTitle='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/ExportFile.svg'

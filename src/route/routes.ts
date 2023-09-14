@@ -17,6 +17,7 @@ import {
 } from "../pages";
 import { withNavigationWatcher } from '../contexts/navigate';
 import DeclareQuantity from "../pages/components/DeclareQuantity/DeclareQuantity";
+import AccountManagement from '../pages/components/AccountManagement/AccountManagement';
 
 type Route = {
     path: string;
@@ -94,6 +95,10 @@ const routes: Route[] = [
     {
         path: "/declare-quantity",
         component: DeclareQuantity,
+    },
+      {
+        path: "/user-management",
+        component: AccountManagement,
     }
 ]
 

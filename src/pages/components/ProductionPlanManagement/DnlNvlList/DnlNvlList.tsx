@@ -76,8 +76,8 @@ export const DnlNvlList = () => {
                                 <Toolbar>
                                     <ToolbarItem location='after'>
                                         <SvgIcon
-                                            tooltipTitle='Xuất Excel'
-                                            text='Xuất Excel'
+                                            text={t("common.exportExcel")}
+                                            tooltipTitle={t("common.exportExcel")}
                                             onClick={() => { }}
                                             sizeIcon={17}
                                             textSize={17}
@@ -242,7 +242,7 @@ export const DnlNvlList = () => {
                                 }}>
                                 <Button
                                     style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                                >Hủy bỏ</Button>
+                                >{t("common.cancel-button")}</Button>
                                 <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Gửi đề nghị lĩnh</Button>
                             </div>
                         </Popup>

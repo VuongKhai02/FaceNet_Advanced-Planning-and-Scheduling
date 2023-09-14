@@ -92,6 +92,20 @@ export function customizeColor(value: any): { color: string, backgroundColor: st
       fontWeight: '500'
     }
   }
+  else if (value === "Xác nhận") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Chưa xác nhận") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#F11C1C",
+      fontWeight: '500'
+    }
+  }
   else if (value === "In offset") {
     return {
       color: "#FFFFFF",

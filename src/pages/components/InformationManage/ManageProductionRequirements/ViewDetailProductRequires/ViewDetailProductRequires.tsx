@@ -635,7 +635,7 @@ export const ViewDetailProductRequires: React.FC<TechFormBodyCardProps> = observ
                                 <Button
                                     onClick={setClose}
                                     style={{ backgroundColor: "gray", color: "#fff", width: 100 }}
-                                >Trở lại</Button>
+                                >{t("common.back-button")}</Button>
                             </div>
                         </div>
                     </div>

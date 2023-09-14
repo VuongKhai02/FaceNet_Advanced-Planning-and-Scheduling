@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { Modal, Upload, Button } from "antd";
 import styles from "./PopupImportFile.module.css";
 import SvgIcon from "../SvgIcon/SvgIcon";
+import { useTranslation } from "react-i18next";
 
 type PopupImportFile = {
     title?: string;
@@ -16,6 +17,7 @@ type PopupImportFile = {
 const cx = classNames.bind(styles);
 
 const PopupImportFile: React.FC<PopupImportFile> = ({ title, visible, onSubmit, onCancel, width }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             open={visible}
@@ -33,7 +35,7 @@ const PopupImportFile: React.FC<PopupImportFile> = ({ title, visible, onSubmit, 
                         onClick={onCancel}
                         style={{ width: 100, height: 40, backgroundColor: "#C0C0C0", borderRadius: 5 }}
                         type='default'>
-                        Hủy bỏ
+                        {t("common.cancel-button")}
                     </Button>
                     <Button
                         key='confirm'

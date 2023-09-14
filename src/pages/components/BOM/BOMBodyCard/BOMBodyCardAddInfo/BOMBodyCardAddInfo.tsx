@@ -565,7 +565,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                                 onClick={() => {
                                                     addNewRowMaterial(cellInfo.rowIndex)
                                                 }}
-                                                tooltipTitle='Thêm mới'
+                                                tooltipTitle={t("common.add-button")}
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Add.svg'
@@ -598,10 +598,10 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <Button
                                 onClick={setClose}
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                            >Hủy bỏ</Button>
+                            > {t("common.cancel-button")}</Button>
                             <Button
                                 onClick={handleCreateBOM}
-                                style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >Thêm mới</Button>
+                                style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >{t("common.add-button")}</Button>
                         </div>
                     </div>
                 </div>

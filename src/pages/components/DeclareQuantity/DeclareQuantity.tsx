@@ -8,6 +8,7 @@ import {
     Toolbar,
     ColumnChooser,
     OperationDescriptions,
+    Lookup,
 } from "devextreme-react/data-grid";
 import PopupConfirmDelete from "../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { WarningOutlined } from "@ant-design/icons";
@@ -15,22 +16,24 @@ import SvgIcon from "../../../shared/components/SvgIcon/SvgIcon";
 import { useBreadcrumb } from "../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../shared/components/PaginationComponent/PaginationComponent";
 import { useTranslation } from "react-i18next";
+import { customizeColor } from "../../../utils/utils";
+import { Tag } from "antd";
 
 const data = [
     {
-        id: 1, section: 'In offset', Foreman: 'Nguyễn Minh Sơn', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 1, section: 'In offset', Foreman: 'Nguyễn Minh Sơn', Shift: 1, day: '10/08/2023', reasonRefuse: '', status: 'Xác nhận'
     },
     {
         id: 2, section: 'In offset', Foreman: 'Vũ Văn Tuấn', Shift: 2, day: '11/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
     },
     {
-        id: 3, section: 'In offset', Foreman: 'Nguyễn Thị T.Nga', Shift: 3, day: '12/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 3, section: 'In offset', Foreman: 'Nguyễn Thị T.Nga', Shift: 3, day: '12/08/2023', reasonRefuse: '', status: 'Xác nhận'
     },
     {
         id: 4, section: 'In offset', Foreman: 'Nguyễn Quang Hiếu', Shift: 2, day: '13/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Chưa xác nhận'
     },
     {
-        id: 5, section: 'In offset', Foreman: 'Đỗ Công Đồng', Shift: 1, day: '10/08/2023', reasonRefuse: 'Số lượng đã sản xuất mặt trước thiếu', status: 'Xác nhận'
+        id: 5, section: 'In offset', Foreman: 'Đỗ Công Đồng', Shift: 1, day: '10/08/2023', reasonRefuse: '', status: 'Xác nhận'
     }
 ];
 export const DeclareQuantity = () => {
@@ -48,12 +51,38 @@ export const DeclareQuantity = () => {
                 items: [
                     {
                         key: "declare-quantity",
-                        title: "Khai báo sản lượng"
+                        title: "declare-production-quantity.output-declaration"
                     }
                 ]
             })
         }
     }, []);
+
+    const onStatusRender = (value: any) => {
+        let customColor: {
+            color: string,
+            backgroundColor: string,
+            fontWeight: string
+        } = {
+            color: "",
+            backgroundColor: "",
+            fontWeight: ""
+        }
+        let border = "";
+        customColor = customizeColor(value.data.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none",
+            fontWeight: customColor.fontWeight
+        }}>{value.data.status}</Tag>
+    }
 
 
     return (
@@ -75,7 +104,7 @@ export const DeclareQuantity = () => {
                                         fontSize: 18,
                                         marginBottom: 0,
                                     }}>
-                                    Danh sách báo cáo hằng ngày
+                                    {t("declare-production-quantity.declare-production-quantity.header")}
                                 </h5>
                             </div>
 
@@ -137,8 +166,8 @@ export const DeclareQuantity = () => {
                                         <SvgIcon
                                             sizeIcon={17}
                                             textSize={17}
-                                            text='Thêm mới'
-                                            tooltipTitle='Thêm mới'
+                                            text={t("common.add-button")}
+                                            tooltipTitle={t("common.add-button")}
                                             icon='assets/icons/CircleAdd.svg'
                                             textColor='#FF7A00'
                                             style={{ marginRight: 17 }}
@@ -171,7 +200,11 @@ export const DeclareQuantity = () => {
                                 <Column caption={"Ca"} dataField={"Shift"} alignment="left" />
                                 <Column caption={"Ngày"} dataField={"day"} />
                                 <Column caption={"Lý do từ chối"} dataField={"reasonRefuse"} />
-                                <Column caption={"Trạng thái"} dataField={"status"} />
+                                <Column caption={"Trạng thái"} dataField={"status"} cellRender={onStatusRender} >
+                                    <Lookup
+                                        dataSource={["Xác nhận", "Chưa xác nhận"]}
+                                    />
+                                </Column>
                                 <Column
                                     fixed={true}
                                     fixedPosition="right"
@@ -198,7 +231,7 @@ export const DeclareQuantity = () => {
                                                 textColor='#FF7A00'
                                             />
                                         </div>
-                                    )}></Column>
+                                    )}>Column</Column>
                             </DataGrid>
                             <PaginationComponent
                                 pageSizeOptions={[10, 20, 40]}

@@ -135,7 +135,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                         />
                                     ))}
                                 </Steps>
-                                <h4 style={{ color: "#004C98", fontWeight: "600" }}>Danh sách lệnh sản xuất</h4>
+                                <p style={{ color: "#004C98", fontWeight: "600", fontSize: 20 }}>Danh sách lệnh sản xuất</p>
                             </div>
                             <DataGrid
                                 key={"manufactureCode"}
@@ -204,7 +204,7 @@ export const ProgressMonitoringOrderDetailProgress: React.FC<ProgressMonitoringO
                                 <Button
                                     onClick={setClose}
                                     style={{ backgroundColor: "gray", color: "#fff", width: 120 }}
-                                >Trở lại</Button>
+                                >{t("common.back-button")}</Button>
                             </div>
                         </div>
                     </div>

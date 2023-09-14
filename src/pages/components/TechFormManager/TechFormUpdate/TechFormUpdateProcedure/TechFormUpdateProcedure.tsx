@@ -8,6 +8,7 @@ import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdateProcedure.module.css";
+import { useTranslation } from "react-i18next";
 
 type TechFormDetailProcedureProps = {
     techFormData: any;
@@ -42,7 +43,7 @@ const data2 = [
 export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = observer(
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
-
+        const { t } = useTranslation(["common"]);
         const onUpdateLaminationInfo = (index_: any, key: any, value: any) => {
             let newLaminationInfos = techFormData.lamination.steps.map((step: any, index: any) => {
                 if (index !== index_) {
@@ -504,7 +505,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                             onClick={() => {
                                                                 onAddNewRowLamination(cellInfo.rowIndex);
                                                             }}
-                                                            tooltipTitle='Thêm mới'
+                                                            tooltipTitle={t("common.add-button")}
                                                             sizeIcon={17}
                                                             textSize={17}
                                                             icon='assets/icons/Add.svg'
@@ -603,7 +604,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                             onClick={() => {
                                                                 onAddRowProcessing(cellInfo.data.no);
                                                             }}
-                                                            tooltipTitle='Thêm mới'
+                                                            tooltipTitle={t("common.add-button")}
                                                             sizeIcon={17}
                                                             textSize={17}
                                                             icon='assets/icons/Add.svg'
@@ -672,7 +673,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                                     onAddRowCutting(cellInfo.rowIndex)
                                                                     // console.log(cellInfo);
                                                                 }}
-                                                                tooltipTitle='Thêm mới'
+                                                                tooltipTitle={t("common.add-button")}
                                                                 sizeIcon={17}
                                                                 textSize={17}
                                                                 icon='assets/icons/Add.svg'
@@ -790,7 +791,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                                     // onAddRowProcessing(cellInfo.data.no);
                                                                     onAddRowHostamping(cellInfo.rowIndex)
                                                                 }}
-                                                                tooltipTitle='Thêm mới'
+                                                                tooltipTitle={t("common.add-button")}
                                                                 sizeIcon={17}
                                                                 textSize={17}
                                                                 icon='assets/icons/Add.svg'
@@ -817,23 +818,23 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                             <Button
                                                 onClick={setClose}
                                                 className={cx("btn-back")}
-                                            >Trở lại</Button>
+                                            >{t("common.back-button")}</Button>
                                             <Button
                                                 onClick={() => {
                                                     setIsVisibleTechFormUpdateHostamping(true);
                                                 }}
                                                 className={cx("btn-next")}
-                                            >Tiếp theo</Button>
+                                            > {t("common.next-button")}</Button>
                                             <Button
                                                 disabled
                                                 onClick={() => { }}
                                                 className={cx("btn-sign")}
-                                            >Ký lập</Button>
+                                            >{t("common.signature")}</Button>
                                             <Button
                                                 disabled
                                                 onClick={() => { }}
                                                 className={cx("btn-send")}
-                                            >Gửi duyệt</Button>
+                                            >{t("common.send-approve")}</Button>
                                         </div>
                                     </div>
                                 </div>

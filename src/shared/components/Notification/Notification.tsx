@@ -2,7 +2,6 @@
 import React, { useEffect, useRef } from 'react';
 import "./Notification.css"
 import SvgIcon from '../SvgIcon/SvgIcon';
-import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 interface NotificationProps {

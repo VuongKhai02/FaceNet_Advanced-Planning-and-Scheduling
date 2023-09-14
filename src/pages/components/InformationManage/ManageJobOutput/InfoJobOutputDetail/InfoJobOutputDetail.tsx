@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import { Button } from "antd";
 
 import styles from "./InfoJobOutputDetail.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ type InfoJobOutputDetailProps = {
     setClose?: () => void;
 };
 export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(({ isOpen = false, setClose }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <>
             <div className='box__shadow-table-responsive'>
@@ -65,7 +67,7 @@ export const InfoJobOutputDetail: React.FC<InfoJobOutputDetailProps> = observer(
                         <Button
                             onClick={setClose}
                             className={cx("btn", "btn-cancel")}
-                        >Hủy bỏ</Button>
+                        >{t("common.cancel-button")}</Button>
                         <Button onClick={() => { }} className={cx("btn", "btn-update")}>Cập nhật</Button>
 
                     </div>

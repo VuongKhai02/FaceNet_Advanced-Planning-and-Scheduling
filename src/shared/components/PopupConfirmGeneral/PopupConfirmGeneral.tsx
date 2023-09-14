@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Button } from "antd";
 import classNames from "classnames/bind";
 import styles from "./PopupConfirmGeneral.module.css";
+import { useTranslation } from "react-i18next";
 interface PopupConfirmGeneralProps {
     isVisible: boolean;
     onCancel: () => void;
@@ -21,6 +22,7 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
     width,
     customFooter,
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             className={cx(["modal-container"])}
@@ -35,14 +37,14 @@ const PopupConfirmGeneral: React.FC<PopupConfirmGeneralProps> = ({
                                 key='cancel'
                                 className={cx("btn-cancel")}
                                 onClick={onCancel}>
-                                Hủy bỏ
+                                {t("common.cancel-button")}
                             </Button>
                             <Button
 
                                 key='submit'
                                 onClick={onSubmit}
                                 className={cx("btn-save")}>
-                                Xác nhận
+                                {t("common.confirm-button")}
                             </Button>
                         </div>,
                     ]

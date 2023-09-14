@@ -8,6 +8,7 @@ import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdateMaterialAndStructure.module.css";
+import { useTranslation } from "react-i18next";
 
 type TechFormUpdateMaterialAndStructureProps = {
     techFormData: any;
@@ -69,7 +70,7 @@ const data1 = [
 export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterialAndStructureProps> = observer(
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateProcedure, setIsVisibleTechFormUpdateProcedure] = React.useState<boolean>(false);
-
+        const { t } = useTranslation(["common"]);
         const getMaterialFormTechForm = () => {
             const data: any[] = [];
             techFormData?.bomBodyCard?.bomBodyCardMaterials.forEach((material: any, index: any) => {
@@ -355,7 +356,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                                         onClick={() => {
                                                             onAddNewRowPlate(cellInfo.rowIndex)
                                                         }}
-                                                        tooltipTitle='Thêm mới'
+                                                        tooltipTitle={t("common.add-button")}
                                                         sizeIcon={17}
                                                         textSize={17}
                                                         icon='assets/icons/Add.svg'
@@ -384,23 +385,23 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                         <Button
                                             onClick={setClose}
                                             className={cx('btn-back')}
-                                        >Trở lại</Button>
+                                        >{t("common.back-button")}</Button>
                                         <Button
                                             onClick={() => {
                                                 setIsVisibleTechFormUpdateProcedure(true);
                                             }}
                                             className={cx('btn-next')}
-                                        >Tiếp theo</Button>
+                                        > {t("common.next-button")}</Button>
                                         <Button
                                             disabled
                                             onClick={() => { }}
                                             className={cx('btn-sign')}
-                                        >Ký lập</Button>
+                                        >{t("common.signature")}</Button>
                                         <Button
                                             disabled
                                             onClick={() => { }}
                                             className={cx('btn-send')}
-                                        >Gửi duyệt</Button>
+                                        >{t("common.send-approve")}</Button>
                                     </div>
                                 </div>
                             </div>
