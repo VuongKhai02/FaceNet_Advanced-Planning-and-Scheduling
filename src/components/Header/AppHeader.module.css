@@ -118,6 +118,7 @@
     .bell[role="img"] {
         font-size: 20px;
     }
+     cursor: pointer;
 }
 
 .shake {

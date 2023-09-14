@@ -8,7 +8,7 @@ import {
     Item as ToolbarItem,
     SearchPanel,
     Toolbar,
-    MasterDetail, ColumnChooser
+    MasterDetail, ColumnChooser, OperationDescriptions
 } from "devextreme-react/data-grid";
 import { getColor, customizeColor } from "../../../../utils/utils";
 import OrderItemTemplate from "./OrderItemTemplate";
@@ -21,6 +21,7 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 export const MrpSaleOrders = () => {
 
@@ -29,7 +30,7 @@ export const MrpSaleOrders = () => {
     const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
 
     const breadcrumbContext = useBreadcrumb();
-
+    const { t } = useTranslation(["common"]);
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(content?.length / pageSize);
@@ -222,7 +223,7 @@ export const MrpSaleOrders = () => {
                 focusedRowEnabled={true}
                 onRowUpdating={updateOrder}
                 onRowRemoving={removeOrder}
-                noDataText='Không có dữ liệu để hiển thị'
+                noDataText={t("common.noData-text")}
             >
                 <PopupConfirmDelete
                     isVisible={isVisibleConfirmDelete}
@@ -260,8 +261,22 @@ export const MrpSaleOrders = () => {
                     <ToolbarItem name="columnChooserButton" />
 
                 </Toolbar>
-                <FilterRow visible={true} />
-                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                    <OperationDescriptions
+                        startsWith={t("common.startsWith")}
+                        equal={t("common.equal")}
+                        endsWith={t("common.endsWith")}
+                        contains={t("common.contains")}
+                        notContains={t("common.notContains")}
+                        notEqual={t("common.notEqual")}
+                        lessThan={t("common.lessThan")}
+                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                        greaterThan={t("common.greaterThan")}
+                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                        between={t("common.between")}
+                    />
+                </FilterRow>
+                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                 <ColumnChooser enabled={true} allowSearch={true} mode="select" title="Chọn cột" />
                 <Column caption={"Mã PO"} dataField={"saleOrderId"} alignment="left" width={60} />
                 <Column caption={"Mã sản xuất"} dataField={"productionCode"} width={100} />

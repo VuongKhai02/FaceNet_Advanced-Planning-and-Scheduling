@@ -9,6 +9,7 @@ import {
     Toolbar,
     MasterDetail,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import Barcode from "react-barcode";
 import JobOutPutDetail from "./JobOutputDetail";
@@ -25,6 +26,7 @@ import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import { Button } from "antd";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -65,7 +67,7 @@ export const CardManagement = () => {
     const totalPage = Math.ceil(data?.length / pageSize);
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
-
+    const { t } = useTranslation(["common"]);
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
@@ -145,7 +147,7 @@ export const CardManagement = () => {
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
-                            noDataText='Không có dữ liệu để hiển thị'
+                            noDataText={t("common.noData-text")}
                         >
                             <PopupScanBarCode
                                 isVisible={isVisibleScanBarCode}
@@ -382,9 +384,23 @@ export const CardManagement = () => {
                                 <ToolbarItem name='searchPanel' location='before' />
                             </Toolbar>
 
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
                             <ColumnChooser enabled={true} allowSearch={true} title='Chọn cột' mode='select' />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
                             <Column caption={"Mã hộp"} dataField={"boxCode"} alignment='left' width={100} />
                             <Column caption={"Mã công đoạn"} dataField={"stageCode"} />

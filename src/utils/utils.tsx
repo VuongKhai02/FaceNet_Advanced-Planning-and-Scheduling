@@ -8,20 +8,6 @@ export const currentDateTime = () => new Date(new Date().toLocaleString("en-US",
 export function getColor(value: any) {
   if (value === "Chờ sản xuất") {
     return "#0066FF"
-  } else if (value === "Chưa xác định") {
-    return "#FFCC00"
-  } else if (value === "Hoàn thành") {
-    return "#33CC33"
-  } else if (value === "Hoàn thành sớm") {
-    return "#33FFFF"
-  } else if (value === "Chậm tiến độ") {
-    return "#FFFF00"
-  } else if (value === "Ngưng sản xuất") {
-    return "#666633"
-  } else if (value === "Đang sản xuất") {
-    return "#FFCCFF"
-  } else if (value === "Không hoàn thành" || value === "Chưa hoàn thành") {
-    return "#FF0000"
   } else if (value === "Mới tạo") {
     return "#A8A8A8"
   } else if (value === "Đang chờ phê duyệt") {
@@ -32,66 +18,43 @@ export function getColor(value: any) {
   return "#FF0000"
 }
 
-export function customizeColor(value: any): { color: string, backgroundColor: string } {
-  if (value === "Chờ sản xuất") {
+export function customizeColor(value: any): { color: string, backgroundColor: string, fontWeight: string } {
+  if (value === "Hoạt động") {
     return {
-      color: "#0066FF",
-      backgroundColor: "#c4dcff"
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
     }
-  } else if (value === "Chưa xác định") {
+  } else if (value === "Ngừng hoạt động") {
     return {
-      color: "#dcb10b",
-      backgroundColor: "#f5f2d6"
-    }
-  } else if (value === "Hoàn thành") {
-    return {
-      color: "#33CC33",
-      backgroundColor: "#ccffd1"
-    }
-  } else if (value === "Hoàn thành sớm") {
-    return {
-      color: "#0ab9b9",
-      backgroundColor: "#c8ffff"
-    }
-  } else if (value === "Chậm tiến độ") {
-    return {
-      color: "#c0c006",
-      backgroundColor: "#fdfdd3"
-    }
-  } else if (value === "Ngưng sản xuất") {
-    return {
-      color: "#666633",
-      backgroundColor: "#eeeeca"
-    }
-  } else if (value === "Đang sản xuất") {
-    return {
-      color: "#f644f6",
-      backgroundColor: "#fcedfc"
-    }
-  } else if (value === "Không hoàn thành" || value === "Chưa hoàn thành") {
-    return {
-      color: "#FF0000",
-      backgroundColor: "#ffdfdf"
+      color: "#FFFFFF",
+      backgroundColor: "#FFC32B",
+      fontWeight: '500'
     }
   } else if (value === "Mới tạo") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#A8A8A8"
+      backgroundColor: "#A8A8A8",
+      fontWeight: '500'
     }
-  } else if (value === "Đang chờ phê duyệt") {
+  }
+  else if (value === "Đang chờ phê duyệt") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#DFE229"
+      backgroundColor: "#DFE229",
+      fontWeight: '500'
     }
   } else if (value === "Đã phê duyệt") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#00AF12"
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
     }
   }
   return {
-    color: "#FF0000",
-    backgroundColor: "#fadbdb"
+    color: "#fa4d4d",
+    backgroundColor: "#fadbdb",
+    fontWeight: '500'
   }
 }
 

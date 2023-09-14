@@ -19,7 +19,7 @@ import PaginationComponent from "../../../../../shared/components/PaginationComp
 import styles from "./ListProduct.module.css";
 import classNames from "classnames/bind";
 import httpRequests from "../../../../../utils/httpRequests";
-
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 const data = [
     { cardCode: "SP091", cardName: "Sản phẩm 09.1", bomversion: "1.1", notice: "VT001", note: "Vật tư 01", status: "Hoạt động" },
@@ -29,42 +29,61 @@ const data = [
 
 const data2 = [
     {
+        id: 1,
         codeMaterial: "VT0001",
         nameMaterial: "Chip vàng 6 chân",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         version: "1.1",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
     {
-        codeMaterial: "VT0002",
+        id: 2,
+        codeMaterial: "VT0001",
         nameMaterial: "Chip vàng 6 chân",
-        version: "1.1",
+        version: "1.2",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
     {
-        codeMaterial: "VT0003",
+        id: 3,
+        codeMaterial: "VT0001",
         nameMaterial: "Chip vàng 6 chân",
-        version: "1.1",
+        version: "1.3",
+        materialNameReplace: "Mực 02",
+        materialCodeReplace: "VT0001",
         classify: "NVL",
         norm: "1",
         unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
+        warehouseCode: "KH01",
+        inventoryQuantity: "1000",
+        availableQuantity: "500",
+        front: "Yes",
+        back: "No",
+        type: "By unit"
     },
 ];
 export const ListProduct = React.memo((props: any) => {
-
+    const { t } = useTranslation(["common"]);
     const [isDetailBOMTemplate, setIsDetailBOMTemplate] = React.useState<boolean>(false);
+    const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [pageIndex, setPageIndex] = React.useState<number>(1);
@@ -73,6 +92,7 @@ export const ListProduct = React.memo((props: any) => {
     const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const [bomData, setBomData] = useState({})
     const [bomIdChoosed, setBomIdChoosed] = useState(null);
+
 
     useEffect(() => {
         if (props!.bomTemplateId) {
@@ -145,7 +165,7 @@ export const ListProduct = React.memo((props: any) => {
                 rowAlternationEnabled={true}
                 wordWrapEnabled={true}
                 columnAutoWidth={true}
-                noDataText='Không có dữ liệu để hiển thị'>
+                noDataText={t("common.noData-text")}>
                 <PopupBOM
                     isVisible={isChangeState}
                     onCancel={() => setIsChangeState(false)}
@@ -204,12 +224,12 @@ export const ListProduct = React.memo((props: any) => {
                                             </td>
                                         </table>
                                     </div>
-                                    <div style={{ marginTop: 40 }}>
-                                        <h4>Danh sách vật tư</h4>
+                                    <div style={{ marginTop: 40, fontSize: 20 }}>
+                                        <p>Danh sách vật tư</p>
                                     </div>
                                     <DataGrid
-                                        key={"codeMaterial"}
-                                        keyExpr={"codeMaterial"}
+                                        key={"id"}
+                                        keyExpr={"id"}
                                         dataSource={data2}
                                         showBorders={true}
                                         columnAutoWidth={true}
@@ -218,7 +238,21 @@ export const ListProduct = React.memo((props: any) => {
                                         allowColumnResizing={true}
                                         allowColumnReordering={true}
                                         focusedRowEnabled={true}>
-                                        <FilterRow visible={true} />
+                                        <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                            <OperationDescriptions
+                                                startsWith={t("common.startsWith")}
+                                                equal={t("common.equal")}
+                                                endsWith={t("common.endsWith")}
+                                                contains={t("common.contains")}
+                                                notContains={t("common.notContains")}
+                                                notEqual={t("common.notEqual")}
+                                                lessThan={t("common.lessThan")}
+                                                lessThanOrEqual={t("common.lessThanOrEqual")}
+                                                greaterThan={t("common.greaterThan")}
+                                                greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                                between={t("common.between")}
+                                            />
+                                        </FilterRow>
 
                                         <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
                                         <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />
@@ -226,9 +260,12 @@ export const ListProduct = React.memo((props: any) => {
                                         <Column caption={"Phân loại"} dataField={"classify"} />
                                         <Column caption={"Định mức"} dataField={"norm"} />
                                         <Column caption={"Đơn vị tính"} dataField={"unit"} />
-                                        <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                        <Column caption={"Mô tả vật tư thay thế"} dataField={"replaceMaterialDescription"} />
-                                        <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
+                                        <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
+                                        <Column caption="Số lượng sẵn sàng" dataField="availableQuantity" />
+                                        <Column caption="Phân loại" dataField="type" />
+                                        <Column caption="Mặt trước" dataField="front" />
+                                        <Column caption="Mặt sau" dataField="back" />
+
                                         <Column
                                             fixed={true}
                                             type={"buttons"}
@@ -237,7 +274,7 @@ export const ListProduct = React.memo((props: any) => {
                                             cellRender={() => (
                                                 <div>
                                                     <SvgIcon
-                                                        onClick={() => { }}
+                                                        onClick={() => setIsVisibleListMaterialReplacement(true)}
                                                         tooltipTitle='Danh sách vật tư thay thế'
                                                         sizeIcon={17}
                                                         icon='assets/icons/EyeOpen.svg'
@@ -260,6 +297,98 @@ export const ListProduct = React.memo((props: any) => {
                     }
                     width={1300}
                     onCancel={() => setIsDetailBOMTemplate(false)}
+                    onSubmit={() => { }}
+                    customFooter={handleCustomFooter}
+                />
+                <PopupBOM
+                    isVisible={isVisibleListMaterialReplacement}
+                    modalContent={
+                        <div>
+                            <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
+                                <div>
+                                    <div>
+                                        <table
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "space-arround",
+                                            }}>
+                                            <td>
+                                                <InfoRow label='Mã vật tư' data='VT001' />
+                                                <InfoRow label='Bom version' data='1.1' />
+                                            </td>
+                                            <td>
+                                                <InfoRow label='Tên vật tư' data='Mực 01' />
+                                                <InfoRow label='Trạng thái' data='Hoạt động' />
+                                            </td>
+                                        </table>
+                                    </div>
+                                    <DataGrid
+                                        key={"id"}
+                                        keyExpr={"id"}
+                                        dataSource={data2}
+                                        showBorders={true}
+                                        columnAutoWidth={true}
+                                        showRowLines={true}
+                                        rowAlternationEnabled={true}
+                                        allowColumnResizing={true}
+                                        allowColumnReordering={true}
+                                        focusedRowEnabled={true}>
+                                        <Toolbar>
+                                            <TItem location='before'>
+                                                <div>
+                                                    <p style={{ fontSize: 20 }}>Danh sách vật tư</p>
+                                                </div>
+                                            </TItem>
+                                            <TItem>
+                                                <SvgIcon
+                                                    sizeIcon={25}
+                                                    text='Thêm mới'
+                                                    tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
+                                                    icon='assets/icons/CircleAdd.svg'
+                                                    textColor='#FF7A00'
+                                                />
+                                            </TItem>
+                                        </Toolbar>
+                                        <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                            <OperationDescriptions
+                                                startsWith={t("common.startsWith")}
+                                                equal={t("common.equal")}
+                                                endsWith={t("common.endsWith")}
+                                                contains={t("common.contains")}
+                                                notContains={t("common.notContains")}
+                                                notEqual={t("common.notEqual")}
+                                                lessThan={t("common.lessThan")}
+                                                lessThanOrEqual={t("common.lessThanOrEqual")}
+                                                greaterThan={t("common.greaterThan")}
+                                                greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                                between={t("common.between")}
+                                            />
+                                        </FilterRow>
+                                        <Column caption={"Mã vật tư thay thế"} dataField={"materialCodeReplace"} />
+                                        <Column caption={"Tên vật tư thay thế"} dataField={"materialNameReplace"} />
+                                        <Column caption={"Version"} dataField={"version"} />
+                                        <Column caption={"Phân loại"} dataField={"classify"} />
+                                        <Column caption={"Định mức"} dataField={"norm"} />
+                                        <Column caption={"Đơn vị tính"} dataField={"unit"} />
+                                        <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
+                                    </DataGrid>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    modalTitle={
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                            <SvgIcon
+                                sizeIcon={25}
+                                icon='assets/icons/Announcement.svg'
+                                textColor='#FF7A00'
+                                style={{ marginRight: 17 }}
+                            />
+                            Danh sách vật tư thay thế
+                        </div>
+                    }
+                    width={1300}
+                    onCancel={() => setIsVisibleListMaterialReplacement(false)}
                     onSubmit={() => { }}
                     customFooter={handleCustomFooter}
                 />
@@ -307,27 +436,27 @@ export const ListProduct = React.memo((props: any) => {
                 />
                 <Toolbar>
                     <TItem location={"before"}>
-                        <div>Danh sách sản phẩm</div>
+                        <div style={{ fontSize: 18, fontWeight: "bold" }}>Danh sách sản phẩm</div>
                     </TItem>
                     <TItem name='columnChooserButton' />
                 </Toolbar>
                 <ColumnChooser enabled={true} allowSearch={true} mode='select' />
-                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
+                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
                     <OperationDescriptions
-                        startsWith='Bắt đầu với'
-                        equal='Bằng'
-                        endsWith='Kết thúc với'
-                        contains='Chứa'
-                        notContains='Không chứa'
-                        notEqual='Không bằng'
-                        lessThan='Nhỏ hơn'
-                        lessThanOrEqual='Nhỏ hơn hoặc bằng'
-                        greaterThan='Lớn hơn'
-                        greaterThanOrEqual='Lớn hơn hoặc bằng'
-                        between='Nằm giữa'
+                        startsWith={t("common.startsWith")}
+                        equal={t("common.equal")}
+                        endsWith={t("common.endsWith")}
+                        contains={t("common.contains")}
+                        notContains={t("common.notContains")}
+                        notEqual={t("common.notEqual")}
+                        lessThan={t("common.lessThan")}
+                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                        greaterThan={t("common.greaterThan")}
+                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                        between={t("common.between")}
                     />
                 </FilterRow>
-                <SearchPanel visible={true} width={240} placeholder='Nhập thông tin và nhấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
                 <Selection mode='single' />
                 <Column caption='Mã thẻ' dataField={"productCode"} />
@@ -335,7 +464,7 @@ export const ListProduct = React.memo((props: any) => {
                 <Column dataField='version' caption='BOM version' />
                 <Column dataField='notice' caption='Lưu ý'></Column>
                 <Column dataField='note' caption='Ghi chú' />
-                <Column caption={"Trạng thái"} dataField='status' cellRender={(cellInfo) => {
+                <Column caption={"Trạng thái"} dataField='status' alignment="left" cellRender={(cellInfo) => {
                     return <Status value={cellInfo.value} />
                 }} />
                 <Column
@@ -364,16 +493,16 @@ export const ListProduct = React.memo((props: any) => {
                                 textSize={17}
                                 icon='assets/icons/StageChange.svg'
                                 textColor='#FF7A00'
-                                style={{ marginRight: 17 }}
+                            // style={{ marginRight: 17 }}
                             />
-                            <SvgIcon
+                            {/* <SvgIcon
                                 onClick={() => setIsConfirmDelete(true)}
                                 tooltipTitle='Xóa'
                                 sizeIcon={17}
                                 textSize={17}
                                 icon='assets/icons/Trash.svg'
                                 textColor='#FF7A00'
-                            />
+                            /> */}
                         </div>
                     )}
                 />
@@ -393,6 +522,8 @@ export const ListProduct = React.memo((props: any) => {
 export default ListProduct;
 
 export function Status({ value }) {
+    console.log('value', value);
+
     return (<div className={cx('status', [value === 0 ? 'active' : 'inactive'])}>
         {
             value === 0 ? "Hoạt động" : "Không hoạt động"

@@ -8,6 +8,7 @@ import {
     Toolbar,
     ColumnChooser,
     MasterDetail,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import styles from "./BOMBodyCard.module.css";
 import classNames from "classnames/bind";
@@ -25,7 +26,7 @@ import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import httpRequests from "../../../../utils/httpRequests";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import { BOMBodyCardInfo } from "./BOMBodyCardInfo/BOMBodyCardInfo";
-
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 const data2 = [
     {
@@ -69,7 +70,7 @@ export const BOMBodyCard = () => {
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
     const [isBOMCardAddTemplate, setIsBOMCardAddTemplate] = React.useState<boolean>(false);
     const [isDetailBOM, setIsDetailBOM] = React.useState<boolean>(false);
-    const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
+
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [bom, setBom] = React.useState<any>({});
     const [bomIdChoosed, setBomIdChoosed] = React.useState<Number | null>(null);
@@ -77,6 +78,8 @@ export const BOMBodyCard = () => {
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(bom?.data?.length / pageSize);
+
+    const { t } = useTranslation(["common"]);
     // const dataPage = bom?.data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
@@ -100,9 +103,6 @@ export const BOMBodyCard = () => {
 
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
-    };
-    const handleHideModalDel = () => {
-        setIsConfirmDelete(false);
     };
 
     const handleBOMBodyCardAddInfo = (cellInfo: any) => {
@@ -190,7 +190,7 @@ export const BOMBodyCard = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Quản lý BOM body card
+                                {t("bom-bodycard.header")}
                             </h5>
                         </div>
                         <div>
@@ -205,7 +205,7 @@ export const BOMBodyCard = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}
-                                noDataText='Không có dữ liệu để hiển thị'
+                                noDataText={t("common.noData-text")}
                             >
                                 <PopupBOM
                                     isVisible={isChangeState}
@@ -274,84 +274,7 @@ export const BOMBodyCard = () => {
                                     onSubmit={() => { }}
                                     customFooter={handleCustomFooter}
                                 />
-                                <PopupBOM
-                                    isVisible={isVisibleListMaterialReplacement}
-                                    modalContent={
-                                        <div>
-                                            <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-                                                <div>
-                                                    <div>
-                                                        <table
-                                                            style={{
-                                                                display: "flex",
-                                                                justifyContent: "space-arround",
-                                                            }}>
-                                                            <td>
-                                                                <InfoRow label='Mã vật tư' data='VT001' />
-                                                                <InfoRow label='Bom version' data='1.1' />
-                                                            </td>
-                                                            <td>
-                                                                <InfoRow label='Tên vật tư' data='Mực 01' />
-                                                                <InfoRow label='Trạng thái' data='Hoạt động' />
-                                                            </td>
-                                                        </table>
-                                                    </div>
-                                                    <DataGrid
-                                                        key={"replaceMaterialCode"}
-                                                        keyExpr={"replaceMaterialCode"}
-                                                        dataSource={data2}
-                                                        showBorders={true}
-                                                        columnAutoWidth={true}
-                                                        showRowLines={true}
-                                                        rowAlternationEnabled={true}
-                                                        allowColumnResizing={true}
-                                                        allowColumnReordering={true}
-                                                        focusedRowEnabled={true}>
-                                                        <Toolbar>
-                                                            <ToolbarItem location='before'>
-                                                                <div>
-                                                                    <h4>Danh sách vật tư</h4>
-                                                                </div>
-                                                            </ToolbarItem>
-                                                            <ToolbarItem>
-                                                                <SvgIcon
-                                                                    sizeIcon={25}
-                                                                    text='Thêm mới'
-                                                                    tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
-                                                                    icon='assets/icons/CircleAdd.svg'
-                                                                    textColor='#FF7A00'
-                                                                />
-                                                            </ToolbarItem>
-                                                        </Toolbar>
-                                                        <FilterRow visible={true} />
-                                                        <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                                        <Column caption={"Tên vật tư thay thế"} dataField={"replaceMaterialName"} />
-                                                        <Column caption={"Version"} dataField={"version"} />
-                                                        <Column caption={"Phân loại"} dataField={"classify"} />
-                                                        <Column caption={"Định mức"} dataField={"norm"} />
-                                                        <Column caption={"Đơn vị tính"} dataField={"unit"} />
-                                                        <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
-                                                    </DataGrid>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    modalTitle={
-                                        <div style={{ display: "flex", flexDirection: "row" }}>
-                                            <SvgIcon
-                                                sizeIcon={25}
-                                                icon='assets/icons/Announcement.svg'
-                                                textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
-                                            />
-                                            Danh sách vật tư thay thế
-                                        </div>
-                                    }
-                                    width={1300}
-                                    onCancel={() => setIsVisibleListMaterialReplacement(false)}
-                                    onSubmit={() => { }}
-                                    customFooter={handleCustomFooter}
-                                />
+
                                 <Toolbar>
                                     <ToolbarItem>
                                         <SvgIcon
@@ -380,8 +303,22 @@ export const BOMBodyCard = () => {
                                     <ToolbarItem name='searchPanel' location='before' />
                                     <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 </Toolbar>
-                                <FilterRow visible={true} />
-                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
+                                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
 
                                 <Column fixed={true} dataField='productCode' minWidth={140} caption='Mã sản phẩm'></Column>
@@ -430,16 +367,16 @@ export const BOMBodyCard = () => {
                                                 textSize={17}
                                                 icon='assets/icons/StageChange.svg'
                                                 textColor='#FF7A00'
-                                                style={{ marginRight: 17 }}
+                                            // style={{ marginRight: 17 }}
                                             />
-                                            <SvgIcon
+                                            {/* <SvgIcon
                                                 onClick={handleShowModalDel}
                                                 tooltipTitle='Xóa'
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Trash.svg'
                                                 textColor='#FF7A00'
-                                            />
+                                            /> */}
                                         </div>
                                     )}></Column>
                                 <MasterDetail enabled={true} render={handleListProduct} />

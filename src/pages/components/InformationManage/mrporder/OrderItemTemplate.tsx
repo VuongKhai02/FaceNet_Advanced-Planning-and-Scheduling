@@ -14,8 +14,6 @@ import DataGrid, {
     Toolbar,
     Item as TItem,
     FormItem,
-    Paging,
-    Pager,
     Format,
     OperationDescriptions,
 } from "devextreme-react/data-grid";
@@ -24,6 +22,7 @@ import { Item } from "devextreme-react/form";
 import { Tooltip } from "devextreme-react/tooltip";
 import { Tag } from "antd";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 const getProductName = (rowData: any) => {
     if (rowData.data.status && rowData.data.status === "created_wo") {
@@ -73,7 +72,6 @@ const quantityOut = (row: any) => {
     return <div>0.00</div>;
 };
 
-const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
 export const OrderItemTemplate = React.memo((props: any) => {
     const [pageIndex, setPageIndex] = React.useState<number>(1);
@@ -82,7 +80,7 @@ export const OrderItemTemplate = React.memo((props: any) => {
     const dataPage = OrderItem?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const [branchGroupArray,] = useState<any[]>([]);
     const [groupArray,] = useState<any[]>([]);
-
+    const { t } = useTranslation(["common"]);
     const loadProductOrderItem = () => { };
     const loadProduct = () => { };
 
@@ -210,29 +208,29 @@ export const OrderItemTemplate = React.memo((props: any) => {
                 onCellPrepared={onCellPrepared}
                 wordWrapEnabled={true}
                 columnAutoWidth={true}
-                noDataText='Không có dữ liệu để hiển thị'>
+                noDataText={t("common.noData-text")}>
                 <Toolbar>
                     <TItem location={"before"}>
-                        <div className={"master-detail-title"}>Danh sách sản phẩm</div>
+                        <div style={{ fontSize: 18, fontWeight: "bold" }}>Danh sách sản phẩm</div>
                     </TItem>
                     <TItem name='addRowButton' />
                 </Toolbar>
-                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText='Đặt lại'>
+                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
                     <OperationDescriptions
-                        startsWith='Bắt đầu với'
-                        equal='Bằng'
-                        endsWith='Kết thúc với'
-                        contains='Chứa'
-                        notContains='Không chứa'
-                        notEqual='Không bằng'
-                        lessThan='Nhỏ hơn'
-                        lessThanOrEqual='Nhỏ hơn hoặc bằng'
-                        greaterThan='Lớn hơn'
-                        greaterThanOrEqual='Lớn hơn hoặc bằng'
-                        between='Nằm giữa'
+                        startsWith={t("common.startsWith")}
+                        equal={t("common.equal")}
+                        endsWith={t("common.endsWith")}
+                        contains={t("common.contains")}
+                        notContains={t("common.notContains")}
+                        notEqual={t("common.notEqual")}
+                        lessThan={t("common.lessThan")}
+                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                        greaterThan={t("common.greaterThan")}
+                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                        between={t("common.between")}
                     />
                 </FilterRow>
-                <SearchPanel visible={true} width={300} placeholder='Nhập thông tin và ấn Enter để tìm kiếm' />
+                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                 <Selection mode='single' />
                 <Column type={"buttons"} caption={"Tùy chọn"} alignment='left' />
                 {/*<Column cellRender={rowIndexRender} width={50} caption={"STT"} alignment={"left"} />*/}

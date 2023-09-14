@@ -7,9 +7,14 @@ import {
     SearchPanel,
     ColumnChooser,
     Button as ButtonIcon,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
+
+import { useTranslation } from "react-i18next";
+
 const data = [{}];
 export const ViewMaterial = () => {
+    const { t } = useTranslation(["common"]);
     return (
         <>
             {
@@ -32,9 +37,23 @@ export const ViewMaterial = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}>
-                                <FilterRow visible={true} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                                 <Paging defaultPageSize={5} />
                                 <Column caption={"Mã WO"} dataField={"saleOrderId"} alignment='left' width={100} />
                                 <Column caption={"Mã SO"} dataField={"productionCode"} />

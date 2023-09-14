@@ -1,12 +1,13 @@
 import React from "react";
 import { DataGrid } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser, OperationDescriptions } from "devextreme-react/data-grid";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import ProgressMonitoringOrderDetailProgress from "./ProgressMonitoringOrderDetailProgress/ProgressMonitoringOrderDetailProgress";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 const data = [
     {
@@ -57,7 +58,7 @@ const data = [
 export const ProgressMonitoringOrder = () => {
     const [isVisibleDetailProgress, setIsVisibleDetailProgress] = React.useState<boolean>(false);
     const [isVisibleConfirmDelete, setIsVisibleConfirmDelete] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
     const totalPage = Math.ceil(data?.length / pageSize);
@@ -118,7 +119,7 @@ export const ProgressMonitoringOrder = () => {
                             allowColumnResizing={true}
                             allowColumnReordering={true}
                             focusedRowEnabled={true}
-                            noDataText="Không có dữ liệu để hiển thị"
+                            noDataText={t("common.noData-text")}
                         >
                             <PopupConfirmDelete
                                 isVisible={isVisibleConfirmDelete}
@@ -178,9 +179,23 @@ export const ProgressMonitoringOrder = () => {
                                 <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 <ToolbarItem name='searchPanel' location='before' />
                             </Toolbar>
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
 
                             <Column caption={"Mã SO"} dataField={"soCode"} />

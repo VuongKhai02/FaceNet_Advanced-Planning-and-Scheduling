@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames/bind";
 import { DataGrid, Popup, SelectBox } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, SearchPanel, Toolbar, ColumnChooser, OperationDescriptions } from "devextreme-react/data-grid";
 import TechFormBodyCard from "./TechFormNewAdd/TechFormBodyCard/TechFormBodyCard";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
@@ -16,6 +16,7 @@ import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete
 import PopupSelectProductionRequirement from "../../../../shared/components/PopupSelectProductionRequirement/PopupSelectProductionRequirement";
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
+import { useTranslation } from "react-i18next";
 
 import styles from "./TechFormList.module.css";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
@@ -31,7 +32,7 @@ export const TechFormList = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
     const [isModalVisibleSendSAP, setIsModalVisibleSendSAP] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const [isPrioritizeLevelChange, setIsPrioritizeLevelChange] = React.useState<boolean>(false);
     const [isVisibleTechFormUpdate, setIsVisibleTechFormUpdate] = React.useState<boolean>(false);
     const [isVisibleBOMBodyCardAddInfo, setIsVisibleBOMBodyCardAddInfo] = React.useState<boolean>(false);
@@ -361,7 +362,7 @@ export const TechFormList = () => {
                             rowAlternationEnabled={true}
                             allowColumnResizing={true}
                             allowColumnReordering={true}
-                            noDataText='Không có dữ liệu để hiển thị'
+                            noDataText={t("common.noData-text")}
                             focusedRowEnabled={true}>
                             <Toolbar>
                                 <ToolbarItem location='after'>
@@ -402,9 +403,23 @@ export const TechFormList = () => {
                                 <ToolbarItem name='searchPanel' location='before' />
                                 <ToolbarItem name='columnChooserButton' />
                             </Toolbar>
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
                             <Column caption={"Mã sản xuất"} dataField={"productionRequirement.productionCode"} />

@@ -7,6 +7,7 @@ import {
     SearchPanel,
     Toolbar,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import DateBox from "devextreme-react/date-box";
 import { PLANNING_API_URL } from "../../../../utils/config";
@@ -22,6 +23,7 @@ import PopupConfirmGeneral from "../../../../shared/components/PopupConfirmGener
 import httpRequests from "../../../../utils/httpRequests";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
+import { useTranslation } from "react-i18next";
 
 import classNames from "classnames/bind";
 import styles from "./ProductionPlanList.module.css";
@@ -95,7 +97,7 @@ export const ProductionPlanList = () => {
     const [, setContent] = useState<string>();
     const [popupVisibleIcon, setPopupVisibleIcon] = React.useState<boolean>(false);
     const [isVisibleAdd, setIsVisibleAdd] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const [isViewMaterial, setIsViewMaterial] = React.useState<boolean>(false);
     const [isVisibleInventoryQuantity, setIsVisibleInventoryQuantity] = React.useState<boolean>(false);
     const [isVisibleQMSProcessResponsiblePerson, setIsVisibleQMSProcessResponsiblePerson] = React.useState<boolean>(false);
@@ -782,7 +784,7 @@ export const ProductionPlanList = () => {
                             focusedRowEnabled={true}
                             onRowUpdating={updateOrder}
                             onRowRemoving={removeOrder}
-                            noDataText='Không có dữ liệu để hiển thị'
+                            noDataText={t("common.noData-text")}
                         >
                             <Toolbar>
                                 <ToolbarItem location='after'>
@@ -812,9 +814,23 @@ export const ProductionPlanList = () => {
                                 <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 <ToolbarItem name='searchPanel' location='before' />
                             </Toolbar>
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                            <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                            <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
                             <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
                             <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
@@ -941,7 +957,21 @@ export const ProductionPlanList = () => {
                                         allowColumnResizing={true}
                                         allowColumnReordering={true}
                                         focusedRowEnabled={true}>
-                                        <FilterRow visible={true} />
+                                        <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                            <OperationDescriptions
+                                                startsWith={t("common.startsWith")}
+                                                equal={t("common.equal")}
+                                                endsWith={t("common.endsWith")}
+                                                contains={t("common.contains")}
+                                                notContains={t("common.notContains")}
+                                                notEqual={t("common.notEqual")}
+                                                lessThan={t("common.lessThan")}
+                                                lessThanOrEqual={t("common.lessThanOrEqual")}
+                                                greaterThan={t("common.greaterThan")}
+                                                greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                                between={t("common.between")}
+                                            />
+                                        </FilterRow>
                                         <Column caption={"No."} dataField={"no"} alignment='left' width={100} />
                                         <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
                                         <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />

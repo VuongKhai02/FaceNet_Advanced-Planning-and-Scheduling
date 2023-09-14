@@ -4,7 +4,7 @@ import styles from './PaginationComponent.module.css';
 import { Button, Input } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Select from 'antd/lib/select';
-
+import { useTranslation } from "react-i18next";
 const { Option } = Select;
 const cx = classNames.bind(styles);
 interface PageTextInfo {
@@ -34,7 +34,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
 }) => {
     const [pageNumbers, setPageNumbers] = useState<(number | string)[]>([]);
     const [goPage, setGoPage] = useState<number | null>(null);
-
+    const { t } = useTranslation(["common"]);
     useEffect(() => {
         calculatePages();
     }, [pageIndex, totalPages]);
@@ -102,7 +102,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                     >
                         {pageSizeOptions.map((option) => (
                             <Option key={option} value={option}>
-                                {option}/Trang
+                                {option}/{t("common.page")}
                             </Option>
                         ))}
                     </Select>
@@ -110,8 +110,8 @@ const PaginationComponent: React.FC<PaginationProps> = ({
             </div>
             <div className={cx("dx-pages")}>
                 <div className={cx("dx-info")}>
-                    {`Trang số`} {pageTextInfo.pageIndex} {`của`}{' '}
-                    {!Number.isNaN(pageTextInfo.numberOfPages) ? pageTextInfo.numberOfPages : 0} ({pageTextInfo.total || 0} {`bản ghi`}) &ensp;
+                    {t("common.page-number")} {pageTextInfo.pageIndex} {t("common.of")}{' '}
+                    {!Number.isNaN(pageTextInfo.numberOfPages) ? pageTextInfo.numberOfPages : 0} ({pageTextInfo.total || 0} {t("common.records")}) &ensp;
                 </div>
                 <Button
                     icon={<LeftOutlined />}
@@ -140,7 +140,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                 />
             </div>
             <div className={cx("dx-pages")}>
-                <div className={cx("dx-info")}>{`Đi đến trang`} &ensp;</div>
+                <div className={cx("dx-info")}>{t("common.goTo-page")} &ensp;</div>
                 <Input
                     placeholder={'1'}
                     style={{ width: 70 }}

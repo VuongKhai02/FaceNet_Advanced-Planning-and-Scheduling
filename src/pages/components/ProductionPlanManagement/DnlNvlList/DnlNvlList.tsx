@@ -1,9 +1,10 @@
 import React from "react";
 import { DataGrid, Popup } from "devextreme-react";
-import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser } from "devextreme-react/data-grid";
+import { Column, FilterRow, Item as ToolbarItem, Pager, Paging, SearchPanel, Toolbar, ColumnChooser, OperationDescriptions } from "devextreme-react/data-grid";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import SvgIcon from "../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 const allowedPageSizes: (number | "auto" | "all")[] = [10, 20, 40];
 
@@ -38,7 +39,7 @@ const data = [
 ];
 export const DnlNvlList = () => {
     const [isViewMaterial, setIsViewMaterial] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     return (
         <>
             {
@@ -88,9 +89,23 @@ export const DnlNvlList = () => {
                                     <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                     <ToolbarItem name='searchPanel' location='before' />
                                 </Toolbar>
-                                <FilterRow visible={true} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
-                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                                 <Paging defaultPageSize={10} />
                                 <Pager
                                     visible={true}
@@ -192,7 +207,21 @@ export const DnlNvlList = () => {
                                     showNavigationButtons={true}
                                     infoText='Trang số {0} trên {1} ({2} bản ghi)'
                                 />
-                                <FilterRow visible={true} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
                                 <Paging defaultPageSize={10} />
                                 <Column caption={"No."} dataField={"no"} alignment='left' width={100} />
                                 <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />

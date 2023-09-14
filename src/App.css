@@ -106,6 +106,7 @@
 
 .ant-btn-default {
     border: none;
+    box-shadow: none;
 }
 
 /* css antd + devextreme */
@@ -235,7 +236,6 @@ table {
 } */
 
 .ant-layout-content {
-    /* background-color: red !important; */
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px !important;
     border-radius: 5px !important;
 }

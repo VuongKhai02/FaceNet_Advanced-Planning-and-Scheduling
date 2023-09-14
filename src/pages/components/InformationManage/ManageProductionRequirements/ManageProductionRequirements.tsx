@@ -7,6 +7,7 @@ import {
     SearchPanel,
     Toolbar,
     ColumnChooser,
+    OperationDescriptions,
 } from "devextreme-react/data-grid";
 import "./ManageProductionRequirements.css";
 import PopupConfirmDelete from "../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
@@ -20,6 +21,7 @@ import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import { Tag } from "antd";
 import { customizeColor, getColor } from "../../../../utils/utils";
+import { useTranslation } from "react-i18next";
 
 export const ManageProductionRequirements = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -33,7 +35,7 @@ export const ManageProductionRequirements = () => {
     const totalPage = Math.ceil(productionRequirements?.length / pageSize);
     const dataPage = productionRequirements?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
-
+    const { t } = useTranslation(["common"]);
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
@@ -73,22 +75,26 @@ export const ManageProductionRequirements = () => {
     const onStatusRender = () => {
         let customColor: {
             color: string,
-            backgroundColor: string
+            backgroundColor: string,
+            fontWeight: string
         } = {
             color: "",
-            backgroundColor: ""
+            backgroundColor: "",
+            fontWeight: ""
         }
-        let status = "";
         let border = "";
         customColor = customizeColor(productionRequirements[0]?.status)
         border = "1px solid " + customColor.color;
         return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
             "width": "100%",
             "textAlign": "center",
             "color": customColor.color,
             "backgroundColor": customColor.backgroundColor,
             "borderRadius": "4px",
-            "border": "none"
+            "border": "none",
+            fontWeight: customColor.fontWeight
         }}>{productionRequirements[0]?.status}</Tag>
     }
 
@@ -119,8 +125,6 @@ export const ManageProductionRequirements = () => {
                 }}>{productionRequirements[0]?.priority}</Tag>
             </div>
         </>
-
-
     }
 
     return (
@@ -163,7 +167,7 @@ export const ManageProductionRequirements = () => {
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
                                 focusedRowEnabled={true}
-                                noDataText='Không có dữ liệu để hiển thị'
+                                noDataText={t("common.noData-text")}
                             >
                                 <PopupDetailProductionRequire
                                     isVisible={isVisibleDetailProductionRequire}
@@ -305,8 +309,22 @@ export const ManageProductionRequirements = () => {
                                     <ToolbarItem name='searchPanel' location='before' />
                                     <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>
                                 </Toolbar>
-                                <FilterRow visible={true} />
-                                <SearchPanel visible={true} placeholder={"Nhập thông tin và ấn Enter để tìm kiếm"} width={300} />
+                                <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                    <OperationDescriptions
+                                        startsWith={t("common.startsWith")}
+                                        equal={t("common.equal")}
+                                        endsWith={t("common.endsWith")}
+                                        contains={t("common.contains")}
+                                        notContains={t("common.notContains")}
+                                        notEqual={t("common.notEqual")}
+                                        lessThan={t("common.lessThan")}
+                                        lessThanOrEqual={t("common.lessThanOrEqual")}
+                                        greaterThan={t("common.greaterThan")}
+                                        greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                        between={t("common.between")}
+                                    />
+                                </FilterRow>
+                                <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
                                 <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
 
                                 <Column dataField='productionCode' caption='Mã sản xuất' />
@@ -325,8 +343,8 @@ export const ManageProductionRequirements = () => {
                                     alignment={"left"}
                                     caption={"Ngày kết thúc"}
                                 />
-                                <Column caption={"Mức độ ưu tiên"} dataField='priority' cellComponent={onPriorityRender} />
-                                <Column caption={"Trạng thái"} dataField='status' cellComponent={onStatusRender} />
+                                <Column caption={"Mức độ ưu tiên"} dataField='priority' cellRender={onPriorityRender} />
+                                <Column caption={"Trạng thái"} dataField='status' cellRender={onStatusRender} />
                                 <Column
                                     fixed={true}
                                     type={"buttons"}

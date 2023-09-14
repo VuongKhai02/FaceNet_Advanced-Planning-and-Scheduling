@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGrid, SelectBox, TextBox } from "devextreme-react";
-import { Column, FilterRow } from "devextreme-react/data-grid";
+import { Column, FilterRow, OperationDescriptions } from "devextreme-react/data-grid";
 import { WarningOutlined } from "@ant-design/icons";
 import PopupConfirmDelete from "../../../../../shared/components/PopupConfirmDelete/PopupConfirmDelete";
 import { observer } from "mobx-react";
@@ -11,6 +11,7 @@ import { MDM_API_URL, PLANNING_API_URL } from "../../../../../utils/config";
 import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 import { Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 type BOMPersonalizedAddInfoProductProps = {
     id: Number | null;
@@ -73,7 +74,7 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
     const gridRef = React.useRef(null);
     const [idRemoveChoosed, setIdRemoveChoosed] = React.useState<any>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
+    const { t } = useTranslation("common");
 
     const handleShowModalDel = (id: any) => {
         setIdRemoveChoosed(id)
@@ -404,14 +405,13 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                             className='informer'
                             style={{
                                 backgroundColor: "#ffffff",
-                                paddingLeft: 13,
                             }}>
                             <h4
                                 className='name'
                                 style={{
                                     color: "rgba(0, 0, 0, 0.7)",
                                     marginTop: 30,
-                                    fontSize: 25,
+                                    fontSize: 20,
                                     boxSizing: "border-box",
                                     fontWeight: 550,
                                 }}>
@@ -420,8 +420,8 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                         </div>
 
                         <DataGrid
-                            key='materialCode'
-                            keyExpr={"materialCode"}
+                            key='id'
+                            keyExpr={"id"}
                             dataSource={bomData.bomBodyCardMaterials}
                             showBorders={true}
                             columnAutoWidth={true}
@@ -481,9 +481,23 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                                 }
                                 width={600}
                             />
-                            <FilterRow visible={true} />
+                            <FilterRow visible={true} applyFilter={"auto"} showAllText='Tất cả' resetOperationText={t("common.reset")}>
+                                <OperationDescriptions
+                                    startsWith={t("common.startsWith")}
+                                    equal={t("common.equal")}
+                                    endsWith={t("common.endsWith")}
+                                    contains={t("common.contains")}
+                                    notContains={t("common.notContains")}
+                                    notEqual={t("common.notEqual")}
+                                    lessThan={t("common.lessThan")}
+                                    lessThanOrEqual={t("common.lessThanOrEqual")}
+                                    greaterThan={t("common.greaterThan")}
+                                    greaterThanOrEqual={t("common.greaterThanOrEqual")}
+                                    between={t("common.between")}
+                                />
+                            </FilterRow>
 
-                            <Column fixed={true} width={250} dataField='productCode' caption='Chọn mã vật tư' cellRender={(cellIfo) => (
+                            <Column fixed={true} dataField='productCode' caption='Mã vật tư' cellRender={(cellIfo) => (
                                 <SelectBox
                                     dataSource={materialList}
                                     searchExpr={"productCode"}
@@ -496,17 +510,16 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                                     }}
                                     placeholder='Nhập' searchEnabled={true} key={"productCode"} />
                             )}></Column>
-                            <Column fixed={true} width={250} dataField='materialCode' caption='Mã vật tư' />
+                            {/* <Column fixed={true} width={250} dataField='materialCode' caption='Mã vật tư' /> */}
                             <Column dataField='materialName' caption='Mô tả vật tư'></Column>
-
-                            <Column dataField='materialTechName' caption='Tên kỹ thuật' alignment='left'></Column>
-
+                            {/* <Column dataField='materialTechName' caption='Tên kỹ thuật' alignment='left'></Column> */}
                             <Column dataField='version' caption='Version' alignment={"left"}></Column>
                             <Column dataField='classify' caption='Phân loại' alignment={"left"}></Column>
                             <Column dataField='quota' caption='Định mức' />
                             <Column dataField='quantity' caption='Số lượng' />
+                            <Column dataField="UoMCode" caption="UoM code" />
                             <Column dataField='unit' caption='Đơn vị tính' />
-                            <Column caption={"Chọn mã vật tư thay thế"} dataField='' cellRender={(cellIfo) => (
+                            <Column caption={"Mã kho"} dataField='' cellRender={(cellIfo) => (
                                 <SelectBox
                                     dataSource={materialList}
                                     searchExpr={"productCode"}
@@ -517,9 +530,9 @@ export const BOMPersonalizedAddInfoProduct: React.FC<BOMPersonalizedAddInfoProdu
                                     }}
                                     placeholder='Nhập' searchEnabled={true} key={"productCode"} />
                             )} />
-                            <Column caption={"Mã vật tư thay thế"} dataField='replaceMaterialCode' />
-                            <Column caption={"Mô tả vật tư thay thế"} dataField='replaceMaterialName' />
                             <Column caption={"Số lượng tồn kho"} dataField='inventoryQuantity' />
+                            <Column caption="Số lượng sẵn sàng" dataField="availableQuantity" />
+                            <Column caption="Loại" dataField="type" cellRender={() => <SelectBox placeholder="Chọn" />} />
                             <Column
                                 type={"buttons"}
                                 caption={"Thao tác"}
