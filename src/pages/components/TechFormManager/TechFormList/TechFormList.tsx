@@ -61,11 +61,11 @@ export const TechFormList = () => {
                 items: [
                     {
                         key: "tech-form-manage",
-                        title: "Quản lý phiếu công nghệ",
+                        title: t("management-techform.mana-techform"),
                     },
                     {
                         key: "tech-form-list",
-                        title: "Danh sách phiếu công nghệ",
+                        title: t("management-techform.techform-list.header"),
                     }
                 ]
             })
@@ -211,7 +211,7 @@ export const TechFormList = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Danh sách phiếu công nghệ
+                                {t("management-techform.techform-list.header")}
                             </h5>
                         </div>
                         <PopupConfirmGeneral
@@ -349,7 +349,7 @@ export const TechFormList = () => {
                             contentRender={() => popupContentIcon}
                             width={320}
                             height={350}
-                            showCloseButton={false}
+                            // showCloseButton={false}
                             hideOnOutsideClick={true}
                         />
                         <DataGrid

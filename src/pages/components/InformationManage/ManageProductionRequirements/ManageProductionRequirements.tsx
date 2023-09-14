@@ -22,6 +22,7 @@ import PaginationComponent from "../../../../shared/components/PaginationCompone
 import { Tag } from "antd";
 import { customizeColor, getColor } from "../../../../utils/utils";
 import { useTranslation } from "react-i18next";
+import NotificationManager from "../../../../utils/NotificationManager";
 
 export const ManageProductionRequirements = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -36,17 +37,18 @@ export const ManageProductionRequirements = () => {
     const dataPage = productionRequirements?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
     const breadcrumbContext = useBreadcrumb();
     const { t } = useTranslation(["common"]);
+
     React.useEffect(() => {
         if (breadcrumbContext && breadcrumbContext.setBreadcrumbData) {
             breadcrumbContext.setBreadcrumbData({
                 items: [
                     {
                         key: "info-manage",
-                        title: "Quản lý thông tin",
+                        title: t("management-info.mana-info"),
                     },
                     {
                         key: "manage-production-equirements",
-                        title: "Quản lý yêu cầu sản xuất",
+                        title: t("management-info.manufacture-request.breadcrumb-label"),
                     }
                 ]
 
@@ -55,7 +57,6 @@ export const ManageProductionRequirements = () => {
     }, []);
 
     const getProductionRequirements = () => {
-
         httpRequests.get(PLANNING_API_URL + "/api/production_requirements").then((response) => {
             if (response.status === 200) {
                 console.log(response.data.data);
@@ -71,8 +72,12 @@ export const ManageProductionRequirements = () => {
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     };
+    const NotificationDelete = () => {
+        NotificationManager.success(t("Xóa dữ liệu thành công!"))
+    }
 
-    const onStatusRender = () => {
+
+    const onStatusRender = (value: any) => {
         let customColor: {
             color: string,
             backgroundColor: string,
@@ -83,7 +88,7 @@ export const ManageProductionRequirements = () => {
             fontWeight: ""
         }
         let border = "";
-        customColor = customizeColor(productionRequirements[0]?.status)
+        customColor = customizeColor(value.data.status)
         border = "1px solid " + customColor.color;
         return <Tag style={{
             fontSize: '14px',
@@ -95,10 +100,10 @@ export const ManageProductionRequirements = () => {
             "borderRadius": "4px",
             "border": "none",
             fontWeight: customColor.fontWeight
-        }}>{productionRequirements[0]?.status}</Tag>
+        }}>{value.data.status}</Tag>
     }
 
-    const onPriorityRender = () => {
+    const onPriorityRender = (value: any) => {
         let customColor: {
             color: string,
             backgroundColor: string
@@ -108,8 +113,8 @@ export const ManageProductionRequirements = () => {
         }
         let status = "";
         let border = "";
-        getColor(productionRequirements[0]?.priority);
-        customColor = customizeColor(status)
+        getColor(value.data.priority);
+        customColor = customizeColor(value.data.priority)
         border = "1px solid" + customColor.color;
         return <>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -122,7 +127,7 @@ export const ManageProductionRequirements = () => {
                     "backgroundColor": customColor.backgroundColor,
                     "borderRadius": "100px",
                     "border": border
-                }}>{productionRequirements[0]?.priority}</Tag>
+                }}>{value.data.priority}</Tag>
             </div>
         </>
     }
@@ -152,7 +157,7 @@ export const ManageProductionRequirements = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Danh sách yêu cầu sản xuất
+                                {t("management-info.manufacture-request.label")}
                             </h5>
                         </div>
                         <div>
@@ -266,7 +271,7 @@ export const ManageProductionRequirements = () => {
                                 <PopupConfirmDelete
                                     isVisible={isConfirmDelete}
                                     onCancel={() => setIsConfirmDelete(false)}
-                                    onSubmit={() => { }}
+                                    onSubmit={() => { NotificationDelete(); setIsConfirmDelete(false) }}
                                     modalTitle={
                                         <div>
                                             <h3
