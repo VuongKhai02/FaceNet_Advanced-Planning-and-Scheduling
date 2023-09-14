@@ -11,7 +11,7 @@ import {
 } from "devextreme-react/data-grid";
 import DateBox from "devextreme-react/date-box";
 import { PLANNING_API_URL } from "../../../../utils/config";
-import { customizeColor } from "../../../../utils/utils";
+import { customizeColor, getColor } from "../../../../utils/utils";
 import { Button, Modal, Tag } from "antd";
 import notify from "devextreme/ui/notify";
 import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
@@ -60,38 +60,89 @@ const data = [
 ];
 const data1 = [
     {
+        id: 1,
         soCode: "312324",
         manufactureCode: "MSX-123",
+        lotNumber: 1,
         customerName: "TP Bank",
         cardName: "Visa TPBank",
         quantity: "15000",
         quantityLoss: "18000",
         qrCode: "",
-        priority: "1",
-        reasonClose: "Khách hàng thay đổi yêu cầu",
+        priority: 2,
+        status: "Mới tạo",
+        reasonClose: "",
     },
     {
+        id: 2,
         soCode: "312325",
         manufactureCode: "MSX-123",
+        lotNumber: 2,
         customerName: "TP Bank",
         cardName: "Visa TPBank",
         quantity: "15000",
         quantityLoss: "18000",
         qrCode: "",
-        priority: "1",
-        reasonClose: "Khách hàng thay đổi yêu cầu",
+        priority: 1,
+        status: "Chờ lĩnh nguyên vật liệu",
+        reasonClose: "",
     },
     {
+        id: 3,
         soCode: "312326",
         manufactureCode: "MSX-123",
+        lotNumber: 1,
         customerName: "TP Bank",
         cardName: "Visa TPBank",
         quantity: "15000",
         quantityLoss: "18000",
         qrCode: "",
-        priority: "1",
-        reasonClose: "Khách hàng thay đổi yêu cầu",
+        priority: 3,
+        status: "Đã phát lệnh sản xuất",
+        reasonClose: "",
     },
+    {
+        id: 4,
+        soCode: "312326",
+        manufactureCode: "MSX-123",
+        lotNumber: 1,
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        quantity: "15000",
+        quantityLoss: "18000",
+        qrCode: "",
+        priority: 3,
+        status: "Đang sản xuất",
+        reasonClose: "",
+    },
+    {
+        id: 5,
+        soCode: "312326",
+        manufactureCode: "MSX-123",
+        lotNumber: 2,
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        quantity: "15000",
+        quantityLoss: "18000",
+        qrCode: "",
+        priority: 2,
+        status: "Từ chối",
+        reasonClose: "Khách hàng thay đổi",
+    },
+    {
+        id: 6,
+        soCode: "312326",
+        manufactureCode: "MSX-123",
+        lotNumber: 2,
+        customerName: "TP Bank",
+        cardName: "Visa TPBank",
+        quantity: "15000",
+        quantityLoss: "18000",
+        qrCode: "",
+        priority: 3,
+        status: "Hoàn thành",
+        reasonClose: "",
+    }
 ];
 export const ProductionPlanList = () => {
     const [, setContent] = useState<string>();
@@ -120,11 +171,11 @@ export const ProductionPlanList = () => {
                 items: [
                     {
                         key: "product-plan-management",
-                        title: "Quản lý kế hoạch sản xuất",
+                        title: t("management-manufacture-plan.manage-production-plan"),
                     },
                     {
                         key: "production-plan-list",
-                        title: "Danh sách kế hoạch sản xuất",
+                        title: t("management-manufacture-plan.manufacture-plan-list.header"),
                     }
                 ]
             })
@@ -231,6 +282,61 @@ export const ProductionPlanList = () => {
         });
     };
 
+    const onStatusRender = (value: any) => {
+        console.log("value value", value.data);
+        let customColor: {
+            color: string,
+            backgroundColor: string,
+            fontWeight: string
+        } = {
+            color: "",
+            backgroundColor: "",
+            fontWeight: ""
+        }
+        let border = "";
+        customColor = customizeColor(value.data.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none",
+            fontWeight: customColor.fontWeight
+        }}>{value.data.status}</Tag>
+    }
+
+    const onPriorityRender = (value: any) => {
+        let customColor: {
+            color: string,
+            backgroundColor: string
+        } = {
+            color: "",
+            backgroundColor: ""
+        }
+        let status = "";
+        let border = "";
+        getColor(value.data.priority);
+        customColor = customizeColor(value.data.priority)
+        border = "1px solid" + customColor.color;
+        return <>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Tag style={{
+                    height: "20px",
+                    "fontWeight": "bold",
+                    "width": "30px",
+                    "textAlign": "center",
+                    "color": customColor.color,
+                    "backgroundColor": customColor.backgroundColor,
+                    "borderRadius": "100px",
+                    "border": border
+                }}>{value.data.priority}</Tag>
+            </div>
+        </>
+    }
 
     useEffect(() => {
         loadOrders();
@@ -284,70 +390,6 @@ export const ProductionPlanList = () => {
         });
     };
 
-    const onStatusPoRender = (rowInfo: any) => {
-        let customColor: {
-            color: string;
-            backgroundColor: string;
-        } = {
-            color: "",
-            backgroundColor: "",
-        };
-        let status = "";
-        let border = "";
-
-        const getColor = (value: any) => {
-            switch (value) {
-                case "new":
-                    status = "Chờ sản xuất";
-                    break;
-                case "complete":
-                    status = "Hoàn thành";
-                    break;
-                case "not_complete":
-                    status = "Chưa hoàn thành";
-                    break;
-                case "in_production":
-                    status = "Đang sản xuất";
-                    break;
-                case "early_complete":
-                    status = "Hoàn thành sớm";
-                    break;
-                case "delay":
-                    status = "Chậm tiến độ";
-                    break;
-                case "unknown":
-                    status = "Chưa xác định";
-                    break;
-                case "wait_production":
-                    status = "Chờ sản xuất";
-                    break;
-                case "stop":
-                    status = "Ngưng sản xuất";
-                    break;
-                default:
-                    status = "Chưa xác định";
-                    break;
-            }
-        };
-
-        getColor(rowInfo.data.data.processStatus);
-        customColor = customizeColor(status);
-        border = "1px solid " + customColor.color;
-        return (
-            <Tag
-                style={{
-                    fontWeight: "bold",
-                    width: "100%",
-                    textAlign: "center",
-                    color: customColor.color,
-                    backgroundColor: customColor.backgroundColor,
-                    borderRadius: "4px",
-                    border: border,
-                }}>
-                {status}
-            </Tag>
-        );
-    };
 
     const handleCustomFooterAddQRCodeWO = [
         <div>
@@ -467,7 +509,7 @@ export const ProductionPlanList = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Danh sách kế hoạch sản xuất
+                                {t("management-manufacture-plan.manufacture-plan-list.header")}
                             </h5>
                         </div>
                         <PopupWO
@@ -833,16 +875,26 @@ export const ProductionPlanList = () => {
                             <ColumnChooser enabled={true} allowSearch={true} mode='select' title='Chọn cột' />
                             <SearchPanel visible={true} placeholder={t("common.search-placeholder")} width={300} />
 
-                            <Column caption={"Mã SO"} dataField={"soCode"} alignment='left' width={100} />
+                            <Column caption={"Mã đơn hàng"} dataField={"soCode"} alignment='left' width={100} />
                             <Column caption={"Mã sản xuất"} dataField={"manufactureCode"} />
+                            <Column caption={"Số lô"} dataField={"lotNumber"} alignment="left" />
                             <Column caption={"Tên khách hàng"} dataField={"customerName"} />
                             <Column caption={"Tên thẻ "} dataField={"cardName"} />
                             <Column caption={"Số lượng"} dataField={"quantity"} />
                             <Column caption={"Số lượng bù hao"} dataField={"quantityLoss"} />
-                            <Column caption={"Mã QR"} dataField={"qrCode"} />
-                            <Column caption={"Mức độ ưu tiên"} dataField={"priority"} />
+                            <Column caption={"Mã QR"} dataField={"qrCode"} cellRender={() => <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <SvgIcon
+                                    onClick={() => { }}
+                                    tooltipTitle='QR Code'
+                                    sizeIcon={17}
+                                    textSize={17}
+                                    icon='assets/icons/QrCodeNoFill.svg'
+                                    textColor='#FF7A00'
+                                />
+                            </div>} />
+                            <Column caption={"Mức độ ưu tiên"} dataField={"priority"} cellRender={onPriorityRender} />
                             <Column caption='Lý do đóng lệnh sản xuất' dataField='reasonClose' />
-                            <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
+                            <Column caption={"Trạng thái"} cellRender={onStatusRender} />
                             <Column
                                 fixed={true}
                                 type={"buttons"}

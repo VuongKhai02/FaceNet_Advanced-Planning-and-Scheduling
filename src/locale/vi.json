@@ -100,6 +100,15 @@
         }
 
     },
+    "management-manufacture-plan":{
+        "manage-production-plan":"Quản lý kế hoạch sản xuất",
+        "manufacture-plan-list":{
+            "header":"Danh sách kế hoạch sản xuất"
+        },
+        "declaration-manufacture-info":{
+            "header":"Danh sách khai báo thông tin sản xuất"
+        }
+    },
     "Yes": "Xóa",
     "No": "Hủy bỏ",
     "dxList-selectAll": "Chọn tất cả",

@@ -73,11 +73,11 @@ export const DeclareProductionObject = () => {
                 items: [
                     {
                         key: "product-plan-management",
-                        title: "Quản lý kế hoạch sản xuất",
+                        title: t("management-manufacture-plan.manage-production-plan"),
                     },
                     {
                         key: "declare-production-object",
-                        title: "Khai báo thông tin sản xuất",
+                        title: t("management-manufacture-plan.declaration-manufacture-info.header"),
                     }
                 ]
             })
@@ -217,7 +217,7 @@ export const DeclareProductionObject = () => {
                                         fontSize: 18,
                                         marginBottom: 0,
                                     }}>
-                                    Danh sách khai báo người/máy/lô sản xuất
+                                    {t("management-manufacture-plan.declaration-manufacture-info.header")}
                                 </h5>
                             </div>
                         </div>

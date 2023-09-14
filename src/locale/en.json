@@ -98,5 +98,14 @@
             "header":"Techform approve"
         }
 
+    },
+     "management-manufacture-plan":{
+        "manage-production-plan":"Manage production plan",
+        "manufacture-plan-list":{
+            "header":"Manufacture plan list"
+        },
+        "declaration-manufacture-info":{
+            "header":"Information product declaration list"
+        }
     }
 }
