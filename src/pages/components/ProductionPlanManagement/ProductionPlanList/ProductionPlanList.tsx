@@ -441,6 +441,7 @@ export const ProductionPlanList = () => {
         </div>,
     ];
 
+
     return (
         <>
             {isCreateProductionPlan ? (
@@ -911,7 +912,7 @@ export const ProductionPlanList = () => {
                             contentRender={() => popupContentIcon}
                             width={370}
                             height={350}
-                            showCloseButton={false}
+                            // showCloseButton={false}
                             hideOnOutsideClick={true}
                         />
                         {/* Xem nguyên vật liệu */}

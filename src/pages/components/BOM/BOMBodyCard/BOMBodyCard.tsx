@@ -20,7 +20,6 @@ import PopupImportFile from "../../../../shared/components/PopupImportFile/Popup
 import ListProduct, { Status } from "./ListProduct/ListProduct";
 import BOMBodyCardAddTemplate from "./BOMBodyCardAddTemplate/BOMBodyCardAddTemplate";
 import PopupBOM from "../../../../shared/components/PopupBOM/PopupBOM";
-import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 import { Button } from "antd";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import httpRequests from "../../../../utils/httpRequests";
@@ -28,41 +27,7 @@ import PaginationComponent from "../../../../shared/components/PaginationCompone
 import { BOMBodyCardInfo } from "./BOMBodyCardInfo/BOMBodyCardInfo";
 import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
-const data2 = [
-    {
-        codeMaterial: "VT0001",
-        replaceMaterialName: "Mực 02",
-        version: "1.1",
-        classify: "NVL",
-        norm: "1",
-        unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
-    },
-    {
-        codeMaterial: "VT0002",
-        replaceMaterialName: "Mực 02",
-        version: "1.1",
-        classify: "NVL",
-        norm: "1",
-        unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
-    },
-    {
-        codeMaterial: "VT0003",
-        replaceMaterialName: "Mực 02",
-        version: "1.1",
-        classify: "NVL",
-        norm: "1",
-        unit: "Cái",
-        replaceMaterialCode: "VT002",
-        replaceMaterialDescription: "Vật tư 01",
-        inventoryQuantity: "Số lượng tồn kho",
-    },
-];
+
 
 export const BOMBodyCard = () => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
@@ -90,11 +55,11 @@ export const BOMBodyCard = () => {
                 items: [
                     {
                         key: "BOM-manage",
-                        title: "Quản lý BOM",
+                        title: t("BOM.bom-management"),
                     },
                     {
                         key: "BOM-bodycard",
-                        title: "Quản lý BOM body card",
+                        title: t("BOM.bom-bodycard.header"),
                     }
                 ]
             })
@@ -190,7 +155,7 @@ export const BOMBodyCard = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                {t("bom-bodycard.header")}
+                                {t("BOM.bom-bodycard.header")}
                             </h5>
                         </div>
                         <div>

@@ -125,11 +125,11 @@ export const BOMPersonalized = () => {
                 items: [
                     {
                         key: "BOM-manage",
-                        title: "Quản lý BOM",
+                        title: t("BOM.bom-management"),
                     },
                     {
                         key: "BOM-personalized",
-                        title: "Quản lý BOM cá thể hóa",
+                        title: t("BOM.bom-personalized.header"),
                     }
                 ]
             })
@@ -228,7 +228,7 @@ export const BOMPersonalized = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Quản lý BOM cá thể hóa
+                                {t("BOM.bom-personalized.header")}
                             </h5>
                         </div>
 

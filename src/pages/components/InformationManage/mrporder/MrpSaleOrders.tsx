@@ -41,11 +41,11 @@ export const MrpSaleOrders = () => {
                 items: [
                     {
                         key: "info-manage",
-                        title: "Quản lý thông tin",
+                        title: t("management-info.mana-info"),
                     },
                     {
                         key: "product-order-manager",
-                        title: "Quản lý đơn hàng",
+                        title: t("management-info.management-order.label"),
                     }
                 ]
             })
@@ -207,7 +207,7 @@ export const MrpSaleOrders = () => {
                 <h5 className="name" style={{
                     fontSize: 18,
                     marginBottom: 0
-                }}>Danh sách đơn hàng</h5>
+                }}>{t("management-info.management-order.label")}</h5>
             </div>
 
             <DataGrid
@@ -255,7 +255,7 @@ export const MrpSaleOrders = () => {
                         <SvgIcon onClick={() => setIsVisibleImportFile(true)} text="Import file" tooltipTitle="Import file" sizeIcon={17} textSize={17} icon="assets/icons/ImportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     </ToolbarItem>
                     <ToolbarItem location="after">
-                        <SvgIcon text="Xuất Excel" tooltipTitle="Xuất Excel" sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                        <SvgIcon text={t("common.exportExcel")} tooltipTitle={t("common.exportExcel")} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                     </ToolbarItem>
                     <ToolbarItem name="searchPanel" location="before" />
                     <ToolbarItem name="columnChooserButton" />

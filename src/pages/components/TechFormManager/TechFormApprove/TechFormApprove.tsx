@@ -24,11 +24,11 @@ import { useTranslation } from "react-i18next";
 
 const data = [
     {
-        id: 1, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: "1", refuseReason: "", status: "Đang chờ phê duyệt"
+        id: 1, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: 1, refuseReason: "", status: "Đang chờ phê duyệt"
     },
-    { id: 2, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: "2", refuseReason: "", status: "Đang chờ phê duyệt" },
-    { id: 3, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: "3", refuseReason: "NVL thay thế khônghợp lệ", status: "Từ chối" },
-    { id: 4, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: "2", refuseReason: "", status: "Đã phê duyệt" }
+    { id: 2, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: 2, refuseReason: "", status: "Đang chờ phê duyệt" },
+    { id: 3, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: 3, refuseReason: "NVL thay thế không hợp lệ", status: "Từ chối" },
+    { id: 4, orderCode: "22424", productCode: "MSX-1213", productName: "Visa TPBank", quantity: "20,000", startDate: "09/08/2023", endDate: "19/08/2023", createdBy: "Nguyễn Văn B", checkBy: "Nguyễn Văn A", priority: 2, refuseReason: "", status: "Đã phê duyệt" }
 ];
 export const TechFormApprove = () => {
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
@@ -49,11 +49,11 @@ export const TechFormApprove = () => {
                 items: [
                     {
                         key: "tech-form-manage",
-                        title: "Quản lý phiếu công nghệ",
+                        title: t("management-techform.mana-techform"),
                     },
                     {
                         key: "tech-form-approve",
-                        title: "Phê duyệt phiếu công nghệ",
+                        title: t("management-techform.techform-approve.header"),
                     }
                 ]
             })
@@ -76,7 +76,8 @@ export const TechFormApprove = () => {
     };
 
 
-    const onStatusRender = () => {
+    const onStatusRender = (value: any) => {
+        console.log("value value", value.data);
         let customColor: {
             color: string,
             backgroundColor: string,
@@ -87,7 +88,7 @@ export const TechFormApprove = () => {
             fontWeight: ""
         }
         let border = "";
-        customColor = customizeColor(data[0]?.status)
+        customColor = customizeColor(value.data.status)
         border = "1px solid " + customColor.color;
         return <Tag style={{
             fontSize: '14px',
@@ -99,10 +100,10 @@ export const TechFormApprove = () => {
             "borderRadius": "4px",
             "border": "none",
             fontWeight: customColor.fontWeight
-        }}>{data[0]?.status}</Tag>
+        }}>{value.data.status}</Tag>
     }
 
-    const onPriorityRender = () => {
+    const onPriorityRender = (value: any) => {
         let customColor: {
             color: string,
             backgroundColor: string
@@ -112,8 +113,8 @@ export const TechFormApprove = () => {
         }
         let status = "";
         let border = "";
-        getColor(data[3]?.priority);
-        customColor = customizeColor(status)
+        getColor(value.data.priority);
+        customColor = customizeColor(value.data.priority)
         border = "1px solid" + customColor.color;
         return <>
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -126,7 +127,7 @@ export const TechFormApprove = () => {
                     "backgroundColor": customColor.backgroundColor,
                     "borderRadius": "100px",
                     "border": border
-                }}>{data[3]?.priority}</Tag>
+                }}>{value.data.priority}</Tag>
             </div>
         </>
     }
@@ -154,7 +155,7 @@ export const TechFormApprove = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Phê duyệt phiếu công nghệ
+                                {t("management-techform.techform-approve.header")}
                             </h5>
                         </div>
                         <DataGrid

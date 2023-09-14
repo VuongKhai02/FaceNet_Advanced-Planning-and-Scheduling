@@ -41,13 +41,37 @@ export function customizeColor(value: any): { color: string, backgroundColor: st
   else if (value === "Đang chờ phê duyệt") {
     return {
       color: "#FFFFFF",
-      backgroundColor: "#DFE229",
+      backgroundColor: "#FFC32B",
       fontWeight: '500'
     }
   } else if (value === "Đã phê duyệt") {
     return {
       color: "#FFFFFF",
       backgroundColor: "#00AF12",
+      fontWeight: '500'
+    }
+  } else if (value === "Từ chối") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#F11C1C",
+      fontWeight: '500'
+    }
+  } else if (value === 1) {
+    return {
+      color: "#F11C1C",
+      backgroundColor: "",
+      fontWeight: '500'
+    }
+  } else if (value === 2) {
+    return {
+      color: "#FFC32B",
+      backgroundColor: "",
+      fontWeight: '500'
+    }
+  } else if (value === 3) {
+    return {
+      color: "#00AF12",
+      backgroundColor: "",
       fontWeight: '500'
     }
   }

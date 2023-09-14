@@ -13,6 +13,7 @@ import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 import { Button } from "antd";
 import { useTranslation } from "react-i18next";
+import NotificationManager from "../../../../../utils/NotificationManager";
 type BOMBodyCardAddInfoProps = {
     id: Number | null;
     requestInfo: any;
@@ -139,6 +140,7 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
             ...bomData,
             bomBodyCardMaterials: newbomBodyCardMaterials,
         });
+        NotificationManager.success(t("Thêm mới hàng thành công!"))
     }
 
     const removeRowMaterial = (id: any) => {
@@ -151,11 +153,13 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
             });
         if (newData.length === 0) {
             newData.push({ id: 1 })
+
         }
         setBomData({
             ...bomData,
             bomBodyCardMaterials: newData,
         });
+        NotificationManager.success(t("Xóa hàng thành công!"))
     }
 
 

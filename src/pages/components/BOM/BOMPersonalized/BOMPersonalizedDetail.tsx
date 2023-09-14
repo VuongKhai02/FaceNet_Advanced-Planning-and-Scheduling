@@ -139,7 +139,7 @@ export const BOMPersonalizedDetail = React.memo((props: any) => {
         </div>,
     ];
     const Notification = () => {
-        NotificationManager.success(t("No"))
+        NotificationManager.success(t("Xóa dữ liệu thành công!"))
     }
     const handleCustomFooterButtonChangeState = [
         <div>

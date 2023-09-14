@@ -69,11 +69,11 @@ export const ManageJobOutput = () => {
                 items: [
                     {
                         key: "info-manage",
-                        title: "Quản lý thông tin",
+                        title: t("management-info.mana-info"),
                     },
                     {
                         key: "manage-job-output",
-                        title: "Quản lý Job output",
+                        title: t("management-info.management-job-output.breadcrumb-label"),
                     }
                 ]
             })
@@ -111,7 +111,7 @@ export const ManageJobOutput = () => {
                                         fontSize: 18,
                                         marginBottom: 0,
                                     }}>
-                                    Danh sách Job output
+                                    {t("management-info.management-job-output.label")}
                                 </h5>
                             </div>
 

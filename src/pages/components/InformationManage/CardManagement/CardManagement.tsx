@@ -74,11 +74,11 @@ export const CardManagement = () => {
                 items: [
                     {
                         key: "info-manage",
-                        title: "Quản lý thông tin",
+                        title: t("management-info.mana-info"),
                     },
                     {
                         key: "manage-card-box",
-                        title: "Quản lý hộp chứa thẻ",
+                        title: t("management-info.management-box-card.breadcrumb-label"),
                     }
                 ]
             })
@@ -133,7 +133,7 @@ export const CardManagement = () => {
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                Danh sách hộp chứa thẻ
+                                {t("management-info.management-box-card.label")}
                             </h5>
                         </div>
                         <DataGrid

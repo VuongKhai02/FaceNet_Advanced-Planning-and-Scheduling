@@ -20,7 +20,11 @@
         "greaterThanOrEqual":"Greater than or equal to",
         "between":"Beetween",
         "reset":"Reset",
-        "hello":"Hello bro"
+        "hello":"Hello bro",
+        "exportExcel":"Export Excel",
+        "notification":"Notification",
+        "notification-setting":"Notification setting",
+        "see-more":"See more"
     },
     "sider": {
         "home": "Dashboard",
@@ -58,7 +62,41 @@
         "warning": "Warning",
         "report-statistics": "Report, statistics"
     },
-    "bom-bodycard": {
-        "header": "Management of bodycard BOM"
+    "management-info": {
+        "mana-info" :"Management of information",
+        "management-order": {
+            "label":"Management of order"          
+        },
+         "manufacture-request":{
+            "label":"List of production requirements",
+            "breadcrumb-label":"Manufacture Request"
+        }, 
+        "management-box-card":{
+            "label":"List of boxes containing cards",
+            "breadcrumb-label":"Management of Box Card"
+        },
+        "management-job-output":{
+            "label":"Job output list",
+            "breadcrumb-label":"Management of Job Output"
+        }
+    },
+    "BOM": {
+        "bom-management":"Management of BOM",
+        "bom-bodycard": {
+            "header": "Management of bodycard BOM"
+        },
+          "bom-personalized": {
+            "header": "Management of personalized BOM"
+        }
+    },
+    "management-techform": {
+        "mana-techform":"Management of techform",
+        "techform-list":{
+            "header":"Techform list"
+        },
+        "techform-approve": {
+            "header":"Techform approve"
+        }
+
     }
 }
