@@ -49,6 +49,8 @@ export const BOMBodyCardInfo = React.memo((props: any) => {
 
     const [bomInfo, setBomInfo] = useState<any>()
 
+    const [bomId, setBomId] = useState<any>(props.bomId)
+
     const getBomById = (bomId) => {
         httpRequests.get(`http://localhost:6886/api/boms/${bomId}`)
         .then((response) =>{
@@ -57,10 +59,19 @@ export const BOMBodyCardInfo = React.memo((props: any) => {
     }
 
     useEffect(() => {
-        if (props!.bomId) {
-            getBomById(props.bomId)
+        console.log("hello212321312")
+        if (bomId) {
+            getBomById(bomId)
         }
-    }, [props!.bomId])
+        return () => {
+            console.log("hello")
+            setBomId(null)
+        }
+    }, [bomId])
+
+    useEffect(() => {
+        setBomId(props.bomId)
+    }, [props])
 
     console.log("bom data: ", bomInfo)
 

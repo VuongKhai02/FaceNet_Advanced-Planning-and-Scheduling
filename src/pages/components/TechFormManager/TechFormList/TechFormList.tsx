@@ -21,6 +21,7 @@ import styles from "./TechFormList.module.css";
 import PaginationComponent from "../../../../shared/components/PaginationComponent/PaginationComponent";
 import ListProduct from "../../BOM/BOMBodyCard/ListProduct/ListProduct";
 import ProductionRequirementTechForm from "./ProductionRequirementList/ProductionRequirementList";
+import NotificationManager from "../../../../utils/NotificationManager";
 
 const cx = classNames.bind(styles);
 
@@ -51,8 +52,8 @@ export const TechFormList = () => {
 
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
-    const totalPage = Math.ceil(techForms?.length / pageSize);
-    const dataPage = techForms?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+    const [totalPage, setTotalPage] = useState<number>(0);
+    // const dataPage = techForms?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
 
     const breadcrumbContext = useBreadcrumb();
 
@@ -103,24 +104,39 @@ export const TechFormList = () => {
             .then(response => {
                 console.log(response);
                 if (response.status === 200 && response.data.responseCode === '00') {
+                    loadTechForms();
+                    setTechFormIdChoosed(response.data.data)
+                    setIsVisibleTechFormUpdate(true)
+                    NotificationManager.success("Tạo phiếu công nghệ thành công")
                     console.log("Ok")
                 }
+            })
+            .finally(() => {
+                setIsOpenSelectPR(false);
             })
         }
     }
 
     const loadTechForms = () => {
-        httpRequests.get(PLANNING_API_URL + "/api/techforms").then((response) => {
+        httpRequests.get(PLANNING_API_URL + `/api/techforms?page=${pageIndex - 1}&size=${pageSize}`).then((response) => {
             if (response.status === 200 && response.data.responseCode === '00') {
-                setTechForms(response.data.data.data);
+                setTechForms(response.data.data);
+                setTotalPage(Math.ceil(response.data.data.totalItems / pageSize))
+
             }
         });
     };
     console.log(techForms);
 
     React.useEffect(() => {
+        
         loadTechForms();
-    }, []);
+    }, [pageIndex, pageSize]);
+
+    const updatePageSize = (size) => {
+        setPageSize(size);
+        setPageIndex(1);
+    }
 
     const popupContentIcon = (
         <div
@@ -203,8 +219,8 @@ export const TechFormList = () => {
                 />
             ) : isVisibleBOMBodyCardAddInfo ? (
                 <BOMBodyCardAddInfo
-                    requestInfo={requestInfoChoosed}
-                    techFormId={techFormIdChoosed}
+                    bomTemplateId={null}
+                    requestId={null}
                     id={null}
                     isOpen={isVisibleBOMBodyCardAddInfo}
                     setClose={() => {
@@ -374,7 +390,7 @@ export const TechFormList = () => {
                         <DataGrid
                             key={"id"}
                             keyExpr={"id"}
-                            dataSource={dataPage}
+                            dataSource={techForms?.data}
                             showBorders={true}
                             columnAutoWidth={true}
                             showRowLines={true}
@@ -495,12 +511,12 @@ export const TechFormList = () => {
                         </DataGrid>
                         <PaginationComponent
                             pageSizeOptions={[10, 20, 40]}
-                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: techForms?.length }}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: techForms?.totalItems }}
                             totalPages={totalPage}
                             pageIndex={pageIndex}
                             pageSize={pageSize}
                             onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
-                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                            onPageSizeChanged={(newPageSize) => updatePageSize(newPageSize)}
                         />
                     </div>
                 </div>

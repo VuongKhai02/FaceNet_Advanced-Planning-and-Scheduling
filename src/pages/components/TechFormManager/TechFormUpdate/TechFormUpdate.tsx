@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { DataGrid, TextArea, TextBox } from "devextreme-react";
+import React, { useContext, useEffect, useState } from "react";
+import { DataGrid, TabPanel, TextArea, TextBox } from "devextreme-react";
 import classNames from "classnames/bind";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
@@ -9,6 +9,10 @@ import httpRequests from "../../../../utils/httpRequests";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdate.module.css";
+import ProductSpec from "../../../../components/TechFormComponent/ProductSpec";
+import TechFormDesTab from "../../../../components/TechFormComponent/TechFormDesTab";
+import ProductDesign from "../../../../components/TechFormComponent/ProductDesign";
+import TechFormProvider, { TechFormContext } from "../../../../contexts/TechFormContext";
 
 const cx = classNames.bind(styles);
 
@@ -28,8 +32,6 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             httpRequests.get(PLANNING_API_URL + "/api/techforms/" + id).then((response) => {
                 if (response.status === 200) {
                     let techForm = response.data.data;
-                    console.log("Hello " ,techForm)
-
                     setTechFormData(techForm);
                 }
             });
@@ -46,6 +48,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
             </p>
         );
     };
+
 
     const onChangeProductSpec = (key: any, value: any) => {
         console.log(key, value)
@@ -75,20 +78,48 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
         console.log(techFormData);
         
         if (techFormData !== undefined) {
+            let quantity = 0;
+            let totalQuantity = 0;
+            if (techFormData.productionRequirements.length === 1) {
+                quantity = techFormData.productionRequirements[0].quantityRequirement
+                totalQuantity = techFormData.productionRequirements[0].totalQuantity
+            } else {
+                quantity = techFormData.productionRequirements.reduce((pre, next) => {
+                    if (next !== undefined && next !== null ) {
+                        return pre.quantityRequirement + next.quantityRequirement
+                    } else {
+                        return pre.quantityRequirement
+                    }
+                })
+                totalQuantity = techFormData.productionRequirements.reduce((pre, next) => {
+                    if (next !== undefined && next !== null ) {
+                        return pre.totalQuantity + next.totalQuantity
+                    } else {
+                        return pre.totalQuantity
+                    }
+                })
+            }
             setGeneralInfo({
-                productionCode:[... new Set(techFormData.productionRequirements.map(pr => pr.productionCode))],
+                productionCode:[... new Set(techFormData.productionRequirements
+                    .map(pr => {return {
+                                        code: pr.productionCode,
+                                        quantity: pr.quantityRequirement
+                                        }}))],
                 customer: [... new Set(techFormData.productionRequirements.map(pr => pr.customer))],
+                sender: [...new Set(techFormData.productionRequirements.map(pr => pr.sender))],
+                quantity: quantity,
+                totalQuantity: totalQuantity,
+                cardName: [...new Set(techFormData.productionRequirements.map(pr => pr.cardName))],
+                poNumber: [...new Set(techFormData.productionRequirements.map(pr => pr.poNumber))],
+                startDate: (new Date(techFormData.startDate)).toLocaleDateString(),
+                endDate: (new Date(techFormData.endDate)).toLocaleDateString()
             })
         }
     }, [techFormData])
 
-    console.log(generalInfo);
-    
-
-    console.log(techFormData);
     return (
         techFormData && 
-        <>
+        <TechFormProvider techFormState={techFormData}>
             {isVisibleTechProcedureUpdate ? (
                 <TechnologyProcedureUpdate
                     techFormData={techFormData}
@@ -150,7 +181,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                         </div>
 
                         <div style={{ marginTop: 10 }}>
-                            <TechFormGeneralInfo dataGeneral={techFormData!.productionRequirement} />
+                            <TechFormGeneralInfo dataGeneral={generalInfo} />
                             <div
                                 className='informer'
                                 style={{
@@ -170,65 +201,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     Quy cách sản phẩm/Product Spec
                                 </h5>
                             </div>
-                            <DataGrid dataSource={[techFormData.productSpec]} showBorders={true} showRowLines={true} showColumnLines={true}>
-                                <Column
-                                    dataField='sizeType'
-                                    caption='Khổ thẻ/Size'
-                                    cellRender={(cellIfo) => <TextBox
-                                        onValueChange={(e) => {
-                                            onChangeProductSpec("sizeType", e)
-                                        }} placeholder='Nhập' value={cellIfo.value} key={"sizeType"} />}
-                                />
-                                <Column
-                                    alignment='left'
-                                    dataField='thickness'
-                                    caption='Độ dày/Thickness(mm)'
-                                    cellRender={(cellIfo) => <TextBox
-                                        onValueChange={(e) => {
-                                            onChangeProductSpec("thickness", e)
-                                        }} placeholder='Nhập' value={cellIfo.value} key={"thickness"} />}
-                                />
-                                <Column
-                                    dataField='size'
-                                    caption='Kích thước/Size, Dài/Length * Rộng/Width(mm)'
-                                    cellRender={(cellIfo) => (
-                                        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                                            {" "}
-                                            <div className={cx('textbox-row')}>
-                                                <label>Width(W)</label>
-                                                <TextBox
-                                                    style={{ width: "100%" }}
-                                                    placeholder='Nhập'
-                                                    value={cellIfo.value?.split(";")[0].replace("Width(W):", "").trim()}
-                                                    onValueChange={(e) => {
-                                                        // let newValue = "Width(W): " + e + ";" + cellIfo.value?.split(";")[1];
-                                                        console.log(e)
-                                                        // onChangeProductSpec('size', newValue)
-                                                    }}
-                                                    key={"size"}
-                                                />
-                                            </div>{" "}
-                                            <div className={cx('textbox-row')}>
-                                                {" "}
-                                                <label>Height(H)</label>
-                                                <TextBox
-                                                    style={{ width: "100%" }}
-                                                    placeholder='Nhập'
-                                                    value={cellIfo.value?.split(";")[1].replace("Height(H):", "").trim()}
-                                                    key={"size"}
-                                                />
-                                            </div>{" "}
-                                        </div>
-                                    )}
-                                />
-                                <Column
-                                    dataField='other'
-                                    caption='Khác/other'
-                                    cellRender={(cellIfo) => <TextArea onValueChange={(e) => {
-                                        onChangeProductSpec("other", e)
-                                    }} placeholder='Nhập' value={cellIfo.value} key={"other"} />}
-                                />
-                            </DataGrid>
+                            <TechFormDesTab data = {techFormData.productionRequirements} component={ProductSpec} />
                             <div
                                 className='informer'
                                 style={{
@@ -246,7 +219,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                     Thiết kế - Card design
                                 </h5>
                             </div>
-                            <div className={cx('outer-rectangle')}>
+                            {/* <div className={cx('outer-rectangle')}>
                                 <div className={cx('inner-rectangle')}>
                                     <div className={cx('text')}>Chú ý: -Màu theo tờ mẫu đã làm T05/2020</div>
                                 </div>
@@ -258,7 +231,8 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                         className={cx('credit-card-image')}
                                     />
                                 </div>
-                            </div>
+                            </div> */}
+                            <TechFormDesTab data = {techFormData.productionRequirements} component={ProductDesign} />
                             <div className={cx('toolbar')}>
                                 <Button
                                     onClick={setClose}
@@ -286,7 +260,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                 </div>
             )}
 
-        </>
+        </TechFormProvider>
     );
 });
 
@@ -295,29 +269,55 @@ export default TechFormUpdate;
 
 export const TechFormGeneralInfo = (dataGeneral: any) => {
 
+    console.log(dataGeneral)
+    const renderProductionCodes = () => {
+        return (
+            <div>
+                {
+                    dataGeneral?.dataGeneral?.productionCode.map((code) => {
+                        return <div className={cx('production_codes')}><div className={cx('code')}>{code.code}</div><div className={cx('quantity')}>- {code.quantity}c</div></div>;
+                    })
+                }
+            </div>
+        )
+    }
+    const renderValue = (values) => {
+        console.log(values);
+        return (
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                {
+                    values.map((value, index) => {
+                            return <div key={index} style={{maxWidth: '100%', textOverflow: 'ellipsis', overflow:'hidden', whiteSpace: 'nowrap'}} className={cx()}>{value}</div>
+                    })
+                }
+            </div>
+        )
+    }
+
     return (
+        dataGeneral?.dataGeneral !== undefined && 
         <div className={cx("wrapper")}>
             <div className={cx("row")}>
                 <div className={cx("title")}>Mã sx/Production Code:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.productionCode}</div>
+                <div className={cx("value")}>{renderProductionCodes()}</div>
                 <div className={cx("title")}>Người gửi/Sender:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.sender}</div>
+                <div className={cx("value")}>{renderValue(dataGeneral?.dataGeneral?.sender)}</div>
             </div>
             <div className={cx("row")}>
                 <div className={cx("title")}>Tên khách hàng/Customer:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.customer}</div>
+                <div className={cx("value")}>{renderValue(dataGeneral?.dataGeneral?.customer)}</div>
                 <div className={cx("title")}>Số lượng thẻ/Q'ty:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityRequirement}</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantity}</div>
             </div>
             <div className={cx("row")}>
                 <div className={cx("title")}>Tên thẻ/Card name:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.cardName}</div>
+                <div className={cx("value")}>{renderValue(dataGeneral?.dataGeneral?.cardName)}</div>
                 <div className={cx("title")}>SL thẻ đã tính bù hao:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityCompensation}</div>
+                <div className={cx("value")}>{dataGeneral?.dataGeneral?.totalQuantity}</div>
             </div>
             <div className={cx("row")}>
                 <div className={cx("title")}>Số HĐ/P.O:</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.poNumber}</div>
+                <div className={cx("value")}>{renderValue(dataGeneral?.dataGeneral?.poNumber)}</div>
                 <div className={cx("title")}>Kết thúc sx/Finish:</div>
                 <div className={cx("value")}>{dataGeneral?.dataGeneral?.endDate}</div>
             </div>
@@ -329,4 +329,14 @@ export const TechFormGeneralInfo = (dataGeneral: any) => {
             </div>
         </div>
     )
+}
+
+export function useTechFormContext() {
+    const context = useContext(TechFormContext);
+    if (context === undefined || context === null) {
+        throw new Error(
+            "useTechFormContext must be used within a TechFormProvider"
+        )
+    }
+    return context;
 }

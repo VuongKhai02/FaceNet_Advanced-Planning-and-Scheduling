@@ -20,6 +20,7 @@ import PaginationComponent from "../../../../../shared/components/PaginationComp
 import styles from "./ListProduct.module.css";
 import classNames from "classnames/bind";
 import httpRequests from "../../../../../utils/httpRequests";
+import { BOMBodyCardInfo } from "../BOMBodyCardInfo/BOMBodyCardInfo";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -65,13 +66,12 @@ const data2 = [
 ];
 export const ListProduct = React.memo((props: any) => {
 
-    const [isDetailBOMTemplate, setIsDetailBOMTemplate] = React.useState<boolean>(false);
+    const [isDetailBOMProduct, setIsDetailBOMProduct] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [pageIndex, setPageIndex] = React.useState<number>(1);
-    const [pageSize, setPageSize] = React.useState<number>(10);
-    const totalPage = Math.ceil(data?.length / pageSize);
-    const dataPage = data?.slice((pageIndex - 1) * pageSize, pageIndex * pageSize);
+    const [pageSize, setPageSize] = React.useState<number>(5);
+    const [totalPage, setTotalPage] = React.useState<number>(10);
     const [bomData, setBomData] = useState({})
     const [bomIdChoosed, setBomIdChoosed] = useState(null);
 
@@ -79,7 +79,7 @@ export const ListProduct = React.memo((props: any) => {
         if (props!.bomTemplateId){
             getBOMsProduct(props.bomTemplateId)
         }
-    }, [])
+    }, [pageSize, pageIndex])
 
 
 
@@ -88,9 +88,15 @@ export const ListProduct = React.memo((props: any) => {
             if (response.status === 200) {
                 console.log("hung: ", response)
                 setBomData(response.data.data)
+                setTotalPage(Math.ceil(response.data.data.totalItems / pageSize))
                 // setBom(response.data.data);
             }
         });
+    }
+
+    const updatePageSize = (newPageSize) => {
+        setPageIndex(1);
+        setPageSize(newPageSize)
     }
 
 
@@ -192,86 +198,29 @@ export const ListProduct = React.memo((props: any) => {
                     customFooter={handleCustomFooterButtonChangeState}
                 />
                 <PopupBOM
-                    isVisible={isDetailBOMTemplate}
+                    isVisible={isDetailBOMProduct}
                     modalContent={
-                        <div>
-                            <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-                                <div>
-                                    <div>
-                                        <table
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "space-arround",
-                                            }}>
-                                            <td>
-                                                <InfoRow label='Mã thẻ' data='TH001' />
-                                                <InfoRow label='Bom version' data='1.1' />
-                                            </td>
-                                            <td>
-                                                <InfoRow label='Tên thẻ' data='Thẻ visa TP Bank' />
-                                                <InfoRow label='Trạng thái' data='Hoạt động' />
-                                            </td>
-                                        </table>
-                                    </div>
-                                    <div style={{ marginTop: 40 }}>
-                                        <h4>Danh sách vật tư</h4>
-                                    </div>
-                                    <DataGrid
-                                        key={"codeMaterial"}
-                                        keyExpr={"codeMaterial"}
-                                        dataSource={data2}
-                                        showBorders={true}
-                                        columnAutoWidth={true}
-                                        showRowLines={true}
-                                        rowAlternationEnabled={true}
-                                        allowColumnResizing={true}
-                                        allowColumnReordering={true}
-                                        focusedRowEnabled={true}>
-                                        <FilterRow visible={true} />
-
-                                        <Column caption={"Mã vật tư"} dataField={"codeMaterial"} />
-                                        <Column caption={"Tên vật tư"} dataField={"nameMaterial"} />
-                                        <Column caption={"Version"} dataField={"version"} />
-                                        <Column caption={"Phân loại"} dataField={"classify"} />
-                                        <Column caption={"Định mức"} dataField={"norm"} />
-                                        <Column caption={"Đơn vị tính"} dataField={"unit"} />
-                                        <Column caption={"Mã vật tư thay thế"} dataField={"replaceMaterialCode"} />
-                                        <Column caption={"Mô tả vật tư thay thế"} dataField={"replaceMaterialDescription"} />
-                                        <Column caption={"Số lượng tồn kho"} dataField={"inventoryQuantity"} />
-                                        <Column
-                                            fixed={true}
-                                            type={"buttons"}
-                                            caption={"Thao tác"}
-                                            alignment='center'
-                                            cellRender={() => (
-                                                <div>
-                                                    <SvgIcon
-                                                        onClick={() => { }}
-                                                        tooltipTitle='Danh sách vật tư thay thế'
-                                                        sizeIcon={17}
-                                                        icon='assets/icons/EyeOpen.svg'
-                                                        textColor='#FF7A00'
-                                                        style={{ marginLeft: 35 }}
-                                                    />
-                                                </div>
-                                            )}
-                                        />
-                                    </DataGrid>
-                                </div>
-                            </div>
-                        </div>
+                        <BOMBodyCardInfo bomId = {bomIdChoosed} />
                     }
                     modalTitle={
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                            <SvgIcon sizeIcon={25} icon='assets/icons/Announcement.svg' textColor='#FF7A00' style={{ marginRight: 17 }} />
-                            Xem chi tiết BOM sản phẩm
+                            <SvgIcon
+                                sizeIcon={25}
+                                icon='assets/icons/Announcement.svg'
+                                textColor='#FF7A00'
+                                style={{ marginRight: 17 }}
+                            />
+                            Xem chi tiết BOM mẫu
                         </div>
                     }
                     width={1300}
-                    onCancel={() => setIsDetailBOMTemplate(false)}
+                    onCancel={() => {
+                        console.log("hdjdhsfjd")
+                        setIsDetailBOMProduct(false)
+                    setBomIdChoosed(null)}}
                     onSubmit={() => { }}
                     customFooter={handleCustomFooter}
-                />
+                    />
                 <PopupConfirmDelete
                     isVisible={isConfirmDelete}
                     onCancel={() => setIsConfirmDelete(false)}
@@ -355,7 +304,9 @@ export const ListProduct = React.memo((props: any) => {
                     cellRender={(cellInfo) => (
                         <div style={{ display: "flex", justifyContent: "center" }}>
                             <SvgIcon
-                                onClick={() => setIsDetailBOMTemplate(true)}
+                                onClick={() =>{
+                                    setBomIdChoosed(cellInfo.key)
+                                    setIsDetailBOMProduct(true)}}
                                 tooltipTitle='Thông tin chi tiết BOM sản phẩm'
                                 sizeIcon={17}
                                 textSize={17}
@@ -388,13 +339,13 @@ export const ListProduct = React.memo((props: any) => {
                 />
             </DataGrid>
             <PaginationComponent
-                pageSizeOptions={[10, 20, 40]}
-                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: data?.length }}
+                pageSizeOptions={[5, 10, 20]}
+                pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: bomData?.totalItems }}
                 totalPages={totalPage}
                 pageIndex={pageIndex}
                 pageSize={pageSize}
                 onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
-                onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                onPageSizeChanged={(newPageSize) => updatePageSize(newPageSize)}
             />
         </div>
     );

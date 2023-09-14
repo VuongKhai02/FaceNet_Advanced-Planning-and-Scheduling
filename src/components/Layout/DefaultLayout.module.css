@@ -10,4 +10,5 @@
 .wrapper {
     height: max-content;
     min-height: 100%;
+    /* background: #f6f6f6; */
 }

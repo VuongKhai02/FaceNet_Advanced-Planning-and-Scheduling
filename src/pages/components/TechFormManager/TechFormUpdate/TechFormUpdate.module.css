@@ -100,9 +100,26 @@
     font-weight: 700;
     width: 18%;
     padding: 10px;
+    text-align: end;
 }
 
 .value {
     width: 25%;
     padding: 10px;
+}
+
+.production_codes {
+    display: flex;
+    flex-direction: row;
+}
+
+.production_codes .code {
+    max-width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.production_codes .quantity {
+    margin-left: auto;
+    margin-right: 120px;
 }
