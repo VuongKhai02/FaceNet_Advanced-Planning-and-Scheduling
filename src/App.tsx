@@ -35,9 +35,11 @@ function App() {
       if (localizedData.language === 'vi') {
         setLanguageAntd(viVN);
         i18n.changeLanguage('vi');
+        document.documentElement.lang = 'vi';
       } else {
         setLanguageAntd(enUS);
         i18n.changeLanguage('en');
+        document.documentElement.lang = 'en';
       }
     }
   }, [localizedData.language])

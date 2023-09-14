@@ -54,6 +54,10 @@
     color: var(--text-color);
 }
 
+.ant-select-single.ant-select-open .ant-select-selection-item {
+    color: var(--text-color);
+}
+
 .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
     border-color: transparent;
     box-shadow: none;
@@ -170,11 +174,7 @@ table {
 
 .ant-layout-sider {
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important; */
-    box-shadow: 2px 0 6px rgba(0,21,41,.35) !important;
-}
-
-.ant-menu-inline.ant-menu-root {
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px !important;  */
+    box-shadow: 2px 0 6px rgba(0, 21, 41, .35) !important;
 }
 
 .narrow-layout {
@@ -244,24 +244,33 @@ table {
 .ant-table-wrapper .ant-table-thead>tr>td {
     background-color: #FFE0C2;
 }
-.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:first-child {
     border-start-start-radius: unset;
 }
-.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
-     border-start-end-radius: unset;
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:last-child {
+    border-start-end-radius: unset;
 }
 
 ::-webkit-scrollbar {
-  /* width: 4px !important; */
+    /* width: 4px !important; */
 }
+
 ::-webkit-scrollbar-track {
-  /* background: #f1f1f1;  */
+    /* background: #f1f1f1;  */
 }
+
 ::-webkit-scrollbar-thumb {
-  /* background: #c2c0c0;  */
+    /* background: #c2c0c0;  */
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  /* background: #ff7a00;  */
+    /* background: #ff7a00;  */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
 }
 
 .ant-steps .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-tail::after,
@@ -330,12 +339,25 @@ h3 {
 .dx-list-item-content.dx-texteditor::after,
 .dx-toolbar-item-content>.dx-texteditor::after,
 .dx-toolbar-item-content.dx-texteditor::after {
-    content: "Tìm kiếm chung";
     position: absolute;
     top: -28px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.6);
 
+}
+
+.dx-list-item-content>.dx-texteditor:lang(vi)::after,
+.dx-list-item-content.dx-texteditor:lang(vi)::after,
+.dx-toolbar-item-content>.dx-texteditor:lang(vi):after,
+.dx-toolbar-item-content.dx-texteditor:lang(vi):after {
+    content: "Tìm kiếm chung";
+}
+
+.dx-list-item-content>.dx-texteditor:lang(en):after,
+.dx-list-item-content.dx-texteditor:lang(en)::after,
+.dx-toolbar-item-content>.dx-texteditor:lang(en)::after,
+.dx-toolbar-item-content.dx-texteditor:lang(en)::after {
+    content: "Common searching";
 }
 
 .dx-icon-close {

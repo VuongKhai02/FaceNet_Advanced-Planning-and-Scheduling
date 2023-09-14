@@ -111,7 +111,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
             <div className={cx("dx-pages")}>
                 <div className={cx("dx-info")}>
                     {`Trang số`} {pageTextInfo.pageIndex} {`của`}{' '}
-                    {pageTextInfo.numberOfPages} ({pageTextInfo.total} {`bản ghi`}) &ensp;
+                    {!Number.isNaN(pageTextInfo.numberOfPages) ? pageTextInfo.numberOfPages : 0} ({pageTextInfo.total || 0} {`bản ghi`}) &ensp;
                 </div>
                 <Button
                     icon={<LeftOutlined />}
@@ -148,7 +148,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
                     className={cx("custom-goto")}
                     value={goPage || ''}
                     onChange={onGoToPageValueChange}
-                    onKeyPress={(e) => {
+                    onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             goToPage(goPage || 1);
                         }

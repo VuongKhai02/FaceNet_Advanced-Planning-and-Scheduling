@@ -1,10 +1,17 @@
-
 .pagination-container {
   padding-bottom: 30px;
   margin-top: 15px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  :global(.ant-select-arrow) {
+    color: #000000;
+  }
+}
+
+.pagination-container :global(.ant-select-single.ant-select-open) :global(.ant-select-selection-item) {
+  color: unset;
 }
 
 .dx-pages {
@@ -29,7 +36,7 @@
 }
 
 .pagination-container :global(.ant-select-selector):hover {
-    background-color: #eeecec;
+  background-color: #eeecec;
 }
 
 ::ng-deep .dx-button-has-text .dx-button-content {
