@@ -13,6 +13,7 @@ import ProductSpec from "../../../../components/TechFormComponent/ProductSpec";
 import TechFormDesTab from "../../../../components/TechFormComponent/TechFormDesTab";
 import ProductDesign from "../../../../components/TechFormComponent/ProductDesign";
 import TechFormProvider, { TechFormContext } from "../../../../contexts/TechFormContext";
+import Loading from "../../../../shared/components/Loading/Loading";
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
     const [isVisibleTechProcedureUpdate, setIsVisibleTechProcedureUpdate] = React.useState<boolean>(false);
     const [techFormData, setTechFormData] = React.useState<any>();
     const [generalInfo, setGeneralInfo] = useState<any>();
+    // const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const loadTechFormData = (id: any) => {
         if (id > 0) {
@@ -118,7 +120,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
     }, [techFormData])
 
     return (
-        techFormData && 
+        techFormData ? 
         <TechFormProvider techFormState={techFormData}>
             {isVisibleTechProcedureUpdate ? (
                 <TechnologyProcedureUpdate
@@ -260,7 +262,7 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                 </div>
             )}
 
-        </TechFormProvider>
+        </TechFormProvider> : <Loading  />
     );
 });
 

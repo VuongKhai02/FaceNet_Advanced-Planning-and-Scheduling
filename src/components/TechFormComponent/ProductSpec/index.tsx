@@ -1,12 +1,21 @@
 import classNames from "classnames/bind";
 import styles from "./ProductSpec.module.css"
 import { useState } from "react";
-import { DataGrid, TextArea, TextBox } from "devextreme-react";
+import { DataGrid, SelectBox, TextArea, TextBox } from "devextreme-react";
 import { Column } from "devextreme-react/data-grid";
 import { useTechFormContext } from "../../../pages/components/TechFormManager/TechFormUpdate/TechFormUpdate";
 import { updateProductSpec } from "../../../store/action/TechFormAction";
 
 const cx = classNames.bind(styles);
+
+const thicknessOptions = [
+    "option 1",
+    "option 2",
+    "option 3",
+    "option 4",
+]
+
+const defaultSize = "Width (W): 85.47 mm <W< 85.72 mm;\nHeight (H): 53.92 <H< 54.03 mm"
 
 function ProductSpec(prop) {
 
@@ -71,7 +80,28 @@ function ProductSpec(prop) {
                 }} placeholder='Nhập' value={cellIfo.value} key={"other"} />}
             />
         </DataGrid> */}
-        <table></table>
+        <table className={cx('spec_table')}>
+            <tr>
+                <th>Khổ thẻ</th>
+                <th>Độ dày</th>
+                <th>Kích thước<br /> Dài x Rộng (mm)</th>
+                <th>Khác</th>
+            </tr>
+            <tr>
+                <td>
+                    <TextBox disabled value="ISO Size" />
+                </td>
+                <td>
+                    <SelectBox acceptCustomValue  placeholder="Chọn"  dataSource={thicknessOptions}  />
+                </td>
+                <td>
+                    <TextArea value={defaultSize} />
+                </td>
+                <td>
+                    <TextBox />
+                </td>
+            </tr>
+        </table>
     </div>);
 }
 

@@ -16,20 +16,9 @@ const data2 = [
 function TechFormProcedureDraft(props) {
     return (<div className={cx('wrapper')}>
         <div>
-            <Table dataSource={[]} rowKey='step1' bordered pagination={false}>
-                <Table.Column title='Step1' dataIndex='step1' key='step1' align='left' width={130} />
-                <Table.Column title='Step2' dataIndex='step2' key='step2' align='center' />
-                <Table.Column title='Step3' dataIndex='step3' key='step3' align='center' />
-                <Table.Column title='Step4' dataIndex='step4' key='step4' align='center' />
-                <Table.Column title='Step5' dataIndex='step5' key='step5' align='center' />
-                <Table.Column title='Step6' dataIndex='step6' key='step6' align='center' />
-                <Table.Column title='Step7' dataIndex='step7' key='step7' align='center' />
-                <Table.Column title='Step8' dataIndex='step8' key='step8' align='center' />
-                <Table.Column title='Step9' dataIndex='step9' key='step9' align='center' />
-                <Table.Column title='Step10' dataIndex='step10' key='step10' align='center' />
-                <Table.Column title='Step11' dataIndex='step11' key='step11' align='center' />
-                <Table.Column title='Step12' dataIndex='step12' key='step12' align='center' />
-            </Table>
+            <div>
+                
+            </div>
             <Table dataSource={data2} rowKey='no' bordered pagination={false}>
                 <Table.Column title='No.' dataIndex='no' key='no' align='left' width={130} />
                 <Table.Column

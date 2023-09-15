@@ -21,6 +21,7 @@ import styles from "./ListProduct.module.css";
 import classNames from "classnames/bind";
 import httpRequests from "../../../../../utils/httpRequests";
 import { BOMBodyCardInfo } from "../BOMBodyCardInfo/BOMBodyCardInfo";
+import NotificationManager from "../../../../../utils/NotificationManager";
 
 const cx = classNames.bind(styles);
 const data = [
@@ -104,7 +105,10 @@ export const ListProduct = React.memo((props: any) => {
         httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
         .then(response => {
             console.log(response);
-            getBOMsProduct(props.bomTemplateId)
+            if (response.status === 200) {
+                NotificationManager.success("Thay đổi trạng thái bom thành công")
+                getBOMsProduct(props.bomTemplateId)
+            }
         })
     }
 
