@@ -165,14 +165,14 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                     textAlign: "left",
                                     paddingTop: 12,
                                 }}>
-                                <h5
+                                {/* <h5
                                     className='name'
                                     style={{
                                         fontSize: 18,
                                         marginBottom: 0,
                                     }}>
                                     Thêm mới phiếu công nghệ
-                                </h5>
+                                </h5> */}
                                 <h5
                                     className='name'
                                     style={{
@@ -211,7 +211,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             fontSize: 18,
                                             marginBottom: 0,
                                         }}>
-                                        Quy cách sản phẩm/Product Spec
+                                        Quy cách sản phẩm
                                     </h5>
                                 </div>
                                 <Table dataSource={[techFormData.productSpec]} bordered={false} rowKey='Id' pagination={false}>
@@ -227,7 +227,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         }}
                                     />
                                     <Table.Column
-                                        title='Độ dày/Thickness(mm)'
+                                        title='Độ dày'
                                         dataIndex='thickness'
                                         key='thickness'
                                         render={(value) => <Input value={value} onChange={e => {
@@ -235,7 +235,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         }} className='inputRow' placeholder='Nhập' />}
                                     />
                                     <Table.Column
-                                        title='Kích thước/Size, Dài/Length * Rộng/Width(mm)'
+                                        title='Kích thước, Dài * Rộng'
                                         dataIndex='size'
                                         key='size'
                                         render={(value) => <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -290,7 +290,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                 }}>
                                     <h5 className="name" style={{
                                         fontSize: 18,
-                                    }}>Thiết kế/Card design</h5>
+                                    }}>Thiết kế</h5>
                                     <div className="mt-24" style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                                         <div><TextArea placeholder="Nhập ghi chú" rows={8} cols={70} style={{ resize: "horizontal" }} /></div>
                                         <Upload.Dragger
@@ -316,7 +316,7 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                         <h5 className="name" style={{
                                             fontSize: 18,
                                             marginBottom: 0,
-                                        }}>1. Trình tự công nghệ/Technology procedure</h5>
+                                        }}>1. Trình tự công nghệ</h5>
                                     </div>
                                     <div>
                                         <Table key={"step1"} dataSource={data2} rowKey='step1' bordered={false} pagination={false}>
@@ -443,17 +443,17 @@ export const TechFormBodyCard: React.FC<TechFormBodyCardProps> = observer(({ isO
                                             <Table.Column title="No." dataIndex="no" key="no" align="left" width={130} />
                                             <Table.Column onCell={(item, index: any) => {
                                                 return index === 2 ? { rowSpan: 3 } : [3, 4].includes(index) ? { rowSpan: 0 } : { rowSpan: 1 }
-                                            }} title="Tên vật liệu/Materials Name" dataIndex="" key="materialName" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
-                                            <Table.Column title="Xuất xứ/Supplier" dataIndex="" key="supplier" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
-                                            <Table.Column title="Độ dày/Thickness(mm)" dataIndex="" key="thickNess" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
-                                            <Table.Column title="Số lượng/Q'ty(tấm)" dataIndex="" key="quantity" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
-                                            <Table.Column title="Ghi chú/Remark" dataIndex="" key="remark" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
+                                            }} title="Tên vật liệu" dataIndex="" key="materialName" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
+                                            <Table.Column title="Xuất xứ" dataIndex="" key="supplier" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
+                                            <Table.Column title="Độ dày" dataIndex="" key="thickNess" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
+                                            <Table.Column title="Số lượng" dataIndex="" key="quantity" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
+                                            <Table.Column title="Ghi chú" dataIndex="" key="remark" align="center" render={() => <TextBox placeholder="Nhập" key="step8" />} />
                                             <Table.Column
                                                 width={300}
                                                 onCell={(item, index: any) => {
                                                     return index === 0 ? { rowSpan: 9 } : { rowSpan: 0 }
                                                 }}
-                                                title="Cấu trúc/Structure"
+                                                title="Cấu trúc"
                                                 dataIndex=''
                                                 key="structure"
                                                 align="center"

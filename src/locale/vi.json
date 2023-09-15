@@ -31,7 +31,9 @@
         "cancel-button":"Hủy bỏ",
         "confirm-button":"Xác nhận",
         "signature":"Ký lập",
-        "send-approve":"Gửi duyệt"
+        "send-approve":"Gửi duyệt",
+        "active":"Hoạt động",
+        "inactive":"Ngừng hoạt động"
 
     },
     "sider": {
@@ -140,10 +142,18 @@
     },
     "user-management":{
         "user-management":"Quản lý tài khoản",
-        "header":"Danh sách tài khoản"
-    },
-    "Yes": "Xóa",
-    "No": "Hủy bỏ",
-    "dxList-selectAll": "Chọn tất cả",
-    "dxList-pageLoadingText": "Đang tải..."
+        "header":"Danh sách tài khoản",
+        "title-column":{
+            "ordinal-numbers":"Số thứ tự",
+            "account-code":"Mã tài khoản",
+            "account-name":"Tên tài khoản",
+            "user-name":"Tên người dùng",
+            "part":"Bộ phận",
+            "email":"Email",
+            "phoneNumber":"Số điện thoại",
+            "signature":"Chữ ký",
+            "status":"Trạng thái",
+            "operation":"Thao tác"
+        }
+    }
 }

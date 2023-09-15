@@ -31,7 +31,9 @@
         "cancel-button":"Cancel",
         "confirm-button":"Confirm",
         "signature":"Signature",
-        "send-approve":"Send approve"
+        "send-approve":"Send approve",
+        "active":"Active",
+        "inactive":"In Active"
     },
     "sider": {
         "home": "Dashboard",
@@ -139,6 +141,18 @@
     },
     "user-management":{
         "user-management":"Account management",
-        "header":"List of accounts"
+        "header":"List of accounts",
+         "title-column":{
+            "ordinal-numbers":"Ordinal numbers",
+            "account-code":"Account code",
+            "account-name":"Account name",
+            "user-name":"User name",
+            "part":"Part",
+            "email":"Email",
+            "phoneNumber":"Phone number",
+            "signature":"Signature",
+            "status":"Status",
+            "operation":"Operation"
+        }
     }
 }

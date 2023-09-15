@@ -10,6 +10,7 @@ import { Button } from "antd";
 
 import styles from "./TechFormUpdate.module.css";
 import { useTranslation } from "react-i18next";
+import InfoRow from "../../../../shared/components/InfoRow/InfoRow";
 
 const cx = classNames.bind(styles);
 
@@ -303,37 +304,55 @@ export default TechFormUpdate;
 export const TechFormGeneralInfo = (dataGeneral: any) => {
 
     return (
-        <div className={cx("wrapper")}>
-            <div className={cx("row")}>
-                <div className={cx("title")}>Mã sx/Production Code</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.productionCode}</div>
-                <div className={cx("title")}>Người gửi/Sender</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.sender}</div>
-            </div>
-            <div className={cx("row")}>
-                <div className={cx("title")}>Tên khách hàng/Customer</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.customer}</div>
-                <div className={cx("title")}>Số lượng thẻ/Q'ty</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityRequirement}</div>
-            </div>
-            <div className={cx("row")}>
-                <div className={cx("title")}>Tên thẻ/Card name</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.cardName}</div>
-                <div className={cx("title")}>SL thẻ đã tính bù hao</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityCompensation}</div>
-            </div>
-            <div className={cx("row")}>
-                <div className={cx("title")}>Số HĐ/P.O</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.poNumber}</div>
-                <div className={cx("title")}>Kết thúc sx/Finish</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.endDate}</div>
-            </div>
-            <div className={cx("row")}>
-                <div className={cx("title")}>Bắt đầu sx/ Start</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.startDate}</div>
-                <div className={cx("title")}>Giao hàng/ Delivery date</div>
-                <div className={cx("value")}>{dataGeneral?.dataGeneral?.deliveryDate}</div>
-            </div>
+        // <div className={cx("wrapper")}>
+        //     <div className={cx("row")}>
+        //         <div className={cx("title")}>Mã sx/Production Code</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.productionCode}</div>
+        //         <div className={cx("title")}>Người gửi/Sender</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.sender}</div>
+        //     </div>
+        //     <div className={cx("row")}>
+        //         <div className={cx("title")}>Tên khách hàng/Customer</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.customer}</div>
+        //         <div className={cx("title")}>Số lượng thẻ/Q'ty</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityRequirement}</div>
+        //     </div>
+        //     <div className={cx("row")}>
+        //         <div className={cx("title")}>Tên thẻ/Card name</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.cardName}</div>
+        //         <div className={cx("title")}>SL thẻ đã tính bù hao</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.quantityCompensation}</div>
+        //     </div>
+        //     <div className={cx("row")}>
+        //         <div className={cx("title")}>Số HĐ/P.O</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.poNumber}</div>
+        //         <div className={cx("title")}>Kết thúc sx/Finish</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.endDate}</div>
+        //     </div>
+        //     <div className={cx("row")}>
+        //         <div className={cx("title")}>Bắt đầu sx/ Start</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.startDate}</div>
+        //         <div className={cx("title")}>Giao hàng/ Delivery date</div>
+        //         <div className={cx("value")}>{dataGeneral?.dataGeneral?.deliveryDate}</div>
+        //     </div>
+        // </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <td>
+                <InfoRow label={"Tổng số lô"} data={'1'} />
+                <InfoRow label={'Mã sản xuất'} data={dataGeneral?.dataGeneral?.productionCode} />
+                <InfoRow label={'Tên khách hàng'} data={dataGeneral?.dataGeneral?.customer} />
+                <InfoRow label={'Tên thẻ'} data={dataGeneral?.dataGeneral?.cardName} />
+                <InfoRow label={'Số HĐ'} data={dataGeneral?.dataGeneral?.poNumber} />
+                <InfoRow label={'Bắt đầu sản xuất'} data={new Date(dataGeneral?.dataGeneral?.startDate).toLocaleDateString()} />
+            </td>
+            <td>
+                <InfoRow label={'Số lô'} data={'1'} />
+                <InfoRow label={'Người gửi'} data={dataGeneral?.dataGeneral?.sender} />
+                <InfoRow label={'Số lượng thẻ'} data={dataGeneral?.dataGeneral?.quantityRequirement} />
+                <InfoRow label={'SL thẻ đã tính bù hao'} data={dataGeneral?.dataGeneral?.quantityCompensation} />
+                <InfoRow label={'Kết thúc sản xuất'} data={new Date(dataGeneral?.dataGeneral?.endDate).toLocaleDateString()} />
+                <InfoRow label={'Giao hàng'} data={new Date(dataGeneral?.dataGeneral?.deliveryDate).toLocaleDateString()} />
+            </td>
         </div>
     )
 }
