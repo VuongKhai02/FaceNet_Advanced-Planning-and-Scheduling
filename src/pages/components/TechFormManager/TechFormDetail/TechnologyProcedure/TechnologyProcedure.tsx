@@ -1,10 +1,11 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import { Column, Editing } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormDetailMaterialAndStructure from "../TechFormDetailMaterialAndStructure/TechFormDetailMaterialAndStructure";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import "./TechnologyProcedure.css";
+import { useTranslation } from "react-i18next";
 
 type TechnologyPocudureProps = {
     isOpen: boolean;
@@ -50,7 +51,7 @@ const data2 = [
 
 export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({ isOpen = false, setClose }) => {
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const HandleTechFormDetailMaterialAndStructure = () => {
         setIsAddNewTechForm(true);
     };
@@ -74,7 +75,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                     fontSize: 18,
                                     marginBottom: 0,
                                 }}>
-                                1. Trình tự công nghệ/Technology procedure
+                                1. Trình tự công nghệ
                             </h5>
                         </div>
 
@@ -100,17 +101,17 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                         onCell={(item, index) => {
                                             return index === 2 ? { rowSpan: 2 } : index === 3 ? { rowSpan: 0 } : { rowSpan: 1 };
                                         }}
-                                        title='Tên vật liệu/Materials Name'
+                                        title='Tên vật liệu'
                                         dataIndex='materialName'
                                         key='materialName'
                                         align='center'
                                     />
-                                    <Table.Column title='Xuất xứ/Supplier' dataIndex='supplier' key='supplier' align='center' />
+                                    <Table.Column title='Xuất xứ' dataIndex='supplier' key='supplier' align='center' />
                                     <Table.Column
                                         onCell={(item, index: any) => {
                                             return index === 2 ? { rowSpan: 3 } : [3, 4].includes(index) ? { rowSpan: 0 } : { rowSpan: 1 };
                                         }}
-                                        title='Độ dày/Thickness(mm)'
+                                        title='Độ dày'
                                         dataIndex='thickNess'
                                         key='thickNess'
                                         align='center'
@@ -119,17 +120,17 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                         onCell={(item, index: any) => {
                                             return index === 2 ? { rowSpan: 3 } : [3, 4].includes(index) ? { rowSpan: 0 } : { rowSpan: 1 };
                                         }}
-                                        title="Số lượng/Q'ty(tấm)"
+                                        title="Số lượng"
                                         dataIndex='quantity'
                                         key='quantity'
                                         align='center'
                                     />
-                                    <Table.Column title='Ghi chú/Remark' dataIndex='remark' key='remark' align='center' />
+                                    <Table.Column title='Ghi chú' dataIndex='remark' key='remark' align='center' />
                                     <Table.Column
                                         onCell={(item, index: any) => {
                                             return index === 0 ? { rowSpan: 9 } : { rowSpan: 0 };
                                         }}
-                                        title='Cấu trúc/Structure'
+                                        title='Cấu trúc'
                                         dataIndex='structure'
                                         key='structure'
                                         align='center'
@@ -158,7 +159,7 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                             fontSize: 18,
                                             marginBottom: 30,
                                         }}>
-                                        Trình tự công nghệ/Technology procedure
+                                        Trình tự công nghệ
                                     </h5>
                                 </div>
                                 <DataGrid
@@ -189,17 +190,13 @@ export const TechnologyPocudure: React.FC<TechnologyPocudureProps> = observer(({
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    className='border-none'
-                                    icon='back'
                                     onClick={setClose}
-                                    style={{ marginRight: "10px", color: "#333" }}
-                                />
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                >{t("common.back-button")}</Button>
                                 <Button
-                                    className='border-none'
-                                    icon='chevronright'
                                     onClick={HandleTechFormDetailMaterialAndStructure}
-                                    style={{ color: "#fff" }}
-                                />
+                                    style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
+                                >{t("common.next-button")}</Button>
                             </div>
                         </div>
                     </div>

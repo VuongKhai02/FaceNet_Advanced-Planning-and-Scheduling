@@ -1,9 +1,11 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import "./TechFormDetailProcedure.css";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormDetailHostamping from "../TechFormDetailHostamping/TechFormDetailHostamping";
+import { useTranslation } from "react-i18next";
+import { Button } from "antd";
 
 type TechFormDetailProcedureProps = {
     isOpen: boolean;
@@ -33,7 +35,7 @@ const data2 = [
 
 export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = observer(({ isOpen = false, setClose }) => {
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const handleTechFormDetailHostamping = () => {
         setIsAddNewTechForm(true);
     };
@@ -45,7 +47,7 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
             ) : (
                 <div className=''>
                     <div className='table-responsive'>
-                        <div
+                        {/* <div
                             className='informer'
                             style={{
                                 textAlign: "left",
@@ -59,9 +61,9 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 }}>
                                 Xem chi tiết phiếu công nghệ
                             </h5>
-                        </div>
+                        </div> */}
                         <div className='subtile'>
-                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>In/Printing : </h6>
+                            <h6 style={{ fontSize: 15, fontWeight: 500 }}>In: </h6>
                             <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
                                 Thời gian từ 09/08/2022 đến 19/08/2022
                             </h6>
@@ -74,17 +76,12 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 showBorders={true}
                                 showRowLines={true}
                                 showColumnLines={true}>
-                                <Column alignment='left' caption='Công nghệ In/Printing Technology' fixed>
-                                    <Column alignment='left' caption='Nội dung In/Printing Contents' fixed>
-                                        <Column dataField='id' alignment='center' caption='Bước/Step' width={100}>
-                                            {/* <Column>
-                                    <Column dataField="" caption="Front" width={50} />
-                                    <Column dataField="" caption="Back" width={50} />
-                                </Column> */}
-                                            {/* <Column dataField="id" width={50} alignment="left" caption="" /> */}
+                                <Column alignment='left' caption='Công nghệ In' fixed>
+                                    <Column alignment='left' caption='Nội dung In' fixed>
+                                        <Column dataField='id' alignment='center' caption='Bước' width={100}>
                                         </Column>
-                                        <Column dataField='item' caption='Nội dung/Item' />
-                                        <Column dataField='method' caption='Phương pháp/Method' />
+                                        <Column dataField='item' caption='Nội dung' />
+                                        <Column dataField='method' caption='Phương pháp' />
                                     </Column>
                                 </Column>
                                 <Column
@@ -108,8 +105,8 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                         );
                                     }}>
                                     <Column alignment='center' caption='File'>
-                                        <Column dataField='colour' caption='Màu/Colour' />
-                                        <Column dataField='note' caption='Ghi chú/Note' />
+                                        <Column dataField='colour' caption='Màu' />
+                                        <Column dataField='note' caption='Ghi chú' />
                                     </Column>
                                 </Column>
                             </DataGrid>
@@ -117,7 +114,7 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                         <div style={{ marginTop: 30 }}>
                             <div>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép/Lamination : </h6>
+                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Ép: </h6>
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
@@ -131,16 +128,16 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     showRowLines={true}
                                     showColumnLines={true}>
                                     <Column dataField='id' caption='Bước' alignment='left' width={100} />
-                                    <Column dataField='contens' caption='Nội dung ép/Contens' />
-                                    <Column dataField='classify' caption='Phân loại/Classify' />
-                                    <Column dataField='lamination' caption='Thông số máy/Lamination Parameter' width={270} />
+                                    <Column dataField='contens' caption='Nội dung ép' />
+                                    <Column dataField='classify' caption='Phân loại' />
+                                    <Column dataField='lamination' caption='Thông số máy' width={270} />
                                     <Column dataField='other' caption='Khác/Other'></Column>
-                                    <Column dataField='structure' caption='Cấu trúc/Structure' />
+                                    <Column dataField='structure' caption='Cấu trúc' />
                                 </DataGrid>
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công/Processing : </h6>
+                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Gia công: </h6>
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
@@ -152,18 +149,18 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     showBorders={true}
                                     showRowLines={true}
                                     showColumnLines={true}>
-                                    <Column dataField='id' caption='No.' alignment='left' width={100} />
-                                    <Column dataField='lnk' caption='Mực/Lnk' />
+                                    <Column dataField='id' caption='STT' alignment='left' width={100} />
+                                    <Column dataField='lnk' caption='Mực' />
                                     <Column dataField='nilon' caption='Nilon' />
                                     <Column dataField='cut' caption='Cắt' />
                                     <Column dataField='be' caption='Bế'></Column>
                                     <Column dataField='dun' caption='Đùn' />
-                                    <Column dataField='other' caption='Khác/Other' />
+                                    <Column dataField='other' caption='Khác' />
                                 </DataGrid>
                             </div>
                             <div style={{ marginTop: 30 }}>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
-                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cut/Cutting : </h6>
+                                    <h6 style={{ fontSize: 15, fontWeight: 500 }}>Cắt: </h6>
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
                                         Thời gian từ 09/08/2022 đến 19/08/2022
                                     </h6>
@@ -175,12 +172,12 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     showBorders={true}
                                     showRowLines={true}
                                     showColumnLines={true}>
-                                    <Column dataField='id' caption='No.' alignment='left' width={100} />
-                                    <Column dataField='content' caption='Nội dung/Content' />
-                                    <Column dataField='machine' caption='Máy/Machine' />
+                                    <Column dataField='id' caption='STT' alignment='left' width={100} />
+                                    <Column dataField='content' caption='Nội dung' />
+                                    <Column dataField='machine' caption='Máy' />
                                 </DataGrid>
                             </div>
-                            <div>
+                            {/* <div>
                                 <div className='subtile' style={{ marginBottom: 15 }}>
                                     <h6 style={{ fontSize: 15, fontWeight: 500 }}>Hostamping: </h6>
                                     <h6 style={{ fontSize: 14, fontStyle: "italic", fontWeight: 400, marginLeft: 10 }}>
@@ -195,15 +192,15 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     showRowLines={true}
                                     showColumnLines={true}>
                                     <Column dataField='id' caption='Bước' alignment='center' width={100} />
-                                    <Column dataField='process' caption='Công đoạn/Process' />
-                                    <Column dataField='content' alignment='center' caption='Nội dung hots/Content' />
-                                    <Column dataField='rmcode' alignment='center' caption='Mã vật liệu/RMcode' />
-                                    <Column dataField='typehots' alignment='center' caption='Loại phôi hots/Type' />
+                                    <Column dataField='process' caption='Công đoạn' />
+                                    <Column dataField='content' alignment='center' caption='Nội dung hots' />
+                                    <Column dataField='rmcode' alignment='center' caption='Mã vật liệu' />
+                                    <Column dataField='typehots' alignment='center' caption='Loại phôi hots' />
                                     <Column dataField='position' alignment='center' caption='Vị trí'></Column>
-                                    <Column dataField='machine' alignment='center' caption='Máy/Machine' />
-                                    <Column dataField='other' alignment='center' caption='Khác/Other' />
+                                    <Column dataField='machine' alignment='center' caption='Máy' />
+                                    <Column dataField='other' alignment='center' caption='Khác' />
                                 </DataGrid>
-                            </div>
+                            </div> */}
                             <div
                                 className='toolbar'
                                 style={{
@@ -215,17 +212,13 @@ export const TechFormDetailProcedure: React.FC<TechFormDetailProcedureProps> = o
                                     borderRadius: "4px",
                                 }}>
                                 <Button
-                                    className='border-none'
-                                    icon='back'
                                     onClick={setClose}
-                                    style={{ marginRight: "10px", color: "#333" }}
-                                />
+                                    style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                >{t("common.back-button")}</Button>
                                 <Button
-                                    className='border-none'
-                                    icon='chevronright'
                                     onClick={handleTechFormDetailHostamping}
-                                    style={{ color: "#fff" }}
-                                />
+                                    style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
+                                >{t("common.next-button")}</Button>
                             </div>
                         </div>
                     </div>

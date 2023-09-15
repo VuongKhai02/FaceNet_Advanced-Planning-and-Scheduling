@@ -1,9 +1,11 @@
 import React, { } from "react";
-import { Button, DataGrid } from "devextreme-react";
+import { DataGrid } from "devextreme-react";
 import "./TechFormDetailMaterialAndStructure.css";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import TechFormDetailProcedure from "../TechFormDetailProcedure/TechFormDetailProcedure";
+import { useTranslation } from "react-i18next";
+import { Button } from "antd";
 
 type TechFormDetailMaterialAndStructureProps = {
     isOpen: boolean;
@@ -17,7 +19,7 @@ const data = [
         materialName: "Chip vàng 6 chân S3D350AACS- 6GK6DEA(U - MA / VI / VC) load Visa Master VCCS - REVISED APPLET",
         quantity: "19.430",
         note: "",
-        structure: "",
+        unit: "Cái",
     },
     {
         No: 2,
@@ -25,7 +27,7 @@ const data = [
         materialName: "Chip vàng 6 chân S3D350AACS- 6GK6DEA(U - MA / VI / VC) load Visa Master VCCS - REVISED APPLET",
         quantity: "19.430",
         note: "",
-        structure: "",
+        unit: "Tấm",
     },
     {
         No: 3,
@@ -33,7 +35,7 @@ const data = [
         materialName: "Chip vàng 6 chân S3D350AACS- 6GK6DEA(U - MA / VI / VC) load Visa Master VCCS - REVISED APPLET",
         quantity: "19.430",
         note: "",
-        structure: "",
+        unit: "Kg",
     },
 ];
 
@@ -58,10 +60,18 @@ const data1 = [
     },
 ];
 
+const data2 = [
+    { id: 1, CongDoan: "In Offset", MaJob: "JB01-001", TenJob: "In Offset ra bản" },
+    { id: 2, CongDoan: "In Lưới", MaJob: "JB01-002", TenJob: "In lưới: Căng lưới + Chụp lưới" },
+    { id: 3, CongDoan: "Dải từ", MaJob: "JB03-002", TenJob: "In Offset: In màu CMYK,P" },
+    { id: 4, CongDoan: "Hostamping", MaJob: "JB03-002", TenJob: "QC chọn thẻ card body" },
+    { id: 5, CongDoan: "Gia công- Đóng gói", MaJob: "JB03-002", TenJob: "Gia công- Đóng gói : ĐG theo hộp nhỏ" },
+];
+
 export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterialAndStructureProps> = observer(
     ({ isOpen = false, setClose }) => {
         const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
+        const { t } = useTranslation(["common"]);
         const handleTechFormDetailProcedure = () => {
             setIsAddNewTechForm(true);
         };
@@ -73,24 +83,40 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                 ) : (
                     <div className=''>
                         <div className='table-responsive'>
-                            <div
-                                className='informer'
-                                style={{
-                                    textAlign: "left",
-                                    paddingTop: 12,
-                                }}>
-                                <h5
-                                    className='name'
+                            <div style={{ marginTop: 30 }}>
+                                <div
+                                    className='informer'
                                     style={{
-                                        fontSize: 18,
-                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        paddingTop: 12,
                                     }}>
-                                    Thêm mới phiếu công nghệ
-                                </h5>
+                                    <h5
+                                        className='name'
+                                        style={{
+                                            fontSize: 18,
+                                            marginBottom: 30,
+                                        }}>
+                                        Trình tự công nghệ
+                                    </h5>
+                                </div>
+                                <DataGrid
+                                    key={"id"}
+                                    dataSource={data2}
+                                    keyExpr='id'
+                                    showBorders={true}
+                                    showRowLines={true}
+                                    showColumnLines={true}>
+                                    <Column dataField='id' caption='STT' allowEditing={false} alignment='left' />
+                                    <Column dataField='CongDoan' caption='Công đoạn'>
+                                    </Column>
+                                    <Column dataField='MaJob' caption='Mã Job'>
+                                    </Column>
+                                    <Column dataField='TenJob' caption='Tên Job' />
+                                </DataGrid>
                             </div>
                             <div className='subtile'>
                                 <h6 style={{ fontSize: 15, fontWeight: 500 }}>
-                                    Vật liệu và cấu trúc/Material and Structure : Thời gian từ 09/08/2022 đến 19/08/2022{" "}
+                                    Vật liệu và cấu trúc: Thời gian từ 09/08/2022 đến 19/08/2022{" "}
                                 </h6>
                             </div>
                             <div style={{ marginTop: 30 }}>
@@ -101,29 +127,29 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                     showBorders={true}
                                     showRowLines={true}
                                     showColumnLines={true}>
-                                    <Column dataField='No' caption='No.' allowEditing={false} alignment='left' />
-                                    <Column dataField='materialCode' caption='Mã vật tư/Material Code' />
-                                    <Column dataField='materialName' caption='Tên vật tư/Material Name' width={500} />
-                                    <Column dataField='quantity' caption="Số lượng/Q'ty" />
-                                    <Column dataField='note' caption='Ghi chú/Remarks' />
-                                    <Column dataField='structure' caption='Cấu trúc/Structure' />
+                                    <Column dataField='No' caption='STT' allowEditing={false} alignment='left' />
+                                    <Column dataField='materialCode' caption='Mã vật tư' />
+                                    <Column dataField='materialName' caption='Tên vật tư' width={500} />
+                                    <Column dataField='quantity' caption="Số lượng" />
+                                    <Column dataField='unit' caption='Đơn vị tính' />
+                                    <Column dataField='note' caption='Ghi chú' />
                                 </DataGrid>
-                                <div className='container'>
+                                <div className='container' style={{ marginTop: 10 }}>
                                     <div className='checkbox'>
                                         <label htmlFor='raPhim' style={{ fontWeight: 500 }}>
-                                            Ra phim/Pre-press
+                                            Ra phim
                                         </label>
                                         <input type='checkbox' id='raPhim' checked={true} />
                                     </div>
                                     <div className='checkbox'>
                                         <label htmlFor='raBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                            Ra bản/PC to plate
+                                            Ra bản
                                         </label>
                                         <input type='checkbox' id='raBan' checked={true} />
                                     </div>
                                     <div className='input'>
                                         <label htmlFor='tongSoBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                            Tổng số bản: {"6"}
+                                            Tổng số bản: {"10"}
                                         </label>
                                     </div>
                                 </div>
@@ -136,15 +162,15 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                         showRowLines={true}
                                         showColumnLines={true}>
                                         <Column dataField='Id' caption='Id' visible={false} />
-                                        <Column alignment='center' caption='Mặt trước/Front' fixed>
-                                            <Column dataField='contentFront' caption='Nội dung/Item' />
-                                            <Column dataField='quantityFront' caption="Số lượng/Q'ty" alignment='left' />
-                                            <Column dataField='sizeFront' caption='Kích thước bản/Plate size' />
+                                        <Column alignment='center' caption='Mặt trước' fixed>
+                                            <Column dataField='contentFront' caption='Nội dung' />
+                                            <Column dataField='quantityFront' caption="Số lượng" alignment='left' />
+                                            <Column dataField='sizeFront' caption='Kích thước bản' />
                                         </Column>
-                                        <Column alignment='center' caption='Mặt sau/Back' fixed>
-                                            <Column dataField='contentFront' caption='Nội dung/Item' />
-                                            <Column dataField='quantityFront' caption="Số lượng/Q'ty" alignment='left' />
-                                            <Column dataField='sizeFront' caption='Kích thước bản/Plate size' />
+                                        <Column alignment='center' caption='Mặt sau' fixed>
+                                            <Column dataField='contentFront' caption='Nội dung' />
+                                            <Column dataField='quantityFront' caption="Số lượng" alignment='left' />
+                                            <Column dataField='sizeFront' caption='Kích thước bản' />
                                         </Column>
                                     </DataGrid>
                                 </div>
@@ -159,17 +185,13 @@ export const TechFormDetailMaterialAndStructure: React.FC<TechFormDetailMaterial
                                         borderRadius: "4px",
                                     }}>
                                     <Button
-                                        className='border-none'
-                                        icon='back'
                                         onClick={setClose}
-                                        style={{ marginRight: "10px", color: "#333" }}
-                                    />
+                                        style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
+                                    >{t("common.back-button")}</Button>
                                     <Button
-                                        className='border-none'
-                                        icon='chevronright'
                                         onClick={handleTechFormDetailProcedure}
-                                        style={{ color: "#fff" }}
-                                    />
+                                        style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
+                                    >{t("common.next-button")}</Button>
                                 </div>
                             </div>
                         </div>
