@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid, SelectBox, TextBox } from "devextreme-react";
 import { Column, FilterRow } from "devextreme-react/data-grid";
 import "./BOMBodyCardAddInfo.css";
@@ -12,12 +12,13 @@ import { MDM_API_URL, PLANNING_API_URL } from "../../../../../utils/config";
 import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 import { Button } from "antd";
+import { getAllBOMTemplates, getBOMTemplateById } from "../../../../../utils/bomService";
 
 type BOMBodyCardAddInfoProps = {
     id: Number | null;
-    requestInfo: any;
-    techFormId: any;
+    requestId: any;
     isOpen: boolean;
+    bomTemplateId: number | null
     setClose?: () => void;
 };
 
@@ -65,7 +66,7 @@ const convertToMaterialBOM = (value: any) => {
 const classify = ['Thành phẩm', 'Bán thành phẩm', 'Nguyên vật liệu']
 
 
-export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id, requestInfo, techFormId }) => {
+export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({ isOpen = false, setClose, id = null, requestId = null, bomTemplateId =null }) => {
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
     const [isVisiblePopupAddInfoMaterial, setIsVisiblePopupAddInfoMaterial] = React.useState<boolean>(false);
     const [isVisibleImportFile, setIsVisibleImportFile] = React.useState<boolean>(false);
@@ -74,6 +75,13 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
     const gridRef = React.useRef(null);
     const [idRemoveChoosed, setIdRemoveChoosed] = React.useState<any>(null);
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
+    const [materialList, setMaterialList] = React.useState<any>([]);
+    const [productList, setProductList] = useState<any>([]);
+    const [bomTemplate, setBomTemplate] = useState<any>({});
+    const [bomTemplateList, setBomTemplateList] = useState<any>([]);
+    const [tempId, setTempId] = useState<any>(bomTemplateId);
+    const [prId, setPrId] = useState<any>(requestId);
+
 
 
     const handleShowModalDel = (id: any) => {
@@ -85,12 +93,21 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
         setIdRemoveChoosed(null)
     };
 
+    const getAllBOMTemplate = () => {
+        getAllBOMTemplates().then((response) => {
+            setBomTemplateList(response.data.data.data.map(data => {return {
+                id: data.id,
+                productCode: data.productCode,
+                productName: data.productName
+            }}))
+        })
+    }
+
 
     const handleAddNewInfoMaterial = () => {
         setIsVisiblePopupAddInfoMaterial(true);
     };
 
-    const [materialList, setMaterialList] = React.useState<any>([]);
 
     const onAddMatetialToBom = (id: any, value: any) => {
 
@@ -157,35 +174,30 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
             bomBodyCardMaterials: newData,
         });
     }
-
+    console.log(bomData)
 
     const getAllMaterial = () => {
         const data = JSON.stringify({
             pageNumber: 0,
-            pageSize: 9999,
+            pageSize: 999999999,
             common: "",
             filter: {
             },
         });
 
         httpRequests({ method: "post", url: MDM_API_URL + "/api/products", data: data }).then((response: any) => {
+            console.log(response)
             if (response.status === 200) {
-                setMaterialList(response.data.data)
+                setMaterialList(response.data.data.filter(data => data.itemGroupCode !== 103));
+                setProductList(response.data.data.filter(data => data.itemGroupCode !== 101))
             }
         });
-    }
+    } 
 
     const handleCreateBOM = () => {
         setIsLoading(true)
         httpRequests.post("/api/boms", bomData)
             .then((response: any) => {
-                if (response.data.message === 'Thành công') {
-                    if (techFormId !== null) {
-                        httpRequests.post(`/api/techforms/${techFormId}/boms`, response.data.data)
-                            .then((response: any) => {
-                            })
-                    }
-                }
             }).finally(() => {
                 setTimeout(() => {
                     setIsLoading(false)
@@ -230,36 +242,73 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                 }
             });
         }
-    };
+    };                                                          
+
+
+
+    const getBOMById = (bomId) => {
+        httpRequests.get(`/api/boms/products/${bomId}`)
+        .then((response) => {
+            console.log(response);
+            if (response.status === 200 && response.data.responseCode === '00') {
+                if (response.data.data.bomTemplateId !== null) {
+                    getBOMTemplateById(response.data.data.bomTemplateId)
+                    .then(data => {
+                        setBomTemplate(data.data.data)
+                    })
+                }
+                setBomData({
+                    ...bomData,
+                    productName: response.data.data.productName,
+                    quantity: response.data.data.quantity
+                })
+            }
+        })
+    }
+
+    const getRequestById = (requestId) => {
+        httpRequests.get(`/api/production_requirements/${requestId}`)
+        .then(response => {
+            console.log(response)
+            setBomData({
+                ...bomData,
+                productName: response.data.data.cardName,
+                quantity: response.data.data.totalQuantity
+            })
+        }) 
+    }
+
+    const getTemplateById = (bomTemplateId) => {
+        getBOMTemplateById(bomTemplateId).then(response => {
+            console.log(response);
+            setBomData({
+                ...bomData,
+                bomBodyCardMaterials: response.data.data.bomBodyCardMaterials
+            })
+            setBomTemplate(response.data.data)
+        })
+    }
+
 
     React.useEffect(() => {
         if (id !== null) {
-            httpRequests.get(PLANNING_API_URL + "/api/boms/" + id).then((response: any) => {
-                if (response.status === 200) {
-                    setBomData(response.data.data);
-                }
-            });
-        } else {
-            setBomData({
-                productName: requestInfo?.cardName,
-                quantity: requestInfo?.quantityCompensation,
-                version: '1.0',
-                bomBodyCardMaterials: [{ id: 1 }]
-            })
+            getBOMById(id);
         }
-    }, [id, requestInfo, techFormId]);
+        if (prId !== null) {
+            getRequestById(prId);
+        }
+        if (tempId !== null) {
+            getTemplateById(tempId)   
+        }
+        
+    }, [id, tempId, prId]);
 
     React.useEffect(() => {
         getAllMaterial();
+        getAllBOMTemplate();
     }, [])
 
-    const test = () => {
-        console.log('bomData 22', bomData)
-    }
-    console.log('bomData', bomData)
-
-
-    console.log('bomData bomBodyCardMaterials', bomData.bomBodyCardMaterials);
+    console.log(bomTemplateList.find(bom => bom.id = tempId))
 
 
     return (
@@ -376,11 +425,25 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                             <table style={{ display: "flex", justifyContent: "space-between" }}>
                                 <td style={{ marginLeft: 30 }}>
                                     <p>Tên thẻ</p>
-                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestInfo !== null} placeholder='SP001' width={300}></TextBox>
+                                    <TextBox value={bomData.productName} style={{ backgroud: 'black' }} disabled={requestId !== null || id !== null} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Mã loại thẻ mẫu</p>
-                                    <SelectBox placeholder='Chọn'></SelectBox>
-                                    <p style={{ marginTop: 30 }}>Tổng số bản</p>
-                                    <TextBox placeholder='Nhập'></TextBox>
+                                    <SelectBox defaultValue={bomTemplateList.find(bom => bom.id = tempId)} dataSource={bomTemplateList} searchExpr={"productCode"}
+                                    valueExpr={"productCode"}
+                                    displayExpr={"productCode"} searchEnabled={true} key={"productCode"} placeholder='Chọn'></SelectBox>
+                                    <p style={{ marginTop: 30 }}>Mã thẻ</p>
+                                    <SelectBox 
+                                    onSelectionChanged={(e) => {
+                                        console.log(e)
+                                        setBomData({
+                                            ...bomData,
+                                            productCode: e.selectedItem.productCode,
+                                            productName: e.selectedItem.proName,
+
+                                        })
+                                    }}
+                                    dataSource={productList} searchExpr={"productCode"}
+                                    valueExpr={"productCode"}
+                                    displayExpr={"productCode"} placeholder='Nhập' searchEnabled={true} key={"productCode"}></SelectBox>
                                 </td>
                                 <td>
                                     <p>Version</p>
@@ -391,15 +454,15 @@ export const BOMBodyCardAddInfo: React.FC<BOMBodyCardAddInfoProps> = observer(({
                                         })
                                     }} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Tên loại thẻ mẫu</p>
-                                    <TextBox value={bomData.notice} placeholder='Visa'></TextBox>
+                                    <TextBox disabled value={bomTemplate.productName} placeholder='Visa'></TextBox>
                                     <p style={{ marginTop: 30 }}>Chọn thẻ để sao chép BOM</p>
                                     <SelectBox placeholder='Chọn'></SelectBox>
                                 </td>
                                 <td style={{ marginRight: 30 }}>
                                     <p>Số lượng đã tính bù hao</p>
-                                    <TextBox value={bomData.quantity} disabled={requestInfo !== null} placeholder='Nhập' width={300}></TextBox>
+                                    <TextBox value={bomData.quantity} disabled={requestId !== null || id !== null} placeholder='Nhập' width={300}></TextBox>
                                     <p style={{ marginTop: 30 }}>Phân loại sản phẩm</p>
-                                    <SelectBox onValueChange={e => {
+                                    <SelectBox defaultValue={"Thành phẩm"} onValueChange={e => {
                                         console.log(e)
                                         setBomData({
                                             ...bomData,

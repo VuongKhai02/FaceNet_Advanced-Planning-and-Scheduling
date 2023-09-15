@@ -6,3 +6,14 @@
     align-items: center;
     border-radius: 5px;
 }
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-align: start;
+}
+
+.status.draf {
+    background: #D4D4D4;
+    color: #7E7E7E;
+}

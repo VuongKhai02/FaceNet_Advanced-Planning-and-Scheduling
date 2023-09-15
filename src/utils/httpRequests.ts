@@ -5,7 +5,8 @@ import { AuthService } from "../auth";
 const httpRequests = axios.create({
     baseURL: import.meta.env.VITE_BASE_URL || "http://localhost:6080",
     headers: {
-        Authorization: `Bearer ${AuthService.getAccessToken()}`
+        Authorization: `Bearer ${AuthService.getAccessToken()}`,
+        "Content-Type": 'application/json'
     },
 })
 httpRequests.interceptors.response.use(
@@ -19,4 +20,6 @@ httpRequests.interceptors.response.use(
         return Promise.reject(error);
     }
 )
+
+
 export default httpRequests;

@@ -7,6 +7,10 @@ import { Button, Table, Upload } from "antd";
 import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
 
 import styles from "./TechnologyProcedureUpdate.module.css";
+import TechFormDesTab from "../../../../../components/TechFormComponent/TechFormDesTab";
+import { useTechFormContext } from "../TechFormUpdate";
+import TechFormProcedureDraft from "../../../../../components/TechFormComponent/TechFormProcedureDraft";
+import JobsProcedure from "../../../../../components/TechFormComponent/JobsProcedure";
 
 type TechnologyProcedureUpdateProps = {
     techFormData: any;
@@ -58,6 +62,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateMaterialAndStructure, setIsVisibleTechFormUpdateMaterialAndStructure] =
             React.useState<boolean>(false);
+        
+            const [techFormState, dispatch] = useTechFormContext();
 
         return (
             <>
@@ -88,8 +94,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                             </div>
 
                             <div style={{ marginTop: 30 }}>
-                                <div>
-                                    <Table dataSource={data1} rowKey='step1' bordered={false} pagination={false}>
+                                {/* <div>
+                                    <Table dataSource={data1} rowKey='step1' bordered pagination={false}>
                                         <Table.Column title='Step1' dataIndex='step1' key='step1' align='left' width={130} />
                                         <Table.Column title='Step2' dataIndex='step2' key='step2' align='center' />
                                         <Table.Column title='Step3' dataIndex='step3' key='step3' align='center' />
@@ -161,7 +167,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                             )}
                                         />
                                     </Table>
-                                </div>
+                                </div> */}
+                                <TechFormDesTab data={techFormState.productionRequirements} component={TechFormProcedureDraft}/>
                                 <div style={{ marginTop: 30 }}>
                                     <div
                                         className='informer'
@@ -178,7 +185,7 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                             Trình tự công nghệ/Technology procedure
                                         </h5>
                                     </div>
-                                    <div className={cx('mt-24', 'upload-container')}>
+                                    {/* <div className={cx('mt-24', 'upload-container')}>
                                         <Upload.Dragger
                                             multiple={false}
                                             accept='.csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'>
@@ -220,7 +227,8 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                             <Editing allowUpdating={true} />
                                         </Column>
                                         <Column dataField='' caption='Tên Job' />
-                                    </DataGrid>
+                                    </DataGrid> */}
+                                    <TechFormDesTab data={techFormState.productionRequirements} component={JobsProcedure} />
                                 </div>
                                 <div className={cx('toolbar')}>
                                     <Button

@@ -1,0 +1,5 @@
+.dx-item.dx-tab[role="tab"] {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

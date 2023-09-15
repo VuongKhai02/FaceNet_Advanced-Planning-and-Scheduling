@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import classNames from "classnames/bind";
 import { DataGrid } from "devextreme-react";
-import { Column, Selection } from "devextreme-react/data-grid";
+import { Column, FilterRow, Selection } from "devextreme-react/data-grid";
 import SvgIcon from "../SvgIcon/SvgIcon";
 import { PLANNING_API_URL } from "../../../utils/config"
 import httpRequests from "../../../utils/httpRequests";
 
 import styles from "./PopupSelectProductionRequirement.module.css";
+import PaginationComponent from "../PaginationComponent/PaginationComponent";
+import PopupBOM from "../PopupBOM/PopupBOM";
+import { WarningOutlined } from "@ant-design/icons";
 
 const cx = classNames.bind(styles);
 
@@ -16,25 +19,62 @@ type PopupSelectProductionRequirementProps = {
     visible: boolean,
     onSubmit: (data: any) => void,
     onCancel: () => void,
-    width?: number
+    width?: number,
+    onCreateTechForm: (ids: any) => void,
     children?: React.ReactNode
 }
 
-const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequirementProps> = ({ title, visible, onSubmit, onCancel, width }) => {
+const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequirementProps> = ({ title, visible, onSubmit, onCreateTechForm, onCancel, width }) => {
 
     const [dataGrid, setDataGrid] = React.useState<any>([])
     const [dataChoosed, setDataChoosed] = React.useState<any>(null);
+    const [pageIndex, setPageIndex] = React.useState<number>(1);
+    const [pageSize, setPageSize] = React.useState<number>(10);
+    const [totalPage, setTotalPage] = useState<number>(0)
 
+    const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    console.log(dataChoosed)
 
+    const getProductionRequirement = () => {
+        httpRequests.get(PLANNING_API_URL + `/api/production_requirements?page=${pageIndex - 1}&size=${pageSize}&isCreatedTechForm=false`)
+                .then((response) => {
+                    if (response.data.responseCode === "00")
+                    console.log(response)
+                    const prDatas = response.data.data.data.filter(data => data.techFormId === null)
+                    console.log(prDatas)
+                    setDataGrid(prDatas)
+                    setTotalPage(Math.ceil(response.data.data.totalItems / pageSize))
+                })
+    }
     useEffect(() => {
         if (visible) {
-            httpRequests.get(PLANNING_API_URL + "/api/production_requirements?isCreatedTechForm=false")
-                .then((response) => {
-                    console.log(response)
-                    setDataGrid(response.data.data.data)
-                })
+            getProductionRequirement()
         }
-    }, [visible])
+    }, [visible, pageIndex, pageSize])
+
+    const handleCustomFooterButtonSubmitCreate = [
+        <div>
+            <div className={cx("footer-container")}>
+                <Button
+                    key='cancel'
+                    className={cx("btn-cancel")}
+                    onClick={() => setIsSubmit(false)}>
+                    Hủy bỏ
+                </Button>
+                <Button
+                    className={cx("btn-save")}
+                    key='submit'
+                    onClick={() => { 
+                        // handleChangeStatus(bomIdChoosed);
+                        onCreateTechForm(dataChoosed)
+                        setIsSubmit(false);
+                    }}
+                >
+                    Xác nhận
+                </Button>
+            </div>
+        </div>
+    ];
 
     const style = () => {
         if (dataChoosed) {
@@ -59,10 +99,13 @@ const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequiremen
                 </div>
             }
             footer={[
-                <Button key="cancel" onClick={onCancel} className={cx("btn-cancel")} type="default">
+                <Button key="cancel" onClick={() => {
+                    setDataChoosed(null);
+                    onCancel()
+                }} className={cx("btn-cancel")} type="default">
                     Hủy bỏ
                 </Button>,
-                <Button disabled={dataChoosed === null} key="confirm" onClick={() => { onSubmit(dataChoosed) }} style={style()}>
+                <Button disabled={dataChoosed === null} key="confirm" onClick={() => { setIsSubmit(true) }} style={style()}>
                     Xác nhận
                 </Button>,
             ]}
@@ -76,18 +119,66 @@ const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequiremen
                 keyExpr="id"
                 onSelectionChanged={(e) => {
                     console.log(e)
-                    setDataChoosed(e.selectedRowsData[0])
+                    if (e.selectedRowsData.length === 0) {
+                        setDataChoosed(null)
+                    } else {
+                        setDataChoosed(e.selectedRowsData.map(data => data.id))
+                    }
                 }}
-                defaultSelectedRowKeys={dataChoosed?.id}
+                
             >
-                <Selection mode="single" />
+                <PopupBOM
+                                    isVisible={isSubmit}
+                                    onCancel={() => setIsSubmit(false)}
+                                    onSubmit={() => { }}
+                                    modalTitle={
+                                        <div>
+                                            <h3
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                    color: "#ff794e",
+                                                    fontWeight: 500,
+                                                }}>
+                                                    Xác nhận tạo phiếu công nghệ cho các yêu cầu sản xuất đã chọn
+                                            </h3>
+                                        </div>
+                                    }
+                                    modalContent={
+                                        <div>
+                                            <h4 style={{ fontWeight: 500, fontSize: 16 }}>Bạn có chắc muốn tạo phiếu yêu cầu cho những yêu cầu sản xuất đã chọn?</h4>
+                                            <div style={{ backgroundColor: "#ffe0c2", borderLeft: "4px solid #ff794e", borderRadius: 5, height: 120, marginTop: 20 }}>
+                                                <h3 style={{ color: "#ff794e", fontWeight: 500 }}>
+                                                    <WarningOutlined style={{ color: "#ff794e", marginRight: "8px" }} />
+                                                    Lưu ý:
+                                                </h3>
+                                                <p style={{ marginLeft: 20, fontSize: 15, fontWeight: 400 }}>
+                                                    Sau khi ấn xác nhận bạn không thể  hoàn tác.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    customFooter={handleCustomFooterButtonSubmitCreate}
+                                    width={600}
+                                />
+                <Selection mode="multiple" />
+                <FilterRow visible={true} />
                 <Column alignment="left" dataField="productionCode" caption="Mã sản xuất" />
                 <Column alignment="left" dataField="cardName" caption="Tên thẻ" />
                 <Column alignment="left" dataField="customer" caption="Khách hàng" />
                 <Column alignment="left" dataField="quantityRequirement" caption="Số lượng yêu cầu" />
 
             </DataGrid>
-
+            <PaginationComponent
+                            pageSizeOptions={[10, 20, 40]}
+                            pageTextInfo={{ pageIndex, numberOfPages: totalPage, total: dataGrid?.length }}
+                            totalPages={totalPage}
+                            pageIndex={pageIndex}
+                            pageSize={pageSize}
+                            onPageChanged={(newPageIndex) => setPageIndex(newPageIndex)}
+                            onPageSizeChanged={(newPageSize) => setPageSize(newPageSize)}
+                        />
         </Modal>
     )
 }

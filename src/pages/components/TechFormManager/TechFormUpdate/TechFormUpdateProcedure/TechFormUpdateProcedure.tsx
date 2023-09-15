@@ -8,6 +8,13 @@ import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdateProcedure.module.css";
+import TechFormDesTab from "../../../../../components/TechFormComponent/TechFormDesTab";
+import { useTechFormContext } from "../TechFormUpdate";
+import Printing from "../../../../../components/TechFormComponent/Printing";
+import Lamination from "../../../../../components/TechFormComponent/Lamination";
+import Processing from "../../../../../components/TechFormComponent/Processing";
+import Cutting from "../../../../../components/TechFormComponent/Cutting";
+import Hostamping from "../../../../../components/TechFormComponent/Hostamping";
 
 type TechFormDetailProcedureProps = {
     techFormData: any;
@@ -42,6 +49,8 @@ const data2 = [
 export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = observer(
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateHostamping, setIsVisibleTechFormUpdateHostamping] = React.useState<boolean>(false);
+
+        const [techFormState, dispatch] = useTechFormContext();
 
         const onUpdateLaminationInfo = (index_: any, key: any, value: any) => {
             let newLaminationInfos = techFormData.lamination.steps.map((step: any, index: any) => {
@@ -347,93 +356,7 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                 </h6>
                             </div>
                             <div style={{ marginTop: 30 }}>
-                                <DataGrid
-                                    key={"step"}
-                                    keyExpr={"step"}
-                                    dataSource={[...techFormData.printingTech.front, ...techFormData.printingTech.back]}
-                                    showBorders={true}
-                                    showRowLines={true}
-                                    showColumnLines={true}>
-                                    <Column alignment='left' caption='Công nghệ In/Printing Technology' fixed>
-                                        <Column alignment='left' caption='Nội dung In/Printing Contents' fixed>
-                                            <Column
-                                                dataField='step'
-                                                alignment='center'
-                                                caption='Bước/Step'
-                                                width={100}
-                                                cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"step"} />
-                                                )}>
-                                                {/* <Column>
-                                    <Column dataField="" caption="Front" width={50} />
-                                    <Column dataField="" caption="Back" width={50} />
-                                </Column> */}
-                                                {/* <Column dataField="id" width={50} alignment="left" caption="" /> */}
-                                            </Column>
-                                            <Column
-                                                dataField='item'
-                                                caption='Nội dung/Item'
-                                                cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"item"} />
-                                                )}
-                                            />
-                                            <Column
-                                                dataField='method'
-                                                caption='Phương pháp/Method'
-                                                cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"method"} />
-                                                )}
-                                            />
-                                        </Column>
-                                    </Column>
-                                    <Column
-                                        alignment='left'
-                                        headerCellRender={() => {
-                                            return (
-                                                <div className='checkbox'>
-                                                    <div>
-                                                        <input
-                                                            onChange={() => onChoosePrintingTechnology(0)}
-                                                            type='checkbox'
-                                                            id='In'
-                                                            checked={techFormData.printingTech.printingTechnology === 0}
-                                                        />
-                                                        <label htmlFor='In' className='checkBoxStyle'>
-                                                            In trở Nó
-                                                        </label>
-                                                    </div>
-                                                    <div style={{ marginLeft: 120 }}>
-                                                        <input
-                                                            onChange={() => onChoosePrintingTechnology(1)}
-                                                            type='checkbox'
-                                                            id='In'
-                                                            checked={techFormData.printingTech.printingTechnology === 1}
-                                                        />
-                                                        <label htmlFor='In' className='checkBoxStyle'>
-                                                            In trở Khác
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            );
-                                        }}>
-                                        <Column alignment='center' caption='File'>
-                                            <Column
-                                                dataField='colour'
-                                                caption='Màu/Colour'
-                                                cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"colour"} />
-                                                )}
-                                            />
-                                            <Column
-                                                dataField='note'
-                                                caption='Ghi chú/Note'
-                                                cellRender={(cellInfo) => (
-                                                    <TextBox placeholder='Nhập' value={cellInfo.value} key={"note"} />
-                                                )}
-                                            />
-                                        </Column>
-                                    </Column>
-                                </DataGrid>
+                                <TechFormDesTab data={techFormState.productionRequirements} component={Printing}  />
                             </div>
                             <div style={{ marginTop: 30 }}>
 
@@ -445,10 +368,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 Thời gian từ 09/08/2022 đến 19/08/2022
                                             </h6>
                                         </div>
-
-                                        <DataGrid
+                                        {/* <DataGrid
                                             key={"step"}
-                                            dataSource={techFormData.lamination.steps}
+                                            dataSource={[]}
                                             keyExpr='step'
                                             showBorders={true}
                                             showRowLines={true}
@@ -524,7 +446,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     </div>
                                                 )}
                                             />
-                                        </DataGrid>
+                                        </DataGrid> */}
+                                        <TechFormDesTab data={techFormState.productionRequirements} component={Lamination} />
                                     </div>
                                     <div style={{ marginTop: 30 }}>
                                         <div className='subtile' style={{ marginBottom: 15 }}>
@@ -533,9 +456,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                 Thời gian từ 09/08/2022 đến 19/08/2022
                                             </h6>
                                         </div>
-                                        <DataGrid
+                                        {/* <DataGrid
                                             key={"no"}
-                                            dataSource={techFormData.processing.processingInfos}
+                                            dataSource={[]}
                                             keyExpr='no'
                                             showBorders={true}
                                             showRowLines={true}
@@ -623,7 +546,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     </div>
                                                 )}
                                             />
-                                        </DataGrid>
+                                        </DataGrid> */}
+                                        <TechFormDesTab data={techFormState.productionRequirements} component={Processing} />
                                     </div>
                                     <div style={{ marginTop: 30 }}>
                                         <div style={{ marginTop: 30 }}>
@@ -633,9 +557,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     Thời gian từ 09/08/2022 đến 19/08/2022
                                                 </h6>
                                             </div>
-                                            <DataGrid
+                                            {/* <DataGrid
                                                 key={"no"}
-                                                dataSource={techFormData.cutting.cuttingInfos}
+                                                dataSource={[]}
                                                 keyExpr='no'
                                                 showBorders={true}
                                                 showRowLines={true}
@@ -693,7 +617,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                         </div>
                                                     )}
                                                 />
-                                            </DataGrid>
+                                            </DataGrid> */}
+                                            <TechFormDesTab data={techFormState.productionRequirements} component={Cutting} />
                                         </div>
                                         <div>
                                             <div className='subtile' style={{ marginBottom: 15 }}>
@@ -702,9 +627,9 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                     Thời gian từ 09/08/2022 đến 19/08/2022
                                                 </h6>
                                             </div>
-                                            <DataGrid
+                                            {/* <DataGrid
                                                 key={"step"}
-                                                dataSource={techFormData.hostamping.hostampingInfos}
+                                                dataSource={[]}
                                                 keyExpr='step'
                                                 showBorders={true}
                                                 showRowLines={true}
@@ -811,7 +736,8 @@ export const TechFormUpdateProcedure: React.FC<TechFormDetailProcedureProps> = o
                                                         </div>
                                                     )}
                                                 />
-                                            </DataGrid>
+                                            </DataGrid> */}
+                                            <TechFormDesTab data={techFormState.productionRequirements} component={Hostamping} />
                                         </div>
                                         <div className={cx("toolbar")}>
                                             <Button

@@ -72,7 +72,7 @@ export const BOMBodyCard = () => {
     const [isVisibleListMaterialReplacement, setIsVisibleListMaterialReplacement] = React.useState<boolean>(false);
     const [isChangeState, setIsChangeState] = React.useState<boolean>(false);
     const [bom, setBom] = React.useState<any>({});
-    const [bomIdChoosed, setBomIdChoosed] = React.useState<Number | null>(null);
+    const [bomIdChoosed, setBomIdChoosed] = React.useState<number | null>(null);
 
     const [pageIndex, setPageIndex] = React.useState<number>(1);
     const [pageSize, setPageSize] = React.useState<number>(10);
@@ -112,10 +112,10 @@ export const BOMBodyCard = () => {
     };
 
     const handleChangeStatus = (bomId) => {
-        httpRequests.put(`http://localhost:6886/api/boms/${bomId}/status`)
+        httpRequests.put(`/api/boms/${bomId}/status`)
         .then(response => {
             console.log(response);
-            getBOMsProduct(props.bomTemplateId)
+            getBomTemplate();
         })
     }
 
@@ -149,7 +149,11 @@ export const BOMBodyCard = () => {
                 <Button
                     className={cx("btn-save")}
                     key='submit'
-                    onClick={() => { }}
+                    onClick={() => { 
+                        handleChangeStatus(bomIdChoosed);
+                        setBomIdChoosed(null);
+                        setIsChangeState(false);
+                    }}
                 >
                     Xác nhận
                 </Button>
@@ -166,9 +170,9 @@ export const BOMBodyCard = () => {
         <>
             {isBOMCardAddInfo ? (
                 <BOMBodyCardAddInfo
-                    requestInfo={{}}
-                    techFormId={null}
-                    id={bomIdChoosed}
+                    requestId={null}
+                    id={null}
+                    bomTemplateId={bomIdChoosed}
                     isOpen={isBOMCardAddInfo}
                     setClose={() => {
                         setIsBOMCardAddInfo(false);
@@ -430,7 +434,9 @@ export const BOMBodyCard = () => {
                                                 style={{ marginRight: 17 }}
                                             />
                                             <SvgIcon
-                                                onClick={() => setIsChangeState(true)}
+                                                onClick={() => {setIsChangeState(true)
+                                                    setBomIdChoosed(cellInfo.key);
+                                                }}
                                                 tooltipTitle='Chuyển trạng thái'
                                                 sizeIcon={17}
                                                 textSize={17}

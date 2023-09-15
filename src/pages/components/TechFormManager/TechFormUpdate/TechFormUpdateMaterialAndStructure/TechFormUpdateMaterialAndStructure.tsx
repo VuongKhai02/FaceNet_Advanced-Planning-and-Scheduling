@@ -8,6 +8,10 @@ import SvgIcon from "../../../../../shared/components/SvgIcon/SvgIcon";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdateMaterialAndStructure.module.css";
+import { useTechFormContext } from "../TechFormUpdate";
+import TechFormDesTab from "../../../../../components/TechFormComponent/TechFormDesTab";
+import MaterialTable from "../../../../../components/TechFormComponent/MaterialTable";
+import PlateStructure from "../../../../../components/TechFormComponent/PlateStructure";
 
 type TechFormUpdateMaterialAndStructureProps = {
     techFormData: any;
@@ -70,113 +74,115 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
         const [isVisibleTechFormUpdateProcedure, setIsVisibleTechFormUpdateProcedure] = React.useState<boolean>(false);
 
+        const [techFormState, dispatch] = useTechFormContext();
+
         const getMaterialFormTechForm = () => {
-            const data: any[] = [];
-            techFormData?.bomBodyCard?.bomBodyCardMaterials.forEach((material: any, index: any) => {
-                data.push({
-                    ...material,
-                    no: index + 1,
-                });
-            });
-            return data;
+            // const data: any[] = [];
+            // techFormData?.bomBodyCard?.bomBodyCardMaterials.forEach((material: any, index: any) => {
+            //     data.push({
+            //         ...material,
+            //         no: index + 1,
+            //     });
+            // });
+            // return data;
         };
 
         const getInfoPlate = () => {
-            const data: any[] = [];
-            const maxLength = Math.max(techFormData.prePressPcToPlate.front.length, techFormData.prePressPcToPlate.back.length);
+            // const data: any[] = [];
+            // const maxLength = Math.max(techFormData.prePressPcToPlate.front.length, techFormData.prePressPcToPlate.back.length);
 
-            let front;
-            let back;
+            // let front;
+            // let back;
 
-            for (let i = 0; i < maxLength; ++i) {
-                if (techFormData.prePressPcToPlate.front.length > i) {
-                    front = techFormData.prePressPcToPlate.front[i];
-                } else {
-                    front = {};
-                }
+            // for (let i = 0; i < maxLength; ++i) {
+            //     if (techFormData.prePressPcToPlate.front.length > i) {
+            //         front = techFormData.prePressPcToPlate.front[i];
+            //     } else {
+            //         front = {};
+            //     }
 
-                if (techFormData.prePressPcToPlate.back.length > i) {
-                    back = techFormData.prePressPcToPlate.back[i];
-                } else {
-                    back = {};
-                }
-                data.push({
-                    no: i,
-                    front: front,
-                    back: back,
-                });
+            //     if (techFormData.prePressPcToPlate.back.length > i) {
+            //         back = techFormData.prePressPcToPlate.back[i];
+            //     } else {
+            //         back = {};
+            //     }
+            //     data.push({
+            //         no: i,
+            //         front: front,
+            //         back: back,
+            //     });
 
-                console.log(data)
-            }
+            //     console.log(data)
+            // }
 
-            return data;
+            // return data;
         };
 
         const onRemoveRowPlate = (rowIndex: any) => {
-            const newPlateInfosFront = techFormData.prePressPcToPlate.front
-                .filter((step: any, index: any) => index !== rowIndex);
-            const newPlateInfosBack = techFormData.prePressPcToPlate.back
-                .filter((step: any, index: any) => index !== rowIndex);
-            if (newPlateInfosFront.length === 0 && newPlateInfosBack.length === 0) {
-                newPlateInfosFront.push({})
-                newPlateInfosBack.push({})
-            }
-            setTechFormData({
-                ...techFormData,
-                prePressPcToPlate: {
-                    ...techFormData.prePressPcToPlate,
-                    front: newPlateInfosFront,
-                    back: newPlateInfosBack
-                },
-            });
+            // const newPlateInfosFront = techFormData.prePressPcToPlate.front
+            //     .filter((step: any, index: any) => index !== rowIndex);
+            // const newPlateInfosBack = techFormData.prePressPcToPlate.back
+            //     .filter((step: any, index: any) => index !== rowIndex);
+            // if (newPlateInfosFront.length === 0 && newPlateInfosBack.length === 0) {
+            //     newPlateInfosFront.push({})
+            //     newPlateInfosBack.push({})
+            // }
+            // setTechFormData({
+            //     ...techFormData,
+            //     prePressPcToPlate: {
+            //         ...techFormData.prePressPcToPlate,
+            //         front: newPlateInfosFront,
+            //         back: newPlateInfosBack
+            //     },
+            // });
         }
 
         const onAddNewRowPlate = (currentIndex: any) => {
-            console.log(currentIndex);
-            const newPlateInfosFront = [
-                ...techFormData.prePressPcToPlate.front.slice(0, currentIndex + 1),
-                {},
-                ...techFormData.prePressPcToPlate.front.slice(currentIndex + 1),
-            ];
-            const newPlateInfosBack = [
-                ...techFormData.prePressPcToPlate.back.slice(0, currentIndex + 1),
-                {},
-                ...techFormData.prePressPcToPlate.back.slice(currentIndex + 1),
-            ];
-            setTechFormData({
-                ...techFormData,
-                prePressPcToPlate: {
-                    ...techFormData.prePressPcToPlate,
-                    front: newPlateInfosFront,
-                    back: newPlateInfosBack
-                },
-            });
+            // console.log(currentIndex);
+            // const newPlateInfosFront = [
+            //     ...techFormData.prePressPcToPlate.front.slice(0, currentIndex + 1),
+            //     {},
+            //     ...techFormData.prePressPcToPlate.front.slice(currentIndex + 1),
+            // ];
+            // const newPlateInfosBack = [
+            //     ...techFormData.prePressPcToPlate.back.slice(0, currentIndex + 1),
+            //     {},
+            //     ...techFormData.prePressPcToPlate.back.slice(currentIndex + 1),
+            // ];
+            // setTechFormData({
+            //     ...techFormData,
+            //     prePressPcToPlate: {
+            //         ...techFormData.prePressPcToPlate,
+            //         front: newPlateInfosFront,
+            //         back: newPlateInfosBack
+            //     },
+            // });
         }
         const onUpdatePlateInfo = (isFront: any, index: any, key: any, value: any) => {
-            let side;
-            let newData;
-            if (isFront) {
-                side = 'front';
-                newData = techFormData.prePressPcToPlate.front;
-            } else {
-                side = 'back';
-                newData = techFormData.prePressPcToPlate.back;
-            }
-            console.log("before", newData)
-            newData[index] = {
-                ...newData[index],
-                [key]: value
-            }
+            // let side;
+            // let newData;
+            // if (isFront) {
+            //     side = 'front';
+            //     newData = techFormData.prePressPcToPlate.front;
+            // } else {
+            //     side = 'back';
+            //     newData = techFormData.prePressPcToPlate.back;
+            // }
+            // console.log("before", newData)
+            // newData[index] = {
+            //     ...newData[index],
+            //     [key]: value
+            // }
 
-            console.log("after", newData)
+            // console.log("after", newData)
 
-            setTechFormData({
-                ...techFormData,
-                prePressPcToPlate: {
-                    ...techFormData.prePressPcToPlate,
-                    [side]: newData,
-                },
-            });
+            // setTechFormData({
+            //     ...techFormData,
+            //     prePressPcToPlate: {
+            //         ...techFormData.prePressPcToPlate,
+            //         [side]: newData,
+            //     },
+            // });
 
         }
 
@@ -214,10 +220,10 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                     Vật liệu và cấu trúc/Material and Structure : Thời gian từ 09/08/2022 đến 19/08/2022{" "}
                                 </h6>
                             </div>
-                            <div style={{ marginTop: 30 }}>
-                                <DataGrid
+                            <div style={{ marginTop: 30, display: 'flex', flexDirection: 'column', gap: 100 }}>
+                                {/* <DataGrid
                                     key={"no"}
-                                    dataSource={getMaterialFormTechForm()}
+                                    dataSource={[]}
                                     keyExpr='no'
                                     showBorders={true}
                                     showRowLines={true}
@@ -228,8 +234,10 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                     <Column dataField='quantity' caption="Số lượng/Q'ty" />
                                     <Column dataField='note' caption='Ghi chú/Remarks' />
                                     <Column dataField='structure' caption='Cấu trúc/Structure' />
-                                </DataGrid>
-                                <div className='container'>
+                                </DataGrid> */}
+                                <TechFormDesTab data={techFormState.productionRequirements} component={MaterialTable}/>
+                                <TechFormDesTab data={techFormState.productionRequirements} component={PlateStructure} />
+                                {/* <div className='container' style={{paddingTop: 50}}>
                                     <div className='checkbox'>
                                         <label htmlFor='raPhim' style={{ fontWeight: 500 }}>
                                             Ra phim/Pre-press
@@ -246,7 +254,7 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             }}
                                             type='checkbox'
                                             id='raPhim'
-                                            checked={techFormData.prePressPcToPlate.isPrePress}
+                                            checked={true}
                                         />
                                     </div>
                                     <div className='checkbox'>
@@ -265,20 +273,20 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             }}
                                             type='checkbox'
                                             id='raBan'
-                                            checked={techFormData.prePressPcToPlate.isPcToPlate}
+                                            checked={true}
                                         />
                                     </div>
                                     <div className='input'>
                                         <label htmlFor='tongSoBan' style={{ fontWeight: 500, marginLeft: 50 }}>
-                                            Tổng số bản: {techFormData.prePressPcToPlate.totalPlate}
+                                            Tổng số bản: 1
                                         </label>
                                     </div>
                                 </div>
-                                <div style={{ paddingTop: 30 }}>
+                                <div style={{ paddingTop: 10 }}>
                                     <DataGrid
                                         key={"no"}
                                         keyExpr={"no"}
-                                        dataSource={getInfoPlate()}
+                                        dataSource={[]}
                                         showBorders={true}
                                         showRowLines={true}
                                         showColumnLines={true}>
@@ -379,7 +387,9 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                         />
                                     </DataGrid>
 
-                                    <div
+                                </div> */}
+                            </div>
+                            <div
                                         className={cx('toolbar')}>
                                         <Button
                                             onClick={setClose}
@@ -402,8 +412,6 @@ export const TechFormUpdateMaterialAndStructure: React.FC<TechFormUpdateMaterial
                                             className={cx('btn-send')}
                                         >Gửi duyệt</Button>
                                     </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 )}

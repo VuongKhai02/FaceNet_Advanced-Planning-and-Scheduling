@@ -98,13 +98,28 @@
 
 .title {
     font-weight: 700;
-    width: 25%;
+    width: 18%;
     padding: 10px;
-    border: 1px solid rgb(189, 187, 187);
+    text-align: end;
 }
 
 .value {
-    border: 1px solid rgb(189, 187, 187);
     width: 25%;
     padding: 10px;
+}
+
+.production_codes {
+    display: flex;
+    flex-direction: row;
+}
+
+.production_codes .code {
+    max-width: 70%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.production_codes .quantity {
+    margin-left: auto;
+    margin-right: 120px;
 }

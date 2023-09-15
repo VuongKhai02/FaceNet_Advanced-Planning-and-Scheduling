@@ -1,0 +1,14 @@
+.wrapper {
+    padding: 10px;
+}
+
+.spec_table {
+    width: 90%;
+    margin: 0 auto;
+
+}
+
+.spec_table tr th {
+    background: #FFE0C2;
+    padding: 2px;
+}
