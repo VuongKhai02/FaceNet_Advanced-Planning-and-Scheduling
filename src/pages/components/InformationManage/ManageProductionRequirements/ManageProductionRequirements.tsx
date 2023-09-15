@@ -167,11 +167,11 @@ export const ManageProductionRequirements = () => {
                                 dataSource={dataPage}
                                 showBorders={true}
                                 columnAutoWidth={true}
+                                hoverStateEnabled={true}
                                 showRowLines={true}
                                 rowAlternationEnabled={true}
                                 allowColumnResizing={true}
                                 allowColumnReordering={true}
-                                focusedRowEnabled={true}
                                 noDataText={t("common.noData-text")}
                             >
                                 <PopupDetailProductionRequire
