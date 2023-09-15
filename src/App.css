@@ -441,6 +441,11 @@ tbody[role="presentation"] .dx-row.dx-column-lines.dx-header-row {
     color: #fff !important;
 }
 
+.dx-datagrid-table .dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row):not(.dx-row-focused)>td:not(.dx-focused) {
+    background-color: #fafafa;
+    color: unset;
+}
+
 .dx-popup-title {
     color: #da5859 !important;
     font-size: 24px !important;
