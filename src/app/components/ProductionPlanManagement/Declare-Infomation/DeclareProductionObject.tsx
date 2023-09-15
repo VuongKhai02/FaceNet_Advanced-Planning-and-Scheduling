@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./DeclareProductionObject.css"
-import { DataGrid, SelectBox, } from "devextreme-react";
+// import { DataGrid, } from "devextreme-react";
 import { Button, Tag } from "antd"
 import {
+    DataGrid,
     Export,
     Column,
     FilterRow,
@@ -11,7 +12,7 @@ import {
     Pager,
     Paging,
     SearchPanel,
-    Toolbar, ColumnChooser, Button as ButtonIcon, MasterDetail
+    Toolbar, ColumnChooser, Button as ButtonIcon, MasterDetail, Lookup
 } from "devextreme-react/data-grid";
 import axios from "axios";
 import { useMainStore } from "@haulmont/jmix-react-core";
@@ -36,6 +37,15 @@ const fakeInfoMapped = [{
     plot_id: "",
 }]
 
+
+const lookupData = [
+    'Not Started',
+    'Need Assistance',
+    'In Progress',
+    // ...
+];
+
+
 export const infoMappedContext = React.createContext<any | null>(null);
 
 export const DeclareProductionObject = () => {
@@ -45,6 +55,15 @@ export const DeclareProductionObject = () => {
     const [isDeclareInfo, setisDeclareInfo] = React.useState<boolean>(false);
     const [isVisibleDetail, setisVisibleDetail] = React.useState<boolean>(false);
     const [isConfirmDelete, setIsConfirmDelete] = React.useState<boolean>(false);
+    const [infoMapped, setInfoMapped] = useState(fakeInfoMapped);
+
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        loadOrders();
+        window.addEventListener('resize', updateDimension);
+    }, [])
 
     const handleHideModalDel = () => {
         setIsConfirmDelete(false);
@@ -53,8 +72,6 @@ export const DeclareProductionObject = () => {
     const handleShowModalDel = () => {
         setIsConfirmDelete(true);
     }
-
-    const [infoMapped, setInfoMapped] = useState(fakeInfoMapped);
 
     const loadOrders = () => {
         const headers = {
@@ -69,14 +86,6 @@ export const DeclareProductionObject = () => {
             }
             );
     }
-
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        loadOrders();
-        window.addEventListener('resize', updateDimension);
-    }, [])
 
     const onStatusPoRender = (rowInfo) => {
         // console.log("Data color,", data?.value)
@@ -161,17 +170,12 @@ export const DeclareProductionObject = () => {
             autoFilterEnabled: true,
         }).then(() => {
             workbook.xlsx.writeBuffer().then((buffer) => {
-                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Danh sách được khai báo thông tin.xlsx');
             });
         });
         e.cancel = true;
     }
 
-    const cellRender = (e) => {
-        return (
-            windowWidth < 600 ? <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn công đoạn --" /> : <></>
-        )
-    }
     return (
         <infoMappedContext.Provider value={[infoMapped, setInfoMapped]}>
             <>
@@ -245,11 +249,13 @@ export const DeclareProductionObject = () => {
                                         showNavigationButtons={true}
                                         infoText="Trang số {0} trên {1} ({2} bản ghi)" />
 
-                                    <Column caption={"Mã đơn hàng"} dataField={"saleOrderId"} alignment="left" allowFiltering={false} ></Column>
-                                    <Column caption={"Mã sản xuất"} dataField={"customer"} alignment="right" />
-                                    <Column caption={"Tên thẻ"} dataField={"customer"} />
+                                    <Column caption={"Mã đơn hàng"} width={140} dataField={"saleOrderId"} alignment="left">
+                                        <Lookup dataSource={lookupData} />
+                                    </Column>
+                                    <Column caption={"Mã sản xuất"} dataField={"productionCode"} />
+                                    <Column caption={"Tên thẻ"} dataField={"sender"} />
                                     <Column caption={"Ngày bắt đầu"} dataType="datetime" dataField={"startTime"} format="dd/MM/yyyy hh:mm:ss" />
-                                    <Column caption={"Ngày kết thúc"} dataType="datetime" dataField={"startTime"} cellRender={cellRender} format="dd/MM/yyyy hh:mm:ss" />
+                                    <Column caption={"Ngày kết thúc"} dataType="datetime" dataField={"finishTime"} format="dd/MM/yyyy hh:mm:ss" />
                                     <Column caption={"Trạng thái"} cellComponent={onStatusPoRender} />
                                     <Column type="buttons" width={110} caption="Thao tác" cellRender={() =>
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
@@ -288,35 +294,6 @@ export const DeclareProductionObject = () => {
                                                 margin: "0 0 .6rem .5rem"
                                             }}>Khai báo thông tin</h2>
                                             <div style={{ border: '1px solid #ccc', borderRadius: '6px', margin: '0.5rem', padding: windowWidth < 600 ? "0" : "0 3rem" }}>
-                                                {/* <div className="content" style={{ display: "flex", height: "24vh", width: "100%", justifyContent: "space-between", margin: ".5rem", flexWrap: "wrap" }}>
-                                                    <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
-                                                        <p>Tên công đoạn</p>
-                                                        <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn công đoạn --" items={stage_name} />
-
-                                                    </div>
-                                                    <div className="col-4" style={{ width: windowWidth < 600 ? "100%" : "47%", margin: "0 1rem 1rem 0" }}>
-                                                        <p>Tên Job</p>
-                                                        <SelectBox style={{ width: windowWidth < 600 ? "100%" : "47%" }} placeholder="-- Chọn job --" items={job_name} />
-                                                    </div>
-                                                </div>
-
-                                                <div className="content" style={{ display: windowWidth < 600 ? "none" : "flex", justifyContent: "space-between", margin: ".5rem", padding: "1rem 0.3rem", borderRadius: "4px" }}>
-                                                    <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                                        <p>Mã sản xuất</p>
-                                                        <TextBox value={infoMapped[0].pro_id} disabled style={{ background: infoMapped[0].pro_id == "" ? `url(assets/images/qrTextBox.jpg) no-repeat scroll 5px 4px` : "none", padding: infoMapped[0].pro_id == "" ? "0 0 0 1.5rem" : "0 .3rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-
-                                                        <p>Mã máy</p>
-                                                        <TextBox value={infoMapped[0].machine_id} disabled style={{ background: infoMapped[0].machine_id == "" ? `url(assets/images/qrTextBox.jpg) no-repeat scroll 5px 4px` : "none", padding: infoMapped[0].machine_id == "" ? "0 0 0 1.5rem" : "0 .3rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-                                                    </div>
-                                                    <div className="col-4" style={{ width: "47%", margin: "0.2rem" }}>
-                                                        <p>Mã công nhân</p>
-                                                        <TextBox value={infoMapped[0].worker_id} disabled style={{ background: infoMapped[0].worker_id == "" ? `url(assets/images/qrTextBox.jpg) no-repeat scroll 5px 4px` : "none", padding: infoMapped[0].worker_id == "" ? "0 0 0 1.5rem" : "0 .3rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-
-                                                        <p>Mã lô NVL/BTP</p>
-                                                        <TextBox value={infoMapped[0].plot_id} disabled style={{ background: infoMapped[0].plot_id == "" ? `url(assets/images/qrTextBox.jpg) no-repeat scroll 5px 4px` : "none", padding: infoMapped[0].plot_id == "" ? "0 0 0 1.5rem" : "0 .3rem", borderRadius: "4px", border: "1px solid rgba(0, 0, 0, 0.4)", marginBottom: "1rem" }} placeholder="Quét mã trên Zebra  " > </TextBox>
-                                                    </div>
-
-                                                </div> */}
                                                 <div style={{ display: 'flex', flexDirection: "row-reverse", padding: "1rem" }}>
                                                     <Button onClick={() => { setisDeclareInfo(true) }} className="btn_continue">{windowWidth > 600 ? "Chuyển sang giao diện công nhân" : "Sang công nhân"}</Button>
                                                 </div>
@@ -330,10 +307,6 @@ export const DeclareProductionObject = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                 }
             </>
         </infoMappedContext.Provider>

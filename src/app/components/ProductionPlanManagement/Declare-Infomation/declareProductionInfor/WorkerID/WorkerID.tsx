@@ -42,6 +42,7 @@ export const WorkerID: React.FC<WorkerID> = observer(({
         window.addEventListener('resize', updateDimension);
     }, [])
 
+    // Kiểm tra xem khai báo NVL hay khai báo Hộp
     const checkIsNVL = (_isNVL) => {
         setIsNVL(_isNVL);
         console.log("NVL", isNVL);

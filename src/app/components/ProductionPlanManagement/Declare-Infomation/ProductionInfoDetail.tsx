@@ -20,7 +20,7 @@ import { customizeColor } from "../../../../utils/utils";
 type ProductionInfoDetail = {
     isOpen: boolean,
     setClose?: () => void;
-
+    production_id: ""
 };
 
 const stage_value = [
@@ -41,8 +41,7 @@ const stage_value = [
 const allowedPageSizes: (number | "auto" | "all")[] = [5, 10, 'all'];
 
 export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
-    isOpen = false, setClose }) => {
-    const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+    isOpen = false, setClose, production_id = "" }) => {
     const [content, setContent] = useState<string>();
     const [isVisibleProgressWODetailJob, setisVisibleProgressWODetailJob] = React.useState<boolean>(false);
     const mainStore = useMainStore();
@@ -50,10 +49,6 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
 
     useEffect(() => {
         loadOrders();
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
     }, [])
 
     const loadOrders = () => {
@@ -143,10 +138,11 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
 
     }
 
+    // Master detail
     const detailData = () => {
         return (
-
             <DataGrid
+                // showColumnHeaders={false}
                 style={{ marginLeft: "0 .5rem" }}
                 keyExpr={"saleOrderId"}
                 dataSource={content}
@@ -159,7 +155,7 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
                 focusedRowEnabled={true}
             >
                 <FilterRow visible={true} />
-                <Column caption={"Mã Job"} dataField={"customer"} alignment="right" />
+                <Column caption={"Mã Job"} dataField={"customer"} alignment="right" ></Column>
                 <Column caption={"Tên công nhân"} dataField={"customer"} />
                 <Column caption={"Nhóm/tổ"} dataField={"customer"} />
                 <Column caption={"Ca sản xuất"} dataType="datetime" dataField={"customer"} />
@@ -211,7 +207,7 @@ export const ProductionInfoDetail: React.FC<ProductionInfoDetail> = observer(({
                                 width: "90%"
                             }}>
                             <td>
-                                <InfoRow label='Mã đơn hàng' data='SO_2343' />
+                                <InfoRow label='Mã đơn hàng' data={production_id} />
                                 <InfoRow label='Tên thẻ' data='Visa TPBank' />
                                 <InfoRow label='Số lượng' data='15,000' />
                                 <InfoRow label='Thời gian bắt đầu' data='09/08/2023' />

@@ -38,6 +38,12 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
     const [nvlBtpPlot_barcode, setnvlBtpPlot_barcode] = useState(fakeNvlBtpPlot_barcode);
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', updateDimension);
+    }, [])
 
     const checkedInfo = () => {
         console.log("Chấm công");
@@ -90,14 +96,6 @@ export const NvlBtpPlot: React.FC<NvlBtpPlot> = observer(({
             }, 1000);
         }
     }
-
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
-    }, [])
-
 
     return (
         <>

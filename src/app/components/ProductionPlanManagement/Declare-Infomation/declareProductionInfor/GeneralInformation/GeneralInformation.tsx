@@ -74,6 +74,7 @@ export const GeneralInformation: React.FC<GeneralInformation> = observer(({
             finishTime: data[0].finishTime,
         }
         setSelectedInfo(newObj);
+        console.log(newObj)
     }
 
     return (

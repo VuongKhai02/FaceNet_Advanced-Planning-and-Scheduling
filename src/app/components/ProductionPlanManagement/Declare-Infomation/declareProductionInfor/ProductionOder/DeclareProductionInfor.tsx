@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { TextBox } from "devextreme-react";
 import { Button } from "antd"
 import { observer } from "mobx-react";
-import { ProductionID } from "../ProductionID/ProductionID";
 import { GeneralInformation } from "../GeneralInformation/GeneralInformation";
 import { infoMappedContext } from "../../DeclareProductionObject";
 import "../../styleCommon.css"
@@ -28,6 +27,13 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
     const [productionInfo, setProductionInfo] = useState(fakeProductionInfo);
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', updateDimension);
+    }, [])
+
     const refresh = () => {
         productionInfo[0].id = "";
         productionInfo[0].cardName = "";
@@ -39,10 +45,11 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         infoMapped[0].pro_id = "";
         let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
         setInfoMapped(newInfoMpaped);
+        //Ấn nút quét lại thì tự động focus vào ô input
         document.getElementById("inputHide")?.focus();
     }
 
-    // Function for update after qr again
+    // Hàm test để update dữ liệu 
     const updateDt = () => {
         productionInfo[0].id = "189";
         productionInfo[0].cardName = "Phôi mới";
@@ -51,7 +58,6 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         productionInfo[0].plot_number = "1";
         let newObj = JSON.parse(JSON.stringify(productionInfo))
         setProductionInfo(newObj);
-        console.log(newObj)
 
         infoMapped[0].pro_id = "189";
         let newInfoMpaped = JSON.parse(JSON.stringify(infoMapped))
@@ -62,13 +68,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
         console.log("Chấm công");
     }
 
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
-    }, [])
-
+    //Hiện tại chưa có thông tin chuẩn mã Qr lệnh sx, nên vẫn đang test bằng chuỗi Json
     const handleValueChange = (e) => {
         let input = e.target.value;
         if (input.includes("{")) {
@@ -90,7 +90,6 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
             }, 1000);
         }
     }
-
 
     return (
         < >
@@ -117,6 +116,7 @@ export const DeclareProductionInfor: React.FC<productionOrder> = observer(({
                                 <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                 <div>
                                     <div>
+                                        {/* Đã có css ẩn input với className="inputHidden" */}
                                         <input type="text" className="" name="a" id="inputHide" autoFocus onInput={handleValueChange} />
                                     </div>
                                     <Button onClick={refresh} className="btn_back">Quét lại</Button>

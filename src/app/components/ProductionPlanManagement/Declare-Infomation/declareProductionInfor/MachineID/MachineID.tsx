@@ -32,6 +32,12 @@ export const MachineID: React.FC<MachineID> = observer(({
     const [machineID, setmachineID] = useState(fakeMachineID);
     const [infoMapped, setInfoMapped] = useContext(infoMappedContext);
 
+    useEffect(() => {
+        const updateDimension = () => {
+            setwindowWidth(window.innerWidth)
+        }
+        window.addEventListener('resize', updateDimension);
+    }, [])
 
     const checkedInfo = () => {
         console.log("Chấm công");
@@ -65,6 +71,7 @@ export const MachineID: React.FC<MachineID> = observer(({
             "sortProperty": "machineCode",
             "sortOrder": "ASC"
         }
+        // Gọi api của mdm, chỉ khi truy cập url Localhost mới chạy dc
         axios.post("http://222.252.25.37:10068" + '/api/machines', request, { headers })
             .then(response => {
                 if (response.status === 200) {
@@ -94,13 +101,6 @@ export const MachineID: React.FC<MachineID> = observer(({
         }, 1000);
     }
 
-    useEffect(() => {
-        const updateDimension = () => {
-            setwindowWidth(window.innerWidth)
-        }
-        window.addEventListener('resize', updateDimension);
-    }, [])
-
     return (
         <>
             {isDeclareInfo ? <WorkerID isOpen={isDeclareInfo} setClose={() => setisDeclareInfo(false)}
@@ -127,7 +127,6 @@ export const MachineID: React.FC<MachineID> = observer(({
                                     <img src="assets/images/qrCode.svg" width={200} height={200} alt="" />
                                     <div>
                                         <div>
-
                                             <input type="text" className="inputHidden" id="inputHide" autoFocus onInput={handleValueChange} />
                                             <input type="text" className="" id="inputHide" autoFocus onInput={handleValueChange} />
                                         </div>
