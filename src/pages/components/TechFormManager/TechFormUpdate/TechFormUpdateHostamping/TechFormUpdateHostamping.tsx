@@ -9,6 +9,7 @@ import Loading from "../../../../../shared/components/Loading/Loading";
 import httpRequests from "../../../../../utils/httpRequests";
 
 import styles from "./TechFormUpdateHostamping.module.css";
+import { useTranslation } from "react-i18next";
 
 type TechFormDetailHostampingProps = {
     techFormData: any;
@@ -40,7 +41,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
 
         const [isLoading, setIsLoading] = React.useState(false);
-
+        const { t } = useTranslation(["common"]);
         const handleSaveClick = () => {
             setIsLoading(true);
             httpRequests.put(PLANNING_API_URL + "/api/techforms/" + techFormData.id, techFormData).then((response) => {
@@ -340,7 +341,7 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 <Button
                                     onClick={setClose}
                                     className={cx("btn-back")}
-                                >Trở lại</Button>
+                                >{t("common.back-button")}</Button>
                                 <Button
                                     onClick={() => { handleSaveClick() }}
                                     className={cx("btn-save")}
@@ -348,11 +349,11 @@ export const TechFormUpdateHostamping: React.FC<TechFormDetailHostampingProps> =
                                 <Button
                                     onClick={() => { }}
                                     className={cx("btn-sign")}
-                                >Ký lập</Button>
+                                >{t("common.signature")}</Button>
                                 <Button
                                     onClick={() => { }}
                                     className={cx("btn-send")}
-                                >Gửi duyệt</Button>
+                                >{t("common.send-approve")}</Button>
                             </div>
                         </div>
                     </div>

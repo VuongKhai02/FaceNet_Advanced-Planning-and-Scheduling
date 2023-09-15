@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import { Button, Input, Table } from "antd";
 import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
 import { TechFormContext } from "../TechFormBodyCard/TechFormBodyCard";
+import { useTranslation } from "react-i18next";
 
 type TechFormHostampingProps = {
     isOpen: boolean;
@@ -24,7 +25,7 @@ const data1 = [
 export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({ isOpen = false, setClose }) => {
     const [fromDateTime, setFromDateTime] = useState("");
     const [toDateTime, setToDateTime] = useState("");
-
+    const { t } = useTranslation(["common"]);
     const handleFromDateTimeChange = (e: any) => {
         setFromDateTime(e.value);
     };
@@ -144,7 +145,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 cellRender={() => (
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                         <SvgIcon
-                                            tooltipTitle='Thêm mới'
+                                            tooltipTitle={t("common.add-button")}
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Add.svg'
@@ -230,7 +231,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     render={() => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
-                                                tooltipTitle='Thêm mới'
+                                                tooltipTitle={t("common.add-button")}
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Add.svg'
@@ -286,7 +287,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                     render={() => (
                                         <div style={{ display: "flex", flexDirection: "row" }}>
                                             <SvgIcon
-                                                tooltipTitle='Thêm mới'
+                                                tooltipTitle={t("common.add-button")}
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Add.svg'
@@ -490,7 +491,7 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                                 cellRender={() => (
                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                         <SvgIcon
-                                            tooltipTitle='Thêm mới'
+                                            tooltipTitle={t("common.add-button")}
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Add.svg'
@@ -542,16 +543,16 @@ export const TechFormHostamping: React.FC<TechFormHostampingProps> = observer(({
                         <Button
                             onClick={setClose}
                             style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
-                        >Trở lại</Button>
+                        >{t("common.back-button")}</Button>
                         <Button
                             disabled
                             onClick={() => { }}
                             style={{ marginRight: "10px", width: 100 }}
-                        >Tiếp theo</Button>
+                        >{t("common.next-button")}</Button>
                         <Button
                             onClick={save}
                             style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
-                        >Thêm mới</Button>
+                        >{t("common.add-button")}</Button>
                     </div>
                 </div>
             </div>

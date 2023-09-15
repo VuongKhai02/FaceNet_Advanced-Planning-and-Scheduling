@@ -24,7 +24,14 @@
         "exportExcel":"Export Excel",
         "notification":"Notification",
         "notification-setting":"Notification setting",
-        "see-more":"See more"
+        "see-more":"See more",
+        "back-button":"Back",
+        "add-button":"Add",
+        "next-button":"Next",
+        "cancel-button":"Cancel",
+        "confirm-button":"Confirm",
+        "signature":"Signature",
+        "send-approve":"Send approve"
     },
     "sider": {
         "home": "Dashboard",
@@ -98,5 +105,40 @@
             "header":"Techform approve"
         }
 
+    },
+     "management-manufacture-plan":{
+        "manage-production-plan":"Manage production plan",
+        "manufacture-plan-list":{
+            "header":"Manufacture plan list"
+        },
+        "declaration-manufacture-info":{
+            "header":"Information product declaration list"
+        }
+    },
+    "progress-monitoring":{
+        "progress-monitoring-breadcrumb":"Progress monitoring",
+        "manufacture-progress-monitoring":{
+            "header":"Manufacture progress monitoring"
+        },
+        "order-progress-monitoring":{
+            "header":"Order progress monitoring"
+        },
+        "machine-monitoring":{
+
+        },
+        "stage-queue":{
+            "header":"Stage queue",
+            "label-table":"List of pending production orders"
+        }
+    },
+    "declare-production-quantity":{
+        "output-declaration":"Output declaration",
+        "declare-production-quantity":{
+            "header":"List of daily reports"
+        }
+    },
+    "user-management":{
+        "user-management":"Account management",
+        "header":"List of accounts"
     }
 }

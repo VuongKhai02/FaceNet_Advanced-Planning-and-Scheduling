@@ -10,6 +10,7 @@ const { Step } = Steps;
 import classNames from "classnames/bind";
 import styles from "./ProgressMonitoringStageQueue.module.css";
 import { WarningOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 const items = [
@@ -25,20 +26,20 @@ export const ProgressMonitoringStageQueue = () => {
     const [isVisibleDefineStageQueue, setIsVisibleDefineStageQueue] = React.useState<boolean>(false);
     const [defineStageQueue, setDefineStageQueue] = React.useState<boolean>(false);
     const [startStage, setStartStage] = React.useState<boolean>(false);
-    const {setBreadcrumbData} = useBreadcrumb();
-
+    const { setBreadcrumbData } = useBreadcrumb();
+    const { t } = useTranslation(["common"]);
     React.useEffect(() => {
         if (setBreadcrumbData) {
             setBreadcrumbData({
                 items: [
                     {
                         key: "progress-monitoring",
-                        title: "Giám sát tiến độ",
+                        title: "progress-monitoring.progress-monitoring-breadcrumb",
 
                     },
                     {
                         key: "stage-queue",
-                        title: "Hàng chờ công đoạn",
+                        title: "progress-monitoring.stage-queue.header",
                     }
                 ]
             })
@@ -51,7 +52,7 @@ export const ProgressMonitoringStageQueue = () => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsVisibleDefineStageQueue(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     key='submit'
@@ -82,7 +83,7 @@ export const ProgressMonitoringStageQueue = () => {
                                     fontSize: 20,
                                     marginBottom: 0,
                                 }}>
-                                Hàng chờ công đoạn
+                                {t("progress-monitoring.stage-queue.header")}
                             </h5>
                             <SvgIcon
                                 onClick={() => setIsVisibleDefineStageQueue(true)}
@@ -106,7 +107,7 @@ export const ProgressMonitoringStageQueue = () => {
                         <div>
                             <div style={{ border: "1px solid #004C98", borderRadius: 5, marginTop: 30, width: "40%", marginLeft: 20 }}>
                                 <h3>
-                                    <p>Danh sách lệnh sản xuất đang chờ</p>
+                                    <p>{t("progress-monitoring.stage-queue.label-table")}</p>
                                 </h3>
                                 <div className={cx('border__table-row')}></div>
                                 <InfoRow label='Mã sản xuất ' data='1234' />
@@ -217,8 +218,7 @@ export const ProgressMonitoringStageQueue = () => {
                                     isVisible={isVisibleDefineStageQueue}
                                     modalContent={
                                         <div>
-                                            <div style={{ marginLeft: 20, marginRight: 20, marginTop: 30 }}>
-                                                <p style={{ marginBottom: 5, color: "#333", fontSize: 20 }}>Thiết lập hàng chờ công đoạn</p>
+                                            <div style={{ marginLeft: 20, marginRight: 20 }}>
                                                 <div style={{ marginTop: 20 }}>
                                                     <table style={{ display: "flex", justifyContent: "space-between" }}>
                                                         <td style={{ width: 300 }}>
@@ -293,7 +293,7 @@ export const ProgressMonitoringStageQueue = () => {
                             <Button
                                 onClick={() => { }}
                                 style={{ marginRight: "8px", backgroundColor: "gray", color: "#fff", width: 120 }}
-                            >Trở lại</Button>
+                            >{t("common.back-button")}</Button>
                         </div>
                     </div>
                 </div>

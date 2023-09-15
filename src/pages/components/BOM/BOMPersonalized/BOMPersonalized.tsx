@@ -9,6 +9,7 @@ import {
     MasterDetail,
     ColumnChooser,
     OperationDescriptions,
+    Lookup,
 } from "devextreme-react/data-grid";
 import { useBreadcrumb } from "../../../../contexts/BreadcrumbItems";
 import PopupImportFile from "../../../../shared/components/PopupImportFile/PopupImportFile";
@@ -31,7 +32,7 @@ import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles);
 const data = [
     {
-        value: 0,
+        id: 1,
         customerCode: "TH01",
         customerName: "Sản phẩm 1",
         version: "1.1",
@@ -40,7 +41,7 @@ const data = [
         status: "Hoạt động",
     },
     {
-        value: 1,
+        id: 2,
         customerCode: "TH02",
         customerName: "Sản phẩm 2",
         version: "1.2",
@@ -154,43 +155,45 @@ export const BOMPersonalized = () => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
                 >
-                    Xác nhận
+                    {t("common.confirm-button")}
                 </Button>
             </div>
         </div>
     ];
 
+
     const onStatusRender = (value: any) => {
-        return data.map((item) => {
-            console.log('item status', item.value);
-            const customColor = customizeColor(item.status);
-            return (
-                <Tag
-                    key={item.value}
-                    style={{
-                        fontSize: '14px',
-                        padding: '7px',
-                        width: '100%',
-                        textAlign: 'center',
-                        color: customColor.color,
-                        backgroundColor: customColor.backgroundColor,
-                        borderRadius: '4px',
-                        border: 'none',
-                        fontWeight: customColor.fontWeight,
-                    }}
-                >
-                    {item.status}
-                </Tag>
-            );
-        });
-    };
+        let customColor: {
+            color: string,
+            backgroundColor: string,
+            fontWeight: string
+        } = {
+            color: "",
+            backgroundColor: "",
+            fontWeight: ""
+        }
+        let border = "";
+        customColor = customizeColor(value.data.status)
+        border = "1px solid " + customColor.color;
+        return <Tag style={{
+            fontSize: '14px',
+            padding: '7px',
+            "width": "100%",
+            "textAlign": "center",
+            "color": customColor.color,
+            "backgroundColor": customColor.backgroundColor,
+            "borderRadius": "4px",
+            "border": "none",
+            fontWeight: customColor.fontWeight
+        }}>{value.data.status}</Tag>
+    }
 
 
     return (
@@ -281,7 +284,7 @@ export const BOMPersonalized = () => {
                                                     <ToolbarItem>
                                                         <SvgIcon
                                                             sizeIcon={25}
-                                                            text='Thêm mới'
+                                                            text={t("common.add-button")}
                                                             tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
                                                             icon='assets/icons/CircleAdd.svg'
                                                             textColor='#FF7A00'
@@ -526,7 +529,7 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem location='after'>
                                     <SvgIcon
                                         onClick={() => setIsBOMPersonalizedAddTemplate(true)}
-                                        text='Thêm mới'
+                                        text={t("common.add-button")}
                                         tooltipTitle='Thêm mới thông tin BOM mẫu'
                                         sizeIcon={17}
                                         textSize={17}
@@ -550,8 +553,8 @@ export const BOMPersonalized = () => {
                                 <ToolbarItem>
                                     <SvgIcon
                                         onClick={() => { }}
-                                        text='Xuất Excel'
-                                        tooltipTitle='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/ExportFile.svg'
@@ -585,10 +588,9 @@ export const BOMPersonalized = () => {
                             <Column caption={"Version"} dataField={"version"} />
                             <Column caption={"Lưu ý"} dataField={"notice"} />
                             <Column caption={"Ghi chú"} dataField={"note"} />
-                            <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={(cellInfo) => {
-                                return <Status value={cellInfo.data.value} />
-
-                            }} />
+                            <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={onStatusRender} >
+                                <Lookup dataSource={["Hoạt động", "Ngừng hoạt động"]} />
+                            </Column>
                             <Column
                                 fixed={true}
                                 type={"buttons"}

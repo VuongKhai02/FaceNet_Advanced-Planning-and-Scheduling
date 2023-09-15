@@ -216,11 +216,11 @@ export const TechFormApprove = () => {
                             <Toolbar>
                                 <ToolbarItem>
                                     <SvgIcon
-                                        tooltipTitle='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/ExportFile.svg'
-                                        text='Xuất Excel'
                                         textColor='#FF7A00'
                                         style={{ marginRight: 17 }}
                                     />
@@ -363,11 +363,11 @@ export const TechFormApprove = () => {
                                     <Button
                                         onClick={onCancelClick}
                                         style={{ backgroundColor: "#E5E5E5", marginRight: 20, width: 100 }}
-                                    >Hủy bỏ</Button>
+                                    >{t("common.cancel-button")}</Button>
                                     <Button
                                         onClick={onConfirmClick}
                                         style={{ backgroundColor: "#FF7A00", color: "#FFF" }}
-                                    >Xác nhận</Button>
+                                    >{t("common.confirm-button")}</Button>
                                 </div>
                             </div>
                         </PopupCofirm>

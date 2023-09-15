@@ -112,7 +112,7 @@ export const CreateProductionPlan: React.FC<CreateProductionPlanProps> = observe
                             <Button
                                 onClick={setClose}
                                 style={{ marginRight: "20px", backgroundColor: "#E5E5E5", color: "#333", width: 150 }}
-                            >Hủy bỏ</Button>
+                            >{t("common.cancel-button")}</Button>
                             <Button style={{ marginRight: "20px", backgroundColor: "#FF7A00", color: "#fff", width: 150 }} >Lưu lại</Button>
                             <Button style={{ backgroundColor: "#FF7A00", color: "#fff" }} >Phát lệnh sản xuất</Button>
                         </div>

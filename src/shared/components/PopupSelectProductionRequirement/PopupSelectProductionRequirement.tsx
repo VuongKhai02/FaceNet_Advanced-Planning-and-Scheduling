@@ -8,6 +8,7 @@ import { PLANNING_API_URL } from "../../../utils/config"
 import httpRequests from "../../../utils/httpRequests";
 
 import styles from "./PopupSelectProductionRequirement.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ type PopupSelectProductionRequirementProps = {
 }
 
 const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequirementProps> = ({ title, visible, onSubmit, onCancel, width }) => {
-
+    const { t } = useTranslation(["common"]);
     const [dataGrid, setDataGrid] = React.useState<any>([])
     const [dataChoosed, setDataChoosed] = React.useState<any>(null);
 
@@ -60,10 +61,10 @@ const PopupSelectProductionRequirement: React.FC<PopupSelectProductionRequiremen
             }
             footer={[
                 <Button key="cancel" onClick={onCancel} className={cx("btn-cancel")} type="default">
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>,
                 <Button disabled={dataChoosed === null} key="confirm" onClick={() => { onSubmit(dataChoosed) }} style={style()}>
-                    Xác nhận
+                    {t("common.confirm-button")}
                 </Button>,
             ]}
             width={width || 900}

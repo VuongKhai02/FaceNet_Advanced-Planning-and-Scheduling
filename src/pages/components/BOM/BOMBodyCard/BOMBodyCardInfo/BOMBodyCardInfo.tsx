@@ -156,7 +156,7 @@ export const BOMBodyCardInfo = React.memo((props: any) => {
                                                             <ToolbarItem>
                                                                 <SvgIcon
                                                                     sizeIcon={25}
-                                                                    text='Thêm mới'
+                                                                    text={t("common.add-button")}
                                                                     tooltipTitle='Thêm vật tư thay thế cho vật tư(Sau khi ấn link sang hệ thống MDM)'
                                                                     icon='assets/icons/CircleAdd.svg'
                                                                     textColor='#FF7A00'

@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import TechFormNewAddProcedure from "../TechFormNewAddProcedure/TechFormNewAddProcedure";
 import { Button, Input, Table } from "antd";
 import SvgIcon from "../../../../../../shared/components/SvgIcon/SvgIcon";
+import { useTranslation } from "react-i18next";
 
 type MaterialAndStructureProps = {
     isOpen: boolean;
@@ -43,7 +44,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
     const [fromDateTime, setFromDateTime] = useState("");
     const [toDateTime, setToDateTime] = useState("");
     const [isAddNewTechForm, setIsAddNewTechForm] = React.useState<boolean>(false);
-
+    const { t } = useTranslation(["common"]);
     const handleFromDateTimeChange = (e: any) => {
         setFromDateTime(e.value);
     };
@@ -148,7 +149,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                     render={() => (
                                         <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                             <SvgIcon
-                                                tooltipTitle='Thêm mới'
+                                                tooltipTitle={t("common.add-button")}
                                                 sizeIcon={17}
                                                 textSize={17}
                                                 icon='assets/icons/Add.svg'
@@ -237,7 +238,7 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                         render={() => (
                                             <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                                                 <SvgIcon
-                                                    tooltipTitle='Thêm mới'
+                                                    tooltipTitle={t("common.add-button")}
                                                     sizeIcon={17}
                                                     textSize={17}
                                                     icon='assets/icons/Add.svg'
@@ -269,12 +270,12 @@ export const MaterialAndStructure: React.FC<MaterialAndStructureProps> = observe
                                 <Button
                                     onClick={setClose}
                                     style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
-                                >Trở lại</Button>
+                                >{t("common.back-button")}</Button>
                                 <Button
                                     onClick={handleAddFormTechProcedure}
                                     style={{ marginRight: "10px", backgroundColor: "#FF7A00", color: "#fff", width: 100 }}
-                                >Tiếp theo</Button>
-                                <Button style={{ width: 100 }} disabled>Thêm mới</Button>
+                                >{t("common.next-button")}</Button>
+                                <Button style={{ width: 100 }} disabled>{t("common.add-button")}</Button>
                             </div>
                         </div>
                     </div>

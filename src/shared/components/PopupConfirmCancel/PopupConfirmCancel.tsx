@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface PopupConfirmCancelProps {
     isVisible: boolean;
@@ -11,6 +12,7 @@ interface PopupConfirmCancelProps {
 }
 
 const PopupConfirmCancel: React.FC<PopupConfirmCancelProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             // closeIcon={true}
@@ -30,7 +32,7 @@ const PopupConfirmCancel: React.FC<PopupConfirmCancelProps> = ({ isVisible, onCa
                             fontSize: 16,
                         }}
                         onClick={onCancel}>
-                        Hủy bỏ
+                        {t("common.cancel-button")}
                     </Button>
                     <Button
                         style={{
@@ -45,7 +47,7 @@ const PopupConfirmCancel: React.FC<PopupConfirmCancelProps> = ({ isVisible, onCa
                         key='submit'
                         onClick={onSubmit}
                         className='btn btn-save'>
-                        Xác nhận
+                        {t("common.confirm-button")}
                     </Button>
                 </div>,
             ]}

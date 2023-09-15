@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { Modal, Button } from "antd";
 
 import styles from "./PopupDetailBoxCard.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 interface PopupDetailBoxCardProps {
@@ -24,6 +25,7 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
     width,
     className,
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             className={cx("modal-container", className)}
@@ -38,7 +40,7 @@ const PopupDetailBoxCard: React.FC<PopupDetailBoxCardProps> = ({
                             key='cancel'
                             className={cx("btn-cancel")}
                             onClick={onCancel}>
-                            Hủy bỏ
+                            {t("common.cancel-button")}
                         </Button>
                         <Button
                             className={cx(["btn", "btn-save"])}

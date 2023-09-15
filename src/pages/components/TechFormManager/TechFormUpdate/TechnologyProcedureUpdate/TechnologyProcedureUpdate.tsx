@@ -7,6 +7,7 @@ import { Button, Table, Upload } from "antd";
 import TechFormUpdateMaterialAndStructure from "../TechFormUpdateMaterialAndStructure/TechFormUpdateMaterialAndStructure";
 
 import styles from "./TechnologyProcedureUpdate.module.css";
+import { useTranslation } from "react-i18next";
 
 type TechnologyProcedureUpdateProps = {
     techFormData: any;
@@ -56,6 +57,7 @@ const data2 = [
 
 export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps> = observer(
     ({ isOpen = false, setClose, techFormData, setTechFormData }) => {
+        const { t } = useTranslation(["common"]);
         const [isVisibleTechFormUpdateMaterialAndStructure, setIsVisibleTechFormUpdateMaterialAndStructure] =
             React.useState<boolean>(false);
 
@@ -226,23 +228,23 @@ export const TechnologyProcedureUpdate: React.FC<TechnologyProcedureUpdateProps>
                                     <Button
                                         onClick={setClose}
                                         className={cx("btn-back")}
-                                    >Trở lại</Button>
+                                    >{t("common.back-button")}</Button>
                                     <Button
                                         onClick={() => {
                                             setIsVisibleTechFormUpdateMaterialAndStructure(true);
                                         }}
                                         className={cx("btn-next")}
-                                    >Tiếp theo</Button>
+                                    > {t("common.next-button")}</Button>
                                     <Button
                                         disabled
                                         onClick={() => { }}
                                         className={cx("btn-sign")}
-                                    >Ký lập</Button>
+                                    >{t("common.signature")}</Button>
                                     <Button
                                         disabled
                                         onClick={() => { }}
                                         className={cx("btn-send")}
-                                    >Gửi duyệt</Button>
+                                    >{t("common.send-approve")}</Button>
                                 </div>
                             </div>
                         </div>

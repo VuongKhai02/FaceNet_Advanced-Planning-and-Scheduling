@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { Modal, Button } from "antd";
 
 import styles from "./PopupScanBarCode.module.css";
+import { useTranslation } from "react-i18next";
 interface PopupScanBarCodeProps {
     isVisible: boolean;
     onCancel: () => void;
@@ -15,6 +16,7 @@ interface PopupScanBarCodeProps {
 const cx = classNames.bind(styles);
 
 const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel, onSubmit, modalTitle, modalContent, width }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <Modal
             open={isVisible}
@@ -26,7 +28,7 @@ const PopupScanBarCode: React.FC<PopupScanBarCodeProps> = ({ isVisible, onCancel
                         key='cancel'
                         className={cx("btn-cancel")}
                         onClick={onCancel}>
-                        Hủy bỏ
+                        {t("common.cancel-button")}
                     </Button>
                     <Button
                         className={cx("btn-save")}

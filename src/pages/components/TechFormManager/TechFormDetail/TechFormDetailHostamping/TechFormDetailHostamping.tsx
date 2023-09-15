@@ -4,6 +4,7 @@ import "./TechFormDetailHostamping.css";
 import { Column } from "devextreme-react/data-grid";
 import { observer } from "mobx-react";
 import { Button, Table } from "antd";
+import { useTranslation } from "react-i18next";
 
 type TechFormDetailHostampingProps = {
     isOpen: boolean;
@@ -27,6 +28,7 @@ const data2 = [
 ];
 
 export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> = observer(({ isOpen = false, setClose }) => {
+    const { t } = useTranslation(["common"]);
     const handleNextClick = () => {
         console.log("Tiếp theo");
     };
@@ -272,7 +274,7 @@ export const TechFormDetailHostamping: React.FC<TechFormDetailHostampingProps> =
                         <Button
                             onClick={setClose}
                             style={{ marginRight: "10px", backgroundColor: "gray", color: "#fff", width: 100 }}
-                        >Trở lại</Button>
+                        >{t("common.back-button")}</Button>
                         <Button
                             onClick={handleNextClick}
                             style={{ backgroundColor: "#737070", color: "#fff", width: 100, marginRight: "10px" }}

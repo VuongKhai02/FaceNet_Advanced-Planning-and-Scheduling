@@ -73,11 +73,11 @@ export const DeclareProductionObject = () => {
                 items: [
                     {
                         key: "product-plan-management",
-                        title: "Quản lý kế hoạch sản xuất",
+                        title: t("management-manufacture-plan.manage-production-plan"),
                     },
                     {
                         key: "declare-production-object",
-                        title: "Khai báo thông tin sản xuất",
+                        title: t("management-manufacture-plan.declaration-manufacture-info.header"),
                     }
                 ]
             })
@@ -217,7 +217,7 @@ export const DeclareProductionObject = () => {
                                         fontSize: 18,
                                         marginBottom: 0,
                                     }}>
-                                    Danh sách khai báo người/máy/lô sản xuất
+                                    {t("management-manufacture-plan.declaration-manufacture-info.header")}
                                 </h5>
                             </div>
                         </div>
@@ -237,7 +237,8 @@ export const DeclareProductionObject = () => {
                     >
                         <Toolbar>
                             <ToolbarItem location="after">
-                                <SvgIcon tooltipTitle="Xuất Excel" text="Xuất Excel" onClick={() => { }} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
+                                <SvgIcon text={t("common.exportExcel")}
+                                    tooltipTitle={t("common.exportExcel")} onClick={() => { }} sizeIcon={17} textSize={17} icon="assets/icons/ExportFile.svg" textColor="#FF7A00" style={{ marginRight: 17 }} />
                             </ToolbarItem>
                             {/* <ToolbarItem name='exportButton' html='Xuất Excel' location='after'></ToolbarItem> */}
                             <ToolbarItem name='columnChooserButton' location='after'></ToolbarItem>

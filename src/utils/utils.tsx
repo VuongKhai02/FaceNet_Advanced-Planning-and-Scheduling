@@ -56,6 +56,69 @@ export function customizeColor(value: any): { color: string, backgroundColor: st
       backgroundColor: "#F11C1C",
       fontWeight: '500'
     }
+  }
+  else if (value === "Đã đóng") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#F11C1C",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Hoàn thành") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Chờ lĩnh nguyên vật liệu") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#0047FF",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Đã phát lệnh sản xuất") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#BC47A2",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Đang sản xuất") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#DFE229",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Xác nhận") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#00AF12",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Chưa xác nhận") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#F11C1C",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "In offset") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#DFE229",
+      fontWeight: '500'
+    }
+  }
+  else if (value === "Hostamping") {
+    return {
+      color: "#FFFFFF",
+      backgroundColor: "#DFE229",
+      fontWeight: '500'
+    }
   } else if (value === 1) {
     return {
       color: "#F11C1C",

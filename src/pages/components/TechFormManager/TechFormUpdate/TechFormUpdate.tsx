@@ -9,6 +9,7 @@ import httpRequests from "../../../../utils/httpRequests";
 import { Button } from "antd";
 
 import styles from "./TechFormUpdate.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ type TechFormUpdateProps = {
 export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen = false, setClose, id }) => {
     const [isVisibleTechProcedureUpdate, setIsVisibleTechProcedureUpdate] = React.useState<boolean>(false);
     const [techFormData, setTechFormData] = React.useState<any>({});
-
+    const { t } = useTranslation(["common"]);
     const loadTechFormData = (id: any) => {
         if (id > 0) {
             httpRequests.get(PLANNING_API_URL + "/api/techforms/" + id).then((response) => {
@@ -269,23 +270,23 @@ export const TechFormUpdate: React.FC<TechFormUpdateProps> = observer(({ isOpen 
                                 <Button
                                     onClick={setClose}
                                     className={cx("btn-back")}
-                                >Trở lại</Button>
+                                >{t("common.back-button")}</Button>
                                 <Button
                                     onClick={() => {
                                         setIsVisibleTechProcedureUpdate(true);
                                     }}
                                     className={cx("btn-next")}
-                                >Tiếp theo</Button>
+                                > {t("common.next-button")}</Button>
                                 <Button
                                     disabled
                                     onClick={() => { }}
                                     className={cx("btn-sign")}
-                                >Ký lập</Button>
+                                >{t("common.signature")}</Button>
                                 <Button
                                     disabled
                                     onClick={() => { }}
                                     className={cx("btn-send")}
-                                >Gửi duyệt</Button>
+                                >{t("common.send-approve")}</Button>
                             </div>
                         </div>
                     </div>

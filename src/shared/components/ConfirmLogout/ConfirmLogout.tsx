@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { Modal, Button } from "antd";
 
 import styles from "./ConfirmLogout.module.css";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
     width,
     customFooter,
 }) => {
+    const { t } = useTranslation(["common"]);
     return (
         <>
             <Modal
@@ -40,7 +42,7 @@ const PopupConfirmDelete: React.FC<PopupConfirmDeleteProps> = ({
                                     key='cancel'
                                     className={cx("btn-cancel")}
                                     onClick={onCancel}>
-                                    Hủy bỏ
+                                    {t("common.cancel-button")}
                                 </Button>
                                 <Button
                                     className={cx(["btn", "btn-save"])}

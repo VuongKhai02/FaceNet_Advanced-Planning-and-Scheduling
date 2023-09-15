@@ -322,8 +322,8 @@ export const BOMPersonalizedAddInfoTemplate: React.FC<BOMPersonalizedAddInfoTemp
                             <Button
                                 onClick={setClose}
                                 style={{ marginRight: "15px", backgroundColor: "#E5E5E5", color: "#333", width: 100 }}
-                            >Hủy bỏ</Button>
-                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >Thêm mới</Button>
+                            >{t("common.cancel-button")}</Button>
+                            <Button style={{ backgroundColor: "#FF7A00", color: "#fff", width: 100 }} >{t("common.add-button")}</Button>
                         </div>
                     </div>
                 </div>

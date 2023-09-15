@@ -9,6 +9,7 @@ import {
     ColumnChooser,
     MasterDetail,
     OperationDescriptions,
+    Lookup,
 } from "devextreme-react/data-grid";
 import styles from "./BOMBodyCard.module.css";
 import classNames from "classnames/bind";
@@ -101,14 +102,14 @@ export const BOMBodyCard = () => {
                     key='cancel'
                     className={cx("btn-cancel")}
                     onClick={() => setIsChangeState(false)}>
-                    Hủy bỏ
+                    {t("common.cancel-button")}
                 </Button>
                 <Button
                     className={cx("btn-save")}
                     key='submit'
                     onClick={() => { }}
                 >
-                    Xác nhận
+                    {t("common.confirm-button")}
                 </Button>
             </div>
         </div>
@@ -244,7 +245,7 @@ export const BOMBodyCard = () => {
                                     <ToolbarItem>
                                         <SvgIcon
                                             onClick={() => setIsBOMCardAddTemplate(true)}
-                                            text='Thêm mới'
+                                            text={t("common.add-button")}
                                             tooltipTitle='Thêm mới thông tin BOM mẫu'
                                             sizeIcon={17}
                                             textSize={17}
@@ -256,8 +257,8 @@ export const BOMBodyCard = () => {
                                     <ToolbarItem>
                                         <SvgIcon
                                             onClick={() => { }}
-                                            text='Xuất Excel'
-                                            tooltipTitle='Xuất Excel'
+                                            text={t("common.exportExcel")}
+                                            tooltipTitle={t("common.exportExcel")}
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/ExportFile.svg'
@@ -294,7 +295,9 @@ export const BOMBodyCard = () => {
                                 <Column dataField='note' alignment={"left"} caption={"Ghi chú"} width={140}></Column>
                                 <Column caption={"Trạng thái"} dataField='status' alignment={'left'} cellRender={(cellInfo) => {
                                     return <Status value={cellInfo.value} />
-                                }} />
+                                }} >
+                                    <Lookup dataSource={["Hoạt động", "Không hoạt động"]} />
+                                </Column>
                                 <Column
                                     fixed={true}
                                     type={"buttons"}

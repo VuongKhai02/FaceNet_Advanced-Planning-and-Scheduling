@@ -147,8 +147,8 @@ export const TechFormList = () => {
             <div className={cx("icon-more")}>
                 <SvgIcon
                     onClick={() => { }}
-                    text='Thêm mới'
-                    tooltipTitle='Thêm mới'
+                    text={t("common.add-button")}
+                    tooltipTitle={t("common.add-button")}
                     sizeIcon={17}
                     textSize={17}
                     icon='assets/icons/Add.svg'
@@ -160,7 +160,7 @@ export const TechFormList = () => {
                 <div key={index} className={cx("icon-more")}>
                     <SvgIcon
                         text='Thêm mới button icon'
-                        tooltipTitle='Thêm mới'
+                        tooltipTitle={t("common.add-button")}
                         sizeIcon={17}
                         textSize={17}
                         icon='assets/icons/Add.svg'
@@ -367,8 +367,8 @@ export const TechFormList = () => {
                             <Toolbar>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
-                                        tooltipTitle='Thêm mới'
-                                        text='Thêm mới'
+                                        tooltipTitle={t("common.add-button")}
+                                        text={t("common.add-button")}
                                         onClick={() => setIsOpenSelectPR(true)}
                                         sizeIcon={17}
                                         textSize={17}
@@ -391,8 +391,8 @@ export const TechFormList = () => {
                                 </ToolbarItem>
                                 <ToolbarItem location='after'>
                                     <SvgIcon
-                                        tooltipTitle='Xuất Excel'
-                                        text='Xuất Excel'
+                                        text={t("common.exportExcel")}
+                                        tooltipTitle={t("common.exportExcel")}
                                         sizeIcon={17}
                                         textSize={17}
                                         icon='assets/icons/ExportFile.svg'
@@ -468,7 +468,7 @@ export const TechFormList = () => {
                                         />
                                         <SvgIcon
                                             onClick={() => setIsModalVisibleSendSAP(true)}
-                                            tooltipTitle='Gửi duyệt'
+                                            tooltipTitle={t("common.send-approve")}
                                             sizeIcon={17}
                                             textSize={17}
                                             icon='assets/icons/Send.svg'
